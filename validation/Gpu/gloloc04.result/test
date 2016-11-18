@@ -1,0 +1,93 @@
+#
+# initial code
+#
+// global/private propagation by transitivity
+
+
+
+extern void propagate00(float *f);
+
+extern int main(void);
+int main(void)
+{
+   float data[10];
+   propagate00(data);
+}
+void propagate00(float *f)
+{
+   float a[10];
+   memset(a, 0, 10*sizeof(float));
+
+   float *b, *c;
+   float *q, *r;
+   q = f;
+   b = a;
+   r = q;
+   c = b;
+   float *s = r;
+   float *d = c;
+   float *t = s;
+   float *e = d;
+   
+   // private stuff
+   float x = a[0]+f[0];
+   float *z = &x;
+   
+   // private again stuff
+   float w;
+   float *v;
+   w = a[1]+f[2];
+   v = &w;
+   
+   // not really used
+   float *u0 = (void *) 0;
+   float *u1;
+   u1 = (void *) 0;
+}
+#
+# global/private declarations
+#
+// global/private propagation by transitivity
+
+
+
+extern void propagate00(float *f);
+
+extern int main(void);
+int main(void)
+{
+   float data[10];
+   propagate00(data);
+}
+void propagate00(global float *f)
+{
+   private float a[10];
+   memset(a, 0, 10*sizeof(float));
+
+   private float *b, private *c;
+   global float *q, global *r;
+   q = f;
+   b = a;
+   r = q;
+   c = b;
+   global float *s = r;
+   private float *d = c;
+   global float *t = s;
+   private float *e = d;
+   
+   // private stuff
+   float x = a[0]+f[0];
+   private float *z = &x;
+   
+   // private again stuff
+   float w;
+   private float *v;
+   w = a[1]+f[2];
+   v = &w;
+   
+   // not really used
+   private float *u0 = (void *) 0;
+   private float *u1;
+   u1 = (void *) 0;
+}
+

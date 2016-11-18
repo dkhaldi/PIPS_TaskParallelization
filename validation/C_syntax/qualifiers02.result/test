@@ -1,0 +1,6 @@
+void h(void)
+{
+   const struct s {
+      int mem;
+   } cs = {1};
+}

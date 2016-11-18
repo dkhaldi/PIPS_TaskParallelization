@@ -1,0 +1,53 @@
+
+Proper effects
+
+void dereferencing04()
+{
+   double *p;
+   double *q;
+   double *r;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p q r
+
+   *(p+(q-r)) = 0.;
+   return;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void dereferencing04()
+{
+
+// Points To: none
+
+   double *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   double *q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   double *r;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+
+   *(p+(q-r)) = 0.;
+
+// Points To: unreachable
+
+   return;
+}

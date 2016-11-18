@@ -1,0 +1,26 @@
+setenv WS "split_initializations10"
+setproperty ABORT_ON_USER_ERROR TRUE
+delete $WS
+create $WS $WS.c
+
+echo
+echo Initial code
+echo
+display PRINTED_FILE[$WS]
+
+echo
+echo Code after split_initializations
+echo
+apply SPLIT_INITIALIZATIONS[$WS]
+activate PRINT_CODE
+display PRINTED_FILE[$WS]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WS.database/Warnings
+
+delete $WS
+quit
+

@@ -1,0 +1,30 @@
+setenv WSPACE define04
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 8
+setproperty ABORT_ON_USER_ERROR TRUE
+
+# activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+echo
+echo // Parsed code
+echo
+display PARSED_PRINTED_FILE[main]
+
+echo
+echo // Initial code
+echo
+display PRINTED_FILE[main]
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

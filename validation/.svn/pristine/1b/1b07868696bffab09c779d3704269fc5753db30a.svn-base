@@ -1,0 +1,270 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   char buffer_in2[10][10];
+
+// Points To: none
+
+   char buffer_out2[10][10];
+
+// Points To: none
+
+   int l = argc;
+
+
+// Points To: none
+
+   char *ip = &buffer_in2[0][0];
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+
+   char *op = &buffer_out2[0][0];
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out2[0][0] , EXACT
+
+
+   memcpy(op, ip, l);
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out2[0][0] , EXACT
+
+   mymemcpy(op, ip, l);
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out2[0][0] , EXACT
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in2
+   char buffer_in2[10][10];
+//             <    is declared>: buffer_out2
+   char buffer_out2[10][10];
+//             <    is read   >: argc
+//             <    is written>: l
+//             <    is referenced>: argc l
+//             <    is declared>: l
+   int l = argc;
+
+//             <    is written>: ip
+//             <    is referenced>: buffer_in2 ip
+//             <    is declared>: ip
+   char *ip = &buffer_in2[0][0];
+//             <    is written>: op
+//             <    is referenced>: buffer_out2 op
+//             <    is declared>: op
+   char *op = &buffer_out2[0][0];
+//             <    is read   >: buffer_in2[0][0:l-1] ip l op
+//             <    is written>: buffer_out2[0][0:l-1]
+//             <    is referenced>: ip l op
+
+   memcpy(op, ip, l);
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is read   >: ip l op
+//             <    is referenced>: ip l op
+   mymemcpy(op, ip, l);
+
+   return 0;
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <    is read   >: argc
+//             <    is referenced>: argc
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in2
+   char buffer_in2[10][10];
+//             <    is declared>: buffer_out2
+   char buffer_out2[10][10];
+//             <    is read   >: argc
+//             <    is written>: l
+//             <    is referenced>: argc l
+//             <    is declared>: l
+   int l = argc;
+
+//             <    is written>: ip
+//             <    is referenced>: buffer_in2 ip
+//             <    is declared>: ip
+   char *ip = &buffer_in2[0][0];
+//             <    is written>: op
+//             <    is referenced>: buffer_out2 op
+//             <    is declared>: op
+   char *op = &buffer_out2[0][0];
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is read   >: ip l op
+//             <    is referenced>: ip l op
+
+   memcpy(op, ip, l);
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is read   >: ip l op
+//             <    is referenced>: ip l op
+   mymemcpy(op, ip, l);
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   char buffer_in2[10][10];
+
+//  T() {}
+
+   char buffer_out2[10][10];
+
+//  T(l) {argc==l}
+
+   int l = argc;
+
+
+//  T() {}
+
+   char *ip = &buffer_in2[0][0];
+
+//  T() {}
+
+   char *op = &buffer_out2[0][0];
+
+//  T() {}
+
+
+   memcpy(op, ip, l);
+
+//  T() {}
+
+   mymemcpy(op, ip, l);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   char buffer_in2[10][10];
+
+//  P() {}
+
+   char buffer_out2[10][10];
+
+//  P() {}
+
+   int l = argc;
+
+
+//  P(l) {argc==l}
+
+   char *ip = &buffer_in2[0][0];
+
+//  P(l) {argc==l}
+
+   char *op = &buffer_out2[0][0];
+
+//  P(l) {argc==l}
+
+
+   memcpy(op, ip, l);
+
+//  P(l) {argc==l}
+
+   mymemcpy(op, ip, l);
+
+//  P(l) {argc==l}
+
+
+   return 0;
+}
+
+Convex array regions with points-to for "main"
+
+int main(int argc, char **argv)
+{
+
+//  <buffer_in2-WE-EXACT-{}>
+
+   char buffer_in2[10][10];
+
+//  <buffer_out2-WE-EXACT-{}>
+
+   char buffer_out2[10][10];
+   int l = argc;
+
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <ip-RE-EXACT-{}>
+//  <ip-WE-EXACT-{}>
+//  <ip-W-EXACT-{}>
+
+   char *ip = &buffer_in2[0][0];
+
+//  <buffer_out2-RE-EXACT-{}>
+//  <op-RE-EXACT-{}>
+//  <op-WE-EXACT-{}>
+//  <op-W-EXACT-{}>
+
+   char *op = &buffer_out2[0][0];
+
+//  <buffer_in2[PHI1][PHI2]-R-EXACT-{PHI1==0, 0<=PHI2, PHI2+1<=l,
+//    l==argc}>
+//  <buffer_out2[PHI1][PHI2]-W-EXACT-{PHI1==0, 0<=PHI2, PHI2+1<=l,
+//    l==argc}>
+//  <ip-R-EXACT-{}>
+//  <ip-RE-EXACT-{}>
+//  <op-R-EXACT-{}>
+//  <op-RE-EXACT-{}>
+
+
+   memcpy(op, ip, l);
+
+//  <buffer_in2[PHI1][PHI2]-R-EXACT-{PHI1==0, 0<=PHI2, PHI2+1<=l}>
+//  <buffer_out2[PHI1][PHI2]-W-EXACT-{PHI1==0, 0<=PHI2, PHI2+1<=l}>
+//  <ip-R-EXACT-{}>
+//  <ip-RE-EXACT-{}>
+//  <op-R-EXACT-{}>
+//  <op-RE-EXACT-{}>
+
+   mymemcpy(op, ip, l);
+
+   return 0;
+}

@@ -1,0 +1,9 @@
+delete static01
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create static01 static01.f
+module STATIC01
+display PRINTED_FILE[STATIC01]
+close
+delete static01
+quit
+

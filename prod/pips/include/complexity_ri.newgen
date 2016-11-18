@@ -1,0 +1,26 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import statement from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+external Ppolynome ;
+
+-- Domains
+-- -------
+complexity = eval:Ppolynome x varcount x rangecount x ifcount ;
+ifcount = profiled:int x computed:int x halfhalf:int ;
+rangecount = profiled:int x guessed:int x bounded:int x unknown:int ;
+varcount = symbolic:int x guessed:int x bounded:int x unknown:int ;

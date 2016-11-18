@@ -1,0 +1,7 @@
+delete nomain
+create nomain nomain.f
+display PRINTED_FILE
+close
+delete nomain
+quit
+

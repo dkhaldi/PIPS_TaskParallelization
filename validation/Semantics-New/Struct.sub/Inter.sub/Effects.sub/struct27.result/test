@@ -1,0 +1,41 @@
+
+Cumulated Effects
+
+//             <    is read   >: a.x a.y
+complexfloat F1(complexfloat a)
+{
+   complexfloat r;
+//             <    is read   >: a.y
+//             <    is written>: r.x
+   r.x = -a.y;
+//             <    is read   >: a.x
+//             <    is written>: r.y
+   r.y = a.x;
+//             <    is read   >: r.x r.y
+   return r;
+}
+
+Transformers
+
+
+//  T() {}
+
+complexfloat F1(complexfloat a)
+{
+
+//  T() {}
+
+   complexfloat r;
+
+//  T() {}
+
+   r.x = -a.y;
+
+//  T() {}
+
+   r.y = a.x;
+
+//  T() {}
+
+   return r;
+}

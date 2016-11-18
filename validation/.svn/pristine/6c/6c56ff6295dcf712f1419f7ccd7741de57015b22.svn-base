@@ -1,0 +1,9 @@
+#/bin/sh
+
+WS=inter02
+
+tpips $WS.tpips
+
+cat $WS.database/Warnings
+
+rm -Rf $WS.database

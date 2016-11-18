@@ -1,0 +1,32 @@
+(tp_parse) equiv01: No such workspace
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+Registering file equiv01.f
+Splitting file    ./equiv01.f
+  Module         EQUIV01
+Workspace equiv01 created and opened.
+Module EQUIV01 selected
+Main module PROGRAM "EQUIV01" selected.
+Module EQUIV01 already active.
+Module EQUIV01 already active.
+Request: build resource PRINTED_FILE for module EQUIV01.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(EQUIV01)
+  PARSER                         building   PARSED_CODE(EQUIV01)
+                                 building   CALLEES(EQUIV01)
+PARSER[EQUIV01] (ComputeAddresses) Offset -4 for T in common /~C_U/.
+PARSER[EQUIV01] (ComputeAddresses) [user error] Parser error between lines 14 and 14
+Attempt to extend common backwards. Have you checked the code with a Fortran compiler?
+PARSER[EQUIV01] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[EQUIV01] (catch_user_error) pass has failed
+PARSER[EQUIV01] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module EQUIV01.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module EQUIV01.
+Closing program.
+Closing workspace.
+Workspace equiv01 closed.
+Workspace equiv01 deleted.
+Pips is done: tpips quit

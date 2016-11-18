@@ -1,0 +1,6 @@
+# test timeout while doing something
+echo timeout 2
+timeout 2
+echo sleep 9...
+shell sleep 9
+echo "not reached"

@@ -1,0 +1,48 @@
+
+Proper effects
+
+int main(int argc, char *argv[])
+{
+   int t;
+//             <    is written>: t
+   
+   
+   for(t = 0; t <= 63; t += 1)
+//             <may be written>: tab[*][*]
+      compute();
+   
+   
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+
+// Points To: none
+
+   int t;
+
+// Points To: none
+
+   
+   
+   for(t = 0; t <= 63; t += 1)
+
+// Points To: none
+
+      compute();
+
+// Points To: none
+
+   
+   
+   return 0;
+}

@@ -1,0 +1,32 @@
+(tp_parse) stack03: No such workspace
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+Registering file stack03.f
+Splitting file    ./stack03.f
+  Module         STACK03
+Workspace stack03 created and opened.
+Module STACK03 selected
+Module STACK03 already active.
+setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+Module STACK03 already active.
+Request: build resource PRINTED_FILE for module STACK03.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(STACK03)
+  PARSER                         building   PARSED_CODE(STACK03)
+                                 building   CALLEES(STACK03)
+PARSER[STACK03] (MakeEquivAtom) Adjustable array A appears in EQUIVALENCE declaration
+PARSER[STACK03] (MakeEquivAtom) [user error] Parser error between lines 4 and 4
+Adjustable array in equivalence chain
+PARSER[STACK03] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[STACK03] (catch_user_error) pass has failed
+PARSER[STACK03] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module STACK03.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module STACK03.
+Closing program.
+Closing workspace.
+Workspace stack03 closed.
+Workspace stack03 deleted.
+Pips is done: tpips quit

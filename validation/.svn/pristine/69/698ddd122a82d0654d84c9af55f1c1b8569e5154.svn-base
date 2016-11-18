@@ -1,0 +1,62 @@
+
+Initial code
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+   for(i = 0; i <= 9; i += 1) {
+      //PIPS generated variable
+      register int v_0 = v[i], c_0;
+      int x;
+      x = a+b;
+      c_0 = x*v_0;
+      c[i] = c_0;
+   }
+
+   return c[0];
+}
+
+INVARIANT_CODE_MOTION
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+#pragma omp parallel for 
+   for(i = 0; i <= 9; i += 1) {
+      //PIPS generated variable
+      register int v_0 = v[i], c_0;
+      int x;
+      x = a+b;
+      c_0 = x*v_0;
+      c[i] = c_0;
+   }
+
+   return c[0];
+}
+
+DEAD_CODE_ELIMINATION
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+#pragma omp parallel for 
+   for(i = 0; i <= 9; i += 1) {
+      //PIPS generated variable
+      register int v_0 = v[i], c_0;
+      int x;
+      x = a+b;
+      c_0 = x*v_0;
+      c[i] = c_0;
+   }
+
+   return c[0];
+}
+
+Warnings
+

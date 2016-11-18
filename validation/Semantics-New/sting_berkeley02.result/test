@@ -1,0 +1,174 @@
+
+TRANSFORMERS
+
+
+//  T() {0==-1}
+
+void sting_berkeley02()
+{
+   //
+   // BERKELEY model taken from Fast
+   //
+   
+
+//  T(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0}
+
+   int invalid, unowned = 0, nonexclusive = 0, exclusive = 0;
+
+//  T() {exclusive==0, nonexclusive==0, unowned==0, 1<=invalid}
+
+   
+   //propsteps(3)
+   
+   
+   if (!(invalid>=1))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive+invalid+nonexclusive+unowned==invalid#init,
+//    exclusive#init==0, nonexclusive#init==0, unowned#init==0,
+//    1<=invalid#init}
+
+
+   while (1) {
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive+nonexclusive==exclusive#init+nonexclusive#init,
+//    invalid+unowned==invalid#init+unowned#init, 1<=invalid,
+//    invalid<=invalid#init, 1<=invalid#init}
+
+      // StInG expected results: exclusive>=0, unowned>=0,
+      // invalid+unowned+nonexclusive+exclusive>=1
+      //transition t1: l0,
+      while (invalid>=1&&alea()>=0.)
+
+//  T(exclusive,invalid,nonexclusive,unowned) {exclusive==0,
+//    exclusive#init+nonexclusive#init==nonexclusive,
+//    invalid==invalid#init-1, unowned==unowned#init+1, 0<=invalid}
+
+         nonexclusive += exclusive, exclusive = 0, invalid--, unowned++;
+
+//  T() {1<=nonexclusive+unowned}
+
+      
+      //transition t2: l0,
+      while (nonexclusive+unowned>=1&&alea()>=0.)
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive==exclusive#init+1,
+//    invalid#init+nonexclusive#init+unowned#init==invalid+1,
+//    nonexclusive==0, unowned==0, 1<=nonexclusive#init+unowned#init}
+
+         invalid += unowned+nonexclusive-1, exclusive++, unowned = 0, nonexclusive = 0;
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive+invalid+nonexclusive+unowned==exclusive#init+
+//    invalid#init+nonexclusive#init+unowned#init, 1<=invalid,
+//    1<=invalid#init}
+
+      
+      //transition t3: l0,
+      while (invalid>=1&&alea()>=0.)
+
+//  T(exclusive,invalid,nonexclusive,unowned) {exclusive==1,
+//    exclusive#init+invalid#init+nonexclusive#init+unowned#init==
+//    invalid+1, nonexclusive==0, unowned==0, 1<=invalid#init}
+
+         invalid += unowned+exclusive+nonexclusive-1, unowned = 0, nonexclusive = 0, exclusive = 1;
+
+//  T(unowned) {unowned==unowned#init}
+
+      // PIPS result: 4y+5<=13x, y<=3x, x+15<=8y, x<=2y (which implies
+      // x>=1 and y >=2)
+      // NOP statement get the body postcondition
+      unowned = unowned;
+   }
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+void sting_berkeley02()
+{
+   //
+   // BERKELEY model taken from Fast
+   //
+   
+
+//  P() {}
+
+   int invalid, unowned = 0, nonexclusive = 0, exclusive = 0;
+
+//  P(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0}
+
+   
+   //propsteps(3)
+   
+   
+   if (!(invalid>=1))
+
+//  P(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0, invalid<=0}
+
+      abort();
+
+//  P(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0, 1<=invalid}
+
+
+   while (1) {
+
+//  P(exclusive,invalid,nonexclusive,unowned)
+//    {1<=exclusive+invalid+nonexclusive+unowned}
+
+      // StInG expected results: exclusive>=0, unowned>=0,
+      // invalid+unowned+nonexclusive+exclusive>=1
+      //transition t1: l0,
+      while (invalid>=1&&alea()>=0.)
+
+//  P(exclusive,invalid,nonexclusive,unowned)
+//    {1<=exclusive+invalid+nonexclusive+unowned, 1<=invalid}
+
+         nonexclusive += exclusive, exclusive = 0, invalid--, unowned++;
+
+//  P(exclusive,invalid,nonexclusive,unowned)
+//    {1<=exclusive+invalid+nonexclusive+unowned}
+
+      
+      //transition t2: l0,
+      while (nonexclusive+unowned>=1&&alea()>=0.)
+
+//  P(exclusive,invalid,nonexclusive,unowned)
+//    {1<=exclusive+invalid+nonexclusive+unowned,
+//    1<=nonexclusive+unowned}
+
+         invalid += unowned+nonexclusive-1, exclusive++, unowned = 0, nonexclusive = 0;
+
+//  P(exclusive,invalid,nonexclusive,unowned)
+//    {1<=exclusive+invalid+nonexclusive+unowned}
+
+      
+      //transition t3: l0,
+      while (invalid>=1&&alea()>=0.)
+
+//  P(exclusive,invalid,nonexclusive,unowned)
+//    {1<=exclusive+invalid+nonexclusive+unowned, 1<=invalid}
+
+         invalid += unowned+exclusive+nonexclusive-1, unowned = 0, nonexclusive = 0, exclusive = 1;
+
+//  P(exclusive,invalid,nonexclusive,unowned)
+//    {1<=exclusive+invalid+nonexclusive+unowned}
+
+      // PIPS result: 4y+5<=13x, y<=3x, x+15<=8y, x<=2y (which implies
+      // x>=1 and y >=2)
+      // NOP statement get the body postcondition
+      unowned = unowned;
+   }
+}

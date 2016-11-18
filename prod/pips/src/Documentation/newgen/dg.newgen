@@ -1,0 +1,31 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import statement from "ri.newgen" ;
+import effect from "effects.newgen" ;
+import vertex from "graph.newgen" ;
+
+-- External domains
+-- ----------------
+external Ptsg ;
+
+-- Domains
+-- -------
+cone = levels:int* x generating_system:Ptsg ;
+conflict = persistant source:effect x persistant sink:effect x cone ;
+dg_arc_label = conflicts:conflict* ;
+dg_vertex_label = statement:int x sccflags ;
+sccflags = enclosing_scc:scc x mark:int x dfnumber:int x lowlink:int ;
+sccs = sccs:scc* ;
+scc = vertices:vertex* x indegree:int ;

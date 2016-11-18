@@ -1,0 +1,50 @@
+setenv WSPACE=outregionsscalaire01
+delete $WSPACE
+create $WSPACE $WSPACE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+activate MUST_REGIONS
+
+echo
+echo Init Code
+echo
+display PRINTED_FILE[main]
+
+#echo
+#echo Source code for "$WSPACE" after dead-code elimination
+#echo
+#apply DEAD_CODE_ELIMINATION[main]
+#display PRINTED_FILE[main]
+
+echo
+echo OUT regions for "$WSPACE"
+echo
+activate PRINT_CODE_OUT_REGIONS
+display PRINTED_FILE[main]
+
+echo
+echo OUT effect for "$WSPACE"
+echo
+activate PRINT_CODE_OUT_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Source code for "$WSPACE" after dead-code elimination with OUT regions
+echo
+apply DEAD_CODE_ELIMINATION_WITH_OUT_REGIONS[main]
+activate PRINT_CODE
+display PRINTED_FILE[main]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

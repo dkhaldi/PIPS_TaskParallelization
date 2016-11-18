@@ -1,0 +1,53 @@
+
+Initial code
+
+      SUBROUTINE HYPER02(X, N, M)
+
+C     Same code as loopfi01.f, used to check management of user errors
+
+      REAL X(N, M)
+
+      DO 100 I = 1, N                                                   0007
+         DO 200 J = 1, M                                                0008
+            X(I,J) = FLOAT(I+J)                                         0009
+200         CONTINUE                                                    0010
+100      CONTINUE                                                       0011
+
+      PRINT *, X                                                        0013
+
+      END
+
+Unknown loop label
+
+
+Too many vector components
+
+
+Too few vector components
+
+
+Vector component with wrong type
+
+      SUBROUTINE HYPER02(X, N, M)
+
+C     Same code as loopfi01.f, used to check management of user errors
+
+      REAL X(N, M)
+
+      DO Ip = 1, N                                                      0007
+         DO Jp = 1, M                                                   0008
+            X(Ip,Jp) = FLOAT(Ip+Jp)                                     0009
+200         CONTINUE                                                    0010
+         ENDDO
+      ENDDO
+
+      PRINT *, X                                                        0013
+
+      END
+### stderr
+echo Unknown loop label
+LOOP_HYPERPLANE[HYPER02] (interactive_loop_transformation) [user error] loop label `300' does not exist
+Too many coordinates. Hyperplane loop transformation has been cancelled.
+LOOP_HYPERPLANE[HYPER02] (hyperplane) [user error] A proper hyperplane direction was not provided
+Not enough coordinates. Hyperplane loop transformation has been cancelled.
+LOOP_HYPERPLANE[HYPER02] (hyperplane) [user error] A proper hyperplane direction was not provided

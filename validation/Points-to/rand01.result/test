@@ -1,0 +1,67 @@
+
+Proper effects
+
+int main()
+{
+   int entier;
+   int graine;
+   double virgule;
+//             <    is written>: graine
+   graine = 50;
+//             <    is read   >: graine
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED
+   srandom(graine);
+//             <    is read   >: _RANDOM_EFFECTS:GEN_SEED
+//             <    is written>: virgule _RANDOM_EFFECTS:GEN_SEED
+   /* generator initialization */
+   virgule = (double) rand()/(2147483647+1);
+//             <    is read   >: _RANDOM_EFFECTS:GEN_SEED
+//             <    is written>: entier _RANDOM_EFFECTS:GEN_SEED
+   entier = 1+rand();
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int entier;
+
+// Points To: none
+
+   int graine;
+
+// Points To: none
+
+   double virgule;
+
+// Points To: none
+
+   graine = 50;
+
+// Points To: none
+
+   srandom(graine);
+
+// Points To: none
+
+   /* generator initialization */
+   virgule = (double) rand()/(2147483647+1);
+
+// Points To: none
+
+   entier = 1+rand();
+
+// Points To: none
+
+   return 0;
+}

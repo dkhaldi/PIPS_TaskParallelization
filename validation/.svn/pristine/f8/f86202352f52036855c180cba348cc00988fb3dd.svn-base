@@ -1,0 +1,46 @@
+
+Transformers for printf03
+
+
+//  T() {}
+
+void printf03()
+{
+
+//  T(i) {i==1}
+
+   int i = 1;
+
+//  T(i) {i#init==1}
+
+   // Here, the transformer should impact i
+   fprintf(stdout, "i=%d\n", i);
+
+//  T() {}
+
+   // Here, i is unknown
+   return;
+}
+
+Preconditions for printf03
+
+
+//  P() {}
+
+void printf03()
+{
+
+//  P() {}
+
+   int i = 1;
+
+//  P(i) {i==1}
+
+   // Here, the transformer should impact i
+   fprintf(stdout, "i=%d\n", i);
+
+//  P(i) {}
+
+   // Here, i is unknown
+   return;
+}

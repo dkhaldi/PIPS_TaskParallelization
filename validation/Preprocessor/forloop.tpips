@@ -1,0 +1,17 @@
+# default test case cannot be used because of the include which leads
+# to a non-portable output
+
+delete forloop
+create forloop forloop.c
+
+shell echo "Database for forloop created"
+
+quit
+
+activate C_PARSER
+
+display PRINTED_FILE[main]
+
+close
+delete forloop
+quit

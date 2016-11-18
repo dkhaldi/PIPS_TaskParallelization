@@ -1,0 +1,500 @@
+C$C$###################### md-STEP/md.database/Src/COMPUTE_PARDO_HYBRID.f ######################
+      SUBROUTINE COMPUTE_PARDO_HYBRID(ND, NP, BOX, D, F, I, J, K, KIN
+     &, L, PI2, POS, POT, RIJ, VEL)
+      implicit none
+      include "STEP.h"
+      REAL*8 DOTR8
+      EXTERNAL DOTR8
+      INTEGER IDX, STEP_COMM_RANK, STEP_I_UP, STEP_I_LOW, 
+     &STEP_COMM_SIZE, ND, NP, I, J, K, L
+      INTEGER STEP_SR_F(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2
+     &, 1:STEP_MAX_NB_LOOPSLICES), STEP_RR_VEL(STEP_INDEX_SLICE_LOW:
+     &STEP_INDEX_SLICE_UP, 1:2, 1:STEP_MAX_NB_LOOPSLICES), 
+     &STEP_RR_POS(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2, 1:
+     &STEP_MAX_NB_LOOPSLICES)
+      REAL*8 BOX(1:ND), D, F(1:ND, 1:NP), KIN, PI2, POS(1:ND, 1:NP), 
+     &POT, RIJ(1:ND), VEL(1:ND, 1:NP)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_PARALLEL_DO)
+      CALL STEP_INIT_ARRAYREGIONS(F, STEP_REAL8, 2, 1, ND, 1, NP)
+      CALL STEP_INIT_ARRAYREGIONS(POS, STEP_REAL8, 2, 1, ND, 1, NP)
+      CALL STEP_INIT_ARRAYREGIONS(VEL, STEP_REAL8, 2, 1, ND, 1, NP)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, NP, 1, STEP_COMM_SIZE)
+      CALL STEP_INITREDUCTION(KIN, STEP_SUM_REDUCE, STEP_REAL8)
+      CALL STEP_INITREDUCTION(POT, STEP_SUM_REDUCE, STEP_REAL8)
+
+C RECV REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <POS(PHI1,PHI2)-R-MAY-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=500, STEP_I_LOW<=STEP_I_UP, 1<=STEP_I_UP}>
+
+         IF (STEP_I_LOW-STEP_I_UP.LE.0.AND.(-STEP_I_UP+1.LE.0.AND.
+     &   STEP_I_LOW-500.LE.0)) THEN
+            STEP_RR_POS(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+            STEP_RR_POS(STEP_INDEX_SLICE_UP,1,IDX) = 3
+            STEP_RR_POS(STEP_INDEX_SLICE_LOW,2,IDX) = 1
+            STEP_RR_POS(STEP_INDEX_SLICE_UP,2,IDX) = 500
+         ELSE
+C  Inverted bounds correspond to empty regions
+C  Used when work concerns specific data ex: print A[5]
+C  In this case, only concerned process sends non empty regions
+            STEP_RR_POS(STEP_INDEX_SLICE_LOW,1,IDX) = ND
+            STEP_RR_POS(STEP_INDEX_SLICE_UP,1,IDX) = 1
+            STEP_RR_POS(STEP_INDEX_SLICE_LOW,2,IDX) = NP
+            STEP_RR_POS(STEP_INDEX_SLICE_UP,2,IDX) = 1
+         ENDIF
+
+C  <VEL(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_RR_VEL(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_RR_VEL(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_RR_VEL(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_RR_VEL(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+      ENDDO
+      CALL STEP_SET_RECVREGIONS(POS, STEP_COMM_SIZE, STEP_RR_POS)
+      CALL STEP_SET_RECVREGIONS(VEL, STEP_COMM_SIZE, STEP_RR_VEL)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(POS, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(VEL, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <F(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_SR_F(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_F(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_SR_F(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_SR_F(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(F, STEP_COMM_SIZE, STEP_SR_F)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_I_LOW, STEP_I_UP)
+!$omp parallel do private(D, I, J, K, RIJ) reduction(+: KIN, POT)
+
+! The computation of forces and energies is fully parallel.
+
+      DO I = STEP_I_LOW, STEP_I_UP
+! compute potential energy and forces
+
+!!        f(1:nd,i) = 0.0
+         DO L = 1, ND
+            F(L,I) = 0.0
+         ENDDO
+
+
+         DO J = 1, NP
+            IF (I.NE.J) THEN
+               CALL DIST(ND, BOX, POS(1,I), POS(1,J), RIJ, D)
+! attribute half of the potential energy to particle 'j'
+
+               POT = POT+0.5*SIN(MIN(D, PI2))**2.
+               DO K = 1, ND
+                  F(K,I) = F(K,I)-RIJ(K)*2.*SIN(MIN(D, PI2))*COS(MIN(
+     &            D, PI2))/D
+               ENDDO
+            ENDIF
+         ENDDO
+! compute kinetic energy
+
+         KIN = KIN+DOTR8(ND, VEL(1,I), VEL(1,I))
+      ENDDO
+!$omp end parallel do
+C END WORK
+!$omp master
+      CALL STEP_REDUCTION(KIN)
+      CALL STEP_REDUCTION(POT)
+      CALL STEP_ALLTOALL_FULL(F, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT
+     &)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_PARALLEL_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### md-STEP/md.database/Src/MD_MASTER_HYBRID.f ######################
+      SUBROUTINE MD_MASTER_HYBRID(E0, KINETIC, POTENTIAL)
+      implicit none
+      include "STEP.h"
+      INTEGER STEP_COMM_RANK
+      REAL*8 E0, KINETIC, POTENTIAL
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_MASTER)
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      IF (STEP_COMM_RANK.EQ.0) THEN
+         PRINT *, POTENTIAL, KINETIC, (POTENTIAL+KINETIC-E0)/E0
+      ENDIF
+C END WORK
+      CALL STEP_CONSTRUCT_END(STEP_MASTER)
+!$omp end master
+      END
+###################### md-STEP/md.database/Src/UPDATE_PARDO_HYBRID.f ######################
+      SUBROUTINE UPDATE_PARDO_HYBRID(ND, NP, A, DT, F, I, J, POS, 
+     &RMASS, VEL)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_I_UP, STEP_I_LOW, 
+     &STEP_COMM_SIZE, ND, NP, I, J
+      INTEGER STEP_SR_VEL(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1
+     &:2, 1:STEP_MAX_NB_LOOPSLICES), STEP_SR_POS(STEP_INDEX_SLICE_LOW
+     &:STEP_INDEX_SLICE_UP, 1:2, 1:STEP_MAX_NB_LOOPSLICES), STEP_SR_A
+     &(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2, 1:
+     &STEP_MAX_NB_LOOPSLICES), STEP_RR_VEL(STEP_INDEX_SLICE_LOW:
+     &STEP_INDEX_SLICE_UP, 1:2, 1:STEP_MAX_NB_LOOPSLICES), 
+     &STEP_RR_POS(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2, 1:
+     &STEP_MAX_NB_LOOPSLICES), STEP_RR_F(STEP_INDEX_SLICE_LOW:
+     &STEP_INDEX_SLICE_UP, 1:2, 1:STEP_MAX_NB_LOOPSLICES), STEP_RR_A(
+     &STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2, 1:
+     &STEP_MAX_NB_LOOPSLICES)
+      REAL*8 A(1:ND, 1:NP), DT, F(1:ND, 1:NP), POS(1:ND, 1:NP), RMASS
+     &, VEL(1:ND, 1:NP)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_PARALLEL_DO)
+      CALL STEP_INIT_ARRAYREGIONS(A, STEP_REAL8, 2, 1, ND, 1, NP)
+      CALL STEP_INIT_ARRAYREGIONS(F, STEP_REAL8, 2, 1, ND, 1, NP)
+      CALL STEP_INIT_ARRAYREGIONS(POS, STEP_REAL8, 2, 1, ND, 1, NP)
+      CALL STEP_INIT_ARRAYREGIONS(VEL, STEP_REAL8, 2, 1, ND, 1, NP)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, NP, 1, STEP_COMM_SIZE)
+
+C RECV REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <A(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_RR_A(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_RR_A(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_RR_A(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_RR_A(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+
+C  <F(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_RR_F(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_RR_F(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_RR_F(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_RR_F(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+
+C  <POS(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_RR_POS(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_RR_POS(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_RR_POS(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_RR_POS(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+
+C  <VEL(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_RR_VEL(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_RR_VEL(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_RR_VEL(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_RR_VEL(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+      ENDDO
+      CALL STEP_SET_RECVREGIONS(A, STEP_COMM_SIZE, STEP_RR_A)
+      CALL STEP_SET_RECVREGIONS(F, STEP_COMM_SIZE, STEP_RR_F)
+      CALL STEP_SET_RECVREGIONS(POS, STEP_COMM_SIZE, STEP_RR_POS)
+      CALL STEP_SET_RECVREGIONS(VEL, STEP_COMM_SIZE, STEP_RR_VEL)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(F, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(POS, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(VEL, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <A(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_A(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_SR_A(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+
+C  <POS(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_SR_POS(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_POS(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_SR_POS(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_SR_POS(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+
+C  <VEL(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=3, 1<=PHI2, PHI2<=500,
+C    STEP_I_LOW<=PHI2, PHI2<=STEP_I_UP}>
+
+         STEP_SR_VEL(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_VEL(STEP_INDEX_SLICE_UP,1,IDX) = 3
+         STEP_SR_VEL(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_I_LOW)
+         STEP_SR_VEL(STEP_INDEX_SLICE_UP,2,IDX) = MIN(500, STEP_I_UP)
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(A, STEP_COMM_SIZE, STEP_SR_A)
+      CALL STEP_SET_SENDREGIONS(POS, STEP_COMM_SIZE, STEP_SR_POS)
+      CALL STEP_SET_SENDREGIONS(VEL, STEP_COMM_SIZE, STEP_SR_VEL)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_I_LOW, STEP_I_UP)
+!$omp parallel do private(I, J)
+
+! The time integration is fully parallel
+
+      DO I = STEP_I_LOW, STEP_I_UP
+         DO J = 1, ND
+            POS(J,I) = POS(J,I)+VEL(J,I)*DT+0.5*DT*DT*A(J,I)
+            VEL(J,I) = VEL(J,I)+0.5*DT*(F(J,I)*RMASS+A(J,I))
+            A(J,I) = F(J,I)*RMASS
+         ENDDO
+      ENDDO
+!$omp end parallel do
+C END WORK
+!$omp master
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(POS, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(VEL, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_PARALLEL_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### md-STEP/md.database/Src/md.f ######################
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! This program implements a simple molecular dynamics simulation,
+!   using the velocity Verlet time integration scheme. The particles
+!   interact with a central pair potential.
+!
+! Author:   Bill Magro, Kuck and Associates, Inc. (KAI), 1998
+!
+! Parallelism is implemented via OpenMP directives.
+! THIS PROGRAM USES THE FORTRAN90 RANDOM_NUMBER FUNCTION AND ARRAY 
+!   SYNTAX
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+      PROGRAM MD
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+
+! simulation parameters
+      
+! dimensionality of the physical space
+      INTEGER NDIM       
+! number of particles
+      INTEGER NPARTS     
+! number of time steps in the simulation
+      INTEGER NSTEPS     
+      PARAMETER(NDIM=3,NPARTS=500,NSTEPS=500)
+! mass of the particles
+      REAL*8 MASS        
+! time step
+      REAL*8 DT          
+! dimensions of the simulation box
+      REAL*8 BOX(NDIM)   
+      PARAMETER(MASS=1.0,DT=1.0E-4)
+
+! simulation variables
+      
+      REAL*8 POSITION(NDIM,NPARTS)
+      REAL*8 VELOCITY(NDIM,NPARTS)
+      REAL*8 FORCE(NDIM,NPARTS)
+      REAL*8 ACCEL(NDIM,NPARTS)
+      REAL*8 POTENTIAL, KINETIC, E0
+      INTEGER I , L
+      CALL STEP_INIT_FORTRAN_ORDER
+
+!!      box(1:ndim) = 10.
+      DO L = 1, NDIM
+         BOX(L) = 10.
+      ENDDO
+
+! set initial positions, velocities, and accelerations
+
+      CALL INITIALIZE(NPARTS, NDIM, BOX, POSITION, VELOCITY, ACCEL)
+
+! compute the forces and energies
+
+      CALL COMPUTE(NPARTS, NDIM, BOX, POSITION, VELOCITY, MASS, FORCE
+     &, POTENTIAL, KINETIC)
+      E0 = POTENTIAL+KINETIC
+
+! This is the main time stepping loop
+
+      DO I = 1, NSTEPS
+         CALL COMPUTE(NPARTS, NDIM, BOX, POSITION, VELOCITY, MASS, 
+     &   FORCE, POTENTIAL, KINETIC)
+         CALL MD_MASTER_HYBRID(E0, KINETIC, POTENTIAL)
+         CALL UPDATE(NPARTS, NDIM, POSITION, VELOCITY, FORCE, ACCEL, 
+     &   MASS, DT)
+      ENDDO
+      CALL STEP_FINALIZE
+
+      END
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Compute the forces and energies, given positions, masses,
+! and velocities
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      SUBROUTINE COMPUTE(NP,ND,BOX,POS,VEL,MASS,F,POT,KIN)
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+
+      INTEGER NP
+      INTEGER ND
+      REAL*8  BOX(ND)
+      REAL*8  POS(ND,NP)
+      REAL*8  VEL(ND,NP)
+      REAL*8  F(ND,NP)
+      REAL*8  MASS
+      REAL*8  POT
+      REAL*8  KIN
+
+      REAL*8 DOTR8
+      EXTERNAL DOTR8
+      REAL*8 V, DV, X
+
+      INTEGER I, J, K, L
+      REAL*8  RIJ(ND)
+      REAL*8  D
+      REAL*8  PI2
+      PARAMETER(PI2=3.14159265D0/2.0D0)
+
+! statement function for the pair potential and its derivative
+
+! This potential is a harmonic well which smoothly saturates to a
+
+! maximum value at PI/2.
+
+C PIPS STATEMENT FUNCTION V SUBSTITUTED
+C PIPS STATEMENT FUNCTION DV SUBSTITUTED
+
+      POT = 0.0
+      KIN = 0.0
+      CALL COMPUTE_PARDO_HYBRID(ND, NP, BOX, D, F, I, J, K, KIN, L, 
+     &PI2, POS, POT, RIJ, VEL)
+      KIN = KIN*0.5*MASS
+
+      END
+       
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Initialize the positions, velocities, and accelerations.
+! The Fortran90 random_number function is used to choose positions.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      SUBROUTINE INITIALIZE(NP,ND,BOX,POS,VEL,ACC)
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+
+      INTEGER NP
+      INTEGER ND
+      REAL*8  BOX(ND)
+      REAL*8  POS(ND,NP)
+      REAL*8  VEL(ND,NP)
+      REAL*8  ACC(ND,NP)
+
+      INTEGER I, J
+      REAL*8 X
+
+      DO I = 1, NP
+         DO J = 1, ND
+            CALL RANDOM_NUMBER(X)
+            POS(J,I) = BOX(J)*X
+            VEL(J,I) = 0.0
+            ACC(J,I) = 0.0
+         ENDDO
+      ENDDO
+
+      END
+
+	SUBROUTINE   RANDOM_NUMBER(X)
+	REAL*8 X
+      X = 0.0
+      END
+
+! Compute the displacement vector (and its norm) between two particles.
+      SUBROUTINE DIST(ND,BOX,R1,R2,DR,D)
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+
+      INTEGER ND
+      REAL*8 BOX(ND)
+      REAL*8 R1(ND)
+      REAL*8 R2(ND)
+      REAL*8 DR(ND)
+      REAL*8 D
+
+      INTEGER I
+
+      D = 0.0
+      DO I = 1, ND
+         DR(I) = R1(I)-R2(I)
+         D = D+DR(I)**2.
+      ENDDO
+      D = SQRT(D)
+
+      END
+
+! Return the dot product between two vectors of type real*8 and length n
+      REAL*8 FUNCTION DOTR8(N,X,Y)
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+
+      INTEGER N
+      REAL*8 X(N)
+      REAL*8 Y(N)
+
+      INTEGER I
+
+      DOTR8 = 0.0
+      DO I = 1, N
+         DOTR8 = DOTR8+X(I)*Y(I)
+      ENDDO
+
+      END
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Perform the time integration, using a velocity Verlet algorithm
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      SUBROUTINE UPDATE(NP,ND,POS,VEL,F,A,MASS,DT)
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+
+      INTEGER NP
+      INTEGER ND
+      REAL*8  POS(ND,NP)
+      REAL*8  VEL(ND,NP)
+      REAL*8  F(ND,NP)
+      REAL*8  A(ND,NP)
+      REAL*8  MASS
+      REAL*8  DT
+
+      INTEGER I, J
+      REAL*8  RMASS
+
+      RMASS = 1.0/MASS
+      CALL UPDATE_PARDO_HYBRID(ND, NP, A, DT, F, I, J, POS, RMASS, 
+     &VEL)
+
+      END

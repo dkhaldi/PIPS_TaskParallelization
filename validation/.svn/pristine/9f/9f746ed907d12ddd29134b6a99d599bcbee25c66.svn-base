@@ -1,0 +1,113 @@
+//
+// Init Code
+//
+int main()
+{
+   int a[10], i;
+
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+
+   for(i = 0; i <= 9; i += 1)
+      if (i<5)
+         a[i] = i;
+
+   return a[0]+a[9];
+}
+//
+// OUT regions for for03
+//
+int main()
+{
+   int a[10], i;
+
+//  <a[PHI1]-OUT-MAY-{0<=PHI1, PHI1<=9}>
+
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <a[PHI1]-OUT-MAY-{PHI1==i, 0<=i, i<=9}>
+
+      a[i] = i;
+
+//  <a[PHI1]-OUT-MAY-{0<=PHI1, PHI1<=4}>
+
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <a[PHI1]-OUT-MAY-{PHI1==i, 0<=i, i<=4}>
+
+      if (i<5)
+
+//  <a[PHI1]-OUT-MAY-{PHI1==i, 0<=i, i<=4}>
+
+         a[i] = i;
+
+   return a[0]+a[9];
+}
+//
+// Source code for for03 after LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+//
+int main()
+{
+   int a[10], i;
+
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+
+   for(i = 0; i <= 4; i += 1)
+      if (i<5)
+         a[i] = i;
+
+   return a[0]+a[9];
+}
+//
+// OUT regions for for03
+//
+int main()
+{
+   int a[10], i;
+
+//  <a[PHI1]-OUT-MAY-{5<=PHI1, PHI1<=9}>
+
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <a[PHI1]-OUT-MAY-{PHI1==i, 5<=PHI1, i<=9}>
+
+      a[i] = i;
+
+//  <a[PHI1]-OUT-MAY-{0<=PHI1, PHI1<=4}>
+
+
+   for(i = 0; i <= 4; i += 1)
+
+//  <a[PHI1]-OUT-MAY-{PHI1==i, 0<=i, i<=4}>
+
+      if (i<5)
+
+//  <a[PHI1]-OUT-MAY-{PHI1==i, 0<=i, i<=4}>
+
+         a[i] = i;
+
+   return a[0]+a[9];
+}
+//
+// Source code for for03 after LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+//
+int main()
+{
+   int a[10], i;
+
+   for(i = 5; i <= 9; i += 1)
+      a[i] = i;
+
+   for(i = 0; i <= 4; i += 1)
+      if (i<5)
+         a[i] = i;
+
+   return a[0]+a[9];
+}
+
+Warnings
+

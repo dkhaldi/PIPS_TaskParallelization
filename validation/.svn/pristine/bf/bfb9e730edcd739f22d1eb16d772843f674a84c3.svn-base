@@ -1,0 +1,17 @@
+
+Points-To for "main"
+
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (adapt_reference_to_type) There may be a typing error at line 13 (e.g. improper malloc call).
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (filter_formal_context_according_to_actual_context) line 13 
+at statement:
+
+	update(&v);
+
+
+Type "int[]" for formal reference "_p_1" is incompatible with type "unsigned int" for actual reference "v".
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (filter_formal_context_according_to_actual_context) [user error] Translation failure for actual parameter "v" at line 13.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (set_debug_stack_pointer) debug level stack is set to 2
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (catch_user_error) pass has failed
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module main.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE

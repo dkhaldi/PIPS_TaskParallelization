@@ -1,0 +1,31 @@
+
+int main()
+{
+//             <    is written>: i j k l
+   int i = 0, j = 1, k = 2, l = 3;
+   int *p, *q, *r, *s;
+//             <    is written>: r
+
+   r = &i;
+//             <    is written>: q
+   q = &j;
+//             <    is read   >: p q r
+//             <    is written>: p s
+   /* here the comma operator defines a sequence point.
+        we treat this instructions asfollow :
+        p = r;
+        q;
+        s = p;
+     */
+   p = r, q, s = p;
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	08 --> 16 with conflicts
+		from <r-W-EXACT> to <r-R-EXACT>
+	09 --> 16 with conflicts
+		from <q-W-EXACT> to <q-R-EXACT>
+
+****************** End of Dependence Graph ******************

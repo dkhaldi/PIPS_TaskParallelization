@@ -1,0 +1,375 @@
+
+Proper effects
+
+int main()
+{
+   int a, b, c, d;
+   int *pa, *pb, *pc, *pd;
+   int **ppa, **ppb, **ppc, **ppd;
+//             <    is written>: a
+   a = 1;
+//             <    is written>: b
+   b = 2;
+//             <    is written>: c
+   c = 3;
+//             <    is written>: d
+   d = 4;
+//             <    is written>: pa
+
+   pa = &a;
+//             <    is written>: ppa
+   ppa = &pa;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppa
+   *ppa = &b;
+//             <    is written>: pb
+
+   pb = &b;
+//             <    is written>: ppb
+   ppb = &pb;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppb
+   *ppb = &a;
+//             <    is written>: pc
+
+   pc = &c;
+//             <    is written>: ppc
+   ppc = &pc;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppc
+   *ppc = &a;
+//             <    is written>: pd
+
+   pd = &d;
+//             <    is written>: ppd
+   ppd = &pd;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppd
+   *ppd = &c;
+//             <    is read   >: pd
+//             <    is written>: pc
+
+   pc = pd;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppc
+
+   *ppc = &b;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: pc ppa
+
+   *ppa = pc;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppd
+//             <    is written>: pa
+
+   pa = *ppd;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppa ppd
+
+   *ppa = *ppd;
+
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int a, b, c, d;
+
+// Points To: none
+
+   int *pa, *pb, *pc, *pd;
+
+// Points To:
+// pa -> undefined , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+
+   int **ppa, **ppb, **ppc, **ppd;
+
+// Points To:
+// pa -> undefined , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> undefined , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   a = 1;
+
+// Points To:
+// pa -> undefined , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> undefined , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   b = 2;
+
+// Points To:
+// pa -> undefined , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> undefined , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   c = 3;
+
+// Points To:
+// pa -> undefined , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> undefined , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   d = 4;
+
+// Points To:
+// pa -> undefined , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> undefined , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+
+   pa = &a;
+
+// Points To:
+// pa -> a , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> undefined , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   ppa = &pa;
+
+// Points To:
+// pa -> a , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   *ppa = &b;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> undefined , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+
+   pb = &b;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> b , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> undefined , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   ppb = &pb;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> b , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   *ppb = &a;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> undefined , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+
+   pc = &c;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> c , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> undefined , EXACT
+// ppd -> undefined , EXACT
+
+   ppc = &pc;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> c , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> undefined , EXACT
+
+   *ppc = &a;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> a , EXACT
+// pd -> undefined , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> undefined , EXACT
+
+
+   pd = &d;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> a , EXACT
+// pd -> d , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> undefined , EXACT
+
+   ppd = &pd;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> a , EXACT
+// pd -> d , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> pd , EXACT
+
+   *ppd = &c;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> a , EXACT
+// pd -> c , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> pd , EXACT
+
+
+   pc = pd;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> c , EXACT
+// pd -> c , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> pd , EXACT
+
+
+   *ppc = &b;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> b , EXACT
+// pd -> c , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> pd , EXACT
+
+
+   *ppa = pc;
+
+// Points To:
+// pa -> b , EXACT
+// pb -> a , EXACT
+// pc -> b , EXACT
+// pd -> c , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> pd , EXACT
+
+
+   pa = *ppd;
+
+// Points To:
+// pa -> c , EXACT
+// pb -> a , EXACT
+// pc -> b , EXACT
+// pd -> c , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> pd , EXACT
+
+
+   *ppa = *ppd;
+
+// Points To:
+// pa -> c , EXACT
+// pb -> a , EXACT
+// pc -> b , EXACT
+// pd -> c , EXACT
+// ppa -> pa , EXACT
+// ppb -> pb , EXACT
+// ppc -> pc , EXACT
+// ppd -> pd , EXACT
+
+
+   return 0;
+}

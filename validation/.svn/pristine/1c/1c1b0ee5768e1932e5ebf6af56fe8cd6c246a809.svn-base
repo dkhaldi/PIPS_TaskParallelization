@@ -1,0 +1,33 @@
+
+Points-to "read_towns"
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// read_towns.data -> *HEAP*_l_21[0] , MAY
+
+towns read_towns(const char fname[])
+{
+
+// Points To: none
+
+   FILE *fd = fopen(fname, "r");
+
+// Points To:
+// fd -> *NULL* , MAY
+// fd -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+   towns the_towns = {1, malloc(sizeof(town))};
+
+// Points To:
+// fd -> *NULL* , MAY
+// fd -> __IO_EFFECTS:IO_FILES[*] , MAY
+// the_towns.data -> *HEAP*_l_21[0] , MAY
+
+   return the_towns;
+}
+
+Warnings
+

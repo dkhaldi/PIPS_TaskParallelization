@@ -1,0 +1,3 @@
+See source file and warnigns in omp_include.result/test: attribute lists not supported.
+
+Note: this is a PIPS preprocessor bug before it is a C parser bug.

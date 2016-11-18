@@ -1,0 +1,19 @@
+setenv WS=return08
+delete $WS
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 1
+
+#setenv PRETTYPRINT_DEBUG_LEVEL 5
+
+echo
+echo Parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[$WS]
+
+
+close
+delete $WS
+
+quit

@@ -1,0 +1,39 @@
+
+Cumulated Effects
+
+//             <    is read   >: i j
+//             <    is written>: global_f.i global_f.j
+//             <    is referenced>: global_f i j
+void updateFoo(int i, int j)
+{
+//             <    is read   >: i
+//             <    is written>: global_f.i
+//             <    is referenced>: global_f i
+   global_f.i = i;
+//             <    is read   >: j
+//             <    is written>: global_f.j
+//             <    is referenced>: global_f j
+   global_f.j = j;
+   return;
+}
+
+Transformers
+
+
+//  T(global_f[i],global_f[j]) {global_f[i]==i, global_f[j]==j}
+
+void updateFoo(int i, int j)
+{
+
+//  T(global_f[i]) {global_f[i]==i}
+
+   global_f.i = i;
+
+//  T(global_f[j]) {global_f[j]==j}
+
+   global_f.j = j;
+
+//  T() {}
+
+   return;
+}

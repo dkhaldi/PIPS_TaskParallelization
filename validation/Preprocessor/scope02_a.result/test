@@ -1,0 +1,22 @@
+# 13 "scope02_a.c"
+void foo()
+{
+  printf("%d\n",i);
+}
+# 5 "scope02_a.c"
+main()
+{
+  // printf("%d\n",i);
+  foo();
+}
+extern int i;
+
+void foo();
+
+# 5 "./scope02_a.c"
+extern main();
+
+static int i = 2;
+
+# 13 "./scope02_a.c"
+extern void foo();

@@ -1,0 +1,290 @@
+###################### matmul-STEP/matmul.database/Src/MATMUL_PAR_HYBRID.f ######################
+      SUBROUTINE MATMUL_PAR_HYBRID(N, A, B, C, I, J, K)
+      implicit none
+      include "STEP.h"
+      INTEGER N, I, J, K
+      REAL*8 A(1:N, 1:N), B(1:N, 1:N), C(1:N, 1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_PARALLEL)
+      CALL STEP_INIT_ARRAYREGIONS(A, STEP_REAL8, 2, 1, N, 1, N)
+      CALL STEP_INIT_ARRAYREGIONS(B, STEP_REAL8, 2, 1, N, 1, N)
+      CALL STEP_INIT_ARRAYREGIONS(C, STEP_REAL8, 2, 1, N, 1, N)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+!$omp parallel
+      CALL MATMUL_PAR_HYBRID_DO_HYBRID(N, A, B, C, I, J)
+      CALL MATMUL_PAR_HYBRID_MASTER_HYBRID
+      CALL MATMUL_PAR_HYBRID_DO_HYBRID_1(N, A, B, C, I, J, K)
+      CALL MATMUL_PAR_HYBRID_MASTER_HYBRID_1(N, C, I, J)
+!$omp end parallel
+C END WORK
+!$omp master
+      CALL STEP_CONSTRUCT_END(STEP_PARALLEL)
+!$omp end master
+!$omp barrier
+      END
+###################### matmul-STEP/matmul.database/Src/MATMUL_PAR_HYBRID_DO_HYBRID.f ######################
+      SUBROUTINE MATMUL_PAR_HYBRID_DO_HYBRID(N, A, B, C, I, J)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_J_UP, STEP_J_LOW, 
+     &STEP_COMM_SIZE, N, I, J
+      INTEGER STEP_SR_C(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2
+     &, 1:STEP_MAX_NB_LOOPSLICES), STEP_SR_B(STEP_INDEX_SLICE_LOW:
+     &STEP_INDEX_SLICE_UP, 1:2, 1:STEP_MAX_NB_LOOPSLICES), STEP_SR_A(
+     &STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2, 1:
+     &STEP_MAX_NB_LOOPSLICES)
+      REAL*8 A(1:N, 1:N), B(1:N, 1:N), C(1:N, 1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_DO)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, N, 1, STEP_COMM_SIZE)
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_J_LOW, STEP_J_UP)
+
+C  <A(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=10, 1<=PHI2, PHI2<=10,
+C    STEP_J_LOW<=PHI2, PHI2<=STEP_J_UP}>
+
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_A(STEP_INDEX_SLICE_UP,1,IDX) = 10
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_J_LOW)
+         STEP_SR_A(STEP_INDEX_SLICE_UP,2,IDX) = MIN(10, STEP_J_UP)
+
+C  <B(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=10, 1<=PHI2, PHI2<=10,
+C    STEP_J_LOW<=PHI2, PHI2<=STEP_J_UP}>
+
+         STEP_SR_B(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_B(STEP_INDEX_SLICE_UP,1,IDX) = 10
+         STEP_SR_B(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_J_LOW)
+         STEP_SR_B(STEP_INDEX_SLICE_UP,2,IDX) = MIN(10, STEP_J_UP)
+
+C  <C(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=10, 1<=PHI2, PHI2<=10,
+C    STEP_J_LOW<=PHI2, PHI2<=STEP_J_UP}>
+
+         STEP_SR_C(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_C(STEP_INDEX_SLICE_UP,1,IDX) = 10
+         STEP_SR_C(STEP_INDEX_SLICE_LOW,2,IDX) = MAX(1, STEP_J_LOW)
+         STEP_SR_C(STEP_INDEX_SLICE_UP,2,IDX) = MIN(10, STEP_J_UP)
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(A, STEP_COMM_SIZE, STEP_SR_A)
+      CALL STEP_SET_SENDREGIONS(B, STEP_COMM_SIZE, STEP_SR_B)
+      CALL STEP_SET_SENDREGIONS(C, STEP_COMM_SIZE, STEP_SR_C)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_J_LOW, STEP_J_UP)
+!$omp do
+
+
+C     Initialize A, B and C matrices
+      DO 10 J = STEP_J_LOW, STEP_J_UP
+         DO 10 I = 1, N
+            A(I,J) = 2.0
+            B(I,J) = 3.0
+            C(I,J) = 0
+10          CONTINUE
+!$omp end do
+C END WORK
+!$omp master
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(B, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(C, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### matmul-STEP/matmul.database/Src/MATMUL_PAR_HYBRID_DO_HYBRID_1.f ######################
+      SUBROUTINE MATMUL_PAR_HYBRID_DO_HYBRID_1(N, A, B, C, I, J, K)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_J_UP, STEP_J_LOW, 
+     &STEP_COMM_SIZE, N, I, J, K
+      INTEGER STEP_SR_C(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2
+     &, 1:STEP_MAX_NB_LOOPSLICES), STEP_RR_C(STEP_INDEX_SLICE_LOW:
+     &STEP_INDEX_SLICE_UP, 1:2, 1:STEP_MAX_NB_LOOPSLICES), STEP_RR_B(
+     &STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2, 1:
+     &STEP_MAX_NB_LOOPSLICES), STEP_RR_A(STEP_INDEX_SLICE_LOW:
+     &STEP_INDEX_SLICE_UP, 1:2, 1:STEP_MAX_NB_LOOPSLICES)
+      REAL*8 A(1:N, 1:N), B(1:N, 1:N), C(1:N, 1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_DO)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, N, 1, STEP_COMM_SIZE)
+
+C RECV REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_J_LOW, STEP_J_UP)
+
+C  <A(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=10, 1<=PHI2, PHI2<=10,
+C    STEP_J_LOW<=10, STEP_J_LOW<=STEP_J_UP}>
+
+         IF (STEP_J_LOW-STEP_J_UP.LE.0.AND.STEP_J_LOW-10.LE.0) THEN
+            STEP_RR_A(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+            STEP_RR_A(STEP_INDEX_SLICE_UP,1,IDX) = 10
+            STEP_RR_A(STEP_INDEX_SLICE_LOW,2,IDX) = 1
+            STEP_RR_A(STEP_INDEX_SLICE_UP,2,IDX) = 10
+         ELSE
+C  Inverted bounds correspond to empty regions
+C  Used when work concerns specific data ex: print A[5]
+C  In this case, only concerned process sends non empty regions
+            STEP_RR_A(STEP_INDEX_SLICE_LOW,1,IDX) = N
+            STEP_RR_A(STEP_INDEX_SLICE_UP,1,IDX) = 1
+            STEP_RR_A(STEP_INDEX_SLICE_LOW,2,IDX) = N
+            STEP_RR_A(STEP_INDEX_SLICE_UP,2,IDX) = 1
+         ENDIF
+
+C  <B(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=10, PHI2<=10,
+C    STEP_J_LOW<=PHI2, PHI2<=STEP_J_UP}>
+
+         STEP_RR_B(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_RR_B(STEP_INDEX_SLICE_UP,1,IDX) = 10
+         STEP_RR_B(STEP_INDEX_SLICE_LOW,2,IDX) = STEP_J_LOW
+         STEP_RR_B(STEP_INDEX_SLICE_UP,2,IDX) = MIN(10, STEP_J_UP)
+
+C  <C(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=10, PHI2<=10,
+C    STEP_J_LOW<=PHI2, PHI2<=STEP_J_UP}>
+
+         STEP_RR_C(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_RR_C(STEP_INDEX_SLICE_UP,1,IDX) = 10
+         STEP_RR_C(STEP_INDEX_SLICE_LOW,2,IDX) = STEP_J_LOW
+         STEP_RR_C(STEP_INDEX_SLICE_UP,2,IDX) = MIN(10, STEP_J_UP)
+      ENDDO
+      CALL STEP_SET_RECVREGIONS(A, STEP_COMM_SIZE, STEP_RR_A)
+      CALL STEP_SET_RECVREGIONS(B, STEP_COMM_SIZE, STEP_RR_B)
+      CALL STEP_SET_RECVREGIONS(C, STEP_COMM_SIZE, STEP_RR_C)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(B, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(C, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_J_LOW, STEP_J_UP)
+
+C  <C(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=10, PHI2<=10,
+C    STEP_J_LOW<=PHI2, PHI2<=STEP_J_UP}>
+
+         STEP_SR_C(STEP_INDEX_SLICE_LOW,1,IDX) = 1
+         STEP_SR_C(STEP_INDEX_SLICE_UP,1,IDX) = 10
+         STEP_SR_C(STEP_INDEX_SLICE_LOW,2,IDX) = STEP_J_LOW
+         STEP_SR_C(STEP_INDEX_SLICE_UP,2,IDX) = MIN(10, STEP_J_UP)
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(C, STEP_COMM_SIZE, STEP_SR_C)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_J_LOW, STEP_J_UP)
+!$omp do
+
+C     Compute matrix-matrix product
+      DO 20 J = STEP_J_LOW, STEP_J_UP
+         DO 20 I = 1, N
+            DO 20 K = 1, N
+               C(I,J) = C(I,J)+A(I,K)*B(K,J)
+20             CONTINUE
+!$omp end do
+C END WORK
+!$omp master
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(C, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### matmul-STEP/matmul.database/Src/MATMUL_PAR_HYBRID_MASTER_HYBRID.f ######################
+      SUBROUTINE MATMUL_PAR_HYBRID_MASTER_HYBRID
+      implicit none
+      include "STEP.h"
+      INTEGER STEP_COMM_RANK
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_MASTER)
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      IF (STEP_COMM_RANK.EQ.0) THEN
+
+         PRINT *, 
+     &   '******************************************************'
+         PRINT *, 'Matrices initialized'
+         PRINT *, 
+     &   '******************************************************'
+      ENDIF
+C END WORK
+      CALL STEP_CONSTRUCT_END(STEP_MASTER)
+!$omp end master
+      END
+###################### matmul-STEP/matmul.database/Src/MATMUL_PAR_HYBRID_MASTER_HYBRID_1.f ######################
+      SUBROUTINE MATMUL_PAR_HYBRID_MASTER_HYBRID_1(N, C, I, J)
+      implicit none
+      include "STEP.h"
+      INTEGER STEP_COMM_RANK, N, I, J
+      INTEGER STEP_RR_C(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2
+     &)
+      REAL*8 C(1:N, 1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_MASTER)
+
+C RECV REGIONS
+
+C  <C(PHI1,PHI2)-R-EXACT-{1<=PHI1, PHI1<=10, 1<=PHI2, PHI2<=10}>
+
+      STEP_RR_C(STEP_INDEX_SLICE_LOW,1) = 1
+      STEP_RR_C(STEP_INDEX_SLICE_UP,1) = 10
+      STEP_RR_C(STEP_INDEX_SLICE_LOW,2) = 1
+      STEP_RR_C(STEP_INDEX_SLICE_UP,2) = 10
+      CALL STEP_SET_RECVREGIONS(C, 1, STEP_RR_C)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(C, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      IF (STEP_COMM_RANK.EQ.0) THEN
+
+C     Print result matrix
+         PRINT *, 
+     &   '******************************************************'
+         PRINT *, 'Result Matrix:'
+         DO 50 I = 1, N
+            DO 40 J = 1, N
+               WRITE (*, 30) C(I,J)
+30             FORMAT(2X,F8.2,$)
+40             CONTINUE
+            PRINT *, ' '
+50          CONTINUE
+         PRINT *, 
+     &   '******************************************************'
+         PRINT *, 'Done.'
+      ENDIF
+C END WORK
+      CALL STEP_CONSTRUCT_END(STEP_MASTER)
+!$omp end master
+      END
+###################### matmul-STEP/matmul.database/Src/matmul.f ######################
+      PROGRAM MATMUL
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+      INTEGER  N, I, J, K
+      PARAMETER (N=10)
+      REAL*8 A(N,N), B(N,N), C(N,N)
+      CALL STEP_INIT_FORTRAN_ORDER
+      CALL MATMUL_PAR_HYBRID(N, A, B, C, I, J, K)
+      CALL STEP_FINALIZE
+
+      END

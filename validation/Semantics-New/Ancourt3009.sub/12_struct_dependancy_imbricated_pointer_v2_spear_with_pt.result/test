@@ -1,0 +1,471 @@
+<!-- XML prettyprint for module main. --> 
+<Application Name="main" Language="C" PassingMode="BYVALUE">
+  <IncludedFiles/>
+  <GlobalVariables>
+  </GlobalVariables>
+  <Box Name="main">
+    <GlobalVariables/>
+    <LocalVariables>
+      <Scalar Name="s" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="sub" Size="4"/>
+      <Scalar Name="a" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="content" Size="12"/>
+      <Array Name="b" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>99</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+      <Array Name="c" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>99</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+    </LocalVariables>
+    <FormalVariables/>
+    <ReferenceTypes>
+        <Reference Name= "c">
+          <ArrayType Dimension = "1">
+          <Basic>int</Basic>
+          </ArrayType>
+        </Reference>
+        <Reference Name= "b">
+          <ArrayType Dimension = "1">
+          <Basic>int</Basic>
+          </ArrayType>
+        </Reference>
+        <Reference Name= "a">
+          <Typedef Name= "content">
+            <Derived Name= "struct {int var1; sub *s;}">
+              <Struct>
+                <Field Name= "var1" >
+                  <Basic>int</Basic>
+                </Field>
+                <Field Name= "s" >
+                  <Pointer Name = "sub *">
+                  </Pointer>
+                </Field>
+              </Struct>
+            </Derived>
+          </Typedef>
+        </Reference>
+        <Reference Name= "s">
+          <Typedef Name= "sub">
+            <Derived Name= "struct {int var2;}">
+            </Derived>
+          </Typedef>
+        </Reference>
+    </ReferenceTypes>
+    <Call Name="LocalAssignment" StNumber="14">
+      <ReferencedParameters>
+      </ReferencedParameters>
+      <ExternalLoops>
+      </ExternalLoops>
+      <TaskParameters>
+        <TaskParameter Name="a" Type="DATA" DataType="content" AccessMode="DEF" ArrayP="FALSE" Kind="VARIABLE">
+        </TaskParameter>
+      </TaskParameters>
+    </Call>
+    <Call Name="update1" StNumber="19">
+      <ReferencedParameters>
+      </ReferencedParameters>
+      <ExternalLoops>
+      </ExternalLoops>
+      <Arguments>
+        <Argument>
+          <ScalarArgument ActualName="a" FormalName="a" AccessMode="DEF">
+          </ScalarArgument>
+        </Argument>
+        </Arguments>
+      </Call>
+      <Call Name="compute1" StNumber="20">
+        <ReferencedParameters>
+          <ReferencedParameter Name="b" Range="[0;99]" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+        </ReferencedParameters>
+        <ExternalLoops>
+        </ExternalLoops>
+        <Arguments>
+          <Argument>
+            <ScalarArgument ActualName="a" FormalName="a" AccessMode="USE">
+            </ScalarArgument>
+          </Argument>
+          <Argument>
+            <ArrayArgument ActualName="b" ActualDim="1" FormalName="b" FormalDim="1" AccessMode="DEF">
+            <Connection>
+            <Matrix NbRows="1" NbColumns="1" >
+            <Row> <c>1</c> </Row>
+            </Matrix>
+            </Connection>
+            <LoopOffset>
+            <Matrix NbRows="0" NbColumns="0" >
+            </Matrix>
+            </LoopOffset>
+            <ConstOffset>
+            <Matrix NbRows="1" NbColumns="1" >
+            <Row> <c>0</c> </Row>
+            </Matrix>
+            </ConstOffset>
+          </ArrayArgument>
+          </Argument>
+          </Arguments>
+        </Call>
+        <Call Name="update2" StNumber="21">
+          <ReferencedParameters>
+          </ReferencedParameters>
+          <ExternalLoops>
+          </ExternalLoops>
+          <Arguments>
+            <Argument>
+              <ScalarArgument ActualName="a" FormalName="a" AccessMode="USE">
+              </ScalarArgument>
+            </Argument>
+            </Arguments>
+          </Call>
+          <Call Name="compute2" StNumber="22">
+            <ReferencedParameters>
+              <ReferencedParameter Name="c" Range="[0;99]" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+              <ReferencedParameter Name="b" Range="[0;99]" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+            </ReferencedParameters>
+            <ExternalLoops>
+            </ExternalLoops>
+            <Arguments>
+              <Argument>
+                <ScalarArgument ActualName="a" FormalName="a" AccessMode="USE">
+                </ScalarArgument>
+              </Argument>
+              <Argument>
+                <ArrayArgument ActualName="b" ActualDim="1" FormalName="b" FormalDim="1" AccessMode="USE">
+                <Connection>
+                <Matrix NbRows="1" NbColumns="1" >
+                <Row> <c>1</c> </Row>
+                </Matrix>
+                </Connection>
+                <LoopOffset>
+                <Matrix NbRows="0" NbColumns="0" >
+                </Matrix>
+                </LoopOffset>
+                <ConstOffset>
+                <Matrix NbRows="1" NbColumns="1" >
+                <Row> <c>0</c> </Row>
+                </Matrix>
+                </ConstOffset>
+              </ArrayArgument>
+              </Argument>
+              <Argument>
+                <ArrayArgument ActualName="c" ActualDim="1" FormalName="c" FormalDim="1" AccessMode="DEF">
+                <Connection>
+                <Matrix NbRows="1" NbColumns="1" >
+                <Row> <c>1</c> </Row>
+                </Matrix>
+                </Connection>
+                <LoopOffset>
+                <Matrix NbRows="0" NbColumns="0" >
+                </Matrix>
+                </LoopOffset>
+                <ConstOffset>
+                <Matrix NbRows="1" NbColumns="1" >
+                <Row> <c>0</c> </Row>
+                </Matrix>
+                </ConstOffset>
+              </ArrayArgument>
+              </Argument>
+              </Arguments>
+            </Call>
+            <BoxGraph Name="main">
+                <TaskRef Name="LocalAssignment" StNumber="14">
+                  <Computes ScalarName="a" ReadBy="update2" StNumber="21"/>
+                </TaskRef>
+                <TaskRef Name="update1" StNumber="19">
+                  <Computes ScalarName="a" ReadBy="compute1" StNumber="20"/>
+                </TaskRef>
+                <TaskRef Name="compute1" StNumber="20">
+                  <Computes ArrayName="b" ReadBy="compute2" StNumber="22"/>
+                </TaskRef>
+                <TaskRef Name="update2" StNumber="21">
+                  <Computes ScalarName="s" ReadBy="compute2" StNumber="22"/>
+                </TaskRef>
+                <TaskRef Name="update2" StNumber="21">
+                  <Needs ScalarName="a" DefinedBy="LocalAssignment" StNumber="14"/>
+                </TaskRef>
+                <TaskRef Name="compute2" StNumber="22">
+                  <Needs ScalarName="a" DefinedBy="LocalAssignment" StNumber="14"/>
+                </TaskRef>
+                <TaskRef Name="compute1" StNumber="20">
+                  <Needs ScalarName="a" DefinedBy="update1" StNumber="19"/>
+                </TaskRef>
+                <TaskRef Name="compute2" StNumber="22">
+                  <Needs ArrayName="b" DefinedBy="compute1" StNumber="20"/>
+                </TaskRef>
+                <TaskRef Name="compute2" StNumber="22">
+                  <Needs ScalarName="s" DefinedBy="update2" StNumber="21"/>
+                </TaskRef>
+                <TaskRef Name="compute2" StNumber="22">
+                  <Computes ArrayName="c"/>
+                </TaskRef>
+            </BoxGraph>
+          </Box>
+<!-- XML prettyprint for module compute2. --> 
+  <Task Name="compute2">
+    <Library>
+    </Library>
+    <GlobalVariables>
+    </GlobalVariables>
+    <LocalVariables/>
+    <FormalVariables>
+      <Scalar Name="a" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="content *" Size="8"/>
+      <Array Name="b" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>100-1</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+      <Array Name="c" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>100-1</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+    </FormalVariables>
+    <ReferencedParameters>
+      <ReferencedParameter Name="c" Range="[0;99]" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+      <ReferencedParameter Name="_a_1_2__1" Range="[0;0][0;0]" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+      <ReferencedParameter Name="_a_1" Range="[0;0]" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+      <ReferencedParameter Name="b" Range="[0;99]" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+    </ReferencedParameters>
+    <Loops>
+    </Loops>
+    <TaskParameters>
+      <TaskParameter Name="a" Type="DATA" DataType="content *" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+      </TaskParameter>
+      <TaskParameter Name="b" Type="DATA" DataType="int" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE">
+        <Pattern AccessMode="USE">
+          <DimPattern Index="">
+            <Offset>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+            </Offset>
+            <Length>
+            <Symbolic>100</Symbolic>
+            <Numeric>100</Numeric>
+            </Length>
+            <Stride>
+            <Symbolic>1</Symbolic>
+            <Numeric>1</Numeric>
+            </Stride>
+          </DimPattern>
+        </Pattern>
+        <Pavage AccessMode="USE">
+          <DimPavage/>
+        </Pavage>
+      </TaskParameter>
+      <TaskParameter Name="c" Type="DATA" DataType="int" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE">
+        <Pattern AccessMode="DEF">
+          <DimPattern Index="">
+            <Offset>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+            </Offset>
+            <Length>
+            <Symbolic>100</Symbolic>
+            <Numeric>100</Numeric>
+            </Length>
+            <Stride>
+            <Symbolic>1</Symbolic>
+            <Numeric>1</Numeric>
+            </Stride>
+          </DimPattern>
+        </Pattern>
+        <Pavage AccessMode="DEF">
+          <DimPavage/>
+        </Pavage>
+      </TaskParameter>
+    </TaskParameters>
+    <CodeSize>
+    </CodeSize>
+  </Task>
+<!-- XML prettyprint for module update2. --> 
+  <Task Name="update2">
+    <Library>
+    </Library>
+    <GlobalVariables>
+    </GlobalVariables>
+    <LocalVariables/>
+    <FormalVariables>
+      <Scalar Name="a" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="content *" Size="8"/>
+    </FormalVariables>
+    <ReferencedParameters>
+      <ReferencedParameter Name="_a_1" Range="[0;0]" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+      <ReferencedParameter Name="_a_1_2__1" Range="[0;0][0;0]" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+    </ReferencedParameters>
+    <Loops>
+    </Loops>
+    <TaskParameters>
+      <TaskParameter Name="a" Type="DATA" DataType="content *" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+      </TaskParameter>
+    </TaskParameters>
+    <CodeSize>
+    </CodeSize>
+  </Task>
+<!-- XML prettyprint for module compute1. --> 
+  <Task Name="compute1">
+    <Library>
+    </Library>
+    <GlobalVariables>
+    </GlobalVariables>
+    <LocalVariables/>
+    <FormalVariables>
+      <Scalar Name="a" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="content *" Size="8"/>
+      <Array Name="b" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>100-1</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+    </FormalVariables>
+    <ReferencedParameters>
+      <ReferencedParameter Name="b" Range="[0;99]" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+      <ReferencedParameter Name="_a_1" Range="[0;0]" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+    </ReferencedParameters>
+    <Loops>
+    </Loops>
+    <TaskParameters>
+      <TaskParameter Name="a" Type="DATA" DataType="content *" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+      </TaskParameter>
+      <TaskParameter Name="b" Type="DATA" DataType="int" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE">
+        <Pattern AccessMode="DEF">
+          <DimPattern Index="">
+            <Offset>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+            </Offset>
+            <Length>
+            <Symbolic>100</Symbolic>
+            <Numeric>100</Numeric>
+            </Length>
+            <Stride>
+            <Symbolic>1</Symbolic>
+            <Numeric>1</Numeric>
+            </Stride>
+          </DimPattern>
+        </Pattern>
+        <Pavage AccessMode="DEF">
+          <DimPavage/>
+        </Pavage>
+      </TaskParameter>
+    </TaskParameters>
+    <CodeSize>
+    </CodeSize>
+  </Task>
+<!-- XML prettyprint for module update1. --> 
+  <Task Name="update1">
+    <Library>
+    </Library>
+    <GlobalVariables>
+    </GlobalVariables>
+    <LocalVariables/>
+    <FormalVariables>
+      <Scalar Name="a" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="content *" Size="8"/>
+    </FormalVariables>
+    <ReferencedParameters>
+      <ReferencedParameter Name="_a_1" Range="[0;0]" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+    </ReferencedParameters>
+    <Loops>
+    </Loops>
+    <TaskParameters>
+      <TaskParameter Name="a" Type="DATA" DataType="content *" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+      </TaskParameter>
+    </TaskParameters>
+    <CodeSize>
+    </CodeSize>
+  </Task>
+  <ApplicationGraph Name="main">
+    <TaskRef Name="main">
+              <Computes ScalarName="a"/>
+              <Computes ArrayName="b"/>
+              <Computes ScalarName="s"/>
+              <Computes ArrayName="c"/>
+              <Needs ScalarName="a" DefinedBy="update1"/>
+              <Needs ScalarName="s" DefinedBy="update2"/>
+              <Needs ArrayName="b" DefinedBy="compute1"/>
+            </TaskRef>
+          </ApplicationGraph>
+        </Application>

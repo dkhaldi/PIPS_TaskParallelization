@@ -1,0 +1,562 @@
+
+//  T() {}
+
+void compute1_1(sub s, int b[100])
+{
+
+//  T() {}
+
+   int i;
+
+//  T(i) {0<=i, i+1<=s[var2]}
+
+   for(i = 0; i <= s.var2-1; i += 1)
+
+//  T() {}
+
+      b[i] = s.var2;
+}
+
+//  T() {}
+
+void compute1_2(sub *s, int b[100])
+{
+
+//  T() {}
+
+   int i;
+
+//  T(i) {i+1<=_s_1[0][var2], 0<=i}
+
+   for(i = 0; i <= s->var2-1; i += 1)
+
+//  T() {}
+
+      b[i] = s->var2;
+}
+
+//  T() {}
+
+void compute2_1(sub *s, int b[100], int c[100])
+{
+
+//  T(k) {k==0}
+
+   int k = 0;
+   {
+
+//  T() {}
+
+      int i;
+
+//  T(i) {i+1<=_s_1[0][var2], 0<=i}
+
+      for(i = 0; i <= s->var2-1; i += 1)
+
+//  T() {}
+
+         c[i] = b[i]+s->var2;
+   }
+}
+
+//  T() {}
+
+void compute2_2(int *var2, int b[100], int c[100])
+{
+
+//  T() {}
+
+   int i;
+
+//  T(i) {0<=i, i<=99}
+
+   for(i = 0; i <= 99; i += 1)
+
+//  T() {}
+
+      c[i] = b[i]+*var2;
+}
+
+//  T() {}
+
+void compute2_3(int var2, int b[100], int c[100])
+{
+
+//  T(k) {k==0}
+
+   int k = 0;
+   {
+
+//  T() {}
+
+      int i;
+
+//  T(i) {0<=i, i<=99}
+
+      for(i = 0; i <= 99; i += 1)
+
+//  T() {}
+
+         c[i] = b[i]+var2;
+   }
+}
+
+//  T(_s_1[0][var2]) {_s_1[0][var2]==4}
+
+void computeH(sub *s, int b[100], int c[100], int d[100], int e[100])
+{
+   // s->var2 == 7
+
+//  T(k) {k==0}
+
+   int k = 0;
+
+//  T(_s_1[0][var2]) {_s_1[0][var2]==4}
+
+   // s->var2 == 7
+   update3(s);
+
+//  T() {}
+
+   // s->var2 == 4
+   compute2_1(s, b, c);
+
+//  T() {}
+
+   // s->var2 == 4
+   compute2_2(&s->var2, c, d);
+
+//  T() {}
+
+   // s->var2 == 4
+   compute2_3(s->var2, d, e);
+}
+
+//  T() {}
+
+void foo(int k)
+{
+
+//  T() {}
+
+   printf("k= %d\n", k);
+}
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T() {}
+
+   content a;
+
+//  T() {}
+
+   int b[100];
+
+//  T() {}
+
+   int c[100];
+
+//  T() {}
+
+   int d[100];
+
+//  T() {}
+
+   int e[100];
+
+//  T(a[s1][var2]) {a[s1][var2]==8}
+
+
+   update1(&a);
+
+//  T() {}
+
+   // a.s1.var2 == 8
+   use1_1(&a);
+
+//  T() {}
+
+   
+   // a.s1.var2 == 8
+   use1_2(a);
+
+//  T() {}
+
+   
+   // a.s1.var2 == 8
+   compute1_1(a.s1, b);
+
+//  T() {}
+
+   
+   // a.s1.var2 == 8
+   compute1_2(&a.s1, b);
+
+//  T(a[s2][var2]) {a[s2][var2]==7}
+
+   
+   // a.s1.var2 == 8
+   update2(&a);
+
+//  T(a[s2][var2]) {a[s2][var2]==4}
+
+   
+   // a.s1.var2 == 8, a.s2.var2 == 7
+   computeH(&a.s2, b, c, d, e);
+
+//  T() {}
+
+   
+   // a.s1.var2 == 8, a.s2.var2 == 4
+   printf("a.s1.var2= %d , a.s2.var2 == %d\n", a.s1.var2, a.s2.var2);
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+//  T(_a_1[0][s1][var2]) {_a_1[0][s1][var2]==8}
+
+void update1(content *a)
+{
+
+//  T(_a_1[0][s1][var2]) {_a_1[0][s1][var2]==8}
+
+   a->s1.var2 = 8;
+}
+
+//  T(_a_1[0][s2][var2]) {_a_1[0][s2][var2]==7}
+
+void update2(content *a)
+{
+
+//  T(k) {k==0}
+
+   int k = 0;
+
+//  T(_a_1[0][s2][var2]) {_a_1[0][s2][var2]==7}
+
+   a->s2.var2 = 7;
+}
+
+//  T(_st_1[0][var2]) {_st_1[0][var2]==4}
+
+void update3(sub *st)
+{
+
+//  T(_st_1[0][var2]) {_st_1[0][var2]==4}
+
+   st->var2 = 4;
+}
+
+//  T() {}
+
+void use1_1(content *a)
+{
+
+//  T(k) {k==0}
+
+   int k = 0;
+
+//  T() {}
+
+   printf("val a =%d\n", a->s1.var2);
+}
+
+//  T() {}
+
+void use1_2(content a)
+{
+
+//  T(k) {k==0}
+
+   int k = 0;
+
+//  T() {}
+
+   printf("val a =%d\n", a.s1.var2);
+}
+
+//  P() {s[var2]==8}
+
+void compute1_1(sub s, int b[100])
+{
+
+//  P() {s[var2]==8}
+
+   int i;
+
+//  P() {s[var2]==8}
+
+   for(i = 0; i <= s.var2-1; i += 1)
+
+//  P(i) {s[var2]==8, 0<=i, i<=7}
+
+      b[i] = s.var2;
+}
+
+//  P() {_s_1[0][var2]==8}
+
+void compute1_2(sub *s, int b[100])
+{
+
+//  P() {_s_1[0][var2]==8}
+
+   int i;
+
+//  P() {_s_1[0][var2]==8}
+
+   for(i = 0; i <= s->var2-1; i += 1)
+
+//  P(i) {_s_1[0][var2]==8, 0<=i, i<=7}
+
+      b[i] = s->var2;
+}
+
+//  P() {}
+
+void compute2_1(sub *s, int b[100], int c[100])
+{
+
+//  P() {}
+
+   int k = 0;
+   {
+
+//  P(k) {k==0}
+
+      int i;
+
+//  P(k) {k==0}
+
+      for(i = 0; i <= s->var2-1; i += 1)
+
+//  P(i,k) {k==0, i+1<=_s_1[0][var2], 0<=i}
+
+         c[i] = b[i]+s->var2;
+   }
+}
+
+//  P() {}
+
+void compute2_2(int *var2, int b[100], int c[100])
+{
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+   for(i = 0; i <= 99; i += 1)
+
+//  P(i) {0<=i, i<=99}
+
+      c[i] = b[i]+*var2;
+}
+
+//  P() {var2==4}
+
+void compute2_3(int var2, int b[100], int c[100])
+{
+
+//  P() {var2==4}
+
+   int k = 0;
+   {
+
+//  P(k) {k==0, var2==4}
+
+      int i;
+
+//  P(k) {k==0, var2==4}
+
+      for(i = 0; i <= 99; i += 1)
+
+//  P(i,k) {k==0, var2==4, 0<=i, i<=99}
+
+         c[i] = b[i]+var2;
+   }
+}
+
+//  P() {_s_1[0][var2]==7}
+
+void computeH(sub *s, int b[100], int c[100], int d[100], int e[100])
+{
+   // s->var2 == 7
+
+//  P() {_s_1[0][var2]==7}
+
+   int k = 0;
+
+//  P(k) {_s_1[0][var2]==7, k==0}
+
+   // s->var2 == 7
+   update3(s);
+
+//  P(_s_1[0][var2],k) {_s_1[0][var2]==4, _s_1[0][var2]#init==7, k==0}
+
+   // s->var2 == 4
+   compute2_1(s, b, c);
+
+//  P(_s_1[0][var2],k) {_s_1[0][var2]==4, _s_1[0][var2]#init==7, k==0}
+
+   // s->var2 == 4
+   compute2_2(&s->var2, c, d);
+
+//  P(_s_1[0][var2],k) {_s_1[0][var2]==4, _s_1[0][var2]#init==7, k==0}
+
+   // s->var2 == 4
+   compute2_3(s->var2, d, e);
+}
+
+//  P() {0==-1}
+
+void foo(int k)
+{
+
+//  P() {0==-1}
+
+   printf("k= %d\n", k);
+}
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   content a;
+
+//  P() {}
+
+   int b[100];
+
+//  P() {}
+
+   int c[100];
+
+//  P() {}
+
+   int d[100];
+
+//  P() {}
+
+   int e[100];
+
+//  P() {}
+
+
+   update1(&a);
+
+//  P(a[s1][var2]) {a[s1][var2]==8}
+
+   // a.s1.var2 == 8
+   use1_1(&a);
+
+//  P(a[s1][var2]) {a[s1][var2]==8}
+
+   
+   // a.s1.var2 == 8
+   use1_2(a);
+
+//  P(a[s1][var2]) {a[s1][var2]==8}
+
+   
+   // a.s1.var2 == 8
+   compute1_1(a.s1, b);
+
+//  P(a[s1][var2]) {a[s1][var2]==8}
+
+   
+   // a.s1.var2 == 8
+   compute1_2(&a.s1, b);
+
+//  P(a[s1][var2]) {a[s1][var2]==8}
+
+   
+   // a.s1.var2 == 8
+   update2(&a);
+
+//  P(a[s1][var2],a[s2][var2]) {a[s1][var2]==8, a[s2][var2]==7}
+
+   
+   // a.s1.var2 == 8, a.s2.var2 == 7
+   computeH(&a.s2, b, c, d, e);
+
+//  P(a[s1][var2],a[s2][var2]) {a[s1][var2]==8, a[s2][var2]==4}
+
+   
+   // a.s1.var2 == 8, a.s2.var2 == 4
+   printf("a.s1.var2= %d , a.s2.var2 == %d\n", a.s1.var2, a.s2.var2);
+
+//  P(a[s1][var2],a[s2][var2]) {a[s1][var2]==8, a[s2][var2]==4}
+
+   return 0;
+}
+
+//  P() {}
+
+void update1(content *a)
+{
+
+//  P() {}
+
+   a->s1.var2 = 8;
+}
+
+//  P() {}
+
+void update2(content *a)
+{
+
+//  P() {}
+
+   int k = 0;
+
+//  P(k) {k==0}
+
+   a->s2.var2 = 7;
+}
+
+//  P() {}
+
+void update3(sub *st)
+{
+
+//  P() {}
+
+   st->var2 = 4;
+}
+
+//  P() {_a_1[0][s1][var2]==8}
+
+void use1_1(content *a)
+{
+
+//  P() {_a_1[0][s1][var2]==8}
+
+   int k = 0;
+
+//  P(k) {_a_1[0][s1][var2]==8, k==0}
+
+   printf("val a =%d\n", a->s1.var2);
+}
+
+//  P() {}
+
+void use1_2(content a)
+{
+
+//  P() {}
+
+   int k = 0;
+
+//  P(k) {k==0}
+
+   printf("val a =%d\n", a.s1.var2);
+}

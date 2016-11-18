@@ -1,0 +1,159 @@
+
+PROPER  EFFECTS 
+
+int main()
+{
+   char **p, *q, *r, *s, i, j, k;
+//             <    is written>: i j k
+   i = j = k = 'c';
+//             <    is written>: q
+   q = &i;
+//             <    is written>: r
+   r = &j;
+//             <    is read   >: i
+   if (i=='h')
+//             <    is written>: p
+      p = &q;
+   else
+//             <    is written>: p
+      p = &r;
+//             <    is written>: s
+   s = &k;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p s
+   *p = s;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   char **p, *q, *r, *s, i, j, k;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+// s -> undefined , EXACT
+
+   i = j = k = 'c';
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+// s -> undefined , EXACT
+
+   q = &i;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> i , EXACT
+// r -> undefined , EXACT
+// s -> undefined , EXACT
+
+   r = &j;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> i , EXACT
+// r -> j , EXACT
+// s -> undefined , EXACT
+
+   if (i=='h')
+
+// Points To:
+// p -> undefined , EXACT
+// q -> i , EXACT
+// r -> j , EXACT
+// s -> undefined , EXACT
+
+      p = &q;
+   else
+
+// Points To:
+// p -> undefined , EXACT
+// q -> i , EXACT
+// r -> j , EXACT
+// s -> undefined , EXACT
+
+      p = &r;
+
+// Points To:
+// p -> q , MAY
+// p -> r , MAY
+// q -> i , EXACT
+// r -> j , EXACT
+// s -> undefined , EXACT
+
+   s = &k;
+
+// Points To:
+// p -> q , MAY
+// p -> r , MAY
+// q -> i , EXACT
+// r -> j , EXACT
+// s -> k , EXACT
+
+   *p = s;
+}
+
+PROPER EFFECTS WITH POINTS TO
+
+int main()
+{
+   char **p, *q, *r, *s, i, j, k;
+//             <    is written>: i j k
+   i = j = k = 'c';
+//             <    is written>: q
+   q = &i;
+//             <    is written>: r
+   r = &j;
+//             <    is read   >: i
+   if (i=='h')
+//             <    is written>: p
+      p = &q;
+   else
+//             <    is written>: p
+      p = &r;
+//             <    is written>: s
+   s = &k;
+//             <may be written>: q r
+//             <    is read   >: p s
+   *p = s;
+}
+
+CUMULATED EFFECTS WITH POINTS TO
+
+int main()
+{
+   char **p, *q, *r, *s, i, j, k;
+//             <    is written>: i j k
+   i = j = k = 'c';
+//             <    is written>: q
+   q = &i;
+//             <    is written>: r
+   r = &j;
+//             <    is read   >: i
+//             <    is written>: p
+   if (i=='h')
+//             <    is written>: p
+      p = &q;
+   else
+//             <    is written>: p
+      p = &r;
+//             <    is written>: s
+   s = &k;
+//             <may be written>: q r
+//             <    is read   >: p s
+   *p = s;
+}

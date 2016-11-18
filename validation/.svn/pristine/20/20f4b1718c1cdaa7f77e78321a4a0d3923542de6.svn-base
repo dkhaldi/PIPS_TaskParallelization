@@ -1,0 +1,277 @@
+
+TRANSFORMERS
+
+
+//  T() {}
+
+void sting_berkeley01()
+{
+   //
+   // BERKELEY model taken from Fast
+   //
+   
+
+//  T(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0}
+
+   int invalid, unowned = 0, nonexclusive = 0, exclusive = 0;
+
+//  T() {exclusive==0, nonexclusive==0, unowned==0, 1<=invalid}
+
+   
+   //propsteps(3)
+   
+   
+   if (!(invalid>=1))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive+invalid==invalid#init, exclusive#init==0,
+//    nonexclusive==0, nonexclusive#init==0, unowned==0,
+//    unowned#init==0, 1<=invalid#init}
+
+
+   while (invalid>=1||nonexclusive+unowned>=1) {
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive+invalid+nonexclusive+unowned==exclusive#init+
+//    invalid#init+nonexclusive#init+unowned#init}
+
+      // StInG expected results: exclusive>=0, unowned>=0,
+      // invalid+unowned+nonexclusive+exclusive>=1
+      //transition t1 or t2 or t3 may execute: l0,
+      if (invalid>=1&&nonexclusive+unowned>=1)
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive+invalid+nonexclusive+unowned==exclusive#init+
+//    invalid#init+nonexclusive#init+unowned#init, 1<=invalid#init,
+//    1<=nonexclusive#init+unowned#init}
+
+         if (alea()>=0.)
+
+//  T(exclusive,invalid,nonexclusive,unowned) {exclusive==0,
+//    exclusive#init+nonexclusive#init==nonexclusive,
+//    invalid==invalid#init-1, unowned==unowned#init+1, 0<=invalid,
+//    2<=nonexclusive#init+unowned}
+
+            // t1
+            nonexclusive += exclusive, exclusive = 0, invalid--, unowned++;
+         else if (alea()>=0)
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive==exclusive#init+1,
+//    invalid#init+nonexclusive#init+unowned#init==invalid+1,
+//    nonexclusive==0, unowned==0, 1<=invalid, 1<=invalid#init,
+//    1<=nonexclusive#init+unowned#init}
+
+            // t2
+            invalid += unowned+nonexclusive-1, exclusive++, unowned = 0, nonexclusive = 0;
+         else
+
+//  T(exclusive,invalid,nonexclusive,unowned) {exclusive==1,
+//    exclusive#init+invalid#init+nonexclusive#init+unowned#init==
+//    invalid+1, nonexclusive==0, unowned==0,
+//    exclusive#init+1<=invalid, 1<=invalid#init,
+//    1<=nonexclusive#init+unowned#init}
+
+            // t3
+            invalid += unowned+exclusive+nonexclusive-1, unowned = 0, nonexclusive = 0, exclusive = 1;
+      else if (invalid>=1) {
+
+//  T() {1<=invalid, nonexclusive+unowned<=0}
+
+         if (!!(nonexclusive+unowned>=1))
+
+//  T() {0==-1}
+
+            abort();
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive+invalid+nonexclusive+unowned==exclusive#init+
+//    invalid#init+nonexclusive#init+unowned#init,
+//    invalid+nonexclusive+unowned<=exclusive#init+invalid#init+
+//    nonexclusive#init+unowned#init,
+//    exclusive#init+invalid#init+nonexclusive#init+unowned#init<=
+//    invalid+nonexclusive+unowned+1, 1<=invalid#init,
+//    nonexclusive#init+unowned#init<=0}
+
+         if (alea()>=0.)
+
+//  T(exclusive,invalid,nonexclusive,unowned) {exclusive==0,
+//    exclusive#init+nonexclusive#init==nonexclusive,
+//    invalid==invalid#init-1, unowned==unowned#init+1, 0<=invalid,
+//    nonexclusive#init+unowned<=1}
+
+            //transition t1: l0,
+            nonexclusive += exclusive, exclusive = 0, invalid--, unowned++;
+         else
+
+//  T(exclusive,invalid,nonexclusive,unowned) {exclusive==1,
+//    exclusive#init+invalid#init+nonexclusive#init+unowned#init==
+//    invalid+1, nonexclusive==0, unowned==0, 1<=invalid#init,
+//    nonexclusive#init+unowned#init<=0}
+
+            //transition t3: l0,
+            invalid += unowned+exclusive+nonexclusive-1, unowned = 0, nonexclusive = 0, exclusive = 1;
+      }
+      else
+
+//  T() {invalid<=0, 1<=nonexclusive+unowned}
+
+         //if(nonexclusive+unowned>=1)
+         if (!(!(invalid>=1)&&nonexclusive+unowned>=1))
+
+//  T() {0==-1}
+
+            abort();
+
+//  T(exclusive,invalid,nonexclusive,unowned)
+//    {exclusive==exclusive#init+1,
+//    invalid#init+nonexclusive#init+unowned#init==invalid+1,
+//    nonexclusive==0, unowned==0}
+
+      //transition t2: l0 must be executable,
+      invalid += unowned+nonexclusive-1, exclusive++, unowned = 0, nonexclusive = 0;
+   }
+   // This point should never be reached, but it is. Try with small
+   // initial values for invalid
+
+//  T(count) {count==0, nonexclusive==0, unowned==0,
+//    1<=exclusive+invalid, invalid<=0}
+
+   int count = 0;
+
+//  T() {count==0, nonexclusive==0, unowned==0, 1<=exclusive+invalid,
+//    invalid<=0}
+
+   printf("count = %d\n", count);
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+void sting_berkeley01()
+{
+   //
+   // BERKELEY model taken from Fast
+   //
+   
+
+//  P() {}
+
+   int invalid, unowned = 0, nonexclusive = 0, exclusive = 0;
+
+//  P(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0}
+
+   
+   //propsteps(3)
+   
+   
+   if (!(invalid>=1))
+
+//  P(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0, invalid<=0}
+
+      abort();
+
+//  P(exclusive,nonexclusive,unowned) {exclusive==0, nonexclusive==0,
+//    unowned==0, 1<=invalid}
+
+
+   while (invalid>=1||nonexclusive+unowned>=1) {
+
+//  P(exclusive,invalid,nonexclusive,unowned) {nonexclusive==0,
+//    unowned==0, 1<=exclusive+invalid, 1<=invalid}
+
+      // StInG expected results: exclusive>=0, unowned>=0,
+      // invalid+unowned+nonexclusive+exclusive>=1
+      //transition t1 or t2 or t3 may execute: l0,
+      if (invalid>=1&&nonexclusive+unowned>=1)
+
+//  P() {0==-1}
+
+         if (alea()>=0.)
+
+//  P() {0==-1}
+
+            // t1
+            nonexclusive += exclusive, exclusive = 0, invalid--, unowned++;
+         else if (alea()>=0)
+
+//  P() {0==-1}
+
+            // t2
+            invalid += unowned+nonexclusive-1, exclusive++, unowned = 0, nonexclusive = 0;
+         else
+
+//  P() {0==-1}
+
+            // t3
+            invalid += unowned+exclusive+nonexclusive-1, unowned = 0, nonexclusive = 0, exclusive = 1;
+      else if (invalid>=1) {
+
+//  P(exclusive,invalid,nonexclusive,unowned) {nonexclusive==0,
+//    unowned==0, 1<=exclusive+invalid, 1<=invalid}
+
+         if (!!(nonexclusive+unowned>=1))
+
+//  P() {0==-1}
+
+            abort();
+
+//  P(exclusive,invalid,nonexclusive,unowned) {nonexclusive==0,
+//    unowned==0, 1<=exclusive+invalid, 1<=invalid}
+
+         if (alea()>=0.)
+
+//  P(exclusive,invalid,nonexclusive,unowned) {nonexclusive==0,
+//    unowned==0, 1<=exclusive+invalid, 1<=invalid}
+
+            //transition t1: l0,
+            nonexclusive += exclusive, exclusive = 0, invalid--, unowned++;
+         else
+
+//  P(exclusive,invalid,nonexclusive,unowned) {nonexclusive==0,
+//    unowned==0, 1<=exclusive+invalid, 1<=invalid}
+
+            //transition t3: l0,
+            invalid += unowned+exclusive+nonexclusive-1, unowned = 0, nonexclusive = 0, exclusive = 1;
+      }
+      else
+
+//  P() {0==-1}
+
+         //if(nonexclusive+unowned>=1)
+         if (!(!(invalid>=1)&&nonexclusive+unowned>=1))
+
+//  P() {0==-1}
+
+            abort();
+
+//  P(exclusive,invalid,nonexclusive,unowned) {exclusive+unowned==1,
+//    0<=exclusive, exclusive<=1, 0<=invalid, 0<=invalid+nonexclusive}
+
+      //transition t2: l0 must be executable,
+      invalid += unowned+nonexclusive-1, exclusive++, unowned = 0, nonexclusive = 0;
+   }
+   // This point should never be reached, but it is. Try with small
+   // initial values for invalid
+
+//  P(exclusive,invalid,nonexclusive,unowned) {nonexclusive==0,
+//    unowned==0, 1<=exclusive, exclusive<=2, 1<=exclusive+invalid,
+//    invalid<=0}
+
+   int count = 0;
+
+//  P(count,exclusive,invalid,nonexclusive,unowned) {count==0,
+//    nonexclusive==0, unowned==0, 1<=exclusive, exclusive<=2,
+//    1<=exclusive+invalid, invalid<=0}
+
+   printf("count = %d\n", count);
+}

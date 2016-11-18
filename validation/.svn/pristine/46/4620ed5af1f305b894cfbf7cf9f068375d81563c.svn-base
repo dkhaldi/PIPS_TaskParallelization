@@ -1,0 +1,93 @@
+
+Initial code
+
+void flatten_code11(void)
+{
+   // BEGIN BLOCK
+   int i;                                                               /*0007*/
+   
+   /* Let's execute this loop four times! */
+   for(i = 0; i <= 3; i += 1) {                                         /*0010*/
+      // BEGIN BLOCK
+      static int foo = 0;                                               /*0011*/
+      
+      /* Let's update a static variable! */
+      foo++;                                                            /*0014*/
+
+      fprintf(stdout, "foo=%d\n", foo);                                 /*0016*/
+      // END BLOCK
+   }
+   // END BLOCK
+}
+
+Code with preconditions
+
+
+//  P() {foo==0}
+
+void flatten_code11(void)
+{
+
+//  P() {foo==0}
+
+   // BEGIN BLOCK
+
+//  P() {foo==0}
+
+   int i;                                                               /*0007*/
+
+//  P() {foo==0}
+
+   
+   /* Let's execute this loop four times! */
+   for(i = 0; i <= 3; i += 1) {                                         /*0010*/
+
+//  P(foo,i) {foo==i, foo#init==0, 0<=foo, foo<=3}
+
+      // BEGIN BLOCK
+
+//  P(foo,i) {foo==i, foo#init==0, 0<=foo, foo<=3}
+
+      static int foo = 0;                                               /*0011*/
+
+//  P(foo,i) {foo==i, foo#init==0, 0<=foo, foo<=3}
+
+      
+      /* Let's update a static variable! */
+      foo++;                                                            /*0014*/
+
+//  P(foo,i) {foo==i+1, foo#init==0, 1<=foo, foo<=4}
+
+
+      fprintf(stdout, "foo=%d\n", foo);                                 /*0016*/
+      // END BLOCK
+   }
+   // END BLOCK
+}
+
+Code after code flattening
+
+void flatten_code11(void)
+{
+   // BEGIN BLOCK
+   int i;                                                               /*0007*/
+   //PIPS generated variable
+   static int foo = 0;
+   
+   /* Let's execute this loop four times! */
+   foo++;
+   fprintf(stdout, "foo=%d\n", foo);
+   foo++;
+   fprintf(stdout, "foo=%d\n", foo);
+   foo++;
+   fprintf(stdout, "foo=%d\n", foo);
+   foo++;
+   fprintf(stdout, "foo=%d\n", foo);
+   // END BLOCK
+}
+
+Unsplit and compile resulting code
+
+#
+# compile run compare both flatten_code11
+#

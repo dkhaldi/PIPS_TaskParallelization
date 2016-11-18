@@ -1,0 +1,142 @@
+
+Proper effects
+
+int main(void)
+{
+//             <    is written>: i
+   int i = 1;
+//             <    is written>: pi
+   int *pi = &i;
+//             <    is written>: pp
+   int **pp = &pi;
+//             <    is written>: j
+   int j = 2;
+//             <    is read   >: __TIME_EFFECTS:KALI
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED 
+//                               __TIME_EFFECTS:KALI
+
+   srand(time((void *) 0));
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout _RANDOM_EFFECTS:GEN_SEED 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED 
+//                               __IO_EFFECTS:LUNS[1]
+
+   if (alea()) {
+//             <    is written>: pj
+      int *pj = &j;
+//             <    is written>: pp
+      pp = &pj;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: pp
+      **pp = 0;
+   }
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: pp stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   
+   // pp may points to a dead value in the stack
+   printf("%p\n", pp);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: pp
+   
+   // possible segfault.
+   // should generate an error while analyzing?
+   **pp = 0;
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(void)
+{
+
+// Points To: none
+
+   int i = 1;
+
+// Points To: none
+
+   int *pi = &i;
+
+// Points To:
+// pi -> i , EXACT
+
+   int **pp = &pi;
+
+// Points To:
+// pi -> i , EXACT
+// pp -> pi , EXACT
+
+   int j = 2;
+
+// Points To:
+// pi -> i , EXACT
+// pp -> pi , EXACT
+
+
+   srand(time((void *) 0));
+
+// Points To:
+// pi -> i , EXACT
+// pp -> pi , EXACT
+
+
+   if (alea()) {
+
+// Points To:
+// pi -> i , EXACT
+// pp -> pi , EXACT
+
+      int *pj = &j;
+
+// Points To:
+// pi -> i , EXACT
+// pj -> j , EXACT
+// pp -> pi , EXACT
+
+      pp = &pj;
+
+// Points To:
+// pi -> i , EXACT
+// pj -> j , EXACT
+// pp -> pj , EXACT
+
+      **pp = 0;
+   }
+
+// Points To:
+// pi -> i , EXACT
+// pp -> undefined , MAY
+// pp -> pi , MAY
+
+   
+   // pp may points to a dead value in the stack
+   printf("%p\n", pp);
+
+// Points To:
+// pi -> i , EXACT
+// pp -> undefined , MAY
+// pp -> pi , MAY
+
+   
+   // possible segfault.
+   // should generate an error while analyzing?
+   **pp = 0;
+
+// Points To:
+// pi -> i , EXACT
+// pp -> pi , EXACT
+
+   return 0;
+}

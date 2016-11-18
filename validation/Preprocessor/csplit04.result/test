@@ -1,0 +1,6 @@
+
+Warnings for csplit04
+
+CREATE_WORKSPACE[Program] (process_user_file) Duplicate module name "FOO/FOO.initial.f" from files "./csplit04.src/foo1.f" and "./csplit04.src/foo2.f".
+(tp_parse) [user error] Could not create workspace "csplit04"
+(pips_log_end) [user error] stopping pips on code 2 (USER_ERROR) for CLOSE_WORKSPACE_AND_QUIT_ON_ERROR

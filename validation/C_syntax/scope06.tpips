@@ -1,0 +1,32 @@
+setenv WS=scope06
+delete $WS
+#setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.src/scope06_a.c  $WS.src/scope06_b.c
+
+#setenv PIPS_CPP_FLAGS=" -I$WS "
+
+echo
+echo Symbol table for scope06_a!
+echo
+
+display SYMBOL_TABLE_FILE[scope06_a!]
+
+echo
+echo Symbol table for scope06_b!
+echo
+
+display SYMBOL_TABLE_FILE[scope06_b!]
+
+close
+
+echo
+echo Warnings
+echo
+
+shell cat $WS.database/Warnings
+
+#delete $WS
+quit
+
+
+

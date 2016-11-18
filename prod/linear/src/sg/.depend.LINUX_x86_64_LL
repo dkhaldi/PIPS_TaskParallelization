@@ -1,0 +1,4 @@
+LINUX_x86_64_LL/sg.o: sg.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/ray_dte.h $(ROOT)/include/sommet.h sg.h

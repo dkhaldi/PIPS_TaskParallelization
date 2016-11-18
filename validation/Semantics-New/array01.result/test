@@ -1,0 +1,47 @@
+
+Cumulated Effects
+
+//             <    is written>: a[1]
+int main(void)
+{
+//             <    is written>: a[1]
+   a[1] = 2;
+
+   return 0;
+}
+
+Transformers
+
+
+//  T(a[1],main) {a[1]==2, main==0}
+
+int main(void)
+{
+
+//  T(a[1]) {a[1]==2}
+
+   a[1] = 2;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   a[1] = 2;
+
+//  P(a[1]) {a[1]==2}
+
+
+   return 0;
+}

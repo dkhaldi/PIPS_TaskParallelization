@@ -1,0 +1,17 @@
+setenv WSPACE=declaration06
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+delete $WSPACE
+
+create $WSPACE $WSPACE.c
+
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+
+display PRINTED_FILE[main]
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE
+
+close
+delete $WSPACE
+quit

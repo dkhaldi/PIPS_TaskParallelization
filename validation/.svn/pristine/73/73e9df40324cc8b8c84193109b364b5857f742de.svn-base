@@ -1,0 +1,100 @@
+
+Cumulated Effects
+
+//             <    is written>: p.N1
+int init()
+{
+//             <    is written>: p.N1
+   p.N1 = 1;
+   return 0;
+}
+//             <    is read   >: p
+int main(int argc, char *argv[])
+{
+   // Ici fonction de recuperation des dimensions des tableaux
+   //	while ( read_config_file() >=0 )
+   //  while (read_config_file())
+   while (1) {
+//             <    is read   >: p.N1 p.N3 p.N4
+      float Gen_chirp_out[p.N4][p.N3][p.N1];
+   }
+   return 0;
+}
+
+Transformers
+
+
+//  T(init,p[N1]) {init==0, p[N1]==1}
+
+int init()
+{
+
+//  T(p[N1]) {p[N1]==1}
+
+   p.N1 = 1;
+
+//  T(init) {init==0}
+
+   return 0;
+}
+
+//  T() {0==-1}
+
+int main(int argc, char *argv[])
+{
+
+//  T() {}
+
+   // Ici fonction de recuperation des dimensions des tableaux
+   //	while ( read_config_file() >=0 )
+   //  while (read_config_file())
+   while (1) {
+
+//  T() {}
+
+      float Gen_chirp_out[p.N4][p.N3][p.N1];
+   }
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {0==-1}
+
+int init()
+{
+
+//  P() {0==-1}
+
+   p.N1 = 1;
+
+//  P() {0==-1}
+
+   return 0;
+}
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   // Ici fonction de recuperation des dimensions des tableaux
+   //	while ( read_config_file() >=0 )
+   //  while (read_config_file())
+   while (1) {
+
+//  P() {}
+
+      float Gen_chirp_out[p.N4][p.N3][p.N1];
+   }
+
+//  P() {0==-1}
+
+   return 0;
+}

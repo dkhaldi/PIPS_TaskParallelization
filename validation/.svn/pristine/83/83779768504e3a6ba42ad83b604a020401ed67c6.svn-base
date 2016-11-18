@@ -1,0 +1,40 @@
+
+Initial code
+
+void a()
+{
+   int i, j;
+   j = 0;
+kernel:
+   for(i = 0; i <= 255; i += 1)
+      j += b(i);
+}
+int b(int i)
+{
+   return i*2;
+}
+
+Code after outlining
+
+void a()
+{
+   int i, j;
+   j = 0;
+kernel:   kernel(&j);
+}
+int b(int i)
+{
+   return i*2;
+}
+void kernel(int j_0[1])
+{
+   // Declared by Pass Outlining
+   int i;
+   // Declared as a patch variable by Pass Outlining
+   int j;
+   j = *j_0;
+kernel:
+   for(i = 0; i <= 255; i += 1)
+      j += b(i);
+   *j_0 = j;
+}

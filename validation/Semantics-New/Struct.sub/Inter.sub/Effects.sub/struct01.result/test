@@ -1,0 +1,74 @@
+
+Cumulated Effects
+
+//             <    is read   >: global_f.i global_f.j
+//             <    is written>: global_f.i global_f.j
+int main(void)
+{
+//             <    is written>: global_f.i
+   global_f.i = 0;
+//             <    is written>: global_f.j
+   global_f.j = 2;
+
+//             <    is read   >: global_f.i global_f.j
+//             <    is written>: l
+   int l = global_f.i+global_f.j;
+
+   return 0;
+}
+
+Transformers
+
+
+//  T(global_f[i],global_f[j],main) {global_f[i]==0, global_f[j]==2,
+//    main==0}
+
+int main(void)
+{
+
+//  T(global_f[i]) {global_f[i]==0}
+
+   global_f.i = 0;
+
+//  T(global_f[j]) {global_f[j]==2}
+
+   global_f.j = 2;
+
+
+//  T(l) {global_f[i]+global_f[j]==l}
+
+   int l = global_f.i+global_f.j;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   global_f.i = 0;
+
+//  P(global_f[i]) {global_f[i]==0}
+
+   global_f.j = 2;
+
+
+//  P(global_f[i],global_f[j]) {global_f[i]==0, global_f[j]==2}
+
+   int l = global_f.i+global_f.j;
+
+//  P(global_f[i],global_f[j],l) {global_f[i]==0, global_f[j]==2,
+//    l==2}
+
+
+   return 0;
+}

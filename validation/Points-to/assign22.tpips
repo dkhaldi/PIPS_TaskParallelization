@@ -1,0 +1,58 @@
+setenv WS=assign22
+delete $WS
+create $WS $WS.c
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+# The property CONSTANT_PATH_EFFECTS is not set to true
+setproperty CONSTANT_PATH_EFFECTS FALSE
+
+##TODO: explain
+
+echo 
+echo Proper effects for "make_s"
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[make_s]
+
+echo 
+echo Proper pointer effects for "make_s"
+echo
+activate PRINT_CODE_PROPER_POINTER_EFFECTS
+display PRINTED_FILE[make_s]
+
+echo
+echo Points-to for "make_s"
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[make_s]
+
+echo 
+echo Proper effects for "$WS"
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[$WS]
+
+echo 
+echo Proper pointer effects for "$WS"
+echo
+activate PRINT_CODE_PROPER_POINTER_EFFECTS
+display PRINTED_FILE[$WS]
+
+echo
+echo Points-to for "$WS"
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[$WS]
+
+
+close
+delete $WS
+quit

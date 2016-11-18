@@ -1,0 +1,17 @@
+delete precedence_operator
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create precedence_operator precedence_operator.c
+
+display PRINTED_FILE[precedence_operator!]
+display PRINTED_FILE[main]
+
+apply UNSPLIT(%ALL)
+shell pips_validation_exe.sh -c -g precedence_operator
+
+close
+
+delete precedence_operator
+quit

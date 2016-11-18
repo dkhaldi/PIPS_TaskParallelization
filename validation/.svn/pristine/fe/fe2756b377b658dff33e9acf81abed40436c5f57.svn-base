@@ -1,0 +1,22 @@
+char isme(int elligent)
+{
+   int roverti;
+   int repide[elligent];
+donne:
+   for(roverti = 0; roverti <= elligent-1; roverti += 2)
+      repide[roverti] = 1;
+}
+char isme(int elligent)
+{
+   int roverti;
+   int repide[elligent];
+   //PIPS generated variable
+   int I_0;
+#pragma omp parallel for private(roverti)
+donne:
+   for(I_0 = 1; I_0 <= (elligent+1)/2/N; I_0 += 1)
+#pragma omp parallel for 
+      for(roverti = I_0*N; roverti <= pips_min(2, (elligent+1)/2, I_0*N+(N-1)); roverti += 1)
+         repide[2*roverti-2] = 1;
+}
+

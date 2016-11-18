@@ -1,0 +1,21 @@
+      DOUBLE PRECISION FUNCTION ALIAS(ANAM)
+
+c     Problem: detection of Hollerith constants in DATA statements
+
+      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      DIMENSION ANAM1(14),ANAM2(14)
+      DATA ANAM1 /'VA ','VB ','CCS','NS ','C2 ','PT ','C4 ',
+     1     'PE ','ME ','PC ','MC ','PS ','MS ','IK '/
+      DATA ANAM2 /'VAF','VAR','CJS','NSS','ISE','XTI','ISC',
+     1            'VJE','MJE','VJC','MJC','VJS','MJS','IKF'/
+C     
+C     THIS FUNCTION RETURNS THE MGP EQUIVALENT OF THE GP PARAMETERS
+C     (THOSE WHICH APPLY)
+C     
+      IKNT = 0                                                          0015
+      ALIAS = ANAM                                                      0016
+10    IKNT = IKNT+1                                                     0017
+      IF (IKNT.GT.14) RETURN                                            0018
+      IF (ANAM1(IKNT).NE.ANAM) GOTO 10                                  0019
+      ALIAS = ANAM2(IKNT)                                               0020
+      END

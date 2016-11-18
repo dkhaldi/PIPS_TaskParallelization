@@ -1,0 +1,5 @@
+delete entry14
+create entry14 entry14.f
+display PRINTED_FILE[%ALL]
+close
+delete entry14

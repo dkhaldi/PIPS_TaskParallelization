@@ -1,0 +1,134 @@
+
+POINTS TO
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_2[0] , MAY
+// q -> *NULL* , MAY
+// q -> _q_3[0] , MAY
+
+
+// Points To OUT:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+void pointer11(int n, float *p, float *q)
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_2[0] , MAY
+// q -> *NULL* , MAY
+// q -> _q_3[0] , MAY
+
+   p!=(void *) 0&&q!=(void *) 0?(void) 0:__assert_fail("p!=NULL && q!=NULL", "./pointer11.c", 8, __func__);
+
+
+// Points To:
+// p -> _p_2[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+   int i;
+
+// Points To:
+// p -> _p_2[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+   p = q;
+
+// Points To:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+
+   for(i = 0; i <= n-1; i += 1)
+
+// Points To:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+      p[i] = q[i];
+
+// Points To:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+
+   return;
+}
+
+Proper effects with points-to
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_2[0] , MAY
+// q -> *NULL* , MAY
+// q -> _q_3[0] , MAY
+
+
+// Points To OUT:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+void pointer11(int n, float *p, float *q)
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_2[0] , MAY
+// q -> *NULL* , MAY
+// q -> _q_3[0] , MAY
+
+   p!=(void *) 0&&q!=(void *) 0?(void) 0:__assert_fail("p!=NULL && q!=NULL", "./pointer11.c", 8, __func__);
+
+
+// Points To:
+// p -> _p_2[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+   int i;
+
+// Points To:
+// p -> _p_2[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+   p = q;
+
+// Points To:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+
+   for(i = 0; i <= n-1; i += 1)
+
+// Points To:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+      p[i] = q[i];
+
+// Points To:
+// p -> _q_3[0] , EXACT
+// q -> _q_3[0] , EXACT
+
+
+   return;
+}
+
+Parallel code
+
+void pointer11(int n, float *p, float *q)
+{
+   p!=(void *) 0&&q!=(void *) 0?(void) 0:__assert_fail("p!=NULL && q!=NULL", "./pointer11.c", 8, __func__);
+
+   int i;
+   p = q;
+
+#pragma omp parallel for 
+   for(i = 0; i <= n-1; i += 1)
+      p[i] = q[i];
+
+   return;
+}

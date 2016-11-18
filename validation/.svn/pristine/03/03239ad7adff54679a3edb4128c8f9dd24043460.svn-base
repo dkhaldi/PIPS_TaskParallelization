@@ -1,0 +1,15 @@
+
+int main()
+{
+   char *end;
+   long int li;
+//             <    is written>: end li
+
+   li = strtol("32445667 is a number", &end, 0);
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

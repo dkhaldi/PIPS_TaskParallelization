@@ -1,0 +1,47 @@
+#
+# Initial code for module main
+#
+int main(int argc, char **argv)
+{
+   int n = atoi(argv[1]);
+   int a[n], b[n], c[n];
+
+   init(n, a, b);
+   
+   
+   kernel_add(n, c, a, b);
+   
+   // This wrapper contains a kernel call
+   // We use to kill a def on the gpu by a use here
+   // this is because when we get the propers effects 
+   // for this call we can't know if it a use in a 
+   // kernel or on the CPU
+   wrap_kernel_add(n, a, b, c);
+
+   display(n, c);
+}
+#
+# Code after kernel_data_mapping for module main
+#
+int main(int argc, char **argv)
+{
+   int n = atoi(argv[1]);
+   int a[n], b[n], c[n];
+
+   init(n, a, b);
+   P4A_copy_to_accel(a, sizeof(int)*n);
+   P4A_copy_to_accel(b, sizeof(int)*n);
+   
+   
+   kernel_add(n, c, a, b);
+   
+   // This wrapper contains a kernel call
+   // We use to kill a def on the gpu by a use here
+   // this is because when we get the propers effects 
+   // for this call we can't know if it a use in a 
+   // kernel or on the CPU
+   wrap_kernel_add(n, a, b, c);
+   P4A_copy_from_accel(c, sizeof(int)*n);
+
+   display(n, c);
+}

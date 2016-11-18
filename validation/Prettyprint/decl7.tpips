@@ -1,0 +1,16 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty PRETTYPRINT_ALL_DECLARATIONS=TRUE
+setproperty PRETTYPRINT_COMMONS "include"
+
+delete decl7
+# Several parameters have not been typed
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create decl7 decl7.f
+
+apply CLEAN_DECLARATIONS[%ALL]
+apply UNSPLIT
+
+close
+
+shell cat decl7.database/Src/*
+# delete decl7

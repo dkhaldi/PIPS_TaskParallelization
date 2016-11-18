@@ -1,0 +1,36 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+delete remove02
+create remove02 remove02.c
+
+module main
+
+echo
+echo Initial code
+echo
+
+activate PRINT_CODE_CUMULATED_REDUCTIONS
+display PRINTED_FILE
+
+echo
+echo after removing reductions
+echo
+
+setproperty LOOP_LABEL "l0"
+apply REDUCTION_VARIABLE_EXPANSION
+setproperty LOOP_LABEL "l1"
+apply REDUCTION_VARIABLE_EXPANSION
+activate PRINT_CODE
+display PRINTED_FILE
+
+echo
+echo Unsplit resulting code
+echo
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g remove02
+
+close
+delete remove02
+quit
+
+

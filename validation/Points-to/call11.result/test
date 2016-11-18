@@ -1,0 +1,81 @@
+
+Proper effects
+
+int main()
+{
+//             <    is written>: d1
+   int d1 = 10;
+//             <    is written>: d2
+   int d2 = 10;
+//             <    is written>: d3
+   int d3 = 10;
+//             <    is written>: d4
+   int d4 = 10;
+//             <    is read   >: d1 d2 d3 d4
+   int y[d1][d2][d3][d4];
+   int i, j;
+//             <    is read   >: d1
+//             <    is written>: i
+
+   for(i = 0; i <= d1-1; i += 1)
+//             <    is read   >: d1 d2
+//             <    is written>: j
+      for(j = 0; j <= d2-1; j += 1)
+//             <may be written>: y[i][j][*][*]
+//             <    is read   >: d1 d2 d3 d4 i j
+         call11(d3, d4, &y[i][j][0]);
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int d1 = 10;
+
+// Points To: none
+
+   int d2 = 10;
+
+// Points To: none
+
+   int d3 = 10;
+
+// Points To: none
+
+   int d4 = 10;
+
+// Points To: none
+
+   int y[d1][d2][d3][d4];
+
+// Points To: none
+
+   int i, j;
+
+// Points To: none
+
+
+   for(i = 0; i <= d1-1; i += 1)
+
+// Points To: none
+
+      for(j = 0; j <= d2-1; j += 1)
+
+// Points To: none
+
+         call11(d3, d4, &y[i][j][0]);
+
+// Points To: none
+
+   return 0;
+}

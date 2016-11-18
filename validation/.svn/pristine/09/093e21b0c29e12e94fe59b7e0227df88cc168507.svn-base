@@ -1,0 +1,39 @@
+
+Initial source code
+
+void invariant02(int ni, int nj)
+{
+   int n = 10;
+   float y[n];
+   int i, j;
+   float s, a, b;
+
+   for(i = 0; i <= ni-1; i += 1) {
+      s = a*b;
+      y[i] = s;
+   }
+}
+
+Source code after invariant code motion
+
+void invariant02(int ni, int nj)
+{
+   int n = 10;
+   float y[n];
+   int i, j;
+   float s, a, b;
+
+   s = a*b;
+   i = MAX(INT(ni), 0);
+#pragma omp parallel for 
+   for(i = 0; i <= ni-1; i += 1)
+      y[i] = s;
+}
+
+Warnings
+
+unknown[unknown] (activate_phase) Rule `INTERPROCEDURAL_SUMMARY_PRECONDITION' already active
+unknown[unknown] (activate_phase) Rule `TRANSFORMERS_INTER_FULL' already active
+unknown[unknown] (activate_phase) Rule `PRECONDITIONS_INTER_FULL' already active
+unknown[unknown] (tp_parse) Properties should not be updated during tpips processing. Move the setproperty statement at the beginning of your tpips script.
+PROGRAM_PRECONDITION[] (get_main_entity) no main found, returning invariant02 instead

@@ -1,0 +1,8 @@
+PARSER[EXTERNAL05] (update_functional_type_with_actual_arguments) Functional actual argument F found.
+Functional arguments are not yet suported by PIPS
+PARSER[EXTERNAL05] (CheckLeftHandSide) [user error] Illegal assignment to variable F with type functional
+PARSER[EXTERNAL05] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[EXTERNAL05] (catch_user_error) pass has failed
+PARSER[EXTERNAL05] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module EXTERNAL05.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE

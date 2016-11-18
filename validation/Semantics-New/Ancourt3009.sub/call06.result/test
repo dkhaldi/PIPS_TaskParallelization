@@ -1,0 +1,204 @@
+
+Points-to for "update_sub2"
+
+
+// Points To IN:
+// pb -> *NULL* , MAY
+// pb -> _pb_1[0] , MAY
+
+
+// Points To OUT:
+// pb -> _pb_1[0] , EXACT
+
+void update_sub2(sub2 *pb)
+{
+
+// Points To:
+// pb -> *NULL* , MAY
+// pb -> _pb_1[0] , MAY
+
+   pb->k1 = 0;
+
+// Points To:
+// pb -> _pb_1[0] , EXACT
+
+   pb->k2 = 1;
+
+// Points To:
+// pb -> _pb_1[0] , EXACT
+
+   return;
+}
+
+Proper effects for "update_sub2"
+
+void update_sub2(sub2 *pb)
+{
+//             <    is read   >: pb
+//             <    is written>: _pb_1[0].k1
+//             <    is referenced>: pb
+   pb->k1 = 0;
+//             <    is read   >: pb
+//             <    is written>: _pb_1[0].k2
+//             <    is referenced>: pb
+   pb->k2 = 1;
+   return;
+}
+
+Cumulated effects for "update_sub2"
+
+//             <    is read   >: pb
+//             <    is written>: _pb_1[0].k1 _pb_1[0].k2
+//             <    is referenced>: pb
+void update_sub2(sub2 *pb)
+{
+//             <    is read   >: pb
+//             <    is written>: _pb_1[0].k1
+//             <    is referenced>: pb
+   pb->k1 = 0;
+//             <    is read   >: pb
+//             <    is written>: _pb_1[0].k2
+//             <    is referenced>: pb
+   pb->k2 = 1;
+   return;
+}
+
+Points-to for "update_sub"
+
+
+// Points To IN:
+// _ps_1[0].var3 -> *NULL* , MAY
+// _ps_1[0].var3 -> _ps_1_2__1[0][0] , MAY
+// ps -> *NULL* , MAY
+// ps -> _ps_1[0] , MAY
+
+
+// Points To OUT:
+// _ps_1[0].var3 -> _ps_1_2__1[0][0] , EXACT
+// ps -> _ps_1[0] , EXACT
+
+void update_sub(sub *ps)
+{
+
+// Points To:
+// ps -> *NULL* , MAY
+// ps -> _ps_1[0] , MAY
+
+   ps->var2 = 2;
+
+// Points To:
+// _ps_1[0].var3 -> *NULL* , MAY
+// _ps_1[0].var3 -> _ps_1_2__1[0][0] , MAY
+// ps -> _ps_1[0] , EXACT
+
+   update_sub2(ps->var3);
+
+// Points To:
+// _ps_1[0].var3 -> _ps_1_2__1[0][0] , EXACT
+// ps -> _ps_1[0] , EXACT
+
+   return;
+}
+
+Proper effects for "update_sub"
+
+void update_sub(sub *ps)
+{
+//             <    is read   >: ps
+//             <    is written>: _ps_1[0].var2
+//             <    is referenced>: ps
+   ps->var2 = 2;
+//             <    is read   >: _ps_1[0].var3 ps
+//             <    is written>: _ps_1_2__1[0][0].k1 
+//                               _ps_1_2__1[0][0].k2
+//             <    is referenced>: ps
+   update_sub2(ps->var3);
+   return;
+}
+
+Cumulated effects for "update_sub"
+
+//             <    is read   >: _ps_1[0].var3 ps
+//             <    is written>: _ps_1[0].var2 _ps_1_2__1[0][0].k1 
+//                               _ps_1_2__1[0][0].k2
+//             <    is referenced>: ps
+void update_sub(sub *ps)
+{
+//             <    is read   >: ps
+//             <    is written>: _ps_1[0].var2
+//             <    is referenced>: ps
+   ps->var2 = 2;
+//             <    is read   >: _ps_1[0].var3 ps
+//             <    is written>: _ps_1_2__1[0][0].k1 
+//                               _ps_1_2__1[0][0].k2
+//             <    is referenced>: ps
+   update_sub2(ps->var3);
+   return;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   content ct;
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+   sub2 s2;
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+   if (argc>2)
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+      ct.s3.var3 = &s2;
+
+// Points To:
+// ct.s3.var3 -> undefined , MAY
+// ct.s3.var3 -> s2 , MAY
+
+   update_sub(&ct.s3);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+
+   return 0;
+}
+
+Proper effects for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is referenced>: content
+//             <    is declared>: ct
+   content ct;
+//             <    is referenced>: sub2
+//             <    is declared>: s2
+   sub2 s2;
+//             <    is read   >: argc
+//             <    is referenced>: argc
+   if (argc>2)
+//             <    is written>: ct.s3.var3
+//             <    is referenced>: ct s2
+      ct.s3.var3 = &s2;
+//             <    is read   >: ct.s3.var3
+//             <    is written>: ct.s3.var2 s2.k1 s2.k2
+//             <    is referenced>: ct
+   update_sub(&ct.s3);
+
+   return 0;
+}

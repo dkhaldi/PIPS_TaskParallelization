@@ -1,0 +1,38 @@
+void p4a_kernel_getimage(complex imageout[128][128], int i, int j)
+{
+   imageout[i][j].re = 0.0;
+   imageout[i][j].im = 0.0;
+}
+void p4a_wrapper_getimage(complex imageout[128][128], int i, int j)
+{
+   // To be assigned to a call to P4A_vp_1: i
+   // To be assigned to a call to P4A_vp_0: j
+   p4a_kernel_getimage(imageout, i, j);
+}
+void p4a_launcher_getimage(complex imageout[128][128])
+{
+   // Declared by Pass Outlining
+   int i, j;
+   
+   /* There is no light on the screen at the beginning: */
+   for(i = 0; i <= 127; i += 1)
+      for(j = 0; j <= 127; j += 1)
+         p4a_wrapper_getimage(imageout, i, j);
+}
+void getimage(char *filename)
+{
+   double z, amp, sum, squares;
+   int i, j, conj, nx, ny;
+   unsigned char c;
+   FILE *fp;
+   {
+      //PIPS generated variable
+      complex (*p4a_var_imageout0)[128][128] = (complex (*)[128][128]) 0;
+      P4A_accel_malloc((void **) &p4a_var_imageout0, sizeof(imageout[0][0])*16384);
+      P4A_copy_to_accel_2d(sizeof(imageout[0][0]), 128, 128, 128, 128, 0, 0, &imageout[0][0], *p4a_var_imageout0);
+
+      p4a_launcher_getimage(*p4a_var_imageout0);
+      P4A_copy_from_accel_2d(sizeof(imageout[0][0]), 128, 128, 128, 128, 0, 0, &imageout[0][0], *p4a_var_imageout0);
+      P4A_accel_free(p4a_var_imageout0);
+   }
+}

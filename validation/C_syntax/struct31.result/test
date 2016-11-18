@@ -1,0 +1,18 @@
+
+Parsed printed code for "a"
+
+/* Step-by-step declaration of structs suggested by Fabien */
+
+struct toto;                                                            /*0003*/
+
+void foo(struct toto *p);                                               /*0005*/
+
+typedef struct toto *ptoto;                                             /*0007*/
+
+Parsed printed code for "b"
+
+/* struct declaree dans un autre fichier*/
+
+struct toto {                                                           /*0003*/
+   int f;
+};

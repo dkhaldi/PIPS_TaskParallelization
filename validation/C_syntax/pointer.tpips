@@ -1,0 +1,19 @@
+delete pointer
+
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create pointer pointer.c
+
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5
+
+activate C_PARSER
+
+#setenv PRETTYPRINT_DEBUG_LEVEL 7
+
+display PRINTED_FILE[main]
+close
+delete pointer

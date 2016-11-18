@@ -1,0 +1,48 @@
+/* Partly defined array
+ *
+ * Dimension to be defined elsewhere. Insertion in a static area?
+ *
+ * The type given in the symbol table: "int"...
+ */
+
+extern int y[];
+decl72!
+
+Declarations for module "decl72!" with type "() -> unknown"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 0
+	Declared entity "TOP-LEVEL:y" with type "variable" "int[]"
+	Declared entity "decl72!:*DYNAMIC*" with type "area" with size 0
+	Declared entity "decl72!:*HEAP*" with type "area" with size 0
+	Declared entity "decl72!:*STACK*" with type "area" with size 0
+	Declared entity "decl72!:*STATIC*" with type "area" with size 0
+
+External variable list:
+
+	Declared external entity "TOP-LEVEL:y"	with type "variable" "int"
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 0:
+	External Variable "TOP-LEVEL:y"	offset = UNKNOWN,	size = 4
+
+
+Layout for memory area "decl72!:*DYNAMIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "decl72!:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "decl72!:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "decl72!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module decl72!
+

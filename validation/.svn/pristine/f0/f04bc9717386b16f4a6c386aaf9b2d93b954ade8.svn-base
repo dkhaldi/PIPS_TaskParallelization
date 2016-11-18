@@ -1,0 +1,141 @@
+
+Points-to List
+
+
+// Points To IN:
+// pi -> *NULL* , MAY
+// pi -> _pi_1 , MAY
+
+
+// Points To OUT:
+// pi -> _pi_1 , EXACT
+
+void updateInt(int *pi)
+{
+
+// Points To:
+// pi -> *NULL* , MAY
+// pi -> _pi_1 , MAY
+
+   *pi = 19;
+
+// Points To:
+// pi -> _pi_1 , EXACT
+
+   return;
+}
+
+Points-to List
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(void)
+{
+
+// Points To: none
+
+   int k = 17;
+
+// Points To: none
+
+   updateInt(&k);
+
+// Points To: none
+
+   return 0;
+}
+
+Proper Effects for "updateInt"
+
+void updateInt(int *pi)
+{
+//             <    is read   >: pi
+//             <    is written>: _pi_1
+//             <    is referenced>: pi
+   *pi = 19;
+   return;
+}
+
+Cumulated Effects for "updateInt"
+
+//             <    is read   >: pi
+//             <    is written>: _pi_1
+//             <    is referenced>: pi
+void updateInt(int *pi)
+{
+//             <    is read   >: pi
+//             <    is written>: _pi_1
+//             <    is referenced>: pi
+   *pi = 19;
+   return;
+}
+
+Transformers for updateInt
+
+
+//  T(_pi_1) {}
+
+void updateInt(int *pi)
+{
+
+//  T(_pi_1) {}
+
+   *pi = 19;
+
+//  T() {}
+
+   return;
+}
+
+Proper Effects for "main"
+
+int main(void)
+{
+//             <    is written>: k
+//             <    is referenced>: k
+//             <    is declared>: k
+   int k = 17;
+//             <    is written>: k
+//             <    is referenced>: k
+   updateInt(&k);
+   return 0;
+}
+
+Cumulated Effects for "main"
+
+int main(void)
+{
+//             <    is written>: k
+//             <    is referenced>: k
+//             <    is declared>: k
+   int k = 17;
+//             <    is written>: k
+//             <    is referenced>: k
+   updateInt(&k);
+   return 0;
+}
+
+Transformers for main
+
+
+//  T(main) {main==0}
+
+int main(void)
+{
+
+//  T(k) {k==17}
+
+   int k = 17;
+
+//  T(k) {}
+
+   updateInt(&k);
+
+//  T(main) {main==0}
+
+   return 0;
+}

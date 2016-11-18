@@ -1,0 +1,43 @@
+
+Proper effects
+
+void array02()
+{
+   float x[11][2];
+   int i;
+//             <    is written>: i
+
+   for(i = 1; i <= 9; i += 1)
+//             <    is read   >: i
+//             <    is written>: x[i][1]
+      x[i][1] = 0.;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void array02()
+{
+
+// Points To: none
+
+   float x[11][2];
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+
+   for(i = 1; i <= 9; i += 1)
+
+// Points To: none
+
+      x[i][1] = 0.;
+}

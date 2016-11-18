@@ -1,0 +1,71 @@
+
+Cumulated Effects
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+int main(int argc, char *argv[])
+{
+//             <    is written>: p.N1
+   p.N1 = 256;
+//             <    is written>: p.N2
+   p.N2 = 192;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+   tfile(p.N2, "foo.txt");
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+   return 0;
+}
+
+Transformers
+
+
+//  T(main,p[N1],p[N2]) {main==0, p[N1]==256, p[N2]==192}
+
+int main(int argc, char *argv[])
+{
+
+//  T(p[N1]) {p[N1]==256}
+
+   p.N1 = 256;
+
+//  T(p[N2]) {p[N2]==192}
+
+   p.N2 = 192;
+
+//  T() {}
+
+   tfile(p.N2, "foo.txt");
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   p.N1 = 256;
+
+//  P(p[N1]) {p[N1]==256}
+
+   p.N2 = 192;
+
+//  P(p[N1],p[N2]) {p[N1]==256, p[N2]==192}
+
+   tfile(p.N2, "foo.txt");
+
+//  P(p[N1],p[N2]) {p[N1]==256, p[N2]==192}
+
+   return 0;
+}

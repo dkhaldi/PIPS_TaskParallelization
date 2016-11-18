@@ -1,0 +1,11 @@
+
+Parsed printed code for decl67
+
+/* Initialization of an integer with a sizeof of a struct */
+
+int j = sizeof(struct s_prime {int i; int j;} );                        /*0003*/
+
+struct s_prime s;                                                       /*0005*/
+
+Warnings related to decl67.c
+

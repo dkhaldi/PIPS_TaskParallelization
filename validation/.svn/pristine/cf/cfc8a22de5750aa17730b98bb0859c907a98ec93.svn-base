@@ -1,0 +1,21 @@
+setenv WSPACE=cpp_define
+setenv FILE = cpp_define.c
+delete $WSPACE
+create $WSPACE $FILE
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+echo
+echo // Initial code
+echo
+display PRINTED_FILE [main]
+
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

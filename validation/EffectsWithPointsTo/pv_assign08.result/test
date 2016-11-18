@@ -1,0 +1,20 @@
+
+int * foo()
+{
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   return (int *) malloc(sizeof(int));
+}
+int main()
+{
+   int *a;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a _MALLOC_EFFECTS:_MALLOC_
+   a = foo();
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

@@ -1,0 +1,14 @@
+#/bin/sh
+
+WS=cominc01
+
+# PIPS_CPP="cpp --freestanding" tpips $WS.script
+tpips $WS.script
+
+echo
+echo Warnings for "$WS"
+echo
+
+sed -e 's/(\(".\/cominc01\.c"\):[0-9]*)/(\1:*)/' $WS.database/Warnings
+
+#rm -Rf $WS.database

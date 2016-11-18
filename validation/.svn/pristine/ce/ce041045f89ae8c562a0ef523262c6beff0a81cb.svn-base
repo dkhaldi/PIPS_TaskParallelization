@@ -1,0 +1,58 @@
+
+Transformers for divide08
+
+
+//  T(divide08) {2divide08<=nn, nn<=2divide08+1, 0<=nn}
+
+int divide08(int nn)
+{
+
+//  T(m) {nn<=2m+1, 2m<=nn+1}
+
+   int m = nn/2;
+
+//  T() {nn<=2m+1, 2m<=nn+1, 0<=nn}
+
+   if (!(nn>=0))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(m) {2m<=nn, nn<=2m+1, nn<=2m#init+1, 2m#init<=nn+1, 0<=nn}
+
+   m = nn/2;
+
+//  T(divide08) {divide08==m, 2divide08<=nn, nn<=2divide08+1, 0<=nn}
+
+   return m;
+}
+
+Preconditions for divide08
+
+
+//  P() {}
+
+int divide08(int nn)
+{
+
+//  P() {}
+
+   int m = nn/2;
+
+//  P(m) {nn<=2m+1, 2m<=nn+1}
+
+   if (!(nn>=0))
+
+//  P(m) {nn<=2m+1, 2m<=nn+1, nn+1<=0}
+
+      abort();
+
+//  P(m) {nn<=2m+1, 2m<=nn+1, 0<=nn}
+
+   m = nn/2;
+
+//  P(m) {2m<=nn, nn<=2m+1, 0<=nn}
+
+   return m;
+}

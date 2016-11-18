@@ -1,0 +1,26 @@
+
+POINTS-TO
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+
+
+// Points To OUT:
+// p -> _p_1[0] , EXACT
+
+void pointer_set(pointer p, int v)
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+
+   *p = v;
+
+// Points To:
+// p -> _p_1[0] , EXACT
+
+   return;
+}

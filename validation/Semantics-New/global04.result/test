@@ -1,0 +1,109 @@
+
+Cumulated Effects
+
+//             <    is read   >: global_i
+//             <    is written>: global_i
+//             <    is referenced>: global_i
+int main(void)
+{
+//             <    is written>: global_i
+//             <    is referenced>: global_i
+   global_i = 17;
+//             <    is written>: global_i
+//             <    is referenced>: global_i
+   updateInt(19);
+//             <    is read   >: global_i
+//             <    is written>: global_i
+//             <    is referenced>: global_i
+   global_i += 7;
+   return 0;
+}
+//             <    is read   >: k
+//             <    is written>: global_i
+//             <    is referenced>: global_i k
+void updateInt(int k)
+{
+//             <    is read   >: k
+//             <    is written>: global_i
+//             <    is referenced>: global_i k
+   global_i = k;
+   return;
+}
+
+Transformers
+
+
+//  T(global_i,main) {global_i==26, main==0}
+
+int main(void)
+{
+
+//  T(global_i) {global_i==17}
+
+   global_i = 17;
+
+//  T(global_i) {global_i==19}
+
+   updateInt(19);
+
+//  T(global_i) {global_i==global_i#init+7}
+
+   global_i += 7;
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+//  T(global_i) {global_i==k}
+
+void updateInt(int k)
+{
+
+//  T(global_i) {global_i==k}
+
+   global_i = k;
+
+//  T() {}
+
+   return;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   global_i = 17;
+
+//  P(global_i) {global_i==17}
+
+   updateInt(19);
+
+//  P(global_i) {global_i==19}
+
+   global_i += 7;
+
+//  P(global_i) {global_i==26}
+
+   return 0;
+}
+
+//  P() {global_i==17, k==19}
+
+void updateInt(int k)
+{
+
+//  P() {global_i==17, k==19}
+
+   global_i = k;
+
+//  P(global_i) {global_i==19, global_i#init==17, k==19}
+
+   return;
+}

@@ -1,0 +1,12 @@
+delete equivalence
+create equivalence equivalence.f
+activate MUST_REGIONS
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[%ALL]
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[%ALL]
+close
+delete equivalence
+quit

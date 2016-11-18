@@ -1,0 +1,6 @@
+delete varlen
+create varlen varlen.f
+setproperty PRETTYPRINT_ALL_DECLARATIONS TRUE
+display PRINTED_FILE
+close
+delete varlen

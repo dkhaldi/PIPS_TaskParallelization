@@ -1,0 +1,94 @@
+
+Initial code
+
+int cse_wpt01()
+{
+   // BEGIN BLOCK
+   int i = 0, j = 1, k;
+   int *p = &j;
+   int *q = &k;
+   i = 2*(j+2);
+   *q = *p;
+   k = 3*(j+2);
+   // END BLOCK
+}
+
+PROPER  EFFECTS 
+
+int cse_wpt01()
+{
+   // BEGIN BLOCK
+//             <    is written>: i j
+   int i = 0, j = 1, k;
+//             <    is written>: p
+   int *p = &j;
+//             <    is written>: q
+   int *q = &k;
+//             <    is read   >: j
+//             <    is written>: i
+   i = 2*(j+2);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   *q = *p;
+//             <    is read   >: j
+//             <    is written>: k
+   k = 3*(j+2);
+   // END BLOCK
+}
+
+Cumulated effects for "cse_wpt01" 
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+int cse_wpt01()
+{
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   // BEGIN BLOCK
+//             <    is written>: i j
+   int i = 0, j = 1, k;
+//             <    is written>: p
+   int *p = &j;
+//             <    is written>: q
+   int *q = &k;
+//             <    is read   >: j
+//             <    is written>: i
+   i = 2*(j+2);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   *q = *p;
+//             <    is read   >: j
+//             <    is written>: k
+   k = 3*(j+2);
+   // END BLOCK
+}
+
+Data dependence graph for "cse_wpt01" 
+
+
+ *********************** Use-Def Chains *********************
+
+	06 --> 09 with conflicts
+		from <i-W-EXACT> to <i-W-EXACT>
+		from <j-W-EXACT> to <j-R-EXACT>
+	06 --> 10 with conflicts
+		from <j-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+		from <j-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-R-MAY>
+	06 --> 11 with conflicts
+		from <j-W-EXACT> to <j-R-EXACT>
+	07 --> 10 with conflicts
+		from <p-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+		from <p-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-R-MAY>
+	08 --> 10 with conflicts
+		from <q-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+		from <q-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-R-MAY>
+	09 --> 10 with conflicts
+		from <i-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+		from <i-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-R-MAY>
+		from <j-R-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+	10 --> 11 with conflicts
+		from <*ANY_MODULE*:*ANYWHERE*-W-MAY> to <k-W-EXACT>
+		from <*ANY_MODULE*:*ANYWHERE*-W-MAY> to <j-R-EXACT>
+		from <*ANY_MODULE*:*ANYWHERE*-R-MAY> to <k-W-EXACT>
+
+****************** End of Dependence Graph ******************

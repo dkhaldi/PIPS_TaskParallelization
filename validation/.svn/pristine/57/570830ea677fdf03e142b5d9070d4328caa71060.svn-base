@@ -1,0 +1,180 @@
+
+Proper effects for "foo" with points-to information
+
+void foo(int *p)
+{
+//             <    is read   >: p
+   if (!(p!=0))
+      abort();
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+   (*p)++;
+}
+
+Points-to for "foo" 
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_1 , MAY
+
+
+// Points To OUT:
+// p -> _p_1 , EXACT
+
+void foo(int *p)
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1 , MAY
+
+   if (!(p!=0))
+
+// Points To:
+// p -> *NULL* , EXACT
+
+      abort();
+
+// Points To:
+// p -> _p_1 , EXACT
+
+   (*p)++;
+}
+
+Points-to for "main" 
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   x = 1, y = 2, z = 3;
+
+// Points To: none
+
+   int *p = (int *) malloc(sizeof(int));
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP*_b0 , MAY
+
+   *p = 10;
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP*_b0 , MAY
+
+   foo(p);
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP*_b0 , MAY
+// p -> undefined , MAY
+
+   p = &x;
+
+// Points To:
+// p -> x , EXACT
+
+   foo(p);
+
+// Points To:
+// p -> undefined , MAY
+// p -> x , MAY
+
+   // x==2, y==2 and z==2
+   printf("x=%d, y=%d, z=%d\n", x, y, z);
+
+// Points To:
+// p -> undefined , MAY
+// p -> x , MAY
+
+   return x+y+z;
+}
+
+Proper effects for "main" with points-to information
+
+int main()
+{
+//             <    is written>: x y z
+   x = 1, y = 2, z = 3;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   int *p = (int *) malloc(sizeof(int));
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+   *p = 10;
+//             <    is read   >: p *ANY_MODULE*:*HEAP*_b0
+//             <    is written>: *ANY_MODULE*:*HEAP*_b0
+   foo(p);
+//             <    is written>: p
+   p = &x;
+//             <    is read   >: p x
+//             <    is written>: x
+   foo(p);
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout x y z __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   // x==2, y==2 and z==2
+   printf("x=%d, y=%d, z=%d\n", x, y, z);
+//             <    is read   >: x y z
+   return x+y+z;
+}
+
+Cumulated effects for "foo" with points-to information
+
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+void foo(int *p)
+{
+//             <    is read   >: p
+   if (!(p!=0))
+      abort();
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+   (*p)++;
+}
+
+Cumulated effects for "main" with points-to information
+
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0] *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: stdout x y z _MALLOC_EFFECTS:_MALLOC_
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_ 
+//                               __IO_EFFECTS:LUNS[1]
+int main()
+{
+//             <    is written>: x y z
+   x = 1, y = 2, z = 3;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   int *p = (int *) malloc(sizeof(int));
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+   *p = 10;
+//             <    is read   >: p *ANY_MODULE*:*HEAP*_b0
+//             <    is written>: *ANY_MODULE*:*HEAP*_b0
+   foo(p);
+//             <    is written>: p
+   p = &x;
+//             <    is read   >: p x
+//             <    is written>: x
+   foo(p);
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout x y z __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   // x==2, y==2 and z==2
+   printf("x=%d, y=%d, z=%d\n", x, y, z);
+//             <    is read   >: x y z __IO_EFFECTS:LUNS[1]
+   return x+y+z;
+}
+
+Transformers for "foo" with points-to information
+

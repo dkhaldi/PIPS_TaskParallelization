@@ -1,0 +1,17 @@
+void bar()
+{
+   /* another empty function */
+   ;                                                                    /*0014*/
+}
+void foo()
+{
+   /* empty function */
+   ;                                                                    /*0008*/
+}
+int main()
+{
+   foo();                                                               /*0019*/
+   bar();                                                               /*0020*/
+   return 0;                                                            /*0021*/
+}
+

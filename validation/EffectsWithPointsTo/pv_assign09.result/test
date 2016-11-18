@@ -1,0 +1,39 @@
+
+int main()
+{
+   int *a;
+//             <    is written>: i
+   int i = 5;
+   int *b[10];
+//             <    is read   >: i
+//             <    is written>: b[i]
+   b[i] = &i;
+//             <    is read   >: b[i] i
+//             <    is written>: a
+   a = b[i];
+//             <    is read   >: a i
+//             <    is written>: b[++i] i
+   b[++i] = a;
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	12 --> 14 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+	12 --> 15 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+	12 --> 16 with conflicts
+		from <i-W-EXACT> to <i-W-EXACT>
+		from <i-W-EXACT> to <i-R-EXACT>
+	14 --> 15 with conflicts
+		from <b[i]-W-EXACT> to <b[i]-R-EXACT>
+	14 --> 16 with conflicts
+		from <b[i]-W-EXACT> to <b[++i]-W-EXACT>
+		from <i-R-EXACT> to <i-W-EXACT>
+	15 --> 16 with conflicts
+		from <a-W-EXACT> to <a-R-EXACT>
+		from <i-R-EXACT> to <i-W-EXACT>
+		from <b[i]-R-EXACT> to <b[++i]-W-EXACT>
+
+****************** End of Dependence Graph ******************

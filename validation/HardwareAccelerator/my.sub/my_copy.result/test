@@ -1,0 +1,359 @@
+#
+# AIPO
+#
+#
+# compile generated my_copy
+#
+
+! initial function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_copy(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_copy" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=0 #s=0 #I=1 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =" [shape=circle];
+  "4 =" -> "o";
+  "i0" -> "4 =";
+}
+// graph for dag "dag_cleaned_0" of module "my_copy" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "o" [shape=circle];
+  "o =" [shape=circle,label="=",style="dashed"]
+  "i0" -> "o =";
+  "o =" -> "o";
+}
+
+! updated function for AIPO
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+#
+# SPOC
+#
+
+! initial function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_copy(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_copy" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=0 #s=0 #I=1 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =" [shape=circle];
+  "4 =" -> "o";
+  "i0" -> "4 =";
+}
+// graph for dag "dag_cleaned_0" of module "my_copy" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "o" [shape=circle];
+  "o =" [shape=circle,label="=",style="dashed"]
+  "i0" -> "o =";
+  "o =" -> "o";
+}
+
+! acceleration function
+
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <spoc.h>
+
+// dag 0: 0 ops and 1 copies, optimized to 0 ops and 0+1+0 copies
+// # SPOC calls: 0
+
+! updated function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+
+! cleaned up function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+#
+# TERAPIX
+#
+
+! initial function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_copy(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_copy" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=0 #s=0 #I=1 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =" [shape=circle];
+  "4 =" -> "o";
+  "i0" -> "4 =";
+}
+// graph for dag "dag_cleaned_0" of module "my_copy" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "o" [shape=circle];
+  "o =" [shape=circle,label="=",style="dashed"]
+  "i0" -> "o =";
+  "o =" -> "o";
+}
+
+! acceleration function
+
+// freia terapix includes
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <terapix.h>
+#include <terapix_ucode.h>
+
+// dag 0: 0 ops and 1 copies, optimized to 0 ops and 0+1+0 copies
+
+! updated function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+
+! cleaned up function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+#
+# OPENCL
+#
+
+! initial function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_copy(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_copy" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=0 #s=0 #I=1 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =" [shape=circle];
+  "4 =" -> "o";
+  "i0" -> "4 =";
+}
+// graph for dag "dag_cleaned_0" of module "my_copy" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "o" [shape=circle];
+  "o =" [shape=circle,label="=",style="dashed"]
+  "i0" -> "o =";
+  "o =" -> "o";
+}
+
+! acceleration function
+
+// FREIA OpenCL includes
+#include <CL/opencl.h>
+#include "freia.h"
+#include "private/freia_opencl_runtime.h"
+
+
+// dag 0: 0 ops and 1 copies, optimized to 0 ops and 0+1+0 copies
+#include <freia_opencl_runtime.hcl>
+// generated OpenCL kernels for function my_copy
+
+// opencl for dag 0
+
+! updated function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+
+! cleaned up function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+#
+# SIGMAC
+#
+#
+# compile generated my_copy
+#
+
+! initial function
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_copy(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_copy" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=0 #s=0 #I=1 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =" [shape=circle];
+  "4 =" -> "o";
+  "i0" -> "4 =";
+}
+// graph for dag "dag_cleaned_0" of module "my_copy" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "o" [shape=circle];
+  "o =" [shape=circle,label="=",style="dashed"]
+  "i0" -> "o =";
+  "o =" -> "o";
+}
+
+! updated function for OPENCL
+
+freia_status my_copy(freia_data2d *o, freia_data2d *i0)
+{
+   freia_aipo_copy(o, i0);
+   return 0;
+}
+
+! Sigma-C subgraphs for OPENCL
+
+/* C INCLUDES */
+#include <stdio.h>
+
+/* SIGMA-C INCLUDES */
+#include "sigmacAgents.h"
+
+
+
+
+/*#####################################################################*/
+/*########################### Subgraph Root ###########################*/
+/*#####################################################################*/
+
+subgraph root () {
+  map {
+    int width = 256, height = 256;
+    size_t sizeMax = width * height * sizeof(int16_t);
+
+    char cmd[255] = "cd .. && ./main";
+    int i, n_pipes = 10;
+    char pipes[n_pipes][255];
+    for (i=0; i<n_pipes; i++)
+      tmpnam(pipes[i]);
+
+    agent pp = new Pipes(cmd, n_pipes, pipes);
+    agent sk = new Sink<char>(1);
+    SigmaC_agent_setUnitType(sk, "native");
+    connect(pp.output, sk.input);
+
+    new Malloc(pipes[0], pipes[1]);
+    new Free(pipes[2], pipes[3]);
+    new MCopy(pipes[4], pipes[5]);
+    new SendDataToMPPA(pipes[6], pipes[7], sizeMax);
+    new SendDataToHost(pipes[8], pipes[9], sizeMax);
+
+  }
+}
+#
+# FREIA COMPILATION DONE
+#
+

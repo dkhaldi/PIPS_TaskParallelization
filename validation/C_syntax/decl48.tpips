@@ -1,0 +1,36 @@
+setenv WSPC decl48
+setenv MAIN $WSPC.c
+delete $WSPC
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WSPC $MAIN
+activate C_PARSER
+activate C_SYMBOL_TABLE
+activate PRINT_CODE
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+setproperty PREPROCESSOR_MISSING_FILE_HANDLING "generate"
+
+echo
+echo Symbol table
+echo
+
+display SYMBOL_TABLE_FILE
+
+echo
+echo Parsed code
+echo
+
+display PARSED_PRINTED_FILE
+
+echo
+echo Code
+echo
+
+display PRINTED_FILE
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g decl48
+
+close
+delete $WSPC
+quit

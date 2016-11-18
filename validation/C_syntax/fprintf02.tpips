@@ -1,0 +1,17 @@
+delete fprintf02
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create fprintf02 fprintf02.c
+
+activate C_PARSER
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+echo
+echo parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[fprintf02]
+
+close
+delete fprintf02
+quit

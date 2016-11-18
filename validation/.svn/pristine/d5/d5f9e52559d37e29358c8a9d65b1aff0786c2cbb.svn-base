@@ -1,0 +1,236 @@
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 1;
+
+// Points To: none
+
+   int *q = &i;
+   // added to observe the impact of abstract locations
+   // when abstract effects are used to eliminate some information in
+   // transformers at the end of statement_to_transfoermer
+
+// Points To:
+// q -> i , EXACT
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> i , EXACT
+
+   int **pp;
+
+// Points To:
+// p -> undefined , EXACT
+// pp -> undefined , EXACT
+// q -> i , EXACT
+
+
+   pp = malloc(sizeof(*pp));
+
+// Points To:
+// *HEAP*_l_19 -> undefined , EXACT
+// p -> undefined , EXACT
+// pp -> *HEAP*_l_19 , MAY
+// q -> i , EXACT
+
+   *pp = malloc(sizeof(**pp));
+
+// Points To:
+// *HEAP*_l_19 -> *HEAP*_l_20 , MAY
+// p -> undefined , EXACT
+// pp -> *HEAP*_l_19 , MAY
+// q -> i , EXACT
+
+   p = *pp;
+
+// Points To:
+// *HEAP*_l_19 -> *HEAP*_l_20 , MAY
+// p -> *HEAP*_l_20 , MAY
+// pp -> *HEAP*_l_19 , MAY
+// q -> i , EXACT
+
+
+   free(*pp);
+
+// Points To:
+// *HEAP*_l_19 -> undefined , MAY
+// p -> *HEAP*_l_20 , MAY
+// p -> undefined , MAY
+// pp -> *HEAP*_l_19 , MAY
+// q -> i , EXACT
+
+   free(pp);
+
+// Points To:
+// p -> *HEAP*_l_20 , MAY
+// p -> undefined , MAY
+// pp -> undefined , EXACT
+// q -> i , EXACT
+
+
+   return 0;
+}
+
+PROPER  EFFECTS
+
+int main()
+{
+//             <    is written>: i
+   int i = 1;
+//             <    is written>: q
+   int *q = &i;
+   // added to observe the impact of abstract locations
+   // when abstract effects are used to eliminate some information in
+   // transformers at the end of statement_to_transfoermer
+   int *p;
+   int **pp;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pp _MALLOC_EFFECTS:_MALLOC_
+
+   pp = malloc(sizeof(*pp));
+//             <may be written>: *HEAP*_l_19
+//             <    is read   >: pp _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   *pp = malloc(sizeof(**pp));
+//             <may be read   >: *HEAP*_l_19
+//             <    is read   >: pp
+//             <    is written>: p
+   p = *pp;
+//             <may be read   >: *HEAP*_l_19
+//             <    is read   >: pp _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+
+   free(*pp);
+//             <    is read   >: pp _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   free(pp);
+
+   return 0;
+}
+
+Transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T(i) {i==1}
+
+   int i = 1;
+
+//  T(q) {&i==q, i==1}
+
+   int *q = &i;
+   // added to observe the impact of abstract locations
+   // when abstract effects are used to eliminate some information in
+   // transformers at the end of statement_to_transfoermer
+
+//  T() {&i==q, i==1}
+
+   int *p;
+
+//  T() {&i==q, i==1}
+
+   int **pp;
+
+//  T(pp) {&i==q, i==1}
+
+
+   pp = malloc(sizeof(*pp));
+
+//  T() {&i==q, i==1}
+
+   *pp = malloc(sizeof(**pp));
+
+//  T(p) {&i==q, i==1}
+
+   p = *pp;
+
+//  T() {&i==q, i==1}
+
+
+   free(*pp);
+
+//  T() {&i==q, i==1}
+
+   free(pp);
+
+//  T(main) {&i==q, i==1, main==0}
+
+
+   return 0;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i = 1;
+
+//  P(i) {i==1}
+
+   int *q = &i;
+   // added to observe the impact of abstract locations
+   // when abstract effects are used to eliminate some information in
+   // transformers at the end of statement_to_transfoermer
+
+//  P(i,q) {&i==q, i==1}
+
+   int *p;
+
+//  P(i,q) {&i==q, i==1}
+
+   int **pp;
+
+//  P(i,q) {&i==q, i==1}
+
+
+   pp = malloc(sizeof(*pp));
+
+//  P(i,pp,q) {&i==q, i==1}
+
+   *pp = malloc(sizeof(**pp));
+
+//  P(i,pp,q) {&i==q, i==1}
+
+   p = *pp;
+
+//  P(i,p,pp,q) {&i==q, i==1}
+
+
+   free(*pp);
+
+//  P(i,p,pp,q) {&i==q, i==1}
+
+   free(pp);
+
+//  P(i,p,pp,q) {&i==q, i==1}
+
+
+   return 0;
+}
+
+Warnings
+
+PROPER_EFFECTS_WITH_POINTS_TO[main] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.

@@ -1,0 +1,72 @@
+
+Init Code
+
+int main()
+{
+   int a[10], i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+
+   for(i = 0; i <= 9; i += 1)
+      printf("a[%d]=%d", i, a[i]);
+
+   return 0;
+}
+
+Source code for iofor01 after dead-code elimination
+
+int main()
+{
+   int a[10], i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+
+   for(i = 0; i <= 9; i += 1)
+      printf("a[%d]=%d", i, a[i]);
+
+   return 0;
+}
+
+OUT regions for iofor01
+
+int main()
+{
+   int a[10], i;
+
+//  <a[PHI1]-OUT-EXACT-{0<=PHI1, PHI1<=9}>
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==i, 0<=i, i<=9}>
+
+      a[i] = i;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1}>
+
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <stdout[PHI1]-OUT-MAY-{PHI1==0, 0<=i, i<=9}>
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, 0<=i, i<=9}>
+
+      printf("a[%d]=%d", i, a[i]);
+
+   return 0;
+}
+
+Source code for iofor01 after dead-code elimination with OUT regions
+
+int main()
+{
+   int a[10], i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+
+   for(i = 0; i <= 9; i += 1)
+      printf("a[%d]=%d", i, a[i]);
+
+   return 0;
+}
+
+Warnings
+

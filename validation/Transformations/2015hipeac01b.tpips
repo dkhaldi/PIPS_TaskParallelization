@@ -1,0 +1,63 @@
+setenv WSPACE 2015hipeac01b
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty MEMORY_EFFECTS_ONLY FALSE
+activate MUST_REGIONS
+
+echo
+echo Initial code
+echo
+display PRINTED_FILE[main]
+
+echo
+echo LOOP_FUSION
+echo
+apply LOOP_FUSION
+display PRINTED_FILE[main]
+
+echo
+echo FORWARD_SUBSTITUTE (done nothing with array)
+echo
+apply FORWARD_SUBSTITUTE
+display PRINTED_FILE[main]
+
+echo
+echo SCALARIZATION
+echo
+apply SCALARIZATION
+display PRINTED_FILE[main]
+
+echo
+echo FORWARD_SUBSTITUTE
+echo
+apply FORWARD_SUBSTITUTE
+display PRINTED_FILE[main]
+
+echo
+echo DEAD_CODE_ELIMINATION
+echo
+apply DEAD_CODE_ELIMINATION
+display PRINTED_FILE[main]
+
+#echo
+#echo COMMON_SUBEXPRESSION_ELIMINATION
+#echo
+#apply COMMON_SUBEXPRESSION_ELIMINATION
+#display PRINTED_FILE[main]
+#
+#echo
+#echo OPTIMIZE_EXPRESSIONS
+#echo
+#apply OPTIMIZE_EXPRESSIONS
+#display PRINTED_FILE[main]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

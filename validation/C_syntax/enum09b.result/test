@@ -1,0 +1,9 @@
+void enum09b()
+{
+   union {
+      enum g {gaga} f3;
+   } ss;
+}
+#
+# compile generated enum09b
+#

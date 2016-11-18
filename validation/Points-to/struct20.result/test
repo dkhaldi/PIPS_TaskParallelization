@@ -1,0 +1,71 @@
+
+Points-to "read_towns"
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// read_towns.data -> *HEAP*_l_30 , MAY
+
+towns read_towns(const char fname[])
+{
+
+// Points To: none
+
+   FILE *fd = fopen(fname, "r");
+   /* = { 1 , malloc(sizeof(town)) }*/
+
+// Points To:
+// fd -> *NULL* , MAY
+// fd -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+   towns the_towns;
+
+// Points To:
+// fd -> *NULL* , MAY
+// fd -> __IO_EFFECTS:IO_FILES[*] , MAY
+// the_towns.data -> undefined , EXACT
+
+   the_towns.nb = 1;
+
+// Points To:
+// fd -> *NULL* , MAY
+// fd -> __IO_EFFECTS:IO_FILES[*] , MAY
+// the_towns.data -> undefined , EXACT
+
+   the_towns.data = (town *) malloc(sizeof(town));
+
+// Points To:
+// fd -> *NULL* , MAY
+// fd -> __IO_EFFECTS:IO_FILES[*] , MAY
+// the_towns.data -> *HEAP*_l_30 , MAY
+
+   return the_towns;
+}
+
+Points-to "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+
+// Points To: none
+
+   towns t = read_towns(argv[1]);
+
+// Points To:
+// read_towns:read_towns.data -> read_towns:*HEAP*_l_30 , MAY
+// t.data -> read_towns:*HEAP*_l_30 , MAY
+
+   return (int) t.nb;
+}
+
+Warnings
+
+(activate_phase) Rule `PRINT_CODE_POINTS_TO_LIST' already active

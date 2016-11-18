@@ -1,0 +1,73 @@
+
+Proper effects
+
+int main()
+{
+   int a[10];
+   int *p;
+//             <    is written>: p
+   p = &a[0];
+//             <    is read   >: p
+//             <    is written>: p
+   p++;
+//             <    is read   >: p
+//             <    is written>: p
+   ++p;
+//             <    is read   >: p
+//             <    is written>: p
+   p--;
+//             <    is read   >: p
+//             <    is written>: p
+   --p;
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int a[10];
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   p = &a[0];
+
+// Points To:
+// p -> a[0] , EXACT
+
+   p++;
+
+// Points To:
+// p -> a[1] , EXACT
+
+   ++p;
+
+// Points To:
+// p -> a[2] , EXACT
+
+   p--;
+
+// Points To:
+// p -> a[1] , EXACT
+
+   --p;
+
+// Points To:
+// p -> a[0] , EXACT
+
+   return 0;
+}

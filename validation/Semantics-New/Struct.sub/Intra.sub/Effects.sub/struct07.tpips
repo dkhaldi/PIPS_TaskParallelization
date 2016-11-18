@@ -1,0 +1,34 @@
+setenv WS=struct07
+
+delete $WS
+setproperty ABORT_ON_USER_ERROR TRUE
+#setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+create $WS $WS.c
+
+setproperty CONSTANT_PATH_EFFECTS TRUE
+
+# Result obtained with these two options 
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+activate TRANSFORMERS_INTRA_FULL
+# activate TRANSFORMERS_INTRA_FULL_WITH_POINTS_TO
+# core dump if the property is not set to TRUE
+# no result if the pass is not selected
+
+activate PRECONDITIONS_INTRA
+#activate TRANSFORMERS_INTRA_FULL
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[read_config_file]
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[read_config_file]
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[read_config_file]
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[read_config_file]
+
+close
+delete $WS
+quit

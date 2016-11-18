@@ -1,0 +1,32 @@
+setenv WS=typedef15
+delete $WS
+#setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.src/a.c $WS.src/b.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+echo
+echo Parsed printed code for "a"
+echo
+
+display PARSED_PRINTED_FILE[a!]
+display PARSED_PRINTED_FILE[main]
+
+echo
+echo Parsed printed code for "b"
+echo
+
+display PARSED_PRINTED_FILE[b!]
+display PARSED_PRINTED_FILE[foo]
+
+apply UNSPLIT
+
+close
+
+#echo
+#echo Warnings related to "$WS.c"
+#echo
+
+#shell cat $WS.database/Warnings
+#delete $WS
+quit

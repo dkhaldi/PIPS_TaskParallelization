@@ -1,0 +1,127 @@
+
+PRINT_CODE_SIMPLE_POINTER_VALUES
+
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+void dereferencing04()
+{
+
+// Pointer values: none
+
+   double *p;
+
+// Pointer values:
+// p == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   double *q;
+
+// Pointer values:
+// p == *ANY_MODULE*:*UNDEFINED* (exact);
+// q == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   double *r;
+
+// Pointer values:
+// p == *ANY_MODULE*:*UNDEFINED* (exact);
+// q == *ANY_MODULE*:*UNDEFINED* (exact);
+// r == *ANY_MODULE*:*UNDEFINED* (exact);
+
+
+   *(p+(q-r)) = 0.;
+}
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   dereferencing04();
+
+// Pointer values: none
+
+   return 1;
+}
+
+PROPER_EFFECTS_WITH_POINTER_VALUES
+
+void dereferencing04()
+{
+   double *p;
+   double *q;
+   double *r;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p q r
+
+   *(p+(q-r)) = 0.;
+}
+int main()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   dereferencing04();
+   return 1;
+}
+
+MUST_REGIONS_WITH_POINTER_VALUES
+
+void dereferencing04()
+{
+   double *p;
+   double *q;
+   double *r;
+
+//  <p-R-EXACT-{}>
+//  <q-R-EXACT-{}>
+//  <r-R-EXACT-{}>
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+
+   *(p+(q-r)) = 0.;
+}
+int main()
+{
+
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+   dereferencing04();
+   return 1;
+}
+
+PRINT_CODE_REGIONS
+
+
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+void dereferencing04()
+{
+   double *p;
+   double *q;
+   double *r;
+
+//  <p-R-EXACT-{}>
+//  <q-R-EXACT-{}>
+//  <r-R-EXACT-{}>
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+
+   *(p+(q-r)) = 0.;
+}
+
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+int main()
+{
+
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+   dereferencing04();
+   return 1;
+}

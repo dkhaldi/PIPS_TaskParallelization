@@ -1,0 +1,171 @@
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   p = (void *) 0;
+
+// Points To:
+// p -> *NULL* , EXACT
+
+
+   if (rand())
+
+// Points To:
+// p -> *NULL* , EXACT
+
+      p = malloc(sizeof(*p));
+
+// Points To:
+// p -> *HEAP*_l_12 , MAY
+// p -> *NULL* , MAY
+
+
+   i = *p;
+
+// Points To:
+// p -> *HEAP*_l_12 , MAY
+
+
+   return 0;
+}
+
+PROPER  EFFECTS
+
+int main()
+{
+   int i;
+   int *p;
+//             <    is written>: p
+   p = (void *) 0;
+//             <    is read   >: _RANDOM_EFFECTS:GEN_SEED
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED
+
+   if (rand())
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+      p = malloc(sizeof(*p));
+//             <may be read   >: *HEAP*_l_12
+//             <    is read   >: p
+//             <    is written>: i
+
+   i = *p;
+
+   return 0;
+}
+
+Transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   int i;
+
+//  T() {}
+
+   int *p;
+
+//  T(p) {NULL==p}
+
+   p = (void *) 0;
+
+//  T(p) {}
+
+
+   if (rand())
+
+//  T(p) {NULL==p#init}
+
+      p = malloc(sizeof(*p));
+
+//  T(i) {}
+
+
+   i = *p;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+   int *p;
+
+//  P() {}
+
+   p = (void *) 0;
+
+//  P(p) {NULL==p}
+
+
+   if (rand())
+
+//  P(p) {NULL==p}
+
+      p = malloc(sizeof(*p));
+
+//  P(p) {}
+
+
+   i = *p;
+
+//  P(i,p) {}
+
+
+   return 0;
+}
+
+Warnings
+
+PROPER_EFFECTS_WITH_POINTS_TO[main] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.
+TRANSFORMERS_INTER_FULL_WITH_POINTS_TO[main] (semantics_usable_points_to_reference_p) line 14 
+at statement:
+
+	i = *p;
+
+
+The pointer "p" can point to NULL
+TRANSFORMERS_INTER_FULL_WITH_POINTS_TO[main] (semantics_usable_points_to_reference_p) line 14 
+at statement:
+
+	i = *p;
+
+
+The pointer "p" can point to NULL

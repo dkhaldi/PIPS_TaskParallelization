@@ -1,0 +1,71 @@
+
+Init Code
+
+int main()
+{
+   int a[0];
+   a[0] = 0;
+
+   if (rand())
+      a[0] = 1;
+   else
+      a[0] = 2;
+
+   return a[0];
+}
+
+Source code for outregionsarray04 after dead-code elimination
+
+int main()
+{
+   int a[0];
+   a[0] = 0;
+
+   if (rand())
+      a[0] = 1;
+   else
+      a[0] = 2;
+
+   return a[0];
+}
+
+OUT regions for outregionsarray04
+
+int main()
+{
+   int a[0];
+   a[0] = 0;
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==0}>
+
+
+   if (rand())
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==0}>
+
+      a[0] = 1;
+   else
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==0}>
+
+      a[0] = 2;
+
+   return a[0];
+}
+
+Source code for outregionsarray04 after dead-code elimination with OUT regions
+
+int main()
+{
+   int a[0];
+
+   if (rand())
+      a[0] = 1;
+   else
+      a[0] = 2;
+
+   return a[0];
+}
+
+Warnings
+

@@ -1,0 +1,17 @@
+delete main_abc
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create main_abc main_abc.c
+
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+activate C_PARSER
+
+display PRINTED_FILE[main]
+
+close
+
+delete main_abc
+
+quit

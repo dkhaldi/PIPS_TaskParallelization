@@ -1,0 +1,120 @@
+
+Printed file for scope05_b
+
+extern int i;
+extern int (*bar)(void);
+
+extern void foo();
+void foo()
+{
+   printf("%d\n", i);
+}
+
+Printed file for scope05_a: should work in spite of variable i
+
+extern int i;
+extern int (*bar)(void);
+
+extern int main();
+int main()
+{
+   printf("%d\n", i);
+   foo();
+}
+
+Symbol table for scope05_b!
+
+scope05_b!
+
+Declarations for module "scope05_b!" with type "() -> unknown"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 0
+	Declared entity "TOP-LEVEL:bar" with type "variable" "(void -> int) *"
+	Declared entity "TOP-LEVEL:foo" with type "functional" "() -> void"
+	Declared entity "TOP-LEVEL:i" with type "variable" "int"
+	Declared entity "scope05_b!:*DYNAMIC*" with type "area" with size 0
+	Declared entity "scope05_b!:*HEAP*" with type "area" with size 0
+	Declared entity "scope05_b!:*STACK*" with type "area" with size 0
+	Declared entity "scope05_b!:*STATIC*" with type "area" with size 0
+
+External variable list:
+
+	Declared external entity "TOP-LEVEL:i"	with type "variable" "int"
+	Declared external entity "TOP-LEVEL:bar"	with type "variable" "(void -> int) *"
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 0:
+	External Variable "TOP-LEVEL:i"	offset = UNKNOWN,	size = 4
+	External Variable "TOP-LEVEL:bar"	offset = UNKNOWN,	size = 8
+
+
+Layout for memory area "scope05_b!:*DYNAMIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope05_b!:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope05_b!:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope05_b!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module scope05_b!
+
+
+Symbol table for scope05_a!
+
+scope05_a!
+
+Declarations for module "scope05_a!" with type "() -> unknown"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 0
+	Declared entity "TOP-LEVEL:bar" with type "variable" "(void -> int) *"
+	Declared entity "TOP-LEVEL:i" with type "variable" "int"
+	Declared entity "TOP-LEVEL:main" with type "functional" "() -> int"
+	Declared entity "scope05_a!:*DYNAMIC*" with type "area" with size 0
+	Declared entity "scope05_a!:*HEAP*" with type "area" with size 0
+	Declared entity "scope05_a!:*STACK*" with type "area" with size 0
+	Declared entity "scope05_a!:*STATIC*" with type "area" with size 0
+
+External variable list:
+
+	Declared external entity "TOP-LEVEL:i"	with type "variable" "int"
+	Declared external entity "TOP-LEVEL:bar"	with type "variable" "(void -> int) *"
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 0:
+	External Variable "TOP-LEVEL:i"	offset = UNKNOWN,	size = 4
+	External Variable "TOP-LEVEL:bar"	offset = UNKNOWN,	size = 8
+
+
+Layout for memory area "scope05_a!:*DYNAMIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope05_a!:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope05_a!:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope05_a!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module scope05_a!
+
+
+Warnings
+

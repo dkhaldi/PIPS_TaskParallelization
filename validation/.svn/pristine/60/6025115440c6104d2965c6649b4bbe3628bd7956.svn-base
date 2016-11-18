@@ -1,0 +1,71 @@
+setenv WS=scalarization46
+setproperty ABORT_ON_USER_ERROR TRUE
+delete $WS
+
+setproperty PRETTYPRINT_BLOCKS TRUE
+setproperty CONSTANT_PATH_EFFECTS FALSE
+
+##TODO: explain
+setproperty ARRAY_PRIV_FALSE_DEP_ONLY FALSE
+
+create $WS $WS.c
+
+## Needed for substracting set approximations
+activate MUST_REGIONS_WITH_POINTS_TO
+activate MUST_POINTER_REGIONS_WITH_POINTS_TO
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+echo
+echo Initial code
+echo
+display PRINTED_FILE[main]
+
+echo
+echo Points-to
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[main]
+
+echo
+echo Proper effects
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Cumulated effects
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo RW regions
+echo
+activate PRINT_CODE_PROPER_REGIONS
+display PRINTED_FILE[main]
+#quit
+#echo
+#echo IN regions
+#echo
+#activate PRINT_CODE_IN_REGIONS
+#display PRINTED_FILE[main]
+
+#echo
+#echo Privatized regions
+#echo
+#activate PRINT_CODE_PRIVATIZED_REGIONS
+#display PRINTED_FILE[main]
+
+echo
+echo Code after scalarization
+echo
+apply SCALARIZATION[main]
+activate PRINT_CODE
+display PRINTED_FILE[main]
+
+close
+delete $WS
+quit

@@ -1,0 +1,659 @@
+Content of the validation suite
+
+C99__function__     OK  check that implicit variable __function__ is defined
+
+activate.c
+address_of01	    NOK C parser/prettyprinter error: 
+		    	formal parameter names garbled
+adi02.c
+adi.c
+
+allocation01.c
+allocation02.c
+allocation03.c
+allocation04.c
+allocation05.c
+allocation06.c
+allocation07.c
+allocation08.c
+allocation09.c
+
+ammp01.c
+ammp02.c
+
+array02.c
+array.c
+array_declarators.c
+
+asm01.c
+asm02.c             NOK
+asm03.c             NOK
+
+atexit.c
+
+bit_field.c
+
+block00.c
+block01.c
+block02.c
+block03.c
+block04.c
+block05.c
+
+block_scope01.c
+block_scope02.c
+block_scope03.c
+block_scope04.c
+block_scope05.c
+block_scope06.c
+block_scope07.c
+block_scope08.c
+block_scope09.c
+block_scope10.c
+block_scope12.c
+block_scope13	    NOK bug in controlizer
+block_scope.c
+
+bool01.c
+bool02.c
+bool03.c
+
+c99_array_cast.c
+C99__function__.c
+
+cast_expression02.c
+
+cast_expression.c
+
+char02.c
+char03.c
+characters.c
+
+comma01.c
+comma02.c
+
+comma_subscript01.c
+comma_subscript02.c
+comma_subscript03.c
+comma_subscript04.c
+
+comment01.c
+comment02.c
+comment03.c
+comment04.c
+comment05.c
+comment06.c
+comment07.c
+comment08.c
+comment09.c
+comment10.c
+comment11.c         NOK
+comment12.c
+comment13.c
+comment14.c
+comment15.c
+comment16.c
+comment17.c
+
+complex01.c
+complex02.c
+
+complex03.c	    NOK use symbol I, not recognized by PIPS preprocessor
+		        moved to C_syntax_enhancement
+complex04.c
+complex05.c
+complex06.c
+complex07.c
+conditional01.c
+conditional02.c
+const02.c
+const03.c
+const04.c
+const05.c
+const06.c
+constants02.c
+constants03.c
+constants04.c       NOK
+constants.c
+const.c
+constructor01.c
+constructor02.c
+constructor03.c
+continue01.c
+control01.c
+control02.c
+convold1.c
+cpp_define.c
+dec01.c
+decl01.c
+decl02.c
+decl03.c
+decl04.c
+decl05.c
+decl06.c
+decl07.c
+decl08.c
+decl09.c
+decl10.c
+decl11.c
+decl12.c
+decl13.c
+decl14.c
+decl15.c
+decl16.c
+decl17.c
+decl18.c
+decl19.c
+decl20.c
+decl21.c
+decl22.c
+decl23.c
+
+decl24.c	    NOK either a C parser or a prettyprinter bug;
+		        attribute const is moved from field display_data
+	 		to the typedef itself; see decl50 and decl51
+decl25.c
+decl26.c
+decl27.c
+decl28.c
+decl29.c
+decl30.c
+decl31.c
+decl32.c
+decl33.c
+decl34.c
+decl35.c
+decl36.c
+decl37.c
+decl40.c
+decl42.c
+decl43.c
+decl44.c
+decl45.c
+decl46.c
+decl47.c
+decl48.c
+decl49.c
+decl50.c	    OK  check the parsing and prettyprinting of the const 
+		    	and volatile qualifier for pointer
+decl51.c	    OK  check the parsing and prettyprinting of the const 
+		    	qualifier for pointer and typedef
+decl52.c	    NOK simplified version of decl24.c
+decl53.c	    OK  a variety of const positions and combinations, 
+		    	but not for fields
+decl54.c	    OK  simplified version of decl52, struct with two int fields
+		    	the first is const and not the second
+decl55.c            OK  simplified version of decl52, struct with one pointer
+		    	field, const for pointer target
+decl56.c
+decl57.c
+decl58.c
+decl59.c
+decl60.c                bug due to repeated formal parameters on the same line
+decl61.c                wrong warning about a non-existent return variable
+decl62.c                bug linked to function pointers
+decl63.c                isolated bug of decl62.c: declaration of an array
+                        of function pointers
+decl64.c                issue with comments; full declaration of an extern
+                        struct variable; the struct is fully defined
+decl65.c                issue with comments; same as decl64.c, but with an
+                        initialization
+decl66.c                comment issue; two declarations, including a pointer 
+                        initialized as a struct pointer, with the struct fully
+                        defined
+decl67.c                initialization of an integer with a sizeof containing
+                        the full declaration of a struct
+decl68.c                lost statement: "struct c;"
+decl69.c                issue with struct declarations: a partial and a full
+                        declaration of a struct
+decl70.c            NOK static dummy struct
+decl71.c
+
+define02.c
+define03.c
+define04.c
+define05.c
+define.c
+
+dependent_type01.c
+dependent_type02.c
+
+dereference.c	    NOK the source code is not easy to compile with gcc, even 
+		    	using the options available in the tpips script
+			Seems to work with tpips
+
+dowhile.c
+
+duff_device01-03.c  OK  the switch and the while loop are properly destructured.
+		        Pips is not able to recover the loop structure because of the
+			many labels.
+			No transformation seems to exist to build a prologue with labels
+			and a loop body without labels.
+
+                        Dummy test cases are dealing with anonymous
+                        structs, unions and enums that appear in
+                        typedef statement and in derived type
+                        definitions
+dummy01.c
+dummy02.c
+dummy03.c
+dummy04.c
+dummy05.c           OK  shorter version of dummy03.
+
+empty_for.c
+
+enum01.c
+enum02.c
+enum03.c
+enum04.c
+enum05.c
+enum06              OK  reference to an enum in a declaration
+enum07              OK  same as above + definition of an enum within a declaration
+enum08              OK  enum declaration and reference nested within a struct
+enum09              OK  enum declaration and reference nested within a union
+enum10              OK  simplified version of enum09, used for debugging
+enum11              OK  deeper nesting
+enum12              OK  declaration of an enum, of an enum variable and
+                        assignment
+enum13              OK  dummy declaration of an enum
+enum14              OK  full declaration of an enum and an enum variable in one line
+enum15              OK  same as enum14, but on two lines
+
+enum_member_name.c
+
+enum_scope.c
+
+enum_typedef.c
+
+error02.c
+extension01.c
+
+extension02	    NOK	__attribute__ not parsed by PIPS preprocessor
+		        Moved to C_syntax_enhancements
+externalloc01.c
+externalloc02.c
+externalloc03.c
+externalloc04.c
+externalloc05.c
+externalloc06.c
+externalloc07.c
+externalloc08.c
+externalloc13.c
+external_static.c
+extern.c
+field_expression.c
+files.c
+float01.c
+float02.c
+forloop02.c
+forloop03.c
+forloop04.c
+forloop05.c
+forloop06.c
+forloop07.c
+forloop08.c
+forloop.c
+formal_function.c
+formal_variables.c
+fprintf01.c
+fprintf02.c
+func_array01.c
+func_array02.c
+func_array.c
+function01.c
+function02.c
+function03.c
+function04.c
+function05.c
+function06.c
+function07.c        NOK formal scope badly used
+function08.c        NOK same as function07.c
+
+FUNCTION.c
+
+function_declarators.c
+
+function_name_conflict01
+		    NOK bug in parser for function rand
+
+function_pointer01.c
+function_pointer02.c
+function_scope.c
+generate01.c
+generate02.c
+generate03.c
+generate04.c
+generate05.c
+generate06.c        NOK formal scope
+
+generate07.c        NOK use a local type to type an external function (stupid but legal)
+generate08.c
+generate09.c
+generate10.c
+generate11.c
+generate12.c
+generate13.c        NOK same as generate07.c, but simplified to expose the issue
+generate14.c
+generate15.c
+
+global_extern01.c
+global_extern02.c
+global_extern03.c   NOK
+global_extern04.c
+global_extern.c
+
+goto01.c
+goto02.c
+goto.c
+
+hello_world.c
+
+if02.c
+if03.c
+if04.c
+if.c
+
+include.c
+
+increment.c
+
+initialization01.c
+initialization02.c
+initialization03.c
+initialization04.c
+initialization05.c
+
+initialization06    NOK problem with summary transformer or precondition
+		    	variable name conflict detected by gcc: error
+
+initialization07    NOK C99 source code
+
+inline01.c
+integer01.c
+internal_static.c
+io01.c
+io02.c
+io_intrinsics02.c
+io_intrinsics03.c
+io_intrinsics.c
+io_stdout01.c
+jpeg-6a_fill_input_buffer.c NOK
+keryell01.c
+keyword.c
+linkedlist.c
+local_declaration.c
+loop_bound01.c
+loop_bound02.c
+loop_break01.c
+loop_continue01.c
+loop_expansion02.c
+loop_tiling02.c             NOK
+loop_unsigned01.c
+main02.c
+main03.c
+main04.c
+main05.c
+main06.c
+main07.c
+main_abc.c
+main_hello_world.c
+main_old.c
+main_return.c
+malloc01.c
+malloc02.c
+malloc03.c
+mehdi01.c
+multideclsinfile.c
+multideclslocalvar.c
+ndecl01.c
+ndecl02.c
+ndecl03.c
+ndecl04.c
+ndecl05.c
+ndecl06.c
+ndecl07.c
+ndecl08.c
+ndecl09.c
+ndecl10.c
+ndecl11.c
+ndecl12.c
+ndecl13.c
+ndecl14.c
+ndecl15.c
+
+nested_struct.c
+
+ngspice01.c
+
+nodecls.c
+
+nodeclsfunc.c
+
+null_character.c
+
+old_decl01.c
+
+omp_include.c
+
+one_liner_01.c
+one_liner_02.c
+one_liner_03.c
+one_liner_04.c
+one_liner_05.c
+one_liner_06.c
+one_liner_07.c
+
+one_liner_func01.c
+one_liner_func02.c
+one_liner_func.c
+
+order01.c
+
+parallel01.c
+
+parallel03	    NOK C code should be prettyprinted in Fortran
+		    	Does not work anymore
+pml03.c
+pointer01.c
+pointer.c
+pointer_declarators.c
+point_to01.c
+point_to02.c
+point_to03.c
+point_to04.c
+point_to05.c
+pragma01.c
+pragma02.c
+pragma05.c
+pragma06.c
+pragma07.c
+pragma08.c
+pragma09.c
+pragma10.c
+pragma11.c
+precedence_operator2.c
+precedence_operator.c
+priority01.c
+priority02.c
+priority03.c
+priority04.c
+qualifiers.c
+recursive01.c
+register01.c
+register02.c
+reparse01.c
+restrict01.c
+restrict.c
+return01.c
+return02.c
+return03.c
+return04.c
+return05.c
+return06.c
+return07.c
+return08.c
+rsp01.c
+
+pips		    NOK the tpips file expansion scheme does not work as
+		    	might be expected by a casual user
+
+rsp05		    NOK because of convex array regions
+                        tpips to be simplified for C_syntax
+			full script copied into Regions
+
+scope01.c
+scope02.c
+scope03.c
+scope04.c
+scope05.c
+scope06.c
+
+short_long_int.c
+signed.c
+
+simplify01.c
+
+sizeofArray01.c
+sizeofArray02.c
+sizeofArray03.c
+sizeofArray04.c
+sizeofArray05.c
+
+smil_anr999.c       OK compilation unit generated by Cython; it showed a bug
+                       in C parser
+smil_maxVal_facade.c OK bug for Benoit Pin and Pierre Guillou, not reproduced
+
+static_declaration02.c
+static_declaration.c
+static_function.c
+
+string01.c
+string02.c
+string03.c
+string04.c
+string05.c
+string06.c
+string.c
+
+Steps to prettyprint derived types as type declarations, "struct s {}"
+or type references, "struct s"
+
+struct02            OK
+struct03            OK  internal type declaration to preserve
+struct04            OK  same, simplified for debugging
+struct05            OK  internal derived type use
+struct06                not standard conformant
+struct07                not standard conformant
+struct08            OK  two unions with same name, but in different scopes
+struct09            OK  conflict internal to a union declaration
+struct10            OK  reference to a type declaration located in the c.u.
+struct11                gcc warning, PIPS parser core dumps
+                        union declaration within a function declaration
+                    NOK not compatible with gcc
+		    	fixed version core dumps the parser
+			Since there is a warning, move to C_syntax_enhancements
+struct12            OK  for compilation unit, like struct05
+                        PIPS parser core dumps on the function itself
+struct13                not standard conformant
+struct14            OK  test inside a cast
+struct15            OK  test inside a sizeof
+struct16            OK  easiest case, used to debug the SVN merge between SG and FI
+struct17            OK  simple tree recursive data structure
+struct18            NOK like struct04, but within a function instead of a compilation unit
+struct19            OK  same as struct04, but with two struct nested
+struct20            OK  simple list recursive data structure
+struct21            OK  struct declared in a cast
+struct22            OK  make sure simple cases are handled in a simple usual way
+struct23            OK  global struct declaration + struct returning function
+struct24            NOK gcc __builtin_offsetof()
+struct25            OK  simple one-way recursive data structure
+struct26	    OK  global struct + nested struct (2 declarations)
+struct27            OK  two nested struct declared in one line
+struct28            OK  same as 27, with an extra field
+struct29            OK  same as 28, with a dummy declaration first
+struct30	    OK  three uses of dummy declarations
+struct31            OK  struct and struct-based declarations in two separate
+                        source files
+struct32            OK  a set of different struct declarations to test the
+                        declaration lists generated by the parser
+struct33                inexistant...
+struct34            NOK PIPS internal representation has too any scopes for
+                        derived entities
+struct36            L   assignment of a constant struct to a struct
+
+struct_array_init2.c
+struct_array_init.c
+struct.c
+struct_member_name.c
+struct_noname.c
+struct_return02.c
+struct_return03.c
+struct_scope.c
+switch01.c
+switch02.c
+switch03.c
+switch04.c
+switch05.c
+switch.c
+switch_case.c
+switch_escape.c
+switch_escape_char.c
+switch_for.c
+switch_if.c
+switch_negative.c
+symbol_table.c
+symbol_table_struct.c
+symbol_table_typedef.c
+symbol_table_typedef_struct.c
+twin_innermost_label.c
+twin_label.c
+twin_outermost_label.c
+
+two_modules.c
+type_check01.c
+typedef01.c
+typedef02.c
+typedef03.c
+typedef04.c
+typedef05.c
+typedef06.c
+typedef07.c
+typedef08.c
+typedef09.c
+typedef10.c
+typedef11.c
+typedef12.c
+typedef13a.c
+typedef13b.c
+typedef13c.c
+typedef14.c
+typedef.c
+typedef_cast.c
+typedef_name.c
+
+union01.c           OK  full declaration of a union and a union variable
+                        (two statements)
+union02.c           OK  complex typedef union declaration
+union03.c           OK  dummy definition of a global union
+union04.c           OK  fully definition of a union
+
+unsigned.c
+unsigned_long_int01.c
+unstructured01.c
+unstructured02.c
+varargs01.c
+varargs02.c
+varargs03.c
+very_very_long_name.c
+void_func_ptr.c
+volatile.c
+warning01.c
+while_break.c
+while.c
+while_continue.c
+while_for.c
+
+Note FI: I could not deal with non-standard conformant C code because
+PIPS does not generate an error log file, but the error log file is
+now merged with the warning file and property
+CLOSE_WORKSPACE_AND_QUIT_ON_ERROR can be used to preserve the database in (almost) all circumstances.

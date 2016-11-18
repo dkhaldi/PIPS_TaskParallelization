@@ -1,0 +1,45 @@
+
+PROPER  EFFECTS
+
+void init02()
+{
+   int *p;
+   list q;
+   struct cons_t r;
+   return;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void init02()
+{
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   list q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   struct cons_t r;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r.foo.data -> undefined , EXACT
+// r.next -> undefined , EXACT
+
+   return;
+}

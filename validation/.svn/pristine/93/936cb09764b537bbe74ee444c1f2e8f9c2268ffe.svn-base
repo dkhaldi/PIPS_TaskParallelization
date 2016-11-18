@@ -1,0 +1,11 @@
+# $Id$
+
+PARALLEL_VALIDATION = 1
+include ../validate.mk
+
+# hm... workaround
+fixrts.validate laguer.validate: FLT += -e '/"<built-in>"/d'
+
+clean: local-clean
+local-clean:
+	$(RM) source02.src/module0[12].s

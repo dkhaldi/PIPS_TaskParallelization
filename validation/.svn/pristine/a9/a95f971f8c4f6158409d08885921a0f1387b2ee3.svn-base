@@ -1,0 +1,34 @@
+
+POINTS TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *a[2], i, j;
+
+// Points To:
+// a[*] -> undefined , EXACT
+
+   a[i] = &i;
+
+// Points To:
+// a[*] -> undefined , MAY
+// a[*] -> i , MAY
+
+   a[j] = &j;
+
+// Points To:
+// a[*] -> undefined , MAY
+// a[*] -> i , MAY
+// a[*] -> j , MAY
+
+   return 0;
+}

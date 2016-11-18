@@ -1,0 +1,52 @@
+
+POINTS TO for properties01
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_2[0] , MAY
+
+
+// Points To OUT:
+// p -> _p_2[0] , EXACT
+
+void properties01(int n, int *p)
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int *q = &i;
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_2[0] , MAY
+// q -> i , EXACT
+
+
+   p!=0?(void) 0:__assert_fail("p!=0", "./properties01.c", 12, (const char *) 0);
+
+// Points To:
+// p -> _p_2[0] , EXACT
+// q -> i , EXACT
+
+
+   *p = 19;
+
+// Points To:
+// p -> _p_2[0] , EXACT
+// q -> i , EXACT
+
+
+   *q = 1;
+
+// Points To:
+// p -> _p_2[0] , EXACT
+// q -> i , EXACT
+
+
+   return;
+}

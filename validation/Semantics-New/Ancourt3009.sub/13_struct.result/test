@@ -1,0 +1,515 @@
+
+Points-to for "update1"
+
+
+// Points To IN:
+// _a_1[0].s1 -> *NULL* , MAY
+// _a_1[0].s1 -> _a_1_1__1[0][0] , MAY
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+
+// Points To OUT:
+// _a_1[0].s1 -> *NULL* , MAY
+// _a_1[0].s1 -> _a_1_1__1[0][0] , MAY
+// a -> _a_1[0] , EXACT
+
+void update1(content *a)
+{
+
+// Points To:
+// _a_1[0].s1 -> *NULL* , MAY
+// _a_1[0].s1 -> _a_1_1__1[0][0] , MAY
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+   a->s1->var2 = 8;
+
+// Points To:
+// _a_1[0].s1 -> *NULL* , MAY
+// _a_1[0].s1 -> _a_1_1__1[0][0] , MAY
+// a -> _a_1[0] , EXACT
+
+   return;
+}
+
+Proper effects for "update1"
+
+void update1(content *a)
+{
+//             <    is read   >: _a_1[0].s1 a
+//             <    is written>: _a_1_1__1[0][0].var2
+//             <    is referenced>: a
+   a->s1->var2 = 8;
+   return;
+}
+
+Cumulated effects for "update1"
+
+//             <    is read   >: _a_1[0].s1 a
+//             <    is written>: _a_1_1__1[0][0].var2
+//             <    is referenced>: a
+void update1(content *a)
+{
+//             <    is read   >: _a_1[0].s1 a
+//             <    is written>: _a_1_1__1[0][0].var2
+//             <    is referenced>: a
+   a->s1->var2 = 8;
+   return;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+   // Allocation statique
+
+// Points To: none
+
+   sub s1;
+
+// Points To: none
+
+   sub s2;
+
+// Points To: none
+
+   content a;
+
+// Points To:
+// a.s1 -> undefined , EXACT
+// a.s2 -> undefined , EXACT
+
+   
+   // pointage sur les adresses statiques
+   a.s1 = &s1;
+
+// Points To:
+// a.s2 -> undefined , EXACT
+// a.s1 -> s1 , EXACT
+
+   a.s2 = &s2;
+   
+   // Tableaux 
+
+// Points To:
+// a.s1 -> s1 , EXACT
+// a.s2 -> s2 , EXACT
+
+   int b[100];
+
+// Points To:
+// a.s1 -> s1 , EXACT
+// a.s2 -> s2 , EXACT
+
+   int c[100];
+
+// Points To:
+// a.s1 -> s1 , EXACT
+// a.s2 -> s2 , EXACT
+
+   int d[100];
+
+// Points To:
+// a.s1 -> s1 , EXACT
+// a.s2 -> s2 , EXACT
+
+   int e[100];
+
+// Points To:
+// a.s1 -> s1 , EXACT
+// a.s2 -> s2 , EXACT
+
+   
+   // Ecriture => forcement par pointeur
+   update1(&a);
+
+// Points To:
+// a.s1 -> s1 , MAY
+// a.s1 -> s2 , MAY
+// a.s2 -> s2 , EXACT
+
+   
+   // Lecture par pointeur (USE/DEF_USE ?)
+   // use1_1(&a);
+   
+   // Lecture par valeur (pour comparer)
+   // use1_2(a);
+   
+   // Lecture de structure par valeur 
+   // compute1_1(*a.s1,b);
+   
+   // Lecture de structure par pointeur
+   // compute1_2(a.s1,b);
+   
+   // update par pointeur
+   // update2(&a);
+   
+   // Travail au niveau hierarchique (autre box)
+   // computeH(a.s2,b,c,d,e);		
+   
+   return 0;
+}
+
+Proper effects for "main"
+
+int main(int argc, char *argv[])
+{
+   // Allocation statique
+//             <    is referenced>: sub
+//             <    is declared>: s1
+   sub s1;
+//             <    is referenced>: sub
+//             <    is declared>: s2
+   sub s2;
+//             <    is referenced>: content
+//             <    is declared>: a
+   content a;
+//             <    is written>: a.s1
+//             <    is referenced>: a s1
+   
+   // pointage sur les adresses statiques
+   a.s1 = &s1;
+//             <    is written>: a.s2
+//             <    is referenced>: a s2
+   a.s2 = &s2;
+   
+   // Tableaux 
+//             <    is declared>: b
+   int b[100];
+//             <    is declared>: c
+   int c[100];
+//             <    is declared>: d
+   int d[100];
+//             <    is declared>: e
+   int e[100];
+//             <    is read   >: a.s1
+//             <    is written>: s1.var2 s2.var2
+//             <    is referenced>: a
+   
+   // Ecriture => forcement par pointeur
+   update1(&a);
+   
+   // Lecture par pointeur (USE/DEF_USE ?)
+   // use1_1(&a);
+   
+   // Lecture par valeur (pour comparer)
+   // use1_2(a);
+   
+   // Lecture de structure par valeur 
+   // compute1_1(*a.s1,b);
+   
+   // Lecture de structure par pointeur
+   // compute1_2(a.s1,b);
+   
+   // update par pointeur
+   // update2(&a);
+   
+   // Travail au niveau hierarchique (autre box)
+   // computeH(a.s2,b,c,d,e);		
+   
+   return 0;
+}
+<!-- XML prettyprint for module main. --> 
+<Application Name="main" Language="C" PassingMode="BYVALUE">
+  <IncludedFiles/>
+  <GlobalVariables>
+  </GlobalVariables>
+  <Box Name="main">
+    <GlobalVariables/>
+    <LocalVariables>
+      <Scalar Name="s1" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="sub" Size="4"/>
+      <Scalar Name="s2" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="sub" Size="4"/>
+      <Scalar Name="a" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="content" Size="16"/>
+      <Array Name="b" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>100-1</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+      <Array Name="c" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>100-1</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+      <Array Name="d" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>100-1</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+      <Array Name="e" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+      <DataType Type="int" Size="4"/>
+      <Dimensions>
+        <Dimension>
+          <LowerBound>
+            <Symbolic>0</Symbolic>
+            <Numeric>0</Numeric>
+          </LowerBound>
+          <UpperBound>
+            <Symbolic>100-1</Symbolic>
+            <Numeric>99</Numeric>
+          </UpperBound>
+        </Dimension>
+      </Dimensions>
+      <Layout>
+        <DimLayout>
+          <Symbolic>
+          1
+          </Symbolic>
+        </DimLayout>
+      </Layout>
+      </Array>
+    </LocalVariables>
+    <FormalVariables/>
+    <ReferenceTypes>
+        <Reference Name= "e">
+          <ArrayType Dimension = "1">
+          <Basic>int</Basic>
+          </ArrayType>
+        </Reference>
+        <Reference Name= "d">
+          <ArrayType Dimension = "1">
+          <Basic>int</Basic>
+          </ArrayType>
+        </Reference>
+        <Reference Name= "c">
+          <ArrayType Dimension = "1">
+          <Basic>int</Basic>
+          </ArrayType>
+        </Reference>
+        <Reference Name= "b">
+          <ArrayType Dimension = "1">
+          <Basic>int</Basic>
+          </ArrayType>
+        </Reference>
+        <Reference Name= "a">
+          <Typedef Name= "content">
+            <Derived Name= "struct {sub *s1; sub *s2;}">
+              <Struct>
+                <Field Name= "s1" >
+                  <Pointer Name = "sub *">
+                  </Pointer>
+                </Field>
+                <Field Name= "s2" >
+                  <Pointer Name = "sub *">
+                  </Pointer>
+                </Field>
+              </Struct>
+            </Derived>
+          </Typedef>
+        </Reference>
+        <Reference Name= "s2">
+          <Typedef Name= "sub">
+            <Derived Name= "struct {int var2;}">
+            </Derived>
+          </Typedef>
+        </Reference>
+        <Reference Name= "s1">
+          <Typedef Name= "sub">
+            <Derived Name= "struct {int var2;}">
+            </Derived>
+          </Typedef>
+        </Reference>
+    </ReferenceTypes>
+    <Call Name="LocalAssignment" StNumber="91">
+      <ReferencedParameters>
+      </ReferencedParameters>
+      <ExternalLoops>
+      </ExternalLoops>
+      <TaskParameters>
+        <TaskParameter Name="a" Type="DATA" DataType="content" AccessMode="DEF" ArrayP="FALSE" Kind="VARIABLE">
+        </TaskParameter>
+      </TaskParameters>
+    </Call>
+    <Call Name="LocalAssignment" StNumber="92">
+      <ReferencedParameters>
+      </ReferencedParameters>
+      <ExternalLoops>
+      </ExternalLoops>
+      <TaskParameters>
+        <TaskParameter Name="a" Type="DATA" DataType="content" AccessMode="DEF" ArrayP="FALSE" Kind="VARIABLE">
+        </TaskParameter>
+      </TaskParameters>
+    </Call>
+    <Call Name="update1" StNumber="101">
+      <ReferencedParameters>
+      </ReferencedParameters>
+      <ExternalLoops>
+      </ExternalLoops>
+      <Arguments>
+        <Argument>
+          <ScalarArgument ActualName="a" FormalName="a" AccessMode="USE">
+          </ScalarArgument>
+        </Argument>
+        </Arguments>
+      </Call>
+      <BoxGraph Name="main">
+          <TaskRef Name="LocalAssignment" StNumber="91">
+            <Computes ScalarName="a" ReadBy="update1" StNumber="101"/>
+          </TaskRef>
+          <TaskRef Name="update1" StNumber="101">
+            <Needs ScalarName="a" DefinedBy="LocalAssignment" StNumber="91"/>
+          </TaskRef>
+          <TaskRef Name="NestedCall" StNumber="101">
+            <Computes ScalarName="s2"/>
+          </TaskRef>
+          <TaskRef Name="NestedCall" StNumber="101">
+            <Computes ScalarName="s1"/>
+          </TaskRef>
+      </BoxGraph>
+    </Box>
+<!-- XML prettyprint for module update1. --> 
+  <Box Name="update1">
+    <GlobalVariables>
+    </GlobalVariables>
+    <LocalVariables/>
+    <FormalVariables>
+      <Scalar Name="a" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="content *" Size="8"/>
+    </FormalVariables>
+    <ReferenceTypes>
+    </ReferenceTypes>
+    <Call Name="LocalAssignment" StNumber="22">
+      <ReferencedParameters>
+        <ReferencedParameter Name="_a_1_1__1" Range="" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+        <ReferencedParameter Name="_a_1" Range="" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+      </ReferencedParameters>
+      <ExternalLoops>
+      </ExternalLoops>
+      <TaskParameters>
+        <TaskParameter Name="_a_1_1__1" Type="DATA" DataType="struct {int var2;}" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE">
+          <Pattern AccessMode="DEF">
+            <DimPattern Index="">
+              <Offset>
+              <Symbolic>0</Symbolic>
+              <Numeric>0</Numeric>
+              </Offset>
+              <Length>
+              <Symbolic>*+1</Symbolic>
+              <Numeric>0</Numeric>
+              </Length>
+              <Stride>
+              <Symbolic>1</Symbolic>
+              <Numeric>1</Numeric>
+              </Stride>
+            </DimPattern>
+            <DimPattern Index="">
+              <Offset>
+              <Symbolic>0</Symbolic>
+              <Numeric>0</Numeric>
+              </Offset>
+              <Length>
+              <Symbolic>*+1</Symbolic>
+              <Numeric>0</Numeric>
+              </Length>
+              <Stride>
+              <Symbolic>1</Symbolic>
+              <Numeric>1</Numeric>
+              </Stride>
+            </DimPattern>
+          </Pattern>
+          <Pavage AccessMode="DEF">
+            <DimPavage/>
+            <DimPavage/>
+          </Pavage>
+        </TaskParameter>
+        <TaskParameter Name="a" Type="DATA" DataType="content *" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+        </TaskParameter>
+        <TaskParameter Name="_a_1" Type="DATA" DataType="struct {sub *s1; sub *s2;}" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE">
+          <Pattern AccessMode="USE">
+            <DimPattern Index="">
+              <Offset>
+              <Symbolic>0</Symbolic>
+              <Numeric>0</Numeric>
+              </Offset>
+              <Length>
+              <Symbolic>*+1</Symbolic>
+              <Numeric>0</Numeric>
+              </Length>
+              <Stride>
+              <Symbolic>1</Symbolic>
+              <Numeric>1</Numeric>
+              </Stride>
+            </DimPattern>
+          </Pattern>
+          <Pavage AccessMode="USE">
+            <DimPavage/>
+          </Pavage>
+        </TaskParameter>
+      </TaskParameters>
+    </Call>
+    <BoxGraph Name="update1">
+        <TaskRef Name="LocalAssignment" StNumber="22">
+          <Needs ArrayName="_a_1" DefinedBy="IN_VALUE" StNumber="0"/>
+        </TaskRef>
+        <TaskRef Name="LocalAssignment" StNumber="22">
+          <Needs ScalarName="a" DefinedBy="IN_VALUE" StNumber="0"/>
+        </TaskRef>
+        <TaskRef Name="LocalAssignment" StNumber="22">
+          <Computes ArrayName="_a_1_1__1"/>
+        </TaskRef>
+    </BoxGraph>
+  </Box>
+  <ApplicationGraph Name="main">
+    <TaskRef Name="main">
+        <Computes ScalarName="a"/>
+        <Computes ScalarName="s2"/>
+        <Computes ScalarName="s1"/>
+      </TaskRef>
+    </ApplicationGraph>
+  </Application>

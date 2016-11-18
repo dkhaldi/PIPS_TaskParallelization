@@ -1,0 +1,28 @@
+LINUX_x86_64_LL/alloc.o: alloc.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h contrainte.h
+LINUX_x86_64_LL/binaires.o: binaires.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h contrainte.h
+LINUX_x86_64_LL/error.o: error.c
+LINUX_x86_64_LL/io.o: io.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h contrainte.h
+LINUX_x86_64_LL/listes.o: listes.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h contrainte.h
+LINUX_x86_64_LL/normalize.o: normalize.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h contrainte.h
+LINUX_x86_64_LL/predicats.o: predicats.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h contrainte.h
+LINUX_x86_64_LL/unaires.o: unaires.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h contrainte.h

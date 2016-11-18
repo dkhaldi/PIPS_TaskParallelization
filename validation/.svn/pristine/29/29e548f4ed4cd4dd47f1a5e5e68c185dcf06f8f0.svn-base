@@ -1,0 +1,49 @@
+
+Points-To for pointer08
+
+
+// Points To IN:
+// k -> *NULL* , MAY
+// k -> _k_1[0] , MAY
+
+
+// Points To OUT:
+// k -> _k_1[1] , EXACT
+
+void pointer08(int *k, int i)
+{
+
+// Points To:
+// k -> *NULL* , MAY
+// k -> _k_1[0] , MAY
+
+   if (i>0)
+
+// Points To: none
+
+      k = 0;
+
+// Points To:
+// k -> *NULL* , MAY
+// k -> _k_1[0] , MAY
+
+   i++;
+
+// Points To:
+// k -> *NULL* , MAY
+// k -> _k_1[0] , MAY
+
+   *k++;
+
+// Points To:
+// k -> _k_1[1] , EXACT
+
+   return;
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[pointer08] (offset_cells) line 11 
+at statement:
+
+	*k++;
+
+
+Arithmetic operation performed on "k", which might be a NULL pointer.

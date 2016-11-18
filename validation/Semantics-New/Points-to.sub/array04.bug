@@ -1,0 +1,1 @@
+Expressions based on array elements are processed by pointer branch version, but not by the trunk.

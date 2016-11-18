@@ -1,0 +1,608 @@
+
+// IN Pointer values:
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+// OUT Pointer values:
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+int main()
+{
+
+// Pointer values:
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   FILE *fp;
+
+// Pointer values:
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   size_t n, nr;
+
+// Pointer values:
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   char buf1[200];
+
+// Pointer values:
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   char *buf2 = malloc(200*sizeof(char));
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   char *fmt;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   char *i_name;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   int i, r, c, max;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   fpos_t *fp_pos, pos;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   long int fp_pos_indic;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   va_list vl;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   // formatted IO functions
+   fmt = "%s%d";
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   max = 100;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   n = 200;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == *ANY_MODULE*:*UNDEFINED* (exact);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   fp = fopen("file.txt", "rb");
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   
+   (void) fread(buf1, 8, 50, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) fscanf(fp, fmt, i_name, &i);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) fprintf(fp, "%s%d", i_name, i);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   
+   (void) scanf("%s%d", i_name, &i);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) printf(fmt, i_name, i);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   
+   (void) sscanf(buf1, fmt, i_name, &i);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) sprintf(buf2, fmt, i_name, i);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) snprintf(buf2, 100, fmt, i_name, i);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   
+   // character IO functions
+   
+   c = fgetc(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) fgets(buf1, max, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) fputc(c, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) fputs(buf1, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   c = _IO_getc(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) _IO_putc(c, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) ungetc(c, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   c = getchar();
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) putchar(c);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   (void) gets(buf1);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) puts(buf1);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   // direct IO functions
+   
+   nr = fread(buf2, sizeof(char), n, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   nr = fwrite(buf2, sizeof(char), n, fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == *ANY_MODULE*:*UNDEFINED* (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   // file positionning functions
+   fp_pos = &pos;
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) fgetpos(fp, fp_pos);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   (void) fgetpos(fp, &pos);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   (void) fseek(fp, 0L, 0);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   (void) fsetpos(fp, fp_pos);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   fp_pos_indic = ftell(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   rewind(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   
+   // error handling functions
+   
+   clearerr(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   r = feof(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   r = ferror(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+   perror(buf1);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   fclose(fp);
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   fprintf(stderr, "The END\n");
+
+// Pointer values:
+// buf2 == &*HEAP*_l_10[0] (exact);
+// fmt == &"%s%d"[0] (exact);
+// fp == &*ANY_MODULE*:*ANYWHERE* (may);
+// fp_pos == &pos (exact);
+// i_name == *ANY_MODULE*:*UNDEFINED* (exact);
+// stderr == &__IO_EFFECTS:__stderr__ (exact);
+// stdin == &__IO_EFFECTS:__stdin__ (exact);
+// stdout == &__IO_EFFECTS:__stdout__ (exact);
+
+
+   return 0;
+}

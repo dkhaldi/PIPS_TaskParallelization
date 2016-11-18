@@ -1,0 +1,55 @@
+#
+# initial code
+#
+// global/private errors
+
+extern void error00(float a[10]);
+
+extern void error01(float a[10]);
+
+extern void error02(float a[10]);
+
+extern void error03(float a[10]);
+
+extern int main(void);
+void error00(float a[10])
+{
+   float l[10];
+   float *p = l;
+   p = a;
+}
+void error01(float a[10])
+{
+   float l[10];
+   float *p = a;
+   p = l;
+}
+void error02(float a[10])
+{
+   float l[10];
+   float *p;
+   p = a;
+   p = l;
+}
+void error03(float a[10])
+{
+   float l[10];
+   float *p;
+   p = l;
+   p = a;
+}
+int main(void)
+{
+   float a[10];
+   error00(a);
+   error01(a);
+   error02(a);
+   error03(a);
+   return 0;
+}
+
+### stderr
+GPU_QUALIFY_POINTERS[error00] (set_glopriv_qualifier) [user error] pointer error00:0`p cannot be set as private, it is already global
+GPU_QUALIFY_POINTERS[error01] (set_glopriv_qualifier) [user error] pointer error01:0`p cannot be set as private, it is already global
+GPU_QUALIFY_POINTERS[error02] (set_glopriv_qualifier) [user error] pointer error02:0`p cannot be set as private, it is already global
+GPU_QUALIFY_POINTERS[error03] (set_glopriv_qualifier) [user error] pointer error03:0`p cannot be set as private, it is already global

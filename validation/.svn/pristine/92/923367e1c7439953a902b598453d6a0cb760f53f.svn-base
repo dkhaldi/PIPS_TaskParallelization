@@ -1,0 +1,96 @@
+
+Symbol table for scope06_a!
+
+scope06_a!
+
+Declarations for module "scope06_a!" with type "() -> unknown"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 80
+	Declared entity "TOP-LEVEL:a" with type "variable" "double[10]"
+	Declared entity "TOP-LEVEL:b" with type "variable" "double[10]"
+	Declared entity "TOP-LEVEL:foo" with type "functional" "void -> void"
+	Declared entity "TOP-LEVEL:main" with type "functional" "() -> int"
+	Declared entity "scope06_a!:*DYNAMIC*" with type "area" with size 0
+	Declared entity "scope06_a!:*HEAP*" with type "area" with size 0
+	Declared entity "scope06_a!:*STACK*" with type "area" with size 0
+	Declared entity "scope06_a!:*STATIC*" with type "area" with size 0
+
+External variable list:
+
+	Declared external entity "TOP-LEVEL:a"	with type "variable" "double"
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 80:
+	External Variable "TOP-LEVEL:a"	offset = UNKNOWN,	size = 80
+	Variable "TOP-LEVEL:b"	offset = 0	size = 80
+
+
+Layout for memory area "scope06_a!:*DYNAMIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope06_a!:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope06_a!:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope06_a!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module scope06_a!
+
+
+Symbol table for scope06_b!
+
+scope06_b!
+
+Declarations for module "scope06_b!" with type "() -> unknown"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 160
+	Declared entity "TOP-LEVEL:a" with type "variable" "double[10]"
+	Declared entity "TOP-LEVEL:b" with type "variable" "double[10]"
+	Declared entity "TOP-LEVEL:foo" with type "functional" "() -> void"
+	Declared entity "scope06_b!:*DYNAMIC*" with type "area" with size 0
+	Declared entity "scope06_b!:*HEAP*" with type "area" with size 0
+	Declared entity "scope06_b!:*STACK*" with type "area" with size 0
+	Declared entity "scope06_b!:*STATIC*" with type "area" with size 0
+
+External variable list:
+
+	Declared external entity "TOP-LEVEL:b"	with type "variable" "double"
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 160:
+	Variable "TOP-LEVEL:a"	offset = 80	size = 80
+	Variable "TOP-LEVEL:b"	offset = 0	size = 80
+
+
+Layout for memory area "scope06_b!:*DYNAMIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope06_b!:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope06_b!:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "scope06_b!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module scope06_b!
+
+
+Warnings
+

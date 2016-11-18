@@ -1,0 +1,37 @@
+
+PROPER  EFFECTS
+
+int array18(int *p)
+{
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+//             <    is written>: a[*p+1]
+   a[*p+1] = 2.;
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+
+
+// Points To OUT:
+// p -> _p_1[0] , EXACT
+
+int array18(int *p)
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+
+   a[*p+1] = 2.;
+
+// Points To:
+// p -> _p_1[0] , EXACT
+
+   return 0;
+}

@@ -1,0 +1,6 @@
+
+Warnings
+
+(parse_properties) [user error] Unknown value "true" for property "ABORT_ON_USER_ERROR". Check the tpips script that is used.
+(tpips_user_error) Close workspace and quit on user error requested.
+(pips_log_end) [user error] stopping pips on code 2 (USER_ERROR) for CLOSE_WORKSPACE_AND_QUIT_ON_ERROR

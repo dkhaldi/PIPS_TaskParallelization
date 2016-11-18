@@ -1,0 +1,68 @@
+void foo(void)
+{
+   FILE *fp = fopen("bar", "r");
+}
+int main()
+{
+   FILE *f;
+
+   f = fopen("foo", "r");
+
+   foo();
+
+   return 0;
+}
+
+PROPER  EFFECTS
+
+int main()
+{
+   FILE *f;
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: f
+
+   f = fopen("foo", "r");
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+
+   foo();
+
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   FILE *f;
+
+// Points To:
+// f -> undefined , EXACT
+
+
+   f = fopen("foo", "r");
+
+// Points To:
+// f -> *NULL* , MAY
+// f -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+
+   foo();
+
+// Points To:
+// f -> *NULL* , MAY
+// f -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+
+   return 0;
+}

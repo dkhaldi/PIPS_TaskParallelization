@@ -1,0 +1,8 @@
+delete param02
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create param02 param02.f
+module PARAM02
+display PRINTED_FILE[PARAM02]
+close
+delete param02
+quit

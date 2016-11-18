@@ -1,0 +1,25 @@
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   content ct;
+
+//  P() {}
+
+   update_float2(&ct.s1);
+
+//  P() {}
+
+   //update_float(&ct.s1.x);
+   // update_float2(&(ct.s2[1]));
+   // for (int i = 0; i < 3; i++) 
+   //	 update_float2(&ct.s2[i]);
+   //update_sub(&ct.s3);
+   //update_content(&ct);
+   
+   return 0;
+}

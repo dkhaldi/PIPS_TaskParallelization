@@ -1,0 +1,164 @@
+
+C  T(INEW,LNEW,SNEW,XNEW) {INEW==IOLD, LNEW==LOLD, SNEW==SOLD,
+C    XNEW==XOLD, 0<=LNEW, LNEW<=1}
+
+
+      SUBROUTINE COPY_FOUR(INEW, IOLD,
+     &     XNEW, XOLD, SNEW, SOLD, LNEW, LOLD)
+
+      CHARACTER*4 SNEW, SOLD
+      LOGICAL LNEW, LOLD
+
+C  T(INEW) {INEW==IOLD}
+
+
+      INEW = IOLD                                                       0008
+
+C  T(XNEW) {XNEW==XOLD}
+
+      XNEW = XOLD                                                       0009
+
+C  T(SNEW) {SNEW==SOLD}
+
+      SNEW = SOLD                                                       0010
+
+C  T(LNEW) {LNEW==LOLD, 0<=LNEW, LNEW<=1}
+
+      LNEW = LOLD                                                       0011
+
+      END
+
+C  T() {}
+
+      PROGRAM TYPE29
+
+C     Check analysis of non affine arguments
+
+      REAL X, Y, U, V
+      LOGICAL L, L1, L2, L3
+      CHARACTER*4 S, S1, S2, S3
+
+C  T(U) {U==2.}
+
+
+      U = 2.                                                            0009
+
+C  T(V) {V==3.}
+
+      V = 3.                                                            0010
+
+C  T(S2) {S2=="Hi!"}
+
+      S2 = "Hi!"                                                        0011
+
+C  T(L2) {L2==1}
+
+      L2 = .TRUE.                                                       0012
+
+C  T(I,L1,S1,X) {S1==S2, U+V==X, 0<=I, I<=2, 0<=L1, L1<=1}
+
+
+      CALL COPY_FOUR(I, 1+MOD(J, 2), X, U+V, S1, S2, L1, L2.AND.L3)     0014
+
+C  T() {}
+
+
+      PRINT *, I, X, S1, L1                                             0016
+
+C  T(J,L2,S2,U,V) {}
+
+
+      READ *, J, U, V, S2, L2                                           0018
+
+C  T() {}
+
+
+      PRINT *, I, X, S1, L1                                             0020
+
+      END
+
+C  P() {SOLD=="Hi!", XOLD==2.+3., 0<=IOLD, IOLD<=2, 0<=LNEW, LNEW<=1,
+C    0<=LOLD, LOLD<=1}
+
+
+      SUBROUTINE COPY_FOUR(INEW, IOLD,
+     &     XNEW, XOLD, SNEW, SOLD, LNEW, LOLD)
+
+      CHARACTER*4 SNEW, SOLD
+      LOGICAL LNEW, LOLD
+
+C  P() {SOLD=="Hi!", XOLD==5., 0<=IOLD, IOLD<=2, 0<=LNEW, LNEW<=1,
+C    0<=LOLD, LOLD<=1}
+
+
+      INEW = IOLD                                                       0008
+
+C  P(INEW) {SOLD=="Hi!", XOLD==5., INEW==IOLD, 0<=INEW, INEW<=2,
+C    0<=LNEW, LNEW<=1, 0<=LOLD, LOLD<=1}
+
+      XNEW = XOLD                                                       0009
+
+C  P(INEW,XNEW) {SOLD=="Hi!", XNEW==5., XOLD==5., INEW==IOLD, 0<=INEW,
+C    INEW<=2, 0<=LNEW, LNEW<=1, 0<=LOLD, LOLD<=1}
+
+      SNEW = SOLD                                                       0010
+
+C  P(INEW,SNEW,XNEW) {SNEW=="Hi!", SOLD=="Hi!", XNEW==5., XOLD==5.,
+C    INEW==IOLD, 0<=INEW, INEW<=2, 0<=LNEW, LNEW<=1, 0<=LOLD, LOLD<=1}
+
+      LNEW = LOLD                                                       0011
+
+      END
+
+C  P() {}
+
+      PROGRAM TYPE29
+
+C     Check analysis of non affine arguments
+
+      REAL X, Y, U, V
+      LOGICAL L, L1, L2, L3
+      CHARACTER*4 S, S1, S2, S3
+
+C  P() {}
+
+
+      U = 2.                                                            0009
+
+C  P(U) {U==2.}
+
+      V = 3.                                                            0010
+
+C  P(U,V) {U==2., V==3.}
+
+      S2 = "Hi!"                                                        0011
+
+C  P(S2,U,V) {S2=="Hi!", U==2., V==3.}
+
+      L2 = .TRUE.                                                       0012
+
+C  P(L2,S2,U,V) {S2=="Hi!", U==2., V==3., L2==1}
+
+
+      CALL COPY_FOUR(I, 1+MOD(J, 2), X, U+V, S1, S2, L1, L2.AND.L3)     0014
+
+C  P(I,L1,L2,S1,S2,U,V,X) {S1=="Hi!", S2=="Hi!", U==2., V==3., X==5.,
+C    L2==1, 0<=I, I<=2, 0<=L1, L1<=1}
+
+
+      PRINT *, I, X, S1, L1                                             0016
+
+C  P(I,L1,L2,S1,S2,U,V,X) {S1=="Hi!", S2=="Hi!", U==2., V==3., X==5.,
+C    L2==1, 0<=I, I<=2, 0<=L1, L1<=1}
+
+
+      READ *, J, U, V, S2, L2                                           0018
+
+C  P(I,J,L1,L2,S1,S2,U,V,X) {S1=="Hi!", X==5., 0<=I, I<=2, 0<=L1,
+C    L1<=1}
+
+
+      PRINT *, I, X, S1, L1                                             0020
+
+      END
+

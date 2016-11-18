@@ -1,0 +1,18 @@
+# Just make sure the workspace is created with all the source files
+
+setenv WSPACE=typedef04
+setenv FILE = typedef04.c
+delete $WSPACE
+create $WSPACE $FILE
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+echo
+echo Source files
+echo
+
+shell ls $WSPACE.database/main/main.c
+
+close
+#delete $WSPACE
+quit

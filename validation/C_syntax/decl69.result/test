@@ -1,0 +1,11 @@
+/* An implicit struct declaration disappears or used to disappear
+ *
+ * As well as the LF between the two declarations.
+ */
+
+struct c;                                                               /*0006*/
+
+
+struct c {                                                              /*0009*/
+   int m;
+};

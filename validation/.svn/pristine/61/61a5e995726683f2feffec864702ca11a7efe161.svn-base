@@ -1,0 +1,79 @@
+
+Initial source code
+
+int strip_mining01(int *in, int *val)
+{
+   int x[512];
+   int i;
+
+l1:
+   for(i = 0; i <= 511; i += 1)
+      x[i] = 0;
+
+   return 0;
+}
+
+Source code after strip mining
+
+int strip_mining01(int *in, int *val)
+{
+   int x[512];
+   int i;
+   //PIPS generated variable
+   int i_1;
+
+l1:
+   for(i_1 = 0; i_1 <= 511; i_1 += 128)
+      for(i = i_1; i <= pips_min(2, i_1+127, 511); i += 1)
+         x[i] = 0;
+
+   return 0;
+}
+
+Check preconditions on strip-mined loop
+
+
+//  P() {}
+
+int strip_mining01(int *in, int *val)
+{
+
+//  P() {}
+
+   int x[512];
+
+//  P() {}
+
+   int i;
+   //PIPS generated variable
+
+//  P() {}
+
+   int i_1;
+
+//  P() {}
+
+
+l1:
+   for(i_1 = 0; i_1 <= 511; i_1 += 128)
+
+//  P(i,i_1) {0<=i_1, i_1<=511}
+
+      for(i = i_1; i <= pips_min(2, i_1+127, 511); i += 1)
+
+//  P(i,i_1) {i<=511, i_1<=i, i<=i_1+127, 0<=i_1, i_1<=511}
+
+         x[i] = 0;
+
+//  P(i,i_1) {i<=512, i_1<=i+128, 512<=i_1, i_1<=639}
+
+
+   return 0;
+}
+
+Warnings
+
+(activate_phase) Rule `INTERPROCEDURAL_SUMMARY_PRECONDITION' already active
+(activate_phase) Rule `TRANSFORMERS_INTER_FULL' already active
+(activate_phase) Rule `PRECONDITIONS_INTER_FULL' already active
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "strip_mining01" instead.

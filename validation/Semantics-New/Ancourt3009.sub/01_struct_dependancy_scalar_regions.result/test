@@ -1,0 +1,406 @@
+
+Proper effects with points-to for "main"
+
+int main(int argc, char *argv[])
+{
+//             <    is referenced>: content
+//             <    is declared>: a
+   content a;
+//             <    is declared>: b
+   int b[100];
+//             <    is declared>: c
+   int c[100];
+//             <    is written>: a.var1
+//             <    is referenced>: a
+
+   update1(&a);
+//             <may be written>: b[*]
+//             <    is read   >: a.var1
+//             <    is referenced>: a b
+   // Here, a.var1==8
+   compute1(&a, b);
+//             <    is written>: a.var2
+//             <    is referenced>: a
+   update2(&a);
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: a.var2
+//             <    is referenced>: a b c
+   // Here, a.var1==8, a.var2==9
+   compute2(&a, b, c);
+
+   return 0;
+}
+
+Transformers with point-to for "update1"
+
+
+//  T(_a_1[0][var1]) {_a_1[0][var1]==8}
+
+void update1(content *a)
+{
+
+//  T(_a_1[0][var1]) {_a_1[0][var1]==8}
+
+#pragma MOTIF
+   a->var1 = 8;
+
+//  T() {}
+
+   return;
+}
+
+Transformers with point-to for "update2"
+
+
+//  T(_a_1[0][var2]) {_a_1[0][var2]==9}
+
+void update2(content *a)
+{
+
+//  T(_a_1[0][var2]) {_a_1[0][var2]==9}
+
+#pragma MOTIF
+   a->var2 = 9;
+
+//  T() {}
+
+   return;
+}
+
+Transformers with point-to for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T() {}
+
+   content a;
+
+//  T() {}
+
+   int b[100];
+
+//  T() {}
+
+   int c[100];
+
+//  T(a[var1]) {a[var1]==8}
+
+
+   update1(&a);
+
+//  T() {}
+
+   // Here, a.var1==8
+   compute1(&a, b);
+
+//  T(a[var2]) {a[var2]==9}
+
+   update2(&a);
+
+//  T() {}
+
+   // Here, a.var1==8, a.var2==9
+   compute2(&a, b, c);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions with point-to for "main"
+
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   content a;
+
+//  P() {}
+
+   int b[100];
+
+//  P() {}
+
+   int c[100];
+
+//  P() {}
+
+
+   update1(&a);
+
+//  P(a[var1]) {a[var1]==8}
+
+   // Here, a.var1==8
+   compute1(&a, b);
+
+//  P(a[var1]) {a[var1]==8}
+
+   update2(&a);
+
+//  P(a[var1],a[var2]) {a[var1]==8, a[var2]==9}
+
+   // Here, a.var1==8, a.var2==9
+   compute2(&a, b, c);
+
+//  P(a[var1],a[var2]) {a[var1]==8, a[var2]==9}
+
+
+   return 0;
+}
+
+Preconditions with point-to for "update1"
+
+
+//  P() {}
+
+void update1(content *a)
+{
+
+//  P() {}
+
+#pragma MOTIF
+   a->var1 = 8;
+
+//  P(_a_1[0][var1]) {_a_1[0][var1]==8}
+
+   return;
+}
+
+Preconditions with point-to for "compute1"
+
+
+//  P() {_a_1[0][var1]==8}
+
+void compute1(content *a, int b[100])
+{
+#pragma MOTIF
+   {
+
+//  P() {_a_1[0][var1]==8}
+
+      int i;
+
+//  P() {_a_1[0][var1]==8}
+
+      for(i = 0; i <= 99; i += 1)
+
+//  P(i) {_a_1[0][var1]==8, 0<=i, i<=99}
+
+         b[i] = a->var1;
+   }
+
+//  P() {_a_1[0][var1]==8}
+
+   return;
+}
+
+Preconditions with point-to for "update2"
+
+
+//  P() {}
+
+void update2(content *a)
+{
+
+//  P() {}
+
+#pragma MOTIF
+   a->var2 = 9;
+
+//  P(_a_1[0][var2]) {_a_1[0][var2]==9}
+
+   return;
+}
+
+Preconditions with point-to for "compute2"
+
+
+//  P() {_a_1[0][var2]==9}
+
+void compute2(content *a, int b[100], int c[100])
+{
+#pragma MOTIF
+   {
+
+//  P() {_a_1[0][var2]==9}
+
+      int i;
+
+//  P() {_a_1[0][var2]==9}
+
+      for(i = 0; i <= 99; i += 1)
+
+//  P(i) {_a_1[0][var2]==9, 0<=i, i<=99}
+
+         c[i] = b[i]+a->var2;
+   }
+
+//  P() {_a_1[0][var2]==9}
+
+   return;
+}
+
+Regions with point-to for "update1"
+
+
+//  <_a_1[PHI1].var1-W-EXACT-{PHI1==0}>
+//  <a-R-EXACT-{}>
+
+void update1(content *a)
+{
+
+//  <_a_1[PHI1].var1-W-EXACT-{PHI1==0}>
+//  <a-R-EXACT-{}>
+//  <a-RE-EXACT-{}>
+
+#pragma MOTIF
+   a->var1 = 8;
+   return;
+}
+
+Regions with point-to for "compute1"
+
+
+//  <_a_1[PHI1].var1-R-EXACT-{PHI1==0, _a_1[0][var1]==8}>
+//  <a-R-EXACT-{}>
+//  <b[PHI1]-W-EXACT-{0<=PHI1, PHI1<=99, _a_1[0][var1]==8}>
+
+void compute1(content *a, int b[100])
+{
+#pragma MOTIF
+   {
+      int i;
+
+//  <_a_1[PHI1].var1-R-EXACT-{PHI1==0, _a_1[0][var1]==8}>
+//  <a-R-EXACT-{}>
+//  <a-RE-EXACT-{}>
+//  <b-RE-EXACT-{}>
+//  <b[PHI1]-W-EXACT-{0<=PHI1, PHI1<=99, _a_1[0][var1]==8}>
+
+      for(i = 0; i <= 99; i += 1)
+
+//  <_a_1[PHI1].var1-R-EXACT-{PHI1==0, _a_1[0][var1]==8, 0<=i, i<=99}>
+//  <a-R-EXACT-{}>
+//  <a-RE-EXACT-{}>
+//  <b-RE-EXACT-{}>
+//  <b[PHI1]-W-EXACT-{PHI1==i, _a_1[0][var1]==8, 0<=i, i<=99}>
+
+         b[i] = a->var1;
+   }
+   return;
+}
+
+Regions with point-to for "update2"
+
+
+//  <_a_1[PHI1].var2-W-EXACT-{PHI1==0}>
+//  <a-R-EXACT-{}>
+
+void update2(content *a)
+{
+
+//  <_a_1[PHI1].var2-W-EXACT-{PHI1==0}>
+//  <a-R-EXACT-{}>
+//  <a-RE-EXACT-{}>
+
+#pragma MOTIF
+   a->var2 = 9;
+   return;
+}
+
+Regions with point-to for "compute2"
+
+
+//  <_a_1[PHI1].var2-R-EXACT-{PHI1==0, _a_1[0][var2]==9}>
+//  <a-R-EXACT-{}>
+//  <b[PHI1]-R-EXACT-{0<=PHI1, PHI1<=99, _a_1[0][var2]==9}>
+//  <c[PHI1]-W-EXACT-{0<=PHI1, PHI1<=99, _a_1[0][var2]==9}>
+
+void compute2(content *a, int b[100], int c[100])
+{
+#pragma MOTIF
+   {
+      int i;
+
+//  <_a_1[PHI1].var2-R-EXACT-{PHI1==0, _a_1[0][var2]==9}>
+//  <a-R-EXACT-{}>
+//  <a-RE-EXACT-{}>
+//  <b-RE-EXACT-{}>
+//  <b[PHI1]-R-EXACT-{0<=PHI1, PHI1<=99, _a_1[0][var2]==9}>
+//  <c-RE-EXACT-{}>
+//  <c[PHI1]-W-EXACT-{0<=PHI1, PHI1<=99, _a_1[0][var2]==9}>
+
+      for(i = 0; i <= 99; i += 1)
+
+//  <_a_1[PHI1].var2-R-EXACT-{PHI1==0, _a_1[0][var2]==9, 0<=i, i<=99}>
+//  <a-R-EXACT-{}>
+//  <a-RE-EXACT-{}>
+//  <b-RE-EXACT-{}>
+//  <b[PHI1]-R-EXACT-{PHI1==i, _a_1[0][var2]==9, 0<=i, i<=99}>
+//  <c-RE-EXACT-{}>
+//  <c[PHI1]-W-EXACT-{PHI1==i, _a_1[0][var2]==9, 0<=i, i<=99}>
+
+         c[i] = b[i]+a->var2;
+   }
+   return;
+}
+
+Regions with point-to for "main"
+
+int main(int argc, char *argv[])
+{
+
+//  <a-WE-EXACT-{}>
+//  <content-RT-EXACT-{}>
+
+   content a;
+
+//  <b-WE-EXACT-{}>
+
+   int b[100];
+
+//  <c-WE-EXACT-{}>
+
+   int c[100];
+
+//  <a-RE-EXACT-{}>
+//  <a.var1-W-EXACT-{}>
+
+
+   update1(&a);
+
+//  <a-RE-EXACT-{}>
+//  <a.var1-R-EXACT-{a[var1]==8}>
+//  <b-RE-EXACT-{}>
+//  <b[PHI1]-W-EXACT-{0<=PHI1, PHI1<=99, a[var1]==8}>
+
+   // Here, a.var1==8
+   compute1(&a, b);
+
+//  <a-RE-EXACT-{}>
+//  <a.var2-W-EXACT-{}>
+
+   update2(&a);
+
+//  <a-RE-EXACT-{}>
+//  <a.var2-R-EXACT-{a[var2]==9}>
+//  <b-RE-EXACT-{}>
+//  <b[PHI1]-R-EXACT-{0<=PHI1, PHI1<=99, a[var1]==8, a[var2]==9}>
+//  <c-RE-EXACT-{}>
+//  <c[PHI1]-W-EXACT-{0<=PHI1, PHI1<=99, a[var1]==8, a[var2]==9}>
+
+   // Here, a.var1==8, a.var2==9
+   compute2(&a, b, c);
+
+   return 0;
+}

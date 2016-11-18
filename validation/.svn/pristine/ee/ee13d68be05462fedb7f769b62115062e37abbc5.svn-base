@@ -1,0 +1,37 @@
+
+Proper effects
+
+int main()
+{
+   int *a;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a _MALLOC_EFFECTS:_MALLOC_
+   a = foo();
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *a;
+
+// Points To:
+// a -> undefined , EXACT
+
+   a = foo();
+
+// Points To:
+// a -> foo:*HEAP*_l_7 , MAY
+
+   return 0;
+}

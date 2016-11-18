@@ -1,0 +1,43 @@
+delete dereference
+
+setenv PIPS_CPP_FLAGS=" -D__u64='unsigned long long' -D__s64='long long' -D__signed__=signed -DFLGR_PROC_NUMBER=1 -D__GLIBC_HAVE_LONG_LONG -I../Transformations/Inlining.sub/include/fulguro"
+
+setproperty IGNORE_FUNCTION_IN_HEADER FALSE
+
+create dereference dereference.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+#setproperty PRETTYPRINT_LANGUAGE "C"
+#setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty PREPROCESSOR_MISSING_FILE_HANDLING "generate"
+setproperty IGNORE_FUNCTION_IN_HEADER FALSE
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+
+activate C_PARSER
+
+make CALLEES[flgr2d_raster_slide_window_fgUINT16]
+
+#apply UNFOLDING[flgr_get_array_fgUINT16]
+#apply INLINING[flgr_set_data_array_vector_fgUINT16]
+#apply INLINING[flgr_get_array_fgUINT16]
+#apply INLINING[flgr_set_array_fgUINT16]
+#apply INLINING_SIMPLE[flgr2d_get_neighborhood_fgUINT16]
+#apply INLINING[flgr2d_get_data_array_fgUINT16]
+#apply INLINING_SIMPLE[flgr_get_data_array_vector_fgUINT16]
+#display PRINTED_FILE[flgr2d_raster_slide_window_fgUINT16]
+#display PRINTED_FILE[flgr2d_get_nhb_convolution_fgUINT16]
+
+#apply INLINING_SIMPLE[flgr2d_raster_slide_window_fgUINT16]
+#display PRINTED_FILE[flgr2d_convolution]
+#apply PARTIAL_EVAL[flgr2d_raster_slide_window_fgUINT16]
+#display PRINTED_FILE[flgr2d_raster_slide_window_fgUINT16]
+
+close
+
+# CALLEES are not very readable but they fill the test file
+shell cat dereference.database/flgr2d_raster_slide_window_fgUINT16/CALLEES | sed 's/T[0-9]* //'
+
+quit
+

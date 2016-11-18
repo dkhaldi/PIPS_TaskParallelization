@@ -1,0 +1,35 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+delete remove01
+create remove01 remove01.c
+
+module volume
+
+echo
+echo Initial code
+echo
+
+activate NEW_CONTROLIZER
+display PRINTED_FILE
+
+#apply FOR_LOOP_TO_DO_LOOP
+
+echo
+echo after removing reductions
+echo
+
+setproperty LOOP_LABEL "volume"
+apply REDUCTION_VARIABLE_EXPANSION
+display PRINTED_FILE
+
+echo
+echo Unsplit resulting code
+echo
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g remove01
+
+close
+delete remove01
+quit
+
+

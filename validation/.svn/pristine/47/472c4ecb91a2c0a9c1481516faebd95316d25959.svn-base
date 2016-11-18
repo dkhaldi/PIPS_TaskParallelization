@@ -1,0 +1,7 @@
+      PROGRAM IO_EFFECTS03
+      REAL T(10)
+C             <    is exported>: __IO_EFFECTS:LUNS(6)
+
+      PRINT *, (T(N), N, N = 1, 10)                                     0004
+
+      END

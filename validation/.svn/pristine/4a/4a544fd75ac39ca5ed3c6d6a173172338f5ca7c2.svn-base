@@ -1,0 +1,13 @@
+#/bin/sh
+
+WS=decl11
+
+tpips $WS.script
+
+echo
+echo Warnings for "$WS"
+echo
+
+cat $WS.database/Warnings
+
+rm -Rf $WS.database

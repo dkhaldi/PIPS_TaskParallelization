@@ -1,0 +1,20 @@
+setenv WSPACE=properties04
+delete $WSPACE
+setenv PIPS_CPP="cpp -C"
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WSPACE $WSPACE.c
+
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate PROPER_EFFECTS_WITH_POINTS_TO
+
+echo
+echo Points-to for "$WSPACE"
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[$WSPACE]
+
+close
+delete $WSPACE
+quit

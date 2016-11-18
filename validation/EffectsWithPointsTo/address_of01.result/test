@@ -1,0 +1,56 @@
+
+PROPER  EFFECTS 
+
+int address_of01()
+{
+   int *p, i[10];
+//             <    is written>: p
+   p = 1+&i[0];
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+   return *p;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int address_of01()
+{
+
+// Points To: none
+
+   int *p, i[10];
+
+// Points To:
+// p -> undefined , EXACT
+
+   p = 1+&i[0];
+
+// Points To:
+// p -> i[1] , EXACT
+
+   return *p;
+}
+
+PROPER  EFFECTS WITH POINTS TO
+
+int address_of01()
+{
+   int *p, i[10];
+//             <    is written>: p
+   p = 1+&i[0];
+//             <    is read   >: i[1] p
+   return *p;
+}
+
+ *********************** Use-Def Chains *********************
+
+	09 --> 10 with conflicts
+		from <p-W-EXACT> to <p-R-EXACT>
+
+****************** End of Dependence Graph ******************

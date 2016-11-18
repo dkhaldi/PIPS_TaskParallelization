@@ -1,0 +1,46 @@
+# Converted from a Shell file which used different processes
+
+shell echo # testing checkpoint
+shell echo # first run, create
+
+delete checkpoint_01
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create checkpoint_01 checkpoint_01.f
+checkpoint
+make PRINTED_FILE[%ALL]
+close checkpoint_01
+
+shell echo # second run, display
+
+open checkpoint_01
+display PRINTED_FILE[%ALL]
+checkpoint
+close checkpoint_01
+
+shell echo \# third run, preconditions
+
+open checkpoint_01
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[%ALL]
+activate PRINT_CODE
+checkpoint
+close checkpoint_01
+
+shell echo \# fourth run, partial eval
+
+open checkpoint_01
+capply PARTIAL_EVAL[%ALL]
+checkpoint
+close
+
+shell echo \# last run, display, close and delete.
+
+open checkpoint_01
+display PRINTED_FILE[%ALL]
+close
+delete checkpoint_01
+
+shell echo \# done
+quit

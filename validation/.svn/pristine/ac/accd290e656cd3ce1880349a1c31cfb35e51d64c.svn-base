@@ -1,0 +1,201 @@
+
+// Initial code
+
+int main()
+{
+   int a[10];
+   init(a);
+   update(a);
+   read(a);
+   return 0;
+}
+
+// PROPER_REGIONS
+
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+
+   int a[10];
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{0<=PHI1, PHI1<=9}>
+
+   init(a);
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{0<=PHI1, PHI1<=9}>
+
+   update(a);
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{0<=PHI1, PHI1<=9}>
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1}>
+
+   read(a);
+   return 0;
+}
+
+// REGIONS
+
+
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1}>
+
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+
+   int a[10];
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{0<=PHI1, PHI1<=9}>
+
+   init(a);
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{0<=PHI1, PHI1<=9}>
+
+   update(a);
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{0<=PHI1, PHI1<=9}>
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1}>
+
+   read(a);
+
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+
+   return 0;
+}
+
+// IN_REGIONS
+
+void init(int a[10])
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+}
+void update(int a[10])
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i+10;
+}
+
+//  <a[PHI1]-IN-EXACT-{0<=PHI1, PHI1<=9}>
+//  <stdout-IN-EXACT-{}>
+//  <stdout[PHI1]-IN-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-IN-EXACT-{PHI1==1}>
+
+void read(int a[10])
+{
+   int i;
+
+//  <a[PHI1]-IN-EXACT-{0<=PHI1, PHI1<=9}>
+//  <stdout-IN-EXACT-{}>
+//  <stdout[PHI1]-IN-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-IN-EXACT-{PHI1==1}>
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <a[PHI1]-IN-EXACT-{PHI1==i, 0<=i, i<=9}>
+//  <stdout-IN-EXACT-{}>
+//  <stdout[PHI1]-IN-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-IN-EXACT-{PHI1==1, 0<=i, i<=9}>
+
+      printf("%i", a[i]);
+}
+
+//  <stdout-IN-EXACT-{}>
+//  <stdout[PHI1]-IN-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-IN-EXACT-{PHI1==1}>
+
+int main()
+{
+   int a[10];
+   init(a);
+   update(a);
+
+//  <a[PHI1]-IN-EXACT-{0<=PHI1, PHI1<=9}>
+//  <stdout-IN-EXACT-{}>
+//  <stdout[PHI1]-IN-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-IN-EXACT-{PHI1==1}>
+
+   read(a);
+
+//  <__IO_EFFECTS:LUNS[PHI1]-IN-EXACT-{PHI1==1}>
+
+   return 0;
+}
+
+// OUT_REGIONS
+
+void init(int a[10])
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+}
+
+//  <a[PHI1]-OUT-EXACT-{0<=PHI1, PHI1<=9}>
+
+void update(int a[10])
+{
+   int i;
+
+//  <a[PHI1]-OUT-EXACT-{0<=PHI1, PHI1<=9}>
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==i, 0<=i, i<=9}>
+
+      a[i] = i+10;
+}
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1}>
+
+void read(int a[10])
+{
+   int i;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1}>
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <stdout[PHI1]-OUT-MAY-{PHI1==0, 0<=i, i<=9}>
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, 0<=i, i<=9}>
+
+      printf("%i", a[i]);
+}
+int main()
+{
+   int a[10];
+   init(a);
+
+//  <a[PHI1]-OUT-EXACT-{0<=PHI1, PHI1<=9}>
+
+   update(a);
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1}>
+
+   read(a);
+   return 0;
+}
+
+// Warnings
+

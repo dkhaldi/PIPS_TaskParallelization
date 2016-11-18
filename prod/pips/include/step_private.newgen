@@ -1,0 +1,32 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import entity from "ri.newgen" ;
+import expression from "ri.newgen" ;
+import effect from "effects.newgen" ;
+import statement from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+map_effect_bool = persistent effect -> bool ;
+map_effect_step_point = persistent effect -> step_point ;
+map_entity_int = entity->int ;
+step_clause = reduction:map_entity_int + private:entity* + shared:entity* + transformation:int + nowait:unit + threadprivate:entity* + copyin:entity* + firstprivate:entity* + schedule:string*  ;
+step_comm = path: map_effect_step_point x interlaced: map_effect_bool x partial: map_effect_bool ;
+step_directives = persistent statement->step_directive ;
+step_directive = type : int x persistent block : statement x clauses : step_clause* ;
+step_point = module : entity x persistent stmt : statement x persistent data : effect ;

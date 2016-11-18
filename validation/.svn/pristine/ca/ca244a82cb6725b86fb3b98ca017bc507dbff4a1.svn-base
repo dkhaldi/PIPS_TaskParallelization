@@ -1,0 +1,288 @@
+
+PRINT_CODE_SIMPLE_POINTER_VALUES
+
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+void dereferencing02()
+{
+
+// Pointer values: none
+
+   double x[2] = {1., 2.};
+
+// Pointer values: none
+
+   double *p[1] = {&x[0]};
+
+// Pointer values: none
+
+   double **q = &p[0];
+
+// Pointer values:
+// q == &p[0] (exact);
+
+   double **w;
+
+// Pointer values:
+// q == &p[0] (exact);
+// w == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   int i = 1;
+
+// Pointer values:
+// q == &p[0] (exact);
+// w == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   
+   
+   **q = 2.;
+
+// Pointer values:
+// q == &p[0] (exact);
+// w == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   **(q+(i = 0)) = 3.;
+
+// Pointer values:
+// q == &p[0] (exact);
+// w == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   w = q;
+
+// Pointer values:
+// q == &p[0] (exact);
+// w == q (exact);
+
+   **(w+(i = 2)) = 4.;
+
+// Pointer values:
+// q == &p[0] (exact);
+// w == q (exact);
+
+   x[0] = **q;
+
+// Pointer values:
+// q == &p[0] (exact);
+// w == q (exact);
+
+   q++;
+
+// Pointer values:
+// q == &w[1] (exact);
+// w == &p[0] (exact);
+
+   p[1] = *q++;
+
+// Pointer values:
+// p[1] == q[0] (exact);
+// q == &w[2] (exact);
+// w == &p[0] (exact);
+
+   return;
+}
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   dereferencing02();
+
+// Pointer values: none
+
+   return 1;
+}
+
+PROPER_EFFECTS_WITH_POINTER_VALUES
+
+void dereferencing02()
+{
+//             <may be written>: x[*]
+   double x[2] = {1., 2.};
+//             <may be written>: p[*]
+   double *p[1] = {&x[0]};
+//             <    is written>: q
+   double **q = &p[0];
+   double **w;
+//             <    is written>: i
+   int i = 1;
+//             <    is read   >: p[0] q
+   
+   
+   **q = 2.;
+//             <    is read   >: p[0] q
+//             <    is written>: i
+   **(q+(i = 0)) = 3.;
+//             <    is read   >: q
+//             <    is written>: w
+   w = q;
+//             <    is read   >: p[2] w
+//             <    is written>: i
+   **(w+(i = 2)) = 4.;
+//             <    is read   >: p[0] q
+//             <    is written>: x[0]
+   x[0] = **q;
+//             <    is read   >: q
+//             <    is written>: q
+   q++;
+//             <    is read   >: p[1] q
+//             <    is written>: p[1] q
+   p[1] = *q++;
+   return;
+}
+int main()
+{
+   dereferencing02();
+   return 1;
+}
+
+MUST_REGIONS_WITH_POINTER_VALUES
+
+void dereferencing02()
+{
+
+//  <x[PHI1]-W-MAY-{}>
+
+   double x[2] = {1., 2.};
+
+//  <p[PHI1]-W-MAY-{}>
+
+   double *p[1] = {&x[0]};
+
+//  <q-W-EXACT-{}>
+
+   double **q = &p[0];
+   double **w;
+
+//  <i-W-EXACT-{}>
+
+   int i = 1;
+
+//  <p[PHI1]-R-EXACT-{PHI1==0, i==1}>
+//  <q-R-EXACT-{}>
+
+   
+   
+   **q = 2.;
+
+//  <i-W-EXACT-{}>
+//  <p[PHI1]-R-EXACT-{PHI1==0, i==1}>
+//  <q-R-EXACT-{}>
+
+   **(q+(i = 0)) = 3.;
+
+//  <q-R-EXACT-{}>
+//  <w-W-EXACT-{}>
+
+   w = q;
+
+//  <i-W-EXACT-{}>
+//  <p[PHI1]-R-EXACT-{PHI1==2, i==0}>
+//  <w-R-EXACT-{}>
+
+   **(w+(i = 2)) = 4.;
+
+//  <p[PHI1]-R-EXACT-{PHI1==0, i==2}>
+//  <q-R-EXACT-{}>
+//  <x[PHI1]-W-EXACT-{PHI1==0, i==2}>
+
+   x[0] = **q;
+
+//  <q-R-EXACT-{}>
+//  <q-W-EXACT-{}>
+
+   q++;
+
+//  <p[PHI1]-R-EXACT-{PHI1==1, i==2}>
+//  <p[PHI1]-W-EXACT-{PHI1==1, i==2}>
+//  <q-R-EXACT-{}>
+//  <q-W-EXACT-{}>
+
+   p[1] = *q++;
+   return;
+}
+int main()
+{
+   dereferencing02();
+   return 1;
+}
+
+PRINT_CODE_REGIONS
+
+void dereferencing02()
+{
+
+//  <x[PHI1]-W-MAY-{}>
+
+   double x[2] = {1., 2.};
+
+//  <p[PHI1]-W-MAY-{}>
+
+   double *p[1] = {&x[0]};
+
+//  <q-W-EXACT-{}>
+
+   double **q = &p[0];
+   double **w;
+
+//  <i-W-EXACT-{}>
+
+   int i = 1;
+
+//  <p[PHI1]-R-EXACT-{PHI1==0, i==1}>
+//  <q-R-EXACT-{}>
+
+   
+   
+   **q = 2.;
+
+//  <i-W-EXACT-{}>
+//  <p[PHI1]-R-EXACT-{PHI1==0, i==1}>
+//  <q-R-EXACT-{}>
+
+   **(q+(i = 0)) = 3.;
+
+//  <q-R-EXACT-{}>
+//  <w-W-EXACT-{}>
+
+   w = q;
+
+//  <i-W-EXACT-{}>
+//  <p[PHI1]-R-EXACT-{PHI1==2, i==0}>
+//  <w-R-EXACT-{}>
+
+   **(w+(i = 2)) = 4.;
+
+//  <p[PHI1]-R-EXACT-{PHI1==0, i==2}>
+//  <q-R-EXACT-{}>
+//  <x[PHI1]-W-EXACT-{PHI1==0, i==2}>
+
+   x[0] = **q;
+
+//  <q-R-EXACT-{}>
+//  <q-W-EXACT-{}>
+
+   q++;
+
+//  <p[PHI1]-R-EXACT-{PHI1==1, i==2}>
+//  <p[PHI1]-W-EXACT-{PHI1==1, i==2}>
+//  <q-R-EXACT-{}>
+//  <q-W-EXACT-{}>
+
+   p[1] = *q++;
+   return;
+}
+int main()
+{
+   dereferencing02();
+   return 1;
+}

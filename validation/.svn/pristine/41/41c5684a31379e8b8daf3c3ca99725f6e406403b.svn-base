@@ -1,0 +1,150 @@
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i0 = 0, i1 = 1, j = -1;
+
+// Points To: none
+
+   int *p, *q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   p = &i0;
+
+// Points To:
+// p -> i0 , EXACT
+// q -> undefined , EXACT
+
+   q = &i1;
+
+// Points To:
+// p -> i0 , EXACT
+// q -> i1 , EXACT
+
+
+   j = 1?*p:*q;
+
+// Points To:
+// p -> i0 , EXACT
+// q -> i1 , EXACT
+
+   
+   // Here, j==0, but this is not found by the current pointer analysis
+   // without points-to information
+   return j;
+}
+
+Proper effects
+
+int main()
+{
+//             <    is written>: i0 i1 j
+   int i0 = 0, i1 = 1, j = -1;
+   int *p, *q;
+//             <    is written>: p
+   p = &i0;
+//             <    is written>: q
+   q = &i1;
+//             <may be read   >: p q *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is written>: j
+
+   j = 1?*p:*q;
+//             <    is read   >: j
+   
+   // Here, j==0, but this is not found by the current pointer analysis
+   // without points-to information
+   return j;
+}
+
+Transformers
+
+
+//  T(main) {}
+
+int main()
+{
+
+//  T(i0,i1,j) {i0==0, i1==1, j==-1}
+
+   int i0 = 0, i1 = 1, j = -1;
+
+//  T() {i0==0, i1==1, j==-1}
+
+   int *p, *q;
+
+//  T(p) {&i0==p, i0==0, i1==1, j==-1}
+
+   p = &i0;
+
+//  T(q) {&i0==p, &i1==q, i0==0, i1==1, j==-1}
+
+   q = &i1;
+
+//  T(j) {&i0==p, &i1==q, i0==0, i1==1, j#init==-1}
+
+
+   j = 1?*p:*q;
+
+//  T(main) {&i0==p, &i1==q, i0==0, i1==1, j==main}
+
+   
+   // Here, j==0, but this is not found by the current pointer analysis
+   // without points-to information
+   return j;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i0 = 0, i1 = 1, j = -1;
+
+//  P(i0,i1,j) {i0==0, i1==1, j==-1}
+
+   int *p, *q;
+
+//  P(i0,i1,j) {i0==0, i1==1, j==-1}
+
+   p = &i0;
+
+//  P(i0,i1,j,p) {&i0==p, i0==0, i1==1, j==-1}
+
+   q = &i1;
+
+//  P(i0,i1,j,p,q) {&i0==p, &i1==q, i0==0, i1==1, j==-1}
+
+
+   j = 1?*p:*q;
+
+//  P(i0,i1,j,p,q) {&i0==p, &i1==q, i0==0, i1==1}
+
+   
+   // Here, j==0, but this is not found by the current pointer analysis
+   // without points-to information
+   return j;
+}
+
+Warnings
+
+(activate_phase) Rule `PROPER_EFFECTS' already active
+PROPER_EFFECTS[main] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.
+(activate_phase) Rule `TRANSFORMERS_INTER_FULL' already active

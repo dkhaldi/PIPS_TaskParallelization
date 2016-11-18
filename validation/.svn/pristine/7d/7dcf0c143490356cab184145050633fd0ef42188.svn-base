@@ -1,0 +1,49 @@
+
+int main()
+{
+//             <    is written>: i
+   int i = 0;
+   int *p;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+
+   p = (int *) malloc(10*sizeof(int));
+//             <    is read   >: i
+   do {
+//             <may be written>: *HEAP*_l_7[i]
+//             <    is read   >: i p
+      p[i] = i;
+//             <    is read   >: i
+//             <    is written>: i
+      i++;
+   }
+   while (i<10);
+
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	04 --> 11 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+	04 --> 12 with conflicts
+		from <i-W-EXACT> to <i-W-EXACT>
+		from <i-W-EXACT> to <i-R-EXACT>
+	04 --> 13 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+	07 --> 11 with conflicts
+		from <p-W-EXACT> to <p-R-EXACT>
+	11 --> 11 with conflicts
+		from <*HEAP*_l_7[i]-W-MAY> to <*HEAP*_l_7[i]-W-MAY>
+	11 --> 12 with conflicts
+		from <i-R-EXACT> to <i-W-EXACT>
+	12 --> 11 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+	12 --> 12 with conflicts
+		from <i-W-EXACT> to <i-W-EXACT>
+		from <i-W-EXACT> to <i-R-EXACT>
+		from <i-R-EXACT> to <i-W-EXACT>
+	13 --> 12 with conflicts
+		from <i-R-EXACT> to <i-W-EXACT>
+
+****************** End of Dependence Graph ******************

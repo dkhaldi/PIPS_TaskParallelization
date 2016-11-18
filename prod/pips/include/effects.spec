@@ -1,0 +1,27 @@
+--NEWGEN-START 129
+import entity from "ri.newgen";
+import reference from "ri.newgen";
+import preference from "ri.newgen";
+import expression from "ri.newgen";
+import statement from "ri.newgen";
+external Psysteme;
+action_kind = store:unit + environment:unit + type_declaration:unit;
+action = read:action_kind + write:action_kind;
+approximation = may:unit + must:unit + exact:unit;
+cell_interpretation = value_of:unit + address_of:unit;
+cell = reference:reference + preference:preference + gap:gap;
+cell_relation = first:interpreted_cell x second:interpreted_cell x approximation:approximation x descriptor:descriptor;
+cell_relations = list:cell_relation*;
+descriptor = convexunion:Psysteme* + convex:Psysteme + none:unit;
+effect = cell:cell x action:action x approximation:approximation x descriptor:descriptor;
+effects_classes = classes:effects*;
+effects = effects:effect*;
+entity_effects = entity:entity -> effects:effects;
+gap = variable:entity x path_selectors:path_selectors;
+interpreted_cell = cell:cell x cell_interpretation:cell_interpretation;
+path_selector = expression:expression + recursive_selector:recursive_selector;
+path_selectors = path_selector:path_selector*;
+persistant_expression_to_effects = persistant expression:expression -> effects:effects;
+recursive_selector = basis:path_selectors* x coefficient:expression;
+statement_cell_relations = persistant statement:statement -> cell_relations:cell_relations;
+statement_effects = persistant statement:statement -> effects:effects;

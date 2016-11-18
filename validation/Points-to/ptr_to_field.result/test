@@ -1,0 +1,100 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int ptr_to_field()
+{
+
+// Points To: none
+
+   typedef struct {
+      int *q;
+      int *p;
+   } my_str;
+
+
+// Points To: none
+
+   my_str *m, *n;
+
+// Points To:
+// m -> undefined , EXACT
+// n -> undefined , EXACT
+
+   int i = 0, j = 1;
+
+// Points To:
+// m -> undefined , EXACT
+// n -> undefined , EXACT
+
+   m = (my_str *) malloc(sizeof(my_str));
+
+// Points To:
+// *HEAP*_l_13.p -> undefined , EXACT
+// *HEAP*_l_13.q -> undefined , EXACT
+// m -> *HEAP*_l_13 , MAY
+// n -> undefined , EXACT
+
+   n = (my_str *) malloc(sizeof(my_str));
+
+// Points To:
+// *HEAP*_l_13.p -> undefined , EXACT
+// *HEAP*_l_13.q -> undefined , EXACT
+// *HEAP*_l_14.p -> undefined , EXACT
+// *HEAP*_l_14.q -> undefined , EXACT
+// m -> *HEAP*_l_13 , MAY
+// n -> *HEAP*_l_14 , MAY
+
+   m->q = &i;
+
+// Points To:
+// *HEAP*_l_13.p -> undefined , EXACT
+// *HEAP*_l_13.q -> i , MAY
+// *HEAP*_l_14.p -> undefined , EXACT
+// *HEAP*_l_14.q -> undefined , EXACT
+// m -> *HEAP*_l_13 , MAY
+// n -> *HEAP*_l_14 , MAY
+
+   m->p = &j;
+
+// Points To:
+// *HEAP*_l_13.q -> i , MAY
+// *HEAP*_l_13.p -> j , MAY
+// *HEAP*_l_14.p -> undefined , EXACT
+// *HEAP*_l_14.q -> undefined , EXACT
+// m -> *HEAP*_l_13 , MAY
+// n -> *HEAP*_l_14 , MAY
+
+   n->q = m->p;
+
+// Points To:
+// *HEAP*_l_13.q -> i , MAY
+// *HEAP*_l_13.p -> j , MAY
+// *HEAP*_l_14.p -> undefined , EXACT
+// *HEAP*_l_14.q -> j , MAY
+// m -> *HEAP*_l_13 , MAY
+// n -> *HEAP*_l_14 , MAY
+
+   n->p = m->q;
+
+// Points To:
+// *HEAP*_l_13.q -> i , MAY
+// *HEAP*_l_13.p -> j , MAY
+// *HEAP*_l_14.p -> i , MAY
+// *HEAP*_l_14.q -> j , MAY
+// m -> *HEAP*_l_13 , MAY
+// n -> *HEAP*_l_14 , MAY
+
+
+   return 0;
+}
+
+Warnings and errors: two memory leaks
+
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[ptr_to_field] (points_to_set_block_projection) Memory leak for bucket "ptr_to_field:*HEAP*_l_14".
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[ptr_to_field] (points_to_set_block_projection) Memory leak for bucket "ptr_to_field:*HEAP*_l_13".

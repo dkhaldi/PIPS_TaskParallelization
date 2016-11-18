@@ -1,0 +1,54 @@
+
+Proper effects for "INITIALIZATION01"
+
+C     Check the piece of code added by Ronan to detect uses of
+C     uninitialized variables
+
+C     Results with real codes such as oa118.f and extr.f are garbage,
+C     but it work for toy examples
+
+C     Note that information gathered for the last print is garbage
+
+C     Implicit variables such as __IO_EFFECTS:LUNS are a special case
+C     that is not dealt with. And effects on LUNS are not well defined
+
+      PROGRAM INITIALIZATION01
+C             <    is read   >: I
+C             <    is written>: J
+
+      J = I                                                             0014
+C             <    is written>: I
+      I = 1                                                             0015
+C             <    is read   >: I
+C             <    is written>: J
+      J = I                                                             0016
+C             <    is read   >: J K L __IO_EFFECTS:LUNS(6)
+C             <    is written>: __IO_EFFECTS:LUNS(6)
+      PRINT *, J, K, L                                                  0017
+C             <    is read   >: __IO_EFFECTS:LUNS(5)
+C             <    is written>: I J K L __IO_EFFECTS:LUNS(5)
+      READ *, I, J, K, L                                                0018
+C             <    is read   >: J K L __IO_EFFECTS:LUNS(6)
+C             <    is written>: __IO_EFFECTS:LUNS(6)
+      PRINT *, J, K, L                                                  0019
+      END
+
+Flinted file
+
+
+
+Non-initialized variables:
+--------------------------
+In statement number 14 (0.2):
+	"I" used but not initialized.
+In statement number 17 (0.5):
+	"K" used but not initialized.
+	"L" used but not initialized.
+	"__IO_EFFECTS:LUNS" used but not initialized.
+In statement number 18 (0.6):
+	"__IO_EFFECTS:LUNS" used but not initialized.
+In statement number 19 (0.7):
+	"J" used but not initialized.
+	"L" used but not initialized.
+
+number of messages from flint for INITIALIZATION01 : 7

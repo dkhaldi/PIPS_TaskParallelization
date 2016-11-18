@@ -1,0 +1,20 @@
+
+Parsed Printed file for switch05
+
+int switch05(int predicate)
+{
+   int x = 0;
+
+   if (predicate==(char) 0)
+      goto _switch_1_case_0;
+   if (predicate==(char) 10)
+      goto _switch_1_case_10;
+   goto _break_1;
+_switch_1_case_0:   ;
+   x = x;
+   goto _break_1;
+_switch_1_case_10:   ;
+   x = x+1;
+_break_1:   ;
+   return x;
+}

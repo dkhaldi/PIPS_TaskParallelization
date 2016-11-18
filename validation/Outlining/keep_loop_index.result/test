@@ -1,0 +1,31 @@
+before
+int main()
+{
+   int i, j;
+   j = 1;
+there:
+   for(i = 0; i <= 2; i += 1)
+      j *= i;
+   return j;
+}
+after
+int main()
+{
+   int i, j;
+   j = 1;
+there:   outlined(2+1, &j);
+   return j;
+}
+void outlined(int I_0, int j_0[1])
+{
+   // Declared by Pass Outlining
+   int i;
+   // Declared as a patch variable by Pass Outlining
+   int j;
+   j = *j_0;
+there:
+   for(i = 0; i <= I_0-1; i += 1)
+      j *= i;
+   *j_0 = j;
+}
+

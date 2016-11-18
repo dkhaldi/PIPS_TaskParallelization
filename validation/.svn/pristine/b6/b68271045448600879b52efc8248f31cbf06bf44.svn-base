@@ -1,0 +1,147 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   int a[10];
+
+// Points To: none
+
+
+   a[2] = 2;
+
+// Points To: none
+
+   a[argc] = 3;
+
+// Points To: none
+
+   return a[2];
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: a
+   int a[10];
+//             <    is written>: a[2]
+//             <    is referenced>: a
+
+   a[2] = 2;
+//             <    is read   >: argc
+//             <    is written>: a[argc]
+//             <    is referenced>: a argc
+   a[argc] = 3;
+//             <    is read   >: a[2]
+//             <    is referenced>: a
+   return a[2];
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <    is read   >: argc
+//             <    is referenced>: argc
+int main(int argc, char **argv)
+{
+//             <    is declared>: a
+   int a[10];
+//             <    is written>: a[2]
+//             <    is referenced>: a
+
+   a[2] = 2;
+//             <may be written>: a[*]
+//             <    is read   >: argc
+//             <    is referenced>: a argc
+   a[argc] = 3;
+//             <    is read   >: a[2]
+//             <    is referenced>: a
+   return a[2];
+}
+
+Transformers for "main"
+
+
+//  T(main) {}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   int a[10];
+
+//  T(a[2]) {a[2]==2}
+
+
+   a[2] = 2;
+
+//  T(a[2]) {}
+
+   a[argc] = 3;
+
+//  T(main) {a[2]==main}
+
+   return a[2];
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   int a[10];
+
+//  P() {}
+
+
+   a[2] = 2;
+
+//  P(a[2]) {a[2]==2}
+
+   a[argc] = 3;
+
+//  P(a[2]) {}
+
+   return a[2];
+}
+
+Convex array regions with points-to for "main"
+
+int main(int argc, char **argv)
+{
+
+//  <a-WE-EXACT-{}>
+
+   int a[10];
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==2}>
+
+
+   a[2] = 2;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==argc, a[2]==2}>
+
+   a[argc] = 3;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==2}>
+
+   return a[2];
+}

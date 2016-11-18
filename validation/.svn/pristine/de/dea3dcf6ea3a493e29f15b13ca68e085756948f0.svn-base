@@ -1,0 +1,23 @@
+
+Parser output
+
+int main()
+{
+   int c = 5;
+
+   while (c>0) {
+      c -= 1;
+      goto _break_1;
+   }
+_break_1:   ;
+}
+
+Controlizer output
+
+int main()
+{
+   int c = 5;
+   if (!(c>0)) goto _break_1;
+   c -= 1;
+_break_1:   ;
+}

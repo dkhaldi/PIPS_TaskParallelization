@@ -1,0 +1,20 @@
+#! /bin/bash
+
+tpips -x timeout00.xml timeout00.tpips
+status=$?
+
+if [ $status -eq 142 ]
+then
+    # could check that the delay is around 2 seconds?
+    # that may lead to unstable validation results...
+    echo "TIMEOUT ok"
+else
+    echo "TIMEOUT ** KO **!"
+    echo "TIMEOUT ** KO **!" 1>&2
+    echo "unexpected status: $status (expecting 203)"
+fi
+tail -1 timeout00.err
+echo
+echo "XML file:"
+echo
+cat timeout00.xml

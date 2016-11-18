@@ -1,0 +1,31 @@
+
+Proper effects
+
+void assign01()
+{
+   int i, j;
+//             <    is written>: i j
+
+   i = j = 1;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void assign01()
+{
+
+// Points To: none
+
+   int i, j;
+
+// Points To: none
+
+
+   i = j = 1;
+}

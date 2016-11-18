@@ -1,0 +1,13 @@
+setenv WS=subscript01
+delete $WS
+create $WS $WS.c
+activate MUST_REGIONS
+setproperty ABORT_ON_USER_ERROR TRUE
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[$WS]
+
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[$WS]
+close
+delete $WS
+quit

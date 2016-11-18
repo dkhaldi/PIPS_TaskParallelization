@@ -1,0 +1,6 @@
+setenv WS=if04
+delete $WS
+create $WS $WS.c
+display PRINTED_FILE[%MAIN]
+close
+quit

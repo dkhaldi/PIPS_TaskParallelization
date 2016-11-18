@@ -1,0 +1,83 @@
+
+Proper effects
+
+int main()
+{
+//             <    is written>: i j k l
+   int i = 0, j = 1, k = 2, l = 3;
+   int *p, *q, *r, *s;
+//             <    is written>: r
+
+   r = &i;
+//             <    is written>: q
+   q = &j;
+//             <    is read   >: p q r
+//             <    is written>: p s
+   /* here the comma operator defines a sequence point.
+        we treat this instructions asfollow :
+        p = r;
+        q;
+        s = p;
+     */
+   p = r, q, s = p;
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 0, j = 1, k = 2, l = 3;
+
+// Points To: none
+
+   int *p, *q, *r, *s;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+// s -> undefined , EXACT
+
+
+   r = &i;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> i , EXACT
+// s -> undefined , EXACT
+
+   q = &j;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> j , EXACT
+// r -> i , EXACT
+// s -> undefined , EXACT
+
+   /* here the comma operator defines a sequence point.
+        we treat this instructions asfollow :
+        p = r;
+        q;
+        s = p;
+     */
+   p = r, q, s = p;
+
+// Points To:
+// p -> i , EXACT
+// q -> j , EXACT
+// r -> i , EXACT
+// s -> i , EXACT
+
+   return 0;
+}

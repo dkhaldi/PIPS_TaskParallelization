@@ -1,0 +1,35 @@
+
+int main()
+{
+   int a, aa, *b, *bb, **c;
+//             <    is written>: a
+
+   a = 1;
+//             <    is written>: b
+   b = &a;
+//             <    is written>: c
+   c = &b;
+//             <    is read   >: b c
+//             <    is written>: bb
+
+   bb = *c;
+//             <    is read   >: a b c
+//             <    is written>: aa
+   aa = **c;
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	05 --> 10 with conflicts
+		from <a-W-EXACT> to <a-R-EXACT>
+	06 --> 09 with conflicts
+		from <b-W-EXACT> to <b-R-EXACT>
+	06 --> 10 with conflicts
+		from <b-W-EXACT> to <b-R-EXACT>
+	07 --> 09 with conflicts
+		from <c-W-EXACT> to <c-R-EXACT>
+	07 --> 10 with conflicts
+		from <c-W-EXACT> to <c-R-EXACT>
+
+****************** End of Dependence Graph ******************

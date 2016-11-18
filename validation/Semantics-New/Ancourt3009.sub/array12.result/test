@@ -1,0 +1,113 @@
+int main()
+{
+//             <    is declared>: _PIPS_STRUCT_1 s
+   struct {
+      int a[3][3][6/2];
+   } s;
+//             <    is written>: s.a[0][1][2]
+//             <    is referenced>: s
+   
+   
+   (s.a)[0][1][2] = 1;
+//             <    is read   >: s.a[0][1][2]
+//             <    is written>: s.a[0][1][2]
+//             <    is referenced>: s
+   update_array(s.a);
+//             <    is written>: s.a[0][1][2]
+//             <    is referenced>: s
+   (s.a)[0][1][2] = 1;
+
+   return 0;
+}
+
+//  T(a[0][1][2]) {a[0][1][2]==a[0][1][2]#init+12}
+
+void update_array(int a[3][3][3])
+{
+
+//  T(a[0][1][2]) {a[0][1][2]==a[0][1][2]#init+12}
+
+   a[0][1][2] += 12;
+
+//  T() {}
+
+   // FI: Not implemented yet...
+   return;
+}
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   struct {
+      int a[3][3][6/2];
+   } s;
+
+//  T(s[a][0][1][2]) {s[a][0][1][2]==1}
+
+   
+   
+   (s.a)[0][1][2] = 1;
+
+//  T(s[a][0][1][2]) {s[a][0][1][2]==s[a][0][1][2]#init+12}
+
+   update_array(s.a);
+
+//  T(s[a][0][1][2]) {s[a][0][1][2]==1}
+
+   (s.a)[0][1][2] = 1;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   struct {
+      int a[3][3][6/2];
+   } s;
+
+//  P() {}
+
+   
+   
+   (s.a)[0][1][2] = 1;
+
+//  P(s[a][0][1][2]) {s[a][0][1][2]==1}
+
+   update_array(s.a);
+
+//  P(s[a][0][1][2]) {s[a][0][1][2]==13}
+
+   (s.a)[0][1][2] = 1;
+
+//  P(s[a][0][1][2]) {s[a][0][1][2]==1}
+
+
+   return 0;
+}
+
+//  P() {a[0][1][2]==1}
+
+void update_array(int a[3][3][3])
+{
+
+//  P() {a[0][1][2]==1}
+
+   a[0][1][2] += 12;
+
+//  P(a[0][1][2]) {a[0][1][2]==13, a[0][1][2]#init==1}
+
+   // FI: Not implemented yet...
+   return;
+}

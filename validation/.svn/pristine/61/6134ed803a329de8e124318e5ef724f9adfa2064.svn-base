@@ -1,0 +1,3 @@
+The pointer arithmetic of the four update operators is not exploited by the points-to analysis pass.
+
+See Ticket 804, https://scm.cri.ensmp.fr/trac/pips/ticket/804

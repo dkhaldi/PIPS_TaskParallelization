@@ -1,0 +1,91 @@
+int read_config_file()
+{
+//             <    is referenced>: size_t
+//             <    is declared>: file
+   static FILE *file = (void *) 0;
+//             <    is read   >: file
+//             <    is referenced>: file size_t
+   if (file==(void *) 0)
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+//             <    is referenced>: file __IO_EFFECTS:LUNS size_t
+      file = fopen("vals_init.txt", "r");
+
+//             <may be read   >: file[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: file[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is written>: N1 r
+//             <    is referenced>: N1 file r __IO_EFFECTS:LUNS size_t
+//             <    is declared>: r
+   int r = fscanf(file, "%d", &N1);
+//             <    is read   >: r
+//             <    is referenced>: r
+   if (r==-1) {
+//             <may be read   >: file[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: file[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is referenced>: file __IO_EFFECTS:LUNS size_t
+      fclose(file);
+      return -1;
+   }
+//             <may be read   >: __func__
+//             <may be referenced>: __func__
+//             <    is read   >: N1
+//             <    is referenced>: N1
+
+   0<=N1&&N1<=256?(void) 0:__assert_fail("0<=N1 && N1<=256", "./anywhere02.c", 19, __func__);
+   return 0;
+}
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: file *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: N1 file
+//             <    is written>: N1
+//             <    is referenced>: N1 file __IO_EFFECTS:LUNS
+int read_config_file()
+{
+//             <    is referenced>: size_t
+//             <    is declared>: file
+   static FILE *file = (void *) 0;
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: file __IO_EFFECTS:LUNS[*]
+//             <may be referenced>: __IO_EFFECTS:LUNS
+//             <    is read   >: file
+//             <    is referenced>: file size_t
+   if (file==(void *) 0)
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+//             <    is referenced>: file __IO_EFFECTS:LUNS size_t
+      file = fopen("vals_init.txt", "r");
+
+//             <may be read   >: file[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: file[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is written>: N1 r
+//             <    is referenced>: N1 file r __IO_EFFECTS:LUNS size_t
+//             <    is declared>: r
+   int r = fscanf(file, "%d", &N1);
+//             <may be read   >: file file[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: file[0] __IO_EFFECTS:LUNS[*]
+//             <may be referenced>: file __IO_EFFECTS:LUNS size_t
+//             <    is read   >: r
+//             <    is referenced>: r
+   if (r==-1) {
+//             <may be read   >: file[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: file[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is referenced>: file __IO_EFFECTS:LUNS size_t
+      fclose(file);
+      return -1;
+   }
+//             <may be read   >: __func__
+//             <may be referenced>: __func__
+//             <    is read   >: N1
+//             <    is referenced>: N1
+
+   0<=N1&&N1<=256?(void) 0:__assert_fail("0<=N1 && N1<=256", "./anywhere02.c", 19, __func__);
+   return 0;
+}

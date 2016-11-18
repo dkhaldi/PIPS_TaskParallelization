@@ -1,0 +1,27 @@
+setenv WSPACE=malloc07
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+echo 
+echo Points-to for \"$WSPACE\"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[$WSPACE]
+
+close
+
+echo
+echo Warnings and errors: Check that the dangling pointer is detected?
+echo
+echo In fact, this information cannot be known unless alias analysis
+echo is also performed
+echo
+
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

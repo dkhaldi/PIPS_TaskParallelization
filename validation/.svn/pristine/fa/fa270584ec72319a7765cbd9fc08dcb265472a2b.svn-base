@@ -1,0 +1,5 @@
+# $Id$
+
+include ../validate.mk
+
+cu01.validate: FLT += -e '/built-in/d'

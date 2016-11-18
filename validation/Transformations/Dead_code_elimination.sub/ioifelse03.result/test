@@ -1,0 +1,96 @@
+
+Init Code
+
+int main()
+{
+   int x, y;
+   x = 0;
+   y = 0;
+   if (rand()) {
+      x = x;
+      printf("x=%d", x);
+   }
+   else {
+      y = y;
+      printf("y=%d", y);
+   }
+   return 0;
+}
+
+Source code for ioifelse03 after dead-code elimination
+
+int main()
+{
+   int x, y;
+   x = 0;
+   y = 0;
+   if (rand()) {
+      x = x;
+      printf("x=%d", x);
+   }
+   else {
+      y = y;
+      printf("y=%d", y);
+   }
+   return 0;
+}
+
+OUT regions for ioifelse03
+
+int main()
+{
+   int x, y;
+
+//  <x-OUT-MAY-{}>
+
+   x = 0;
+
+//  <y-OUT-MAY-{}>
+
+   y = 0;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, x==0, y==0}>
+
+   if (rand()) {
+
+//  <x-OUT-EXACT-{}>
+
+      x = x;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, x==0, y==0}>
+
+      printf("x=%d", x);
+   }
+   else {
+
+//  <y-OUT-EXACT-{}>
+
+      y = y;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, x==0, y==0}>
+
+      printf("y=%d", y);
+   }
+   return 0;
+}
+
+Source code for ioifelse03 after dead-code elimination with OUT regions
+
+int main()
+{
+   int x, y;
+   x = 0;
+   y = 0;
+   if (rand()) {
+      x = x;
+      printf("x=%d", x);
+   }
+   else {
+      y = y;
+      printf("y=%d", y);
+   }
+   return 0;
+}
+
+Warnings
+

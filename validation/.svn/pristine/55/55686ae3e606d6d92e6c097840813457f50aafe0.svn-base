@@ -1,0 +1,137 @@
+
+Proper effects for "foo"
+
+void foo(int *p)
+{
+//             <    is read   >: p
+   if (!(p!=0))
+      abort();
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   (*p)++;
+}
+
+Cumulated effects for "foo"
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+void foo(int *p)
+{
+//             <    is read   >: p
+   if (!(p!=0))
+      abort();
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   (*p)++;
+}
+
+Transformers for "foo"
+
+
+//  T() {}
+
+void foo(int *p)
+{
+
+//  T() {}
+
+   if (!(p!=0))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T() {}
+
+   (*p)++;
+}
+
+Proper effects for "main"
+
+int main()
+{
+//             <    is written>: x y z
+   x = 1, y = 2, z = 3;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   int *p = (int *) malloc(sizeof(int));
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   foo(p);
+//             <    is written>: p
+   p = &x;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   foo(p);
+//             <    is read   >: x y z
+   // no information left about x, y and z
+   return x+y+z;
+}
+
+Transformers for "main"
+
+
+//  T(main,x,y,z) {x+y+z==main}
+
+int main()
+{
+
+//  T(x,y,z) {x==1, y==2, z==3}
+
+   x = 1, y = 2, z = 3;
+
+//  T() {}
+
+   int *p = (int *) malloc(sizeof(int));
+
+//  T(x,y,z) {}
+
+   foo(p);
+
+//  T() {}
+
+   p = &x;
+
+//  T(x,y,z) {}
+
+   foo(p);
+
+//  T(main) {x+y+z==main}
+
+   // no information left about x, y and z
+   return x+y+z;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   x = 1, y = 2, z = 3;
+
+//  P(x,y,z) {x==1, y==2, z==3}
+
+   int *p = (int *) malloc(sizeof(int));
+
+//  P(x,y,z) {x==1, y==2, z==3}
+
+   foo(p);
+
+//  P(x,y,z) {}
+
+   p = &x;
+
+//  P(x,y,z) {}
+
+   foo(p);
+
+//  P(x,y,z) {}
+
+   // no information left about x, y and z
+   return x+y+z;
+}

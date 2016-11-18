@@ -1,0 +1,7 @@
+# $Id: default_tpips 6490 2015-07-26 16:49:48Z coelho $
+delete $WSPACE
+create $WSPACE $FILE
+display PRINTED_FILE[%ALL]
+close
+delete $WSPACE
+quit

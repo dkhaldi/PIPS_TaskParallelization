@@ -1,0 +1,27 @@
+setenv WS=dereferencing09
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create  $WS  $WS.c
+
+activate C_PARSER
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+echo
+echo Initial code
+echo
+
+display PRINTED_FILE[$WS]
+
+#activate PRINT_CODE_PROPER_POINTER_EFFECTS
+#display PRINTED_FILE[$WS]
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[$WS]
+
+close
+delete  $WS
+quit
+

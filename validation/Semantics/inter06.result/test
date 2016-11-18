@@ -1,0 +1,73 @@
+
+C  T(I) {I==I#init+1}
+
+
+      SUBROUTINE INCR(I)
+
+C  T(I) {I==I#init+1}
+
+      I = I+1                                                           0003
+      END
+
+C  T() {}
+
+      PROGRAM INTER06
+
+C  T() {}
+
+
+C     Check that type mismatches are detected and do not cause core
+C     dumps: the type mismatch is detected and a warning is issued.
+C     Floating point scalar variables are not analyzed, this is the
+C     difference with inter02
+
+      CALL INCR(X)                                                      0008
+
+C  T() {}
+
+
+      PRINT *, X                                                        0010
+
+      END
+
+C  P() {}
+
+
+      SUBROUTINE INCR(I)
+
+C  P() {}
+
+      I = I+1                                                           0003
+      END
+
+C  P() {}
+
+      PROGRAM INTER06
+
+C  P() {}
+
+
+C     Check that type mismatches are detected and do not cause core
+C     dumps: the type mismatch is detected and a warning is issued.
+C     Floating point scalar variables are not analyzed, this is the
+C     difference with inter02
+
+      CALL INCR(X)                                                      0008
+
+C  P() {}
+
+
+      PRINT *, X                                                        0010
+
+      END
+
+Warnings
+
+TRANSFORMERS_INTER_FULL[INTER06] (fortran_user_call_to_transformer) line 8 
+at statement:
+
+	CALL INCR(X)
+
+
+Type incompatibility (formal INTEGER*4/actual REAL*4) for formal parameter "I" (rank 1) in call to "INCR" from "INTER06"
+INTERPROCEDURAL_SUMMARY_PRECONDITION[INCR] (any_user_call_site_to_transformer) Type incompatibility between call site and declaration for argument "I" (rank 1) of function "INCR" called from function "INTER06": INTEGER*4/REAL*4

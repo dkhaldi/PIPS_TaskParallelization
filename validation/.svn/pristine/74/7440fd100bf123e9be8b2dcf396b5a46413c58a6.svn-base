@@ -1,0 +1,205 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   int a[10][10];
+
+// Points To: none
+
+
+   init(a[0]);
+
+// Points To: none
+
+
+   printf("%d, %d, %d\n", a[0][0], a[0][1], a[0][2]);
+
+// Points To: none
+
+
+   return a[0][2];
+}
+
+Proper effects with points-to for "init"
+
+void init(int b[10])
+{
+//             <    is written>: b[0]
+//             <    is referenced>: b
+   b[0] = 0;
+//             <    is written>: b[1]
+//             <    is referenced>: b
+   b[1] = 2;
+//             <    is written>: b[2]
+//             <    is referenced>: b
+   b[2] = 4;
+   return;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: a
+   int a[10][10];
+//             <may be written>: a[0][*]
+//             <    is referenced>: a
+
+   init(a[0]);
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: a[0][0] a[0][1] a[0][2] stdout 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: a a a stdout __IO_EFFECTS:LUNS
+
+   printf("%d, %d, %d\n", a[0][0], a[0][1], a[0][2]);
+//             <    is read   >: a[0][2]
+//             <    is referenced>: a
+
+   return a[0][2];
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: stdout __IO_EFFECTS:LUNS
+int main(int argc, char **argv)
+{
+//             <    is declared>: a
+   int a[10][10];
+//             <may be written>: a[0][*]
+//             <    is referenced>: a
+
+   init(a[0]);
+//             <may be read   >: a[0][*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: a stdout __IO_EFFECTS:LUNS
+
+   printf("%d, %d, %d\n", a[0][0], a[0][1], a[0][2]);
+//             <    is read   >: a[0][2] __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: a __IO_EFFECTS:LUNS
+
+   return a[0][2];
+}
+
+Transformers for "init"
+
+
+//  T(b[0],b[1],b[2]) {b[0]==0, b[1]==2, b[2]==4}
+
+void init(int b[10])
+{
+
+//  T(b[0]) {b[0]==0}
+
+   b[0] = 0;
+
+//  T(b[1]) {b[1]==2}
+
+   b[1] = 2;
+
+//  T(b[2]) {b[2]==4}
+
+   b[2] = 4;
+
+//  T() {}
+
+   return;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==4}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   int a[10][10];
+
+//  T(a[0][0],a[0][1],a[0][2]) {a[0][0]==0, a[0][1]==2, a[0][2]==4}
+
+
+   init(a[0]);
+
+//  T() {}
+
+
+   printf("%d, %d, %d\n", a[0][0], a[0][1], a[0][2]);
+
+//  T(main) {a[0][2]==main}
+
+
+   return a[0][2];
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   int a[10][10];
+
+//  P() {}
+
+
+   init(a[0]);
+
+//  P(a[0][0],a[0][1],a[0][2]) {a[0][0]==0, a[0][1]==2, a[0][2]==4}
+
+
+   printf("%d, %d, %d\n", a[0][0], a[0][1], a[0][2]);
+
+//  P(a[0][0],a[0][1],a[0][2]) {a[0][0]==0, a[0][1]==2, a[0][2]==4}
+
+
+   return a[0][2];
+}
+
+Preconditions for "init"
+
+
+//  P() {}
+
+void init(int b[10])
+{
+
+//  P() {}
+
+   b[0] = 0;
+
+//  P(b[0]) {b[0]==0}
+
+   b[1] = 2;
+
+//  P(b[0],b[1]) {b[0]==0, b[1]==2}
+
+   b[2] = 4;
+
+//  P(b[0],b[1],b[2]) {b[0]==0, b[1]==2, b[2]==4}
+
+   return;
+}

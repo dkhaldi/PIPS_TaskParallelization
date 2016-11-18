@@ -1,0 +1,31 @@
+Transformers
+
+
+C  T() {}
+
+      PROGRAM NULLINCR2
+
+c     This is Fortran compatible. But a user error should be raised.
+
+      REAL T(10)
+
+C  T(K) {K==0}
+
+
+      K = 0                                                             0007
+
+C  T(I) {}
+
+      DO I = 1, 10, K                                                   0008
+
+C  T() {}
+
+         T(I) = 0.                                                      0009
+      ENDDO
+
+      END
+
+Preconditions
+
+### stderr
+PRECONDITIONS_INTER_FULL[NULLINCR2] (add_index_range_conditions) [user error] Illegal null increment

@@ -1,0 +1,429 @@
+<!-- XML prettyprint for module main. --> 
+<Application Name="main" Language="C" PassingMode="BYVALUE">
+  <IncludedFiles/>
+  <GlobalVariables>
+    <Array Name="A" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+    <DataType Type="int" Size="4"/>
+    <Dimensions>
+      <Dimension>
+        <LowerBound>
+          <Symbolic>0</Symbolic>
+          <Numeric>0</Numeric>
+        </LowerBound>
+        <UpperBound>
+          <Symbolic>10-1</Symbolic>
+          <Numeric>9</Numeric>
+        </UpperBound>
+      </Dimension>
+    </Dimensions>
+    <Layout>
+      <DimLayout>
+        <Symbolic>
+        1
+        </Symbolic>
+      </DimLayout>
+    </Layout>
+    </Array>
+    <Scalar Name="stderr" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="struct _IO_FILE  *" Size="8"/>
+  </GlobalVariables>
+  <Box Name="main">
+    <GlobalVariables/>
+    <LocalVariables/>
+    <FormalVariables/>
+    <ReferenceTypes>
+    </ReferenceTypes>
+    <Call Name="Init" StNumber="38">
+      <ReferencedParameters>
+        <ReferencedParameter Name="A" Range="[0;9]" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+      </ReferencedParameters>
+      <ExternalLoops>
+      </ExternalLoops>
+      <Arguments>
+        <Argument>
+          <ScalarArgument ActualName="10" FormalName="taille" AccessMode="USE">
+          <Numeric>10</Numeric>
+          </ScalarArgument>
+        </Argument>
+        <Argument>
+          <ArrayArgument ActualName="A" ActualDim="1" FormalName="Out" FormalDim="1" AccessMode="DEF">
+          <Connection>
+          <Matrix NbRows="1" NbColumns="1" >
+          <Row> <c>1</c> </Row>
+          </Matrix>
+          </Connection>
+          <LoopOffset>
+          <Matrix NbRows="0" NbColumns="0" >
+          </Matrix>
+          </LoopOffset>
+          <ConstOffset>
+          <Matrix NbRows="1" NbColumns="1" >
+          <Row> <c>0</c> </Row>
+          </Matrix>
+          </ConstOffset>
+        </ArrayArgument>
+        </Argument>
+        <Argument>
+          <ScalarArgument ActualName="3" FormalName="val" AccessMode="USE">
+          <Numeric>3</Numeric>
+          </ScalarArgument>
+        </Argument>
+        </Arguments>
+      </Call>
+      <Call Name="Test" StNumber="39">
+        <ReferencedParameters>
+          <ReferencedParameter Name="A" Range="[0;9]" Type="DATA" AccessMode="USE" ArrayP="TRUE" Kind="VARIABLE"/>
+        </ReferencedParameters>
+        <ExternalLoops>
+        </ExternalLoops>
+        <Arguments>
+          <Argument>
+            <ScalarArgument ActualName="10" FormalName="size" AccessMode="USE">
+            <Numeric>10</Numeric>
+            </ScalarArgument>
+          </Argument>
+          <Argument>
+            <ArrayArgument ActualName="A" ActualDim="1" FormalName="tab" FormalDim="1" AccessMode="USE">
+            <Connection>
+            <Matrix NbRows="1" NbColumns="1" >
+            <Row> <c>1</c> </Row>
+            </Matrix>
+            </Connection>
+            <LoopOffset>
+            <Matrix NbRows="0" NbColumns="0" >
+            </Matrix>
+            </LoopOffset>
+            <ConstOffset>
+            <Matrix NbRows="1" NbColumns="1" >
+            <Row> <c>0</c> </Row>
+            </Matrix>
+            </ConstOffset>
+          </ArrayArgument>
+          </Argument>
+          <Argument>
+            <ScalarArgument ActualName="7" FormalName="res" AccessMode="USE">
+            <Numeric>7</Numeric>
+            </ScalarArgument>
+          </Argument>
+          </Arguments>
+        </Call>
+        <BoxGraph Name="main">
+            <TaskRef Name="Init" StNumber="38">
+              <Computes ArrayName="A" ReadBy="Test" StNumber="39"/>
+            </TaskRef>
+            <TaskRef Name="Test" StNumber="39">
+              <Needs ArrayName="A" DefinedBy="Init" StNumber="38"/>
+            </TaskRef>
+        </BoxGraph>
+      </Box>
+<!-- XML prettyprint for module Test. --> 
+      <Box Name="Test">
+        <GlobalVariables>
+          <Scalar Name="stderr" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="struct _IO_FILE  *" Size="8"/>
+        </GlobalVariables>
+        <LocalVariables>
+          <Scalar Name="fichierOut" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="FILE *" Size="8"/>
+          <Scalar Name="i" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="int" Size="4"/>
+        </LocalVariables>
+        <FormalVariables>
+          <Scalar Name="size" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="int" Size="4"/>
+          <Array Name="tab" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+          <DataType Type="int" Size="4"/>
+          <Dimensions>
+            <Dimension>
+              <LowerBound>
+                <Symbolic>0</Symbolic>
+                <Numeric>0</Numeric>
+              </LowerBound>
+              <UpperBound>
+                <Symbolic>size-1</Symbolic>
+                <Numeric>9</Numeric>
+              </UpperBound>
+            </Dimension>
+          </Dimensions>
+          <Layout>
+            <DimLayout>
+              <Symbolic>
+              1
+              </Symbolic>
+            </DimLayout>
+          </Layout>
+          </Array>
+          <Scalar Name="res" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="int" Size="4"/>
+        </FormalVariables>
+        <ReferenceTypes>
+            <Reference Name= "i">
+              <Basic>int</Basic>
+            </Reference>
+            <Reference Name= "fichierOut">
+              <Pointer Name = "FILE *">
+                <Typedef Name= "FILE">
+                  <Derived Name= "struct _IO_FILE ">
+                    <Struct>
+                      <Field Name= "_flags" >
+                        <Basic>int</Basic>
+                      </Field>
+                      <Field Name= "_IO_read_ptr" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_read_end" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_read_base" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_write_base" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_write_ptr" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_write_end" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_buf_base" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_buf_end" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_save_base" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_backup_base" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_IO_save_end" >
+                        <Pointer Name = "char *">
+                          <Basic>char</Basic>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_markers" >
+                        <Pointer Name = "struct _IO_marker  *">
+                          <Derived Name= "struct _IO_marker ">
+                          </Derived>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_chain" >
+                        <Pointer Name = "struct _IO_FILE  *">
+                          <Derived Name= "struct _IO_FILE ">
+                          </Derived>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_fileno" >
+                        <Basic>int</Basic>
+                      </Field>
+                      <Field Name= "_flags2" >
+                        <Basic>int</Basic>
+                      </Field>
+                      <Field Name= "_old_offset" >
+                        <Typedef Name= "__off_t">
+                          <Basic>long int</Basic>
+                        </Typedef>
+                      </Field>
+                      <Field Name= "_cur_column" >
+                        <Basic>unsigned short</Basic>
+                      </Field>
+                      <Field Name= "_vtable_offset" >
+                        <Basic>signed char</Basic>
+                      </Field>
+                      <Field Name= "_shortbuf" >
+                        <ArrayType Dimension = "1">
+                        <Basic>char</Basic>
+                        </ArrayType>
+                      </Field>
+                      <Field Name= "_lock" >
+                        <Pointer Name = "_IO_lock_t *">
+                          <Typedef Name= "_IO_lock_t">
+                          </Typedef>
+                        </Pointer>
+                      </Field>
+                      <Field Name= "_offset" >
+                        <Typedef Name= "__off64_t">
+                          <Basic>long int</Basic>
+                        </Typedef>
+                      </Field>
+                      <Field Name= "__pad1" >
+                        <Pointer Name = "void *">
+                        </Pointer>
+                      </Field>
+                      <Field Name= "__pad2" >
+                        <Pointer Name = "void *">
+                        </Pointer>
+                      </Field>
+                      <Field Name= "__pad3" >
+                        <Pointer Name = "void *">
+                        </Pointer>
+                      </Field>
+                      <Field Name= "__pad4" >
+                        <Pointer Name = "void *">
+                        </Pointer>
+                      </Field>
+                      <Field Name= "__pad5" >
+                        <Typedef Name= "size_t">
+                          <Basic>unsigned long int</Basic>
+                        </Typedef>
+                      </Field>
+                      <Field Name= "_mode" >
+                        <Basic>int</Basic>
+                      </Field>
+                      <Field Name= "_unused2" >
+                        <ArrayType Dimension = "1">
+                        <Basic>char</Basic>
+                        </ArrayType>
+                      </Field>
+                    </Struct>
+                  </Derived>
+                </Typedef>
+              </Pointer>
+            </Reference>
+        </ReferenceTypes>
+        <BoxGraph Name="Test">
+            <Instruction Name="DeclarationInstruction" StNumber="21">
+              <Computes ScalarName="fichierOut" ReadBy="fprintf" StNumber="30"/>
+            </Instruction>
+            <TaskRef Name="fprintf" StNumber="30">
+              <Computes ArrayName="IO_FILES" ReadBy="fclose" StNumber="31"/>
+            </TaskRef>
+            <TaskRef Name="fprintf" StNumber="30">
+              <Needs ScalarName="fichierOut" DefinedBy="DeclarationInstruction" StNumber="21"/>
+            </TaskRef>
+            <TaskRef Name="fclose" StNumber="31">
+              <Needs ScalarName="fichierOut" DefinedBy="DeclarationInstruction" StNumber="21"/>
+            </TaskRef>
+            <TaskRef Name="fclose" StNumber="31">
+              <Needs ArrayName="IO_FILES" DefinedBy="fprintf" StNumber="30"/>
+            </TaskRef>
+            <TaskRef Name="NestedCall" StNumber="24">
+              <Computes ScalarName="i"/>
+            </TaskRef>
+        </BoxGraph>
+      </Box>
+<!-- XML prettyprint for module Init. --> 
+      <Box Name="Init">
+        <GlobalVariables>
+        </GlobalVariables>
+        <LocalVariables>
+          <Scalar Name="i" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="int" Size="4"/>
+        </LocalVariables>
+        <FormalVariables>
+          <Scalar Name="taille" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="int" Size="4"/>
+          <Array Name="Out" Type="DATA" Allocation="STATIC" Kind="VARIABLE">
+          <DataType Type="int" Size="4"/>
+          <Dimensions>
+            <Dimension>
+              <LowerBound>
+                <Symbolic>0</Symbolic>
+                <Numeric>0</Numeric>
+              </LowerBound>
+              <UpperBound>
+                <Symbolic>taille-1</Symbolic>
+                <Numeric>9</Numeric>
+              </UpperBound>
+            </Dimension>
+          </Dimensions>
+          <Layout>
+            <DimLayout>
+              <Symbolic>
+              1
+              </Symbolic>
+            </DimLayout>
+          </Layout>
+          </Array>
+          <Scalar Name="val" Type="DATA" Allocation="STATIC" Kind="VARIABLE" DataType="int" Size="4"/>
+        </FormalVariables>
+        <ReferenceTypes>
+            <Reference Name= "i">
+              <Basic>int</Basic>
+            </Reference>
+        </ReferenceTypes>
+        <Call Name="LocalAssignment" StNumber="14">
+          <ReferencedParameters>
+            <ReferencedParameter Name="Out" Range="" Type="DATA" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE"/>
+          </ReferencedParameters>
+          <ExternalLoops>
+            <Loop Index="i" ExecutionMode="PARALLEL">
+            <LowerBound>
+              <Symbolic>0</Symbolic>
+              <Numeric>0</Numeric>
+            </LowerBound>
+            <UpperBound>
+              <Symbolic>taille-1</Symbolic>
+              <Numeric>9</Numeric>
+            </UpperBound>
+            <Stride>
+              <Symbolic>1</Symbolic>
+              <Numeric>1</Numeric>
+            </Stride>
+            </Loop>
+          </ExternalLoops>
+          <TaskParameters>
+            <TaskParameter Name="i" Type="DATA" DataType="int" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+            </TaskParameter>
+            <TaskParameter Name="val" Type="DATA" DataType="int" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+            </TaskParameter>
+            <TaskParameter Name="taille" Type="DATA" DataType="int" AccessMode="USE" ArrayP="FALSE" Kind="VARIABLE">
+            </TaskParameter>
+            <AssignParameter Name="Out" Type="DATA" DataType="int" AccessMode="DEF" ArrayP="TRUE" Kind="VARIABLE">
+              <Pattern AccessMode="DEF">
+                <DimPattern Index="">
+                  <Offset>
+                  <Symbolic>0</Symbolic>
+                  <Numeric>0</Numeric>
+                  </Offset>
+                  <Length>
+                  <Symbolic>taille</Symbolic>
+                  </Length>
+                  <Stride>
+                  <Symbolic>1</Symbolic>
+                  <Numeric>1</Numeric>
+                  </Stride>
+                </DimPattern>
+              </Pattern>
+              <Pavage AccessMode="DEF">
+                <DimPavage/>
+              </Pavage>
+            </AssignParameter>
+          </TaskParameters>
+        </Call>
+        <BoxGraph Name="Init">
+            <TaskRef Name="LocalAssignment" StNumber="14">
+              <Needs ScalarName="taille" DefinedBy="IN_VALUE" StNumber="0"/>
+            </TaskRef>
+            <TaskRef Name="LocalAssignment" StNumber="14">
+              <Needs ScalarName="val" DefinedBy="IN_VALUE" StNumber="0"/>
+            </TaskRef>
+            <TaskRef Name="LocalAssignment" StNumber="14">
+              <Computes ArrayName="Out"/>
+            </TaskRef>
+            <TaskRef Name="NestedCall" StNumber="13">
+              <Computes ScalarName="i"/>
+            </TaskRef>
+        </BoxGraph>
+      </Box>
+  <ApplicationGraph Name="main">
+    <TaskRef Name="main">
+          <Computes ArrayName="A"/>
+          <Needs ArrayName="A" DefinedBy="Init"/>
+        </TaskRef>
+      </ApplicationGraph>
+    </Application>

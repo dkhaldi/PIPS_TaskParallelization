@@ -1,0 +1,32 @@
+setenv WS=partial_eval01
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+echo
+echo "foo" file
+echo
+
+display PRINTED_FILE
+
+echo
+echo "foo" file with preconditions
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[foo]
+
+apply PARTIAL_EVAL[foo]
+
+echo
+echo "foo" file after partial evaluation
+echo
+
+activate PRINT_CODE
+display PRINTED_FILE
+
+close
+delete $WS
+quit

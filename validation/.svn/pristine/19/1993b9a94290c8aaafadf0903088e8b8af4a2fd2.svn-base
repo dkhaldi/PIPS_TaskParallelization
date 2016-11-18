@@ -1,0 +1,64 @@
+
+PROPER EFFECTS
+
+int formal_parameter02(int ***ppp)
+{
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               *ANY_MODULE*:*ANYWHERE*_b1
+//             <    is read   >: ppp
+//             <    is written>: q
+   int *q = **ppp;
+   return 0;
+}
+
+PROPER POINTER EFFECTS
+
+int formal_parameter02(int ***ppp)
+{
+//             <    is read   >: ppp ppp[0] ppp[0][0]
+//             <    is written>: q
+   int *q = **ppp;
+   return 0;
+}
+
+POINTS TO
+
+
+// Points To IN:
+// _ppp_1[0] -> *NULL* , MAY
+// _ppp_1[0] -> _ppp_1_1[0][0] , MAY
+// _ppp_1_1[0][0] -> *NULL* , MAY
+// _ppp_1_1[0][0] -> _ppp_1_1_1[0][0][0] , MAY
+// ppp -> *NULL* , MAY
+// ppp -> _ppp_1[0] , MAY
+
+
+// Points To OUT:
+// _ppp_1[0] -> _ppp_1_1[0][0] , EXACT
+// _ppp_1_1[0][0] -> *NULL* , MAY
+// _ppp_1_1[0][0] -> _ppp_1_1_1[0][0][0] , MAY
+// ppp -> _ppp_1[0] , EXACT
+
+int formal_parameter02(int ***ppp)
+{
+
+// Points To:
+// _ppp_1[0] -> *NULL* , MAY
+// _ppp_1[0] -> _ppp_1_1[0][0] , MAY
+// _ppp_1_1[0][0] -> *NULL* , MAY
+// _ppp_1_1[0][0] -> _ppp_1_1_1[0][0][0] , MAY
+// ppp -> *NULL* , MAY
+// ppp -> _ppp_1[0] , MAY
+
+   int *q = **ppp;
+
+// Points To:
+// _ppp_1[0] -> _ppp_1_1[0][0] , EXACT
+// _ppp_1_1[0][0] -> *NULL* , MAY
+// _ppp_1_1[0][0] -> _ppp_1_1_1[0][0][0] , MAY
+// ppp -> _ppp_1[0] , EXACT
+// q -> *NULL* , MAY
+// q -> _ppp_1_1_1[0][0][0] , MAY
+
+   return 0;
+}

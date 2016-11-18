@@ -1,0 +1,78 @@
+############################################
+#
+# Let's try with points-to information
+#
+############################################
+
+Proper effects for "anywhere03" with points-to information
+
+void anywhere03()
+{
+//             <    is written>: m n
+   int m = 1, n = 17;
+//             <    is written>: p
+   int *p = &m;
+//             <    is read   >: p
+//             <    is written>: m n
+   
+   /* Impact of comma expression */
+   *p = 19, n = 2;
+
+   return;
+}
+
+Transformers for "anywhere03" with points-to information
+
+
+//  T() {}
+
+void anywhere03()
+{
+
+//  T(m,n) {m==1, n==17}
+
+   int m = 1, n = 17;
+
+//  T() {}
+
+   int *p = &m;
+
+//  T(m,n) {n==2}
+
+   
+   /* Impact of comma expression */
+   *p = 19, n = 2;
+
+//  T() {}
+
+
+   return;
+}
+
+Preconditions for "anywhere03"
+
+
+//  P() {}
+
+void anywhere03()
+{
+
+//  P() {}
+
+   int m = 1, n = 17;
+
+//  P(m,n) {m==1, n==17}
+
+   int *p = &m;
+
+//  P(m,n) {m==1, n==17}
+
+   
+   /* Impact of comma expression */
+   *p = 19, n = 2;
+
+//  P(m,n) {n==2}
+
+
+   return;
+}

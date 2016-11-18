@@ -1,0 +1,32 @@
+/* Do we have separate name spaces for struct, union and enum as
+ * implemented in PIPS internal representation?
+ *
+ * The code below is not acceptable for gcc. But is easily represented
+ * by PIPS, which has overused special characters to distinguish
+ * between different kinds of derived entities. The distinction should
+ * be made thru the type or thru the entity kind.
+ */
+
+struct s {                                                              /*0010*/
+   int i;
+};
+
+union s {                                                               /*0012*/
+   int i;
+};
+
+enum s {i};                                                             /*0014*/
+
+Warnings related to struct34.c
+
+COMPILATION_UNIT_PARSER[struct34!] (c_parse) ("./struct34.c":10-12) 
+Symbol "i" is redefined.
+Source code after preprocessing:
+struct s {int i;};
+
+union s {int i;};
+Input source code, before preprocessing:
+struct s {int i;};
+
+union s {int i;}; 
+

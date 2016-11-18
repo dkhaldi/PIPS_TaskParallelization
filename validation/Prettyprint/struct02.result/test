@@ -1,0 +1,4 @@
+/* "extern" keyword is lost in structure declaration */
+struct foo {
+   int mem;
+} x;

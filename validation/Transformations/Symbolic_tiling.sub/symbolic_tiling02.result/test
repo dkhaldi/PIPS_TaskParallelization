@@ -1,0 +1,52 @@
+char isme(int elligent)
+{
+   int N;
+   int roverti;
+   int repide[elligent];
+donne:
+   for(roverti = 0; roverti <= elligent-1; roverti += 2)
+      repide[roverti] = repide[roverti+1]*2;
+}
+char isme(int elligent)
+{
+   int N;
+   int roverti;
+   int repide[elligent];
+   //PIPS generated variable
+   int I_0;
+#pragma omp parallel for private(roverti)
+donne:
+   for(I_0 = 1; I_0 <= (elligent+1)/2/N; I_0 += 1)
+#pragma omp parallel for 
+      for(roverti = I_0*N; roverti <= pips_min(2, (elligent+1)/2, I_0*N+(N-1)); roverti += 1)
+         repide[2*roverti-2] = repide[2*roverti-2+1]*2;
+}
+char isme(int elligent)
+{
+   int N;
+   int roverti;
+   int repide[elligent];
+   //PIPS generated variable
+   int I_0;
+
+//  <repide[PHI1]-R-MAY-{PHI1<=elligent}>
+//  <repide[PHI1]-W-MAY-{PHI1+1<=elligent}>
+
+#pragma omp parallel for private(roverti)
+donne:
+   for(I_0 = 1; I_0 <= (elligent+1)/2/N; I_0 += 1)
+
+//  <repide[PHI1]-R-MAY-{PHI1<=elligent, 1<=I_0}>
+//  <repide[PHI1]-W-MAY-{PHI1+1<=elligent, 1<=I_0}>
+
+#pragma omp parallel for 
+      for(roverti = I_0*N; roverti <= pips_min(2, (elligent+1)/2, I_0*N+(N-1)); roverti += 1)
+
+//  <repide[PHI1]-R-EXACT-{PHI1==2roverti-1, 1<=I_0,
+//    2roverti<=elligent+1}>
+//  <repide[PHI1]-W-EXACT-{PHI1==2roverti-2, 1<=I_0,
+//    2roverti<=elligent+1}>
+
+         repide[2*roverti-2] = repide[2*roverti-2+1]*2;
+}
+

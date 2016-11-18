@@ -1,0 +1,26 @@
+setenv WS=vla_declaration01
+
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5
+
+display PARSED_PRINTED_FILE[$WS!]
+quit
+display PARSED_PRINTED_FILE[$WS]
+
+apply UNSPLIT
+
+#shell pips_validation_exe.sh -c -g $WS
+shell gcc -c -g $WS.c
+
+display PRINTED_FILE
+
+close
+
+#delete $WS
+
+quit

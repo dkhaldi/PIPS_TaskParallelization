@@ -1,0 +1,8 @@
+delete shap16
+create shap16 shap16.f
+display CALLGRAPH_FILE[SHAP16]
+display PRINTED_FILE[%ALL]
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[%ALL]
+close
+delete shap16

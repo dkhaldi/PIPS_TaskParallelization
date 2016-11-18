@@ -1,0 +1,18 @@
+setenv WS=conditional02
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 9
+
+display PRINTED_FILE[main]
+
+close
+
+delete $WS
+
+quit
+
+
+
+

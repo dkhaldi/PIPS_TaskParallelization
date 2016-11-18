@@ -1,0 +1,25 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+makefile = rules:rule* x active_phases:string* ;
+owner = { program , module , main , callees , callers , all ,  select , compilation_unit } ;
+real_resource = resource_name:string x owner_name:string ;
+rule = phase:string x required:virtual_resource* x produced:virtual_resource* x preserved:virtual_resource* x modified:virtual_resource* x pre_transformation:virtual_resource* x  post_transformation:virtual_resource* ;
+virtual_resource = name:string x owner  ;

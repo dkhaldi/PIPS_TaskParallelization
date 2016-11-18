@@ -1,0 +1,26 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import entity from "ri.newgen" ;
+import expression from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+alias_associations = list:alias_association* ;
+alias_association = variable:entity x section:entity x offset:expression x lower_offset:int x upper_offset:int x call_chain:call_site* ;
+call_site = function:entity x ordering:int ;
+dynamic_check = first:entity x second:entity x checked:bool ;

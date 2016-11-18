@@ -1,0 +1,6 @@
+# $Id$
+
+include ../../validate.mk
+
+# work around gcc5x/gcc48 cpp differences
+fulguro_convol_3x3.validate: FLT += | grep '[^ ]'

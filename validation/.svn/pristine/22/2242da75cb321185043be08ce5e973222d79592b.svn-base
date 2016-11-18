@@ -1,0 +1,20 @@
+setenv WS=double_declaration02
+
+delete $WS
+
+# Compile and execute user input code
+shell gcc -Wall $WS.c
+shell ./a.out
+
+create $WS $WS.c
+display PRINTED_FILE[$WS!]
+
+apply UNSPLIT
+
+# Compile and execute PIPS regenerated code
+#shell gcc -c $WS.database/Src/$WS.c
+shell gcc -Wall $WS.database/Src/$WS.c
+shell ./a.out
+
+close
+quit

@@ -1,0 +1,4 @@
+#/bin/sh
+tpips error_management04.tpips
+Delete error_management04
+exit 0

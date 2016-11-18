@@ -1,0 +1,8 @@
+delete do_loop01
+setproperty MAXIMUM_USER_ERROR 25
+create do_loop01 do_loop01.f
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE
+close
+delete do_loop01
+quit

@@ -1,0 +1,31 @@
+
+void inter01()
+{
+   static int l;
+   int m;
+   int n;
+//             <    is written>: n
+
+   for(n = 0; n <= 9; n += 1) {
+//             <    is written>: i
+      i = 1;
+//             <    is written>: j
+      j = 2;
+//             <    is written>: k
+      k = 3;
+//             <    is written>: l
+      l = 4;
+//             <    is written>: m
+      m = 5;
+   }
+}
+int main()
+{
+//             <    is written>: i j inter01:0`l k
+   inter01();
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

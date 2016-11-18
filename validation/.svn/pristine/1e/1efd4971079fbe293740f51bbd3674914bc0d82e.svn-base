@@ -1,0 +1,28 @@
+setenv WS=comma03
+
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+#setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create $WS $WS.c
+
+#setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+# To follow emacs C mode
+setproperty PRETTYPRINT_INDENTATION 2
+
+#setenv C_SYNTAX_DEBUG_LEVEL 7
+
+#echo
+#echo Parsed printed file for "main"
+#echo
+
+display PARSED_PRINTED_FILE[comma03!]
+display PARSED_PRINTED_FILE[main]
+
+close
+
+#delete $WS
+
+quit
+

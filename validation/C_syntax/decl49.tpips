@@ -1,0 +1,28 @@
+setenv WSPC decl49
+setenv MAIN $WSPC.c
+delete $WSPC
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WSPC $MAIN
+activate C_PARSER
+activate PRINT_CODE
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+echo
+echo Parsed printed file for "safe_malloc"
+echo
+
+display PARSED_PRINTED_FILE[safe_malloc]
+
+echo
+echo Printed file for "safe_malloc"
+echo
+
+display PRINTED_FILE[safe_malloc]
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g decl49
+
+close
+#delete $WSPC
+quit

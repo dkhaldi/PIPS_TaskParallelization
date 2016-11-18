@@ -1,0 +1,129 @@
+int main(int argc, char *argv[])
+{
+//             <    is declared>: _PIPS_STRUCT_1 p s
+   struct {
+      int a[3][3][6/2];
+   } s, *p;
+//             <    is written>: i
+//             <    is referenced>: i
+//             <    is declared>: i
+   int i = 0;
+//             <    is written>: p
+//             <    is referenced>: p s
+   p = &s;
+//             <    is read   >: i p
+//             <    is written>: i s.a[0][1][2]
+//             <    is referenced>: i p
+
+   update_array(p->a, &i);
+//             <    is written>: s.a[0][1][2]
+//             <    is referenced>: s
+   (s.a)[0][1][2] = 1;
+
+   return 0;
+}
+
+//  T(_pi_2[0],a[0][1][2]) {_pi_2[0]==_pi_2[0]#init+1, a[0][1][2]==12}
+
+void update_array(int a[3][3][3], int *pi)
+{
+
+//  T(a[0][1][2]) {a[0][1][2]==12}
+
+   a[0][1][2] = 12;
+
+//  T(_pi_2[0]) {_pi_2[0]==_pi_2[0]#init+1}
+
+   (*pi)++;
+
+//  T() {}
+
+   return;
+}
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T() {}
+
+   struct {
+      int a[3][3][6/2];
+   } s, *p;
+
+//  T(i) {i==0}
+
+   int i = 0;
+
+//  T() {}
+
+   p = &s;
+
+//  T(i,s[a][0][1][2]) {i==i#init+1, s[a][0][1][2]==12}
+
+
+   update_array(p->a, &i);
+
+//  T(s[a][0][1][2]) {s[a][0][1][2]==1}
+
+   (s.a)[0][1][2] = 1;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   struct {
+      int a[3][3][6/2];
+   } s, *p;
+
+//  P() {}
+
+   int i = 0;
+
+//  P(i) {i==0}
+
+   p = &s;
+
+//  P(i) {i==0}
+
+
+   update_array(p->a, &i);
+
+//  P(i,s[a][0][1][2]) {i==1, s[a][0][1][2]==12}
+
+   (s.a)[0][1][2] = 1;
+
+//  P(i,s[a][0][1][2]) {i==1, s[a][0][1][2]==1}
+
+
+   return 0;
+}
+
+//  P() {_pi_2[0]==0}
+
+void update_array(int a[3][3][3], int *pi)
+{
+
+//  P() {_pi_2[0]==0}
+
+   a[0][1][2] = 12;
+
+//  P(a[0][1][2]) {_pi_2[0]==0, a[0][1][2]==12}
+
+   (*pi)++;
+
+//  P(_pi_2[0],a[0][1][2]) {_pi_2[0]==1, _pi_2[0]#init==0,
+//    a[0][1][2]==12}
+
+   return;
+}

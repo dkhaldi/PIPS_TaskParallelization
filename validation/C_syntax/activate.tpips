@@ -1,0 +1,26 @@
+delete activate
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create activate activate.c
+
+#activate C_PARSER
+#activate C_SYMBOL_TABLE
+
+#setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+#setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+#setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+
+echo
+echo Symbole table for "activate"
+echo
+
+display PARSED_SYMBOL_TABLE_FILE[activate]
+
+#display PARSED_PRINTED_FILE[activate]
+
+close
+delete activate
+quit

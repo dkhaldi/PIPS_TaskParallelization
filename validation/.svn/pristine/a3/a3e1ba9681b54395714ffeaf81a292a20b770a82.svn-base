@@ -1,0 +1,69 @@
+
+POINTS-TO
+
+
+// Points To IN:
+// _l_1[0].next -> *NULL* , MAY
+// _l_1[0].next -> _l_1_2__1[0][0] , MAY
+// l -> *NULL* , MAY
+// l -> _l_1[0] , MAY
+// nil -> *NULL* , EXACT
+
+
+// Points To OUT:
+// _l_1[0].next -> *NULL* , MAY
+// _l_1[0].next -> _l_1_2__1[0][0] , MAY
+// l -> *NULL* , MAY
+// l -> _l_1[0] , MAY
+// nil -> *NULL* , EXACT
+
+int list_len(list l)
+{
+
+// Points To: none
+
+   int n = 0;
+
+// Points To:
+// l -> *NULL* , MAY
+// l -> _l_1[0] , MAY
+
+   list c = l;
+
+// Points To:
+// _l_1[0].next -> *NULL* , MAY
+// _l_1[0].next -> _l_1_2__1[0][0] , MAY
+// c -> *NULL* , MAY
+// c -> _l_1[0] , MAY
+// l -> *NULL* , MAY
+// l -> _l_1[0] , MAY
+// nil -> *NULL* , EXACT
+
+   //while (c!=nil)
+   //{
+   // we know that c!=nil...
+   c = c==nil?nil:c->next;
+
+// Points To:
+// _l_1[0].next -> *NULL* , MAY
+// _l_1[0].next -> _l_1_2__1[0][0] , MAY
+// c -> *NULL* , MAY
+// c -> _l_1_2__1[0][0] , MAY
+// l -> *NULL* , MAY
+// l -> _l_1[0] , MAY
+// nil -> *NULL* , EXACT
+
+   n++;
+
+// Points To:
+// _l_1[0].next -> *NULL* , MAY
+// _l_1[0].next -> _l_1_2__1[0][0] , MAY
+// c -> *NULL* , MAY
+// c -> _l_1_2__1[0][0] , MAY
+// l -> *NULL* , MAY
+// l -> _l_1[0] , MAY
+// nil -> *NULL* , EXACT
+
+   //}
+   return n;
+}

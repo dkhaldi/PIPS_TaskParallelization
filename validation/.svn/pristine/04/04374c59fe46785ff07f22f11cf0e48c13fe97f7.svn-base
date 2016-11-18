@@ -1,0 +1,101 @@
+
+Proper effects for "dependence10"
+
+void dependence10(int flag, int *a)
+{
+   int *p;
+   int b[10];
+   int i;
+//             <    is read   >: flag
+   
+   // Two paths
+   if (flag)
+//             <    is read   >: a
+//             <    is written>: p
+      p = a;
+   else
+//             <    is written>: p
+      p = b;
+//             <    is written>: i
+   
+   // p may points to a[0] or b[0];
+   
+   for(i = 0; i <= 9; i += 1)
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: i p
+      p[i] = 0;
+}
+
+POINTS TO for "dependence10"
+
+
+// Points To IN:
+// a -> *NULL* , MAY
+// a -> _a_2[0] , MAY
+
+
+// Points To OUT:
+// a -> *NULL* , MAY
+// a -> _a_2[0] , MAY
+
+void dependence10(int flag, int *a)
+{
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int b[10];
+
+// Points To:
+// p -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_2[0] , MAY
+// p -> undefined , EXACT
+
+   
+   // Two paths
+   if (flag)
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_2[0] , MAY
+// p -> undefined , EXACT
+
+      p = a;
+   else
+
+// Points To:
+// p -> undefined , EXACT
+
+      p = b;
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_2[0] , MAY
+// p -> *NULL* , MAY
+// p -> _a_2[0] , MAY
+// p -> b[0] , MAY
+
+   
+   // p may points to a[0] or b[0];
+   
+   for(i = 0; i <= 9; i += 1)
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_2[0] , MAY
+// p -> *NULL* , MAY
+// p -> _a_2[0] , MAY
+// p -> b[0] , MAY
+
+      p[i] = 0;
+}
+

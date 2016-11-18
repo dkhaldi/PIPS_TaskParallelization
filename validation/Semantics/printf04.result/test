@@ -1,0 +1,48 @@
+
+Transformers for printf04
+
+
+//  T() {}
+
+void printf04(FILE *p)
+{
+
+//  T(i) {i==1}
+
+   int i = 1;
+
+//  T(i) {i#init==1}
+
+   // Here, the transformer should impact i, regardless of the property
+   // USER_EFFECTS_ON_STD_FILES
+   fprintf(p, "i=%d\n", i);
+
+//  T() {}
+
+   // Here, the value of i is unknown
+   return;
+}
+
+Preconditions for printf04
+
+
+//  P() {}
+
+void printf04(FILE *p)
+{
+
+//  P() {}
+
+   int i = 1;
+
+//  P(i) {i==1}
+
+   // Here, the transformer should impact i, regardless of the property
+   // USER_EFFECTS_ON_STD_FILES
+   fprintf(p, "i=%d\n", i);
+
+//  P(i) {}
+
+   // Here, the value of i is unknown
+   return;
+}

@@ -1,0 +1,159 @@
+
+Source code with proper effects
+
+void assign02()
+{
+//             <    is written>: i
+   int i = 1;                                                           /*0010*/
+   int j;                                                               /*0011*/
+   int k;                                                               /*0012*/
+   int n;                                                               /*0013*/
+//             <    is read   >: n
+//             <    is written>: n
+
+   n++;                                                                 /*0015*/
+//             <    is written>: j k
+   j = k = 2;                                                           /*0016*/
+//             <    is read   >: i j
+//             <    is written>: i k
+   /* i is assigned before k, left-to-right evaluation */
+   i = j, k = i;                                                        /*0018*/
+//             <    is read   >: i j
+//             <    is written>: i j
+
+   j = 2*i, i = j+1;                                                    /*0020*/
+//             <    is read   >: i
+
+   foo(i);                                                              /*0022*/
+}
+
+Source code with cumulated effects
+
+void assign02()
+{
+//             <    is written>: i
+   int i = 1;                                                           /*0010*/
+   int j;                                                               /*0011*/
+   int k;                                                               /*0012*/
+   int n;                                                               /*0013*/
+//             <    is read   >: n
+//             <    is written>: n
+
+   n++;                                                                 /*0015*/
+//             <    is written>: j k
+   j = k = 2;                                                           /*0016*/
+//             <    is read   >: i j
+//             <    is written>: i k
+   /* i is assigned before k, left-to-right evaluation */
+   i = j, k = i;                                                        /*0018*/
+//             <    is read   >: i j
+//             <    is written>: i j
+
+   j = 2*i, i = j+1;                                                    /*0020*/
+//             <    is read   >: i
+
+   foo(i);                                                              /*0022*/
+}
+
+Source code with transformers
+
+
+//  T() {}
+
+void assign02()
+{
+
+//  T(i) {i==1}
+
+   int i = 1;                                                           /*0010*/
+
+//  T() {}
+
+   int j;                                                               /*0011*/
+
+//  T() {}
+
+   int k;                                                               /*0012*/
+
+//  T() {}
+
+   int n;                                                               /*0013*/
+
+//  T(n) {n==n#init+1}
+
+
+   n++;                                                                 /*0015*/
+
+//  T(j,k) {j==2, k==2}
+
+   j = k = 2;                                                           /*0016*/
+
+//  T(i,k) {i==j, i==k}
+
+   /* i is assigned before k, left-to-right evaluation */
+   i = j, k = i;                                                        /*0018*/
+
+//  T(i,j) {i==2i#init+1, 2i#init==j}
+
+
+   j = 2*i, i = j+1;                                                    /*0020*/
+
+//  T() {}
+
+
+   foo(i);                                                              /*0022*/
+}
+
+Source code with preconditions
+
+
+//  P() {}
+
+void assign02()
+{
+
+//  P() {}
+
+   int i = 1;                                                           /*0010*/
+
+//  P(i) {i==1}
+
+   int j;                                                               /*0011*/
+
+//  P(i) {i==1}
+
+   int k;                                                               /*0012*/
+
+//  P(i) {i==1}
+
+   int n;                                                               /*0013*/
+
+//  P(i) {i==1}
+
+
+   n++;                                                                 /*0015*/
+
+//  P(i,n) {i==1}
+
+   j = k = 2;                                                           /*0016*/
+
+//  P(i,j,k,n) {i==1, j==2, k==2}
+
+   /* i is assigned before k, left-to-right evaluation */
+   i = j, k = i;                                                        /*0018*/
+
+//  P(i,j,k,n) {i==2, j==2, k==2}
+
+
+   j = 2*i, i = j+1;                                                    /*0020*/
+
+//  P(i,j,k,n) {i==5, j==4, k==2}
+
+
+   foo(i);                                                              /*0022*/
+}
+
+Warnings
+
+(activate_phase) Rule `C_PARSER' already active
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "assign02" instead.

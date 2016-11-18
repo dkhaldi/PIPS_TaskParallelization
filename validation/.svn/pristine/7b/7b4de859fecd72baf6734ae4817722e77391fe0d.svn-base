@@ -1,0 +1,27 @@
+delete csplit19
+
+#setproperty ABORT_ON_USER_ERROR TRUE
+setenv PIPS_CHECK_C="N"
+
+# We want to move on after the first user error: no
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create csplit19 csplit19.c
+
+# check... what?
+
+# quit
+
+# This has nothing to do with the preprocessing
+
+close
+open csplit19
+
+#activate C_PARSER
+#setproperty PRETTYPRINT_LANGUAGE "C"
+
+display PRINTED_FILE[csplit19]
+close
+
+delete csplit19
+quit

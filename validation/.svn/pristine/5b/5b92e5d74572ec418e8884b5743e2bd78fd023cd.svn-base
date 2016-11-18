@@ -1,0 +1,10 @@
+timeout 2
+sleep 9...
+TIMEOUT ok
+(pips_timeout_callback) [user error] stopping pips on code 142 (TIMEOUT) for timeout after 2 seconds
+
+XML file:
+
+<Exit Code="142" Status="TIMEOUT" Source="user error">
+  <Description AppFunction="" AppFile="" AppLine="" Statement="" Proposition="" Pass="" Owner="" PipsFunction="pips_timeout_callback" PipsFile="/src/Libs/pipsmake/signal.c" PipsLine="..." Message="timeout after 2 seconds" />
+</Exit>

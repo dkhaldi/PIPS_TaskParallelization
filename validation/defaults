@@ -1,0 +1,77 @@
+# $Id: defaults 6733 2016-07-09 17:02:48Z irigoin $
+# the default validation includes the following subdirectories
+# ??? Scalopes/wcdma_original takes about 4mn on its own on 2010-12-02
+Scalopes
+Benchmarks
+SAC
+Pysac
+Syntax
+Control
+Preprocessor
+Pyps
+C_syntax
+C99_syntax
+F95_syntax
+Effects
+Points-to
+# Specific directory for Effects of C intrinsics
+CIntrinsics
+# Preconditions and transformers, using PIPS initial default options
+Semantics
+# Same, but using the 2010 default options
+Semantics-New
+RegionPrivatization
+Complexity
+Regions
+Reductions
+Chains
+Rice
+Ricedg
+CoarseGrainParallelization
+#PHRASE # out as not maintained, 2010-05-10 FC
+Callgraph
+Transformations
+DemoStd
+Hyperplane
+Icfg
+Pipsmake
+Examples
+Prettyprint
+LoopRecovering
+OpenMP
+Outlining
+# ngspice_bug:
+Step
+Flint
+Bootstrap
+Terapix
+Tpips
+Expressions
+Properties
+Crough
+Top-level
+Demo
+Static_controlize
+AcceleratorUtils
+PointerValues
+# put large intra-directory parallel validations at the end!
+Gpu
+Hpfc
+HardwareAccelerator
+Scilab
+# should be added?
+# AliasChecking
+# ArrayBoundCheck
+ArrayResizing
+# Blas
+# Points-to
+# RegionTranslation
+# UseBeforeSet
+# Wp65
+NSAD2010
+# To be added when PAWS is stabilized by Maria, in cooperation with people responsible for its example directories
+# Paws
+ACCA-2011
+Pocc_interface
+Task_parallelization
+RegionsToLoops

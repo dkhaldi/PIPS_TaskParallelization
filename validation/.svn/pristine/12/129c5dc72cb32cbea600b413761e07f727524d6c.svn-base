@@ -1,0 +1,115 @@
+
+// Parsed printed file for esc
+
+int esc(register char *d, register char *s, register int slen)
+{
+   register int ret = 0;
+
+   while (slen>0) {
+
+      if (*s=='\101')
+         goto _switch_2_case_o101;
+      if (*s=='\x42')
+         goto _switch_2_case_x42;
+      if (*s=='\u1234')
+         goto _switch_2_case_u1234;
+      if (*s=='\U12345678')
+         goto _switch_2_case_U12345678;
+      goto _switch_2_default;
+      //Octal
+_switch_2_case_o101:      ;
+      printf("A\n");
+      goto _break_2;
+      //hexa
+_switch_2_case_x42:      ;
+      printf("B\n");
+      goto _break_2;
+      //unicode
+_switch_2_case_u1234:      ;
+      printf("...\n");
+      goto _break_2;
+      //unicode
+_switch_2_case_U12345678:      ;
+      printf("...\n");
+      goto _break_2;
+_switch_2_default:      ;
+      goto _break_2;
+_break_2:      ;
+   }
+   return ret;
+}
+
+// Printed file for esc
+
+int esc(register char *d, register char *s, register int slen)
+{
+   register int ret = 0;
+
+   while (slen>0) {
+      if (*s=='\101') goto _switch_2_case_o101;
+      if (*s=='\x42') goto _switch_2_case_x42;
+      if (*s=='\u1234') goto _switch_2_case_u1234;
+      if (*s=='\U12345678') {
+      }
+      else {
+         goto _switch_2_default;
+      }
+      //unicode
+_switch_2_case_U12345678:      ;
+      printf("...\n");
+      goto _switch_2_default;
+      //unicode
+_switch_2_case_u1234:      ;
+      printf("...\n");
+      goto _switch_2_default;
+      //hexa
+_switch_2_case_x42:      ;
+      printf("B\n");
+      goto _switch_2_default;
+      //Octal
+_switch_2_case_o101:      ;
+      printf("A\n");
+_switch_2_default:      ;
+_break_2:      ;
+   }
+   return ret;
+}
+Try more aggressive restructuring:
+
+// printed file after RESTRUCTURE_CONTROL
+
+int esc(register char *d, register char *s, register int slen)
+{
+   register int ret = 0;
+
+   while (slen>0) {
+      if (*s=='\101') {
+         //Octal
+_switch_2_case_o101:         ;
+         printf("A\n");
+      }
+      else if (*s=='\x42') {
+         //hexa
+_switch_2_case_x42:         ;
+         printf("B\n");
+      }
+      else if (*s=='\u1234') {
+         //unicode
+_switch_2_case_u1234:         ;
+         printf("...\n");
+      }
+      else if (*s=='\U12345678') {
+         //unicode
+_switch_2_case_U12345678:         ;
+         printf("...\n");
+      }
+_switch_2_default:      ;
+_break_2:      ;
+   }
+   return ret;
+}
+
+// Warnings
+
+C_PARSER[esc] (TK_CHARCON_to__int) character constant '\u1234' not recognized
+C_PARSER[esc] (TK_CHARCON_to__int) character constant '\U12345678' not recognized

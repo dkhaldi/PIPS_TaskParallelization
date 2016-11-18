@@ -1,0 +1,10 @@
+delete capture02
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+setproperty ABORT_ON_USER_ERROR TRUE
+create capture02 capture02.f
+module CAPTURE02
+display PRINTED_FILE[CAPTURE02]
+close
+delete capture02
+quit
+

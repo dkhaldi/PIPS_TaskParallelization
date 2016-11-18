@@ -1,0 +1,4 @@
+
+Warnings for multideclsamgfile
+
+COMPILATION_UNIT_PARSER[foo!] (CCompilationUnitMemoryAllocations) Multiple declarations of variable "a" in different files

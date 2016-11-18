@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Three unused formal arguments for "dance". No other compilation issue
+PIPS_CHECK_FORTRAN="N"
+export PIPS_CHECK_FORTRAN
+
+tpips=${tpips_version:-tpips}
+
+($tpips 2>&1 | sed '/file *\//d') <<EOF
+
+delete external06
+create external06 external06.f
+
+setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+setproperty PARSER_ACCEPT_ANSI_EXTENSIONS FALSE
+
+display PRINTED_FILE[EXTERNAL06]
+
+close
+delete external06
+quit
+EOF

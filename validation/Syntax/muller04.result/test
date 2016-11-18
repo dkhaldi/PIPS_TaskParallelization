@@ -1,0 +1,6 @@
+PRINT_CODE[COMPUTE_INDEXMAP_PARDO1] (check_fortran_declaration_dependencies) [user error] Fortran declaration order violated. Variable "AINDEXMAP" depends on variable "D" but is declared first.
+PRINT_CODE[COMPUTE_INDEXMAP_PARDO1] (set_debug_stack_pointer) debug level stack is set to 2
+PRINT_CODE[COMPUTE_INDEXMAP_PARDO1] (catch_user_error) pass has failed
+PRINT_CODE[COMPUTE_INDEXMAP_PARDO1] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module COMPUTE_INDEXMAP_PARDO1.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE

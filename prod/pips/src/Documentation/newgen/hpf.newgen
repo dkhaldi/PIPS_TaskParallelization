@@ -1,0 +1,27 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import entity from "ri.newgen" ;
+import expression from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+align =  alignment* x template:entity ;
+alignment = arraydim:int x templatedim:int x rate:expression x constant:expression ;
+distribute = distribution* x processors:entity ;
+distribution = style x parameter:expression ;
+style = { none , block , cyclic } ;

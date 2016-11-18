@@ -1,0 +1,37 @@
+setenv WS=laguer
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+# Beware of cpp versions and let laguer.test take care of it
+#setenv PIPS_CPP "cpp -C -P -ffreestanding"
+
+create $WS $WS.c
+
+# This file cannot be preprocessed because "complex.h" is not available
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER FALSE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER FALSE
+
+# BUG: the output of CPP is *NOT* stable across compiler versions
+# why reprocessing a cpp-preocessed file?
+# shell cpp -C -ffreestanding laguer.database/Tmp/$WS.cpp_processed.c
+#shell cat $WS.database/Tmp/$WS.cpp_processed.c
+
+# echo cat $WS.database/[a-z_]*[a-z_]/*.c
+
+echo
+echo C source file for compilation unit "$WS!"
+echo
+
+display C_SOURCE_FILE[$WS!]
+
+echo
+echo C source file for function "$WS"
+echo
+
+display C_SOURCE_FILE[$WS]
+
+close
+# delete $WS
+quit

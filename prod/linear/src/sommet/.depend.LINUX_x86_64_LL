@@ -1,0 +1,8 @@
+LINUX_x86_64_LL/sommet.o: sommet.c $(ROOT)/include/boolean.h $(ROOT)/include/assert.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/ray_dte.h sommet.h
+LINUX_x86_64_LL/sommets.o: sommets.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h $(ROOT)/include/sc.h sommet.h

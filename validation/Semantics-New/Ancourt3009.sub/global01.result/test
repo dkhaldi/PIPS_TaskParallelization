@@ -1,0 +1,84 @@
+
+Transformers for "update2"
+
+
+//  T(_b_2[0]) {}
+
+void update2(int a, unsigned int *b)
+{
+
+//  T(_b_2[0]) {}
+
+   if (a>0)
+
+//  T(_b_2[0]) {_b_2[0]==128}
+
+      *b = 128;
+
+//  T() {}
+
+   return;
+}
+
+Transformers for "main"
+
+
+//  T(a,b,main) {a==2, main==0}
+
+int main()
+{
+
+//  T(a) {a==2}
+
+   a = 2;
+
+//  T(b) {}
+
+   update2(a, &b);
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {a==0, b==0}
+
+int main()
+{
+
+//  P() {a==0, b==0}
+
+   a = 2;
+
+//  P(a) {a==2, a#init==0, b==0}
+
+   update2(a, &b);
+
+//  P(a,b) {a==2, a#init==0, b#init==0}
+
+   return 0;
+}
+
+Preconditions for "update2"
+
+
+//  P() {_b_2[0]==0, a==2}
+
+void update2(int a, unsigned int *b)
+{
+
+//  P() {_b_2[0]==0, a==2}
+
+   if (a>0)
+
+//  P() {_b_2[0]==0, a==2}
+
+      *b = 128;
+
+//  P(_b_2[0]) {_b_2[0]==128, _b_2[0]#init==0, a==2}
+
+   return;
+}

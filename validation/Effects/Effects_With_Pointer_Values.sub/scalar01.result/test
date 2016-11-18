@@ -1,0 +1,102 @@
+
+PRINT_CODE_SIMPLE_POINTER_VALUES
+
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   int a, b, *p;
+
+// Pointer values:
+// p == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   a = 0;
+
+// Pointer values:
+// p == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   p = &a;
+
+// Pointer values:
+// p == &a (exact);
+
+   b = *p;
+
+// Pointer values:
+// p == &a (exact);
+
+   return b;
+}
+
+PROPER_EFFECTS_WITH_POINTER_VALUES
+
+int main()
+{
+   int a, b, *p;
+//             <    is written>: a
+   a = 0;
+//             <    is written>: p
+   p = &a;
+//             <    is read   >: a p
+//             <    is written>: b
+   b = *p;
+//             <    is read   >: b
+   return b;
+}
+
+MUST_REGIONS_WITH_POINTER_VALUES
+
+int main()
+{
+   int a, b, *p;
+
+//  <a-W-EXACT-{}>
+
+   a = 0;
+
+//  <p-W-EXACT-{}>
+
+   p = &a;
+
+//  <a-R-EXACT-{}>
+//  <b-W-EXACT-{}>
+//  <p-R-EXACT-{}>
+
+   b = *p;
+
+//  <b-R-EXACT-{}>
+
+   return b;
+}
+
+PRINT_CODE_REGIONS
+
+int main()
+{
+   int a, b, *p;
+
+//  <a-W-EXACT-{}>
+
+   a = 0;
+
+//  <p-W-EXACT-{}>
+
+   p = &a;
+
+//  <a-R-EXACT-{}>
+//  <b-W-EXACT-{}>
+//  <p-R-EXACT-{}>
+
+   b = *p;
+
+//  <b-R-EXACT-{}>
+
+   return b;
+}

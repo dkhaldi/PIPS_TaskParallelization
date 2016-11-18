@@ -1,0 +1,20 @@
+setenv WS=struct06
+setenv PIPS_CHECK_C=No
+setenv PIPS_CPP "cpp -C -ffreestanding"
+
+delete $WS
+
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create $WS $WS.c
+
+echo
+echo Source code for the compilation unit
+echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+apply UNSPLIT
+close
+#delete $WS
+quit

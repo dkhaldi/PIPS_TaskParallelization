@@ -1,0 +1,14 @@
+/* Initialization issue
+ *
+ * With multiple variables that should not be initialized because the
+ * line is declared "extern". Should this be a warning or a user error?
+ * No big deal as this should be detected by gcc or clang before PIPS 
+ * is really run
+ *
+ * See Ticket 430
+ */
+
+extern int a = 1, b = 2, c = 3;
+
+Warnings (should not be empty)
+

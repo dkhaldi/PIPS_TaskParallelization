@@ -1,0 +1,43 @@
+#
+delete mix
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create mix mix.c
+
+#activate some debug mode
+#setenv TEXT_DEBUG_LEVEL 9
+#setenv PARSER_DEBUG_LEVEL 9
+#setenv RICEDG_DEBUG_LEVEL 9
+#setenv SYNTAX_DEBUG_LEVEL 9
+#setenv C_SYNTAX_DEBUG_LEVEL 9
+#setenv SEMANTICS_DEBUG_LEVEL 9
+#setenv PRETTYPRINT_DEBUG_LEVEL 9
+
+# mandatory for A&K (Rice) parallization on C files
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+setproperty PRAGMA_TYPE "str"
+
+setproperty PRETTYPRINT_SEQUENTIAL_STYLE    "do"
+apply PRIVATIZE_MODULE(main)
+echo // OMP style
+activate PRINT_PARALLELIZEDOMP_CODE
+display PARALLELPRINTED_FILE(main)
+
+apply FLAG_PARALLEL_REDUCED_LOOPS_WITH_OPENMP_DIRECTIVES
+setproperty PARALLELIZE_AGAIN_PARALLEL_CODE FALSE
+apply INTERNALIZE_PARALLEL_CODE
+apply FLAG_PARALLEL_REDUCED_LOOPS_WITH_OPENMP_DIRECTIVES
+apply OMPIFY_CODE
+display PRINTED_FILE(main)
+
+apply UNSPLIT
+shell gcc -fopenmp -c mix.database/Src/mix.c -o mix.database/Src/mix.o
+
+close
+delete mix
+quit
+# EOF

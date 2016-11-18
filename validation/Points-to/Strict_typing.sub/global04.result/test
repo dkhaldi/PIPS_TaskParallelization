@@ -1,0 +1,87 @@
+
+PROPER EFFECTS
+
+int main()
+{
+   // To avoid a problem with the semantics of the empty points-to set
+   // The solution might be to add always an arc ANYWHERE->ANYWHERE
+   // when entering a module statement
+//             <    is written>: q
+   int *q = (void *) 0;
+
+   int i;
+//             <    is written>: i
+   i = 1;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+   *p = &i;
+
+   return 0;
+}
+
+PROPER POINTER EFFECTS
+
+int main()
+{
+   // To avoid a problem with the semantics of the empty points-to set
+   // The solution might be to add always an arc ANYWHERE->ANYWHERE
+   // when entering a module statement
+//             <    is written>: q
+   int *q = (void *) 0;
+
+   int i;
+//             <    is written>: i
+   i = 1;
+//             <    is read   >: p
+//             <    is written>: p[0]
+   *p = &i;
+
+   return 0;
+}
+
+POINTS TO
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_0 , MAY
+
+
+// Points To OUT: none
+
+int main()
+{
+   // To avoid a problem with the semantics of the empty points-to set
+   // The solution might be to add always an arc ANYWHERE->ANYWHERE
+   // when entering a module statement
+
+// Points To: none
+
+   int *q = (void *) 0;
+
+
+// Points To:
+// q -> *NULL* , EXACT
+
+   int i;
+
+// Points To:
+// q -> *NULL* , EXACT
+
+   i = 1;
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_0 , MAY
+// q -> *NULL* , EXACT
+
+   *p = &i;
+
+// Points To:
+// _p_0 -> i , EXACT
+// p -> _p_0 , EXACT
+// q -> *NULL* , EXACT
+
+
+   return 0;
+}

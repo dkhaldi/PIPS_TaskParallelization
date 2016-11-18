@@ -1,0 +1,8 @@
+#include <stdio.h>
+
+int main(void)
+{
+  // a version of a world-famous classic
+  puts("hello world");
+  return 0;
+}

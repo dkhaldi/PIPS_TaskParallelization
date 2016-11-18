@@ -1,0 +1,4 @@
+LINUX_x86_64_LL/ray_dte.o: ray_dte.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h ray_dte.h

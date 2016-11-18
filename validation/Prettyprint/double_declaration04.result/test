@@ -1,0 +1,21 @@
+/* Illegal double declaration of C, even with the same initial value
+ *
+ * Similar to double_declaration01.c, but illegal code
+ *
+ * See Ticket 430
+ */
+
+int c = 1;
+int c = 1;
+
+extern int main(void);
+
+Warnings
+
+COMPILATION_UNIT_PARSER[double_declaration04!] (UpdateEntity) ("./double_declaration04.c":9) 
+Multiple declarations of variable "c".
+Source code after preprocessing:
+int c = 1;
+Input source code, before preprocessing:
+int c = 1;
+

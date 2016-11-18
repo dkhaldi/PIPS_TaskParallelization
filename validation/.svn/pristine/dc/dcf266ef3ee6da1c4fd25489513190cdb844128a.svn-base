@@ -1,0 +1,55 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main()
+{
+
+// Points To: none
+
+   int *p, *q, *r;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+   p = malloc(10*sizeof(int));
+
+// Points To:
+// p -> *HEAP*_l_8[0] , MAY
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+   p++;
+
+// Points To:
+// p -> *HEAP*_l_8[1] , MAY
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+   q = p-1;
+
+// Points To:
+// p -> *HEAP*_l_8[1] , MAY
+// q -> *HEAP*_l_8[0] , MAY
+// r -> undefined , EXACT
+
+   r = p;
+
+// Points To:
+// p -> *HEAP*_l_8[1] , MAY
+// q -> *HEAP*_l_8[0] , MAY
+// r -> *HEAP*_l_8[1] , MAY
+
+   free(p);
+
+// Points To: unreachable
+
+   return 0;
+}

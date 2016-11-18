@@ -1,0 +1,92 @@
+
+Source code with cumulated effects with point-to
+
+int main(void)
+{
+   int bla;
+   int *pbla;
+//             <    is written>: b
+   _Bool b = 1;
+//             <    is written>: pbla
+
+   pbla = &bla;
+//             <    is read   >: pbla
+//             <    is written>: bla
+
+   *pbla = 1;
+
+   return 0;
+}
+
+Source code with transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main(void)
+{
+
+//  T() {}
+
+   int bla;
+
+//  T() {}
+
+   int *pbla;
+
+//  T(b) {b==1}
+
+   _Bool b = 1;
+
+//  T() {}
+
+
+   pbla = &bla;
+
+//  T(bla) {}
+
+
+   *pbla = 1;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Source code with preconditions with point-to
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   int bla;
+
+//  P() {}
+
+   int *pbla;
+
+//  P() {}
+
+   _Bool b = 1;
+
+//  P(b) {b==1}
+
+
+   pbla = &bla;
+
+//  P(b) {b==1}
+
+
+   *pbla = 1;
+
+//  P(b,bla) {b==1}
+
+
+   return 0;
+}
+

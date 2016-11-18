@@ -1,0 +1,291 @@
+###################### matmul_c-STEP/matmul_c.database/Src/matmul_c.cpp_processed.c ######################
+#include "matmul_c.cpp_processed.h"
+#include "step_api.h"
+void main_PAR_HYBRID(int n, float a[n][n], float b[n][n], float c[n][n], int i_0[1], int j_0[1], int k_0[1]);
+void main_PAR_HYBRID_MASTER_HYBRID(int n, float c[n][n], int i_0[1], int j_0[1]);
+void main_PAR_HYBRID_FOR_HYBRID_1(int n, float a[n][n], float b[n][n], float c[n][n], int i_0[1], int j_0[1], int k_0[1]);
+void main_PAR_HYBRID_FOR_HYBRID(int n, float a[n][n], float b[n][n], float c[n][n], int i_0[1], int j_0[1]);
+void main_PAR_HYBRID(int n, float a[n][n], float b[n][n], float c[n][n], int i_0[1], int j_0[1], int k_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int i, j, k;
+#pragma omp master
+   {
+      k = *k_0;
+      j = *j_0;
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_PARALLEL);
+      STEP_INIT_ARRAYREGIONS(a, STEP_REAL4, 2, 0, n-1, 0, n-1);
+      STEP_INIT_ARRAYREGIONS(b, STEP_REAL4, 2, 0, n-1, 0, n-1);
+      STEP_INIT_ARRAYREGIONS(c, STEP_REAL4, 2, 0, n-1, 0, n-1);
+   }
+#pragma omp barrier
+
+   
+   //BEGIN WORK
+   ;
+#pragma omp parallel private(i, j, k)
+   {
+      main_PAR_HYBRID_FOR_HYBRID(n, a, b, c, &i, &j);
+      main_PAR_HYBRID_FOR_HYBRID_1(n, a, b, c, &i, &j, &k);
+      main_PAR_HYBRID_MASTER_HYBRID(n, c, &i, &j);
+   }
+   //END WORK
+   ;
+#pragma omp master
+   {
+      STEP_CONSTRUCT_END(STEP_PARALLEL);
+      *i_0 = i;
+      *j_0 = j;
+      *k_0 = k;
+   }
+#pragma omp barrier
+
+   ;
+}
+void main_PAR_HYBRID_MASTER_HYBRID(int n, float c[n][n], int i_0[1], int j_0[1])
+{
+#pragma omp master
+   {
+      // Declared as a patch variable by Pass Outlining
+      int i, j;
+      //PIPS generated variable
+      int STEP_COMM_RANK, STEP_RR_c[2][STEP_INDEX_SLICE_UP];
+      j = *j_0;
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_MASTER);
+      
+      //RECV REGIONS
+      ;
+      
+      //  <c[PHI1][PHI2]-R-EXACT-{0<=PHI1, PHI1<=9, 0<=PHI2, PHI2<=9}>
+      
+      ;
+      STEP_RR_c[1-1][STEP_INDEX_SLICE_LOW-1] = 0;
+      STEP_RR_c[1-1][STEP_INDEX_SLICE_UP-1] = 9;
+      STEP_RR_c[2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+      STEP_RR_c[2-1][STEP_INDEX_SLICE_UP-1] = 9;
+      STEP_SET_RECVREGIONS(c, 1, (STEP_ARG *) STEP_RR_c);
+      STEP_REGISTER_ALLTOALL_PARTIAL(c, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      
+      //BEGIN WORK
+      ;
+      STEP_GET_RANK(&STEP_COMM_RANK);
+      if (STEP_COMM_RANK==0) {
+         for(i = 0; i <= n-1; i += 1) {
+            for(j = 0; j <= n-1; j += 1)
+               printf("%f ", c[i][j]);
+            printf("\n");
+         }
+      }
+      //END WORK
+      ;
+      STEP_CONSTRUCT_END(STEP_MASTER);
+      *i_0 = i;
+      *j_0 = j;
+      ;
+   }
+}
+void main_PAR_HYBRID_FOR_HYBRID_1(int n, float a[n][n], float b[n][n], float c[n][n], int i_0[1], int j_0[1], int k_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int i, j, k;
+   //PIPS generated variable
+   int STEP_COMM_SIZE, STEP_i_LOW, STEP_i_UP, STEP_COMM_RANK, STEP_RR_a[STEP_MAX_NB_LOOPSLICES][2][STEP_INDEX_SLICE_UP], IDX, STEP_RR_b[STEP_MAX_NB_LOOPSLICES][2][STEP_INDEX_SLICE_UP], STEP_RR_c[STEP_MAX_NB_LOOPSLICES][2][STEP_INDEX_SLICE_UP], STEP_SR_c[STEP_MAX_NB_LOOPSLICES][2][STEP_INDEX_SLICE_UP];
+#pragma omp master
+   {
+      k = *k_0;
+      j = *j_0;
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_DO);
+      STEP_GET_COMMSIZE(&STEP_COMM_SIZE);
+      STEP_COMPUTE_LOOPSLICES(0, n-1, 1, STEP_COMM_SIZE);
+      
+      //RECV REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <a[PHI1][PHI2]-R-EXACT-{PHI1<=9, STEP_i_LOW<=PHI1,
+         //    PHI1<=STEP_i_UP, 0<=PHI2, PHI2<=9}>
+         
+         ;
+         STEP_RR_a[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_RR_a[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 9, STEP_i_UP);
+         STEP_RR_a[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+         STEP_RR_a[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 9;
+         
+         //  <b[PHI1][PHI2]-R-EXACT-{0<=PHI1, PHI1<=9, 0<=PHI2, PHI2<=9,
+         //    STEP_i_LOW<=9, STEP_i_LOW<=STEP_i_UP}>
+         
+         ;
+         if (STEP_i_LOW-STEP_i_UP<=0&&STEP_i_LOW-9<=0) {
+            STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = 0;
+            STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = 9;
+            STEP_RR_b[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+            STEP_RR_b[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 9;
+         }
+         else {
+            // Inverted bounds correspond to empty regions
+            // Used when work concerns specific data ex: print A[5]
+            // In this case, only concerned process sends non empty regions
+            STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = n-1;
+            STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = 0;
+            STEP_RR_b[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = n-1;
+            STEP_RR_b[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 0;
+         }
+         
+         //  <c[PHI1][PHI2]-R-EXACT-{PHI1<=9, STEP_i_LOW<=PHI1,
+         //    PHI1<=STEP_i_UP, 0<=PHI2, PHI2<=9}>
+         
+         ;
+         STEP_RR_c[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_RR_c[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 9, STEP_i_UP);
+         STEP_RR_c[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+         STEP_RR_c[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 9;
+      }
+      STEP_SET_RECVREGIONS(a, STEP_COMM_SIZE, (STEP_ARG *) STEP_RR_a);
+      STEP_SET_RECVREGIONS(b, STEP_COMM_SIZE, (STEP_ARG *) STEP_RR_b);
+      STEP_SET_RECVREGIONS(c, STEP_COMM_SIZE, (STEP_ARG *) STEP_RR_c);
+      STEP_REGISTER_ALLTOALL_PARTIAL(a, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_REGISTER_ALLTOALL_PARTIAL(b, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_REGISTER_ALLTOALL_PARTIAL(c, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      
+      //SEND REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <c[PHI1][PHI2]-W-EXACT-{PHI1<=9, STEP_i_LOW<=PHI1,
+         //    PHI1<=STEP_i_UP, 0<=PHI2, PHI2<=9}>
+         
+         ;
+         STEP_SR_c[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_SR_c[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 9, STEP_i_UP);
+         STEP_SR_c[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+         STEP_SR_c[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 9;
+      }
+      STEP_SET_SENDREGIONS(c, STEP_COMM_SIZE, (STEP_ARG *) STEP_SR_c);
+   }
+#pragma omp barrier
+
+   
+   //BEGIN WORK
+   ;
+   STEP_GET_RANK(&STEP_COMM_RANK);
+   STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, &STEP_i_LOW, &STEP_i_UP);
+
+#pragma omp for
+   for(i = STEP_i_LOW; i <= STEP_i_UP; i += 1)
+      for(j = 0; j <= n-1; j += 1)
+         for(k = 0; k <= n-1; k += 1)
+            c[i][j] = c[i][j]+a[i][k]*b[k][j];
+   //END WORK
+   ;
+#pragma omp master
+   {
+      STEP_REGISTER_ALLTOALL_PARTIAL(c, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      STEP_CONSTRUCT_END(STEP_DO);
+      *i_0 = i;
+      *j_0 = j;
+      *k_0 = k;
+   }
+#pragma omp barrier
+
+   ;
+}
+void main_PAR_HYBRID_FOR_HYBRID(int n, float a[n][n], float b[n][n], float c[n][n], int i_0[1], int j_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int i, j;
+   //PIPS generated variable
+   int STEP_COMM_SIZE, STEP_i_LOW, STEP_i_UP, STEP_COMM_RANK, STEP_SR_a[STEP_MAX_NB_LOOPSLICES][2][STEP_INDEX_SLICE_UP], IDX, STEP_SR_b[STEP_MAX_NB_LOOPSLICES][2][STEP_INDEX_SLICE_UP], STEP_SR_c[STEP_MAX_NB_LOOPSLICES][2][STEP_INDEX_SLICE_UP];
+#pragma omp master
+   {
+      j = *j_0;
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_DO);
+      STEP_GET_COMMSIZE(&STEP_COMM_SIZE);
+      STEP_COMPUTE_LOOPSLICES(0, n-1, 1, STEP_COMM_SIZE);
+      
+      //SEND REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <a[PHI1][PHI2]-W-EXACT-{0<=PHI1, PHI1<=9, STEP_i_LOW<=PHI1,
+         //    PHI1<=STEP_i_UP, 0<=PHI2, PHI2<=9}>
+         
+         ;
+         STEP_SR_a[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = pips_max(2, 0, STEP_i_LOW);
+         STEP_SR_a[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 9, STEP_i_UP);
+         STEP_SR_a[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+         STEP_SR_a[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 9;
+         
+         //  <b[PHI1][PHI2]-W-EXACT-{0<=PHI1, PHI1<=9, STEP_i_LOW<=PHI1,
+         //    PHI1<=STEP_i_UP, 0<=PHI2, PHI2<=9}>
+         
+         ;
+         STEP_SR_b[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = pips_max(2, 0, STEP_i_LOW);
+         STEP_SR_b[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 9, STEP_i_UP);
+         STEP_SR_b[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+         STEP_SR_b[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 9;
+         
+         //  <c[PHI1][PHI2]-W-EXACT-{0<=PHI1, PHI1<=9, STEP_i_LOW<=PHI1,
+         //    PHI1<=STEP_i_UP, 0<=PHI2, PHI2<=9}>
+         
+         ;
+         STEP_SR_c[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = pips_max(2, 0, STEP_i_LOW);
+         STEP_SR_c[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 9, STEP_i_UP);
+         STEP_SR_c[IDX-1][2-1][STEP_INDEX_SLICE_LOW-1] = 0;
+         STEP_SR_c[IDX-1][2-1][STEP_INDEX_SLICE_UP-1] = 9;
+      }
+      STEP_SET_SENDREGIONS(a, STEP_COMM_SIZE, (STEP_ARG *) STEP_SR_a);
+      STEP_SET_SENDREGIONS(b, STEP_COMM_SIZE, (STEP_ARG *) STEP_SR_b);
+      STEP_SET_SENDREGIONS(c, STEP_COMM_SIZE, (STEP_ARG *) STEP_SR_c);
+   }
+#pragma omp barrier
+
+   
+   //BEGIN WORK
+   ;
+   STEP_GET_RANK(&STEP_COMM_RANK);
+   STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, &STEP_i_LOW, &STEP_i_UP);
+#pragma omp for
+   for(i = STEP_i_LOW; i <= STEP_i_UP; i += 1)
+      for(j = 0; j <= n-1; j += 1) {
+         a[i][j] = 2;
+         b[i][j] = 3;
+         c[i][j] = 0;
+      }
+   //END WORK
+   ;
+#pragma omp master
+   {
+      STEP_REGISTER_ALLTOALL_PARTIAL(a, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_REGISTER_ALLTOALL_PARTIAL(b, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_REGISTER_ALLTOALL_PARTIAL(c, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      STEP_CONSTRUCT_END(STEP_DO);
+      *i_0 = i;
+      *j_0 = j;
+   }
+#pragma omp barrier
+
+   ;
+}
+int main(void)
+{
+   STEP_INIT_C_ORDER();
+   {
+      int n = 10;
+      float a[n][n], b[n][n], c[n][n];
+      int i, j, k;
+      main_PAR_HYBRID(n, a, b, c, &i, &j, &k);
+      STEP_FINALIZE();
+      return 0;
+   }
+}

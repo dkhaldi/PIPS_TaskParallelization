@@ -1,0 +1,40 @@
+
+int main(int argc, char *argv[])
+{
+   int *pi;
+   float *px;
+   float *pz;
+   int (*pt)[30];
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pi _MALLOC_EFFECTS:_MALLOC_
+
+   pi = (int *) malloc(sizeof(int));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: px _MALLOC_EFFECTS:_MALLOC_
+   px = (float *) malloc(sizeof(float));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pz _MALLOC_EFFECTS:_MALLOC_
+   pz = (float *) malloc(sizeof(float));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pt _MALLOC_EFFECTS:_MALLOC_
+   pt = (int (*)[30]) malloc(sizeof(*pt));
+
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	12 --> 13 with conflicts
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-R-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+	13 --> 14 with conflicts
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-R-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+	14 --> 15 with conflicts
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-R-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+
+****************** End of Dependence Graph ******************

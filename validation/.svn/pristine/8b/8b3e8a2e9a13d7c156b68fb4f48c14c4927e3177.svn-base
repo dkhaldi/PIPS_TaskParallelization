@@ -1,0 +1,85 @@
+
+Source code with transformers
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   int i, j, mi;
+
+//  T(i,j) {}
+
+
+   scanf("%d %d", &i, &j);
+
+//  T() {}
+
+   printf("i=%d, j=%d\n", i, j);
+
+//  T(mi) {}
+
+   if (i==3*j+1) {
+
+//  T(mi) {i==3j+1, 0<=mi+2, mi<=1}
+
+      mi = i%3;
+
+//  T() {i==3j+1, 0<=mi+2, mi<=1}
+
+      printf("mi=%d\n", mi);
+   }
+   else
+
+//  T() {}
+
+      printf("Out of lattice!\n");
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i, j, mi;
+
+//  P() {}
+
+
+   scanf("%d %d", &i, &j);
+
+//  P(i,j) {}
+
+   printf("i=%d, j=%d\n", i, j);
+
+//  P(i,j) {}
+
+   if (i==3*j+1) {
+
+//  P(i,j) {i==3j+1}
+
+      mi = i%3;
+
+//  P(i,j,mi) {i==3j+1, 0<=mi+2, mi<=1}
+
+      printf("mi=%d\n", mi);
+   }
+   else
+
+//  P(i,j) {}
+
+      printf("Out of lattice!\n");
+
+//  P(i,j,mi) {}
+
+   return 0;
+}

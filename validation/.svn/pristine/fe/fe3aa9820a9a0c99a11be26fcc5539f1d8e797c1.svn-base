@@ -1,0 +1,32 @@
+
+int main()
+{
+//             <    is written>: i j k l
+   int i = 0, j = 1, k = 2, l = 3;
+   int *p, *q, *r, *s, *t;
+//             <    is written>: r
+
+   r = &i;
+//             <    is written>: q
+   q = &j;
+//             <    is written>: s
+   s = &k;
+//             <    is read   >: r s
+//             <    is written>: p r
+   /* we treat this instruction as :
+        p = r;
+        r = s;
+     */
+   p = r, r = s;
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	08 --> 15 with conflicts
+		from <r-W-EXACT> to <r-W-EXACT>
+		from <r-W-EXACT> to <r-R-EXACT>
+	10 --> 15 with conflicts
+		from <s-W-EXACT> to <s-R-EXACT>
+
+****************** End of Dependence Graph ******************

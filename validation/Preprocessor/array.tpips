@@ -1,0 +1,26 @@
+delete array
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setenv PIPS_CHECK_C="N"
+
+create array array.c
+
+#close
+#shell cat array.database/Warnings
+#delete array
+#quit
+
+#activate C_PARSER
+
+display PRINTED_FILE[main]
+
+close
+
+echo
+echo Warnings:
+echo
+
+shell cat array.database/Warnings
+
+#delete array
+quit

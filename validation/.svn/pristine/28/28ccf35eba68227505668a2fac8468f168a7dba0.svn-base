@@ -1,0 +1,191 @@
+
+Points-to for "update_sub2"
+
+
+// Points To IN:
+// b -> *NULL* , MAY
+// b -> _b_1[0] , MAY
+
+
+// Points To OUT:
+// b -> _b_1[0] , EXACT
+
+void update_sub2(sub2 *b)
+{
+
+// Points To:
+// b -> *NULL* , MAY
+// b -> _b_1[0] , MAY
+
+   b->k1 = 0;
+
+// Points To:
+// b -> _b_1[0] , EXACT
+
+   b->k2 = 1;
+
+// Points To:
+// b -> _b_1[0] , EXACT
+
+   return;
+}
+
+Proper effects for "update_sub2"
+
+void update_sub2(sub2 *b)
+{
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1
+//             <    is referenced>: b
+   b->k1 = 0;
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k2
+//             <    is referenced>: b
+   b->k2 = 1;
+   return;
+}
+
+Cumulated effects for "update_sub2"
+
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1 _b_1[0].k2
+//             <    is referenced>: b
+void update_sub2(sub2 *b)
+{
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1
+//             <    is referenced>: b
+   b->k1 = 0;
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k2
+//             <    is referenced>: b
+   b->k2 = 1;
+   return;
+}
+
+Points-to for "update_sub"
+
+
+// Points To IN:
+// _s_1[0].var3 -> *NULL* , MAY
+// _s_1[0].var3 -> _s_1_2__1[0][0] , MAY
+// s -> *NULL* , MAY
+// s -> _s_1[0] , MAY
+
+
+// Points To OUT:
+// _s_1[0].var3 -> _s_1_2__1[0][0] , EXACT
+// s -> _s_1[0] , EXACT
+
+void update_sub(sub *s)
+{
+
+// Points To:
+// s -> *NULL* , MAY
+// s -> _s_1[0] , MAY
+
+   s->var2 = 2;
+
+// Points To:
+// _s_1[0].var3 -> *NULL* , MAY
+// _s_1[0].var3 -> _s_1_2__1[0][0] , MAY
+// s -> _s_1[0] , EXACT
+
+   update_sub2(s->var3);
+
+// Points To:
+// _s_1[0].var3 -> _s_1_2__1[0][0] , EXACT
+// s -> _s_1[0] , EXACT
+
+   return;
+}
+
+Proper effects for "update_sub"
+
+void update_sub(sub *s)
+{
+//             <    is read   >: s
+//             <    is written>: _s_1[0].var2
+//             <    is referenced>: s
+   s->var2 = 2;
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1_2__1[0][0].k1 _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+   update_sub2(s->var3);
+   return;
+}
+
+Cumulated effects for "update_sub"
+
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1[0].var2 _s_1_2__1[0][0].k1 
+//                               _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+void update_sub(sub *s)
+{
+//             <    is read   >: s
+//             <    is written>: _s_1[0].var2
+//             <    is referenced>: s
+   s->var2 = 2;
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1_2__1[0][0].k1 _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+   update_sub2(s->var3);
+   return;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main()
+{
+
+// Points To: none
+
+   content ct;
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+   update_sub(&ct.s3);
+
+// Points To: unreachable
+
+
+   return 0;
+}
+
+Proper effects for "main"
+
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (recursive_filter_formal_context_according_to_actual_context) line 48 
+at statement:
+
+	update_sub(&ct.s3);
+
+
+An uninitialized pointer, "ct.s3.var3", is dereferenced.
+PROPER_EFFECTS_WITH_POINTS_TO[main] (recursive_filter_formal_context_according_to_actual_context) line 48 
+at statement:
+
+	update_sub(&ct.s3);
+
+
+An uninitialized pointer, "ct.s3.var3", is dereferenced.
+PROPER_EFFECTS_WITH_POINTS_TO[main] (user_call_to_points_to_interprocedural_binding_set) line 48 
+at statement:
+
+	update_sub(&ct.s3);
+
+
+Call site in "main" incompatible with callee "update_sub".
+PROPER_EFFECTS_WITH_POINTS_TO[main] (effect_backward_translation_error) [user error] Effect "update_sub:_s_1_2__1[0][0].k1" of callee "update_sub" cannot be translated. Check that the caller "main" provides initialized parameters.
+PROPER_EFFECTS_WITH_POINTS_TO[main] (set_debug_stack_pointer) debug level stack is set to 2
+PROPER_EFFECTS_WITH_POINTS_TO[main] (catch_user_error) pass has failed
+PROPER_EFFECTS_WITH_POINTS_TO[main] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module main.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE

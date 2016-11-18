@@ -1,0 +1,56 @@
+
+Parsed printed file for main
+
+int main()
+{
+   int i = 1;
+
+   if (i==1)
+      goto _switch_1_case_1;
+   if (i==2)
+      goto _switch_1_case_2;
+   goto _switch_1_default;
+_switch_1_case_1:   ;
+   printf("1 = %d", i);
+   goto _break_1;
+_switch_1_case_2:   ;
+   printf("2 = %d", i);
+   goto _break_1;
+_switch_1_default:   ;
+_break_1:   ;
+}
+
+Printed file for main
+
+int main()
+{
+   int i = 1;
+   if (i==1) goto _switch_1_case_1;
+   if (i==2) goto _switch_1_case_2;
+_switch_1_default:   ;
+   goto _break_1;
+_switch_1_case_2:   ;
+   printf("2 = %d", i);
+   goto _break_1;
+_switch_1_case_1:   ;
+   printf("1 = %d", i);
+_break_1:   ;
+}
+Try more aggressive restructuring:
+
+printed file after RESTRUCTURE_CONTROL
+
+int main()
+{
+   int i = 1;
+   if (i==1) {
+_switch_1_case_1:      ;
+      printf("1 = %d", i);
+   }
+   else if (i==2) {
+_switch_1_case_2:      ;
+      printf("2 = %d", i);
+   }
+_switch_1_default:   ;
+_break_1:   ;
+}

@@ -1,0 +1,40 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+//             <    is written>: s
+   char *s = "sortie de puts";
+//             <may be read   >: stdout[0] *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: stdout[0]
+//             <    is read   >: s stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   puts(s);
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   char *s = "sortie de puts";
+
+// Points To:
+// s -> "sortie de puts" , EXACT
+
+   puts(s);
+
+// Points To:
+// s -> "sortie de puts" , EXACT
+
+   return 0;
+}

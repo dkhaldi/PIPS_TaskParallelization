@@ -1,0 +1,114 @@
+
+First try: detect conflict between common and program 
+when finding the common name
+
+      PROGRAM ENV
+c      subroutine env
+
+C     Name conflicts between subroutines, functions, main and commons
+
+      CALL FOO                                                          0006
+
+      CALL BAR                                                          0008
+
+      END
+
+Second try: detect conflict between common and subroutine
+when finding the common name
+
+c      program env
+      SUBROUTINE ENV
+
+C     Name onflicts between subroutines, functions, main and commons
+
+      CALL FOO                                                          0006
+
+      CALL BAR                                                          0008
+
+      END
+
+Third try: create the common and detect the conflict 
+when parsing the program
+
+
+      SUBROUTINE FOO
+      COMMON /ENV/ A(10), B(10)
+      COMMON /BAR/ X, Y
+
+      DO I = 1, 10                                                      0006
+         A(I) = 0.                                                      0007
+      ENDDO
+
+      END
+
+C  <BAR:A(PHI1)-R-EXACT-{1<=PHI1, PHI1<=10}>
+C  <BAR:A(PHI1)-W-EXACT-{1<=PHI1, PHI1<=10}>
+C  <BAR:B(PHI1)-W-EXACT-{1<=PHI1, PHI1<=10}>
+
+      PROGRAM ENV
+
+C  <BAR:A(PHI1)-W-EXACT-{1<=PHI1, PHI1<=10}>
+
+c      subroutine env
+
+C     Name conflicts between subroutines, functions, main and commons
+
+      CALL FOO                                                          0006
+
+C  <BAR:A(PHI1)-R-EXACT-{1<=PHI1, PHI1<=10}>
+C  <BAR:B(PHI1)-W-EXACT-{1<=PHI1, PHI1<=10}>
+
+
+      CALL BAR                                                          0008
+
+      END
+
+Fourth try: conflict between a common and a subroutine name
+
+
+      SUBROUTINE BAR
+      COMMON /ENV/A(10), B(10)
+
+      DO I = 1, 10                                                      0005
+         B(I) = A(I)                                                    0006
+      ENDDO
+
+      END
+
+      SUBROUTINE FOO
+      COMMON /ENV/ A(10), B(10)
+      COMMON /BAR/ X, Y
+
+      DO I = 1, 10                                                      0006
+         A(I) = 0.                                                      0007
+      ENDDO
+
+      END
+
+Fifth try: conflict between a subroutine and a common name
+
+
+      SUBROUTINE FOO
+      COMMON /ENV/ A(10), B(10)
+      COMMON /BAR/ X, Y
+
+      DO I = 1, 10                                                      0006
+         A(I) = 0.                                                      0007
+      ENDDO
+
+      END
+
+      SUBROUTINE BAR
+      COMMON /ENV/A(10), B(10)
+
+      DO I = 1, 10                                                      0005
+         B(I) = A(I)                                                    0006
+      ENDDO
+
+      END
+### stderr
+PARSER[ENV] (MakeCurrentFunction) global name ENV used for a module and for a common
+PARSER[FOO] (NameToCommon) Identifier ENV used for a common and for a main
+PARSER[FOO] (NameToCommon) Identifier BAR used for a common and for a function or subroutine
+PARSER[FOO] (NameToCommon) Identifier BAR used for a common and for a function or subroutine
+PARSER[BAR] (MakeCurrentFunction) global name BAR used for a module and for a common

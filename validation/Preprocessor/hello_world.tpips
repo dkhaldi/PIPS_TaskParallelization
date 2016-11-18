@@ -1,0 +1,7 @@
+setenv WS=hello_world
+delete $WS
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+create $WS $WS.c
+display PARSED_PRINTED_FILE[main]
+close
+delete $WS

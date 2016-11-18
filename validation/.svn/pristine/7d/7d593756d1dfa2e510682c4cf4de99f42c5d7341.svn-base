@@ -1,0 +1,41 @@
+/* An implicit struct declaration disappears */
+
+struct c;                                                               /*0003*/
+decl68!
+
+Declarations for module "decl68!" with type "() -> unknown"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 0
+	Declared entity "decl68!:*DYNAMIC*" with type "area" with size 0
+	Declared entity "decl68!:*HEAP*" with type "area" with size 0
+	Declared entity "decl68!:*STACK*" with type "area" with size 0
+	Declared entity "decl68!:*STATIC*" with type "area" with size 0
+
+* empty extern declaration list *
+
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "decl68!:*DYNAMIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "decl68!:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "decl68!:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "decl68!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module decl68!
+

@@ -1,0 +1,37 @@
+delete merge15
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create merge15 merge15.c
+
+#activate some debug mode
+#setenv TEXT_DEBUG_LEVEL 9
+#setenv PARSER_DEBUG_LEVEL 9
+#setenv RICEDG_DEBUG_LEVEL 9
+#setenv SYNTAX_DEBUG_LEVEL 9
+#setenv C_SYNTAX_DEBUG_LEVEL 9
+#setenv SEMANTICS_DEBUG_LEVEL 9
+#setenv PRETTYPRINT_DEBUG_LEVEL 9
+#setenv OPMIFY_CODE_DEBUG_LEVEL 9
+#setproperty PRETTYPRINT_BLOCKS TRUE
+
+setproperty PRAGMA_TYPE "expr"
+setproperty PRETTYPRINT_SEQUENTIAL_STYLE    "do"
+setproperty NESTED_PARALLELISM_THRESHOLD 2
+
+apply PRIVATIZE_MODULE(main)
+echo // OMP style
+apply FLAG_PARALLEL_REDUCED_LOOPS_WITH_OPENMP_DIRECTIVES
+setproperty PARALLELIZE_AGAIN_PARALLEL_CODE FALSE
+apply INTERNALIZE_PARALLEL_CODE(main)
+apply LIMIT_NESTED_PARALLELISM(main)
+apply OMPIFY_CODE(main)
+display PRINTED_FILE(main)
+
+apply UNSPLIT
+shell gcc -fopenmp -c merge15.database/Src/merge15.c -o merge15.database/Src/merge15.o
+
+close
+delete merge15
+quit
+# EOF

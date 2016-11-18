@@ -1,0 +1,11 @@
+The formal scope is not exploited for derived entities, dummy or not.
+
+This kind of declaration is not interesting as the derived entities are private to the formal scope. So this kind of declaration is not used.
+
+Note that dummy parameters are also declared in the formal scope, which explaines that foo(int f) {int f;} is correct.
+
+In the PIPS C parser, we have some kind of formal scope for dummy parameters, but not so much for formal parameters, although an empty scope string may be used.
+
+Hard to estimate the necessary work, but the impact should be close to null...
+
+FI, 23 August 2015

@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <assert.h>
+
+#include "fcts.h"
+
+int main(int argc, char *argv[])
+{
+ content a; 
+ int b[100];
+ int c[100];
+
+ update1(&a.s1);
+ compute1(*a.s1,b);
+ update2(&a.s2); 	
+ compute2(a.s2,b,c);		
+
+  return 0;
+}
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+setenv WSPACE=symbol_after_clean01
+setenv FILE=$WSPACE.c
+
+delete $WSPACE
+create $WSPACE $FILE
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+# C code
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+activate NEW_CONTROLIZER
+
+echo
+echo // Initial code
+echo
+display PRINTED_FILE [main]
+
+echo
+echo // SYMBOL_TABLE_FILE
+echo
+display SYMBOL_TABLE_FILE [main]
+
+echo
+echo // Clean declaration
+echo
+apply CLEAN_DECLARATIONS [main]
+display PRINTED_FILE [main]
+
+echo
+echo // SYMBOL_TABLE_FILE
+echo
+display SYMBOL_TABLE_FILE [main]
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

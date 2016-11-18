@@ -1,0 +1,39 @@
+
+// IN Pointer values:
+// q == &_q_1[0] (exact);
+
+
+// OUT Pointer values:
+// q == &_q_1[0] (exact);
+
+int * foo(int *q)
+{
+
+// Pointer values:
+// q == &_q_1[0] (exact);
+
+   return q;
+}
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   int a = 1, *p;
+
+// Pointer values:
+// p == *ANY_MODULE*:*UNDEFINED* (exact);
+
+   p = foo(&a);
+
+// Pointer values:
+// p == &*ANY_MODULE*:*ANYWHERE* (may);
+
+   return 0;
+}

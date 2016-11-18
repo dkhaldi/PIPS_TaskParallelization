@@ -1,0 +1,65 @@
+
+// Initial code
+
+int test()
+{
+   /*=10*/
+   int i, n;
+   int a[n];
+
+   for(i = 0; i <= n-1; i += 1)
+      a[i] = 0;
+
+   return a[0];
+}
+
+// Code with preconditions
+
+
+//  P() {}
+
+int test()
+{
+   /*=10*/
+
+//  P() {}
+
+   int i, n;
+
+//  P() {}
+
+   int a[n];
+
+//  P() {}
+
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  P(i) {0<=i, i+1<=n}
+
+      a[i] = 0;
+
+//  P(i) {0<=i, n<=i}
+
+
+   return a[0];
+}
+
+// Code after CHECK_INITIALIZE_VLA
+// (nothing modify in the code but generate warning or error)
+
+int test()
+{
+   /*=10*/
+   int i, n;
+   int a[n];
+
+   for(i = 0; i <= n-1; i += 1)
+      a[i] = 0;
+
+   return a[0];
+}
+
+// Warnings
+
+CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS[test] (add_dependence_reference) n can be uninitialized when declaration of a depend of n

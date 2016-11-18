@@ -1,0 +1,35 @@
+
+First try: The initial bug by Nicki Williams-Preston
+
+
+Second try: A modified version of the initial bug
+
+
+Third try: a correct version with integer parameters
+
+
+      SUBROUTINE CACHANBUG4C
+
+C     Bug 4 found by Nicky Williams-Preston: core dump on hexadecimal
+C     constants
+
+C     Check that PIPS is OK for the normal case: compute preconditions
+
+      PARAMETER (M=10)
+
+      INTEGER TAB(M)
+
+      DATA TAB,I/M*M,M/
+
+      J = M                                                             0015
+
+      PRINT *, I, J                                                     0017
+
+      END
+### stderr
+PARSER[CACHANBUG4] (gram) Symbolic constant expected: Z
+PARSER[CACHANBUG4] (gram) Might be a non supported hexadecimal constant
+PARSER[CACHANBUG4] (gram) [user error] Parser error between lines 6 and 6
+PARSER[CACHANBUG4B] (syn_error) Syntax error - syntax error, unexpected TK_SCON, expecting TK_SLASH or TK_COMMA line 3 near "'7F7F'"
+PARSER[CACHANBUG4B] (syn_error) Non analyzed source text stored in logfile
+PARSER[CACHANBUG4B] (syn_error) [user error] Parser error between lines 13 and 13

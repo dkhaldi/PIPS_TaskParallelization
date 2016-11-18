@@ -1,0 +1,102 @@
+
+Initial code
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+   for(i = 0; i <= 9; i += 1)
+      c[i] = a*v[i];
+
+   for(i = 0; i <= 9; i += 1)
+      c[i] = c[i]+b*v[i];
+
+   return c[0];
+}
+
+LOOP_FUSION
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+   for(i = 0; i <= 9; i += 1) {
+      c[i] = a*v[i];
+      c[i] = c[i]+b*v[i];
+   }
+
+   return c[0];
+}
+
+FORWARD_SUBSTITUTE (done nothing with array)
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+   for(i = 0; i <= 9; i += 1) {
+      c[i] = a*v[i];
+      c[i] = c[i]+b*v[i];
+   }
+
+   return c[0];
+}
+
+SCALARIZATION
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+   for(i = 0; i <= 9; i += 1) {
+      //PIPS generated variable
+      register int v_0 = v[i], c_0;
+      c_0 = a*v_0;
+      c_0 = c_0+b*v_0;
+      c[i] = c_0;
+   }
+
+   return c[0];
+}
+
+FORWARD_SUBSTITUTE
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+   for(i = 0; i <= 9; i += 1) {
+      //PIPS generated variable
+      register int v_0 = v[i], c_0;
+      c_0 = a*v_0;
+      c_0 = a*v_0+b*v_0;
+      c[i] = c_0;
+   }
+
+   return c[0];
+}
+
+DEAD_CODE_ELIMINATION
+
+int main()
+{
+   int v[10], c[10];
+   int a, b, i;
+
+   for(i = 0; i <= 9; i += 1) {
+      //PIPS generated variable
+      register int v_0 = v[i], c_0;
+      c_0 = a*v_0+b*v_0;
+      c[i] = c_0;
+   }
+
+   return c[0];
+}
+
+Warnings
+

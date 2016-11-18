@@ -1,0 +1,5 @@
+The structure of the generated source code is too complex when MIN and MAX are replaced by pips_min() and pips_max(), as if an atomizer does not work.
+
+I am planning to let the C prettyprinter preserve MIN and MAX in the printout thanks to yet another property.
+
+Francois Irigoin, 29 July 2015

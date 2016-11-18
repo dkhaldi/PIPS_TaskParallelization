@@ -1,0 +1,6 @@
+void function02(int size, int a[static const size])
+{
+   int i;
+   for(i = 0; i <= size-1; i += 1)
+      a[i] = 0;
+}

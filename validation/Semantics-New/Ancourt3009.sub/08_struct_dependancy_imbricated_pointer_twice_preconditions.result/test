@@ -1,0 +1,338 @@
+
+Points-to for "update2"
+
+
+// Points To IN:
+// pa -> *NULL* , MAY
+// pa -> _pa_1[0] , MAY
+
+
+// Points To OUT:
+// _pa_1[0].s2 -> *HEAP*_l_27 , MAY
+// pa -> _pa_1[0] , EXACT
+
+void update2(content *pa)
+{
+
+// Points To:
+// pa -> *NULL* , MAY
+// pa -> _pa_1[0] , MAY
+
+#pragma MOTIF
+   pa->s2 = (sub *) malloc(sizeof(sub));
+
+// Points To:
+// _pa_1[0].s2 -> *HEAP*_l_27 , MAY
+// pa -> _pa_1[0] , EXACT
+
+   pa->s2->var2 = 8;
+
+// Points To:
+// _pa_1[0].s2 -> *HEAP*_l_27 , MAY
+// pa -> _pa_1[0] , EXACT
+
+   return;
+}
+
+Proper effects with points-to for "update2"
+
+void update2(content *pa)
+{
+//             <    is read   >: pa _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _pa_1[0].s2 _MALLOC_EFFECTS:_MALLOC_
+//             <    is referenced>: pa sub
+#pragma MOTIF
+   pa->s2 = (sub *) malloc(sizeof(sub));
+//             <may be written>: *HEAP*_l_27.var2
+//             <    is read   >: _pa_1[0].s2 pa
+//             <    is referenced>: pa
+   pa->s2->var2 = 8;
+   return;
+}
+
+Cumulated effects with points-to for "update2"
+
+//             <may be written>: *HEAP*_l_27.var2
+//             <    is read   >: _pa_1[0].s2 pa 
+//                               _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _pa_1[0].s2 _MALLOC_EFFECTS:_MALLOC_
+//             <    is referenced>: pa
+void update2(content *pa)
+{
+//             <    is read   >: pa _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _pa_1[0].s2 _MALLOC_EFFECTS:_MALLOC_
+//             <    is referenced>: pa sub
+#pragma MOTIF
+   pa->s2 = (sub *) malloc(sizeof(sub));
+//             <may be written>: *HEAP*_l_27.var2
+//             <    is read   >: _pa_1[0].s2 pa
+//             <    is referenced>: pa
+   pa->s2->var2 = 8;
+   return;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char *argv[])
+{
+//             <    is referenced>: content
+//             <    is declared>: a
+   content a;
+//             <    is declared>: b
+   int b[100];
+//             <    is declared>: c
+   int c[100];
+//             <may be written>: update1:*HEAP*_l_10.var2
+//             <    is read   >: a.s1 _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a.s1 _MALLOC_EFFECTS:_MALLOC_
+//             <    is referenced>: a
+
+   update1(&a);
+//             <may be written>: b[*]
+//             <    is read   >: a.s1 update1:*HEAP*_l_10.var2
+//             <    is referenced>: a b
+   compute1(&a, b);
+//             <may be written>: update2:*HEAP*_l_27.var2
+//             <    is read   >: a.s2 _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a.s2 _MALLOC_EFFECTS:_MALLOC_
+//             <    is referenced>: a
+   update2(&a);
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: a.s2 update1:*HEAP*_l_10.var2 
+//                               update2:*HEAP*_l_27.var2
+//             <    is referenced>: a b c
+   compute2(&a, b, c);
+
+   return 0;
+}
+
+Transformers with point-to for "update1"
+
+
+//  T() {}
+
+void update1(content *pa)
+{
+
+//  T() {}
+
+#pragma MOTIF
+   pa->s1 = (sub *) malloc(sizeof(sub));
+
+//  T() {}
+
+   pa->s1->var2 = 8;
+
+//  T() {}
+
+   return;
+}
+
+Transformers with point-to for "update2"
+
+
+//  T() {}
+
+void update2(content *pa)
+{
+
+//  T() {}
+
+#pragma MOTIF
+   pa->s2 = (sub *) malloc(sizeof(sub));
+
+//  T() {}
+
+   pa->s2->var2 = 8;
+
+//  T() {}
+
+   return;
+}
+
+Transformers with point-to for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T() {}
+
+   content a;
+
+//  T() {}
+
+   int b[100];
+
+//  T() {}
+
+   int c[100];
+
+//  T() {}
+
+
+   update1(&a);
+
+//  T() {}
+
+   compute1(&a, b);
+
+//  T() {}
+
+   update2(&a);
+
+//  T() {}
+
+   compute2(&a, b, c);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions with point-to for "main"
+
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   content a;
+
+//  P() {}
+
+   int b[100];
+
+//  P() {}
+
+   int c[100];
+
+//  P() {}
+
+
+   update1(&a);
+
+//  P() {}
+
+   compute1(&a, b);
+
+//  P() {}
+
+   update2(&a);
+
+//  P() {}
+
+   compute2(&a, b, c);
+
+//  P() {}
+
+
+   return 0;
+}
+
+Preconditions with point-to for "update1"
+
+
+//  P() {}
+
+void update1(content *pa)
+{
+
+//  P() {}
+
+#pragma MOTIF
+   pa->s1 = (sub *) malloc(sizeof(sub));
+
+//  P() {}
+
+   pa->s1->var2 = 8;
+
+//  P() {}
+
+   return;
+}
+
+Preconditions with point-to for "compute1"
+
+
+//  P() {}
+
+void compute1(content *pa, int b[100])
+{
+#pragma MOTIF
+   {
+
+//  P() {}
+
+      int i;
+
+//  P() {}
+
+      for(i = 0; i <= 99; i += 1)
+
+//  P(i) {0<=i, i<=99}
+
+         b[i] = pa->s1->var2;
+   }
+
+//  P() {}
+
+   return;
+}
+
+Preconditions with point-to for "update2"
+
+
+//  P() {}
+
+void update2(content *pa)
+{
+
+//  P() {}
+
+#pragma MOTIF
+   pa->s2 = (sub *) malloc(sizeof(sub));
+
+//  P() {}
+
+   pa->s2->var2 = 8;
+
+//  P() {}
+
+   return;
+}
+
+Preconditions with point-to for "compute2"
+
+
+//  P() {}
+
+void compute2(content *pa, int b[100], int c[100])
+{
+#pragma MOTIF
+   {
+
+//  P() {}
+
+      int i;
+
+//  P() {}
+
+      for(i = 0; i <= 99; i += 1)
+
+//  P(i) {0<=i, i<=99}
+
+         c[i] = b[i]+pa->s2->var2;
+   }
+
+//  P() {}
+
+   return;
+}

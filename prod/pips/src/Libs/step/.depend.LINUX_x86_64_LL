@@ -1,0 +1,507 @@
+LINUX_x86_64_LL/comment2pragma.o: comment2pragma.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h
+LINUX_x86_64_LL/step_lexer.o: step_lexer.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h step_bison_parser.h
+LINUX_x86_64_LL/step_bison_parser.o: step_bison_parser.c step_lexer.h defines-local.h \
+ step.h $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h
+LINUX_x86_64_LL/directives.o: directives.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h $(ROOT)/include/prettyprint.h
+LINUX_x86_64_LL/analyse.o: analyse.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h $(ROOT)/include/workspace-util.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/prettyprint.h $(ROOT)/include/preprocessor.h \
+ $(ROOT)/include/transformer.h $(ROOT)/include/semantics.h \
+ $(ROOT)/include/dg.h $(ROOT)/include/graph.h $(ROOT)/include/ricedg.h \
+ $(ROOT)/include/bootstrap.h STEP_RT_intrinsic.h STEP_RT_bootstrap.h
+LINUX_x86_64_LL/compile_RT.o: compile_RT.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h $(ROOT)/include/syntax.h \
+ $(ROOT)/include/constants.h $(ROOT)/include/specs.h \
+ $(ROOT)/include/parser_private.h $(ROOT)/include/c_syntax.h \
+ $(ROOT)/include/c_parser_private.h $(ROOT)/include/workspace-util.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/prettyprint.h
+LINUX_x86_64_LL/compile_mpi.o: compile_mpi.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h $(ROOT)/include/accel-util.h \
+ $(ROOT)/include/transformer.h $(ROOT)/include/semantics.h \
+ $(ROOT)/include/workspace-util.h $(ROOT)/include/ri-util.h \
+ $(ROOT)/include/pipsdbm.h $(ROOT)/include/prettyprint.h
+LINUX_x86_64_LL/compile_regions.o: compile_regions.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h $(ROOT)/include/prettyprint.h
+LINUX_x86_64_LL/compile.o: compile.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h $(ROOT)/include/prettyprint.h \
+ $(ROOT)/include/workspace-util.h $(ROOT)/include/ri-util.h \
+ $(ROOT)/include/pipsdbm.h
+LINUX_x86_64_LL/parser.o: parser.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h $(ROOT)/include/workspace-util.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/prettyprint.h
+LINUX_x86_64_LL/install.o: install.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h
+LINUX_x86_64_LL/comment2pragma.o: comment2pragma.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h
+LINUX_x86_64_LL/step_lexer.o: step_lexer.c defines-local.h step.h \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h step_bison_parser.h
+LINUX_x86_64_LL/step_bison_parser.o: step_bison_parser.c step_lexer.h defines-local.h \
+ step.h $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/step_private.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/pipsdbm.h \
+ $(ROOT)/include/resources.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/misc.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/text-util.h \
+ $(ROOT)/include/effects-util.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/effects-generic.h \
+ $(ROOT)/include/effects-simple.h $(ROOT)/include/effects-convex.h \
+ step_common.h STEP_name.h

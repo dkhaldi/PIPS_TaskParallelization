@@ -1,0 +1,141 @@
+
+Proper effects for "foo" with points-to information
+
+void foo(double *p)
+{
+//             <    is read   >: p
+   if (!(p!=0))
+      abort();
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+   (*p)++;
+}
+
+Cumulated effects for "foo" with points-to information
+
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+void foo(double *p)
+{
+//             <    is read   >: p
+   if (!(p!=0))
+      abort();
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+   (*p)++;
+}
+
+Proper effects for "main" with points-to information
+
+//             <    is read   >: x y z _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: x y z _MALLOC_EFFECTS:_MALLOC_
+int main()
+{
+//             <    is written>: x y z
+   x = 1, y = 2, z = 3;
+   // FI: was the meaningless cast to (int *) put here with some purpose
+   // double *p = (int *) malloc(sizeof(double));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   double *p = (double *) malloc(sizeof(double));
+//             <    is read   >: p *ANY_MODULE*:*HEAP*_b0
+//             <    is written>: *ANY_MODULE*:*HEAP*_b0
+   foo(p);
+//             <    is read   >: x y z
+   return x+y+z;
+}
+
+Cumulated effects for "main" with points-to information
+
+//             <    is read   >: x y z _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: x y z _MALLOC_EFFECTS:_MALLOC_
+int main()
+{
+//             <    is written>: x y z
+   x = 1, y = 2, z = 3;
+   // FI: was the meaningless cast to (int *) put here with some purpose
+   // double *p = (int *) malloc(sizeof(double));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   double *p = (double *) malloc(sizeof(double));
+//             <    is read   >: p *ANY_MODULE*:*HEAP*_b0
+//             <    is written>: *ANY_MODULE*:*HEAP*_b0
+   foo(p);
+//             <    is read   >: x y z
+   return x+y+z;
+}
+
+Transformers for "foo" with points-to information
+
+
+//  T() {}
+
+void foo(double *p)
+{
+
+//  T() {}
+
+   if (!(p!=0))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T() {}
+
+   (*p)++;
+}
+
+Transformers for "main" with points-to information
+
+
+//  T(main,x,y,z) {main==6, x==1, y==2, z==3}
+
+int main()
+{
+
+//  T(x,y,z) {x==1, y==2, z==3}
+
+   x = 1, y = 2, z = 3;
+   // FI: was the meaningless cast to (int *) put here with some purpose
+   // double *p = (int *) malloc(sizeof(double));
+
+//  T() {}
+
+   double *p = (double *) malloc(sizeof(double));
+
+//  T() {}
+
+   foo(p);
+
+//  T(main) {x+y+z==main}
+
+   return x+y+z;
+}
+
+Preconditions for "main" with points-to information
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   x = 1, y = 2, z = 3;
+   // FI: was the meaningless cast to (int *) put here with some purpose
+   // double *p = (int *) malloc(sizeof(double));
+
+//  P(x,y,z) {x==1, y==2, z==3}
+
+   double *p = (double *) malloc(sizeof(double));
+
+//  P(x,y,z) {x==1, y==2, z==3}
+
+   foo(p);
+
+//  P(x,y,z) {x==1, y==2, z==3}
+
+   return x+y+z;
+}

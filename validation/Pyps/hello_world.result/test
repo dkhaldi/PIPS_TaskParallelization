@@ -1,0 +1,14 @@
+#include "pipsdef.h"
+
+/*
+ * file for hello_world.c
+ */
+#include <stdio.h>
+
+extern int main(void);
+int main(void)
+{
+   // a version of a world-famous classic
+   puts("hello world");
+   return 0;
+}

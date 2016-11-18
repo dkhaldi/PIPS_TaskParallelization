@@ -1,0 +1,144 @@
+
+TRANSFORMERS
+
+
+//  T(main) {main==2}
+
+int main()
+{
+
+//  T(a) {a==1}
+
+   int a = 1;
+
+//  T() {a==1}
+
+   int b;
+
+//  T() {a==1}
+
+   int i;
+
+//  T(i) {a==1, 2<=i, i<=3}
+
+
+   if (a>0&&b>0)
+
+//  T(i) {a==1, i==2, 1<=b}
+
+      i = 2;
+   else
+
+//  T(i) {a==1, i==3, b<=0}
+
+      i = 3;
+
+//  T(i) {a==1, i==2, 2<=i#init, i#init<=3}
+
+
+   if (a>0||b>0)
+
+//  T(i) {a==1, i==2, 2<=i#init, i#init<=3}
+
+      i = 2;
+   else
+
+//  T() {0==-1}
+
+      i = 3;
+
+//  T(main) {a==1, i==2, main==2}
+
+
+   return i;
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int a = 1;
+
+//  P(a) {a==1}
+
+   int b;
+
+//  P(a) {a==1}
+
+   int i;
+
+//  P(a) {a==1}
+
+
+   if (a>0&&b>0)
+
+//  P(a) {a==1, 1<=b}
+
+      i = 2;
+   else
+
+//  P(a) {a==1, b<=0}
+
+      i = 3;
+
+//  P(a,i) {a==1, 2<=i, i<=3}
+
+
+   if (a>0||b>0)
+
+//  P(a,i) {a==1, 2<=i, i<=3}
+
+      i = 2;
+   else
+
+//  P() {0==-1}
+
+      i = 3;
+
+//  P(a,i) {a==1, i==2}
+
+
+   return i;
+}
+
+After suppress_dead_code
+
+int main()
+{
+   int a = 1;
+   int b;
+   int i;
+
+   if (b>0)
+      i = 2;
+   else
+      i = 3;
+
+   i = 2;
+
+   return i;
+}
+
+After atomization
+
+int main()
+{
+   int a = 1;
+   int b;
+   int i;
+
+   if (b>0)
+      i = 2;
+   else
+      i = 3;
+
+   i = 2;
+
+   return i;
+}

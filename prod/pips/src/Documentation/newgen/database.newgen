@@ -1,0 +1,23 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+database = name:string x directory:string x resources:resource* ;
+resource = name:string x owner_name:string x status x time:int x file_time:int ;
+status = memory:string + file:string ;

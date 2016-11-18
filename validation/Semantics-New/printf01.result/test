@@ -1,0 +1,50 @@
+
+TRANSFORMERS
+
+
+//  T(printf01) {}
+
+int printf01()
+{
+
+//  T(i) {i==3}
+
+   int i = 3;
+
+//  T(i) {i#init==3}
+
+
+   printf("%d\n", i++);
+
+//  T(printf01) {i==printf01}
+
+
+   return i;
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+int printf01()
+{
+
+//  P() {}
+
+   int i = 3;
+
+//  P(i) {i==3}
+
+
+   printf("%d\n", i++);
+
+//  P(i) {}
+
+
+   return i;
+}
+
+WARNINGS
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "printf01" instead.

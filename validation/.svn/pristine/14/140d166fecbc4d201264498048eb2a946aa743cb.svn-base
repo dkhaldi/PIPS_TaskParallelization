@@ -1,0 +1,31 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: pi q
+   call03();
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   call03();
+
+// Points To:
+// pi -> _pi_48[1] , EXACT
+
+   return 0;
+}

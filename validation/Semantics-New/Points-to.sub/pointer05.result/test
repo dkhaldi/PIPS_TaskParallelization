@@ -1,0 +1,183 @@
+
+Points-to
+
+
+// Points To IN:
+// _tab_1[0] -> *NULL* , MAY
+// _tab_1[0] -> _tab_1_1[0][0] , MAY
+// tab -> *NULL* , MAY
+// tab -> _tab_1[0] , MAY
+
+
+// Points To OUT:
+// _tab_1[0] -> *NULL* , MAY
+// _tab_1[0] -> _tab_1_1[0][0] , MAY
+// tab -> _tab_1[0] , EXACT
+
+void foo(int **tab)
+{
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// _tab_1[0] -> *NULL* , MAY
+// _tab_1[0] -> _tab_1_1[0][0] , MAY
+// p -> undefined , EXACT
+// tab -> *NULL* , MAY
+// tab -> _tab_1[0] , MAY
+
+   p = *tab;
+
+// Points To:
+// _tab_1[0] -> *NULL* , MAY
+// _tab_1[0] -> _tab_1_1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _tab_1_1[0][0] , MAY
+// tab -> _tab_1[0] , EXACT
+
+   p = p;
+}
+
+PROPER  EFFECTS
+
+void foo(int **tab)
+{
+   int *p;
+//             <    is read   >: _tab_1[0] tab
+//             <    is written>: p
+   p = *tab;
+//             <    is read   >: p
+//             <    is written>: p
+   p = p;
+}
+int main()
+{
+   int i, *p, **pp;
+//             <    is written>: i
+   i = 0;
+//             <    is written>: p
+   p = &i;
+//             <    is written>: pp
+   pp = &p;
+//             <    is read   >: p pp
+
+   foo(pp);
+   return 0;
+}
+
+Transformers with point-to
+
+
+//  T() {}
+
+void foo(int **tab)
+{
+
+//  T() {}
+
+   int *p;
+
+//  T(p) {}
+
+   p = *tab;
+
+//  T(p) {p==p#init}
+
+   p = p;
+}
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   int i, *p, **pp;
+
+//  T(i) {i==0}
+
+   i = 0;
+
+//  T(p) {&i==p, i==0}
+
+   p = &i;
+
+//  T(pp) {&i==p, &p==pp, i==0}
+
+   pp = &p;
+
+//  T() {&i==p, &p==pp, i==0}
+
+
+   foo(pp);
+
+//  T(main) {&i==p, &p==pp, i==0, main==0}
+
+   return 0;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i, *p, **pp;
+
+//  P() {}
+
+   i = 0;
+
+//  P(i) {i==0}
+
+   p = &i;
+
+//  P(i,p) {&i==p, i==0}
+
+   pp = &p;
+
+//  P(i,p,pp) {&i==p, &p==pp, i==0}
+
+
+   foo(pp);
+
+//  P(i,p,pp) {&i==p, &p==pp, i==0}
+
+   return 0;
+}
+
+//  P() {}
+
+void foo(int **tab)
+{
+
+//  P() {}
+
+   int *p;
+
+//  P() {}
+
+   p = *tab;
+
+//  P(p) {}
+
+   p = p;
+}
+
+Warnings
+
+(activate_phase) Rule `PROPER_EFFECTS_WITH_POINTS_TO' already active
+TRANSFORMERS_INTER_FULL_WITH_POINTS_TO[foo] (semantics_usable_points_to_reference_p) line 8 
+at statement:
+
+	p = *tab;
+
+
+The pointer "tab" can point to NULL

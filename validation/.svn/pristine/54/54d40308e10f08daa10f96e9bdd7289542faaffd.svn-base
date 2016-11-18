@@ -1,0 +1,28 @@
+setenv WS=complex_constant
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setenv SHELL /bin/bash
+# FI: Stupid, but preserves restrict.c which is dead wrong
+# setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create $WS $WS.c
+
+# Display result of csplit, including for the compilation unit(s).
+
+# The semantics of %ALL has changed twice, including or not the
+# compilation unit.  Besides, these files include preprocessor
+# dependent information, which make it unsuitable for validation
+display C_SOURCE_FILE[$WS]
+# display PRINTED_FILE[$WS]
+quit
+# Get rid of preprocessed files
+shell rm -f $WS.database/Tmp/*.c
+
+# Display all C files, including compilation units, but get rid of pragmas,
+# except the line number pragma to avoid dependencies on gcc and/or preprocessor version
+shell cat $WS.database/*/*.c|sed -e '/^# [0-9][0-9]*/d'
+
+close
+delete $WS
+quit

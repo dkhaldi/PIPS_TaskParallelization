@@ -1,0 +1,94 @@
+Unlike Semantics, the tpips scripts use the current pipsmake
+environment (Fall 2009) and not the initial one.
+
+anywhere01: *p = ... impact of anywhere effects with different options
+            (see pointer01, 02, 03, 04 for interprocedural issues)
+
+anywhere02:
+
+atoll:      call site located in a declaration initialization (P. Villalon)
+
+continue01:
+
+for08:	    check recursive analysis of update operators (analyzed as a while loop)
+for09:	    check recursive analysis of update operators (analyzed as a while loop)
+
+global01.c: take abstract locations into account (derived from
+	    Benchmarks/whetstone, submitted by Serge Guelton)
+
+gonnord_thesis_x_y.c: example found in PhD dissertation Chapter x, Example y
+
+gopan3.c:   example from Gopan (preparation of a paper, bug fix 
+            for loop postcondition)
+gopan_cav06: Vivien Maisonneuve
+
+gulwani03.c: example from Gulwani (same as opan3)
+
+gulvani_xxx.c: Vivien Maisonneuve (one control node)
+
+linked_regions02.c: a bug with regions linked to the way transformers
+                    and preconditions are computed. I fixed a bug in
+                    declaration_to_transformer (use a range instead of
+                    a precondition) and the region computation
+                    generated lots of overflows and, worse, return a
+                    wrong result for the loop regions
+
+linked_regions03.c: same as linked_regions02, but with additional ifs
+                    to obtain intermediate results; also check of the transformer
+                    computation for multiplication when the arguments are positive and
+                    have upper bounds
+
+linked_regions04.c: same as linked_region03.c, but the loops are
+                    distributed to integrate/sum the array references
+                    one by one before computing the convex hull. No
+                    overflow, much faster, correct result for the
+                    convex array regions.
+
+mehdi01.c:  example submitted by Mehdi Amini
+
+modulo12.c: conditions lead to parametric solution (with redundancy)
+
+modulo13.c: conditions lead to parametric solution (no redundancy)
+
+modulo14.c: conditions lead to parametric solution (with redundancy)
+
+modulo15.c: unfeasible condition
+
+modulo16.c: condition equations lead to exact constant solution 
+
+modulo17.c: copy of print_array.c, a bug found by Nelson Lossing
+
+modulo18.c: check negative e1 in e1%k, where k is a constant
+
+modulo19.c: similar to modulo18.c, check analysis behavior when sign is unknown
+
+summary_precondition02.c:
+
+summary_precondition03.c:
+
+maisonneuve01-18:
+
+             Test cases developped in 2010-2011 by Vivien or Francois
+             to expose weaknesses in semantics, especially in the
+             transitive closure
+
+pc01-04:     Different encoding of a program counter. The goal is to 
+             show robustness wrt the encoding
+
+pointer01: like anywhere01, but interprocedural issues
+
+pointer02:
+
+pointer03:
+
+pointer04:
+
+structure01: added by Corinne Ancourt
+
+structure02: side effects in lhs expressions + some kind of pointer analysis
+
+structure03: same as structure02, but with ALIASING_ACROSS_TYPES set to false
+
+structure04: same as struct02, but with points-to analysis
+
+while01-11: issues with while loops

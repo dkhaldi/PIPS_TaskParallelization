@@ -1,0 +1,88 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(void)
+{
+
+// Points To: none
+
+   int i1, i2;
+
+// Points To: none
+
+   int *pi1 = &i1;
+
+// Points To:
+// pi1 -> i1 , EXACT
+
+   int *pi2 = &i2;
+
+// Points To:
+// pi1 -> i1 , EXACT
+// pi2 -> i2 , EXACT
+
+   int **pp;
+
+// Points To:
+// pi1 -> i1 , EXACT
+// pi2 -> i2 , EXACT
+// pp -> undefined , EXACT
+
+   srand(time((void *) 0));
+
+// Points To:
+// pi1 -> i1 , EXACT
+// pi2 -> i2 , EXACT
+// pp -> undefined , EXACT
+
+   if (alea())
+
+// Points To:
+// pi1 -> i1 , EXACT
+// pi2 -> i2 , EXACT
+// pp -> undefined , EXACT
+
+      pp = &pi1;
+   else
+
+// Points To:
+// pi1 -> i1 , EXACT
+// pi2 -> i2 , EXACT
+// pp -> undefined , EXACT
+
+      pp = &pi2;
+
+// Points To:
+// pi1 -> i1 , EXACT
+// pi2 -> i2 , EXACT
+// pp -> pi1 , MAY
+// pp -> pi2 , MAY
+
+   *pp = (void *) 0;
+
+// Points To:
+// pi1 -> *NULL* , MAY
+// pi1 -> i1 , MAY
+// pi2 -> *NULL* , MAY
+// pi2 -> i2 , MAY
+// pp -> pi1 , MAY
+// pp -> pi2 , MAY
+
+   printf("%p %p %p\n", pp, pi1, pi2);
+
+// Points To:
+// pi1 -> *NULL* , MAY
+// pi1 -> i1 , MAY
+// pi2 -> *NULL* , MAY
+// pi2 -> i2 , MAY
+// pp -> pi1 , MAY
+// pp -> pi2 , MAY
+
+   return 0;
+}

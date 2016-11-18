@@ -1,0 +1,297 @@
+
+Cumulated Effects
+
+int main(void)
+{
+//             <    is written>: k
+//             <    is referenced>: k
+//             <    is declared>: k
+   int k = 17;
+//             <    is written>: k
+//             <    is referenced>: k
+   updateInt(&k);
+//             <    is declared>: f foo
+   struct foo f;
+//             <    is written>: f.i
+//             <    is referenced>: f
+   f.i = 0;
+//             <    is written>: f.j
+//             <    is referenced>: f
+   f.j = 2;
+//             <    is written>: f.i f.j
+//             <    is referenced>: f
+   updateFoo(&f);
+//             <    is read   >: f.i f.j k
+//             <    is written>: l
+//             <    is referenced>: f k l
+//             <    is declared>: l
+   int l = k+f.i+f.j;
+   return 0;
+}
+//             <    is read   >: pf
+//             <    is written>: _pf_1.i _pf_1.j
+//             <    is referenced>: pf
+void updateFoo(struct foo *pf)
+{
+//             <    is read   >: pf
+//             <    is written>: _pf_1.i
+//             <    is referenced>: pf
+   pf->i = 18;
+//             <    is read   >: pf
+//             <    is written>: _pf_1.j
+//             <    is referenced>: pf
+   pf->j = 1;
+   return;
+}
+//             <    is read   >: pi
+//             <    is written>: _pi_1
+//             <    is referenced>: pi
+void updateInt(int *pi)
+{
+//             <    is read   >: pi
+//             <    is written>: _pi_1
+//             <    is referenced>: pi
+   *pi = 19;
+   return;
+}
+
+Points-to List
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(void)
+{
+
+// Points To: none
+
+   int k = 17;
+
+// Points To: none
+
+   updateInt(&k);
+
+// Points To: none
+
+   struct foo f;
+
+// Points To: none
+
+   f.i = 0;
+
+// Points To: none
+
+   f.j = 2;
+
+// Points To: none
+
+   updateFoo(&f);
+
+// Points To: none
+
+   int l = k+f.i+f.j;
+
+// Points To: none
+
+   return 0;
+}
+
+// Points To IN:
+// pf -> *NULL* , MAY
+// pf -> _pf_1 , MAY
+
+
+// Points To OUT:
+// pf -> _pf_1 , EXACT
+
+void updateFoo(struct foo *pf)
+{
+
+// Points To:
+// pf -> *NULL* , MAY
+// pf -> _pf_1 , MAY
+
+   pf->i = 18;
+
+// Points To:
+// pf -> _pf_1 , EXACT
+
+   pf->j = 1;
+
+// Points To:
+// pf -> _pf_1 , EXACT
+
+   return;
+}
+
+// Points To IN:
+// pi -> *NULL* , MAY
+// pi -> _pi_1 , MAY
+
+
+// Points To OUT:
+// pi -> _pi_1 , EXACT
+
+void updateInt(int *pi)
+{
+
+// Points To:
+// pi -> *NULL* , MAY
+// pi -> _pi_1 , MAY
+
+   *pi = 19;
+
+// Points To:
+// pi -> _pi_1 , EXACT
+
+   return;
+}
+
+Transformers
+
+
+//  T(main) {main==0}
+
+int main(void)
+{
+
+//  T(k) {k==17}
+
+   int k = 17;
+
+//  T() {}
+
+   updateInt(&k);
+
+//  T() {}
+
+   struct foo f;
+
+//  T(f[i]) {f[i]==0}
+
+   f.i = 0;
+
+//  T(f[j]) {f[j]==2}
+
+   f.j = 2;
+
+//  T() {}
+
+   updateFoo(&f);
+
+//  T(l) {f[i]+f[j]+k==l}
+
+   int l = k+f.i+f.j;
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+//  T(_pf_1[i],_pf_1[j]) {_pf_1[i]==18, _pf_1[j]==1}
+
+void updateFoo(struct foo *pf)
+{
+
+//  T(_pf_1[i]) {_pf_1[i]==18}
+
+   pf->i = 18;
+
+//  T(_pf_1[j]) {_pf_1[j]==1}
+
+   pf->j = 1;
+
+//  T() {}
+
+   return;
+}
+
+//  T(_pi_1) {_pi_1==19}
+
+void updateInt(int *pi)
+{
+
+//  T(_pi_1) {_pi_1==19}
+
+   *pi = 19;
+
+//  T() {}
+
+   return;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   int k = 17;
+
+//  P(k) {k==17}
+
+   updateInt(&k);
+
+//  P(k) {k==17}
+
+   struct foo f;
+
+//  P(k) {k==17}
+
+   f.i = 0;
+
+//  P(f[i],k) {f[i]==0, k==17}
+
+   f.j = 2;
+
+//  P(f[i],f[j],k) {f[i]==0, f[j]==2, k==17}
+
+   updateFoo(&f);
+
+//  P(f[i],f[j],k) {f[i]==0, f[j]==2, k==17}
+
+   int l = k+f.i+f.j;
+
+//  P(f[i],f[j],k,l) {f[i]==0, f[j]==2, k==17, l==19}
+
+   return 0;
+}
+
+//  P() {}
+
+void updateFoo(struct foo *pf)
+{
+
+//  P() {}
+
+   pf->i = 18;
+
+//  P(_pf_1[i]) {_pf_1[i]==18}
+
+   pf->j = 1;
+
+//  P(_pf_1[i],_pf_1[j]) {_pf_1[i]==18, _pf_1[j]==1}
+
+   return;
+}
+
+//  P() {}
+
+void updateInt(int *pi)
+{
+
+//  P() {}
+
+   *pi = 19;
+
+//  P(_pi_1) {_pi_1==19}
+
+   return;
+}

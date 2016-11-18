@@ -1,0 +1,115 @@
+
+PROPER  EFFECTS 
+
+void assign03()
+{
+   extern char *malloc(int);
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   double *p = (double *) malloc(10*sizeof(double));
+//             <    is written>: j
+   int j = 2;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: j p
+
+   p[j] = 1.;
+}
+extern void assign03();
+
+extern void foo();
+void foo()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   assign03();
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void assign03()
+{
+
+// Points To: none
+
+   extern char *malloc(int);
+
+// Points To: none
+
+   double *p = (double *) malloc(10*sizeof(double));
+
+// Points To:
+// p -> *HEAP*_l_4[0] , MAY
+
+   int j = 2;
+
+// Points To:
+// p -> *HEAP*_l_4[0] , MAY
+
+
+   p[j] = 1.;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+
+// Points To: none
+
+extern void assign03();
+
+
+// Points To: none
+
+extern void foo();
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void foo()
+{
+
+// Points To: none
+
+   assign03();
+}
+
+PROPER  EFFECTS WITH POINTS TO
+
+void assign03()
+{
+   extern char *malloc(int);
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   double *p = (double *) malloc(10*sizeof(double));
+//             <    is written>: j
+   int j = 2;
+//             <may be written>: *HEAP*_l_4[j]
+//             <    is read   >: j p
+
+   p[j] = 1.;
+}
+extern void assign03();
+
+extern void foo();
+void foo()
+{
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   assign03();
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

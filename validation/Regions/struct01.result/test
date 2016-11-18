@@ -1,0 +1,32 @@
+int main(void)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1) {
+      (foo.a)[i] = 0;
+      (foo.b)[i] = 1;
+   }
+   return 0;
+}
+
+//  <foo.a[PHI2]-W-MAY-{0<=PHI2, PHI2<=9}>
+//  <foo.b[PHI2]-W-MAY-{0<=PHI2, PHI2<=9}>
+
+int main(void)
+{
+   int i;
+
+//  <foo.a[PHI2]-W-MAY-{0<=PHI2, PHI2<=9}>
+//  <foo.b[PHI2]-W-MAY-{0<=PHI2, PHI2<=9}>
+
+   for(i = 0; i <= 9; i += 1) {
+
+//  <foo.a[PHI2]-W-EXACT-{PHI2==i, 0<=i, i<=9}>
+
+      (foo.a)[i] = 0;
+
+//  <foo.b[PHI2]-W-EXACT-{PHI2==i, 0<=i, i<=9}>
+
+      (foo.b)[i] = 1;
+   }
+   return 0;
+}

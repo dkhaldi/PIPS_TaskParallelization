@@ -1,0 +1,32 @@
+
+Points-To for pointer06
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void pointer06(int *k)
+{
+
+// Points To: none
+
+   k = 0;
+
+// Points To:
+// k -> *NULL* , EXACT
+
+   *k++;
+
+// Points To: unreachable
+
+   return;
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[pointer06] (offset_cells) line 8 
+at statement:
+
+	*k++;
+
+
+Arithmetic operation performed on NULL pointer "k".

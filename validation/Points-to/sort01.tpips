@@ -1,0 +1,23 @@
+setenv WSPACE=sort01
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+echo 
+echo Points-to for "foo"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[foo]
+
+echo 
+echo Points-to for \"$WSPACE\"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[sort01]
+
+close
+delete $WSPACE
+quit

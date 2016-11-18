@@ -1,0 +1,20 @@
+
+Symbol table for "decl13!"
+
+
+Warnings for decl13
+
+COMPILATION_UNIT_PARSER[decl13!] (c_parse) ("./decl13.c":1-2) 
+Dummy parameter "a" is redefined.
+Source code after preprocessing:
+extern void decl13(int a, int a);
+Input source code, before preprocessing:
+/* This is totally forbidden */
+void decl13(int a, int a)
+
+COMPILATION_UNIT_PARSER[decl13!] (c_parser_error) Recovery from C parser failure not (fully) implemented yet.
+C parser is likely to fail later if re-used.
+COMPILATION_UNIT_PARSER[decl13!] (c_parser_error) [user error] Dummy redefinition accepted by gcc but not compatible with ISO standard. Try to compile with "gcc -ansi -c"
+ at user line 2 in file "./decl13.c"
+COMPILATION_UNIT_PARSER[decl13!] (tpips_user_error) Close workspace and quit on user error requested.
+COMPILATION_UNIT_PARSER[decl13!] (pips_log_end) [user error] stopping pips on code 2 (USER_ERROR) for CLOSE_WORKSPACE_AND_QUIT_ON_ERROR

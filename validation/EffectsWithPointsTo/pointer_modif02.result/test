@@ -1,0 +1,35 @@
+
+int foo(int **dest, int *source)
+{
+//             <    is read   >: dest source
+//             <    is written>: _dest_1[0]
+   *dest = source;
+}
+int main()
+{
+   int *p, *q;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+
+   *p = 1;
+//             <    is read   >: p
+
+   foo(&q, p);
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: q
+   *q = 2;
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	12 --> 14 with conflicts
+		from <*ANY_MODULE*:*ANYWHERE*-W-MAY> to <p-R-EXACT>
+	12 --> 15 with conflicts
+		from <*ANY_MODULE*:*ANYWHERE*-W-MAY> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+		from <*ANY_MODULE*:*ANYWHERE*-W-MAY> to <q-R-EXACT>
+		from <p-R-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+	14 --> 15 with conflicts
+		from <p-R-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+
+****************** End of Dependence Graph ******************

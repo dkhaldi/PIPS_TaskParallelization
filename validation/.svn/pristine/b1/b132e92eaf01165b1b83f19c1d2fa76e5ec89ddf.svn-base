@@ -1,0 +1,87 @@
+
+POINTS TO
+
+
+// Points To IN:
+// x -> *NULL* , MAY
+// x -> _x_3[0] , MAY
+
+
+// Points To OUT:
+// x -> _x_3[0] , EXACT
+
+void call14(int n, int m, int *x)
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+
+   for(i = 0; i <= n*m-1; i += 1)
+
+// Points To:
+// x -> *NULL* , MAY
+// x -> _x_3[0] , MAY
+
+      x[i] = i;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int d1 = 4;
+
+// Points To: none
+
+   int d2 = 4;
+
+// Points To: none
+
+   int y[d1][d2];
+
+// Points To: none
+
+   int i, j;
+
+// Points To: none
+
+
+   call14(d1, d2, (int *) y);
+
+// Points To:
+// y[0] -> y[0][0] , EXACT
+
+
+   for(i = 0; i <= d1-1; i += 1) {
+
+// Points To:
+// y[0] -> y[0][0] , EXACT
+
+      for(j = 0; j <= d2-1; j += 1)
+
+// Points To:
+// y[0] -> y[0][0] , EXACT
+
+         printf("y[%d][%d] = %d\t", i, j, y[i][j]);
+
+// Points To:
+// y[0] -> y[0][0] , EXACT
+
+      printf("\n");
+   }
+
+// Points To:
+// y[0] -> y[0][0] , EXACT
+
+   return 0;
+}

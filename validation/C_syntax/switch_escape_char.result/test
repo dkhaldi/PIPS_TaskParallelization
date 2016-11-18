@@ -1,0 +1,116 @@
+
+// Parsed printed file for esc_q
+
+int esc_q(register char *d, register char *s, register int slen)
+{
+   register int ret = 0;
+
+   while (slen>0) {
+
+      if (*s=='\'')
+         goto _switch_2_case_39;
+      if (*s=='\\')
+         goto _switch_2_case_92;
+      if (*s=='\"')
+         goto _switch_2_case_34;
+      if (*s=='\?')
+         goto _switch_2_case_63;
+      goto _switch_2_default;
+_switch_2_case_39:      ;
+_switch_2_case_92:      ;
+      *d = '\\';
+      ++d;
+      ++ret;
+_switch_2_case_34:      ;
+_switch_2_case_63:      ;
+      *d = '\\';
+      ++d;
+      ++ret;
+_switch_2_default:      ;
+      *d = *s;
+      ++d;
+      ++s;
+      --slen;
+      goto _break_2;
+_break_2:      ;
+   }
+   return ret;
+}
+
+// Printed file for esc_q
+
+int esc_q(register char *d, register char *s, register int slen)
+{
+   register int ret = 0;
+
+   while (slen>0) {
+      if (*s=='\'') goto _switch_2_case_39;
+      if (*s=='\\') goto _switch_2_case_39;
+      if (*s=='\"') goto _switch_2_case_34;
+      if (*s=='\?') {
+      }
+      else {
+         goto _switch_2_default;
+      }
+_switch_2_case_34:      ;
+_switch_2_case_63:      ;
+      *d = '\\';
+      ++d;
+      ++ret;
+      goto _switch_2_default;
+_switch_2_case_39:      ;
+_switch_2_case_92:      ;
+      *d = '\\';
+      ++d;
+      ++ret;
+      goto _switch_2_case_34;
+_switch_2_default:      ;
+      *d = *s;
+      ++d;
+      ++s;
+      --slen;
+_break_2:      ;
+   }
+   return ret;
+}
+Try more aggressive restructuring:
+
+// printed file after RESTRUCTURE_CONTROL
+
+int esc_q(register char *d, register char *s, register int slen)
+{
+   register int ret = 0;
+
+   while (slen>0) {
+      if (*s=='\'') goto _switch_2_case_39;
+      if (*s=='\\') goto _switch_2_case_39;
+      if (*s=='\"') goto _switch_2_case_34;
+      if (*s=='\?') {
+      }
+      else {
+         goto _switch_2_default;
+      }
+_switch_2_case_34:      ;
+_switch_2_case_63:      ;
+      *d = '\\';
+      ++d;
+      ++ret;
+      goto _switch_2_default;
+_switch_2_case_39:      ;
+_switch_2_case_92:      ;
+      *d = '\\';
+      ++d;
+      ++ret;
+      goto _switch_2_case_34;
+_switch_2_default:      ;
+      *d = *s;
+      ++d;
+      ++s;
+      --slen;
+_break_2:      ;
+   }
+   return ret;
+}
+
+// Warnings
+

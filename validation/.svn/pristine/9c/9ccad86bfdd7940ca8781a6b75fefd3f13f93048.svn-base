@@ -1,0 +1,37 @@
+#
+# trying set/get env from tpips
+#
+setproperty MAXIMUM_USER_ERROR 25
+#
+getenv NEWGEN_MAX_TABULATED_ELEMENTS
+setenv NEWGEN_MAX_TABULATED_ELEMENTS 2000
+getenv NEWGEN_MAX_TABULATED_ELEMENTS
+#
+delete env
+create env env.f
+#
+echo ${NEWGEN_MAX_TABULATED_ELEMENTS}
+setenv FOO=foo
+setenv BLA=bla
+echo env set FOO=${FOO}, BLA=${BLA}
+unsetenv FOO
+unsetenv BLA
+echo env unset FOO=${FOO}, BLA=${BLA}
+#
+# some pips
+#
+display PRINTED_FILE
+close
+delete env
+echo max tab is ${NEWGEN_MAX_TABULATED_ELEMENTS}
+#
+# some syntax errors
+#
+setenv 
+setenv FOO
+setenv FOO = 
+setenv FOO = bla 2 = e
+getenv FOO FOO FOO
+getenv ===
+echo done
+quit

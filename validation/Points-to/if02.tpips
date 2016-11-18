@@ -1,0 +1,15 @@
+delete if02
+create if02 if02.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+activate PRINT_CODE_POINTS_TO_LIST
+
+echo
+echo POINTS TO for "main"
+echo
+display PRINTED_FILE[main]
+
+close
+delete if02
+quit

@@ -1,0 +1,55 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+   int t[100][10][3], i;
+
+   int (*p)[3];
+//             <    is written>: i
+   for(i = 0; i <= 2; i += 1)
+//             <    is read   >: i
+//             <    is written>: p
+      p = t[i];
+
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int t[100][10][3], i;
+
+
+// Points To: none
+
+   int (*p)[3];
+
+// Points To:
+// p -> undefined , EXACT
+
+   for(i = 0; i <= 2; i += 1)
+
+// Points To:
+// p -> undefined , MAY
+// p -> t[i][0] , MAY
+
+      p = t[i];
+
+// Points To:
+// p -> undefined , MAY
+// p -> t[*][0] , MAY
+
+
+   return 0;
+}

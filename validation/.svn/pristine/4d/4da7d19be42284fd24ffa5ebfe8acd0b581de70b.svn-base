@@ -1,0 +1,9 @@
+# test timeout while doing something
+delete timeout01
+echo timeout from env: $PIPS_TIMEOUT
+create timeout01 hello_world.c
+echo sleep 9...
+shell sleep 9
+echo "not reached"
+close
+quit

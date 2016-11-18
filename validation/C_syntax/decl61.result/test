@@ -1,0 +1,30 @@
+
+Parsed printed code for decl61
+
+void decl61(char *fn)
+{
+   extern complex imagein[64][64], imageout[256][256];
+}
+
+Warnings related to decl61.c
+
+C_PARSER[decl61] (CreateReturnEntity) ("./decl61.c":25-34) 
+Type of "decl61" is undefined. Return value cannot be created.
+Source code after preprocessing:
+void decl61(fn)
+
+     char * fn;
+
+{ extern complex imagein[64][64], imageout[256][256];
+Input source code, before preprocessing:
+
+float imagein_re[N][N], imageout_re[M][M];
+float imagein_im[N][N], imageout_im[M][M];
+
+
+void decl61(fn)
+
+     char * fn;
+
+{	extern complex imagein[N][N], imageout[M][M];
+

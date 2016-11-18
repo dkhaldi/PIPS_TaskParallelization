@@ -1,0 +1,26 @@
+
+Initial code
+
+int split_initializations08()
+{
+   int i = 1, l = 4;
+   // gcc does not allow variable size array direct initialization
+   int a[l] = {1, 2, 3, i};
+   i++;
+}
+
+Code after c89 split_initializations
+
+int split_initializations08()
+{
+   int i, l;
+   // gcc does not allow variable size array direct initialization
+   int a[l];
+   i = 1;
+   l = 4;
+   a[0] = 1;
+   a[1] = 2;
+   a[2] = 3;
+   a[3] = i;
+   i++;
+}

@@ -1,0 +1,7 @@
+delete error_management05
+setproperty ABORT_ON_USER_ERROR TRUE
+create error_management05 hello_world.c
+echo activate should fail
+activate PASSE_INEXISTANTE
+echo message must not be shown
+quit

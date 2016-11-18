@@ -1,0 +1,33 @@
+
+Parsed printed file for "safe_malloc"
+
+void * safe_malloc(int n)
+{
+   long int i;                                                          /*0009*/
+
+   if (!i) {                                                            /*0011*/
+      void exit(int);                                                   /*0012*/
+      exit(2);                                                          /*0013*/
+      exit(4);                                                          /*0014*/
+   }
+   else
+      return (void *) i;                                                /*0017*/
+}
+
+Printed file for "safe_malloc"
+
+void * safe_malloc(int n)
+{
+   long int i;                                                          /*0009*/
+
+   if (!i) {                                                            /*0011*/
+      void exit(int);                                                   /*0012*/
+      exit(2);                                                          /*0013*/
+      exit(4);                                                          /*0014*/
+   }
+   else
+      return (void *) i;                                                /*0017*/
+}
+#
+# compile generated decl49
+#

@@ -1,0 +1,143 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+
+// Points To: none
+
+   int i = 2;
+
+// Points To: none
+
+   int *p = &i;
+
+// Points To:
+// p -> i , EXACT
+
+   (*p)++;
+
+// Points To:
+// p -> i , EXACT
+
+   *p += 3;
+
+// Points To:
+// p -> i , EXACT
+
+   return *p;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char *argv[])
+{
+//             <    is written>: i
+//             <    is referenced>: i
+//             <    is declared>: i
+   int i = 2;
+//             <    is written>: p
+//             <    is referenced>: i p
+//             <    is declared>: p
+   int *p = &i;
+//             <    is read   >: i p
+//             <    is written>: i
+//             <    is referenced>: p
+   (*p)++;
+//             <    is read   >: i p
+//             <    is written>: i
+//             <    is referenced>: p
+   *p += 3;
+//             <    is read   >: i p
+//             <    is referenced>: p
+   return *p;
+}
+
+Cumulated effects with poins-to for "main"
+
+int main(int argc, char *argv[])
+{
+//             <    is written>: i
+//             <    is referenced>: i
+//             <    is declared>: i
+   int i = 2;
+//             <    is written>: p
+//             <    is referenced>: i p
+//             <    is declared>: p
+   int *p = &i;
+//             <    is read   >: i p
+//             <    is written>: i
+//             <    is referenced>: p
+   (*p)++;
+//             <    is read   >: i p
+//             <    is written>: i
+//             <    is referenced>: p
+   *p += 3;
+//             <    is read   >: i p
+//             <    is referenced>: p
+   return *p;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==6}
+
+int main(int argc, char *argv[])
+{
+
+//  T(i) {i==2}
+
+   int i = 2;
+
+//  T(p) {i==p}
+
+   int *p = &i;
+
+//  T(i) {i==i#init+1}
+
+   (*p)++;
+
+//  T(i) {i==i#init+3}
+
+   *p += 3;
+
+//  T(main) {i==main}
+
+   return *p;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   int i = 2;
+
+//  P(i) {i==2}
+
+   int *p = &i;
+
+//  P(i,p) {i==2, p==2}
+
+   (*p)++;
+
+//  P(i,p) {i==3, p==2}
+
+   *p += 3;
+
+//  P(i,p) {i==6, p==2}
+
+   return *p;
+}

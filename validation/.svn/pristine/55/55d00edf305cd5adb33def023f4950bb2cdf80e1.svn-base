@@ -1,0 +1,100 @@
+int read_config_file()
+{
+//             <    is written>: file
+   FILE *file = (void *) 0;
+   int i;
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+
+   file = fopen("foo.txt", "r");
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: i *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+
+   fscanf(file, "%d", &i);
+
+   return 0;
+}
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+int read_config_file()
+{
+//             <    is written>: file
+   FILE *file = (void *) 0;
+   int i;
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+
+   file = fopen("foo.txt", "r");
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: i *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+
+   fscanf(file, "%d", &i);
+
+   return 0;
+}
+
+//  T(read_config_file) {read_config_file==0}
+
+int read_config_file()
+{
+
+//  T() {}
+
+   FILE *file = (void *) 0;
+
+//  T() {}
+
+   int i;
+
+//  T() {}
+
+
+   file = fopen("foo.txt", "r");
+
+//  T(i) {}
+
+
+   fscanf(file, "%d", &i);
+
+//  T(read_config_file) {read_config_file==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int read_config_file()
+{
+
+//  P() {}
+
+   FILE *file = (void *) 0;
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+
+   file = fopen("foo.txt", "r");
+
+//  P() {}
+
+
+   fscanf(file, "%d", &i);
+
+//  P(i) {}
+
+
+   return 0;
+}

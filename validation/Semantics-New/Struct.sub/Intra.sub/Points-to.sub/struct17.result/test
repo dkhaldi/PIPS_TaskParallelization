@@ -1,0 +1,47 @@
+
+Cumulated Effects
+
+//             <    is written>: global_f.s.j
+int main(void)
+{
+//             <    is written>: global_f.s.j
+   global_f.s.j = 2;
+
+   return 0;
+}
+
+Transformers
+
+
+//  T(global_f[s][j],main) {global_f[s][j]==2, main==0}
+
+int main(void)
+{
+
+//  T(global_f[s][j]) {global_f[s][j]==2}
+
+   global_f.s.j = 2;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   global_f.s.j = 2;
+
+//  P(global_f[s][j]) {global_f[s][j]==2}
+
+
+   return 0;
+}

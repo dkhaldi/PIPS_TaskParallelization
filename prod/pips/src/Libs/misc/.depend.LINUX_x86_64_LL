@@ -1,0 +1,149 @@
+LINUX_x86_64_LL/debug.o: debug.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/file.o: file.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/message.o: message.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h
+LINUX_x86_64_LL/dotting.o: dotting.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/args.o: args.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/system.o: system.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/exception.o: exception.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/perf_spy.o: perf_spy.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/malloc_debug.o: malloc_debug.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h
+LINUX_x86_64_LL/reset_hooks.o: reset_hooks.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h misc.h

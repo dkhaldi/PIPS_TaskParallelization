@@ -1,0 +1,81 @@
+
+Source code with transformers
+
+
+//  T() {}
+
+void modulo16(void)
+{
+
+//  T() {}
+
+   int i, j, k, mi, mj, mip, mjp;
+
+//  T(k,mi,mip,mj,mjp) {}
+
+   if (4*i-3*j==0&&j-i==1) {
+
+//  T(mi) {i==3, j==4, mi==3}
+
+      mi = i%10;
+
+//  T(mj) {i==3, j==4, mi==3, mj==4}
+
+      mj = j%10;
+
+//  T(mip) {i==3, j==4, mi==3, mip==1, mj==4}
+
+      mip = i%2;
+
+//  T(mjp) {i==3, j==4, mi==3, mip==1, mj==4, mjp==1}
+
+      mjp = j%3;
+
+//  T(k) {i==3, j==4, k==0, mi==3, mip==1, mj==4, mjp==1}
+
+      k = 0;
+   }
+
+//  T() {}
+
+   return;
+}
+
+//  P() {}
+
+void modulo16(void)
+{
+
+//  P() {}
+
+   int i, j, k, mi, mj, mip, mjp;
+
+//  P() {}
+
+   if (4*i-3*j==0&&j-i==1) {
+
+//  P() {i==3, j==4}
+
+      mi = i%10;
+
+//  P(mi) {i==3, j==4, mi==3}
+
+      mj = j%10;
+
+//  P(mi,mj) {i==3, j==4, mi==3, mj==4}
+
+      mip = i%2;
+
+//  P(mi,mip,mj) {i==3, j==4, mi==3, mip==1, mj==4}
+
+      mjp = j%3;
+
+//  P(mi,mip,mj,mjp) {i==3, j==4, mi==3, mip==1, mj==4, mjp==1}
+
+      k = 0;
+   }
+
+//  P(k,mi,mip,mj,mjp) {}
+
+   return;
+}

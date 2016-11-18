@@ -1,0 +1,7 @@
+PARSER[FOO] (Syntax) [user error] Parser error between lines 5 and 5
+Array sized with a non-integer expression
+PARSER[FOO] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[FOO] (catch_user_error) pass has failed
+PARSER[FOO] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module FOO.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE

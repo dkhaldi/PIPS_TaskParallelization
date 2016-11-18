@@ -1,0 +1,30 @@
+
+Initial code
+
+int pof()
+{
+   int a;
+#pragma pips outline
+   a = 1;
+}
+extern int pof();
+
+Code after outlining
+
+void kernel(int a_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int a;
+   a = *a_0;
+#pragma pips outline
+   a = 1;
+   *a_0 = a;
+}
+int pof()
+{
+   int a;
+   kernel(&a);
+}
+extern int pof();
+//PIPS generated variable
+void kernel(int a_0[1]);

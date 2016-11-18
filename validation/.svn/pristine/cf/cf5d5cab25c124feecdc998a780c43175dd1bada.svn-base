@@ -1,0 +1,13 @@
+setenv WS=smil_anr999
+delete $WS
+
+# Very specific preprocessing
+setenv PIPS_CPP ./cat_last.sh
+
+create $WS $WS.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+display PARSED_PRINTED_FILE[$WS!]
+close
+#delete $WS

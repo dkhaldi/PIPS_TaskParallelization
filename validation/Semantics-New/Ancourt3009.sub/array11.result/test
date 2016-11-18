@@ -1,0 +1,158 @@
+int main(int argc, char *argv[])
+{
+//             <    is declared>: p s s1 s2
+   struct s {
+      int a[3][3][6/2];
+   } s1, s2, *p;
+//             <    is written>: i
+//             <    is referenced>: i
+//             <    is declared>: i
+   int i = 2;
+//             <    is read   >: argc
+//             <    is referenced>: argc
+
+   if (argc>2)
+//             <    is written>: p
+//             <    is referenced>: p s1
+      p = &s1;
+   else
+//             <    is written>: p
+//             <    is referenced>: p s2
+      p = &s2;
+//             <may be written>: s1.a[0][1][2] s2.a[0][1][2]
+//             <    is read   >: i p
+//             <    is written>: i
+//             <    is referenced>: i p
+
+   update_array(p->a, &i);
+//             <    is written>: s1.a[0][1][2]
+//             <    is referenced>: s1
+   (s1.a)[0][1][2] = 1;
+
+   return 0;
+}
+
+//  T(_pi_2[0],a[0][1][2]) {_pi_2[0]==_pi_2[0]#init+1, a[0][1][2]==12}
+
+void update_array(int a[3][3][3], int *pi)
+{
+
+//  T(a[0][1][2]) {a[0][1][2]==12}
+
+   a[0][1][2] = 12;
+
+//  T(_pi_2[0]) {_pi_2[0]==_pi_2[0]#init+1}
+
+   (*pi)++;
+
+//  T() {}
+
+   return;
+}
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T() {}
+
+   struct s {
+      int a[3][3][6/2];
+   } s1, s2, *p;
+
+//  T(i) {i==2}
+
+   int i = 2;
+
+//  T() {}
+
+
+   if (argc>2)
+
+//  T() {}
+
+      p = &s1;
+   else
+
+//  T() {}
+
+      p = &s2;
+
+//  T(i,s1[a][0][1][2],s2[a][0][1][2]) {i==i#init+1}
+
+
+   update_array(p->a, &i);
+
+//  T(s1[a][0][1][2]) {s1[a][0][1][2]==1}
+
+   (s1.a)[0][1][2] = 1;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   struct s {
+      int a[3][3][6/2];
+   } s1, s2, *p;
+
+//  P() {}
+
+   int i = 2;
+
+//  P(i) {i==2}
+
+
+   if (argc>2)
+
+//  P(i) {i==2, 3<=argc}
+
+      p = &s1;
+   else
+
+//  P(i) {i==2, argc<=2}
+
+      p = &s2;
+
+//  P(i) {i==2}
+
+
+   update_array(p->a, &i);
+
+//  P(i,s1[a][0][1][2],s2[a][0][1][2]) {i==3}
+
+   (s1.a)[0][1][2] = 1;
+
+//  P(i,s1[a][0][1][2],s2[a][0][1][2]) {i==3, s1[a][0][1][2]==1}
+
+
+   return 0;
+}
+
+//  P() {_pi_2[0]==2}
+
+void update_array(int a[3][3][3], int *pi)
+{
+
+//  P() {_pi_2[0]==2}
+
+   a[0][1][2] = 12;
+
+//  P(a[0][1][2]) {_pi_2[0]==2, a[0][1][2]==12}
+
+   (*pi)++;
+
+//  P(_pi_2[0],a[0][1][2]) {_pi_2[0]==3, _pi_2[0]#init==2,
+//    a[0][1][2]==12}
+
+   return;
+}

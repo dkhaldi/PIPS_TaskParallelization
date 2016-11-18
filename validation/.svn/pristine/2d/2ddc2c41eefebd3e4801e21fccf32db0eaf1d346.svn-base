@@ -1,0 +1,8 @@
+/* Check the prettyprint of enum declarations */
+
+enum e {a};
+
+extern int main();
+#
+# compile generated enum06
+#

@@ -1,0 +1,34 @@
+
+Points-to for properties04
+
+
+// Points To IN:
+// q -> *NULL* , MAY
+// q -> _q_1[0] , MAY
+
+
+// Points To OUT:
+// _q_1[0] -> undefined , EXACT
+// q -> _q_1[0] , EXACT
+
+int properties04(int **q)
+{
+
+// Points To: none
+
+   int i;
+
+// Points To:
+// q -> *NULL* , MAY
+// q -> _q_1[0] , MAY
+
+
+   *q = &i;
+
+// Points To:
+// _q_1[0] -> i , EXACT
+// q -> _q_1[0] , EXACT
+
+
+   return 0;
+}

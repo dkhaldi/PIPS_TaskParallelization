@@ -1,0 +1,33 @@
+(tp_parse) equiv12: No such workspace
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+Registering file equiv12.f
+Splitting file    ./equiv12.f
+  Module         EQUIV12
+Workspace equiv12 created and opened.
+Module EQUIV12 selected
+Main module PROGRAM "EQUIV12" selected.
+Module EQUIV12 already active.
+setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+Module EQUIV12 already active.
+Request: build resource PRINTED_FILE for module EQUIV12.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(EQUIV12)
+  PARSER                         building   PARSED_CODE(EQUIV12)
+                                 building   CALLEES(EQUIV12)
+PARSER[EQUIV12] (MakeEquivAtom) Illegal symbol V appears in EQUIVALENCE declaration
+PARSER[EQUIV12] (MakeEquivAtom) [user error] Parser error between lines 12 and 12
+Functional variable (?) in equivalence chain.
+PARSER[EQUIV12] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[EQUIV12] (catch_user_error) pass has failed
+PARSER[EQUIV12] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module EQUIV12.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module EQUIV12.
+Closing program.
+Closing workspace.
+Workspace equiv12 closed.
+Workspace equiv12 deleted.
+Pips is done: tpips quit

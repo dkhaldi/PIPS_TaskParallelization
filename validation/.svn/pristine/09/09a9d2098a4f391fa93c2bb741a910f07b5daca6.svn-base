@@ -1,0 +1,200 @@
+int main()
+{
+   short a[3][3][6/2];
+   int k;
+   a[1][1][4/2] = 0;
+   a[1][1][2] = 1;
+   update_array(k, a);
+   return 0;
+}
+void update_array(int fk, short fa[3][3][3])
+{
+   int i;
+   int j;
+   for(i = 0; i <= 2; i += 1)
+      for(j = 0; j <= 2; j += 1)
+         fa[i][j][fk] = 0;
+}
+int main()
+{
+//             <    is declared>: a
+   short a[3][3][6/2];
+//             <    is declared>: k
+   int k;
+//             <    is written>: a[1][1][4/2]
+//             <    is referenced>: a
+   a[1][1][4/2] = 0;
+//             <    is written>: a[1][1][2]
+//             <    is referenced>: a
+   a[1][1][2] = 1;
+//             <may be written>: a[*][*][*]
+//             <    is read   >: k
+//             <    is referenced>: a k
+   update_array(k, a);
+   return 0;
+}
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   short a[3][3][6/2];
+
+//  T() {}
+
+   int k;
+
+//  T(a[1][1][2]) {a[1][1][2]==0}
+
+   a[1][1][4/2] = 0;
+
+//  T(a[1][1][2]) {a[1][1][2]==1}
+
+   a[1][1][2] = 1;
+
+//  T(a[1][1][2]) {}
+
+   update_array(k, a);
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+//  T() {}
+
+void update_array(int fk, short fa[3][3][3])
+{
+
+//  T() {}
+
+   int i;
+
+//  T() {}
+
+   int j;
+
+//  T(i,j) {0<=i, i<=2}
+
+   for(i = 0; i <= 2; i += 1)
+
+//  T(j) {0<=j, j<=2}
+
+      for(j = 0; j <= 2; j += 1)
+
+//  T() {}
+
+         fa[i][j][fk] = 0;
+}
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   short a[3][3][6/2];
+
+//  P() {}
+
+   int k;
+
+//  P() {}
+
+   a[1][1][4/2] = 0;
+
+//  P(a[1][1][2]) {a[1][1][2]==0}
+
+   a[1][1][2] = 1;
+
+//  P(a[1][1][2]) {a[1][1][2]==1}
+
+   update_array(k, a);
+
+//  P(a[1][1][2]) {}
+
+   return 0;
+}
+
+//  P() {}
+
+void update_array(int fk, short fa[3][3][3])
+{
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+   int j;
+
+//  P() {}
+
+   for(i = 0; i <= 2; i += 1)
+
+//  P(i,j) {0<=i, i<=2}
+
+      for(j = 0; j <= 2; j += 1)
+
+//  P(i,j) {0<=i, i<=2, 0<=j, j<=2}
+
+         fa[i][j][fk] = 0;
+}
+
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI3==fk, 0<=PHI1, PHI1<=2,
+//    0<=PHI2, PHI2<=2}>
+
+void update_array(int fk, short fa[3][3][3])
+{
+   int i;
+   int j;
+
+//  <fa-RE-EXACT-{}>
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI3==fk, 0<=PHI1, PHI1<=2,
+//    0<=PHI2, PHI2<=2}>
+
+   for(i = 0; i <= 2; i += 1)
+
+//  <fa-RE-EXACT-{}>
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI1==i, PHI3==fk, 0<=PHI2,
+//    PHI2<=2, 0<=i, i<=2}>
+
+      for(j = 0; j <= 2; j += 1)
+
+//  <fa-RE-EXACT-{}>
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI1==i, PHI2==j, PHI3==fk, 0<=i,
+//    i<=2, 0<=j, j<=2}>
+
+         fa[i][j][fk] = 0;
+}
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+
+   short a[3][3][6/2];
+   int k;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1][PHI2][PHI3]-W-EXACT-{PHI1==1, PHI2==1, PHI3==2}>
+
+   a[1][1][4/2] = 0;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1][PHI2][PHI3]-W-EXACT-{PHI1==1, PHI2==1, PHI3==2,
+//    a[1][1][2]==0}>
+
+   a[1][1][2] = 1;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1][PHI2][PHI3]-W-EXACT-{PHI3==k, 0<=PHI1, PHI1<=2, 0<=PHI2,
+//    PHI2<=2, a[1][1][2]==1}>
+
+   update_array(k, a);
+   return 0;
+}

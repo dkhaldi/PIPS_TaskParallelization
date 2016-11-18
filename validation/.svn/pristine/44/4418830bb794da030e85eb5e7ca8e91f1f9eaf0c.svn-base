@@ -1,0 +1,23 @@
+
+Code for the main file: double_declaration10
+
+/* A copy of double declaration09, but with a twist: an auxiliary
+ * file, double_declaration10.src/foo.c
+ *
+ * A non-existing error is detected.
+ *
+ */
+
+int a = 1, b = 2, c, d = 4;
+
+Code for the auxiliary file: foo
+
+/* 
+ *
+ * With multiple variables in two different files: c is initialized in
+ * a different file
+ *
+ * See Ticket 430
+ */
+
+int a, b, c = 3, d;

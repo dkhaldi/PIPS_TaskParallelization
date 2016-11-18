@@ -1,0 +1,96 @@
+//
+// Init Code
+//
+int main()
+{
+   int n, m;
+   if (n>0&&m>0) {
+      int a[n], b[m];
+      int i, j, k;
+
+      if (n<2*m) {
+         for(i = 0; i <= n-1; i += 1)
+            a[i] = i;
+         for(j = 0; j <= m-1; j += 1)
+            b[j] = a[2*j];
+
+         for(k = 0; k <= m-1; k += 1)
+            printf("b[%d]=%d", k, b[k]);
+      }
+   }
+   return 0;
+}
+//
+// OUT regions for for20
+//
+int main()
+{
+   int n, m;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, n+1<=2m, 1<=n}>
+
+   if (n>0&&m>0) {
+      int a[n], b[m];
+      int i, j, k;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, n+1<=2m, 1<=n}>
+
+
+      if (n<2*m) {
+
+//  <a[PHI1]-OUT-MAY-{0<=PHI1, PHI1+1<=n, n+1<=2m, 1<=n}>
+
+         for(i = 0; i <= n-1; i += 1)
+
+//  <a[PHI1]-OUT-MAY-{PHI1==i, 0<=i, i+1<=n, n+1<=2m}>
+
+            a[i] = i;
+
+//  <b[PHI1]-OUT-EXACT-{0<=PHI1, PHI1+1<=m, i==n, 1<=i, i+1<=2m}>
+
+         for(j = 0; j <= m-1; j += 1)
+
+//  <b[PHI1]-OUT-EXACT-{PHI1==j, i==n, 1<=i, i+1<=2m, 0<=j, j+1<=m}>
+
+            b[j] = a[2*j];
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, i==n, j==m, 1<=i,
+//    i+1<=2j}>
+
+
+         for(k = 0; k <= m-1; k += 1)
+
+//  <stdout[PHI1]-OUT-MAY-{PHI1==0, 0<=k, k+1<=m}>
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, i==n, j==m, 1<=i,
+//    i+1<=2j, k+1<=j, 0<=k}>
+
+            printf("b[%d]=%d", k, b[k]);
+      }
+   }
+   return 0;
+}
+//
+// Source code for for20 after LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+//
+int main()
+{
+   int n, m;
+   if (n>0&&m>0) {
+      int a[n], b[m];
+      int i, j, k;
+
+      if (n<2*m) {
+         for(i = 0; i <= n-1; i += 1)
+            a[i] = i;
+         for(j = 0; j <= m-1; j += 1)
+            b[j] = a[2*j];
+
+         for(k = 0; k <= m-1; k += 1)
+            printf("b[%d]=%d", k, b[k]);
+      }
+   }
+   return 0;
+}
+
+Warnings
+

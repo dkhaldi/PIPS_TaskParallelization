@@ -1,0 +1,127 @@
+
+Points-to
+
+
+Transformers with point-to
+
+
+//  T() {}
+
+void memcopy04(int size, char *src, char *dst)
+{
+
+//  T() {}
+
+   int i;
+
+//  T(i) {}
+
+   if (src!=(void *) 0&&dst!=(void *) 0) {
+
+//  T(s) {s==src}
+
+      char *s = (char *) src;
+
+//  T(d) {d==dst, s==src}
+
+      char *d = (char *) dst;
+
+//  T(d,i,s) {d#init==dst, s#init==src, 0<=i, i+1<=size}
+
+      for(i = 0; i <= size-1; i += 1)
+
+//  T(d,s) {0<=i, i+1<=size}
+
+         *d++ = *s++;
+   }
+
+//  T() {}
+
+   return;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+void memcopy04(int size, char *src, char *dst)
+{
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+   if (src!=(void *) 0&&dst!=(void *) 0) {
+
+//  P() {}
+
+      char *s = (char *) src;
+
+//  P(s) {s==src}
+
+      char *d = (char *) dst;
+
+//  P(d,s) {d==dst, s==src}
+
+      for(i = 0; i <= size-1; i += 1)
+
+//  P(d,i,s) {0<=i, i+1<=size}
+
+         *d++ = *s++;
+   }
+
+//  P(i) {}
+
+   return;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "memcopy04" instead.
+TRANSFORMERS_INTER_FULL[memcopy04] (pointer_expression_to_transformer) line 11 
+at statement:
+
+	char *s = (char *) src;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).
+TRANSFORMERS_INTER_FULL[memcopy04] (pointer_expression_to_transformer) line 12 
+at statement:
+
+	char *d = (char *) dst;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).
+TRANSFORMERS_INTER_FULL[memcopy04] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "memcopy04" instead.
+TRANSFORMERS_INTER_FULL[memcopy04] (pointer_expression_to_transformer) line 11 
+at statement:
+
+	char *s = (char *) src;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).
+TRANSFORMERS_INTER_FULL[memcopy04] (pointer_expression_to_transformer) line 12 
+at statement:
+
+	char *d = (char *) dst;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).
+PRECONDITIONS_INTER_FULL[memcopy04] (pointer_expression_to_transformer) line 11 
+at statement:
+
+	char *s = (char *) src;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).
+PRECONDITIONS_INTER_FULL[memcopy04] (pointer_expression_to_transformer) line 12 
+at statement:
+
+	char *d = (char *) dst;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).

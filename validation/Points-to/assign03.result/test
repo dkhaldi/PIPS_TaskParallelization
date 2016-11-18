@@ -1,0 +1,105 @@
+
+Points-to for "assign03"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void assign03()
+{
+
+// Points To: none
+
+   extern char *malloc(int);
+
+// Points To: none
+
+   double *p = (double *) malloc(10*sizeof(double));
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+   int j = 2;
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+
+   p[j] = 1.;
+}
+
+Proper effects with points-to for "assign03"
+
+void assign03()
+{
+   extern char *malloc(int);
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   double *p = (double *) malloc(10*sizeof(double));
+//             <    is written>: j
+   int j = 2;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: j p
+
+   p[j] = 1.;
+}
+
+Cumulated pointer effects for ""
+
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+void assign03()
+{
+   extern char *malloc(int);
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   double *p = (double *) malloc(10*sizeof(double));
+//             <    is written>: j
+   int j = 2;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: j p
+
+   p[j] = 1.;
+}
+
+Points-to for "foo"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void foo()
+{
+
+// Points To: none
+
+   assign03();
+}
+
+Proper effects with points-to for "foo"
+
+void foo()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   assign03();
+}
+
+Cumulated pointer effects for "foo"
+
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+void foo()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   assign03();
+}

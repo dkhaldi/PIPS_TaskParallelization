@@ -1,0 +1,122 @@
+//
+// Init Code
+//
+int main()
+{
+   int a[10], i;
+   int l;
+   int u;
+   
+   //al, au are totaly useless for this code but will be revive with LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+   int al, au;
+   al = l;
+   au = u;
+
+   if (l<u&&l<=0&&u<10) {
+      for(i = l; i <= u-1; i += 1)
+         a[i-l] = i;
+
+      for(i = l; i <= u-1; i += 1)
+         if (i<10)
+            a[i] = i;
+
+      for(i = 0; i <= 9; i += 1)
+         printf("a[%d]=%d", i, a[i]);
+   }
+
+   return 0;
+}
+
+OUT regions for live01
+
+int main()
+{
+   int a[10], i;
+   int l;
+   int u;
+   
+   //al, au are totaly useless for this code but will be revive with LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+   int al, au;
+   al = l;
+   au = u;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, al==l, au==u, al<=0,
+//    al+1<=au, au<=9}>
+
+
+   if (l<u&&l<=0&&u<10) {
+
+//  <a[PHI1]-OUT-EXACT-{0<=PHI1, PHI1<=9, au<=PHI1, PHI1+l+1<=au,
+//    al==l, au==u, al+1<=au, au<=9}>
+
+      for(i = l; i <= u-1; i += 1)
+
+//  <a[PHI1]-OUT-EXACT-{PHI1+l==i, 0<=PHI1, PHI1<=9, au<=PHI1, al==l,
+//    au==u, i+1<=au}>
+
+         a[i-l] = i;
+
+//  <a[PHI1]-OUT-EXACT-{0<=PHI1, PHI1<=9, PHI1+1<=au, al==l, au==u,
+//    al<=0, al+1<=au, au<=9}>
+
+
+      for(i = l; i <= u-1; i += 1)
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==i, 0<=PHI1, al==l, au==u, al<=0, au<=9,
+//    i+1<=au}>
+
+         if (i<10)
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==i, 0<=PHI1, al==l, au==u, al<=0, au<=9,
+//    i+1<=au, i<=9}>
+
+            a[i] = i;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, al==l, au==u, al<=0,
+//    al+1<=au, au<=9}>
+
+
+      for(i = 0; i <= 9; i += 1)
+
+//  <stdout[PHI1]-OUT-MAY-{PHI1==0, 0<=i, i<=9}>
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, al==l, au==u, al<=0,
+//    al+1<=au, au<=9, 0<=i, i<=9}>
+
+         printf("a[%d]=%d", i, a[i]);
+   }
+
+   return 0;
+}
+//
+// Source code for live01 after LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+//
+i 
+i 
+int main()
+{
+   int a[10], i;
+   int l;
+   int u;
+   
+   //al, au are totaly useless for this code but will be revive with LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+   int al, au;
+   al = l;
+   au = u;
+
+   if (l<u&&l<=0&&u<10) {
+      for(i = pips_max(2, au+l, al); i <= pips_min(2, au-1, l+9); i += 1)
+         a[i-l] = i;
+
+      for(i = 0; i <= au-1; i += 1)
+         if (i<10)
+            a[i] = i;
+
+      for(i = 0; i <= 9; i += 1)
+         printf("a[%d]=%d", i, a[i]);
+   }
+
+   return 0;
+}
+
+Warnings
+

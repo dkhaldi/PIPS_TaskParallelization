@@ -1,0 +1,35 @@
+setenv WS c99_pragma_for_loop03b
+delete $WS
+# Recycle source from previous example:
+setenv PIPS_CPP_FLAGS=" -std=c99 "
+create $WS c99_pragma_for_loop03.c
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+#setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   FALSE
+#setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER FALSE
+
+#setenv C_SYNTAX_DEBUG_LEVEL 7
+#activate C_PARSER
+
+
+echo //
+echo // Parsed code for "main"
+echo //
+
+display PARSED_PRINTED_FILE[main]
+
+echo //
+echo // Code for "main" new_controlizer
+echo //
+activate NEW_CONTROLIZER
+display PRINTED_FILE[main]
+
+close
+echo //
+echo // Warnings
+echo //
+shell cat $WS.database/Warnings
+
+delete $WS
+quit

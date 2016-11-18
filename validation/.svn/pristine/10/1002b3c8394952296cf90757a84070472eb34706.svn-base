@@ -1,0 +1,65 @@
+
+Init Code
+
+int main()
+{
+   int x, i;
+   x = 0;
+
+   for(i = 0; i <= 9; i += 1)
+      printf("x=%d", x);
+
+   return 0;
+}
+
+Source code for iofor02 after dead-code elimination
+
+int main()
+{
+   int x, i;
+   x = 0;
+
+   for(i = 0; i <= 9; i += 1)
+      printf("x=%d", x);
+
+   return 0;
+}
+
+OUT regions for iofor02
+
+int main()
+{
+   int x, i;
+
+//  <x-OUT-EXACT-{}>
+
+   x = 0;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, x==0}>
+
+
+   for(i = 0; i <= 9; i += 1)
+
+//  <stdout[PHI1]-OUT-MAY-{PHI1==0, 0<=i, i<=9}>
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, x==0, 0<=i, i<=9}>
+
+      printf("x=%d", x);
+
+   return 0;
+}
+
+Source code for iofor02 after dead-code elimination with OUT regions
+
+int main()
+{
+   int x, i;
+   x = 0;
+
+   for(i = 0; i <= 9; i += 1)
+      printf("x=%d", x);
+
+   return 0;
+}
+
+Warnings
+

@@ -1,0 +1,130 @@
+
+Points-to lists
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   // BEGIN BLOCK
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int a[1000];
+
+// Points To:
+// p -> undefined , EXACT
+
+   int i = 0;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   p = &a[i];
+
+// Points To:
+// p -> a[*] , MAY
+
+   a[i] = 1;
+
+// Points To:
+// p -> a[*] , MAY
+
+   *p = 0;
+
+// Points To:
+// p -> a[*] , MAY
+
+   a[i]++;
+
+// Points To:
+// p -> a[*] , MAY
+
+
+   printf("a[0]=%d\n", a[0]);
+   // END BLOCK
+}
+
+Regions
+
+
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1}>
+
+int main()
+{
+
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1}>
+
+   // BEGIN BLOCK
+   int *p;
+   int a[1000];
+   int i = 0;
+
+//  <p-W-EXACT-{}>
+
+
+   p = &a[i];
+
+//  <a[PHI1]-W-EXACT-{PHI1==0, i==0}>
+
+   a[i] = 1;
+
+//  <a[PHI1]-W-MAY-{i==0}>
+//  <p-R-EXACT-{}>
+
+   *p = 0;
+
+//  <a[PHI1]-R-EXACT-{PHI1==0, i==0}>
+//  <a[PHI1]-W-EXACT-{PHI1==0, i==0}>
+
+   a[i]++;
+
+//  <a[PHI1]-R-EXACT-{PHI1==0, i==0}>
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1, i==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1, i==0}>
+
+
+   printf("a[0]=%d\n", a[0]);
+   // END BLOCK
+}
+
+After scalarization
+
+int main()
+{
+   // BEGIN BLOCK
+   int *p;
+   int a[1000];
+   int i = 0;
+
+   p = &a[i];
+   a[i] = 1;
+   *p = 0;
+   a[i]++;
+
+   printf("a[0]=%d\n", a[0]);
+   // END BLOCK
+}

@@ -1,0 +1,60 @@
+
+Transformers for divide10
+
+
+//  T() {0==-1}
+
+int divide10(int n)
+{
+
+//  T(nn) {2n==nn}
+
+   int nn = n+n;
+
+//  T() {0==-1}
+
+   int m = nn/(n-n);
+
+//  T() {0==-1}
+
+   return m;
+}
+
+Preconditions for divide10
+
+
+//  P() {}
+
+int divide10(int n)
+{
+
+//  P() {}
+
+   int nn = n+n;
+
+//  P(nn) {2n==nn}
+
+   int m = nn/(n-n);
+
+//  P() {0==-1}
+
+   return m;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "divide10" instead.
+TRANSFORMERS_INTER_FULL[divide10] (process_bounds_for_divide) line 13 
+at statement:
+
+	int m = nn/(n-n);
+
+
+Zero divide:
+PRECONDITIONS_INTER_FULL[divide10] (process_bounds_for_divide) line 13 
+at statement:
+
+	int m = nn/(n-n);
+
+
+Zero divide:

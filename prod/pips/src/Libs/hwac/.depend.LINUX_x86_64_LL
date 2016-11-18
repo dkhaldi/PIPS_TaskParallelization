@@ -1,0 +1,325 @@
+LINUX_x86_64_LL/hardware_accelerator.o: hardware_accelerator.c \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/effects.h $(ROOT)/include/misc.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h $(ROOT)/include/text.h \
+ $(ROOT)/include/cloning.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/effects-util.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/points_to_private.h \
+ $(ROOT)/include/callgraph.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/pipsdbm.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/control.h $(ROOT)/include/effects-generic.h freia.h \
+ freia_spoc.h freia_terapix.h freia_opencl.h freia_sigmac.h hwac.h \
+ $(ROOT)/include/freia_spoc_private.h
+LINUX_x86_64_LL/freia.o: freia.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h freia.h freia_spoc.h freia_terapix.h \
+ freia_opencl.h freia_sigmac.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/pipsdbm.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/newgen.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/ri-util.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/prettyprint.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/effects-util.h \
+ $(ROOT)/include/points_to_private.h $(ROOT)/include/properties.h \
+ $(ROOT)/include/property.h $(ROOT)/include/c_syntax.h \
+ $(ROOT)/include/c_parser_private.h \
+ $(ROOT)/include/freia_spoc_private.h hwac.h \
+ $(ROOT)/include/effects-generic.h
+LINUX_x86_64_LL/freia_spoc.o: freia_spoc.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h freia.h freia_spoc.h freia_terapix.h \
+ freia_opencl.h freia_sigmac.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h $(ROOT)/include/text.h \
+ $(ROOT)/include/cloning.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/effects-util.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/points_to_private.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/freia_spoc_private.h hwac.h
+LINUX_x86_64_LL/freia_terapix.o: freia_terapix.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h $(ROOT)/include/text.h \
+ $(ROOT)/include/cloning.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/effects-util.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/points_to_private.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h freia.h \
+ freia_spoc.h freia_terapix.h freia_opencl.h freia_sigmac.h \
+ $(ROOT)/include/freia_spoc_private.h hwac.h
+LINUX_x86_64_LL/freia_opencl.o: freia_opencl.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/newgen.h $(ROOT)/include/naming.h \
+ $(ROOT)/include/pipsdbm.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h freia.h \
+ freia_spoc.h freia_terapix.h freia_opencl.h freia_sigmac.h hwac.h \
+ $(ROOT)/include/freia_spoc_private.h
+LINUX_x86_64_LL/freia_aipo.o: freia_aipo.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h freia.h freia_spoc.h freia_terapix.h \
+ freia_opencl.h freia_sigmac.h hwac.h \
+ $(ROOT)/include/freia_spoc_private.h
+LINUX_x86_64_LL/freia_sigmac.o: freia_sigmac.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/newgen.h $(ROOT)/include/naming.h \
+ $(ROOT)/include/prettyprint.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h freia.h \
+ freia_spoc.h freia_terapix.h freia_opencl.h freia_sigmac.h hwac.h \
+ $(ROOT)/include/freia_spoc_private.h
+LINUX_x86_64_LL/dag-utils.o: dag-utils.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h freia.h freia_spoc.h freia_terapix.h \
+ freia_opencl.h freia_sigmac.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/pipsdbm.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/newgen.h $(ROOT)/include/ri.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/ri-util.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/text.h $(ROOT)/include/cloning.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/effects-util.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/points_to_private.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/freia_spoc_private.h hwac.h
+LINUX_x86_64_LL/freia-utils.o: freia-utils.c $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/include/misc.h freia.h freia_spoc.h freia_terapix.h \
+ freia_opencl.h freia_sigmac.h $(ROOT)/../linear/include/linear.h \
+ $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/effects.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h $(ROOT)/include/text.h \
+ $(ROOT)/include/cloning.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/effects-util.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/points_to_private.h \
+ $(ROOT)/include/properties.h $(ROOT)/include/property.h \
+ $(ROOT)/include/pipsdbm.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/freia_spoc_private.h hwac.h \
+ $(ROOT)/include/effects-generic.h
+LINUX_x86_64_LL/freia_transformations.o: freia_transformations.c \
+ $(ROOT)/../newgen/include/genC.h \
+ $(ROOT)/../newgen/include/newgen_assert.h \
+ $(ROOT)/../newgen/include/newgen_types.h \
+ $(ROOT)/../newgen/include/newgen_set.h \
+ $(ROOT)/../newgen/include/newgen_hash.h \
+ $(ROOT)/../newgen/include/newgen_list.h \
+ $(ROOT)/../newgen/include/newgen_stack.h \
+ $(ROOT)/../newgen/include/newgen_string_buffer.h \
+ $(ROOT)/../newgen/include/newgen_auto_string.h \
+ $(ROOT)/../newgen/include/newgen_map.h \
+ $(ROOT)/../newgen/include/newgen_array.h \
+ $(ROOT)/../newgen/include/newgen_generic_mapping.h \
+ $(ROOT)/../newgen/include/newgen_generic_stack.h \
+ $(ROOT)/../newgen/include/newgen_generic_function.h \
+ $(ROOT)/../linear/include/linear.h $(ROOT)/../linear/include/boolean.h \
+ $(ROOT)/../linear/include/arithmetique.h \
+ $(ROOT)/../linear/include/arithmetic_errors.h \
+ $(ROOT)/../linear/include/vecteur.h \
+ $(ROOT)/../linear/include/contrainte.h $(ROOT)/../linear/include/sc.h \
+ $(ROOT)/../linear/include/sommet.h $(ROOT)/../linear/include/ray_dte.h \
+ $(ROOT)/../linear/include/matrix.h $(ROOT)/../linear/include/sg.h \
+ $(ROOT)/../linear/include/polyedre.h \
+ $(ROOT)/../linear/include/polynome.h $(ROOT)/../linear/include/union.h \
+ $(ROOT)/include/ri.h $(ROOT)/include/effects.h $(ROOT)/include/misc.h \
+ $(ROOT)/include/ri-util.h $(ROOT)/include/ri.h $(ROOT)/include/text.h \
+ $(ROOT)/include/cloning.h $(ROOT)/include/newgen.h \
+ $(ROOT)/include/naming.h $(ROOT)/include/effects-util.h \
+ $(ROOT)/include/effects.h $(ROOT)/include/points_to_private.h \
+ $(ROOT)/include/callgraph.h $(ROOT)/include/properties.h \
+ $(ROOT)/include/property.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/pipsdbm.h $(ROOT)/include/resources.h \
+ $(ROOT)/include/control.h $(ROOT)/include/effects-generic.h freia.h \
+ freia_spoc.h freia_terapix.h freia_opencl.h freia_sigmac.h hwac.h \
+ $(ROOT)/include/freia_spoc_private.h

@@ -1,0 +1,46 @@
+
+Transformers for printf02
+
+
+//  T() {}
+
+void printf02()
+{
+
+//  T(i) {i==1}
+
+   int i = 1;
+
+//  T() {i==1}
+
+   // Here, the transformer should not impact i
+   fprintf(stdout, "i=%d\n", i);
+
+//  T() {i==1}
+
+   // Here, i==1
+   return;
+}
+
+Preconditions for printf02
+
+
+//  P() {}
+
+void printf02()
+{
+
+//  P() {}
+
+   int i = 1;
+
+//  P(i) {i==1}
+
+   // Here, the transformer should not impact i
+   fprintf(stdout, "i=%d\n", i);
+
+//  P(i) {i==1}
+
+   // Here, i==1
+   return;
+}

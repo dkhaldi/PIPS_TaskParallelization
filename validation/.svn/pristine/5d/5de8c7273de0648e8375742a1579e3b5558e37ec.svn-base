@@ -1,0 +1,9 @@
+delete average_power
+create average_power average_power.c
+
+setproperty CONSTANT_PATH_EFFECTS FALSE
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[average_power]
+
+close
+delete average_power

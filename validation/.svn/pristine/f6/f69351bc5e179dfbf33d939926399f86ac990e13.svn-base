@@ -1,0 +1,25 @@
+delete assert01
+
+create assert01 assert01.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty PRETTYPRINT_INDENTATION 2
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+echo
+echo Parsed printed file for "assert01"
+echo
+
+display PARSED_PRINTED_FILE[main]
+
+echo
+echo Cumulated effetcs for "assert01"
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[main]
+
+close
+delete assert01
+quit
+

@@ -1,0 +1,70 @@
+
+Points-to for "foo"
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// foo -> *NULL* , EXACT
+
+int * foo()
+{
+
+// Points To: none
+
+   return (void *) 0;
+}
+
+Points-to for "sort01"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void sort01()
+{
+
+// Points To: none
+
+   int a[10];
+
+// Points To:
+// p -> *NULL* , EXACT
+
+   int *p = foo(), *q = foo();
+
+// Points To:
+// p -> *NULL* , EXACT
+// q -> *NULL* , EXACT
+
+
+   a[0] = 1;
+
+// Points To:
+// p -> *NULL* , EXACT
+// q -> *NULL* , EXACT
+
+
+   if (p==q)
+
+// Points To:
+// p -> *NULL* , EXACT
+// q -> *NULL* , EXACT
+
+      p = &a[4];
+   else
+
+// Points To: unreachable
+
+      p = &a[2];
+
+// Points To:
+// p -> a[4] , EXACT
+// q -> *NULL* , EXACT
+
+
+   return;
+}

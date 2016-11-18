@@ -1,0 +1,44 @@
+# Same source code as array_declaration02, but different tpips
+# The pointer analysis is not used here
+
+setenv WSPACE=array_declaration03
+delete $WSPACE
+create $WSPACE $WSPACE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+#setproperty ALIASING_ACROSS_TYPES FALSE
+
+#setenv SEMANTICS_DEBUG_LEVEL 1
+
+#setproperty SEMANTICS_ANALYZE_SCALAR_INTEGER_VARIABLES FALSE
+#setproperty SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+
+# Analyse structs... This property should be sufficient...
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+
+echo
+echo Transformers with point-to
+echo
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[main]
+
+echo
+echo Preconditions with point-to
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

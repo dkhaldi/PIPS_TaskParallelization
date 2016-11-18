@@ -1,0 +1,27 @@
+delete goto
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create goto goto.c
+
+echo
+echo PARSED PRINTED FILE
+echo
+
+display PARSED_PRINTED_FILE[main]
+
+echo
+echo PRINTED FILE (after controlization)
+echo
+
+display PRINTED_FILE[main]
+
+echo
+echo Unsplit goto
+echo
+
+apply UNSPLIT[%PROGRAM]
+shell cat goto.database/Src/goto.c
+close
+
+#delete goto
+
+quit

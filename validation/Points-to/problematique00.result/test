@@ -1,0 +1,71 @@
+
+Proper effects
+
+int main()
+{
+   int *a, b, c, d;
+//             <    is written>: c
+   c = 3;
+//             <    is written>: a
+   /* S1 */
+   a = &c;
+//             <    is read   >: d
+   /* S2 */
+   read(d);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a
+//             <    is written>: b
+   /* S3 */
+   b = *a;
+   /* S4 */
+   
+   
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *a, b, c, d;
+
+// Points To:
+// a -> undefined , EXACT
+
+   c = 3;
+
+// Points To:
+// a -> undefined , EXACT
+
+   /* S1 */
+   a = &c;
+
+// Points To:
+// a -> c , EXACT
+
+   /* S2 */
+   read(d);
+
+// Points To:
+// a -> c , EXACT
+
+   /* S3 */
+   b = *a;
+
+// Points To:
+// a -> c , EXACT
+
+   /* S4 */
+   
+   
+   return 0;
+}

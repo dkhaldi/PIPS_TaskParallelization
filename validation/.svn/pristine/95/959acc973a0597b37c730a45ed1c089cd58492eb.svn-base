@@ -1,0 +1,14 @@
+setenv WS=struct13
+delete $WS
+
+# This piece of code is no longer OK with gcc
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+setenv PIPS_CPP_FLAGS "-P"
+
+create $WS $WS.c
+
+display PARSED_PRINTED_FILE[$WS!]
+close
+# The PIPS C parser core dumps on struct13 function
+shell cat $WS.database/Warnings
+quit

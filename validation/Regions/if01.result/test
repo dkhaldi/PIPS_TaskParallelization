@@ -1,0 +1,323 @@
+
+Init Code
+
+int main()
+{
+   int x, n, a[10];                                                     /*0003*/
+
+   x = 0;                                                               /*0005*/
+   n = 3;                                                               /*0006*/
+
+   if (n<2) {                                                           /*0008*/
+      x = 1;                                                            /*0009*/
+      a[0] = 41;                                                        /*0010*/
+   }
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+PROPER effect for if01
+
+int main()
+{
+//             <    is declared>: a n x
+   int x, n, a[10];                                                     /*0003*/
+//             <    is written>: x
+//             <    is referenced>: x
+
+   x = 0;                                                               /*0005*/
+//             <    is written>: n
+//             <    is referenced>: n
+   n = 3;                                                               /*0006*/
+//             <    is read   >: n
+//             <    is referenced>: n
+
+   if (n<2) {                                                           /*0008*/
+//             <    is written>: x
+//             <    is referenced>: x
+      x = 1;                                                            /*0009*/
+//             <    is written>: a[0]
+//             <    is referenced>: a
+      a[0] = 41;                                                        /*0010*/
+   }
+//             <    is read   >: a[0] x
+//             <    is referenced>: a x
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+CUMULATED effect for if01
+
+int main()
+{
+//             <    is declared>: a n x
+   int x, n, a[10];                                                     /*0003*/
+//             <    is written>: x
+//             <    is referenced>: x
+
+   x = 0;                                                               /*0005*/
+//             <    is written>: n
+//             <    is referenced>: n
+   n = 3;                                                               /*0006*/
+//             <may be written>: a[0] x
+//             <may be referenced>: a x
+//             <    is read   >: n
+//             <    is referenced>: n
+
+   if (n<2) {                                                           /*0008*/
+//             <    is written>: x
+//             <    is referenced>: x
+      x = 1;                                                            /*0009*/
+//             <    is written>: a[0]
+//             <    is referenced>: a
+      a[0] = 41;                                                        /*0010*/
+   }
+//             <    is read   >: a[0] x
+//             <    is referenced>: a x
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+IN effect for if01
+
+int main()
+{
+   int x, n, a[10];                                                     /*0003*/
+
+   x = 0;                                                               /*0005*/
+   n = 3;                                                               /*0006*/
+//             <    is imported>: n
+
+   if (n<2) {                                                           /*0008*/
+      x = 1;                                                            /*0009*/
+      a[0] = 41;                                                        /*0010*/
+   }
+//             <    is imported>: a[0] x
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+OUT effect for if01
+
+int main()
+{
+   int x, n, a[10];                                                     /*0003*/
+//             <    is exported>: x
+
+   x = 0;                                                               /*0005*/
+//             <    is exported>: n
+   n = 3;                                                               /*0006*/
+//             <may be exported>: a[0] x
+
+   if (n<2) {                                                           /*0008*/
+//             <    is exported>: x
+      x = 1;                                                            /*0009*/
+//             <    is exported>: a[0]
+      a[0] = 41;                                                        /*0010*/
+   }
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+REGIONS for if01
+
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+//  <n-WE-EXACT-{}>
+//  <x-WE-EXACT-{}>
+
+   int x, n, a[10];                                                     /*0003*/
+
+//  <x-RE-EXACT-{}>
+//  <x-W-EXACT-{}>
+
+
+   x = 0;                                                               /*0005*/
+
+//  <n-RE-EXACT-{}>
+//  <n-W-EXACT-{}>
+
+   n = 3;                                                               /*0006*/
+
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+
+   if (n<2) {                                                           /*0008*/
+      x = 1;                                                            /*0009*/
+      a[0] = 41;                                                        /*0010*/
+   }
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==0, n==3, x==0}>
+//  <x-RE-EXACT-{}>
+//  <x-R-EXACT-{}>
+
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+REGIONS for if01
+
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+//  <n-WE-EXACT-{}>
+//  <x-WE-EXACT-{}>
+
+   int x, n, a[10];                                                     /*0003*/
+
+//  <x-RE-EXACT-{}>
+//  <x-W-EXACT-{}>
+
+
+   x = 0;                                                               /*0005*/
+
+//  <n-RE-EXACT-{}>
+//  <n-W-EXACT-{}>
+
+   n = 3;                                                               /*0006*/
+
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+
+   if (n<2) {                                                           /*0008*/
+      x = 1;                                                            /*0009*/
+      a[0] = 41;                                                        /*0010*/
+   }
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==0, n==3, x==0}>
+//  <x-R-EXACT-{}>
+//  <x-RE-EXACT-{}>
+
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+IN regions for if01
+
+int main()
+{
+   int x, n, a[10];                                                     /*0003*/
+
+   x = 0;                                                               /*0005*/
+   n = 3;                                                               /*0006*/
+
+//  <n-IN-EXACT-{}>
+
+
+   if (n<2) {                                                           /*0008*/
+      x = 1;                                                            /*0009*/
+      a[0] = 41;                                                        /*0010*/
+   }
+
+//  <a[PHI1]-IN-EXACT-{PHI1==0, n==3, x==0}>
+//  <x-IN-EXACT-{}>
+
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+OUT regions for if01
+
+int main()
+{
+   int x, n, a[10];                                                     /*0003*/
+
+//  <x-OUT-EXACT-{}>
+
+
+   x = 0;                                                               /*0005*/
+
+//  <n-OUT-EXACT-{}>
+
+   n = 3;                                                               /*0006*/
+
+   if (n<2) {                                                           /*0008*/
+      x = 1;                                                            /*0009*/
+      a[0] = 41;                                                        /*0010*/
+   }
+
+   return a[0]+x;                                                       /*0013*/
+}
+
+Atomic Chains for if01
+
+
+ *********************** Use-Def Chains *********************
+
+	03 --> 05 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+	03 --> 06 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	03 --> 08 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	03 --> 09 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+	03 --> 10 with conflicts
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	03 --> 13 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	05 --> 09 with conflicts
+		from <x-W-EXACT> to <x-W-EXACT>
+	05 --> 13 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	06 --> 08 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+	09 --> 13 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	10 --> 13 with conflicts
+		from <a[0]-W-EXACT> to <a[0]-R-EXACT>
+
+****************** End of Dependence Graph ******************
+
+Region Chains for if01
+
+
+ *********************** Use-Def Chains *********************
+
+	03 --> 05 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+	03 --> 06 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	03 --> 08 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	03 --> 13 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	05 --> 13 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	06 --> 08 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+
+****************** End of Dependence Graph ******************
+
+IN/OUT Region Chains for if01
+
+
+ *********************** Use-Def Chains *********************
+
+	03 --> 05 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+	03 --> 06 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	03 --> 08 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	03 --> 13 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	05 --> 13 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	06 --> 08 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+
+****************** End of Dependence Graph ******************
+
+Warnings
+

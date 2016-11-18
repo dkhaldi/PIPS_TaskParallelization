@@ -1,0 +1,959 @@
+extern bool add_control_counters(const string);
+extern bool add_pragma(const string);
+extern bool alias_check(const string);
+extern bool alias_classes(const string);
+extern bool alias_lists(const string);
+extern bool alias_propagation(const string);
+extern bool any_complexities(const string);
+extern bool array_bound_check_bottom_up(const string);
+extern bool array_bound_check_instrumentation(const string);
+extern bool array_bound_check_interprocedural(const string);
+extern bool array_bound_check_top_down(const string);
+extern bool array_expansion(const string);
+extern bool array_privatizer(const string);
+extern bool array_resizing_bottom_up(const string);
+extern bool array_resizing_full_bottom_up(const string);
+extern bool array_resizing_statistic(const string);
+extern bool array_resizing_top_down(const string);
+extern bool array_section_privatizer(const string);
+extern bool atomic_chains(const string);
+extern bool atomizer(const string);
+extern bool bdsc_code_instrumentation(const string);
+extern bool bootstrap(const string);
+extern bool bootstrap_kernels(const string);
+extern bool bootstrap_stubs(const string);
+extern bool callgraph(const string);
+extern bool cast_at_call_sites(const string);
+extern bool check_initialize_vla_with_effects(const string);
+extern bool check_initialize_vla_with_preconditions(const string);
+extern bool check_initialize_vla_with_regions(const string);
+extern bool c_initializer(const string);
+extern bool clean_declarations(const string);
+extern bool clean_unused_dynamic_variables(const string);
+extern bool clear_pragma(const string);
+extern bool clone(const string);
+extern bool clone_on_argument(const string);
+extern bool clone_only(const string);
+extern bool clone_substitute(const string);
+extern bool coarse_grain_parallelization(const string);
+extern bool coarse_grain_parallelization_with_reduction(const string);
+extern bool common_subexpression_elimination(const string);
+extern bool compilation_unit_parser(const string);
+extern bool complementary_sections(const string);
+extern bool computation_intensity(const string);
+extern bool constant_array_scalarization(const string);
+extern bool continuation_conditions(const string);
+extern bool controlizer(const string);
+extern bool c_parser(const string);
+extern bool cumulated_effects(const string);
+extern bool cumulated_effects_with_pointer_values(const string);
+extern bool cumulated_effects_with_points_to(const string);
+extern bool cumulated_pointer_effects(const string);
+extern bool cumulated_pointer_effects_with_pointer_values(const string);
+extern bool cumulated_pointer_effects_with_points_to(const string);
+extern bool cumulated_reductions(const string);
+extern bool cumulated_references(const string);
+extern bool dead_code_elimination(const string);
+extern bool dead_code_elimination_with_out_regions(const string);
+extern bool deatomizer(const string);
+extern bool declarations_privatizer(const string);
+extern bool delay_communications_inter(const string);
+extern bool delay_communications_intra(const string);
+extern bool delay_load_communications_inter(const string);
+extern bool delay_load_communications_intra(const string);
+extern bool delay_store_communications_inter(const string);
+extern bool delay_store_communications_intra(const string);
+extern bool distributer(const string);
+extern bool dowhile_to_while(const string);
+extern bool dsc_code_parallelization(const string);
+extern bool expression_substitution(const string);
+extern bool fast_interprocedural_points_to_analysis(const string);
+extern bool filter_file(const string);
+extern bool filter_proper_effects(const string);
+extern bool flag_as_stub(const string);
+extern bool flag_kernel(const string);
+extern bool flag_loops(const string);
+extern bool flag_parallel_reduced_loops_with_atomic(const string);
+extern bool flag_parallel_reduced_loops_with_openmp_directives(const string);
+extern bool flatten_code(const string);
+extern bool flinter(const string);
+extern bool force_loop_fusion(const string);
+extern bool force_register_declarations(const string);
+extern bool for_loop_to_do_loop(const string);
+extern bool for_loop_to_while_loop(const string);
+extern bool forward_substitute(const string);
+extern bool fp_complexities(const string);
+extern bool freeze_variables(const string);
+extern bool freia_aipo_compiler(const string);
+extern bool freia_opencl_compiler(const string);
+extern bool freia_remove_scalar_ww_deps(const string);
+extern bool freia_sigmac_compiler(const string);
+extern bool freia_spoc_compiler(const string);
+extern bool freia_terapix_compiler(const string);
+extern bool freia_unroll_while(const string);
+extern bool fsm_generation(const string);
+extern bool fsm_merge_states(const string);
+extern bool fsm_split_state(const string);
+extern bool full_fsm_generation(const string);
+extern bool full_graph_of_calls(const string);
+extern bool full_spaghettify(const string);
+extern bool full_unroll(const string);
+extern bool full_unroll_pragma(const string);
+extern bool generate_starpu_pragma(const string);
+extern bool generate_two_addresses_code(const string);
+extern bool gpu_clear_annotations_on_loop_nest(const string);
+extern bool gpu_ify(const string);
+extern bool gpu_loop_nest_annotate(const string);
+extern bool gpu_parallelize_annotated_loop_nest(const string);
+extern bool gpu_promote_sequential(const string);
+extern bool gpu_qualify_pointers(const string);
+extern bool gpu_xml_dump(const string);
+extern bool graph_of_calls(const string);
+extern bool group_constants(const string);
+extern bool guard_elimination(const string);
+extern bool hbdsc_parallelization(const string);
+extern bool hpfc_close(const string);
+extern bool hpfc_compile(const string);
+extern bool hpfc_dynamic_directives(const string);
+extern bool hpfc_filter(const string);
+extern bool hpfc_init(const string);
+extern bool hpfc_install(const string);
+extern bool hpfc_make(const string);
+extern bool hpfc_parser(const string);
+extern bool hpfc_run(const string);
+extern bool hpfc_static_directives(const string);
+extern bool html_prettyprint(const string);
+extern bool html_prettyprint_symbol_table(const string);
+extern bool icm(const string);
+extern bool identity_elimination(const string);
+extern bool identity_elimination_with_points_to(const string);
+extern bool if_conversion(const string);
+extern bool if_conversion_compact(const string);
+extern bool if_conversion_init(const string);
+extern bool impact_check(const string);
+extern bool in_alias_pairs(const string);
+extern bool index_set_splitting(const string);
+extern bool induction_substitution(const string);
+extern bool in_effects(const string);
+extern bool initializer(const string);
+extern bool initialize_vla_with_effects(const string);
+extern bool initialize_vla_with_preconditions(const string);
+extern bool initialize_vla_with_regions(const string);
+extern bool initial_points_to(const string);
+extern bool initial_precondition(const string);
+extern bool initial_simple_pointer_values(const string);
+extern bool init_points_to_analysis(const string);
+extern bool inlining(const string);
+extern bool inlining_simple(const string);
+extern bool in_out_regions_chains(const string);
+extern bool in_regions(const string);
+extern bool instruction_selection(const string);
+extern bool in_summary_effects(const string);
+extern bool in_summary_regions(const string);
+extern bool internalize_parallel_code(const string);
+extern bool interprocedural_points_to_analysis(const string);
+extern bool interprocedural_summary_precondition(const string);
+extern bool intraprocedural_points_to_analysis(const string);
+extern bool intraprocedural_summary_precondition(const string);
+extern bool invariant_code_motion(const string);
+extern bool isolate_statement(const string);
+extern bool kernel_data_mapping(const string);
+extern bool kernelize(const string);
+extern bool kernel_load_store(const string);
+extern bool limit_nested_parallelism(const string);
+extern bool limit_parallelism_using_complexity(const string);
+extern bool linearize_array(const string);
+extern bool linearize_array_fortran(const string);
+extern bool linearize_loop_range(const string);
+extern bool live_in_summary_paths(const string);
+extern bool live_out_summary_paths(const string);
+extern bool live_paths(const string);
+extern bool localize_declaration(const string);
+extern bool loop_auto_unroll(const string);
+extern bool loop_bound_minimization_with_out_regions(const string);
+extern bool loop_expansion(const string);
+extern bool loop_expansion_init(const string);
+extern bool loop_fusion(const string);
+extern bool loop_fusion_with_regions(const string);
+extern bool loop_hyperplane(const string);
+extern bool loop_interchange(const string);
+extern bool loop_nest_unswitching(const string);
+extern bool loop_normalize(const string);
+extern bool loop_reductions(const string);
+extern bool loop_statistics(const string);
+extern bool loop_tiling(const string);
+extern bool may_pointer_regions(const string);
+extern bool may_regions(const string);
+extern bool mpi_task_generation(const string);
+extern bool must_pointer_regions(const string);
+extern bool must_pointer_regions_with_points_to(const string);
+extern bool must_regions(const string);
+extern bool must_regions_with_pointer_values(const string);
+extern bool must_regions_with_points_to(const string);
+extern bool nest_parallelization(const string);
+extern bool new_atomizer(const string);
+extern bool new_controlizer(const string);
+extern bool normalize_microcode(const string);
+extern bool old_reductions(const string);
+extern bool ompify_code(const string);
+extern bool omp_loop_parallel_threshold_set(const string);
+extern bool omp_merge_pragma(const string);
+extern bool one_thread_parallelize(const string);
+extern bool openmp_task_generation(const string);
+extern bool optimize_expressions(const string);
+extern bool out_alias_pairs(const string);
+extern bool out_effects(const string);
+extern bool outline(const string);
+extern bool out_regions(const string);
+extern bool out_summary_effects(const string);
+extern bool out_summary_regions(const string);
+extern bool parsed_symbol_table(const string);
+extern bool parser(const string);
+extern bool partial_eval(const string);
+extern bool partial_redundancy_elimination(const string);
+extern bool path_transformer(const string);
+extern bool phrase_comEngine_distributor(const string);
+extern bool phrase_distributor(const string);
+extern bool phrase_distributor_control_code(const string);
+extern bool phrase_distributor_init(const string);
+extern bool phrase_remove_dependences(const string);
+extern bool pocc_prettyprinter(const string);
+extern bool pragma_outliner(const string);
+extern bool preconditions_inter_fast(const string);
+extern bool preconditions_inter_full(const string);
+extern bool preconditions_intra(const string);
+extern bool preconditions_intra_fast(const string);
+extern bool prepend_call(const string);
+extern bool prepend_comment(const string);
+extern bool print_alias_classes(const string);
+extern bool print_alias_lists(const string);
+extern bool print_call_graph(const string);
+extern bool print_call_graph_with_complexities(const string);
+extern bool print_call_graph_with_cumulated_effects(const string);
+extern bool print_call_graph_with_in_regions(const string);
+extern bool print_call_graph_with_out_regions(const string);
+extern bool print_call_graph_with_preconditions(const string);
+extern bool print_call_graph_with_proper_effects(const string);
+extern bool print_call_graph_with_regions(const string);
+extern bool print_call_graph_with_total_preconditions(const string);
+extern bool print_call_graph_with_transformers(const string);
+extern bool print_c_code(const string);
+extern bool print_chains_graph(const string);
+extern bool print_claire_code(const string);
+extern bool print_claire_code_with_explicit_motif(const string);
+extern bool print_code(const string);
+extern bool print_code_as_a_graph(const string);
+extern bool print_code_as_a_graph_complexities(const string);
+extern bool print_code_as_a_graph_cumulated_effects(const string);
+extern bool print_code_as_a_graph_in_regions(const string);
+extern bool print_code_as_a_graph_out_regions(const string);
+extern bool print_code_as_a_graph_preconditions(const string);
+extern bool print_code_as_a_graph_proper_effects(const string);
+extern bool print_code_as_a_graph_regions(const string);
+extern bool print_code_as_a_graph_total_preconditions(const string);
+extern bool print_code_as_a_graph_transformers(const string);
+extern bool print_code_complementary_sections(const string);
+extern bool print_code_complexities(const string);
+extern bool print_code_continuation_conditions(const string);
+extern bool print_code_cumulated_effects(const string);
+extern bool print_code_cumulated_pointer_effects(const string);
+extern bool print_code_cumulated_reductions(const string);
+extern bool print_code_cumulated_references(const string);
+extern bool print_code_in_effects(const string);
+extern bool print_code_in_regions(const string);
+extern bool print_code_inv_pointer_regions(const string);
+extern bool print_code_inv_regions(const string);
+extern bool print_code_live_in_paths(const string);
+extern bool print_code_live_out_paths(const string);
+extern bool print_code_out_effects(const string);
+extern bool print_code_out_regions(const string);
+extern bool print_code_pointer_regions(const string);
+extern bool print_code_points_to_list(const string);
+extern bool print_code_preconditions(const string);
+extern bool print_code_privatized_regions(const string);
+extern bool print_code_proper_effects(const string);
+extern bool print_code_proper_pointer_effects(const string);
+extern bool print_code_proper_pointer_regions(const string);
+extern bool print_code_proper_reductions(const string);
+extern bool print_code_proper_references(const string);
+extern bool print_code_proper_regions(const string);
+extern bool print_code_regions(const string);
+extern bool print_code_simple_gen_kill_pointer_values(const string);
+extern bool print_code_simple_pointer_values(const string);
+extern bool print_code_smalltalk(const string);
+extern bool print_code_static_control(const string);
+extern bool print_code_total_preconditions(const string);
+extern bool print_code_transformers(const string);
+extern bool print_crough(const string);
+extern bool print_dot_chains_graph(const string);
+extern bool print_dot_dependence_graph(const string);
+extern bool print_dvicfg_with_filtered_proper_effects(const string);
+extern bool print_effective_dependence_graph(const string);
+extern bool print_filtered_dependence_daVinci_graph(const string);
+extern bool print_filtered_dependence_graph(const string);
+extern bool print_icfg(const string);
+extern bool print_icfg_with_complexities(const string);
+extern bool print_icfg_with_control(const string);
+extern bool print_icfg_with_control_complexities(const string);
+extern bool print_icfg_with_control_cumulated_effects(const string);
+extern bool print_icfg_with_control_in_regions(const string);
+extern bool print_icfg_with_control_out_regions(const string);
+extern bool print_icfg_with_control_preconditions(const string);
+extern bool print_icfg_with_control_proper_effects(const string);
+extern bool print_icfg_with_control_regions(const string);
+extern bool print_icfg_with_control_total_preconditions(const string);
+extern bool print_icfg_with_control_transformers(const string);
+extern bool print_icfg_with_cumulated_effects(const string);
+extern bool print_icfg_with_filtered_proper_effects(const string);
+extern bool print_icfg_with_in_regions(const string);
+extern bool print_icfg_with_loops(const string);
+extern bool print_icfg_with_loops_complexities(const string);
+extern bool print_icfg_with_loops_cumulated_effects(const string);
+extern bool print_icfg_with_loops_in_regions(const string);
+extern bool print_icfg_with_loops_out_regions(const string);
+extern bool print_icfg_with_loops_preconditions(const string);
+extern bool print_icfg_with_loops_proper_effects(const string);
+extern bool print_icfg_with_loops_regions(const string);
+extern bool print_icfg_with_loops_total_preconditions(const string);
+extern bool print_icfg_with_loops_transformers(const string);
+extern bool print_icfg_with_out_regions(const string);
+extern bool print_icfg_with_preconditions(const string);
+extern bool print_icfg_with_proper_effects(const string);
+extern bool print_icfg_with_regions(const string);
+extern bool print_icfg_with_total_preconditions(const string);
+extern bool print_icfg_with_transformers(const string);
+extern bool print_in_alias_pairs(const string);
+extern bool print_initial_precondition(const string);
+extern bool print_interface(const string);
+extern bool print_loop_carried_dependence_graph(const string);
+extern bool print_loops(const string);
+extern bool print_out_alias_pairs(const string);
+extern bool print_parallelized77_code(const string);
+extern bool print_parallelized90_code(const string);
+extern bool print_parallelizedcray_code(const string);
+extern bool print_parallelizedHPF_code(const string);
+extern bool print_parallelizedMPI_code(const string);
+extern bool print_parallelizedOMP_code(const string);
+extern bool print_program_precondition(const string);
+extern bool print_source(const string);
+extern bool print_source_complexities(const string);
+extern bool print_source_continuation_conditions(const string);
+extern bool print_source_cumulated_effects(const string);
+extern bool print_source_in_effects(const string);
+extern bool print_source_in_regions(const string);
+extern bool print_source_inv_regions(const string);
+extern bool print_source_out_effects(const string);
+extern bool print_source_out_regions(const string);
+extern bool print_source_preconditions(const string);
+extern bool print_source_proper_effects(const string);
+extern bool print_source_regions(const string);
+extern bool print_source_total_preconditions(const string);
+extern bool print_source_transformers(const string);
+extern bool print_whole_dependence_graph(const string);
+extern bool print_xml_application(const string);
+extern bool print_xml_code(const string);
+extern bool print_xml_code_with_explicit_motif(const string);
+extern bool privatize_module(const string);
+extern bool privatize_module_even_globals(const string);
+extern bool program_points_to(const string);
+extern bool program_postcondition(const string);
+extern bool program_precondition(const string);
+extern bool program_simple_pointer_values(const string);
+extern bool proper_effects(const string);
+extern bool proper_effects_with_pointer_values(const string);
+extern bool proper_effects_with_points_to(const string);
+extern bool proper_pointer_effects(const string);
+extern bool proper_reductions(const string);
+extern bool proper_references(const string);
+extern bool quick_scalarization(const string);
+extern bool recompile_module(const string);
+extern bool recover_for_loop(const string);
+extern bool reduction_atomization(const string);
+extern bool reduction_detection(const string);
+extern bool reduction_propagation(const string);
+extern bool reduction_variable_expansion(const string);
+extern bool redundant_load_store_elimination(const string);
+extern bool refine_transformers(const string);
+extern bool region_chains(const string);
+extern bool regions_to_loops(const string);
+extern bool remove_simple_scalar_pointers(const string);
+extern bool remove_useless_label(const string);
+extern bool rename_operator(const string);
+extern bool replace_reduction_with_atomic(const string);
+extern bool restructure_control(const string);
+extern bool rice_all_dependence(const string);
+extern bool rice_cray(const string);
+extern bool rice_data_dependence(const string);
+extern bool rice_fast_dependence_graph(const string);
+extern bool rice_full_dependence_graph(const string);
+extern bool rice_regions_dependence_graph(const string);
+extern bool rice_semantics_dependence_graph(const string);
+extern bool rstream_interface(const string);
+extern bool safescale_distributor(const string);
+extern bool safescale_distributor_init(const string);
+extern bool scalarization(const string);
+extern bool scalar_renaming(const string);
+extern bool scalopify(const string);
+extern bool scalopragma(const string);
+extern bool sequence_dependence_graph(const string);
+extern bool sesam_buffers_processing(const string);
+extern bool sesamify(const string);
+extern bool set_return_type_as_typedef(const string);
+extern bool simd_atomizer(const string);
+extern bool simdizer(const string);
+extern bool simdizer_auto_tile(const string);
+extern bool simdizer_auto_unroll(const string);
+extern bool simdizer_init(const string);
+extern bool simd_memory_packing(const string);
+extern bool simd_operator_mappings(const string);
+extern bool simd_remove_reductions(const string);
+extern bool simd_treematcher(const string);
+extern bool simple_pointer_values(const string);
+extern bool simple_xpath_test(const string);
+extern bool simplify_complex(const string);
+extern bool simplify_constant_address_expressions(const string);
+extern bool simplify_control(const string);
+extern bool simplify_control_directly(const string);
+extern bool simplify_subscripts(const string);
+extern bool solve_hardware_constraints(const string);
+extern bool spaghettify(const string);
+extern bool spire_distributed_unstructured_to_structured(const string);
+extern bool spire_shared_unstructured_to_structured(const string);
+extern bool split_initializations(const string);
+extern bool split_structures(const string);
+extern bool split_update_operator(const string);
+extern bool statement_insertion(const string);
+extern bool static_controlize(const string);
+extern bool step_analyse(const string);
+extern bool step_analyse_init(const string);
+extern bool step_compile(const string);
+extern bool step_install(const string);
+extern bool step_parser(const string);
+extern bool stf(const string);
+extern bool strength_reduction(const string);
+extern bool strip_mine(const string);
+extern bool summary_complementary_sections(const string);
+extern bool summary_complexity(const string);
+extern bool summary_effects(const string);
+extern bool summary_pointer_effects(const string);
+extern bool summary_pointer_regions(const string);
+extern bool summary_precondition(const string);
+extern bool summary_reductions(const string);
+extern bool summary_regions(const string);
+extern bool summary_total_postcondition(const string);
+extern bool summary_total_precondition(const string);
+extern bool summary_transformer(const string);
+extern bool suppress_dead_code(const string);
+extern bool suppress_trivial_test(const string);
+extern bool symbolic_tiling(const string);
+extern bool symbol_table(const string);
+extern bool taskify(const string);
+extern bool terapix_remove_divide(const string);
+extern bool terapix_warmup(const string);
+extern bool tiling_sequence(const string);
+extern bool total_preconditions_inter(const string);
+extern bool total_preconditions_intra(const string);
+extern bool transformation_test(const string);
+extern bool transformers_inter_fast(const string);
+extern bool transformers_inter_full(const string);
+extern bool transformers_inter_full_with_points_to(const string);
+extern bool transformers_intra_fast(const string);
+extern bool transformers_intra_full(const string);
+extern bool type_checker(const string);
+extern bool unfolding(const string);
+extern bool unfolding_simple(const string);
+extern bool uniform_complexities(const string);
+extern bool unroll(const string);
+extern bool unspaghettify(const string);
+extern bool unsplit(const string);
+extern bool unsplit_parsed(const string);
+extern bool used_before_set(const string);
+extern bool use_def_elimination(const string);
+extern bool variable_expansion(const string);
+extern bool wp65(const string);
+extern bool wrap_kernel_argument(const string);
+
+typedef bool (*builder_func_t)(const string);
+
+static struct builder_map {
+  const char *builder_name;
+  builder_func_t builder_func;
+} builder_maps[] = {
+
+    { BUILDER_ADD_CONTROL_COUNTERS, add_control_counters },
+    { BUILDER_ADD_PRAGMA, add_pragma },
+    { BUILDER_ALIAS_CHECK, alias_check },
+    { BUILDER_ALIAS_CLASSES, alias_classes },
+    { BUILDER_ALIAS_LISTS, alias_lists },
+    { BUILDER_ALIAS_PROPAGATION, alias_propagation },
+    { BUILDER_ANY_COMPLEXITIES, any_complexities },
+    { BUILDER_ARRAY_BOUND_CHECK_BOTTOM_UP, array_bound_check_bottom_up },
+    { BUILDER_ARRAY_BOUND_CHECK_INSTRUMENTATION, array_bound_check_instrumentation },
+    { BUILDER_ARRAY_BOUND_CHECK_INTERPROCEDURAL, array_bound_check_interprocedural },
+    { BUILDER_ARRAY_BOUND_CHECK_TOP_DOWN, array_bound_check_top_down },
+    { BUILDER_ARRAY_EXPANSION, array_expansion },
+    { BUILDER_ARRAY_PRIVATIZER, array_privatizer },
+    { BUILDER_ARRAY_RESIZING_BOTTOM_UP, array_resizing_bottom_up },
+    { BUILDER_ARRAY_RESIZING_FULL_BOTTOM_UP, array_resizing_full_bottom_up },
+    { BUILDER_ARRAY_RESIZING_STATISTIC, array_resizing_statistic },
+    { BUILDER_ARRAY_RESIZING_TOP_DOWN, array_resizing_top_down },
+    { BUILDER_ARRAY_SECTION_PRIVATIZER, array_section_privatizer },
+    { BUILDER_ATOMIC_CHAINS, atomic_chains },
+    { BUILDER_ATOMIZER, atomizer },
+    { BUILDER_BDSC_CODE_INSTRUMENTATION, bdsc_code_instrumentation },
+    { BUILDER_BOOTSTRAP, bootstrap },
+    { BUILDER_BOOTSTRAP_KERNELS, bootstrap_kernels },
+    { BUILDER_BOOTSTRAP_STUBS, bootstrap_stubs },
+    { BUILDER_CALLGRAPH, callgraph },
+    { BUILDER_CAST_AT_CALL_SITES, cast_at_call_sites },
+    { BUILDER_CHECK_INITIALIZE_VLA_WITH_EFFECTS, check_initialize_vla_with_effects },
+    { BUILDER_CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS, check_initialize_vla_with_preconditions },
+    { BUILDER_CHECK_INITIALIZE_VLA_WITH_REGIONS, check_initialize_vla_with_regions },
+    { BUILDER_C_INITIALIZER, c_initializer },
+    { BUILDER_CLEAN_DECLARATIONS, clean_declarations },
+    { BUILDER_CLEAN_UNUSED_DYNAMIC_VARIABLES, clean_unused_dynamic_variables },
+    { BUILDER_CLEAR_PRAGMA, clear_pragma },
+    { BUILDER_CLONE, clone },
+    { BUILDER_CLONE_ON_ARGUMENT, clone_on_argument },
+    { BUILDER_CLONE_ONLY, clone_only },
+    { BUILDER_CLONE_SUBSTITUTE, clone_substitute },
+    { BUILDER_COARSE_GRAIN_PARALLELIZATION, coarse_grain_parallelization },
+    { BUILDER_COARSE_GRAIN_PARALLELIZATION_WITH_REDUCTION, coarse_grain_parallelization_with_reduction },
+    { BUILDER_COMMON_SUBEXPRESSION_ELIMINATION, common_subexpression_elimination },
+    { BUILDER_COMPILATION_UNIT_PARSER, compilation_unit_parser },
+    { BUILDER_COMPLEMENTARY_SECTIONS, complementary_sections },
+    { BUILDER_COMPUTATION_INTENSITY, computation_intensity },
+    { BUILDER_CONSTANT_ARRAY_SCALARIZATION, constant_array_scalarization },
+    { BUILDER_CONTINUATION_CONDITIONS, continuation_conditions },
+    { BUILDER_CONTROLIZER, controlizer },
+    { BUILDER_C_PARSER, c_parser },
+    { BUILDER_CUMULATED_EFFECTS, cumulated_effects },
+    { BUILDER_CUMULATED_EFFECTS_WITH_POINTER_VALUES, cumulated_effects_with_pointer_values },
+    { BUILDER_CUMULATED_EFFECTS_WITH_POINTS_TO, cumulated_effects_with_points_to },
+    { BUILDER_CUMULATED_POINTER_EFFECTS, cumulated_pointer_effects },
+    { BUILDER_CUMULATED_POINTER_EFFECTS_WITH_POINTER_VALUES, cumulated_pointer_effects_with_pointer_values },
+    { BUILDER_CUMULATED_POINTER_EFFECTS_WITH_POINTS_TO, cumulated_pointer_effects_with_points_to },
+    { BUILDER_CUMULATED_REDUCTIONS, cumulated_reductions },
+    { BUILDER_CUMULATED_REFERENCES, cumulated_references },
+    { BUILDER_DEAD_CODE_ELIMINATION, dead_code_elimination },
+    { BUILDER_DEAD_CODE_ELIMINATION_WITH_OUT_REGIONS, dead_code_elimination_with_out_regions },
+    { BUILDER_DEATOMIZER, deatomizer },
+    { BUILDER_DECLARATIONS_PRIVATIZER, declarations_privatizer },
+    { BUILDER_DELAY_COMMUNICATIONS_INTER, delay_communications_inter },
+    { BUILDER_DELAY_COMMUNICATIONS_INTRA, delay_communications_intra },
+    { BUILDER_DELAY_LOAD_COMMUNICATIONS_INTER, delay_load_communications_inter },
+    { BUILDER_DELAY_LOAD_COMMUNICATIONS_INTRA, delay_load_communications_intra },
+    { BUILDER_DELAY_STORE_COMMUNICATIONS_INTER, delay_store_communications_inter },
+    { BUILDER_DELAY_STORE_COMMUNICATIONS_INTRA, delay_store_communications_intra },
+    { BUILDER_DISTRIBUTER, distributer },
+    { BUILDER_DOWHILE_TO_WHILE, dowhile_to_while },
+    { BUILDER_DSC_CODE_PARALLELIZATION, dsc_code_parallelization },
+    { BUILDER_EXPRESSION_SUBSTITUTION, expression_substitution },
+    { BUILDER_FAST_INTERPROCEDURAL_POINTS_TO_ANALYSIS, fast_interprocedural_points_to_analysis },
+    { BUILDER_FILTER_FILE, filter_file },
+    { BUILDER_FILTER_PROPER_EFFECTS, filter_proper_effects },
+    { BUILDER_FLAG_AS_STUB, flag_as_stub },
+    { BUILDER_FLAG_KERNEL, flag_kernel },
+    { BUILDER_FLAG_LOOPS, flag_loops },
+    { BUILDER_FLAG_PARALLEL_REDUCED_LOOPS_WITH_ATOMIC, flag_parallel_reduced_loops_with_atomic },
+    { BUILDER_FLAG_PARALLEL_REDUCED_LOOPS_WITH_OPENMP_DIRECTIVES, flag_parallel_reduced_loops_with_openmp_directives },
+    { BUILDER_FLATTEN_CODE, flatten_code },
+    { BUILDER_FLINTER, flinter },
+    { BUILDER_FORCE_LOOP_FUSION, force_loop_fusion },
+    { BUILDER_FORCE_REGISTER_DECLARATIONS, force_register_declarations },
+    { BUILDER_FOR_LOOP_TO_DO_LOOP, for_loop_to_do_loop },
+    { BUILDER_FOR_LOOP_TO_WHILE_LOOP, for_loop_to_while_loop },
+    { BUILDER_FORWARD_SUBSTITUTE, forward_substitute },
+    { BUILDER_FP_COMPLEXITIES, fp_complexities },
+    { BUILDER_FREEZE_VARIABLES, freeze_variables },
+    { BUILDER_FREIA_AIPO_COMPILER, freia_aipo_compiler },
+    { BUILDER_FREIA_OPENCL_COMPILER, freia_opencl_compiler },
+    { BUILDER_FREIA_REMOVE_SCALAR_WW_DEPS, freia_remove_scalar_ww_deps },
+    { BUILDER_FREIA_SIGMAC_COMPILER, freia_sigmac_compiler },
+    { BUILDER_FREIA_SPOC_COMPILER, freia_spoc_compiler },
+    { BUILDER_FREIA_TERAPIX_COMPILER, freia_terapix_compiler },
+    { BUILDER_FREIA_UNROLL_WHILE, freia_unroll_while },
+    { BUILDER_FSM_GENERATION, fsm_generation },
+    { BUILDER_FSM_MERGE_STATES, fsm_merge_states },
+    { BUILDER_FSM_SPLIT_STATE, fsm_split_state },
+    { BUILDER_FULL_FSM_GENERATION, full_fsm_generation },
+    { BUILDER_FULL_GRAPH_OF_CALLS, full_graph_of_calls },
+    { BUILDER_FULL_SPAGHETTIFY, full_spaghettify },
+    { BUILDER_FULL_UNROLL, full_unroll },
+    { BUILDER_FULL_UNROLL_PRAGMA, full_unroll_pragma },
+    { BUILDER_GENERATE_STARPU_PRAGMA, generate_starpu_pragma },
+    { BUILDER_GENERATE_TWO_ADDRESSES_CODE, generate_two_addresses_code },
+    { BUILDER_GPU_CLEAR_ANNOTATIONS_ON_LOOP_NEST, gpu_clear_annotations_on_loop_nest },
+    { BUILDER_GPU_IFY, gpu_ify },
+    { BUILDER_GPU_LOOP_NEST_ANNOTATE, gpu_loop_nest_annotate },
+    { BUILDER_GPU_PARALLELIZE_ANNOTATED_LOOP_NEST, gpu_parallelize_annotated_loop_nest },
+    { BUILDER_GPU_PROMOTE_SEQUENTIAL, gpu_promote_sequential },
+    { BUILDER_GPU_QUALIFY_POINTERS, gpu_qualify_pointers },
+    { BUILDER_GPU_XML_DUMP, gpu_xml_dump },
+    { BUILDER_GRAPH_OF_CALLS, graph_of_calls },
+    { BUILDER_GROUP_CONSTANTS, group_constants },
+    { BUILDER_GUARD_ELIMINATION, guard_elimination },
+    { BUILDER_HBDSC_PARALLELIZATION, hbdsc_parallelization },
+    { BUILDER_HPFC_CLOSE, hpfc_close },
+    { BUILDER_HPFC_COMPILE, hpfc_compile },
+    { BUILDER_HPFC_DYNAMIC_DIRECTIVES, hpfc_dynamic_directives },
+    { BUILDER_HPFC_FILTER, hpfc_filter },
+    { BUILDER_HPFC_INIT, hpfc_init },
+    { BUILDER_HPFC_INSTALL, hpfc_install },
+    { BUILDER_HPFC_MAKE, hpfc_make },
+    { BUILDER_HPFC_PARSER, hpfc_parser },
+    { BUILDER_HPFC_RUN, hpfc_run },
+    { BUILDER_HPFC_STATIC_DIRECTIVES, hpfc_static_directives },
+    { BUILDER_HTML_PRETTYPRINT, html_prettyprint },
+    { BUILDER_HTML_PRETTYPRINT_SYMBOL_TABLE, html_prettyprint_symbol_table },
+    { BUILDER_ICM, icm },
+    { BUILDER_IDENTITY_ELIMINATION, identity_elimination },
+    { BUILDER_IDENTITY_ELIMINATION_WITH_POINTS_TO, identity_elimination_with_points_to },
+    { BUILDER_IF_CONVERSION, if_conversion },
+    { BUILDER_IF_CONVERSION_COMPACT, if_conversion_compact },
+    { BUILDER_IF_CONVERSION_INIT, if_conversion_init },
+    { BUILDER_IMPACT_CHECK, impact_check },
+    { BUILDER_IN_ALIAS_PAIRS, in_alias_pairs },
+    { BUILDER_INDEX_SET_SPLITTING, index_set_splitting },
+    { BUILDER_INDUCTION_SUBSTITUTION, induction_substitution },
+    { BUILDER_IN_EFFECTS, in_effects },
+    { BUILDER_INITIALIZER, initializer },
+    { BUILDER_INITIALIZE_VLA_WITH_EFFECTS, initialize_vla_with_effects },
+    { BUILDER_INITIALIZE_VLA_WITH_PRECONDITIONS, initialize_vla_with_preconditions },
+    { BUILDER_INITIALIZE_VLA_WITH_REGIONS, initialize_vla_with_regions },
+    { BUILDER_INITIAL_POINTS_TO, initial_points_to },
+    { BUILDER_INITIAL_PRECONDITION, initial_precondition },
+    { BUILDER_INITIAL_SIMPLE_POINTER_VALUES, initial_simple_pointer_values },
+    { BUILDER_INIT_POINTS_TO_ANALYSIS, init_points_to_analysis },
+    { BUILDER_INLINING, inlining },
+    { BUILDER_INLINING_SIMPLE, inlining_simple },
+    { BUILDER_IN_OUT_REGIONS_CHAINS, in_out_regions_chains },
+    { BUILDER_IN_REGIONS, in_regions },
+    { BUILDER_INSTRUCTION_SELECTION, instruction_selection },
+    { BUILDER_IN_SUMMARY_EFFECTS, in_summary_effects },
+    { BUILDER_IN_SUMMARY_REGIONS, in_summary_regions },
+    { BUILDER_INTERNALIZE_PARALLEL_CODE, internalize_parallel_code },
+    { BUILDER_INTERPROCEDURAL_POINTS_TO_ANALYSIS, interprocedural_points_to_analysis },
+    { BUILDER_INTERPROCEDURAL_SUMMARY_PRECONDITION, interprocedural_summary_precondition },
+    { BUILDER_INTRAPROCEDURAL_POINTS_TO_ANALYSIS, intraprocedural_points_to_analysis },
+    { BUILDER_INTRAPROCEDURAL_SUMMARY_PRECONDITION, intraprocedural_summary_precondition },
+    { BUILDER_INVARIANT_CODE_MOTION, invariant_code_motion },
+    { BUILDER_ISOLATE_STATEMENT, isolate_statement },
+    { BUILDER_KERNEL_DATA_MAPPING, kernel_data_mapping },
+    { BUILDER_KERNELIZE, kernelize },
+    { BUILDER_KERNEL_LOAD_STORE, kernel_load_store },
+    { BUILDER_LIMIT_NESTED_PARALLELISM, limit_nested_parallelism },
+    { BUILDER_LIMIT_PARALLELISM_USING_COMPLEXITY, limit_parallelism_using_complexity },
+    { BUILDER_LINEARIZE_ARRAY, linearize_array },
+    { BUILDER_LINEARIZE_ARRAY_FORTRAN, linearize_array_fortran },
+    { BUILDER_LINEARIZE_LOOP_RANGE, linearize_loop_range },
+    { BUILDER_LIVE_IN_SUMMARY_PATHS, live_in_summary_paths },
+    { BUILDER_LIVE_OUT_SUMMARY_PATHS, live_out_summary_paths },
+    { BUILDER_LIVE_PATHS, live_paths },
+    { BUILDER_LOCALIZE_DECLARATION, localize_declaration },
+    { BUILDER_LOOP_AUTO_UNROLL, loop_auto_unroll },
+    { BUILDER_LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS, loop_bound_minimization_with_out_regions },
+    { BUILDER_LOOP_EXPANSION, loop_expansion },
+    { BUILDER_LOOP_EXPANSION_INIT, loop_expansion_init },
+    { BUILDER_LOOP_FUSION, loop_fusion },
+    { BUILDER_LOOP_FUSION_WITH_REGIONS, loop_fusion_with_regions },
+    { BUILDER_LOOP_HYPERPLANE, loop_hyperplane },
+    { BUILDER_LOOP_INTERCHANGE, loop_interchange },
+    { BUILDER_LOOP_NEST_UNSWITCHING, loop_nest_unswitching },
+    { BUILDER_LOOP_NORMALIZE, loop_normalize },
+    { BUILDER_LOOP_REDUCTIONS, loop_reductions },
+    { BUILDER_LOOP_STATISTICS, loop_statistics },
+    { BUILDER_LOOP_TILING, loop_tiling },
+    { BUILDER_MAY_POINTER_REGIONS, may_pointer_regions },
+    { BUILDER_MAY_REGIONS, may_regions },
+    { BUILDER_MPI_TASK_GENERATION, mpi_task_generation },
+    { BUILDER_MUST_POINTER_REGIONS, must_pointer_regions },
+    { BUILDER_MUST_POINTER_REGIONS_WITH_POINTS_TO, must_pointer_regions_with_points_to },
+    { BUILDER_MUST_REGIONS, must_regions },
+    { BUILDER_MUST_REGIONS_WITH_POINTER_VALUES, must_regions_with_pointer_values },
+    { BUILDER_MUST_REGIONS_WITH_POINTS_TO, must_regions_with_points_to },
+    { BUILDER_NEST_PARALLELIZATION, nest_parallelization },
+    { BUILDER_NEW_ATOMIZER, new_atomizer },
+    { BUILDER_NEW_CONTROLIZER, new_controlizer },
+    { BUILDER_NORMALIZE_MICROCODE, normalize_microcode },
+    { BUILDER_OLD_REDUCTIONS, old_reductions },
+    { BUILDER_OMPIFY_CODE, ompify_code },
+    { BUILDER_OMP_LOOP_PARALLEL_THRESHOLD_SET, omp_loop_parallel_threshold_set },
+    { BUILDER_OMP_MERGE_PRAGMA, omp_merge_pragma },
+    { BUILDER_ONE_THREAD_PARALLELIZE, one_thread_parallelize },
+    { BUILDER_OPENMP_TASK_GENERATION, openmp_task_generation },
+    { BUILDER_OPTIMIZE_EXPRESSIONS, optimize_expressions },
+    { BUILDER_OUT_ALIAS_PAIRS, out_alias_pairs },
+    { BUILDER_OUT_EFFECTS, out_effects },
+    { BUILDER_OUTLINE, outline },
+    { BUILDER_OUT_REGIONS, out_regions },
+    { BUILDER_OUT_SUMMARY_EFFECTS, out_summary_effects },
+    { BUILDER_OUT_SUMMARY_REGIONS, out_summary_regions },
+    { BUILDER_PARSED_SYMBOL_TABLE, parsed_symbol_table },
+    { BUILDER_PARSER, parser },
+    { BUILDER_PARTIAL_EVAL, partial_eval },
+    { BUILDER_PARTIAL_REDUNDANCY_ELIMINATION, partial_redundancy_elimination },
+    { BUILDER_PATH_TRANSFORMER, path_transformer },
+    { BUILDER_PHRASE_COMENGINE_DISTRIBUTOR, phrase_comEngine_distributor },
+    { BUILDER_PHRASE_DISTRIBUTOR, phrase_distributor },
+    { BUILDER_PHRASE_DISTRIBUTOR_CONTROL_CODE, phrase_distributor_control_code },
+    { BUILDER_PHRASE_DISTRIBUTOR_INIT, phrase_distributor_init },
+    { BUILDER_PHRASE_REMOVE_DEPENDENCES, phrase_remove_dependences },
+    { BUILDER_POCC_PRETTYPRINTER, pocc_prettyprinter },
+    { BUILDER_PRAGMA_OUTLINER, pragma_outliner },
+    { BUILDER_PRECONDITIONS_INTER_FAST, preconditions_inter_fast },
+    { BUILDER_PRECONDITIONS_INTER_FULL, preconditions_inter_full },
+    { BUILDER_PRECONDITIONS_INTRA, preconditions_intra },
+    { BUILDER_PRECONDITIONS_INTRA_FAST, preconditions_intra_fast },
+    { BUILDER_PREPEND_CALL, prepend_call },
+    { BUILDER_PREPEND_COMMENT, prepend_comment },
+    { BUILDER_PRINT_ALIAS_CLASSES, print_alias_classes },
+    { BUILDER_PRINT_ALIAS_LISTS, print_alias_lists },
+    { BUILDER_PRINT_CALL_GRAPH, print_call_graph },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_COMPLEXITIES, print_call_graph_with_complexities },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_CUMULATED_EFFECTS, print_call_graph_with_cumulated_effects },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_IN_REGIONS, print_call_graph_with_in_regions },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_OUT_REGIONS, print_call_graph_with_out_regions },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_PRECONDITIONS, print_call_graph_with_preconditions },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_PROPER_EFFECTS, print_call_graph_with_proper_effects },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_REGIONS, print_call_graph_with_regions },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_TOTAL_PRECONDITIONS, print_call_graph_with_total_preconditions },
+    { BUILDER_PRINT_CALL_GRAPH_WITH_TRANSFORMERS, print_call_graph_with_transformers },
+    { BUILDER_PRINT_C_CODE, print_c_code },
+    { BUILDER_PRINT_CHAINS_GRAPH, print_chains_graph },
+    { BUILDER_PRINT_CLAIRE_CODE, print_claire_code },
+    { BUILDER_PRINT_CLAIRE_CODE_WITH_EXPLICIT_MOTIF, print_claire_code_with_explicit_motif },
+    { BUILDER_PRINT_CODE, print_code },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH, print_code_as_a_graph },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_COMPLEXITIES, print_code_as_a_graph_complexities },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_CUMULATED_EFFECTS, print_code_as_a_graph_cumulated_effects },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_IN_REGIONS, print_code_as_a_graph_in_regions },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_OUT_REGIONS, print_code_as_a_graph_out_regions },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_PRECONDITIONS, print_code_as_a_graph_preconditions },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_PROPER_EFFECTS, print_code_as_a_graph_proper_effects },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_REGIONS, print_code_as_a_graph_regions },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_TOTAL_PRECONDITIONS, print_code_as_a_graph_total_preconditions },
+    { BUILDER_PRINT_CODE_AS_A_GRAPH_TRANSFORMERS, print_code_as_a_graph_transformers },
+    { BUILDER_PRINT_CODE_COMPLEMENTARY_SECTIONS, print_code_complementary_sections },
+    { BUILDER_PRINT_CODE_COMPLEXITIES, print_code_complexities },
+    { BUILDER_PRINT_CODE_CONTINUATION_CONDITIONS, print_code_continuation_conditions },
+    { BUILDER_PRINT_CODE_CUMULATED_EFFECTS, print_code_cumulated_effects },
+    { BUILDER_PRINT_CODE_CUMULATED_POINTER_EFFECTS, print_code_cumulated_pointer_effects },
+    { BUILDER_PRINT_CODE_CUMULATED_REDUCTIONS, print_code_cumulated_reductions },
+    { BUILDER_PRINT_CODE_CUMULATED_REFERENCES, print_code_cumulated_references },
+    { BUILDER_PRINT_CODE_IN_EFFECTS, print_code_in_effects },
+    { BUILDER_PRINT_CODE_IN_REGIONS, print_code_in_regions },
+    { BUILDER_PRINT_CODE_INV_POINTER_REGIONS, print_code_inv_pointer_regions },
+    { BUILDER_PRINT_CODE_INV_REGIONS, print_code_inv_regions },
+    { BUILDER_PRINT_CODE_LIVE_IN_PATHS, print_code_live_in_paths },
+    { BUILDER_PRINT_CODE_LIVE_OUT_PATHS, print_code_live_out_paths },
+    { BUILDER_PRINT_CODE_OUT_EFFECTS, print_code_out_effects },
+    { BUILDER_PRINT_CODE_OUT_REGIONS, print_code_out_regions },
+    { BUILDER_PRINT_CODE_POINTER_REGIONS, print_code_pointer_regions },
+    { BUILDER_PRINT_CODE_POINTS_TO_LIST, print_code_points_to_list },
+    { BUILDER_PRINT_CODE_PRECONDITIONS, print_code_preconditions },
+    { BUILDER_PRINT_CODE_PRIVATIZED_REGIONS, print_code_privatized_regions },
+    { BUILDER_PRINT_CODE_PROPER_EFFECTS, print_code_proper_effects },
+    { BUILDER_PRINT_CODE_PROPER_POINTER_EFFECTS, print_code_proper_pointer_effects },
+    { BUILDER_PRINT_CODE_PROPER_POINTER_REGIONS, print_code_proper_pointer_regions },
+    { BUILDER_PRINT_CODE_PROPER_REDUCTIONS, print_code_proper_reductions },
+    { BUILDER_PRINT_CODE_PROPER_REFERENCES, print_code_proper_references },
+    { BUILDER_PRINT_CODE_PROPER_REGIONS, print_code_proper_regions },
+    { BUILDER_PRINT_CODE_REGIONS, print_code_regions },
+    { BUILDER_PRINT_CODE_SIMPLE_GEN_KILL_POINTER_VALUES, print_code_simple_gen_kill_pointer_values },
+    { BUILDER_PRINT_CODE_SIMPLE_POINTER_VALUES, print_code_simple_pointer_values },
+    { BUILDER_PRINT_CODE_SMALLTALK, print_code_smalltalk },
+    { BUILDER_PRINT_CODE_STATIC_CONTROL, print_code_static_control },
+    { BUILDER_PRINT_CODE_TOTAL_PRECONDITIONS, print_code_total_preconditions },
+    { BUILDER_PRINT_CODE_TRANSFORMERS, print_code_transformers },
+    { BUILDER_PRINT_CROUGH, print_crough },
+    { BUILDER_PRINT_DOT_CHAINS_GRAPH, print_dot_chains_graph },
+    { BUILDER_PRINT_DOT_DEPENDENCE_GRAPH, print_dot_dependence_graph },
+    { BUILDER_PRINT_DVICFG_WITH_FILTERED_PROPER_EFFECTS, print_dvicfg_with_filtered_proper_effects },
+    { BUILDER_PRINT_EFFECTIVE_DEPENDENCE_GRAPH, print_effective_dependence_graph },
+    { BUILDER_PRINT_FILTERED_DEPENDENCE_DAVINCI_GRAPH, print_filtered_dependence_daVinci_graph },
+    { BUILDER_PRINT_FILTERED_DEPENDENCE_GRAPH, print_filtered_dependence_graph },
+    { BUILDER_PRINT_ICFG, print_icfg },
+    { BUILDER_PRINT_ICFG_WITH_COMPLEXITIES, print_icfg_with_complexities },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL, print_icfg_with_control },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_COMPLEXITIES, print_icfg_with_control_complexities },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_CUMULATED_EFFECTS, print_icfg_with_control_cumulated_effects },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_IN_REGIONS, print_icfg_with_control_in_regions },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_OUT_REGIONS, print_icfg_with_control_out_regions },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_PRECONDITIONS, print_icfg_with_control_preconditions },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_PROPER_EFFECTS, print_icfg_with_control_proper_effects },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_REGIONS, print_icfg_with_control_regions },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_TOTAL_PRECONDITIONS, print_icfg_with_control_total_preconditions },
+    { BUILDER_PRINT_ICFG_WITH_CONTROL_TRANSFORMERS, print_icfg_with_control_transformers },
+    { BUILDER_PRINT_ICFG_WITH_CUMULATED_EFFECTS, print_icfg_with_cumulated_effects },
+    { BUILDER_PRINT_ICFG_WITH_FILTERED_PROPER_EFFECTS, print_icfg_with_filtered_proper_effects },
+    { BUILDER_PRINT_ICFG_WITH_IN_REGIONS, print_icfg_with_in_regions },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS, print_icfg_with_loops },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_COMPLEXITIES, print_icfg_with_loops_complexities },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_CUMULATED_EFFECTS, print_icfg_with_loops_cumulated_effects },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_IN_REGIONS, print_icfg_with_loops_in_regions },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_OUT_REGIONS, print_icfg_with_loops_out_regions },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_PRECONDITIONS, print_icfg_with_loops_preconditions },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_PROPER_EFFECTS, print_icfg_with_loops_proper_effects },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_REGIONS, print_icfg_with_loops_regions },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_TOTAL_PRECONDITIONS, print_icfg_with_loops_total_preconditions },
+    { BUILDER_PRINT_ICFG_WITH_LOOPS_TRANSFORMERS, print_icfg_with_loops_transformers },
+    { BUILDER_PRINT_ICFG_WITH_OUT_REGIONS, print_icfg_with_out_regions },
+    { BUILDER_PRINT_ICFG_WITH_PRECONDITIONS, print_icfg_with_preconditions },
+    { BUILDER_PRINT_ICFG_WITH_PROPER_EFFECTS, print_icfg_with_proper_effects },
+    { BUILDER_PRINT_ICFG_WITH_REGIONS, print_icfg_with_regions },
+    { BUILDER_PRINT_ICFG_WITH_TOTAL_PRECONDITIONS, print_icfg_with_total_preconditions },
+    { BUILDER_PRINT_ICFG_WITH_TRANSFORMERS, print_icfg_with_transformers },
+    { BUILDER_PRINT_IN_ALIAS_PAIRS, print_in_alias_pairs },
+    { BUILDER_PRINT_INITIAL_PRECONDITION, print_initial_precondition },
+    { BUILDER_PRINT_INTERFACE, print_interface },
+    { BUILDER_PRINT_LOOP_CARRIED_DEPENDENCE_GRAPH, print_loop_carried_dependence_graph },
+    { BUILDER_PRINT_LOOPS, print_loops },
+    { BUILDER_PRINT_OUT_ALIAS_PAIRS, print_out_alias_pairs },
+    { BUILDER_PRINT_PARALLELIZED77_CODE, print_parallelized77_code },
+    { BUILDER_PRINT_PARALLELIZED90_CODE, print_parallelized90_code },
+    { BUILDER_PRINT_PARALLELIZEDCRAY_CODE, print_parallelizedcray_code },
+    { BUILDER_PRINT_PARALLELIZEDHPF_CODE, print_parallelizedHPF_code },
+    { BUILDER_PRINT_PARALLELIZEDMPI_CODE, print_parallelizedMPI_code },
+    { BUILDER_PRINT_PARALLELIZEDOMP_CODE, print_parallelizedOMP_code },
+    { BUILDER_PRINT_PROGRAM_PRECONDITION, print_program_precondition },
+    { BUILDER_PRINT_SOURCE, print_source },
+    { BUILDER_PRINT_SOURCE_COMPLEXITIES, print_source_complexities },
+    { BUILDER_PRINT_SOURCE_CONTINUATION_CONDITIONS, print_source_continuation_conditions },
+    { BUILDER_PRINT_SOURCE_CUMULATED_EFFECTS, print_source_cumulated_effects },
+    { BUILDER_PRINT_SOURCE_IN_EFFECTS, print_source_in_effects },
+    { BUILDER_PRINT_SOURCE_IN_REGIONS, print_source_in_regions },
+    { BUILDER_PRINT_SOURCE_INV_REGIONS, print_source_inv_regions },
+    { BUILDER_PRINT_SOURCE_OUT_EFFECTS, print_source_out_effects },
+    { BUILDER_PRINT_SOURCE_OUT_REGIONS, print_source_out_regions },
+    { BUILDER_PRINT_SOURCE_PRECONDITIONS, print_source_preconditions },
+    { BUILDER_PRINT_SOURCE_PROPER_EFFECTS, print_source_proper_effects },
+    { BUILDER_PRINT_SOURCE_REGIONS, print_source_regions },
+    { BUILDER_PRINT_SOURCE_TOTAL_PRECONDITIONS, print_source_total_preconditions },
+    { BUILDER_PRINT_SOURCE_TRANSFORMERS, print_source_transformers },
+    { BUILDER_PRINT_WHOLE_DEPENDENCE_GRAPH, print_whole_dependence_graph },
+    { BUILDER_PRINT_XML_APPLICATION, print_xml_application },
+    { BUILDER_PRINT_XML_CODE, print_xml_code },
+    { BUILDER_PRINT_XML_CODE_WITH_EXPLICIT_MOTIF, print_xml_code_with_explicit_motif },
+    { BUILDER_PRIVATIZE_MODULE, privatize_module },
+    { BUILDER_PRIVATIZE_MODULE_EVEN_GLOBALS, privatize_module_even_globals },
+    { BUILDER_PROGRAM_POINTS_TO, program_points_to },
+    { BUILDER_PROGRAM_POSTCONDITION, program_postcondition },
+    { BUILDER_PROGRAM_PRECONDITION, program_precondition },
+    { BUILDER_PROGRAM_SIMPLE_POINTER_VALUES, program_simple_pointer_values },
+    { BUILDER_PROPER_EFFECTS, proper_effects },
+    { BUILDER_PROPER_EFFECTS_WITH_POINTER_VALUES, proper_effects_with_pointer_values },
+    { BUILDER_PROPER_EFFECTS_WITH_POINTS_TO, proper_effects_with_points_to },
+    { BUILDER_PROPER_POINTER_EFFECTS, proper_pointer_effects },
+    { BUILDER_PROPER_REDUCTIONS, proper_reductions },
+    { BUILDER_PROPER_REFERENCES, proper_references },
+    { BUILDER_QUICK_SCALARIZATION, quick_scalarization },
+    { BUILDER_RECOMPILE_MODULE, recompile_module },
+    { BUILDER_RECOVER_FOR_LOOP, recover_for_loop },
+    { BUILDER_REDUCTION_ATOMIZATION, reduction_atomization },
+    { BUILDER_REDUCTION_DETECTION, reduction_detection },
+    { BUILDER_REDUCTION_PROPAGATION, reduction_propagation },
+    { BUILDER_REDUCTION_VARIABLE_EXPANSION, reduction_variable_expansion },
+    { BUILDER_REDUNDANT_LOAD_STORE_ELIMINATION, redundant_load_store_elimination },
+    { BUILDER_REFINE_TRANSFORMERS, refine_transformers },
+    { BUILDER_REGION_CHAINS, region_chains },
+    { BUILDER_REGIONS_TO_LOOPS, regions_to_loops },
+    { BUILDER_REMOVE_SIMPLE_SCALAR_POINTERS, remove_simple_scalar_pointers },
+    { BUILDER_REMOVE_USELESS_LABEL, remove_useless_label },
+    { BUILDER_RENAME_OPERATOR, rename_operator },
+    { BUILDER_REPLACE_REDUCTION_WITH_ATOMIC, replace_reduction_with_atomic },
+    { BUILDER_RESTRUCTURE_CONTROL, restructure_control },
+    { BUILDER_RICE_ALL_DEPENDENCE, rice_all_dependence },
+    { BUILDER_RICE_CRAY, rice_cray },
+    { BUILDER_RICE_DATA_DEPENDENCE, rice_data_dependence },
+    { BUILDER_RICE_FAST_DEPENDENCE_GRAPH, rice_fast_dependence_graph },
+    { BUILDER_RICE_FULL_DEPENDENCE_GRAPH, rice_full_dependence_graph },
+    { BUILDER_RICE_REGIONS_DEPENDENCE_GRAPH, rice_regions_dependence_graph },
+    { BUILDER_RICE_SEMANTICS_DEPENDENCE_GRAPH, rice_semantics_dependence_graph },
+    { BUILDER_RSTREAM_INTERFACE, rstream_interface },
+    { BUILDER_SAFESCALE_DISTRIBUTOR, safescale_distributor },
+    { BUILDER_SAFESCALE_DISTRIBUTOR_INIT, safescale_distributor_init },
+    { BUILDER_SCALARIZATION, scalarization },
+    { BUILDER_SCALAR_RENAMING, scalar_renaming },
+    { BUILDER_SCALOPIFY, scalopify },
+    { BUILDER_SCALOPRAGMA, scalopragma },
+    { BUILDER_SEQUENCE_DEPENDENCE_GRAPH, sequence_dependence_graph },
+    { BUILDER_SESAM_BUFFERS_PROCESSING, sesam_buffers_processing },
+    { BUILDER_SESAMIFY, sesamify },
+    { BUILDER_SET_RETURN_TYPE_AS_TYPEDEF, set_return_type_as_typedef },
+    { BUILDER_SIMD_ATOMIZER, simd_atomizer },
+    { BUILDER_SIMDIZER, simdizer },
+    { BUILDER_SIMDIZER_AUTO_TILE, simdizer_auto_tile },
+    { BUILDER_SIMDIZER_AUTO_UNROLL, simdizer_auto_unroll },
+    { BUILDER_SIMDIZER_INIT, simdizer_init },
+    { BUILDER_SIMD_MEMORY_PACKING, simd_memory_packing },
+    { BUILDER_SIMD_OPERATOR_MAPPINGS, simd_operator_mappings },
+    { BUILDER_SIMD_REMOVE_REDUCTIONS, simd_remove_reductions },
+    { BUILDER_SIMD_TREEMATCHER, simd_treematcher },
+    { BUILDER_SIMPLE_POINTER_VALUES, simple_pointer_values },
+    { BUILDER_SIMPLE_XPATH_TEST, simple_xpath_test },
+    { BUILDER_SIMPLIFY_COMPLEX, simplify_complex },
+    { BUILDER_SIMPLIFY_CONSTANT_ADDRESS_EXPRESSIONS, simplify_constant_address_expressions },
+    { BUILDER_SIMPLIFY_CONTROL, simplify_control },
+    { BUILDER_SIMPLIFY_CONTROL_DIRECTLY, simplify_control_directly },
+    { BUILDER_SIMPLIFY_SUBSCRIPTS, simplify_subscripts },
+    { BUILDER_SOLVE_HARDWARE_CONSTRAINTS, solve_hardware_constraints },
+    { BUILDER_SPAGHETTIFY, spaghettify },
+    { BUILDER_SPIRE_DISTRIBUTED_UNSTRUCTURED_TO_STRUCTURED, spire_distributed_unstructured_to_structured },
+    { BUILDER_SPIRE_SHARED_UNSTRUCTURED_TO_STRUCTURED, spire_shared_unstructured_to_structured },
+    { BUILDER_SPLIT_INITIALIZATIONS, split_initializations },
+    { BUILDER_SPLIT_STRUCTURES, split_structures },
+    { BUILDER_SPLIT_UPDATE_OPERATOR, split_update_operator },
+    { BUILDER_STATEMENT_INSERTION, statement_insertion },
+    { BUILDER_STATIC_CONTROLIZE, static_controlize },
+    { BUILDER_STEP_ANALYSE, step_analyse },
+    { BUILDER_STEP_ANALYSE_INIT, step_analyse_init },
+    { BUILDER_STEP_COMPILE, step_compile },
+    { BUILDER_STEP_INSTALL, step_install },
+    { BUILDER_STEP_PARSER, step_parser },
+    { BUILDER_STF, stf },
+    { BUILDER_STRENGTH_REDUCTION, strength_reduction },
+    { BUILDER_STRIP_MINE, strip_mine },
+    { BUILDER_SUMMARY_COMPLEMENTARY_SECTIONS, summary_complementary_sections },
+    { BUILDER_SUMMARY_COMPLEXITY, summary_complexity },
+    { BUILDER_SUMMARY_EFFECTS, summary_effects },
+    { BUILDER_SUMMARY_POINTER_EFFECTS, summary_pointer_effects },
+    { BUILDER_SUMMARY_POINTER_REGIONS, summary_pointer_regions },
+    { BUILDER_SUMMARY_PRECONDITION, summary_precondition },
+    { BUILDER_SUMMARY_REDUCTIONS, summary_reductions },
+    { BUILDER_SUMMARY_REGIONS, summary_regions },
+    { BUILDER_SUMMARY_TOTAL_POSTCONDITION, summary_total_postcondition },
+    { BUILDER_SUMMARY_TOTAL_PRECONDITION, summary_total_precondition },
+    { BUILDER_SUMMARY_TRANSFORMER, summary_transformer },
+    { BUILDER_SUPPRESS_DEAD_CODE, suppress_dead_code },
+    { BUILDER_SUPPRESS_TRIVIAL_TEST, suppress_trivial_test },
+    { BUILDER_SYMBOLIC_TILING, symbolic_tiling },
+    { BUILDER_SYMBOL_TABLE, symbol_table },
+    { BUILDER_TASKIFY, taskify },
+    { BUILDER_TERAPIX_REMOVE_DIVIDE, terapix_remove_divide },
+    { BUILDER_TERAPIX_WARMUP, terapix_warmup },
+    { BUILDER_TILING_SEQUENCE, tiling_sequence },
+    { BUILDER_TOTAL_PRECONDITIONS_INTER, total_preconditions_inter },
+    { BUILDER_TOTAL_PRECONDITIONS_INTRA, total_preconditions_intra },
+    { BUILDER_TRANSFORMATION_TEST, transformation_test },
+    { BUILDER_TRANSFORMERS_INTER_FAST, transformers_inter_fast },
+    { BUILDER_TRANSFORMERS_INTER_FULL, transformers_inter_full },
+    { BUILDER_TRANSFORMERS_INTER_FULL_WITH_POINTS_TO, transformers_inter_full_with_points_to },
+    { BUILDER_TRANSFORMERS_INTRA_FAST, transformers_intra_fast },
+    { BUILDER_TRANSFORMERS_INTRA_FULL, transformers_intra_full },
+    { BUILDER_TYPE_CHECKER, type_checker },
+    { BUILDER_UNFOLDING, unfolding },
+    { BUILDER_UNFOLDING_SIMPLE, unfolding_simple },
+    { BUILDER_UNIFORM_COMPLEXITIES, uniform_complexities },
+    { BUILDER_UNROLL, unroll },
+    { BUILDER_UNSPAGHETTIFY, unspaghettify },
+    { BUILDER_UNSPLIT, unsplit },
+    { BUILDER_UNSPLIT_PARSED, unsplit_parsed },
+    { BUILDER_USED_BEFORE_SET, used_before_set },
+    { BUILDER_USE_DEF_ELIMINATION, use_def_elimination },
+    { BUILDER_VARIABLE_EXPANSION, variable_expansion },
+    { BUILDER_WP65, wp65 },
+    { BUILDER_WRAP_KERNEL_ARGUMENT, wrap_kernel_argument },
+
+    { NULL, NULL }
+};

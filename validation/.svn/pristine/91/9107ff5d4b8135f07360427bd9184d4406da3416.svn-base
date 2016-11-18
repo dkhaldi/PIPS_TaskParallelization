@@ -1,0 +1,5 @@
+The C code is wrong. The C parser should detect the mistake. And used to do so. It has been extended, probably to accept undeclared functions. And now it does not detect undeclared variables. No big deal since a C syntax check can be performed before PIPS is run.
+
+Furthermore, the error is detected and classified as a warning rather than a user error.
+
+Also, as NormalizeReference is in ri-util and not in the parser code, pips_user_warning is used instead of c_parser_user_warning() which reduces the information fed back to the user.

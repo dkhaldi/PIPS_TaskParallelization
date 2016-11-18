@@ -1,0 +1,7 @@
+delete while
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create while while.f
+display PRINTED_FILE
+close
+delete while
+quit

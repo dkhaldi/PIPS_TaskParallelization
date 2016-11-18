@@ -1,0 +1,61 @@
+setenv WSPACE=env06
+delete $WSPACE
+create $WSPACE $WSPACE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+activate MUST_REGIONS
+
+echo
+echo Init Code
+echo
+display PRINTED_FILE[$WSPACE]
+display PRINTED_FILE[main]
+
+echo
+echo PROPER_EFFECTS
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[$WSPACE]
+display PRINTED_FILE[main]
+
+echo
+echo CUMULATED_EFFECTS
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[$WSPACE]
+display PRINTED_FILE[main]
+
+echo
+echo IN_EFFECTS
+echo
+activate PRINT_CODE_IN_EFFECTS
+display PRINTED_FILE[$WSPACE]
+display PRINTED_FILE[main]
+
+echo
+echo OUT_EFFECTS
+echo
+activate PRINT_CODE_OUT_EFFECTS
+display PRINTED_FILE[$WSPACE]
+display PRINTED_FILE[main]
+
+echo
+echo REGIONS
+echo
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[$WSPACE]
+display PRINTED_FILE[main]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

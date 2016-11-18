@@ -1,0 +1,61 @@
+
+PROPER  EFFECTS
+
+void assignment01()
+{
+   int i;
+   int *p;
+   int *q;
+   int *r;
+//             <    is written>: p q r
+
+   p = q = r = &i;
+//             <    is written>: i
+   i = 2;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void assignment01()
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int *q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   int *r;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+
+   p = q = r = &i;
+
+// Points To:
+// p -> i , EXACT
+// q -> i , EXACT
+// r -> i , EXACT
+
+   i = 2;
+}

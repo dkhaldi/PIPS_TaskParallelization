@@ -1,0 +1,28 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int struct11()
+{
+
+// Points To: none
+
+   struct foo s1;
+
+// Points To:
+// s1.two -> undefined , EXACT
+
+   my_struct s2;
+
+// Points To:
+// s1.two -> undefined , EXACT
+// s2.two -> undefined , EXACT
+
+
+   return 0;
+}

@@ -1,0 +1,56 @@
+
+Cumulated Effects
+
+//             <may be read   >: p[*].N1 p[*].N2
+//             <may be written>: p[*].N1 p[*].N2
+int main(int argc, char *argv[])
+{
+   int i, j;
+//             <may be read   >: p[*].N1 p[*].N2
+//             <may be written>: p[*].N1 p[*].N2
+//             <    is read   >: i j
+   p[i] = p[j];
+   return 0;
+}
+
+Transformers
+
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T() {}
+
+   int i, j;
+
+//  T() {}
+
+   p[i] = p[j];
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   int i, j;
+
+//  P() {}
+
+   p[i] = p[j];
+
+//  P() {}
+
+   return 0;
+}

@@ -1,0 +1,162 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   struct {
+      int f;
+   } s;
+
+// Points To: none
+
+
+   scanf("%d", &s.f);
+
+// Points To: none
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: 0`#_PIPS_STRUCT_1 s
+   struct {
+      int f;
+   } s;
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: s.f __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: s stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &s.f);
+
+   return 0;
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: stdin __IO_EFFECTS:LUNS
+int main(int argc, char **argv)
+{
+//             <    is declared>: 0`#_PIPS_STRUCT_1 s
+   struct {
+      int f;
+   } s;
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: s.f __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: s stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &s.f);
+//             <    is read   >: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: __IO_EFFECTS:LUNS
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   struct {
+      int f;
+   } s;
+
+//  T(s[f]) {}
+
+
+   scanf("%d", &s.f);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   struct {
+      int f;
+   } s;
+
+//  P() {}
+
+
+   scanf("%d", &s.f);
+
+//  P(s[f]) {}
+
+
+   return 0;
+}
+
+Convex array regions with points-to for "main"
+
+
+//  <stdin-R-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0}>
+
+int main(int argc, char **argv)
+{
+
+//  <0`#_PIPS_STRUCT_1-WE-EXACT-{}>
+//  <s-WE-EXACT-{}>
+
+   struct {
+      int f;
+   } s;
+
+//  <s-RE-EXACT-{}>
+//  <s.f-W-EXACT-{}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0}>
+
+
+   scanf("%d", &s.f);
+
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0}>
+
+
+   return 0;
+}

@@ -1,0 +1,73 @@
+
+Points-to
+
+
+Transformers with point-to
+
+
+//  T() {}
+
+void memcopy06(char *src)
+{
+
+//  T() {}
+
+   if (src==(void *) 0) {
+
+//  T(s) {NULL==s, NULL==src}
+
+      char *s = (char *) src;
+   }
+
+//  T() {}
+
+   return;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+void memcopy06(char *src)
+{
+
+//  P() {}
+
+   if (src==(void *) 0) {
+
+//  P() {NULL==src}
+
+      char *s = (char *) src;
+   }
+
+//  P() {}
+
+   return;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "memcopy06" instead.
+TRANSFORMERS_INTER_FULL[memcopy06] (pointer_expression_to_transformer) line 9 
+at statement:
+
+	char *s = (char *) src;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "memcopy06" instead.
+TRANSFORMERS_INTER_FULL[memcopy06] (pointer_expression_to_transformer) line 9 
+at statement:
+
+	char *s = (char *) src;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).
+PRECONDITIONS_INTER_FULL[memcopy06] (pointer_expression_to_transformer) line 9 
+at statement:
+
+	char *s = (char *) src;
+
+
+Cast for pointer analysis not tested (except for NULL pointer).

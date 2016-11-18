@@ -1,0 +1,9 @@
+/* Declaration of nested structs */
+
+struct s1 {                                                             /*0003*/
+   int e1;
+};
+
+struct s2 {                                                             /*0005*/
+   struct s1 e2;
+};

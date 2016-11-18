@@ -1,0 +1,58 @@
+enum {a=sizeof(int), b};
+
+extern int main();
+#
+# compile generated enum03
+#
+
+Preconditions derived from enum
+
+
+//  P() {}
+
+
+//  P() {}
+
+enum {a=sizeof(int), b};
+
+
+//  P() {}
+
+extern int main();
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int ia;
+
+//  P() {}
+
+   int ib;
+
+//  P() {}
+
+   int t;
+
+//  P() {}
+
+
+   ia = a;
+
+//  P(ia) {}
+
+   ib = b;
+
+//  P(ia,ib) {ib==1}
+
+
+   t = ia+ib;
+
+//  P(ia,ib,t) {ia==t-1, ib==1}
+
+   return 0;
+}

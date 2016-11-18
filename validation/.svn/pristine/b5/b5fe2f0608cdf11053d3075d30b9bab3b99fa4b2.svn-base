@@ -1,0 +1,87 @@
+
+// Initial code
+
+int test()
+{
+   int i, n;
+   if (rand())
+      n = 10;
+   //else {
+   //  n=5;
+   //}
+   int a[n];
+
+   for(i = 0; i <= n-1; i += 1)
+      a[i] = 0;
+
+   return a[0];
+}
+
+// Code with preconditions
+
+
+//  P() {}
+
+int test()
+{
+
+//  P() {}
+
+   int i, n;
+
+//  P() {}
+
+   if (rand())
+
+//  P() {}
+
+      n = 10;
+   //else {
+   //  n=5;
+   //}
+
+//  P(n) {}
+
+   int a[n];
+
+//  P(n) {}
+
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  P(i,n) {0<=i, i+1<=n}
+
+      a[i] = 0;
+
+//  P(i,n) {0<=i, n<=i}
+
+
+   return a[0];
+}
+
+// Code after CHECK_INITIALIZE_VLA
+// (nothing modify in the code but generate warning or error)
+
+int test()
+{
+   int i, n;
+   if (rand())
+      n = 10;
+   //else {
+   //  n=5;
+   //}
+   int a[n];
+
+   for(i = 0; i <= n-1; i += 1)
+      a[i] = 0;
+
+   return a[0];
+}
+
+// Warnings
+
+CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS[test] (add_dependence_reference) [user error] n can be uninitialized when declaration of a depend of n
+CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS[test] (set_debug_stack_pointer) debug level stack is set to 2
+CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS[test] (catch_user_error) pass has failed
+CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS[test] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build phase/rule CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS for module test.

@@ -1,0 +1,290 @@
+
+PROPER EFFECTS 
+
+int main()
+{
+   int i, j, k, l, m;
+   int *p;
+//             <    is written>: m
+
+   m = 10;
+//             <    is read   >: i k l
+
+   if (l<=i&&i<=k) {
+//             <    is read   >: j
+      if (j==0)
+//             <    is written>: p
+         p = &i;
+      else
+//             <    is written>: p
+         p = &j;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+      
+      //without points-to informaion, we lost everything
+      //with points-to informaion, we have l<=k
+      *p = 10;
+
+      return 0;
+   }
+   return 0;
+}
+
+Transformers 
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   int i, j, k, l, m;
+
+//  T() {}
+
+   int *p;
+
+//  T(m) {m==10}
+
+
+   m = 10;
+
+//  T(i,j,k,l,m,main) {}
+
+
+   if (l<=i&&i<=k) {
+
+//  T() {m==10, i<=k, l<=i}
+
+      if (j==0)
+
+//  T() {j==0, m==10, i<=k, l<=i}
+
+         p = &i;
+      else
+
+//  T() {m==10, i<=k, l<=i}
+
+         p = &j;
+
+//  T(i,j,k,l,m) {m#init==10, i#init<=k#init, l#init<=i#init}
+
+      
+      //without points-to informaion, we lost everything
+      //with points-to informaion, we have l<=k
+      *p = 10;
+
+//  T(main) {main==0}
+
+
+      return 0;
+   }
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions 
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i, j, k, l, m;
+
+//  P() {}
+
+   int *p;
+
+//  P() {}
+
+
+   m = 10;
+
+//  P(m) {m==10}
+
+
+   if (l<=i&&i<=k) {
+
+//  P(m) {m==10, i<=k, l<=i}
+
+      if (j==0)
+
+//  P(m) {j==0, m==10, i<=k, l<=i}
+
+         p = &i;
+      else
+
+//  P(m) {m==10, i<=k, l<=i}
+
+         p = &j;
+
+//  P(m) {m==10, i<=k, l<=i}
+
+      
+      //without points-to informaion, we lost everything
+      //with points-to informaion, we have l<=k
+      *p = 10;
+
+//  P(i,j,k,l,m) {}
+
+
+      return 0;
+   }
+
+//  P(i,j,k,l,m,main) {}
+
+   return 0;
+}
+
+PROPER EFFECTS WITH POINTS TO
+
+int main()
+{
+   int i, j, k, l, m;
+   int *p;
+//             <    is written>: m
+
+   m = 10;
+//             <    is read   >: i k l
+
+   if (l<=i&&i<=k) {
+//             <    is read   >: j
+      if (j==0)
+//             <    is written>: p
+         p = &i;
+      else
+//             <    is written>: p
+         p = &j;
+//             <may be written>: i j
+//             <    is read   >: p
+      
+      //without points-to informaion, we lost everything
+      //with points-to informaion, we have l<=k
+      *p = 10;
+
+      return 0;
+   }
+   return 0;
+}
+
+Transformers with points to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   int i, j, k, l, m;
+
+//  T() {}
+
+   int *p;
+
+//  T(m) {m==10}
+
+
+   m = 10;
+
+//  T(i,j,main) {m==10}
+
+
+   if (l<=i&&i<=k) {
+
+//  T() {m==10, i<=k, l<=i}
+
+      if (j==0)
+
+//  T() {j==0, m==10, i<=k, l<=i}
+
+         p = &i;
+      else
+
+//  T() {m==10, i<=k, l<=i}
+
+         p = &j;
+
+//  T(i,j) {m==10, i#init<=k, l<=i#init}
+
+      
+      //without points-to informaion, we lost everything
+      //with points-to informaion, we have l<=k
+      *p = 10;
+
+//  T(main) {m==10, main==0, l<=k}
+
+
+      return 0;
+   }
+
+//  T(main) {m==10, main==0}
+
+   return 0;
+}
+
+Preconditions with points to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i, j, k, l, m;
+
+//  P() {}
+
+   int *p;
+
+//  P() {}
+
+
+   m = 10;
+
+//  P(m) {m==10}
+
+
+   if (l<=i&&i<=k) {
+
+//  P(m) {m==10, i<=k, l<=i}
+
+      if (j==0)
+
+//  P(m) {j==0, m==10, i<=k, l<=i}
+
+         p = &i;
+      else
+
+//  P(m) {m==10, i<=k, l<=i}
+
+         p = &j;
+
+//  P(m) {m==10, i<=k, l<=i}
+
+      
+      //without points-to informaion, we lost everything
+      //with points-to informaion, we have l<=k
+      *p = 10;
+
+//  P(i,j,m) {m==10, l<=k}
+
+
+      return 0;
+   }
+
+//  P(i,j,m,main) {m==10}
+
+   return 0;
+}

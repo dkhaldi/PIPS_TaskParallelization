@@ -1,0 +1,95 @@
+setenv WSPACE=switch_escape_char
+setenv FILE = switch_escape_char.c
+delete $WSPACE
+create $WSPACE $FILE
+
+# setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+# activate C_PARSER
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+
+#echo Try more aggressive restructuring:
+setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+
+echo
+echo // Parsed printed file for esc_q
+echo
+display PARSED_PRINTED_FILE[esc_q]
+
+echo
+echo // Printed file for esc_q
+echo
+display PRINTED_FILE[esc_q]
+
+echo Try more aggressive restructuring:
+#setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+apply RESTRUCTURE_CONTROL[esc_q]
+
+echo
+echo // printed file after RESTRUCTURE_CONTROL
+echo
+display PRINTED_FILE[esc_q]
+
+
+capply UNSPLIT[%PROGRAM]
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+# delete $WSPACE
+# create $WSPACE $FILE
+# 
+# # setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+# # activate C_PARSER
+# 
+# setproperty ABORT_ON_USER_ERROR TRUE
+# 
+# setproperty MEMORY_EFFECTS_ONLY FALSE
+# 
+# setproperty PRETTYPRINT_LANGUAGE "C"
+# setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+# 
+# 
+# #echo Try more aggressive restructuring:
+# setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+# 
+# echo
+# echo // With NEW_CONTROLIZER
+# echo
+# activate NEW_CONTROLIZER
+# 
+# echo
+# echo // Parsed printed file for esc_q
+# echo
+# display PARSED_PRINTED_FILE[esc_q]
+# 
+# echo
+# echo // Printed file for esc_q
+# echo
+# display PRINTED_FILE[esc_q]
+# 
+# echo Try more aggressive restructuring:
+# #setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+# apply RESTRUCTURE_CONTROL[esc_q]
+# 
+# echo
+# echo // printed file after RESTRUCTURE_CONTROL
+# echo
+# display PRINTED_FILE[esc_q]
+# 
+# close
+# echo
+# echo // Warnings
+# echo 
+# shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

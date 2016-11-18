@@ -1,0 +1,142 @@
+setenv WSPACE=10_struct_dependancy_imbricated_pointer_twice_main_effects
+setenv FILE=10_struct_dependancy_imbricated_pointer_twice_main
+# tpips script
+# 
+
+# set cpp flags for pips
+setenv PIPS_CPP_FLAGS "-I$WSPACE.src"
+setproperty ABORT_ON_USER_ERROR TRUE
+
+# skip some properties by pipsmake
+# setproperty PIPSMAKE_WARNINGS FALSE
+
+# quiet cleanup
+# setproperty NO_USER_WARNING TRUE
+
+delete ${WSPACE}
+# setproperty NO_USER_WARNING FALSE
+
+# first run, intraprocedural
+# first and only run, interprocedural
+create ${WSPACE} $FILE.src/*.c
+
+# ensure that the target function exists before proceeding
+module main
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER TRUE
+# BUGGY with PRIVATIZE_MODULE:
+#   setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT FALSE
+
+#new
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+#new
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+setproperty CONSTANT_PATH_EFFECTS FALSE
+setproperty ALIASING_ACROSS_IO_STREAMS FALSE
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+#new, but should be useless for quite a while: to the best of my
+# knowledge, no pass exists that can use the is pointer information
+# setproperty SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+# The programmer guarantee that a pointer is strictly typed
+# For instance, if "p" is declared as "int * p;", then "p[3]" is illegal
+# "p" should be declared as "int (* p)[];" but this is not the case# with
+# this test case
+setproperty POINTS_TO_STRICT_POINTER_TYPES FALSE
+activate PRECONDITIONS_INTER_FULL_WITH_POINTS_TO
+activate INTERPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+
+echo
+echo Points-to for "update1"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[update1]
+
+echo
+echo Proper effects with points-to for "update1"
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[update1]
+
+echo
+echo Cumulated effects with points-to for "update1"
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[update1]
+
+echo
+echo Points-to for "compute1"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[compute1]
+
+echo
+echo Proper effects with points-to for "compute1"
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[compute1]
+
+echo
+echo Cumulated effects with points-to for "compute1"
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[compute1]
+
+echo
+echo Points-to for "update2"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[update2]
+
+echo
+echo Proper effects with points-to for "update2"
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[update2]
+
+echo
+echo Cumulated effects with points-to for "update2"
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[update2]
+
+echo
+echo Points-to for "compute2"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[compute2]
+
+echo
+echo Proper effects with points-to for "compute2"
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[compute2]
+
+echo
+echo Cumulated effects with points-to for "compute2"
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[compute2]
+
+echo
+echo Proper effects with points-to for "main"
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[main]
+close
+
+# no cleanup here
+# delete ${WSPACE}
+quit

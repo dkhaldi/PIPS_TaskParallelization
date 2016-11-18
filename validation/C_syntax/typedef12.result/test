@@ -1,0 +1,20 @@
+Database created
+
+Parsed printed file "local_typedef12a"
+
+void local_typedef12a(int n)
+{
+   /* Create alternate buffer: m rows of n. */
+   typedef int ROW[10];
+   ROW x;
+   x[1] = 0;
+}
+
+Parsed printed file "local_typedef12b"
+
+void local_typedef12b(int n)
+{
+   typedef int ROW[10];
+   ROW x;
+   x[1] = 0;
+}

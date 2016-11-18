@@ -1,0 +1,32 @@
+delete twin_label
+
+setenv C_SYNTAX_DEBUG_LEVEL 9
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create twin_label twin_label.c
+
+activate C_PARSER
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+# For debugging
+setproperty PRETTYPRINT_BLOCKS TRUE
+setproperty PRETTYPRINT_EMPTY_BLOCKS TRUE
+
+echo
+echo parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[miam]
+
+echo
+echo printed file
+echo
+
+display PRINTED_FILE[miam]
+
+close
+#delete twin_label
+quit

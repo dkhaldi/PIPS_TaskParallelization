@@ -1,0 +1,44 @@
+
+POINTS TO for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int if14()
+{
+
+// Points To: none
+
+   int *p, i, j;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   p = (void *) 0;
+
+// Points To:
+// p -> *NULL* , EXACT
+
+
+   if (p!=(void *) 0)
+
+// Points To: unreachable
+
+      p = &i;
+   else
+
+// Points To:
+// p -> *NULL* , EXACT
+
+      p = &j;
+
+// Points To:
+// p -> j , EXACT
+
+
+   return 0;
+}

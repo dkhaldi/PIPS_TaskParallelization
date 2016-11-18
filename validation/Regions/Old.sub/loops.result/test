@@ -1,0 +1,2 @@
+### stderr
+PROPER_EFFECTS[LOOPS] (effects_of_implied_do) [user error] Index J7 in implied DO is read. Standard violation, see Section 12.8.2.3

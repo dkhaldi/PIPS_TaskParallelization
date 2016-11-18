@@ -1,0 +1,15 @@
+setenv WS=struct02
+delete $WS
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5
+
+display PRINTED_FILE[$WS!]
+
+display PRINTED_FILE[$WS]
+
+close
+
+delete $WS
+
+quit

@@ -1,0 +1,120 @@
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int struct11()
+{
+
+// Points To: none
+
+   int i = 0;
+
+// Points To: none
+
+   q.N1 = 1;
+
+// Points To: none
+
+   q.N2 = 2;
+
+// Points To: none
+
+
+   q = p[i++];
+
+// Points To: none
+
+
+   return 0;
+}
+int struct11()
+{
+//             <    is written>: i
+   int i = 0;
+//             <    is written>: q.N1
+   q.N1 = 1;
+//             <    is written>: q.N2
+   q.N2 = 2;
+//             <    is read   >: i p[i++].N1 p[i++].N2
+//             <    is written>: i q.N1 q.N2
+
+   q = p[i++];
+
+   return 0;
+}
+//             <may be read   >: p[*].N1 p[*].N2
+//             <    is written>: q.N1 q.N2
+int struct11()
+{
+//             <    is written>: i
+   int i = 0;
+//             <    is written>: q.N1
+   q.N1 = 1;
+//             <    is written>: q.N2
+   q.N2 = 2;
+//             <may be read   >: p[*].N1 p[*].N2
+//             <    is read   >: i
+//             <    is written>: i q.N1 q.N2
+
+   q = p[i++];
+
+   return 0;
+}
+
+//  T(q[N1],q[N2],struct11) {struct11==0}
+
+int struct11()
+{
+
+//  T(i) {i==0}
+
+   int i = 0;
+
+//  T(q[N1]) {q[N1]==1}
+
+   q.N1 = 1;
+
+//  T(q[N2]) {q[N2]==2}
+
+   q.N2 = 2;
+
+//  T(i,q[N1],q[N2]) {i==i#init+1}
+
+
+   q = p[i++];
+
+//  T(struct11) {struct11==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int struct11()
+{
+
+//  P() {}
+
+   int i = 0;
+
+//  P(i) {i==0}
+
+   q.N1 = 1;
+
+//  P(i,q[N1]) {i==0, q[N1]==1}
+
+   q.N2 = 2;
+
+//  P(i,q[N1],q[N2]) {i==0, q[N1]==1, q[N2]==2}
+
+
+   q = p[i++];
+
+//  P(i,q[N1],q[N2]) {i==1}
+
+
+   return 0;
+}

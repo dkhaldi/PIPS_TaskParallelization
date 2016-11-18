@@ -1,0 +1,22 @@
+delete global02
+create global02 global02.c
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+# Assume pointers points to array by default and generate indexing
+setproperty POINTS_TO_STRICT_POINTER_TYPES FALSE
+
+echo
+echo POINTS TO
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[%ALLFUNC]
+
+
+close
+delete global02
+quit

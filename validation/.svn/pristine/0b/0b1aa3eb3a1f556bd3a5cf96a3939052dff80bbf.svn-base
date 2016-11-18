@@ -1,0 +1,35 @@
+setenv WSPACE=fabien01
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+echo 
+echo Points-to for "cons"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[cons]
+
+echo 
+echo Points-to for "revcopy"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[revcopy]
+
+echo 
+echo Points-to for "reverse"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[reverse]
+
+echo 
+echo Points-to for "main"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[main]
+
+close
+delete $WSPACE
+quit

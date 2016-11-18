@@ -1,0 +1,21 @@
+# $Id: Makefile 6727 2016-07-01 15:22:04Z coelho $
+
+include ../../validate.mk
+
+GEN	= ./combinatorial_generation.py
+# todo: heap
+MEMORY 	= global stack formal static
+
+gen:
+	for v in $(MEMORY) ; do \
+	  for p in $(MEMORY) ; do \
+	    for t in int float ; do \
+	      $(GEN) $$v $$p $$t int > gen_$${v}_$${p}_$${t}_int.c ; \
+	    done ; \
+	  done ; \
+	done
+
+
+clean: local-clean
+local-clean:
+	$(RM) gen_*.c

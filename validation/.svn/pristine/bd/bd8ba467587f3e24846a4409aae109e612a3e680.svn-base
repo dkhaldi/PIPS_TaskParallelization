@@ -1,0 +1,166 @@
+
+POINTS TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   struct p_s {
+      struct q_s {int r;} *q;
+   };
+
+
+// Points To: none
+
+   struct q_s;
+
+// Points To: none
+
+   struct p_s *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   struct q_s *b;
+
+// Points To:
+// b -> undefined , EXACT
+// p -> undefined , EXACT
+
+   struct q_s *u;
+
+// Points To:
+// b -> undefined , EXACT
+// p -> undefined , EXACT
+// u -> undefined , EXACT
+
+   struct q_s *x;
+
+// Points To:
+// b -> undefined , EXACT
+// p -> undefined , EXACT
+// u -> undefined , EXACT
+// x -> undefined , EXACT
+
+   struct q_s **z;
+
+// Points To:
+// b -> undefined , EXACT
+// p -> undefined , EXACT
+// u -> undefined , EXACT
+// x -> undefined , EXACT
+// z -> undefined , EXACT
+
+   int a = 0;
+
+// Points To:
+// b -> undefined , EXACT
+// p -> undefined , EXACT
+// u -> undefined , EXACT
+// x -> undefined , EXACT
+// z -> undefined , EXACT
+
+   u = (struct q_s *) malloc(sizeof(struct q_s ));
+
+// Points To:
+// b -> undefined , EXACT
+// p -> undefined , EXACT
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> undefined , EXACT
+// z -> undefined , EXACT
+
+   b = (struct q_s *) malloc(sizeof(struct q_s ));
+
+// Points To:
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> undefined , EXACT
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> undefined , EXACT
+// z -> undefined , EXACT
+
+   p = (struct p_s *) malloc(sizeof(struct p_s ));
+
+// Points To:
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> undefined , EXACT
+// z -> undefined , EXACT
+
+   x = b;
+
+// Points To:
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// z -> undefined , EXACT
+
+   p->q = x;
+
+// Points To:
+// *ANY_MODULE*:*HEAP**ANYWHERE* -> *ANY_MODULE*:*HEAP**ANYWHERE*
+//     , MAY
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// z -> undefined , EXACT
+
+   
+   
+   
+   z = &p->q;
+
+// Points To:
+// *ANY_MODULE*:*HEAP**ANYWHERE* -> *ANY_MODULE*:*HEAP**ANYWHERE*
+//     , MAY
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// z -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+   p->q = b;
+
+// Points To:
+// *ANY_MODULE*:*HEAP**ANYWHERE* -> *ANY_MODULE*:*HEAP**ANYWHERE*
+//     , MAY
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// z -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+   z = &u;
+
+// Points To:
+// *ANY_MODULE*:*HEAP**ANYWHERE* -> *ANY_MODULE*:*HEAP**ANYWHERE*
+//     , MAY
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// z -> u , EXACT
+
+
+   p->q->r = a;
+
+// Points To:
+// *ANY_MODULE*:*HEAP**ANYWHERE* -> *ANY_MODULE*:*HEAP**ANYWHERE*
+//     , MAY
+// b -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// p -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// u -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// x -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// z -> u , EXACT
+
+   return 0;
+}

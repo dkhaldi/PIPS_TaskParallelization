@@ -1,0 +1,346 @@
+
+POINTS TO
+
+
+// Points To IN:
+// filename -> *NULL* , MAY
+// filename -> _filename_1[0] , MAY
+// nch -> *NULL* , MAY
+// nch -> _nch_5[0] , MAY
+// ncl -> *NULL* , MAY
+// ncl -> _ncl_4[0] , MAY
+// nrh -> *NULL* , MAY
+// nrh -> _nrh_3[0] , MAY
+// nrl -> *NULL* , MAY
+// nrl -> _nrl_2[0] , MAY
+// stderr -> *NULL* , MAY
+// stderr -> __IO_EFFECTS:IO_FILES[2] , MAY
+
+
+// Points To OUT:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , MAY
+// LoadPGM_bmatrix -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+// filename -> _filename_1[0] , EXACT
+// nch -> _nch_5[0] , EXACT
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+byte * * LoadPGM_bmatrix(char *filename, int *nrl, int *nrh, int *ncl, int *nch)
+{
+
+// Points To: none
+
+   int height = 10, width = 10;
+   //, gris;
+
+// Points To: none
+
+   byte **m;
+
+// Points To:
+// m -> undefined , EXACT
+
+   FILE *file;
+
+// Points To:
+// file -> undefined , EXACT
+// m -> undefined , EXACT
+
+   char *buffer;
+
+// Points To:
+// buffer -> undefined , EXACT
+// file -> undefined , EXACT
+// m -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// buffer -> undefined , EXACT
+// file -> undefined , EXACT
+// m -> undefined , EXACT
+
+
+   buffer = (char *) calloc(80, sizeof(char));
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> undefined , EXACT
+// filename -> *NULL* , MAY
+// filename -> _filename_1[0] , MAY
+// m -> undefined , EXACT
+
+   file = fopen(filename, "rb");
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> *NULL* , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+
+   if (file==(void *) 0)
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> *NULL* , EXACT
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+// stderr -> *NULL* , MAY
+// stderr -> __IO_EFFECTS:IO_FILES[2] , MAY
+
+      nrerror("ouverture du fichier impossible\n");
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+
+   
+   // The code synthesis fails because of type_supporting_entities() which explodes the stack
+   //readitem(file, buffer);
+   if (strcmp(buffer, "P5")!=0)
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+// stderr -> *NULL* , MAY
+// stderr -> __IO_EFFECTS:IO_FILES[2] , MAY
+
+      nrerror("entete du fichier %s invalide\n");
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+// nrl -> *NULL* , MAY
+// nrl -> _nrl_2[0] , MAY
+
+   
+   //width  = atoi(readitem(file, buffer));
+   //height = atoi(readitem(file, buffer));
+   //gris   = atoi(readitem(file, buffer));
+   
+   *nrl = 0;
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+// nrh -> *NULL* , MAY
+// nrh -> _nrh_3[0] , MAY
+// nrl -> _nrl_2[0] , EXACT
+
+   *nrh = height-1;
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+// ncl -> *NULL* , MAY
+// ncl -> _ncl_4[0] , MAY
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+   *ncl = 0;
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+// nch -> *NULL* , MAY
+// nch -> _nch_5[0] , MAY
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+   *nch = width-1;
+
+// Points To:
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> undefined , EXACT
+// nch -> _nch_5[0] , EXACT
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+   m = bmatrix(*nrl, *nrh, *ncl, *nch);
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , MAY
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+// nch -> _nch_5[0] , EXACT
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+
+   for(i = 0; i <= height-1; i += 1)
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , MAY
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+// nch -> _nch_5[0] , EXACT
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+      ReadPGMrow(file, width, m[i]);
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , MAY
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+// nch -> _nch_5[0] , EXACT
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+
+   fclose(file);
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , MAY
+// buffer -> *ANY_MODULE*:*HEAP*_b1[0] , MAY
+// file -> undefined , EXACT
+// filename -> _filename_1[0] , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+// nch -> _nch_5[0] , EXACT
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+   free(buffer);
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , MAY
+// buffer -> undefined , EXACT
+// file -> undefined , EXACT
+// filename -> _filename_1[0] , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+// nch -> _nch_5[0] , EXACT
+// ncl -> _ncl_4[0] , EXACT
+// nrh -> _nrh_3[0] , EXACT
+// nrl -> _nrl_2[0] , EXACT
+
+
+   return m;
+}
+
+// Points To IN:
+// file -> *NULL* , MAY
+// file -> _file_1[0] , MAY
+// line -> *NULL* , MAY
+// line -> _line_3[0] , MAY
+
+
+// Points To OUT:
+// file -> _file_1[0] , EXACT
+// line -> _line_3[0] , EXACT
+
+void ReadPGMrow(FILE *file, int width, byte *line)
+{
+
+// Points To:
+// file -> *NULL* , MAY
+// file -> _file_1[0] , MAY
+// line -> *NULL* , MAY
+// line -> _line_3[0] , MAY
+
+   fread(&line[0], sizeof(byte), width, file);
+}
+
+// Points To IN: none
+
+
+// Points To OUT:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , EXACT
+// bmatrix -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+
+byte * * bmatrix(int nrl, int nrh, int ncl, int nch)
+{
+
+// Points To: none
+
+   int i, nrow = nrh-nrl+1, ncol = nch-ncl+1;
+
+// Points To: none
+
+   byte **m;
+
+// Points To:
+// m -> undefined , EXACT
+
+   
+   /* allocate pointers to rows */
+   m = (byte **) malloc((size_t) ((nrow+ncol)*sizeof(byte *)));
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+
+   for(i = nrl+1; i <= nrh; i += 1)
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+
+      m[i] = m[i-1]+ncol;
+
+// Points To:
+// *ANY_MODULE*:*HEAP*_b0[*] -> undefined , EXACT
+// m -> *ANY_MODULE*:*HEAP*_b0[0] , MAY
+
+   /* return pointer to array of pointers to rows */
+   return m;
+}
+
+// Points To IN:
+// stderr -> *NULL* , MAY
+// stderr -> __IO_EFFECTS:IO_FILES[2] , MAY
+
+
+// Points To OUT: unreachable
+
+void nrerror(char error_text[])
+{
+
+// Points To:
+// stderr -> *NULL* , MAY
+// stderr -> __IO_EFFECTS:IO_FILES[2] , MAY
+
+   fprintf(stderr, "Numerical Recipes run-time error...\n");
+
+// Points To:
+// stderr -> __IO_EFFECTS:IO_FILES[2] , EXACT
+
+   fprintf(stderr, "%s\n", error_text);
+
+// Points To:
+// stderr -> __IO_EFFECTS:IO_FILES[2] , EXACT
+
+   fprintf(stderr, "...now exiting to system...\n");
+
+// Points To:
+// stderr -> __IO_EFFECTS:IO_FILES[2] , EXACT
+
+   exit(1);
+}

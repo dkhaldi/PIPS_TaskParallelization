@@ -1,0 +1,119 @@
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   struct {
+      int dim;
+   } s;
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   s.dim = 10;
+
+// Points To: none
+
+   double a[s.dim];
+
+// Points To: none
+
+   // a[i] = 0.;
+   return 0;
+}
+
+PROPER  EFFECTS
+
+int main()
+{
+   struct {
+      int dim;
+   } s;
+   int i;
+//             <    is written>: s.dim
+   s.dim = 10;
+//             <    is read   >: s.dim
+   double a[s.dim];
+   // a[i] = 0.;
+   return 0;
+}
+
+Transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   struct {
+      int dim;
+   } s;
+
+//  T(i) {}
+
+   int i;
+
+//  T(s[dim]) {s[dim]==10}
+
+   s.dim = 10;
+
+//  T() {s[dim]==10}
+
+   double a[s.dim];
+
+//  T(main) {main==0, s[dim]==10}
+
+   // a[i] = 0.;
+   return 0;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   struct {
+      int dim;
+   } s;
+
+//  P() {}
+
+   int i;
+
+//  P(i) {}
+
+   s.dim = 10;
+
+//  P(i,s[dim]) {s[dim]==10}
+
+   double a[s.dim];
+
+//  P(i,s[dim]) {s[dim]==10}
+
+   // a[i] = 0.;
+   return 0;
+}
+
+Warnings
+
+PRECONDITIONS_INTER_FULL[main] (apply_effects_to_transformer) Transformer resolve with the effects

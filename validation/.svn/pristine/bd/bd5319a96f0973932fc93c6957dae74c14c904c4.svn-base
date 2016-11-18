@@ -1,0 +1,34 @@
+C     Scalar replacement in the presence of conditional control flow
+C
+C     Steve Carr and Ken Kennedy
+C
+C     Software - Practive and Experience, Vol. 24, No. 1, pp. 51-77, 1994
+C
+C     Fifth example, page 18: b(k) is not scalarized by PIPS... because
+C     we do not try to scalarize from outside a loop. We would also miss
+C     opportunities within a basic block not included in a loop. Or
+C     because we do not check that the reference is loop invariant and
+C     that the profitability analysis is different, as well as the
+C     importation and exportation of the initial and final values, if
+C     any
+C
+C     b(k) is scalarized by the second scalarization algorithm
+C     implemented in PIPS
+C
+C     Also, we do not try to carry a value from one iteration to the next
+
+      SUBROUTINE SCALARIZATION34(A, B, C, D, E, M, N)
+      REAL A(N), B(N), C(N), D(N), E(N), M(N)
+      B_0 = B(K)
+
+      DO I = 1, 100
+         C_0 = C(I)
+         IF (M(I).LT.0.) E(I) = C_0
+         A(I) = C_0+D(I)
+         B_0 = B_0+A(I-1)
+      ENDDO
+      B(K) = B_0
+
+      PRINT *, B, E
+
+      END

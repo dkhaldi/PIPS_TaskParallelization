@@ -1,0 +1,35 @@
+
+Listing for FOO
+
+      SUBROUTINE FOO(X)
+      EXTERNAL X
+      REAL Y(100)
+
+      DO 100 J = 1, 100                                                 0005
+         CALL X(I)                                                      0006
+         Y(I) = 0.                                                      0007
+100      CONTINUE                                                       0008
+      END
+
+Listing for FORMEL03
+
+c     passage de procedure formelle
+C     abort "no source file for x"
+      PROGRAM FORMEL03
+      EXTERNAL Q
+
+C     Forbidden in Fortran 77:
+c      p = q
+
+      CALL FOO(Q)                                                       0009
+      END
+
+Listing for Q
+
+      SUBROUTINE Q(I)
+      I = I+1                                                           0002
+      END
+### stderr
+PARSER[FOO] (SafeLocalToGlobal) Variable FOO:X is a formal functional parameter.
+PARSER[FOO] (MakeExternalFunction) unsupported formal function FOO:X
+PARSER[FOO] (MakeCallInst) entity FOO:X is a formal functional parameter

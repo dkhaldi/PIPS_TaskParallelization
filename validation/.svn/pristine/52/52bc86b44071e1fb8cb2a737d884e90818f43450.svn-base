@@ -1,0 +1,50 @@
+
+Proper effects
+
+void point_to03()
+{
+   typedef double a_t[10][20];
+   a_t a;
+   a_t *p;
+//             <    is written>: p
+
+   p = &a;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+   ((*p)[2])[3] = 1.5;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void point_to03()
+{
+
+// Points To: none
+
+   typedef double a_t[10][20];
+
+// Points To: none
+
+   a_t a;
+
+// Points To: none
+
+   a_t *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   p = &a;
+
+// Points To:
+// p -> a , EXACT
+
+   ((*p)[2])[3] = 1.5;
+}

@@ -1,0 +1,34 @@
+#
+# SAME AS line04 but preprocessed by clang instead of gcc
+#
+setenv WS=line04b
+delete $WS
+
+# This setting is overridden by create_workspace() calling activate_language()
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+# FI: In this case, we do need preprocessing
+# FC: MAYBE, THIS CANNOT BE PORTABLE
+# As Pips never sees the pre-processed file anyway, so ISTM
+# it is ok to test from a preprocessed version.
+setenv PIPS_CPP ./cat_last.sh
+create $WS $WS.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+echo
+echo Parsed code for "main"
+echo
+
+display PARSED_PRINTED_FILE[main]
+
+echo
+echo Parsed code for the compilation unit $WS!
+echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+close
+#delete $WS

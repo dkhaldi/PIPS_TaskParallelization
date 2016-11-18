@@ -1,0 +1,23 @@
+delete one_liner_07
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create one_liner_07 one_liner_07.c
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+activate C_PARSER
+
+echo
+echo PARSED PRINTED FILE FOR MODULE one_liner_07
+echo
+
+display PARSED_PRINTED_FILE[one_liner_07]
+
+echo
+echo Compile parsed file one_liner_07
+echo
+
+apply UNSPLIT[%PROGRAM]
+shell pips_validation_exe.sh -c -g one_liner_07
+close
+delete one_liner_07 
+quit

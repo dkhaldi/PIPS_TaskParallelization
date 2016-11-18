@@ -1,0 +1,20 @@
+delete bit_field
+
+# The input code is correct
+# setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create bit_field bit_field.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+activate C_PARSER
+
+display PARSED_PRINTED_FILE[main]
+
+# display PRINTED_FILE[main]
+
+close
+
+delete bit_field
+
+quit

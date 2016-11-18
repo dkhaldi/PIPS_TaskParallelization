@@ -1,0 +1,27 @@
+delete for01
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create for01 for01.c
+
+echo
+echo Parsed code
+echo
+
+display PARSED_PRINTED_FILE
+
+activate NEW_CONTROLIZER
+
+#setenv CONTROL_DEBUG_LEVEL 9
+
+echo
+echo Controlized code
+echo
+
+display PRINTED_FILE
+
+apply UNSPLIT
+shell (cd for01.database/Src; gcc for01.c; ./a.out)
+
+close
+quit

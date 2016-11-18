@@ -1,0 +1,33 @@
+(tp_parse) param05: No such workspace
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+Registering file param05.f
+Splitting file    ./param05.f
+  Module         PARAM05
+Workspace param05 created and opened.
+Module PARAM05 selected
+Main module PROGRAM "PARAM05" selected.
+Module PARAM05 already active.
+Module PARAM05 already active.
+Module PARAM05 already active.
+Request: build resource PRINTED_FILE for module PARAM05.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(PARAM05)
+  PARSER                         building   PARSED_CODE(PARAM05)
+                                 building   CALLEES(PARAM05)
+PARSER[PARAM05] (MakeAssignInst) PARAMETER IFOO appears as lhs
+PARSER[PARAM05] (MakeAssignInst) [user error] Parser error between lines 5 and 5
+Illegal lhs
+PARSER[PARAM05] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[PARAM05] (catch_user_error) pass has failed
+PARSER[PARAM05] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module PARAM05.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module PARAM05.
+Closing program.
+Closing workspace.
+Workspace param05 closed.
+Workspace param05 deleted.
+Pips is done: tpips quit

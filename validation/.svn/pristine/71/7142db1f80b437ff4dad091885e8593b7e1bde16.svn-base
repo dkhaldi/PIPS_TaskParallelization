@@ -1,0 +1,21 @@
+setenv WS=include
+delete $WS
+# The source code is about OK, why skip the test?
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5 
+
+#setenv PRETTYPRINT_DEBUG_LEVEL 7
+
+display PRINTED_FILE[$WS!]
+display PRINTED_FILE[main]
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g $WS
+
+close
+
+#delete $WS
+
+quit

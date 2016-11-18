@@ -1,0 +1,36 @@
+
+void foo(int *col)
+{
+//             <    is read   >: _col_1[0] col
+//             <    is written>: col
+   *col++;
+
+   return;
+}
+int main()
+{
+   int x, tab1[10], tab2[10], *p;
+//             <    is read   >: x
+//             <    is written>: x
+   x++;
+//             <    is read   >: x
+//             <    is written>: x
+   x += 3;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p tab1[tab2[x]] tab2[x] x
+   *(p+tab1[tab2[x]]) = 0;
+   return 1;
+}
+
+ *********************** Use-Def Chains *********************
+
+	17 --> 18 with conflicts
+		from <x-W-EXACT> to <x-W-EXACT>
+		from <x-W-EXACT> to <x-R-EXACT>
+		from <x-R-EXACT> to <x-W-EXACT>
+	18 --> 19 with conflicts
+		from <x-W-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+		from <x-W-EXACT> to <x-R-EXACT>
+		from <x-R-EXACT> to <*ANY_MODULE*:*ANYWHERE*-W-MAY>
+
+****************** End of Dependence Graph ******************

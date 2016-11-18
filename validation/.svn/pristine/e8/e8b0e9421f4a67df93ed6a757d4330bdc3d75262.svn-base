@@ -1,0 +1,19 @@
+setenv WS=decl15b
+delete $WS
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 1
+
+echo
+echo Parsed printed file for "$WS!"
+echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g $WS
+
+close
+delete $WS
+
+quit

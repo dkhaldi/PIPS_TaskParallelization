@@ -1,0 +1,36 @@
+
+void lhs02()
+{
+//             <    is written>: i
+   int i = 2;
+//             <    is written>: j
+   int j = 2;
+//             <may be written>: i j
+//             <    is read   >: i
+
+   *(i>2?&i:&j) = 3;
+//             <may be read   >: j
+//             <    is read   >: i
+//             <    is written>: j
+
+   j = i>2?i+1:j+2;
+}
+
+ *********************** Use-Def Chains *********************
+
+	05 --> 08 with conflicts
+		from <i-W-EXACT> to <i-W-MAY>
+		from <i-W-EXACT> to <i-R-EXACT>
+	05 --> 10 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+	06 --> 08 with conflicts
+		from <j-W-EXACT> to <j-W-MAY>
+	06 --> 10 with conflicts
+		from <j-W-EXACT> to <j-W-EXACT>
+		from <j-W-EXACT> to <j-R-MAY>
+	08 --> 10 with conflicts
+		from <j-W-MAY> to <j-W-EXACT>
+		from <j-W-MAY> to <j-R-MAY>
+		from <i-W-MAY> to <i-R-EXACT>
+
+****************** End of Dependence Graph ******************

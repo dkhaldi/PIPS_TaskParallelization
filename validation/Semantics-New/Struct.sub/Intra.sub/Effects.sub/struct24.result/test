@@ -1,0 +1,121 @@
+
+Cumulated Effects
+
+//             <    is read   >: n1 n2
+param init(int n1, int n2)
+{
+   param s;
+//             <    is read   >: n1
+//             <    is written>: s.N1
+   s.N1 = n1;
+//             <    is read   >: n2
+//             <    is written>: s.N2
+   s.N2 = n2;
+//             <    is read   >: s.N1 s.N2
+   return s;
+}
+int main(int argc, char *argv[])
+{
+//             <    is written>: i j
+   int i = 1, j = 2;
+   param p;
+//             <    is read   >: i j
+//             <    is written>: p.N1 p.N2
+   p = init(i, j);
+//             <    is read   >: p.N1
+   return p.N1;
+}
+
+Transformers
+
+
+//  T(init[N1],init[N2]) {init[N1]==n1, init[N2]==n2}
+
+param init(int n1, int n2)
+{
+
+//  T() {}
+
+   param s;
+
+//  T(s[N1]) {n1==s[N1]}
+
+   s.N1 = n1;
+
+//  T(s[N2]) {n2==s[N2]}
+
+   s.N2 = n2;
+
+//  T(init[N1],init[N2]) {init[N1]==s[N1], init[N2]==s[N2]}
+
+   return s;
+}
+
+//  T(main) {}
+
+int main(int argc, char *argv[])
+{
+
+//  T(i,j) {i==1, j==2}
+
+   int i = 1, j = 2;
+
+//  T() {}
+
+   param p;
+
+//  T(p[N1],p[N2]) {}
+
+   p = init(i, j);
+
+//  T(main) {main==p[N1]}
+
+   return p.N1;
+}
+
+Preconditions
+
+
+//  P() {}
+
+param init(int n1, int n2)
+{
+
+//  P() {}
+
+   param s;
+
+//  P() {}
+
+   s.N1 = n1;
+
+//  P(s[N1]) {n1==s[N1]}
+
+   s.N2 = n2;
+
+//  P(s[N1],s[N2]) {n1==s[N1], n2==s[N2]}
+
+   return s;
+}
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   int i = 1, j = 2;
+
+//  P(i,j) {i==1, j==2}
+
+   param p;
+
+//  P(i,j) {i==1, j==2}
+
+   p = init(i, j);
+
+//  P(i,j,p[N1],p[N2]) {i==1, j==2}
+
+   return p.N1;
+}

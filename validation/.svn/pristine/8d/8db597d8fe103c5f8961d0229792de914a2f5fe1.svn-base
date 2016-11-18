@@ -1,0 +1,35 @@
+setenv WS=call05
+delete $WS
+create $WS $WS.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+echo 
+echo Proper effects
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[call05]
+
+echo 
+echo Cumulated effects
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[call05]
+
+echo 
+echo Proper effects
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[main]
+
+echo 
+echo Points-to
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE
+
+close
+delete $WS
+quit

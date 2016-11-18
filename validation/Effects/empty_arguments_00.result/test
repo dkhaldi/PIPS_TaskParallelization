@@ -1,0 +1,12 @@
+#
+# compile initial empty_arguments_00
+#
+extern int main(void);
+int main(void)
+{
+   foo();
+   foo(1);
+   foo(1, 2);
+   return 0;
+}
+

@@ -1,0 +1,39 @@
+# Remove this option to improve portability
+# setenv LINEAR_USE_GMP 1
+setenv WSPACE=modulo17
+setenv FUNC=print_array
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+activate MUST_REGIONS
+
+activate NEW_CONTROLIZER
+
+
+echo
+echo INITIAL
+echo
+display PRINTED_FILE [main]
+display PRINTED_FILE[$WSPACE!$FUNC]
+
+echo
+echo PRECONDITIONS_INTER_FULL[$WSPACE!$FUNC]
+echo
+apply PRECONDITIONS_INTER_FULL[$WSPACE!$FUNC]
+display PRINTED_FILE[$WSPACE!$FUNC]
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

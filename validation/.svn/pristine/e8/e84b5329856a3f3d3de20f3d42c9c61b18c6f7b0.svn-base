@@ -1,0 +1,37 @@
+
+Parsed printed code for "a"
+
+/* Interprocedurally conflicting typedefs */
+
+//#include <stdio.h>
+
+typedef int km;                                                         /*0005*/
+
+extern km x;                                                            /*0007*/
+
+km y = 1;                                                               /*0009*/
+
+extern int main();                                                      /*0011*/
+int main()
+{
+   extern void foo(km *);                                               /*0013*/
+   x = x/2;                                                             /*0014*/
+   x = x+y;                                                             /*0015*/
+   //printf("%d %d\n", x, y);
+   foo(&x);                                                             /*0017*/
+   return x;                                                            /*0018*/
+}
+
+Parsed printed code for "b"
+
+/* Interprocedurally conflicting typedefs */
+
+typedef double km;                                                      /*0003*/
+
+km x = 2.3;                                                             /*0005*/
+
+extern void foo(km *p);                                                 /*0007*/
+void foo(km *p)
+{
+   *p = *p+1.8;                                                         /*0009*/
+}

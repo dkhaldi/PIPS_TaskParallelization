@@ -1,0 +1,45 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+   tf_t s;
+//             <    is written>: sp
+   tf_t *sp = &s;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: sp
+
+   call09(s.one, sp->one);
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   tf_t s;
+
+// Points To: none
+
+   tf_t *sp = &s;
+
+// Points To:
+// sp -> s , EXACT
+
+
+   call09(s.one, sp->one);
+
+// Points To:
+// sp -> s , EXACT
+
+   return 0;
+}

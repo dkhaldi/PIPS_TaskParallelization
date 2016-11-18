@@ -1,0 +1,14 @@
+setenv WS=line02
+delete $WS
+
+# This setting is overridden by create_workspace() calling activate_language()
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+setenv PIPS_CPP ./cat_last.sh
+create $WS $WS.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+display PARSED_PRINTED_FILE[main]
+close
+#delete $WS

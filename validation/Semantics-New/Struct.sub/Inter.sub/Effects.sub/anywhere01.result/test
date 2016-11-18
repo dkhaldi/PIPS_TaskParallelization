@@ -1,0 +1,228 @@
+void TEST(int a, float2 tab[a], char *fileName)
+{
+//             <    is referenced>: size_t size_t
+//             <    is declared>: fichier fichierOut
+   FILE *fichier, *fichierOut;
+//             <    is written>: 0`i
+//             <    is referenced>: 0`i
+//             <    is declared>: 0`i
+   int i = 0;
+//             <    is written>: filename
+//             <    is referenced>: filename
+//             <    is declared>: filename
+   char *filename = "toto.txt";
+//             <may be read   >: filename[*] __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is read   >: filename
+//             <    is written>: fichier
+//             <    is referenced>: fichier filename __IO_EFFECTS:LUNS
+//                               size_t
+   fichier = fopen(filename, "r");
+//             <may be read   >: fileName[*] __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fileName
+//             <    is written>: fichierOut
+//             <    is referenced>: fichierOut fileName 
+//                               __IO_EFFECTS:LUNS size_t
+   fichierOut = fopen(fileName, "w");
+//             <    is read   >: fichier
+//             <    is referenced>: fichier size_t
+
+   if (fichier!=0) {
+//             <    is declared>: val1
+      float val1;
+//             <    is referenced>: float2
+//             <    is declared>: test
+      float2 test;
+      {
+//             <    is declared>: 0`1`2`i
+         int i;
+//             <    is read   >: a
+//             <    is written>: 0`1`2`i
+//             <    is referenced>: a 0`1`2`i
+         for(i = 0; i <= a-1; i += 1)
+//             <may be read   >: fichier[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichier[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: a fichier
+//             <    is written>: val1
+//             <    is referenced>: a fichier val1 __IO_EFFECTS:LUNS 
+//                               size_t
+            if (fscanf(fichier, "%f ", &val1)!=-1) {
+//             <    is read   >: a 0`1`2`i tab[i].x tab[i].y
+//             <    is written>: test.x test.y
+//             <    is referenced>: a 0`1`2`i tab test
+               test = tab[i];
+//             <    is read   >: a test.x
+//             <    is referenced>: a test
+               if (test.x>0.) {
+//             <may be read   >: filename[*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: a filename 0`1`2`i stdout 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: a filename 0`1`2`i stdout 
+//                               __IO_EFFECTS:LUNS
+                  printf("### Test failed - %s : error l%d\n", filename, i);
+//             <    is read   >: a
+//             <    is referenced>: a
+                  return;
+               }
+            }
+      }
+//             <may be read   >: fichier[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichier[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fichier
+//             <    is referenced>: fichier __IO_EFFECTS:LUNS size_t
+      fclose(fichier);
+//             <may be read   >: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fichierOut
+//             <    is referenced>: fichierOut __IO_EFFECTS:LUNS 
+//                               size_t
+      fprintf(fichierOut, "OK");
+//             <may be read   >: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fichierOut
+//             <    is referenced>: fichierOut __IO_EFFECTS:LUNS 
+//                               size_t
+      fclose(fichierOut);
+   }
+   else
+//             <may be read   >: filename[*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: filename stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: filename stdout __IO_EFFECTS:LUNS
+      printf("--- Test impossible - %s\n", filename);
+}
+//             <may be read   >: stdout stdout[0] tab[*].x tab[*].y 
+//                               *ANY_MODULE*:*ANYWHERE*_b0 
+//                               *ANY_MODULE*:*ANYWHERE*_b1 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: stdout[0] *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be referenced>: a stdout tab
+//             <    is read   >: a fileName
+//             <    is referenced>: fileName __IO_EFFECTS:LUNS
+void TEST(int a, float2 tab[a], char *fileName)
+{
+//             <    is referenced>: size_t
+//             <    is declared>: fichier fichierOut
+   FILE *fichier, *fichierOut;
+//             <    is written>: 0`i
+//             <    is referenced>: 0`i
+//             <    is declared>: 0`i
+   int i = 0;
+//             <    is written>: filename
+//             <    is referenced>: filename
+//             <    is declared>: filename
+   char *filename = "toto.txt";
+//             <may be read   >: filename[*] __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is read   >: filename
+//             <    is written>: fichier
+//             <    is referenced>: fichier filename __IO_EFFECTS:LUNS
+//                               size_t
+   fichier = fopen(filename, "r");
+//             <may be read   >: fileName[*] __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fileName
+//             <    is written>: fichierOut
+//             <    is referenced>: fichierOut fileName 
+//                               __IO_EFFECTS:LUNS size_t
+   fichierOut = fopen(fileName, "w");
+//             <may be read   >: a fichier[0] fichierOut fichierOut[0]
+//                               filename filename[*] stdout stdout[0]
+//                               tab[*].x tab[*].y 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichier[0] fichierOut[0] stdout[0] 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be referenced>: a fichierOut filename stdout tab
+//             <    is read   >: fichier
+//             <    is referenced>: fichier __IO_EFFECTS:LUNS size_t
+
+   if (fichier!=0) {
+//             <    is declared>: val1
+      float val1;
+//             <    is referenced>: float2
+//             <    is declared>: test
+      float2 test;
+      {
+//             <    is declared>: 0`1`2`i
+         int i;
+//             <may be read   >: fichier fichier[0] filename 
+//                               filename[*] 0`1`2`i stdout stdout[0] 
+//                               tab[*].x tab[*].y test.x 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichier[0] stdout[0] test.x test.y 
+//                               val1 __IO_EFFECTS:LUNS[*]
+//             <may be referenced>: fichier filename stdout tab test 
+//                               val1 __IO_EFFECTS:LUNS size_t
+//             <    is read   >: a
+//             <    is written>: 0`1`2`i
+//             <    is referenced>: a 0`1`2`i
+         for(i = 0; i <= a-1; i += 1)
+//             <may be read   >: fichier[0] filename filename[*] 
+//                               0`1`2`i stdout stdout[0] tab[*].x 
+//                               tab[*].y test.x __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichier[0] stdout[0] test.x test.y 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be referenced>: filename 0`1`2`i stdout tab test
+//             <    is read   >: a fichier
+//             <    is written>: val1
+//             <    is referenced>: a fichier val1 __IO_EFFECTS:LUNS 
+//                               size_t
+            if (fscanf(fichier, "%f ", &val1)!=-1) {
+//             <may be read   >: tab[*].x tab[*].y
+//             <    is read   >: a 0`1`2`i
+//             <    is written>: test.x test.y
+//             <    is referenced>: a 0`1`2`i tab test
+               test = tab[i];
+//             <may be read   >: filename filename[*] 0`1`2`i stdout 
+//                               stdout[0] __IO_EFFECTS:LUNS[1]
+//             <may be written>: stdout[0] __IO_EFFECTS:LUNS[1]
+//             <may be referenced>: filename 0`1`2`i stdout 
+//                               __IO_EFFECTS:LUNS
+//             <    is read   >: a test.x
+//             <    is referenced>: a test
+               if (test.x>0.) {
+//             <may be read   >: filename[*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: a filename 0`1`2`i stdout 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: a filename 0`1`2`i stdout 
+//                               __IO_EFFECTS:LUNS
+                  printf("### Test failed - %s : error l%d\n", filename, i);
+//             <    is read   >: a
+//             <    is referenced>: a
+                  return;
+               }
+            }
+      }
+//             <may be read   >: fichier[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichier[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fichier
+//             <    is referenced>: fichier __IO_EFFECTS:LUNS size_t
+      fclose(fichier);
+//             <may be read   >: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fichierOut
+//             <    is referenced>: fichierOut __IO_EFFECTS:LUNS 
+//                               size_t
+      fprintf(fichierOut, "OK");
+//             <may be read   >: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <may be written>: fichierOut[0] __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fichierOut
+//             <    is referenced>: fichierOut __IO_EFFECTS:LUNS 
+//                               size_t
+      fclose(fichierOut);
+   }
+   else
+//             <may be read   >: filename[*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: filename stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: filename stdout __IO_EFFECTS:LUNS
+      printf("--- Test impossible - %s\n", filename);
+}

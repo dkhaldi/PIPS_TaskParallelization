@@ -1,0 +1,1 @@
+The result cannot be obtained if array elements are not analyzed. Currently, module_to_value_mappings() does not collect them.

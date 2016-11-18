@@ -1,0 +1,79 @@
+
+Source code with transformers
+
+
+//  T() {}
+
+void modulo12(void)
+{
+
+//  T() {}
+
+   int i, j, k, mi, mj, mk, l;
+
+//  T(l,mi,mj,mk) {}
+
+   if (2*i+4*j==2&&4*i+8*j==4&&2*k==2&&i>=0) {
+
+//  T(mi) {i+2j==1, k==1, mi==1, j<=0}
+
+      // i is odd, mi==1
+      mi = i%2;
+
+//  T(mj) {i+2j==1, k==1, mi==1, j<=0, mj<=0, 0<=mj+1}
+
+      // j's parity is not constrained by equation i+2j=1
+      mj = j%2;
+
+//  T(mk) {i+2j==1, k==1, mi==1, mk==1, j<=0, mj<=0, 0<=mj+1}
+
+      // k==1, hence mk==1
+      mk = k%2;
+
+//  T(l) {i+2j==1, k==1, l==0, mi==1, mk==1, j<=0, mj<=0, 0<=mj+1}
+
+      l = 0;
+   }
+
+//  T() {}
+
+   return;
+}
+
+//  P() {}
+
+void modulo12(void)
+{
+
+//  P() {}
+
+   int i, j, k, mi, mj, mk, l;
+
+//  P() {}
+
+   if (2*i+4*j==2&&4*i+8*j==4&&2*k==2&&i>=0) {
+
+//  P() {i+2j==1, k==1, j<=0}
+
+      // i is odd, mi==1
+      mi = i%2;
+
+//  P(mi) {i+2j==1, k==1, mi==1, j<=0}
+
+      // j's parity is not constrained by equation i+2j=1
+      mj = j%2;
+
+//  P(mi,mj) {i+2j==1, k==1, mi==1, j<=0, mj<=0, 0<=mj+1}
+
+      // k==1, hence mk==1
+      mk = k%2;
+
+//  P(mi,mj,mk) {i+2j==1, k==1, mi==1, mk==1, j<=0, mj<=0, 0<=mj+1}
+
+      l = 0;
+   }
+
+//  P(l,mi,mj,mk) {}
+
+   return;
+}

@@ -1,0 +1,39 @@
+//
+// Parsed code for "main"
+//
+int main()
+{
+   int a[5][6];
+#pragma omp parallel for
+   {
+      int i;
+      for (i = 0;i<5;i++) {
+         int j;
+         for (j = 0;j<6;j++)
+            a[i][j] = i*5+j;
+      }
+   }
+
+   return 0;
+}
+//
+// Code for "main" new_controlizer
+//
+int main()
+{
+   int a[5][6];
+#pragma omp parallel for
+   {
+      int i;
+      for(i = 0; i <= 4; i += 1) {
+         int j;
+         for(j = 0; j <= 5; j += 1)
+            a[i][j] = i*5+j;
+      }
+   }
+
+   return 0;
+}
+//
+// Warnings
+//

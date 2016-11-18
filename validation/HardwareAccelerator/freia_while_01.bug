@@ -1,0 +1,2 @@
+AIPO: an intermediary image w1_1 is allocated outside the while
+loop, but is freed inside it

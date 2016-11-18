@@ -1,0 +1,88 @@
+###################### do_reduction-STEP/do_reduction.database/Src/DO_REDUCTION_PARDO_HYBRID.f ######################
+      SUBROUTINE DO_REDUCTION_PARDO_HYBRID(N, A, B, C, D, I)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_I_UP, STEP_I_LOW, 
+     &STEP_COMM_SIZE, N, A, I
+      INTEGER STEP_SR_D(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:1
+     &, 1:STEP_MAX_NB_LOOPSLICES), D(1:N)
+      REAL*4 C
+      REAL*8 B
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_PARALLEL_DO)
+      CALL STEP_INIT_ARRAYREGIONS(D, STEP_INTEGER4, 1, 1, N)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, N, 1, STEP_COMM_SIZE)
+      CALL STEP_INITREDUCTION(B, STEP_PROD_REDUCE, STEP_REAL8)
+      CALL STEP_INITREDUCTION(A, STEP_SUM_REDUCE, STEP_INTEGER4)
+      CALL STEP_INITREDUCTION(C, STEP_SUM_REDUCE, STEP_REAL4)
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <D(PHI1)-W-EXACT-{1<=PHI1, PHI1<=10, STEP_I_LOW<=PHI1,
+C    PHI1<=STEP_I_UP}>
+
+         STEP_SR_D(STEP_INDEX_SLICE_LOW,1,IDX) = MAX(1, STEP_I_LOW)
+         STEP_SR_D(STEP_INDEX_SLICE_UP,1,IDX) = MIN(10, STEP_I_UP)
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(D, STEP_COMM_SIZE, STEP_SR_D)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_I_LOW, STEP_I_UP)
+!$omp parallel do reduction(*: B) reduction(+: A, C)
+
+      DO 10 I = STEP_I_LOW, STEP_I_UP
+         D(I) = I
+         A = A+D(I)
+         B = B*I
+         C = C+I
+10       CONTINUE
+!$omp end parallel do
+C END WORK
+!$omp master
+      CALL STEP_REDUCTION(B)
+      CALL STEP_REDUCTION(A)
+      CALL STEP_REDUCTION(C)
+      CALL STEP_ALLTOALL_FULL(D, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT
+     &)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_PARALLEL_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### do_reduction-STEP/do_reduction.database/Src/do_reduction.f ######################
+!
+! do_reduction.f
+! Example of reduction clauses on a parallel do directive
+!
+! 2008
+! Creation: A. Muller, 2008
+
+      PROGRAM DO_REDUCTION
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+      INTEGER N
+      PARAMETER (N=10)
+      INTEGER I,A,T
+      INTEGER D(N)
+      REAL*8 B
+      REAL C
+      CALL STEP_INIT_FORTRAN_ORDER
+
+      A = 0
+      B = 1
+      C = -1
+      CALL DO_REDUCTION_PARDO_HYBRID(N, A, B, C, D, I)
+
+      PRINT *, A
+      PRINT *, B
+      PRINT *, C
+      PRINT *, D
+      CALL STEP_FINALIZE
+
+      END

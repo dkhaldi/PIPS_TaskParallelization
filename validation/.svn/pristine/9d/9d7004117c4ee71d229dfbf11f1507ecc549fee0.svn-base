@@ -1,0 +1,63 @@
+#
+# initial code
+#
+extern void setzero(int a[1]);
+
+extern void addone(int *a);
+
+extern void one01(int n, int a[n]);
+
+extern int main(void);
+void addone(int *a)
+{
+   *a += 1;
+}
+int main(void)
+{
+   int a[10];
+   one00(10, a);
+}
+void one01(int n, int a[n])
+{
+   int i;
+   for(i = 0; i <= n-1; i += 1) {
+      setzero(&a[i]);
+      addone(a+i);
+   }
+}
+void setzero(int a[1])
+{
+   a[0] = 0;
+}
+#
+# global/private declarations
+#
+extern void setzero(int a[1]);
+
+extern void addone(int *a);
+
+extern void one01(int n, int a[n]);
+
+extern int main(void);
+void addone(global int *a)
+{
+   *a += 1;
+}
+int main(void)
+{
+   int a[10];
+   one00(10, a);
+}
+void one01(int n, global int a[n])
+{
+   int i;
+   for(i = 0; i <= n-1; i += 1) {
+      setzero(&a[i]);
+      addone(a+i);
+   }
+}
+void setzero(global int a[1])
+{
+   a[0] = 0;
+}
+

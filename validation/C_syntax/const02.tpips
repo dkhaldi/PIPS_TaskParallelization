@@ -1,0 +1,19 @@
+setenv WS=const02
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+activate C_PARSER
+
+# display PARSED_PRINTED_FILE[main]
+display PRINTED_FILE[$WS!]
+display PRINTED_FILE[main]
+
+close
+
+delete $WS
+
+quit

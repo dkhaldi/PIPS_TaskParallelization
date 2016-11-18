@@ -1,0 +1,52 @@
+
+Proper effects
+
+int main()
+{
+   int x, tab1[10], tab2[10], *p;
+//             <    is read   >: x
+//             <    is written>: x
+   x++;
+//             <    is read   >: x
+//             <    is written>: x
+   x += 3;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p tab1[tab2[x]] tab2[x] x
+   *(p+tab1[tab2[x]]) = 0;
+   return 1;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main()
+{
+
+// Points To: none
+
+   int x, tab1[10], tab2[10], *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   x++;
+
+// Points To:
+// p -> undefined , EXACT
+
+   x += 3;
+
+// Points To:
+// p -> undefined , EXACT
+
+   *(p+tab1[tab2[x]]) = 0;
+
+// Points To: unreachable
+
+   return 1;
+}

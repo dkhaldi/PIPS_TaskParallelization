@@ -1,0 +1,44 @@
+
+POINTS TO for assignment15
+
+
+// Points To IN:
+// _qq_2 -> *NULL* , MAY
+// _qq_2 -> _qq_2_2 , MAY
+// pp -> *NULL* , MAY
+// pp -> _pp_1 , MAY
+// qq -> *NULL* , MAY
+// qq -> _qq_2 , MAY
+
+
+// Points To OUT:
+// _pp_1 -> *NULL* , MAY
+// _pp_1 -> _qq_2_2 , MAY
+// _qq_2 -> *NULL* , MAY
+// _qq_2 -> _qq_2_2 , MAY
+// pp -> _pp_1 , EXACT
+// qq -> _qq_2 , EXACT
+
+void assignment15(int **pp, int **qq)
+{
+
+// Points To:
+// _qq_2 -> *NULL* , MAY
+// _qq_2 -> _qq_2_2 , MAY
+// pp -> *NULL* , MAY
+// pp -> _pp_1 , MAY
+// qq -> *NULL* , MAY
+// qq -> _qq_2 , MAY
+
+   *pp = *qq;
+
+// Points To:
+// _pp_1 -> *NULL* , MAY
+// _pp_1 -> _qq_2_2 , MAY
+// _qq_2 -> *NULL* , MAY
+// _qq_2 -> _qq_2_2 , MAY
+// pp -> _pp_1 , EXACT
+// qq -> _qq_2 , EXACT
+
+   return;
+}

@@ -1,0 +1,171 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   char buffer_in[100];
+
+// Points To: none
+
+   char buffer_out[100];
+
+// Points To: none
+
+
+   memcpy(buffer_out, buffer_in, 4);
+
+// Points To: none
+
+   mymemcpy(buffer_out, buffer_in, 4);
+
+// Points To:
+// buffer_in -> buffer_in[0] , EXACT
+// buffer_out -> buffer_out[0] , EXACT
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in
+   char buffer_in[100];
+//             <    is declared>: buffer_out
+   char buffer_out[100];
+//             <    is read   >: buffer_in[0:4-1]
+//             <    is written>: buffer_out[0:4-1]
+//             <    is referenced>: buffer_in buffer_out
+
+   memcpy(buffer_out, buffer_in, 4);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is referenced>: buffer_in buffer_out
+   mymemcpy(buffer_out, buffer_in, 4);
+
+   return 0;
+}
+
+Cumulated effects with poins-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in
+   char buffer_in[100];
+//             <    is declared>: buffer_out
+   char buffer_out[100];
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is referenced>: buffer_in buffer_out
+
+   memcpy(buffer_out, buffer_in, 4);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is referenced>: buffer_in buffer_out
+   mymemcpy(buffer_out, buffer_in, 4);
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   char buffer_in[100];
+
+//  T() {}
+
+   char buffer_out[100];
+
+//  T() {}
+
+
+   memcpy(buffer_out, buffer_in, 4);
+
+//  T() {}
+
+   mymemcpy(buffer_out, buffer_in, 4);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   char buffer_in[100];
+
+//  P() {}
+
+   char buffer_out[100];
+
+//  P() {}
+
+
+   memcpy(buffer_out, buffer_in, 4);
+
+//  P() {}
+
+   mymemcpy(buffer_out, buffer_in, 4);
+
+//  P() {}
+
+
+   return 0;
+}
+
+Convex array regions with points-to for "main"
+
+int main(int argc, char **argv)
+{
+
+//  <buffer_in-WE-EXACT-{}>
+
+   char buffer_in[100];
+
+//  <buffer_out-WE-EXACT-{}>
+
+   char buffer_out[100];
+
+//  <buffer_in-RE-EXACT-{}>
+//  <buffer_in[PHI1]-R-EXACT-{0<=PHI1, PHI1<=3}>
+//  <buffer_out-RE-EXACT-{}>
+//  <buffer_out[PHI1]-W-EXACT-{0<=PHI1, PHI1<=3}>
+
+
+   memcpy(buffer_out, buffer_in, 4);
+
+//  <buffer_in-RE-EXACT-{}>
+//  <buffer_in[PHI1]-R-EXACT-{0<=PHI1, PHI1<=3}>
+//  <buffer_out-RE-EXACT-{}>
+//  <buffer_out[PHI1]-W-EXACT-{0<=PHI1, PHI1<=3}>
+
+   mymemcpy(buffer_out, buffer_in, 4);
+
+   return 0;
+}

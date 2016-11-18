@@ -1,0 +1,15 @@
+delete zroots
+
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create zroots zroots.c
+
+# quit
+
+#activate C_PARSER
+
+#setproperty PRETTYPRINT_LANGUAGE "C"
+
+display PRINTED_FILE[zroots]
+quit

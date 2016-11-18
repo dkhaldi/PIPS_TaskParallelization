@@ -1,0 +1,28 @@
+setenv WS=intrinsics01
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+# setproperty PRETTYPRINT_ALL_C_BRACES TRUE
+setproperty PRETTYPRINT_INTERNAL_INTRINSICS TRUE
+
+echo
+echo Parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[main]
+
+echo
+echo Printed file
+echo
+
+display PRINTED_FILE[main]
+
+#apply UNSPLIT
+
+#shell echo `(cd $WS.database/Src; gcc -c -Wall $WS.c) 2>&1`
+
+close
+quit

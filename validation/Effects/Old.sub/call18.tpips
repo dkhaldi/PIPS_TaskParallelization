@@ -1,0 +1,31 @@
+delete call18
+
+setproperty ABORT_ON_USER_ERROR TRUE
+# fmt undeclared
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create call18 call18.c
+
+activate C_PARSER
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[call18]
+
+echo
+echo Proper effects for "main"
+echo
+
+activate PRINT_CODE_PROPER_POINTER_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Cumulated effects for "main"
+echo
+
+activate PRINT_CODE_CUMULATED_POINTER_EFFECTS
+display PRINTED_FILE[main]
+
+close
+delete call18
+quit

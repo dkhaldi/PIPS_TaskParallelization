@@ -1,0 +1,43 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+   int t[100][10][3];
+   int *pu;
+//             <    is written>: pu
+
+   pu = t[1][2];
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int t[100][10][3];
+
+// Points To: none
+
+   int *pu;
+
+// Points To:
+// pu -> undefined , EXACT
+
+
+   pu = t[1][2];
+
+// Points To:
+// pu -> t[1][2][0] , EXACT
+
+   return 0;
+}

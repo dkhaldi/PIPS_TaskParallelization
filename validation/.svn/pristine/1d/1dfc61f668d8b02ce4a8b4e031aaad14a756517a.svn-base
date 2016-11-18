@@ -1,0 +1,57 @@
+
+Proper effects
+
+int main()
+{
+   int *x, *a, i;
+//             <    is written>: i
+   i = 1;
+//             <    is written>: a
+   a = &i;
+//             <    is read   >: a
+//             <    is written>: x
+   x = a;
+
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *x, *a, i;
+
+// Points To:
+// a -> undefined , EXACT
+// x -> undefined , EXACT
+
+   i = 1;
+
+// Points To:
+// a -> undefined , EXACT
+// x -> undefined , EXACT
+
+   a = &i;
+
+// Points To:
+// a -> i , EXACT
+// x -> undefined , EXACT
+
+   x = a;
+
+// Points To:
+// a -> i , EXACT
+// x -> i , EXACT
+
+
+   return 0;
+}

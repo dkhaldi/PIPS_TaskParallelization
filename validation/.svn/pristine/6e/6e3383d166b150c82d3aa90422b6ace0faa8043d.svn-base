@@ -1,0 +1,10 @@
+#/bin/sh
+
+tpips error_management03.tpips
+
+echo
+echo Warnings
+echo
+
+cat error_management03.database/Warnings
+rm -Rf error_management03.database

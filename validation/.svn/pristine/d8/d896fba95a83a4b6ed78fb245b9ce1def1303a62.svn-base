@@ -1,0 +1,18 @@
+# Issue with cpp 5
+
+setenv WS=linkedlist01
+
+delete $WS
+
+setenv ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+display PARSED_PRINTED_FILE[$WS!]
+display PARSED_PRINTED_FILE[main]
+
+close
+
+#delete $WS
+
+quit

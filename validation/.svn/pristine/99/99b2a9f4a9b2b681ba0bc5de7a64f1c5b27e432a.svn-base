@@ -1,0 +1,66 @@
+
+Source code with transformers
+
+
+//  T() {}
+
+void modulo06(unsigned int n, int i, unsigned int a[n])
+{
+
+//  T(i) {0<=i+3, i<=3}
+
+   i = n%4;
+
+//  T(j) {0<=j+3, j<=3}
+
+   int j = n%4;
+
+//  T() {}
+
+   
+   // Here i and j in the precondition should be the same
+   printf("%d", a[i]);
+}
+
+Source code with preconditions
+
+
+//  P() {i==0, n==10}
+
+void modulo06(unsigned int n, int i, unsigned int a[n])
+{
+
+//  P() {i==0, n==10}
+
+   i = n%4;
+
+//  P(i) {i==2, n==10}
+
+   int j = n%4;
+
+//  P(i,j) {i==2, j==2, n==10}
+
+   
+   // Here i and j in the precondition should be the same
+   printf("%d", a[i]);
+}
+
+Warnings
+
+TRANSFORMERS_INTER_FULL[main] (any_user_call_site_to_transformer) line 11 
+at statement:
+
+	modulo06(n, 0, a);
+
+
+Signed/unsigned integer type conversion.
+INTERPROCEDURAL_SUMMARY_PRECONDITION[modulo06] (any_user_call_site_to_transformer) Signed/unsigned integer type conversion.
+REFINE_TRANSFORMERS[modulo06] (module_name_to_transformers_in_context) Although property SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT is not set, it is used because it is necessary for this recomputation to be useful
+TRANSFORMERS_INTER_FULL[main] (any_user_call_site_to_transformer) line 11 
+at statement:
+
+	modulo06(n, 0, a);
+
+
+Signed/unsigned integer type conversion.
+INTERPROCEDURAL_SUMMARY_PRECONDITION[modulo06] (any_user_call_site_to_transformer) Signed/unsigned integer type conversion.

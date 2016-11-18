@@ -1,0 +1,50 @@
+delete pointer01
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create pointer01 pointer01.c
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+#activate PROPER_EFFECTS
+
+activate PRINT_CODE_POINTS_TO_LIST
+
+echo
+echo POINTS TO
+echo
+
+display PRINTED_FILE
+
+echo
+echo Proper effects with points-to
+echo
+
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE
+
+echo
+echo Cumulated effects with points-to
+echo
+
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE
+
+echo
+echo Parallel code
+echo
+
+#activate PRINT_CODE_PROPER_EFFECTS
+display PARALLELPRINTED_FILE
+
+close
+
+# FI: I need to check the logfile to see how it is impacted by the
+# bang rule for intraprocedural_points_to_analysis
+#
+# We seem to have tons of useless recomputations due to the bang rule
+
+#delete pointer01
+quit

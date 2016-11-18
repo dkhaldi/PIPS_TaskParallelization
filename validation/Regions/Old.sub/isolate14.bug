@@ -1,0 +1,2 @@
+Redundancy elimination seems to eliminate information that is not redundant if not directly
+tight to the PHI variables. This information could potentially result into an empty region.

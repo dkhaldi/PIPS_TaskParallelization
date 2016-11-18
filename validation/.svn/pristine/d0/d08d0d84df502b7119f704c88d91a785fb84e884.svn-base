@@ -1,0 +1,18 @@
+delete A
+# Floating poiint variables used as DO loop bounds
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create A tiling-symbolic.f
+#create A tiling.c
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+activate MUST_REGIONS
+
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE
+activate PRINT_CODE_IN_REGIONS
+display PRINTED_FILE
+activate PRINT_CODE_OUT_REGIONS
+display PRINTED_FILE
+
+close
+

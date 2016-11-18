@@ -1,0 +1,28 @@
+
+Proper effects with points-to
+
+void call09(int i, int j)
+{
+//             <    is read   >: i j
+//             <    is written>: i
+   i = i+j;
+}
+int main()
+{
+   tf_t s;
+//             <    is written>: sp
+   tf_t *sp = &s;
+//             <    is read   >: s.one sp
+
+   call09(s.one, sp->one);
+}
+
+Use-def chains
+
+
+ *********************** Use-Def Chains *********************
+
+	20 --> 22 with conflicts
+		from <sp-W-EXACT> to <sp-R-EXACT>
+
+****************** End of Dependence Graph ******************

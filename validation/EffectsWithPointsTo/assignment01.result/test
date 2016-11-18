@@ -1,0 +1,18 @@
+
+void assignment01()
+{
+   int i;
+   int *p;
+   int *q;
+   int *r;
+//             <    is written>: p q r
+
+   p = q = r = &i;
+//             <    is written>: i
+   i = 2;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

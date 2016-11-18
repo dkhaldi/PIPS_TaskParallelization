@@ -1,0 +1,13 @@
+setenv WS=decl74
+delete $WS
+
+create $WS $WS.c
+
+#echo
+#echo Parsed printed code for "$WS!"
+#echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+close
+quit

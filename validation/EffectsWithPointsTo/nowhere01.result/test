@@ -1,0 +1,74 @@
+
+Points-to for nowhere01
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int nowhere01()
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int **q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+
+   *p = 1;
+
+// Points To: unreachable
+
+   *q = &i;
+
+// Points To: unreachable
+
+
+   return 0;
+}
+
+Proper effects with points-to for nowhere01
+
+int nowhere01()
+{
+   int i;
+   int *p;
+   int **q;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+
+   *p = 1;
+   *q = &i;
+
+   return 0;
+}
+
+Cumulated effects with points-to for nowhere01
+
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+int nowhere01()
+{
+   int i;
+   int *p;
+   int **q;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+
+   *p = 1;
+   *q = &i;
+
+   return 0;
+}

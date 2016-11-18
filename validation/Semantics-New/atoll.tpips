@@ -1,0 +1,24 @@
+delete atoll
+
+create atoll atoll.c
+
+#display PRINTED_FILE(%ALL)
+#setproperty PRAGMA_TYPE "expr"
+#apply PRIVATIZE_MODULE(%ALL)
+echo // OMP style
+#apply COARSE_GRAIN_PARALLELIZATION(%ALL)
+#apply INTERNALIZE_PARALLEL_CODE(%ALLFUNC)
+#apply OMPIFY_CODE(%ALL)
+
+# Do not use %ALL because it includes compilation units and hence,
+# quite often, OS dependent source code.
+apply PRECONDITIONS_INTER_FULL(%ALLFUNC)
+
+setproperty PRETTYPRINT_SEQUENTIAL_STYLE    "do"
+
+# Do not use %ALLFUNC, or exclude functions whose code appear in header files
+display PRINTED_FILE(%ALLFUNC)
+
+close
+delete atoll
+quit

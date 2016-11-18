@@ -1,0 +1,8 @@
+# $Id$
+delete $WSPACE
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WSPACE $FILE
+display PRINTED_FILE[%ALL]
+close
+delete $WSPACE
+quit

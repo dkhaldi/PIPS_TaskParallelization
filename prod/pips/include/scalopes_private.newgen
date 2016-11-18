@@ -1,0 +1,25 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import entity from "ri.newgen" ;
+import effect from "effects.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+entity_task_buffers = entity -> task_buffers ;
+sesam_buffers_processing_context = kernel_tasks:entity{} x server_tasks:entity{} x kernel_buffers:entity_task_buffers x server_buffers:entity_task_buffers x buffers:entity{} ;
+task_buffers = input:entity{} x output:entity{}  ;

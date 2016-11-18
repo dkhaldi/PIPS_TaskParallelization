@@ -1,0 +1,98 @@
+
+POINTS TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main(void)
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int **pp;
+
+// Points To:
+// pp -> undefined , EXACT
+
+   srand(time((void *) 0));
+
+// Points To:
+// pp -> undefined , EXACT
+
+
+   if (alea()) {
+
+// Points To:
+// pp -> undefined , EXACT
+
+      int *pi = &i;
+
+// Points To:
+// pi -> i , EXACT
+// pp -> undefined , EXACT
+
+      pp = &pi;
+
+// Points To:
+// pi -> i , EXACT
+// pp -> pi , EXACT
+
+
+      **pp = 1;
+   }
+
+// Points To:
+// pp -> undefined , EXACT
+
+   
+   // pp points to a dead value in the stack; pp's value is
+   // indeterminate according to C standard
+   printf("%p\n", pp);
+
+// Points To: unreachable
+
+   
+   // possible segfault.
+   // should generate an error while analyzing?
+   **pp = 0;
+
+// Points To: unreachable
+
+   return 0;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+static int alea(void)
+{
+
+// Points To: none
+
+   int r = rand();
+
+// Points To: none
+
+   printf("%d\n", r);
+
+// Points To: none
+
+   return rand()%2==1;
+}
+
+Warnings
+
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "alea" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "alea" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (points_to_set_block_projection) Dangling pointer "pp" towards "pi".
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "alea" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (intrinsic_call_to_points_to) Undefined value "pp" is used at line 28.

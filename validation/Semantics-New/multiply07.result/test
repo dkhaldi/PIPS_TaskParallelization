@@ -1,0 +1,38 @@
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T(i,j) {i==2, j==3}
+
+   int i = 2, j = 3, k, l;
+
+//  T(i,k) {i==3, i#init==2, j==3, k==2}
+
+
+   k = i++;
+
+//  T(i,j,k) {i==4, i#init==3, j==4, j#init==3, k==16, k#init==2}
+
+
+   k = ++i*++j;
+
+//  T(i,j,l) {i==5, i#init==4, j==5, j#init==4, k==16, l==16}
+
+
+   l = i++*j++;
+
+//  T() {i==5, j==5, k==16, l==16}
+
+
+   printf("%d\n", k);
+
+//  T(main) {i==5, j==5, k==16, l==16, main==0}
+
+
+   return 0;
+}

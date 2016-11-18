@@ -1,0 +1,47 @@
+setenv WS=scanf01
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+
+# To check the environment and type declaration effects
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+activate MUST_POINTER_REGIONS
+
+# setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+echo
+echo Parsed code for "$WS"
+echo
+
+display PARSED_PRINTED_FILE[$WS]
+
+echo
+echo Code for "$WS"
+echo
+
+display PRINTED_FILE[$WS]
+
+echo
+echo Proper effects for "$WS"
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[$WS]
+
+echo
+echo Cumulated effects for "$WS"
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[$WS]
+
+close
+delete $WS
+quit

@@ -1,0 +1,145 @@
+
+Cumulated Effects
+
+//             <    is read   >: global_f.i global_f.j
+//             <    is written>: global_f.i global_f.j
+//             <    is referenced>: global_f
+int main(void)
+{
+//             <    is written>: global_f.i
+//             <    is referenced>: global_f
+   global_f.i = 0;
+//             <    is written>: global_f.j
+//             <    is referenced>: global_f
+   global_f.j = 2;
+//             <    is written>: global_f.i global_f.j
+//             <    is referenced>: global_f
+
+   updateFoo(21, 29);
+
+//             <    is read   >: global_f.i global_f.j
+//             <    is written>: l
+//             <    is referenced>: l global_f
+//             <    is declared>: l
+   int l = global_f.i+global_f.j;
+
+   return 0;
+}
+//             <    is read   >: i j
+//             <    is written>: global_f.i global_f.j
+//             <    is referenced>: i j global_f
+void updateFoo(int i, int j)
+{
+//             <    is read   >: i
+//             <    is written>: global_f.i
+//             <    is referenced>: i global_f
+   global_f.i = i;
+//             <    is read   >: j
+//             <    is written>: global_f.j
+//             <    is referenced>: j global_f
+   global_f.j = j;
+   return;
+}
+
+Transormers
+
+
+//  T(global_f[i],global_f[j],main) {global_f[i]==21, global_f[j]==29,
+//    main==0}
+
+int main(void)
+{
+
+//  T(global_f[i]) {global_f[i]==0}
+
+   global_f.i = 0;
+
+//  T(global_f[j]) {global_f[j]==2}
+
+   global_f.j = 2;
+
+//  T(global_f[i],global_f[j]) {global_f[i]==21, global_f[j]==29}
+
+
+   updateFoo(21, 29);
+
+
+//  T(l) {global_f[i]+global_f[j]==l}
+
+   int l = global_f.i+global_f.j;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+//  T(global_f[i],global_f[j]) {global_f[i]==i, global_f[j]==j}
+
+void updateFoo(int i, int j)
+{
+
+//  T(global_f[i]) {global_f[i]==i}
+
+   global_f.i = i;
+
+//  T(global_f[j]) {global_f[j]==j}
+
+   global_f.j = j;
+
+//  T() {}
+
+   return;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   global_f.i = 0;
+
+//  P(global_f[i]) {global_f[i]==0}
+
+   global_f.j = 2;
+
+//  P(global_f[i],global_f[j]) {global_f[i]==0, global_f[j]==2}
+
+
+   updateFoo(21, 29);
+
+
+//  P(global_f[i],global_f[j]) {global_f[i]==21, global_f[j]==29}
+
+   int l = global_f.i+global_f.j;
+
+//  P(global_f[i],global_f[j],l) {global_f[i]==21, global_f[j]==29,
+//    l==50}
+
+
+   return 0;
+}
+
+//  P() {i==21, j==29}
+
+void updateFoo(int i, int j)
+{
+
+//  P() {i==21, j==29}
+
+   global_f.i = i;
+
+//  P(global_f[i]) {global_f[i]==21, i==21, j==29}
+
+   global_f.j = j;
+
+//  P(global_f[i],global_f[j]) {global_f[i]==21, global_f[j]==29,
+//    i==21, j==29}
+
+   return;
+}

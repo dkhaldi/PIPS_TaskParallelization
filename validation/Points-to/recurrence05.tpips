@@ -1,0 +1,14 @@
+delete recurrence05
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create recurrence05 recurrence05.c
+
+activate PRINT_CODE_POINTS_TO_LIST
+
+echo
+echo POINTS TO for "recurrence05"
+echo
+display PRINTED_FILE[recurrence05]
+
+close
+delete recurrence05

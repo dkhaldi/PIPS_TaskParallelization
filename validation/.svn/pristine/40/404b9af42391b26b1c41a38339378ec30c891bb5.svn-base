@@ -1,0 +1,29 @@
+setenv WSPACE=cominc02
+delete $WSPACE
+
+# setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+# Do not combine options -P and -C with cpp
+setenv PIPS_CPP="cpp --freestanding"
+
+create $WSPACE $WSPACE.c
+
+display PRINTED_FILE[main]
+
+close
+
+# No warnings: we should check that the Warnings file is empty
+
+#echo
+#echo Error and warning messages
+#echo
+
+#shell cat $WSPACE.database/Warnings
+
+setenv FILE=$WSPACE.database/Warnings
+shell if test -s $FILE  ; then \
+echo "$FILE should be empty." ; \
+fi ;
+
+#delete $WSPACE
+quit

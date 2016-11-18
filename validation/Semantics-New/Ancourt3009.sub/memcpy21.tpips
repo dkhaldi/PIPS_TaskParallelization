@@ -1,0 +1,90 @@
+setenv WS=memcpy21
+
+#setenv PIPS_CPP_FLAGS " -I. -Isrc/include -I."
+setproperty ABORT_ON_USER_ERROR TRUE
+
+#setproperty PIPSMAKE_WARNINGS FALSE
+#setproperty NO_USER_WARNING TRUE
+delete $WS
+#setproperty NO_USER_WARNING FALSE
+
+create $WS $WS.c 
+
+module main
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT FALSE
+
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+setproperty ABSTRACT_HEAP_LOCATIONS "flow-sensitive"
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+
+# To stress most PIPS passes, set the next property to FALSE
+# To run PIPS as it was designed, set it to TRUE
+setproperty CONSTANT_PATH_EFFECTS TRUE
+
+setproperty ALIASING_ACROSS_IO_STREAMS FALSE
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+setproperty POINTS_TO_STRICT_POINTER_TYPES FALSE
+activate PRECONDITIONS_INTER_FULL_WITH_POINTS_TO
+activate INTERPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+activate MUST_REGIONS_WITH_POINTS_TO
+
+activate REGION_CHAINS
+activate RICE_REGIONS_DEPENDENCE_GRAPH
+
+echo
+echo Points-To for "main"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[main]
+
+echo
+echo Proper effects with points-to for "main"
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Cumulated effects with poins-to for "main"
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Transformers for "main"
+echo
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[main]
+
+echo
+echo Preconditions for "main"
+echo
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+echo
+echo Convex array regions with points-to for "main"
+echo
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[main]
+
+quit
+
+apply PRIVATIZE_MODULE[%ALLFUNC]
+apply COARSE_GRAIN_PARALLELIZATION[%ALLFUNC]
+activate PRINT_XML_APPLICATION
+
+make XML_PRINTED_FILE[main]
+close
+quit

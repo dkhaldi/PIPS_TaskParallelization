@@ -1,0 +1,237 @@
+
+Parsed code for scanf01
+
+void scanf01()
+{
+   int j;
+   param p;
+
+   scanf("%d", &j);
+   fscanf(stdin, "%d", &j);
+
+   scanf("%d", &p.N1);
+   fscanf(stdin, "%d", &p.N1);
+
+   scanf("%d", &q.N1);
+   fscanf(stdin, "%d", &q.N1);
+
+   int r = scanf("%d", &j);
+   r = fscanf(stdin, "%d", &j);
+
+   r = scanf("%d", &p.N1);
+   r = fscanf(stdin, "%d", &p.N1);
+
+   r = scanf("%d", &q.N1);
+   r = fscanf(stdin, "%d", &q.N1);
+}
+
+Code for scanf01
+
+void scanf01()
+{
+   int j;
+   param p;
+
+   scanf("%d", &j);
+   fscanf(stdin, "%d", &j);
+
+   scanf("%d", &p.N1);
+   fscanf(stdin, "%d", &p.N1);
+
+   scanf("%d", &q.N1);
+   fscanf(stdin, "%d", &q.N1);
+
+   int r = scanf("%d", &j);
+   r = fscanf(stdin, "%d", &j);
+
+   r = scanf("%d", &p.N1);
+   r = fscanf(stdin, "%d", &p.N1);
+
+   r = scanf("%d", &q.N1);
+   r = fscanf(stdin, "%d", &q.N1);
+}
+
+Proper effects for scanf01
+
+void scanf01()
+{
+//             <    is declared>: j
+   int j;
+//             <    is referenced>: param
+//             <    is declared>: p
+   param p;
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j stdin __IO_EFFECTS:LUNS size_t
+   fscanf(stdin, "%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p stdin __IO_EFFECTS:LUNS size_t
+   fscanf(stdin, "%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &q.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q stdin __IO_EFFECTS:LUNS size_t
+   fscanf(stdin, "%d", &q.N1);
+
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j r stdin __IO_EFFECTS:LUNS
+//             <    is declared>: r
+   int r = scanf("%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j r stdin __IO_EFFECTS:LUNS size_t
+   r = fscanf(stdin, "%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p r stdin __IO_EFFECTS:LUNS
+
+   r = scanf("%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p r stdin __IO_EFFECTS:LUNS size_t
+   r = fscanf(stdin, "%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q r stdin __IO_EFFECTS:LUNS
+
+   r = scanf("%d", &q.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q r stdin __IO_EFFECTS:LUNS size_t
+   r = fscanf(stdin, "%d", &q.N1);
+}
+
+Cumulated effects for scanf01
+
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q stdin __IO_EFFECTS:LUNS
+void scanf01()
+{
+//             <    is declared>: j
+   int j;
+//             <    is referenced>: param
+//             <    is declared>: p
+   param p;
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j stdin __IO_EFFECTS:LUNS size_t
+   fscanf(stdin, "%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p stdin __IO_EFFECTS:LUNS size_t
+   fscanf(stdin, "%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &q.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q stdin __IO_EFFECTS:LUNS size_t
+   fscanf(stdin, "%d", &q.N1);
+
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j r stdin __IO_EFFECTS:LUNS
+//             <    is declared>: r
+   int r = scanf("%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: j stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: j r stdin __IO_EFFECTS:LUNS size_t
+   r = fscanf(stdin, "%d", &j);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p r stdin __IO_EFFECTS:LUNS
+
+   r = scanf("%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: p.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p r stdin __IO_EFFECTS:LUNS size_t
+   r = fscanf(stdin, "%d", &p.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q r stdin __IO_EFFECTS:LUNS
+
+   r = scanf("%d", &q.N1);
+//             <may be read   >: stdin[0]
+//             <may be written>: q.N1 stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: r __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: q r stdin __IO_EFFECTS:LUNS size_t
+   r = fscanf(stdin, "%d", &q.N1);
+}

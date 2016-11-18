@@ -1,0 +1,65 @@
+
+// Parsed code
+
+int main()
+{
+   int n, m;
+   int i;
+   int x = n<m?n:m;
+   int y = n>m?n:m;
+   int r;
+
+   if (n<=(x<y?x:y))
+      r = 0;
+
+   i = 0;
+   while (i<=(x>y?x:y)) {
+      r = 0;
+      i++;
+   }
+
+   if (n<(0<1?0:1))
+      r = 0;
+
+   i = 0;
+   while (i<=(0>1?0:1)) {
+      r = 0;
+      i++;
+   }
+
+   return r;
+}
+
+// Initial code
+
+int main()
+{
+   int n, m;
+   int i;
+   int x = n<m?n:m;
+   int y = n>m?n:m;
+   int r;
+
+   if (n<=(x<y?x:y))
+      r = 0;
+
+   i = 0;
+   while (i<=(x>y?x:y)) {
+      r = 0;
+      i++;
+   }
+
+   if (n<(0<1?0:1))
+      r = 0;
+
+   i = 0;
+   while (i<=(0>1?0:1)) {
+      r = 0;
+      i++;
+   }
+
+   return r;
+}
+
+// Warnings
+

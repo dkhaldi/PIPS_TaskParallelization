@@ -1,0 +1,21 @@
+
+C  P() {}
+
+      PROGRAM SAVEGLOBAL
+
+C  P() {}
+
+
+      CALL FOO(I)                                                       0003
+
+C  P(FOO:I,FOO:J) {FOO:I==FOO:J-1, FOO:I==I}
+
+
+      CALL FOO(I+1)                                                     0005
+
+C  P(FOO:I,FOO:J) {FOO:I==FOO:J-1, FOO:I==I+1}
+
+
+      PRINT *, I                                                        0007
+
+      END

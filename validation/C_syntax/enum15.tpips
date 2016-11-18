@@ -1,0 +1,11 @@
+setenv WS=enum15
+delete $WS
+create $WS $WS.c
+
+display PRINTED_FILE[$WS!]
+
+close
+
+#delete $WS
+
+quit

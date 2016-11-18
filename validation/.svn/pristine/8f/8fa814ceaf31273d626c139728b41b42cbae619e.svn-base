@@ -1,0 +1,133 @@
+
+Transformers for divide02
+
+
+//  T(divide02) {v1<=2divide02, 3divide02+1<=v1+v2, 0<=v1+100,
+//    v1+10<=0, 2<=v2, v2<=3}
+
+int divide02(int v1, int v2)
+{
+   //int v1, v2;
+
+//  T() {}
+
+   int v, vm;
+
+//  T() {0<=v1+100, v1+10<=0, 2<=v2, v2<=3}
+
+   //scanf("%d", &v1);
+   //scanf("%d", &v2);
+   if (!(-100<=v1&&v1<=-10&&2<=v2&&v2<=3))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(v) {v1<=2v, 3v+1<=v1+v2, 0<=v1+100, v1+10<=0, 2<=v2, v2<=3}
+
+   v = v1/v2;
+
+//  T() {v1<=2v, 3v+1<=v1+v2, 0<=v1+100, v1+10<=0, 2<=v2, v2<=3}
+
+   // vm = v1 % v2;
+   // To force an evaluation of v
+   //scanf("%d", &v1);
+   //gscanf("%d", &v2);
+   printf("v=%d, vm=%d\n", v, vm);
+
+//  T(divide02) {divide02==v, v1<=2divide02, 3divide02+1<=v1+v2,
+//    0<=v1+100, v1+10<=0, 2<=v2, v2<=3}
+
+   return v;
+}
+
+Transformers for "main"
+
+
+//  T(main) {0<=main+7, main+5<=0}
+
+int main()
+{
+
+//  T(k) {0<=k+7, k+5<=0}
+
+   int k = divide02(-15, 2);
+
+//  T(main) {k==main, 0<=k+7, k+5<=0}
+
+   return k;
+}
+
+Preconditions for divide02
+
+
+//  P() {v1==-15, v2==2}
+
+int divide02(int v1, int v2)
+{
+   //int v1, v2;
+
+//  P() {v1==-15, v2==2}
+
+   int v, vm;
+
+//  P() {v1==-15, v2==2}
+
+   //scanf("%d", &v1);
+   //scanf("%d", &v2);
+   if (!(-100<=v1&&v1<=-10&&2<=v2&&v2<=3))
+
+//  P() {0==-1}
+
+      abort();
+
+//  P() {v1==-15, v2==2}
+
+   v = v1/v2;
+
+//  P(v) {v1==-15, v2==2, 0<=v+7, v+5<=0}
+
+   // vm = v1 % v2;
+   // To force an evaluation of v
+   //scanf("%d", &v1);
+   //gscanf("%d", &v2);
+   printf("v=%d, vm=%d\n", v, vm);
+
+//  P(v) {v1==-15, v2==2, 0<=v+7, v+5<=0}
+
+   return v;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int k = divide02(-15, 2);
+
+//  P(k) {0<=k+7, k+5<=0}
+
+   return k;
+}
+
+Preconditions for "main" after transformer refinement
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int k = divide02(-15, 2);
+
+//  P(k) {k==-7}
+
+   return k;
+}

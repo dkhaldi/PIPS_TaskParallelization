@@ -1,0 +1,17 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+setenv WS="intrinsics03"
+delete $WS
+create $WS $WS.c
+
+#setproperty PRETTYPRINT_INTERNAL_INTRINSICS TRUE
+
+echo
+echo Convex array regions for the input code
+echo
+
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[foo]
+
+close
+delete $WS
+quit

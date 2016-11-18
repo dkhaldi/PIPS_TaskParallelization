@@ -1,0 +1,18 @@
+setenv WS=qualifiers01
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[h]
+
+
+close
+
+delete $WS 
+
+quit

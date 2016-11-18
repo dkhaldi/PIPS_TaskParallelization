@@ -1,0 +1,34 @@
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int foo(int a)
+{
+
+// Pointer values: none
+
+   return a;
+}
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   int a;
+
+// Pointer values: none
+
+   a = foo(2);
+
+// Pointer values: none
+
+   return 0;
+}

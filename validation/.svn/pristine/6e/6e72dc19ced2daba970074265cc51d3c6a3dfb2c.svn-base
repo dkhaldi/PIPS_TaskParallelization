@@ -1,0 +1,22 @@
+setenv WS="jpeg-6a"
+setenv PIPS_CPP_FLAGS="-I$WS"
+setproperty ABORT_ON_USER_ERROR TRUE
+delete $WS
+create $WS  jpeg-6a/jdhuff.c
+
+# To debug the new_controlizer
+setenv CONTROL_DEBUG_LEVEL=8
+
+#setproperty PRETTYPRINT_EMPTY_BLOCKS TRUE
+setproperty PRETTYPRINT_UNSTRUCTURED TRUE
+
+display PARSED_PRINTED_FILE[decode_mcu]
+
+activate NEW_CONTROLIZER
+display PRINTED_FILE[decode_mcu]
+
+quit
+
+close
+delete $WS
+quit

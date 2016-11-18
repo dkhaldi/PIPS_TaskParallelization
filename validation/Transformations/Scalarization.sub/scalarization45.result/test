@@ -1,0 +1,33 @@
+#
+# initial file
+#
+void FAdd1(int IN1[1], int OUT1[1])
+{
+   int i;
+   for(i = 0; i <= 0; i += 1)
+      // oui, avec *0*, pas i
+      Add1(1, (int *) &IN1[0], (int *) &OUT1[0]);
+}
+#
+# not scalarized because of &
+#
+void FAdd1(int IN1[1], int OUT1[1])
+{
+   int i;
+   for(i = 0; i <= 0; i += 1)
+      // oui, avec *0*, pas i
+      Add1(1, (int *) &IN1[0], (int *) &OUT1[0]);
+}
+#
+# scalarized anyway
+#
+void FAdd1(int IN1[1], int OUT1[1])
+{
+   //PIPS generated variable
+   register int OUT1_0, IN1_0 = IN1[0];
+   int i;
+   for(i = 0; i <= 0; i += 1)
+      // oui, avec *0*, pas i
+      Add1(1, (int *) &IN1_0, (int *) &OUT1_0);
+   OUT1[0] = OUT1_0;
+}

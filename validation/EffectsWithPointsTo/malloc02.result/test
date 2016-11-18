@@ -1,0 +1,67 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+
+// Points To: none
+
+   int *pi;
+
+// Points To:
+// pi -> undefined , EXACT
+
+   float *px;
+
+// Points To:
+// pi -> undefined , EXACT
+// px -> undefined , EXACT
+
+
+   pi = (int *) malloc(sizeof(int));
+
+// Points To:
+// pi -> *HEAP*_l_13 , MAY
+// px -> undefined , EXACT
+
+   px = (float *) malloc(sizeof(float));
+
+// Points To:
+// pi -> *HEAP*_l_13 , MAY
+// px -> *HEAP*_l_14 , MAY
+
+
+   return 0;
+}
+
+PROPER  EFFECTS WITH POINTS TO
+
+int main(int argc, char *argv[])
+{
+   int *pi;
+   float *px;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pi _MALLOC_EFFECTS:_MALLOC_
+
+   pi = (int *) malloc(sizeof(int));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: px _MALLOC_EFFECTS:_MALLOC_
+   px = (float *) malloc(sizeof(float));
+
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	13 --> 14 with conflicts
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-R-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+
+****************** End of Dependence Graph ******************

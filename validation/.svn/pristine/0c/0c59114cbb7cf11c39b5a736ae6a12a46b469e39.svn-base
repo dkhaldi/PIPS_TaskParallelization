@@ -1,0 +1,20 @@
+# To explore the impact of points-to properties on
+# effects_with_points_to (used to be the motivation, but not here:
+# points-to are enough)
+
+setenv WSPACE=properties01
+delete $WSPACE
+setenv PIPS_CPP="cpp -C"
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WSPACE $WSPACE.c
+
+echo
+echo POINTS TO for "$WSPACE"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[$WSPACE]
+
+close
+delete $WSPACE
+quit

@@ -1,0 +1,11 @@
+
+Parsed printed file for decl15b!
+
+/* Simplified version of decl15.c */
+
+typedef struct {
+   union {int __wch;} __value;
+} __mbstate_t;
+#
+# compile generated decl15b
+#

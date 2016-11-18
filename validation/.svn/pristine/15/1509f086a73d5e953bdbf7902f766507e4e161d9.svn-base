@@ -1,0 +1,11 @@
+delete save07
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create save07 save07.f
+
+setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+
+display PRINTED_FILE[SAVE07]
+
+close
+delete save07
+quit

@@ -1,0 +1,35 @@
+setenv WS=struct21
+
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c ${WS}_init.c
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+activate PRECONDITIONS_INTER_FULL
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+activate INTERPROCEDURAL_SUMMARY_PRECONDITION
+
+echo
+echo Cumulated Effects
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[%ALLFUNC]
+
+echo
+echo Transformers
+echo
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[%ALLFUNC]
+
+echo
+echo Preconditions
+echo
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[%ALLFUNC]
+
+close
+delete $WS
+quit

@@ -1,0 +1,50 @@
+setenv WS=struct06
+
+delete $WS
+setproperty ABORT_ON_USER_ERROR TRUE
+#setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+create $WS $WS.c
+
+setproperty CONSTANT_PATH_EFFECTS TRUE
+
+# Result obtained with these two options 
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+activate TRANSFORMERS_INTER_FULL
+# activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+# core dump if the property is not set to TRUE
+# no result if the pass is not selected
+
+activate PRECONDITIONS_INTER_FULL
+#activate TRANSFORMERS_INTER_FULL
+
+echo
+echo Proper effects for "read_config_makefile"
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[read_config_file]
+
+echo
+echo Cumulated effects for "read_config_makefile"
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[read_config_file]
+
+echo
+echo Transformers for "read_config_makefile"
+echo
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[read_config_file]
+
+echo
+echo Preconditions for "read_config_makefile"
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[read_config_file]
+
+close
+delete $WS
+quit

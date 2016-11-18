@@ -1,0 +1,44 @@
+
+Proper effects
+
+int main()
+{
+   char *end;
+   long int li;
+//             <    is written>: end li
+
+   li = strtol("32445667 is a number", &end, 0);
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   char *end;
+
+// Points To:
+// end -> undefined , EXACT
+
+   long int li;
+
+// Points To:
+// end -> undefined , EXACT
+
+
+   li = strtol("32445667 is a number", &end, 0);
+
+// Points To:
+// end -> undefined , EXACT
+
+   return 0;
+}

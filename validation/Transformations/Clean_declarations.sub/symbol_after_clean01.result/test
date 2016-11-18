@@ -1,0 +1,155 @@
+
+// Initial code
+
+int main(int argc, char **argv)
+{
+   int x;
+   int y;
+
+   x = 0;
+
+   return x;
+}
+
+// SYMBOL_TABLE_FILE
+
+main
+
+Declarations for module "main" with type "int x char * * -> int"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 0
+	Declared entity "main:*DYNAMIC*" with type "area" with size 18
+	Declared entity "main:*HEAP*" with type "area" with size 0
+	Declared entity "main:*STACK*" with type "area" with size 0
+	Declared entity "main:*STATIC*" with type "area" with size 0
+	Declared entity "main:0`__FUNCTION__" with type "variable" "char *"
+	Declared entity "main:0`__func__" with type "variable" "char *"
+	Declared entity "main:0`x" with type "variable" "int"
+	Declared entity "main:0`y" with type "variable" "int"
+	Declared entity "main:argc" with type "variable" "int"
+	Declared entity "main:argv" with type "variable" "char * *"
+	Declared entity "main:main" with type "variable" "int"
+	Declared entity "symbol_after_clean01!:*STATIC*" with type "area" with size 0
+
+* empty extern declaration list *
+
+
+Layout for formal parameters:
+
+	Variable main:argc	offset = 1
+	Variable main:argv	offset = 2
+
+Layout for return variable:
+
+	Variable "main:main"	size = 4
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*DYNAMIC*" of size 18:
+	Variable "main:0`x"	offset = 10	size = 4
+	Variable "main:0`y"	offset = 14	size = 4
+	Variable "main:0`__func__"	offset = 0	size = 5
+	Variable "main:0`__FUNCTION__"	offset = 5	size = 5
+
+
+Layout for memory area "main:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*STATIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "symbol_after_clean01!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module main
+
+
+// Clean declaration
+
+int main(int argc, char **argv)
+{
+   int x;
+
+   x = 0;
+
+   return x;
+}
+
+// SYMBOL_TABLE_FILE
+
+main
+
+Declarations for module "main" with type "int x char * * -> int"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 0
+	Declared entity "main:*DYNAMIC*" with type "area" with size 18
+	Declared entity "main:*HEAP*" with type "area" with size 0
+	Declared entity "main:*STACK*" with type "area" with size 0
+	Declared entity "main:*STATIC*" with type "area" with size 0
+	Declared entity "main:0`x" with type "variable" "int"
+	Declared entity "main:argc" with type "variable" "int"
+	Declared entity "main:argv" with type "variable" "char * *"
+	Declared entity "main:main" with type "variable" "int"
+	Declared entity "symbol_after_clean01!:*STATIC*" with type "area" with size 0
+
+* empty extern declaration list *
+
+
+Layout for formal parameters:
+
+	Variable main:argc	offset = 1
+	Variable main:argv	offset = 2
+
+Layout for return variable:
+
+	Variable "main:main"	size = 4
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*DYNAMIC*" of size 18:
+	Variable "main:0`x"	offset = 10	size = 4
+	Variable "main:0`y"	offset = 14	size = 4
+	Variable "main:0`__func__"	offset = 0	size = 5
+	Variable "main:0`__FUNCTION__"	offset = 5	size = 5
+
+
+Layout for memory area "main:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*STATIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "symbol_after_clean01!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module main
+
+
+// Warnings
+
+SYMBOL_TABLE[main] (set_debug_stack_pointer) debug level stack is set to 2
+SYMBOL_TABLE[main] (set_debug_stack_pointer) debug level stack is set to 2

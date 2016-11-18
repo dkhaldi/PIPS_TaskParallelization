@@ -1,0 +1,24 @@
+
+#setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+setenv WS=error_management01
+delete $WS
+
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+#setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+echo
+echo // Initial code
+echo
+display PRINTED_FILE [main]
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+#delete $WS
+quit

@@ -1,0 +1,232 @@
+ main
+     FM
+         F2
+
+Cumulated Effects
+
+//             <may be read   >: X1[*].x X1[*].y X2[*].x X2[*].y
+//             <may be written>: X2[*].x X2[*].y
+void main()
+{
+//             <may be read   >: X1[*].x X1[*].y X2[*].x X2[*].y
+//             <may be written>: X2[*].x X2[*].y
+   FM(10, X1, X2);
+}
+
+Transformers
+
+
+//  T() {}
+
+complexfloat F1(complexfloat a)
+{
+
+//  T() {}
+
+   complexfloat r;
+
+//  T() {}
+
+   r.x = -a.y;
+
+//  T() {}
+
+   r.y = a.x;
+
+//  T() {}
+
+   return r;
+}
+
+//  T() {}
+
+complexfloat F2(complexfloat a, complexfloat b)
+{
+
+//  T() {}
+
+   complexfloat ret;
+
+//  T() {}
+
+   ret.x = -a.y*b.y+a.x*b.x;
+
+//  T() {}
+
+   ret.y = a.y*b.x+a.x*b.y;
+
+//  T() {}
+
+   return ret;
+}
+
+//  T() {}
+
+void FM(int np, complexfloat in[np], complexfloat out[np])
+{
+
+//  T() {}
+
+   int p;
+
+//  T() {}
+
+   int i, j;
+
+//  T() {}
+
+   complexfloat tmp;
+
+//  T() {}
+
+   tmp.x = 0.1;
+
+//  T() {}
+
+   tmp.y = 1.;
+
+//  T(p) {p+1<=np, 0<=p}
+
+   for(p = 0; p <= np-1; p += 1) {
+
+//  T() {}
+
+      out[p].x = in[p].x;
+
+//  T() {}
+
+      out[p].y = in[p].y;
+   }
+
+//  T(p) {p+1<=np, 0<=p}
+
+   for(p = 0; p <= np-1; p += 1)
+
+//  T() {}
+
+      out[p] = F2(out[p], tmp);
+}
+
+//  T() {}
+
+void main()
+{
+
+//  T() {}
+
+   FM(10, X1, X2);
+}
+
+//  T() {}
+
+void main()
+{
+
+//  T() {}
+
+   FM(10, X1, X2);
+}
+
+Preconditions
+
+
+//  P() {0==-1}
+
+complexfloat F1(complexfloat a)
+{
+
+//  P() {0==-1}
+
+   complexfloat r;
+
+//  P() {0==-1}
+
+   r.x = -a.y;
+
+//  P() {0==-1}
+
+   r.y = a.x;
+
+//  P() {0==-1}
+
+   return r;
+}
+
+//  P() {}
+
+complexfloat F2(complexfloat a, complexfloat b)
+{
+
+//  P() {}
+
+   complexfloat ret;
+
+//  P() {}
+
+   ret.x = -a.y*b.y+a.x*b.x;
+
+//  P() {}
+
+   ret.y = a.y*b.x+a.x*b.y;
+
+//  P() {}
+
+   return ret;
+}
+
+//  P() {np==10}
+
+void FM(int np, complexfloat in[np], complexfloat out[np])
+{
+
+//  P() {np==10}
+
+   int p;
+
+//  P() {np==10}
+
+   int i, j;
+
+//  P() {np==10}
+
+   complexfloat tmp;
+
+//  P() {np==10}
+
+   tmp.x = 0.1;
+
+//  P() {np==10}
+
+   tmp.y = 1.;
+
+//  P() {np==10}
+
+   for(p = 0; p <= np-1; p += 1) {
+
+//  P(p) {np==10, 0<=p, p<=9}
+
+      out[p].x = in[p].x;
+
+//  P(p) {np==10, 0<=p, p<=9}
+
+      out[p].y = in[p].y;
+   }
+
+//  P(p) {np==10, p==10}
+
+   for(p = 0; p <= np-1; p += 1)
+
+//  P(p) {np==10, 0<=p, p<=9}
+
+      out[p] = F2(out[p], tmp);
+}
+
+//  P() {}
+
+void main()
+{
+
+//  P() {}
+
+   FM(10, X1, X2);
+}

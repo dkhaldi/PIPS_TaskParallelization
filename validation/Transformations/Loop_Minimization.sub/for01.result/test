@@ -1,0 +1,27 @@
+//
+// Init Code
+//
+int main()
+{
+   int a[10], i;
+
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+
+   return a[0]+a[9];
+}
+//
+// Source code for for01 after LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+//
+int main()
+{
+   int a[10], i;
+
+   for(i = 0; i <= 9; i += 1)
+      a[i] = i;
+
+   return a[0]+a[9];
+}
+
+Warnings
+

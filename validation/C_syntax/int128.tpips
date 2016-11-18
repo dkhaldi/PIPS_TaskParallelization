@@ -1,0 +1,13 @@
+setenv WS=int128
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setenv SHELL /bin/bash
+
+create $WS $WS.c
+
+display PRINTED_FILE[$WS]
+
+close
+delete $WS
+quit

@@ -1,0 +1,21 @@
+delete io_intrinsics02
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create io_intrinsics02 io_intrinsics02.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+
+
+module main
+
+display PRINTED_FILE
+
+close
+delete io_intrinsics02

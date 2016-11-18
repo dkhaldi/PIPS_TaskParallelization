@@ -1,0 +1,18 @@
+delete extern
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create extern extern.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+#setenv PRETTYPRINT_DEBUG_LEVEL 7
+
+display PRINTED_FILE[%ALL]
+
+
+close
+delete extern
+
+quit

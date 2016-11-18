@@ -1,0 +1,123 @@
+
+Proper effects
+
+int main(void)
+{
+   int i;
+//             <    is written>: pp
+   int **pp = (void *) 0;
+//             <    is read   >: __TIME_EFFECTS:KALI
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED 
+//                               __TIME_EFFECTS:KALI
+
+   srand(time((void *) 0));
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout _RANDOM_EFFECTS:GEN_SEED 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED 
+//                               __IO_EFFECTS:LUNS[1]
+   if (alea()) {
+//             <    is written>: pi
+      int *pi = &i;
+//             <    is written>: pp
+      pp = &pi;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: pp
+      **pp = 1;
+   }
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: pp stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   
+   // pp points to a dead value in the stack
+   printf("%p\n", pp);
+//             <    is read   >: pp
+   
+   // possible segfault.
+   // should generate an error while analyzing?
+   if (pp)
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: pp
+      **pp = 0;
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(void)
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int **pp = (void *) 0;
+
+// Points To:
+// pp -> *NULL* , EXACT
+
+
+   srand(time((void *) 0));
+
+// Points To:
+// pp -> *NULL* , EXACT
+
+   if (alea()) {
+
+// Points To:
+// pp -> *NULL* , EXACT
+
+      int *pi = &i;
+
+// Points To:
+// pi -> i , EXACT
+// pp -> *NULL* , EXACT
+
+      pp = &pi;
+
+// Points To:
+// pi -> i , EXACT
+// pp -> pi , EXACT
+
+      **pp = 1;
+   }
+
+// Points To:
+// pp -> undefined , MAY
+// pp -> *NULL* , MAY
+
+   
+   // pp points to a dead value in the stack
+   printf("%p\n", pp);
+
+// Points To:
+// pp -> undefined , MAY
+// pp -> *NULL* , MAY
+
+   
+   // possible segfault.
+   // should generate an error while analyzing?
+   if (pp)
+
+// Points To:
+// pp -> undefined , MAY
+
+      **pp = 0;
+
+// Points To:
+// pp -> *NULL* , EXACT
+
+   return 0;
+}

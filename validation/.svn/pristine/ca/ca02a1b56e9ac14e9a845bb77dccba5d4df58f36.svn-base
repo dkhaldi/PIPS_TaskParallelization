@@ -1,0 +1,49 @@
+
+Proper effects
+
+int main()
+{
+//             <    is written>: i
+   int i = 5;
+//             <    is written>: j
+   int j = 6;
+   float x;
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: i j stdout x __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   printf("i=%d, %d, %f\n", i, i+j, x);
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 5;
+
+// Points To: none
+
+   int j = 6;
+
+// Points To: none
+
+   float x;
+
+// Points To: none
+
+   printf("i=%d, %d, %f\n", i, i+j, x);
+
+// Points To: none
+
+   return 0;
+}

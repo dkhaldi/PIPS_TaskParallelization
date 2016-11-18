@@ -1,0 +1,312 @@
+
+Transformers for "main"
+
+
+//  T() {0==-1}
+
+int main()
+{
+
+//  T() {}
+
+   int v, t, x, d;
+
+//  T(d,t,v,x) {d==0, t==0, v==0, x==0}
+
+   v = t = x = d = 0;
+
+//  T(d,t,v,x) {d#init==0, t#init==0, v#init==0, x#init==0, 0<=d,
+//    d<=t, t+5x<=d+5v, 0<=t, 0<=v}
+
+   
+   // The convex enveloppe of the guards is true
+   while (1) {
+
+//  T(d,t,v,x) {d+t#init==d#init+t, v+x#init==v#init+x, d<=9,
+//    d#init<=d, d#init<=9, v#init<=v, x<=4, x#init<=4}
+
+      while (x<=4&&d<=9)
+
+//  T(d,t,v,x) {d+v==d#init+v#init+1, t+v==t#init+v#init+1,
+//    v+x#init==v#init+x, d+v<=v#init+10, v#init<=v, v<=v#init+1,
+//    v#init+x<=v+4}
+
+         if (alea())
+
+//  T(v,x) {v==v#init+1, x==x#init+1, d<=9, x<=5}
+
+            x++, v++;
+         else
+
+//  T(d,t) {d==d#init+1, t==t#init+1, d<=10, x<=4}
+
+            d++, t++;
+
+//  T(d,t) {d+t#init==d#init+t, d<=9, d#init<=d, d#init<=9}
+
+      //if(x>4)
+      /*x>4 &&*/
+      while (d<=9)
+
+//  T(d,t) {d==d#init+1, t==t#init+1, d<=10}
+
+         d++, t++;
+
+//  T(v,x) {v+x#init==v#init+x, 10<=d, x<=4, x#init<=x, x#init<=4}
+
+      //else if(d>9)
+      /*d>9 &&*/
+      while (x<=4&&(alea()||x>=2))
+
+//  T(v,x) {v==v#init+1, x==x#init+1, 10<=d, x<=5}
+
+         x++, v++;
+
+//  T() {d==10, 2<=x}
+
+      /* && alea() */
+      while (d==10&&x>=2)
+
+//  T(d,x) {d==0, d#init==10, x==0, 2<=x#init}
+
+         x = d = 0;
+   }
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int v, t, x, d;
+
+//  P() {}
+
+   v = t = x = d = 0;
+
+//  P(d,t,v,x) {d==0, t==0, v==0, x==0}
+
+   
+   // The convex enveloppe of the guards is true
+   while (1) {
+
+//  P(d,t,v,x) {0<=d, d<=10, d<=t, t+5x<=d+5v, 10x<=d, 0<=t, 0<=v,
+//    x<=v, x<=5}
+
+      while (x<=4&&d<=9)
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t, t+5x<=d+5v, 0<=v, x<=v, x<=4}
+
+         if (alea())
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t, t+5x<=d+5v, 0<=v, x<=v, x<=4}
+
+            x++, v++;
+         else
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t, t+5x<=d+5v, 0<=v, x<=v, x<=4}
+
+            d++, t++;
+
+//  P(d,t,v,x) {0<=d, d<=10, d<=t, t+5x<=d+5v, 10<=d+2v, d+x<=14,
+//    x<=5}
+
+      //if(x>4)
+      /*x>4 &&*/
+      while (d<=9)
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t, t+5x<=d+5v, 10<=d+2v, x<=5}
+
+         d++, t++;
+
+//  P(d,t,v,x) {d==10, 10<=t, t+5x<=5v+10, 0<=v, x<=5}
+
+      //else if(d>9)
+      /*d>9 &&*/
+      while (x<=4&&(alea()||x>=2))
+
+//  P(d,t,v,x) {d==10, 10<=t, t+5x<=5v+10, 0<=v, x<=4}
+
+         x++, v++;
+
+//  P(d,t,v,x) {d==10, 10<=t, t+5x<=5v+10, 0<=v, x<=5}
+
+      /* && alea() */
+      while (d==10&&x>=2)
+
+//  P(d,t,v,x) {d==10, 10<=t, t+5x<=5v+10, 0<=v, 2<=x, x<=5}
+
+         x = d = 0;
+   }
+}
+
+Refine transformers with preconditions
+
+
+Transformers for "main" after refinement
+
+
+//  T() {0==-1}
+
+int main()
+{
+
+//  T() {}
+
+   int v, t, x, d;
+
+//  T(d,t,v,x) {d==0, t==0, v==0, x==0}
+
+   v = t = x = d = 0;
+
+//  T(d,t,v,x) {d#init==0, t#init==0, v#init==0, x#init==0, 0<=d,
+//    d<=10, t+5x<=d+5v, d+2v<=t+2x, 10x<=d, 0<=t, 0<=v}
+
+   
+   // The convex enveloppe of the guards is true
+   while (1) {
+
+//  T(d,t,v,x) {d+t#init==d#init+t, v+x#init==v#init+x, 0<=d, d<=9,
+//    d#init<=d, 0<=d#init, d#init<=9, d#init<=t#init,
+//    t#init+5x#init<=d#init+5v#init, 0<=t#init, 0<=v, v#init<=v,
+//    0<=v#init, x<=4, x#init<=0}
+
+      while (x<=4&&d<=9)
+
+//  T(d,t,v,x) {d+v==d#init+v#init+1, t+v==t#init+v#init+1,
+//    v+x#init==v#init+x, d<=t, t+5x<=d+5v, v#init+1<=d+v,
+//    d+v<=v#init+10, v#init<=v, v<=v#init+1, v#init+x<=v+4,
+//    0<=v#init}
+
+         if (alea())
+
+//  T(v,x) {v==v#init+1, x==x#init+1, 0<=d, d<=9, d<=t, t+5x<=d+5v,
+//    1<=v, x<=v, x<=5}
+
+            x++, v++;
+         else
+
+//  T(d,t) {d==d#init+1, t==t#init+1, 1<=d, d<=10, d<=t, t+5x<=d+5v,
+//    0<=v, x<=v, x<=4}
+
+            d++, t++;
+
+//  T(d,t) {d+t#init==d#init+t, 0<=d, d<=9, d#init<=d, 10<=d+2v,
+//    0<=d#init, d#init<=9, d#init<=t#init, 10<=d#init+9t#init+10v,
+//    t#init+5x<=d#init+5v, 5d#init+2x<=4t#init+v+51,
+//    9d#init+4x<=8t#init+4v+90, 16d#init+7x<=12t#init+3v+164,
+//    20d#init+9x<=16t#init+4v+205, 49d#init+10x<=49t#init+10v+490,
+//    49d#init+19x<=40t#init+10v+499, 49d#init+20x<=40t#init+10v+500,
+//    49d#init+20x<=39t#init+10v+500,
+//    151d#init+61x<=120t#init+30v+1541, 10<=d#init+2v, 1<=d#init+v,
+//    10x<=d#init+10v, 9x+1<=d#init+10v, 2x+10<=d#init+4v,
+//    d#init+41x<=40v+50, d#init+31x<=30v+41, d#init+4x<=3v+14,
+//    0<=t#init, 0<=v, x<=v, 5x<=4v+5, x<=5}
+
+      //if(x>4)
+      /*x>4 &&*/
+      while (d<=9)
+
+//  T(d,t) {d==d#init+1, t==t#init+1, 1<=d, d<=10, d<=t, t+5x<=d+5v,
+//    11<=d+2v, 1<=v, x<=v, x<=5}
+
+         d++, t++;
+
+//  T(v,x) {d==10, v+x#init==v#init+x, 10<=t, t+5x#init<=5v#init+10,
+//    0<=v, 0<=v#init, x<=4, x#init<=x, x#init<=4}
+
+      //else if(d>9)
+      /*d>9 &&*/
+      while (x<=4&&(alea()||x>=2))
+
+//  T(v,x) {d==10, v==v#init+1, x==x#init+1, 10<=t, t+5x<=5v+10, 1<=v,
+//    x<=5}
+
+         x++, v++;
+
+//  T() {d==10, 10<=t, t+5x<=5v+10, 2<=v, x<=v, x+2<=2v, 2<=x, x<=5}
+
+      /* && alea() */
+      while (d==10&&x>=2)
+
+//  T(d,x) {d==0, d#init==10, x==0, 10<=t, t<=5v, t+5x#init<=5v+10,
+//    0<=v, 2<=x#init, x#init<=5}
+
+         x = d = 0;
+   }
+}
+
+Preconditions for "main" after refinement
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int v, t, x, d;
+
+//  P() {}
+
+   v = t = x = d = 0;
+
+//  P(d,t,v,x) {d==0, t==0, v==0, x==0}
+
+   
+   // The convex enveloppe of the guards is true
+   while (1) {
+
+//  P(d,t,v,x) {0<=d, d<=10, d<=t, 0<=t}
+
+      while (x<=4&&d<=9)
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t, x<=4}
+
+         if (alea())
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t, x<=4}
+
+            x++, v++;
+         else
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t, x<=4}
+
+            d++, t++;
+
+//  P(d,t,v,x) {0<=d, d<=10, d<=t}
+
+      //if(x>4)
+      /*x>4 &&*/
+      while (d<=9)
+
+//  P(d,t,v,x) {0<=d, d<=9, d<=t}
+
+         d++, t++;
+
+//  P(d,t,v,x) {d==10, 10<=t}
+
+      //else if(d>9)
+      /*d>9 &&*/
+      while (x<=4&&(alea()||x>=2))
+
+//  P(d,t,v,x) {d==10, 10<=t, x<=4}
+
+         x++, v++;
+
+//  P(d,t,v,x) {d==10, 10<=t}
+
+      /* && alea() */
+      while (d==10&&x>=2)
+
+//  P(d,t,v,x) {d==10, 10<=t, 2<=x}
+
+         x = d = 0;
+   }
+}

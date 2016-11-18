@@ -1,0 +1,26 @@
+
+First try: detect extra ENDDO
+
+
+Second try: detect wrong lhs
+
+
+Third try: detect extra ENDDIF
+
+
+Fourth try: detect IF/ENDDO pair
+
+
+Fifth try: detect DO/ENDIF pair
+
+### stderr
+PARSER[CORINNE] (MakeEnddoInst) [user error] Parser error between lines 18 and 18
+Unexpected ENDDO statement
+PARSER[CORINNE] (MakeEndifInst) [user error] Parser error between lines 24 and 24
+block if statement badly nested
+PARSER[CORINNE] (MakeEndifInst) [user error] Parser error between lines 24 and 24
+block if statement badly nested
+PARSER[IFENDDO] (MakeEnddoInst) [user error] Parser error between lines 7 and 7
+block do statement badly nested
+PARSER[DOENDIF] (MakeEndifInst) [user error] Parser error between lines 7 and 7
+block if statement badly nested

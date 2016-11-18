@@ -1,0 +1,193 @@
+
+Points-to for "update_sub2"
+
+
+// Points To IN:
+// b -> *NULL* , MAY
+// b -> _b_1[0] , MAY
+
+
+// Points To OUT:
+// b -> _b_1[0] , EXACT
+
+void update_sub2(sub2 *b)
+{
+
+// Points To:
+// b -> *NULL* , MAY
+// b -> _b_1[0] , MAY
+
+   b->k1 = 0;
+
+// Points To:
+// b -> _b_1[0] , EXACT
+
+   b->k2 = 1;
+
+// Points To:
+// b -> _b_1[0] , EXACT
+
+   return;
+}
+
+Proper effects for "update_sub2"
+
+void update_sub2(sub2 *b)
+{
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1
+//             <    is referenced>: b
+   b->k1 = 0;
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k2
+//             <    is referenced>: b
+   b->k2 = 1;
+   return;
+}
+
+Cumulated effects for "update_sub2"
+
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1 _b_1[0].k2
+//             <    is referenced>: b
+void update_sub2(sub2 *b)
+{
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1
+//             <    is referenced>: b
+   b->k1 = 0;
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k2
+//             <    is referenced>: b
+   b->k2 = 1;
+   return;
+}
+
+Points-to for "update_sub"
+
+
+// Points To IN:
+// _s_1[0].var3 -> *NULL* , MAY
+// _s_1[0].var3 -> _s_1_2__1[0][0] , MAY
+// s -> *NULL* , MAY
+// s -> _s_1[0] , MAY
+
+
+// Points To OUT:
+// _s_1[0].var3 -> _s_1_2__1[0][0] , EXACT
+// s -> _s_1[0] , EXACT
+
+void update_sub(sub *s)
+{
+
+// Points To:
+// s -> *NULL* , MAY
+// s -> _s_1[0] , MAY
+
+   s->var2 = 2;
+
+// Points To:
+// _s_1[0].var3 -> *NULL* , MAY
+// _s_1[0].var3 -> _s_1_2__1[0][0] , MAY
+// s -> _s_1[0] , EXACT
+
+   update_sub2(s->var3);
+
+// Points To:
+// _s_1[0].var3 -> _s_1_2__1[0][0] , EXACT
+// s -> _s_1[0] , EXACT
+
+   return;
+}
+
+Proper effects for "update_sub"
+
+void update_sub(sub *s)
+{
+//             <    is read   >: s
+//             <    is written>: _s_1[0].var2
+//             <    is referenced>: s
+   s->var2 = 2;
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1_2__1[0][0].k1 _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+   update_sub2(s->var3);
+   return;
+}
+
+Cumulated effects for "update_sub"
+
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1[0].var2 _s_1_2__1[0][0].k1 
+//                               _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+void update_sub(sub *s)
+{
+//             <    is read   >: s
+//             <    is written>: _s_1[0].var2
+//             <    is referenced>: s
+   s->var2 = 2;
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1_2__1[0][0].k1 _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+   update_sub2(s->var3);
+   return;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   content ct;
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+   sub2 s2;
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+   ct.s3.var3 = &s2;
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   update_sub(&ct.s3);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+
+   return 0;
+}
+
+Proper effects for "main"
+
+int main()
+{
+//             <    is referenced>: content
+//             <    is declared>: ct
+   content ct;
+//             <    is referenced>: sub2
+//             <    is declared>: s2
+   sub2 s2;
+//             <    is written>: ct.s3.var3
+//             <    is referenced>: ct s2
+   ct.s3.var3 = &s2;
+//             <    is read   >: ct.s3.var3
+//             <    is written>: ct.s3.var2 s2.k1 s2.k2
+//             <    is referenced>: ct
+   update_sub(&ct.s3);
+
+   return 0;
+}

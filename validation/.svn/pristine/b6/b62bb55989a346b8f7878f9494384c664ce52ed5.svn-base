@@ -1,0 +1,32 @@
+
+Proper effects
+
+void lhs04()
+{
+   float x;
+//             <    is read   >: x
+//             <    is written>: x
+
+   *((int *) &x) &= 0x7fffffff;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void lhs04()
+{
+
+// Points To: none
+
+   float x;
+
+// Points To: none
+
+
+   *((int *) &x) &= 0x7fffffff;
+}

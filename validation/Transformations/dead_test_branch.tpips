@@ -1,0 +1,18 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+delete d
+
+setproperty PRETTYPRINT_BLOCKS TRUE
+setproperty PRETTYPRINT_UNSTRUCTURED TRUE
+
+create d dead_test_branch.f
+
+echo ### initial code
+display PRINTED_FILE
+
+echo ### suppress dead code
+apply SIMPLIFY_CONTROL
+display PRINTED_FILE
+
+close
+
+delete d

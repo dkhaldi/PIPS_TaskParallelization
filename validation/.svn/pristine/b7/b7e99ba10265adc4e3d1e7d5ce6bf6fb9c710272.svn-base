@@ -1,0 +1,31 @@
+
+// Initial code
+
+int test()
+{
+   /*=10*/
+   int i, n;
+   int a[n];
+
+   for(i = 0; i <= n-1; i += 1)
+      a[i] = 0;
+
+   return a[0];
+}
+
+// Code after INITIALIZE_VLA_WITH_PRECONDITIONS
+
+int test()
+{
+   /*=10*/
+   int i, n = 10;
+   int a[n];
+
+   for(i = 0; i <= n-1; i += 1)
+      a[i] = 0;
+
+   return a[0];
+}
+
+// Warnings
+

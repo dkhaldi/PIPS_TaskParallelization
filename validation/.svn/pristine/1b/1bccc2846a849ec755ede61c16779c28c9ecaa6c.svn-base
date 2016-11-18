@@ -1,0 +1,72 @@
+###################### init-STEP/init.database/Src/init.cpp_processed.c ######################
+#include "init.cpp_processed.h"
+#include "step_api.h"
+void main_PARFOR_HYBRID(int array[10], int i_0[1]);
+void main_PARFOR_HYBRID(int array[10], int i_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int i;
+   //PIPS generated variable
+   int STEP_COMM_SIZE, STEP_i_LOW, STEP_i_UP, STEP_COMM_RANK, STEP_SR_array[STEP_MAX_NB_LOOPSLICES][1][STEP_INDEX_SLICE_UP], IDX;
+#pragma omp master
+   {
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_PARALLEL_DO);
+      STEP_INIT_ARRAYREGIONS(array, STEP_INTEGER4, 1, 0, 10-1);
+      STEP_GET_COMMSIZE(&STEP_COMM_SIZE);
+      STEP_COMPUTE_LOOPSLICES(0, 9, 1, STEP_COMM_SIZE);
+      
+      //SEND REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <array[PHI1]-W-EXACT-{0<=PHI1, PHI1<=9, STEP_i_LOW<=PHI1,
+         //    PHI1<=STEP_i_UP}>
+         
+         ;
+         STEP_SR_array[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = pips_max(2, 0, STEP_i_LOW);
+         STEP_SR_array[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 9, STEP_i_UP);
+      }
+      STEP_SET_SENDREGIONS(array, STEP_COMM_SIZE, (STEP_ARG *) STEP_SR_array);
+   }
+#pragma omp barrier
+
+   
+   //BEGIN WORK
+   ;
+   STEP_GET_RANK(&STEP_COMM_RANK);
+   STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, &STEP_i_LOW, &STEP_i_UP);
+
+#pragma omp parallel for private(i)
+   for(i = STEP_i_LOW; i <= STEP_i_UP; i += 1)
+      array[i] = i;
+   //END WORK
+   ;
+#pragma omp master
+   {
+      STEP_ALLTOALL_FULL(array, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      STEP_CONSTRUCT_END(STEP_PARALLEL_DO);
+      *i_0 = i;
+   }
+#pragma omp barrier
+
+   ;
+}
+int main(void)
+{
+   STEP_INIT_C_ORDER();
+   {
+      int array[10];
+      int i;
+      main_PARFOR_HYBRID(array, &i);
+
+      for(i = 0; i <= 9; i += 1)
+         printf("%d ", array[i]);
+
+      printf("\n");
+      STEP_FINALIZE();
+      return 0;
+   }
+}

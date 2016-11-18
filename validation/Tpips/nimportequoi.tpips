@@ -1,0 +1,16 @@
+echo trying file nimportequoi.f
+setproperty MAXIMUM_USER_ERROR 25
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create nimportequoi1 nimportequoi.f
+echo trying another file
+create nimportequoi2 test.f
+display PRINTED_FILE
+close
+echo trying file nimportequoi.f again
+create nimportequoi1 nimportequoi.f
+echo the other database should still be there
+open nimportequoi2
+display PRINTED_FILE
+close
+delete nimportequoi2
+delete nimportequoi1

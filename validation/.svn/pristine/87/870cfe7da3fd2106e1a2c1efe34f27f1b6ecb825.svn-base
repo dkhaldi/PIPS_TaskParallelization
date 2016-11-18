@@ -1,0 +1,32 @@
+#setenv GPU_QUALIFY_POINTERS_DEBUG_LEVEL 8
+setenv NAME=gloloc11
+delete $NAME
+create $NAME $NAME.c
+echo #
+echo # initial code
+echo #
+display PRINTED_FILE[$NAME!]
+display PRINTED_FILE[%ALLFUNC]
+#
+# qualify pointers
+# BEWARE, implicit top-down propagation...
+#
+setproperty SET_RETURN_TYPE_AS_TYPEDEF_NEW_TYPE "kernel"
+apply GPU_QUALIFY_POINTERS[stuff]
+apply SET_RETURN_TYPE_AS_TYPEDEF[stuff]
+apply GPU_QUALIFY_POINTERS[private_zero]
+apply SET_RETURN_TYPE_AS_TYPEDEF[private_zero]
+apply SET_RETURN_TYPE_AS_TYPEDEF[global_zero]
+apply GPU_QUALIFY_POINTERS[global_zero]
+echo #
+echo # global/private declarations
+echo #
+setproperty PRETTYPRINT_GLOBAL_QUALIFIER "global"
+setproperty PRETTYPRINT_PRIVATE_QUALIFIER "private"
+display PRINTED_FILE[$NAME!]
+display PRINTED_FILE[%ALLFUNC]
+#
+# cleanup
+#
+close
+delete $NAME

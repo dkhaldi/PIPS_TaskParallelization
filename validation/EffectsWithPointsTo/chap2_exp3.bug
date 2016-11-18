@@ -1,0 +1,6 @@
+Mostly improvements, but also a new anywhere due to a bad translation for a malloced locaton:
+
+123c135
+< //             <may be read   >: *HEAP*_l_32.row
+---
+> //             <may be read   >: *ANY_MODULE*:*ANYWHERE*

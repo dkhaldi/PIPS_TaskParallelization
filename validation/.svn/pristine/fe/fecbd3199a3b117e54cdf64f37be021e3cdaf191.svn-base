@@ -1,0 +1,11 @@
+setenv WS=double_declaration01
+delete $WS
+create $WS $WS.c
+display PRINTED_FILE[$WS!]
+
+apply UNSPLIT
+
+shell gcc -c $WS.database/Src/$WS.c
+
+close
+quit

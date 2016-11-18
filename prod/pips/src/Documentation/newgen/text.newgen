@@ -1,0 +1,23 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+sentence = formatted:string + unformatted ;
+text = sentences:sentence* ;
+unformatted = label:string x number:int x extra_margin:int x  words:string* ;

@@ -1,0 +1,19 @@
+delete ifthenelse05
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create ifthenelse05 ifthenelse05.f
+
+echo
+echo PRINTED FILE
+echo
+
+display PRINTED_FILE
+
+echo
+echo RESTRUCTURED FILE
+echo
+
+apply RESTRUCTURE_CONTROL
+display PRINTED_FILE
+close
+delete ifthenelse05
+quit

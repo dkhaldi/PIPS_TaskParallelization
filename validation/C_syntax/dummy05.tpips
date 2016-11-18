@@ -1,0 +1,26 @@
+setenv WS=dummy05
+delete $WS
+create $WS $WS.c
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+activate C_PARSER
+
+echo
+echo Parsed printed file for "$WS!"
+echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+#echo
+#echo Printed file for "$WS!"
+#echo
+
+#display PRINTED_FILE[$WS!]
+
+close
+
+delete $WS
+
+quit

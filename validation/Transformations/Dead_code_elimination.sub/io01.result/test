@@ -1,0 +1,49 @@
+
+Init Code
+
+int main()
+{
+   int x;
+   x = 0;
+   printf("x=%d", x);
+   return 0;
+}
+
+Source code for io01 after dead-code elimination
+
+int main()
+{
+   int x;
+   x = 0;
+   printf("x=%d", x);
+   return 0;
+}
+
+OUT regions for io01
+
+int main()
+{
+   int x;
+
+//  <x-OUT-EXACT-{}>
+
+   x = 0;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-EXACT-{PHI1==1, x==0}>
+
+   printf("x=%d", x);
+   return 0;
+}
+
+Source code for io01 after dead-code elimination with OUT regions
+
+int main()
+{
+   int x;
+   x = 0;
+   printf("x=%d", x);
+   return 0;
+}
+
+Warnings
+

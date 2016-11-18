@@ -1,0 +1,51 @@
+
+POINTS TO for inter01
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void inter01()
+{
+
+// Points To: none
+
+   static int l;
+
+// Points To: none
+
+   int m;
+
+// Points To: none
+
+   int n;
+
+// Points To: none
+
+
+   for(n = 0; n <= 9; n += 1) {
+
+// Points To: none
+
+      i = 1;
+
+// Points To: none
+
+      j = 2;
+
+// Points To: none
+
+      k = 3;
+
+// Points To: none
+
+      l = 4;
+
+// Points To: none
+
+      m = 5;
+   }
+}
+(activate_phase) Rule `INTERPROCEDURAL_POINTS_TO_ANALYSIS' already active

@@ -1,0 +1,758 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   int a1[100];
+
+// Points To: none
+
+   int a2[10][10];
+
+// Points To: none
+
+   int n = argc;
+
+// Points To: none
+
+   
+   /* 1D buffers */
+   
+   scanf("%d", a1);
+
+// Points To: none
+
+   scanf("%d", &a1[0]);
+
+// Points To: none
+
+   scanf("%d", &a1[n]);
+
+
+// Points To: none
+
+   int *p1 = &a1[0];
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+
+   scanf("%d", p1);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+   scanf("%d", &p1[n]);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+   scanf("%d", p1+n);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+   
+   /* 2D buffers */
+   
+   // scanf("%d", a2); not type compliant
+   scanf("%d", a2[0]);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+   scanf("%d", &a2[0][0]);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+   scanf("%d", &a2[n][0]);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+   scanf("%d", &a2[0][n]);
+
+
+// Points To:
+// p1 -> a1[0] , EXACT
+
+   int *p2 = &a2[0][0];
+
+// Points To:
+// p1 -> a1[0] , EXACT
+// p2 -> a2[0][0] , EXACT
+
+
+   scanf("%d", p2);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+// p2 -> a2[0][0] , EXACT
+
+   scanf("%d", &p2[n]);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+// p2 -> a2[0][0] , EXACT
+
+   scanf("%d", p2+n);
+
+// Points To:
+// p1 -> a1[0] , EXACT
+// p2 -> a2[0][0] , EXACT
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: a1
+   int a1[100];
+//             <    is declared>: a2
+   int a2[10][10];
+//             <    is read   >: argc
+//             <    is written>: n
+//             <    is referenced>: argc n
+//             <    is declared>: n
+   int n = argc;
+//             <may be read   >: stdin[0]
+//             <may be written>: a1[*] stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a1 stdin __IO_EFFECTS:LUNS
+   
+   /* 1D buffers */
+   
+   scanf("%d", a1);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a1[0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a1 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a1[0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a1[n] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a1 n stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a1[n]);
+
+//             <    is written>: p1
+//             <    is referenced>: a1 p1
+//             <    is declared>: p1
+   int *p1 = &a1[0];
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: p1 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a1[0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p1 stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", p1);
+//             <may be read   >: stdin[0]
+//             <may be written>: a1[*] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p1 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &p1[n]);
+//             <may be read   >: stdin[0]
+//             <may be written>: a1[*] stdin[0]
+//             <    is read   >: n p1 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p1 stdin __IO_EFFECTS:LUNS
+   scanf("%d", p1+n);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[0][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 stdin __IO_EFFECTS:LUNS
+   
+   /* 2D buffers */
+   
+   // scanf("%d", a2); not type compliant
+   scanf("%d", a2[0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[0][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a2[0][0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[n][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 n stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a2[n][0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[0][n] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 n stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a2[0][n]);
+
+//             <    is written>: p2
+//             <    is referenced>: a2 p2
+//             <    is declared>: p2
+   int *p2 = &a2[0][0];
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: p2 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[0][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p2 stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", p2);
+//             <may be read   >: stdin[0]
+//             <may be written>: a2[0][*] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p2 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &p2[n]);
+//             <may be read   >: stdin[0]
+//             <may be written>: a2[0][*] stdin[0]
+//             <    is read   >: n p2 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p2 stdin __IO_EFFECTS:LUNS
+   scanf("%d", p2+n);
+
+   return 0;
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: argc stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: argc stdin __IO_EFFECTS:LUNS
+int main(int argc, char **argv)
+{
+//             <    is declared>: a1
+   int a1[100];
+//             <    is declared>: a2
+   int a2[10][10];
+//             <    is read   >: argc
+//             <    is written>: n
+//             <    is referenced>: argc n
+//             <    is declared>: n
+   int n = argc;
+//             <may be read   >: stdin[0]
+//             <may be written>: a1[*] stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a1 stdin __IO_EFFECTS:LUNS
+   
+   /* 1D buffers */
+   
+   scanf("%d", a1);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a1[0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a1 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a1[0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: a1[*] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a1 n stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a1[n]);
+
+//             <    is written>: p1
+//             <    is referenced>: a1 p1
+//             <    is declared>: p1
+   int *p1 = &a1[0];
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: p1 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a1[0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p1 stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", p1);
+//             <may be read   >: stdin[0]
+//             <may be written>: a1[*] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p1 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &p1[n]);
+//             <may be read   >: stdin[0]
+//             <may be written>: a1[*] stdin[0]
+//             <    is read   >: n p1 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p1 stdin __IO_EFFECTS:LUNS
+   scanf("%d", p1+n);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[0][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 stdin __IO_EFFECTS:LUNS
+   
+   /* 2D buffers */
+   
+   // scanf("%d", a2); not type compliant
+   scanf("%d", a2[0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[0][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a2[0][0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: a2[*][0] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 n stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a2[n][0]);
+//             <may be read   >: stdin[0]
+//             <may be written>: a2[0][*] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 n stdin __IO_EFFECTS:LUNS
+   scanf("%d", &a2[0][n]);
+
+//             <    is written>: p2
+//             <    is referenced>: a2 p2
+//             <    is declared>: p2
+   int *p2 = &a2[0][0];
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: p2 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[0][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: p2 stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", p2);
+//             <may be read   >: stdin[0]
+//             <may be written>: a2[0][*] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p2 stdin __IO_EFFECTS:LUNS
+   scanf("%d", &p2[n]);
+//             <may be read   >: stdin[0]
+//             <may be written>: a2[0][*] stdin[0]
+//             <    is read   >: n p2 stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: n p2 stdin __IO_EFFECTS:LUNS
+   scanf("%d", p2+n);
+//             <    is read   >: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: __IO_EFFECTS:LUNS
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   int a1[100];
+
+//  T() {}
+
+   int a2[10][10];
+
+//  T(n) {argc==n}
+
+   int n = argc;
+
+//  T(a1[0]) {}
+
+   
+   /* 1D buffers */
+   
+   scanf("%d", a1);
+
+//  T(a1[0]) {}
+
+   scanf("%d", &a1[0]);
+
+//  T(a1[0]) {}
+
+   scanf("%d", &a1[n]);
+
+
+//  T() {}
+
+   int *p1 = &a1[0];
+
+//  T(a1[0]) {}
+
+
+   scanf("%d", p1);
+
+//  T(a1[0]) {}
+
+   scanf("%d", &p1[n]);
+
+//  T(a1[0]) {}
+
+   scanf("%d", p1+n);
+
+//  T(a2[0][0]) {}
+
+   
+   /* 2D buffers */
+   
+   // scanf("%d", a2); not type compliant
+   scanf("%d", a2[0]);
+
+//  T(a2[0][0]) {}
+
+   scanf("%d", &a2[0][0]);
+
+//  T(a2[0][0]) {}
+
+   scanf("%d", &a2[n][0]);
+
+//  T(a2[0][0]) {}
+
+   scanf("%d", &a2[0][n]);
+
+
+//  T() {}
+
+   int *p2 = &a2[0][0];
+
+//  T(a2[0][0]) {}
+
+
+   scanf("%d", p2);
+
+//  T(a2[0][0]) {}
+
+   scanf("%d", &p2[n]);
+
+//  T(a2[0][0]) {}
+
+   scanf("%d", p2+n);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   int a1[100];
+
+//  P() {}
+
+   int a2[10][10];
+
+//  P() {}
+
+   int n = argc;
+
+//  P(n) {argc==n}
+
+   
+   /* 1D buffers */
+   
+   scanf("%d", a1);
+
+//  P(a1[0],n) {argc==n}
+
+   scanf("%d", &a1[0]);
+
+//  P(a1[0],n) {argc==n}
+
+   scanf("%d", &a1[n]);
+
+
+//  P(a1[0],n) {argc==n}
+
+   int *p1 = &a1[0];
+
+//  P(a1[0],n) {argc==n}
+
+
+   scanf("%d", p1);
+
+//  P(a1[0],n) {argc==n}
+
+   scanf("%d", &p1[n]);
+
+//  P(a1[0],n) {argc==n}
+
+   scanf("%d", p1+n);
+
+//  P(a1[0],n) {argc==n}
+
+   
+   /* 2D buffers */
+   
+   // scanf("%d", a2); not type compliant
+   scanf("%d", a2[0]);
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+   scanf("%d", &a2[0][0]);
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+   scanf("%d", &a2[n][0]);
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+   scanf("%d", &a2[0][n]);
+
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+   int *p2 = &a2[0][0];
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+
+   scanf("%d", p2);
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+   scanf("%d", &p2[n]);
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+   scanf("%d", p2+n);
+
+//  P(a1[0],a2[0][0],n) {argc==n}
+
+
+   return 0;
+}
+
+Convex array regions with points-to for "main"
+
+
+//  <stdin-R-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0}>
+
+int main(int argc, char **argv)
+{
+
+//  <a1-WE-EXACT-{}>
+
+   int a1[100];
+
+//  <a2-WE-EXACT-{}>
+
+   int a2[10][10];
+   int n = argc;
+
+//  <a1-RE-EXACT-{}>
+//  <a1[PHI1]-W-MAY-{n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   
+   /* 1D buffers */
+   
+   scanf("%d", a1);
+
+//  <a1-RE-EXACT-{}>
+//  <a1[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", &a1[0]);
+
+//  <a1-RE-EXACT-{}>
+//  <a1[PHI1]-W-EXACT-{PHI1==n, n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", &a1[n]);
+
+
+//  <a1-RE-EXACT-{}>
+//  <p1-RE-EXACT-{}>
+//  <p1-WE-EXACT-{}>
+//  <p1-W-EXACT-{}>
+
+   int *p1 = &a1[0];
+
+//  <a1[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+//  <p1-R-EXACT-{}>
+//  <p1-RE-EXACT-{}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+
+   scanf("%d", p1);
+
+//  <a1[PHI1]-W-MAY-{n==argc}>
+//  <p1-RE-EXACT-{}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", &p1[n]);
+
+//  <a1[PHI1]-W-MAY-{n==argc}>
+//  <p1-R-EXACT-{}>
+//  <p1-RE-EXACT-{}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", p1+n);
+
+//  <a2-RE-EXACT-{}>
+//  <a2[PHI1][PHI2]-W-EXACT-{PHI1==0, PHI2==0, n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   
+   /* 2D buffers */
+   
+   // scanf("%d", a2); not type compliant
+   scanf("%d", a2[0]);
+
+//  <a2-RE-EXACT-{}>
+//  <a2[PHI1][PHI2]-W-EXACT-{PHI1==0, PHI2==0, n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", &a2[0][0]);
+
+//  <a2-RE-EXACT-{}>
+//  <a2[PHI1][PHI2]-W-EXACT-{PHI1==n, PHI2==0, n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", &a2[n][0]);
+
+//  <a2-RE-EXACT-{}>
+//  <a2[PHI1][PHI2]-W-EXACT-{PHI1==0, PHI2==n, n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", &a2[0][n]);
+
+
+//  <a2-RE-EXACT-{}>
+//  <p2-RE-EXACT-{}>
+//  <p2-WE-EXACT-{}>
+//  <p2-W-EXACT-{}>
+
+   int *p2 = &a2[0][0];
+
+//  <a2[PHI1][PHI2]-W-EXACT-{PHI1==0, PHI2==0, n==argc}>
+//  <p2-R-EXACT-{}>
+//  <p2-RE-EXACT-{}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+
+   scanf("%d", p2);
+
+//  <a2[PHI1][PHI2]-W-MAY-{PHI1==0, n==argc}>
+//  <p2-RE-EXACT-{}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", &p2[n]);
+
+//  <a2[PHI1][PHI2]-W-MAY-{PHI1==0, n==argc}>
+//  <p2-R-EXACT-{}>
+//  <p2-RE-EXACT-{}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==argc}>
+
+   scanf("%d", p2+n);
+
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0}>
+
+
+   return 0;
+}

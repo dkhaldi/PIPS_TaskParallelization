@@ -1,0 +1,59 @@
+
+int ptr_to_field()
+{
+   typedef struct {
+      int *q;
+      int *p;
+   } my_str;
+
+   my_str *m, *n;
+//             <    is written>: i j
+   int i = 0, j = 1;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: m _MALLOC_EFFECTS:_MALLOC_
+   m = (my_str *) malloc(sizeof(my_str));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: n _MALLOC_EFFECTS:_MALLOC_
+   n = (my_str *) malloc(sizeof(my_str));
+//             <may be written>: *HEAP*_l_12.q
+//             <    is read   >: m
+   m->q = &i;
+//             <may be written>: *HEAP*_l_12.p
+//             <    is read   >: m
+   m->p = &j;
+//             <may be read   >: *HEAP*_l_12.p
+//             <may be written>: *HEAP*_l_13.q
+//             <    is read   >: m n
+   n->q = m->p;
+//             <may be read   >: *HEAP*_l_12.q
+//             <may be written>: *HEAP*_l_13.p
+//             <    is read   >: m n
+   n->p = m->q;
+
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	12 --> 13 with conflicts
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-R-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+	12 --> 14 with conflicts
+		from <m-W-EXACT> to <m-R-EXACT>
+	12 --> 15 with conflicts
+		from <m-W-EXACT> to <m-R-EXACT>
+	12 --> 16 with conflicts
+		from <m-W-EXACT> to <m-R-EXACT>
+	12 --> 17 with conflicts
+		from <m-W-EXACT> to <m-R-EXACT>
+	13 --> 16 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+	13 --> 17 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+	14 --> 17 with conflicts
+		from <*HEAP*_l_12.q-W-MAY> to <*HEAP*_l_12.q-R-MAY>
+	15 --> 16 with conflicts
+		from <*HEAP*_l_12.p-W-MAY> to <*HEAP*_l_12.p-R-MAY>
+
+****************** End of Dependence Graph ******************

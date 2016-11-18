@@ -1,0 +1,154 @@
+###################### do-STEP/do.database/Src/MY_DO_PAR_HYBRID.f ######################
+      SUBROUTINE MY_DO_PAR_HYBRID(N, A, I)
+      implicit none
+      include "STEP.h"
+      INTEGER N, I
+      INTEGER STEP_SR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2
+     &), A(1:N, 1:2)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_PARALLEL)
+      CALL STEP_INIT_ARRAYREGIONS(A, STEP_INTEGER4, 2, 1, N, 1, 2)
+
+C SEND REGIONS
+
+C  <A(PHI1,PHI2)-W-EXACT-{1<=PHI1, PHI1<=10, 1<=PHI2, PHI2<=2}>
+
+      STEP_SR_A(STEP_INDEX_SLICE_LOW,1) = 1
+      STEP_SR_A(STEP_INDEX_SLICE_UP,1) = 10
+      STEP_SR_A(STEP_INDEX_SLICE_LOW,2) = 1
+      STEP_SR_A(STEP_INDEX_SLICE_UP,2) = 2
+      CALL STEP_SET_SENDREGIONS(A, 1, STEP_SR_A)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+!$omp parallel
+      CALL MY_DO_PAR_HYBRID_DO_HYBRID(N, A, I)
+      CALL MY_DO_PAR_HYBRID_DO_HYBRID_1(N, A, I)
+!$omp end parallel
+C END WORK
+!$omp master
+      CALL STEP_ALLTOALL_FULL(A, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT
+     &)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_PARALLEL)
+!$omp end master
+!$omp barrier
+      END
+###################### do-STEP/do.database/Src/MY_DO_PAR_HYBRID_DO_HYBRID.f ######################
+      SUBROUTINE MY_DO_PAR_HYBRID_DO_HYBRID(N, A, I)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_I_UP, STEP_I_LOW, 
+     &STEP_COMM_SIZE, N, I
+      INTEGER STEP_SR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2
+     &, 1:STEP_MAX_NB_LOOPSLICES), A(1:N, 1:2)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_DO)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, N, 1, STEP_COMM_SIZE)
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <A(PHI1,PHI2)-W-EXACT-{PHI2==1, 1<=PHI1, PHI1<=10,
+C    STEP_I_LOW<=PHI1, PHI1<=STEP_I_UP}>
+
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,1,IDX) = MAX(1, STEP_I_LOW)
+         STEP_SR_A(STEP_INDEX_SLICE_UP,1,IDX) = MIN(10, STEP_I_UP)
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,2,IDX) = 1
+         STEP_SR_A(STEP_INDEX_SLICE_UP,2,IDX) = 1
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(A, STEP_COMM_SIZE, STEP_SR_A)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_I_LOW, STEP_I_UP)
+!$omp do
+
+
+      DO I = STEP_I_LOW, STEP_I_UP
+         A(I,1) = I
+      ENDDO
+!$omp end do
+C END WORK
+!$omp master
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### do-STEP/do.database/Src/MY_DO_PAR_HYBRID_DO_HYBRID_1.f ######################
+      SUBROUTINE MY_DO_PAR_HYBRID_DO_HYBRID_1(N, A, I)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_I_UP, STEP_I_LOW, 
+     &STEP_COMM_SIZE, N, I
+      INTEGER STEP_SR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:2
+     &, 1:STEP_MAX_NB_LOOPSLICES), A(1:N, 1:2)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_DO)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, N, 1, STEP_COMM_SIZE)
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <A(PHI1,PHI2)-W-EXACT-{PHI2==2, PHI1<=10, STEP_I_LOW<=PHI1,
+C    PHI1<=STEP_I_UP}>
+
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,1,IDX) = STEP_I_LOW
+         STEP_SR_A(STEP_INDEX_SLICE_UP,1,IDX) = MIN(10, STEP_I_UP)
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,2,IDX) = 2
+         STEP_SR_A(STEP_INDEX_SLICE_UP,2,IDX) = 2
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(A, STEP_COMM_SIZE, STEP_SR_A)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_I_LOW, STEP_I_UP)
+!$omp do
+
+      DO 20 I = STEP_I_LOW, STEP_I_UP
+         A(I,2) = 2*I
+20       CONTINUE
+!$omp end do
+C END WORK
+!$omp master
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### do-STEP/do.database/Src/do.f ######################
+!
+! do.f
+!
+! Example of a parallel and do directives
+!
+! 2008-2009
+! Creation: A. Muller, FSC
+
+      PROGRAM MY_DO
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+      INTEGER N
+      PARAMETER (N=10)
+      INTEGER I,A(N,2)
+      CALL STEP_INIT_FORTRAN_ORDER
+      CALL MY_DO_PAR_HYBRID(N, A, I)
+
+      PRINT *, A
+      CALL STEP_FINALIZE
+
+      END

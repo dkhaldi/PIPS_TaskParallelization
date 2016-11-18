@@ -1,0 +1,47 @@
+unsigned long long int time01()
+{
+//             <    is declared>: t timeval
+   struct timeval t;
+//             <may be written>: t.tv_sec t.tv_usec
+//             <    is read   >: __TIME_EFFECTS:KALI
+//             <    is written>: __TIME_EFFECTS:KALI
+//             <    is referenced>: __TIME_EFFECTS:KALI
+   gettimeofday(&t, (void *) 0);
+//             <    is read   >: t.tv_sec t.tv_usec
+//             <    is referenced>: t t
+   return t.tv_sec*1e6+t.tv_usec;
+}
+//             <    is read   >: __TIME_EFFECTS:KALI
+//             <    is written>: __TIME_EFFECTS:KALI
+//             <    is referenced>: __TIME_EFFECTS:KALI
+unsigned long long int time01()
+{
+//             <    is declared>: t timeval
+   struct timeval t;
+//             <may be written>: t.tv_sec t.tv_usec
+//             <    is read   >: __TIME_EFFECTS:KALI
+//             <    is written>: __TIME_EFFECTS:KALI
+//             <    is referenced>: __TIME_EFFECTS:KALI
+   gettimeofday(&t, (void *) 0);
+//             <    is read   >: t.tv_sec t.tv_usec
+//             <    is referenced>: t
+   return t.tv_sec*1e6+t.tv_usec;
+}
+
+//  T(time01) {}
+
+unsigned long long int time01()
+{
+
+//  T() {}
+
+   struct timeval t;
+
+//  T(t[tv_sec],t[tv_usec]) {}
+
+   gettimeofday(&t, (void *) 0);
+
+//  T(time01) {}
+
+   return t.tv_sec*1e6+t.tv_usec;
+}

@@ -1,0 +1,9 @@
+setenv WSPACE license_plate_copies_4
+setenv FILE license_plate_copies.c
+setenv NAME license_plate_copies
+setproperty HWAC_SPOC_DEPTH 4
+setproperty HWAC_TERAPIX_DAG_CUT "compute"
+# test faster bandwidth
+setproperty HWAC_TERAPIX_DMABW 32
+setproperty HWAC_TERAPIX_OVERLAP_IO TRUE
+source default_tpips

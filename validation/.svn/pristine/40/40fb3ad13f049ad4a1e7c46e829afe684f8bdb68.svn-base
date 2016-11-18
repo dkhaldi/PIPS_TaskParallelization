@@ -1,0 +1,28 @@
+delete decl29
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create decl29 decl29.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 1
+
+activate C_PARSER
+activate C_SYMBOL_TABLE
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+#setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+
+#setenv PRETTYPRINT_DEBUG_LEVEL 5
+
+echo
+echo Parsed printed file for "decl29"
+echo
+
+display PARSED_PRINTED_FILE[decl29]
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g decl29
+
+close
+delete decl29
+
+quit

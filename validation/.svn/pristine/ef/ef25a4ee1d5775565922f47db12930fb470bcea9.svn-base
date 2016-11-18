@@ -1,0 +1,20 @@
+
+Error duplicate variable declaration for variable "a" 
+
+/* Multiple declarations of global variables check in one file */
+
+/* but this is OK with C... */
+
+int a;
+int k;
+int a;
+
+Warnings for multideclsinfile
+
+COMPILATION_UNIT_PARSER[multideclsinfile!] (UpdateEntity) ("./multideclsinfile.c":7) 
+Multiple declarations of variable "a".
+Source code after preprocessing:
+int a;
+Input source code, before preprocessing:
+int a;
+

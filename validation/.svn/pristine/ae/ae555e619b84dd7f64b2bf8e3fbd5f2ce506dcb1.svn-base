@@ -1,0 +1,9 @@
+delete io03
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create io03 io03.f
+module IO03
+display PRINTED_FILE[IO03]
+close
+delete io03
+quit
+

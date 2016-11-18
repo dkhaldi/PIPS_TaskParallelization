@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Type check the max operators
+
+tpips=${tpips_version:-tpips}
+
+($tpips 2>&1 | grep "incompatible") <<EOF
+delete checkmax
+setproperty MAXIMUM_USER_ERROR 25
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create checkmax checkmax.f
+setproperty PARSER_TYPE_CHECK_CALL_SITES   TRUE
+display PRINTED_FILE(CHECKMAX)
+close
+delete checkmax
+quit
+EOF
+

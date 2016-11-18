@@ -1,0 +1,10 @@
+setpropertu ABORT_ON_USER_ERROR TRUE
+delete cpretty
+create cpretty cpretty.f
+
+setproperty EVAL_SYMBOLIC_CONSTANT TRUE
+display PRINTED_FILE[%ALL]
+display C_PRINTED_FILE[%ALL]
+
+close
+delete cpretty

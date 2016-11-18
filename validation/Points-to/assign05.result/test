@@ -1,0 +1,70 @@
+
+POINTS TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void assign05()
+{
+
+// Points To: none
+
+   int *r;
+
+// Points To:
+// r -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// r -> undefined , EXACT
+
+
+   r = bar(i);
+
+// Points To: unreachable
+
+   i = 1;
+
+// Points To: unreachable
+
+   *r = 0;
+
+// Points To: unreachable
+
+   return;
+}
+
+// Points To IN: none
+
+
+// Points To OUT:
+// bar -> j , EXACT
+
+int * bar(int j)
+{
+
+// Points To: none
+
+   return &j;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void foo()
+{
+
+// Points To: none
+
+   assign05();
+
+// Points To: unreachable
+
+   return;
+}

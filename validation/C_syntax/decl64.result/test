@@ -1,0 +1,15 @@
+
+Parsed printed code for decl64
+
+/* Preserve the "extern" keyword
+ *
+ * One LF is lost, although it is preserved by the C preprocessor and
+ * by PIPS file splitter.
+ */
+
+extern struct foo {                                                     /*0007*/
+   int mem;
+} x;
+
+Warnings related to decl64.c
+

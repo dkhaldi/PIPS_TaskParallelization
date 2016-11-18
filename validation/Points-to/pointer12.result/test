@@ -1,0 +1,44 @@
+
+POINTS TO for "pointer12"
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// a.array -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+void pointer12(array_2D a)
+{
+
+// Points To: none
+
+   int i, j;
+
+// Points To: none
+
+   a.d1 = 5;
+
+// Points To: none
+
+   a.d2 = 4;
+
+// Points To: none
+
+   a.array = malloc(a.d1+a.d2*sizeof(double));
+
+// Points To:
+// a.array -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+   for(i = 0; i <= a.d1-1; i += 1)
+
+// Points To:
+// a.array -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+      for(j = 0; j <= a.d2-1; j += 1)
+
+// Points To:
+// a.array -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+         (a.array)[a.d2*i+j] = 0.;
+}

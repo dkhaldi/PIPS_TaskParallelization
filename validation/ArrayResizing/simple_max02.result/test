@@ -1,0 +1,28 @@
+
+Init Code
+
+int foo()
+{
+   int i, j;
+   int a[100][100];
+   for(i = 0; i <= 49; i += 1)
+      for(j = 0; j <= 9; j += 1)
+         a[i][j] = 0;
+   return 0;
+}
+
+ARRAY_RESIZING_FULL_BOTTOM_UP
+
+int foo()
+{
+   int i, j;
+   int a[50][10];
+   for(i = 0; i <= 49; i += 1)
+      for(j = 0; j <= 9; j += 1)
+         a[i][j] = 0;
+   return 0;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "foo" instead.

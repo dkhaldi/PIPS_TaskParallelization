@@ -1,0 +1,128 @@
+
+TRANSFORMERS
+
+
+//  T() {0==-1}
+
+void sting_seesaw()
+{
+
+//  T(x,y) {x==0, y==0}
+
+   int x = 0, y = 0;
+
+//  T(x,y) {x#init==0, y#init==0, y<=3x, x<=2y}
+
+
+   while (1) {
+
+//  T(x,y) {2x+y#init==2x#init+y, y#init<=y, y<=y#init+2}
+
+      // StInG Expected result: x<=2y, y<=3x
+      // PIPS results: y<=3x, x<=2y
+      // Transition t2
+      if (x<=4)
+
+//  T(x,y) {x==x#init+1, y==y#init+2, x<=5}
+
+         x++, y += 2;
+
+//  T(x,y) {x+2y#init==x#init+2y, y#init<=y, y<=y#init+1}
+
+      // Transition t1
+      if (5<=x&&x<=7&&alea()>=0.)
+
+//  T(x,y) {x==x#init+2, y==y#init+1, 7<=x, x<=9}
+
+         x += 2, y++;
+
+//  T(x,y) {3x+y#init==3x#init+y, y#init<=y, y<=y#init+3}
+
+      // Transition t3
+      if (7<=x&&x<=9&&alea()>=0.)
+
+//  T(x,y) {x==x#init+1, y==y#init+3, 8<=x, x<=10}
+
+         x++, y += 3;
+
+//  T(x,y) {x+2y#init==x#init+2y, y#init<=y, y<=y#init+1}
+
+      // Transition t4
+      if (x>=9)
+
+//  T(x,y) {x==x#init+2, y==y#init+1, 11<=x}
+
+         x += 2, y++;
+
+//  T(x) {x==x#init}
+
+      // PIPS result: 4y+5<=13x, y<=3x, x+15<=8y, x<=2y (which implies
+      // x>=1 and y >=2)
+      // NOP statement get the body postcondition
+      x = x;
+   }
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+void sting_seesaw()
+{
+
+//  P() {}
+
+   int x = 0, y = 0;
+
+//  P(x,y) {x==0, y==0}
+
+
+   while (1) {
+
+//  P(x,y) {y<=3x, x<=2y}
+
+      // StInG Expected result: x<=2y, y<=3x
+      // PIPS results: y<=3x, x<=2y
+      // Transition t2
+      if (x<=4)
+
+//  P(x,y) {x<=4, y<=3x, x<=2y}
+
+         x++, y += 2;
+
+//  P(x,y) {y<=3x, x<=2y, 4y+5<=13x, x+15<=8y}
+
+      // Transition t1
+      if (5<=x&&x<=7&&alea()>=0.)
+
+//  P(x,y) {5<=x, x<=7, y<=3x, x<=2y, 3<=y}
+
+         x += 2, y++;
+
+//  P(x,y) {y<=3x, x<=2y, 4y+5<=13x, x+15<=8y}
+
+      // Transition t3
+      if (7<=x&&x<=9&&alea()>=0.)
+
+//  P(x,y) {7<=x, x<=9, y<=3x, x<=2y, 2y+7<=7x, 3<=y}
+
+         x++, y += 3;
+
+//  P(x,y) {y<=3x, x<=2y, 4y+5<=13x, x+15<=8y}
+
+      // Transition t4
+      if (x>=9)
+
+//  P(x,y) {9<=x, y<=3x, x<=2y, 4y+5<=13x, x+15<=8y}
+
+         x += 2, y++;
+
+//  P(x,y) {y<=3x, x<=2y, 4y+5<=13x, x+15<=8y}
+
+      // PIPS result: 4y+5<=13x, y<=3x, x+15<=8y, x<=2y (which implies
+      // x>=1 and y >=2)
+      // NOP statement get the body postcondition
+      x = x;
+   }
+}

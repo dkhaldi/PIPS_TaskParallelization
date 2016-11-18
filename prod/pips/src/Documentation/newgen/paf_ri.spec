@@ -1,0 +1,25 @@
+--NEWGEN-START 229
+import reference from "ri.newgen";
+import predicate from "ri.newgen";
+import expression from "ri.newgen";
+import loop from "ri.newgen";
+import statement from "ri.newgen";
+import entity from "ri.newgen";
+import sccflags from "dg.newgen";
+external Pvecteur;
+bdt = schedules:schedule*;
+communication = broadcast:predicate x reduction:predicate x shift:predicate;
+conditional = predicate:predicate x true_quast:quast x false_quast:quast;
+dataflow = reference:reference x transformation:expression* x governing_pred:predicate x communication:communication;
+dfg_arc_label = dataflows:dataflow*;
+dfg_vertex_label = statement:int x exec_domain:predicate x sccflags:sccflags;
+leaf_label = statement:int x depth:int;
+lisp_expression = operation:string x args:expression*;
+placement = statement:int x dims:expression*;
+plc = placements:placement*;
+quast_leaf = solution:expression* x leaf_label:leaf_label;
+quast = quast_value:quast_value x newparms:var_val*;
+quast_value = quast_leaf:quast_leaf + conditional:conditional;
+schedule = statement:int x predicate:predicate x dims:expression*;
+static_control = yes:bool x params:entity* x loops:loop* x tests:expression*;
+var_val = variable:entity x value:expression;

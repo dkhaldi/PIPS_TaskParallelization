@@ -1,0 +1,71 @@
+
+Transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   struct {
+      int dim;
+   } s;
+
+//  T(i) {}
+
+   int i;
+
+//  T() {}
+
+   s.dim = 10;
+
+//  T() {}
+
+   double a[s.dim];
+
+//  T(main) {main==0}
+
+   // a[i] = 0.;
+   return 0;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   struct {
+      int dim;
+   } s;
+
+//  P() {}
+
+   int i;
+
+//  P(i) {}
+
+   s.dim = 10;
+
+//  P(i) {}
+
+   double a[s.dim];
+
+//  P(i) {}
+
+   // a[i] = 0.;
+   return 0;
+}
+
+Warnings
+
+TRANSFORMERS_INTER_FULL[main] (apply_effects_to_transformer) Transformer resolve with the effects
+TRANSFORMERS_INTER_FULL[main] (apply_effects_to_transformer) Transformer resolve with the effects
+TRANSFORMERS_INTER_FULL[main] (apply_effects_to_transformer) Transformer resolve with the effects
+PRECONDITIONS_INTER_FULL[main] (apply_effects_to_transformer) Transformer resolve with the effects

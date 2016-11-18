@@ -1,0 +1,17 @@
+delete struct_noname
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create struct_noname struct_noname.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[main]
+
+
+close
+
+delete struct_noname
+
+quit

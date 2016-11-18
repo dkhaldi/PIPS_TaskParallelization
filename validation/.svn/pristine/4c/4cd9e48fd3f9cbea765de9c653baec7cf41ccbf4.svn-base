@@ -1,0 +1,691 @@
+#
+# AIPO
+#
+#
+# compile generated my_dilate_6c
+#
+
+! initial function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_dilate_6c" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "dag_cleaned_0" of module "my_dilate_6c" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+
+! updated function for AIPO
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+#
+# SPOC
+#
+
+! initial function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_dilate_6c" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "dag_cleaned_0" of module "my_dilate_6c" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "my_dilate_6c_spoc_helper_0_0" of module "my_dilate_6c" in dot format
+// DAG "my_dilate_6c_spoc_helper_0_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "my_dilate_6c_spoc_helper_0_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+
+! acceleration function
+
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <spoc.h>
+
+// dag 0: 1 ops and 0 copies, optimized to 1 ops and 0+0+0 copies
+// split 0: 1 cut
+// # SPOC calls: 1
+
+// FREIA-SPoC helper function for module my_dilate_6c
+freia_status my_dilate_6c_spoc_helper_0_0_0(
+  freia_data2d * o0,
+  const freia_data2d * i0,
+  const int32_t * pi0)
+{
+  spoc_instr si;
+  spoc_param sp;
+  freia_microcode mcode;
+  freia_dynamic_param dynparam;
+  freia_op_param param;
+  freia_status ret;
+  int i;
+
+  // init pipe to nop
+  spoc_init_pipe(&si, &sp, 16);
+
+
+  // STAGE 0
+  // i0 [0 input 0] -> [0 poc 0] 5 dilate_6c
+  // nope
+  // poc 5 dilate_6c stage 0 side 0
+  si.poc[0][0].op = SPOC_POC_DILATE;
+  si.poc[0][0].grid = SPOC_POC_6_CONNEX;
+  for(i=0 ; i<9 ; i++)
+    sp.poc[0][0].kernel[i] = pi0[i];
+
+
+  // output image o on 0
+  // o [0 poc 0] -> [0 output 0] 0 null
+  si.mux[0][0].op = SPOC_MUX_IN0;
+
+  // fill in to the end...
+  // o [0 output 0] -> [7 output 0] 0 null
+  // o [1 input 0] -> [7 output 0] 0 null
+  si.mux[1][0].op = SPOC_MUX_IN0;
+  // o [2 input 0] -> [7 output 0] 0 null
+  si.mux[2][0].op = SPOC_MUX_IN0;
+  // o [3 input 0] -> [7 output 0] 0 null
+  si.mux[3][0].op = SPOC_MUX_IN0;
+  // o [4 input 0] -> [7 output 0] 0 null
+  si.mux[4][0].op = SPOC_MUX_IN0;
+  // o [5 input 0] -> [7 output 0] 0 null
+  si.mux[5][0].op = SPOC_MUX_IN0;
+  // o [6 input 0] -> [7 output 0] 0 null
+  si.mux[6][0].op = SPOC_MUX_IN0;
+  // o [7 input 0] -> [7 output 0] 0 null
+  si.mux[7][0].op = SPOC_MUX_IN0;
+
+  mcode.raw = (freia_ptr) &si;
+  mcode.size = sizeof(spoc_instr);
+
+  dynparam.raw = (freia_ptr) &sp;
+  dynparam.size = sizeof(spoc_param);
+
+  ret = freia_cg_write_microcode(&mcode);
+  ret |= freia_cg_write_dynamic_param(&dynparam);
+
+  // actual call of spoc hardware
+  freia_cg_template_process_2i_2o(&param, o0, NULL, i0, NULL);
+
+  return ret;
+}
+
+! updated function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return my_dilate_6c_spoc_helper_0_0_0(o, i0, p0);                    /*0005*/
+}
+
+! cleaned up function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return my_dilate_6c_spoc_helper_0_0_0(o, i0, p0);                    /*0005*/
+}
+#
+# TERAPIX
+#
+
+! initial function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_dilate_6c" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "dag_cleaned_0" of module "my_dilate_6c" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "my_dilate_6c_terapix_helper_0_0_0" of module "my_dilate_6c" in dot format
+// DAG "my_dilate_6c_terapix_helper_0_0_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "my_dilate_6c_terapix_helper_0_0_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+
+! acceleration function
+
+// freia terapix includes
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <terapix.h>
+#include <terapix_ucode.h>
+
+// dag 0: 1 ops and 0 copies, optimized to 1 ops and 0+0+0 copies
+
+/* FREIA terapix helper function for module my_dilate_6c
+ *
+ * RAMPE    = 1024
+ * NPE      = 128
+ * DMA BW   = 24
+ * GRAM W   = 64
+ * GRAM H   = 32
+ * DAG CUT  = compute
+ * OVERLAP  = false
+ * IMAGE H  = 0
+ * MAX SIZE = 0
+ *
+ * 1 input image, 1 output image
+ * 1 image operations in dag
+ * dag length is 2, dag width is 1
+ * costs in cycles per imagelet row:
+ * - computation: 10
+ * - communication: 48
+ */
+freia_status my_dilate_6c_terapix_helper_0_0_0(
+  freia_data2d * o0,
+  const freia_data2d * i0,
+  const int32_t * pi2)
+{
+  // declarations:
+  freia_microcode mcode;
+  freia_op_param param;
+  freia_dynamic_param dyn_param;
+  terapix_gram gram;
+  int i;
+  freia_status ret = FREIA_OK;
+  // data structures for reductions
+  terapix_mcu_macrocode mem_init;
+  freia_reduction_results redres;
+  terapix_reduction redter;
+  // overall structure which describes the computation
+  terapix_mcu_instr mcu_instr;
+  // operation 0 parameters
+  int16_t p_0[9];
+  const int32_t x_0 = 0;
+  const int32_t y_0 = 0;
+  // flip flop macro code and I/Os
+  terapix_mcu_macrocode mcu_macro[2][2];
+  terapix_tile_info tile_in[2][1];
+  terapix_tile_info tile_out[2][1];
+  // imagelets definitions:
+  // - 2 computation imagelets
+  // - 1 double buffer imagelets
+  // dynamic optimal imagelet size computation
+  // this formula must match what the scheduler does!
+  int vertical_border = 1;
+  int image_height = i0->heightWa;
+  int max_computed_size = 339;
+  int n_tiles = (image_height+max_computed_size-1)/max_computed_size;
+  int imagelet_size = (n_tiles==1)? image_height:
+        ((image_height+n_tiles-1)/n_tiles)+2*vertical_border;
+  int imagelet_1 = 0;
+  int imagelet_2 = 341;
+  int imagelet_3 = 682;
+
+  // double buffer assignment
+  int imagelet_io_1_0 = imagelet_1;
+  int imagelet_io_1_1 = imagelet_3;
+
+  // body:
+  // mcode param
+  mcode.raw = (void*) terapix_ucode_array;
+  mcode.size = TERAPIX_UCODE_SIZE_T;
+  freia_mg_write_microcode(&mcode);
+
+  // dyn_param contents
+  dyn_param.raw = &gram;
+  dyn_param.size = sizeof(terapix_gram);
+
+  // redres contents
+  redres.raw = (void*) &redter;
+  redres.size = sizeof(terapix_reduction);
+
+  // 0: D6(1) -> 2
+  mcu_macro[0][0].xmin1 = imagelet_io_1_0;
+  mcu_macro[1][0].xmin1 = imagelet_io_1_1;
+  mcu_macro[0][0].ymin1 = 0;
+  mcu_macro[1][0].ymin1 = 0;
+  mcu_macro[0][0].xmin2 = imagelet_2;
+  mcu_macro[1][0].xmin2 = imagelet_2;
+  mcu_macro[0][0].ymin2 = 0;
+  mcu_macro[1][0].ymin2 = 0;
+  // copy of operation 0 parameters
+  for(i=0; i<9; i++)
+    p_0[i] = pi2[i];
+  gram.xoffset = x_0;
+  gram.yoffset = y_0;
+  gram.width = 3;
+  gram.height = 3;
+  gram.params = p_0;
+  freia_mg_write_dynamic_param(&dyn_param);
+  mcu_macro[0][0].xmin3 = x_0;
+  mcu_macro[1][0].xmin3 = x_0;
+  mcu_macro[0][0].ymin3 = y_0;
+  mcu_macro[1][0].ymin3 = y_0;
+  mcu_macro[0][0].iter1 = TERAPIX_PE_NUMBER;
+  mcu_macro[1][0].iter1 = TERAPIX_PE_NUMBER;
+  mcu_macro[0][0].iter2 = imagelet_size;
+  mcu_macro[1][0].iter2 = imagelet_size;
+  mcu_macro[0][0].iter3 = 0;
+  mcu_macro[1][0].iter3 = 0;
+  mcu_macro[0][0].iter4 = 0;
+  mcu_macro[1][0].iter4 = 0;
+  mcu_macro[0][0].addrStart = TERAPIX_UCODE_DILATE_3_3?;
+  mcu_macro[1][0].addrStart = TERAPIX_UCODE_DILATE_3_3?;
+  // output copy 2 -> 1
+  mcu_macro[0][1].xmin1 = imagelet_2;
+  mcu_macro[1][1].xmin1 = imagelet_2;
+  mcu_macro[0][1].ymin1 = 0;
+  mcu_macro[1][1].ymin1 = 0;
+  mcu_macro[0][1].xmin2 = imagelet_io_1_0;
+  mcu_macro[1][1].xmin2 = imagelet_io_1_1;
+  mcu_macro[0][1].ymin2 = 0;
+  mcu_macro[1][1].ymin2 = 0;
+  mcu_macro[0][1].iter1 = TERAPIX_PE_NUMBER;
+  mcu_macro[1][1].iter1 = TERAPIX_PE_NUMBER;
+  mcu_macro[0][1].iter2 = imagelet_size;
+  mcu_macro[1][1].iter2 = imagelet_size;
+  mcu_macro[0][1].iter3 = 0;
+  mcu_macro[1][1].iter3 = 0;
+  mcu_macro[0][1].iter4 = 0;
+  mcu_macro[1][1].iter4 = 0;
+  mcu_macro[0][1].addrStart = TERAPIX_UCODE_COPY;
+  mcu_macro[1][1].addrStart = TERAPIX_UCODE_COPY;
+
+
+  // inputs:
+  // - imagelet 1 is i0 for i0
+  tile_in[0][0].x = imagelet_io_1_0;
+  tile_in[0][0].y = 0;
+  tile_in[1][0].x = imagelet_io_1_1;
+  tile_in[1][0].y = 0;
+
+  // outputs:
+  // - imagelet 1 is o0 for o
+  tile_out[0][0].x = imagelet_io_1_0;
+  tile_out[0][0].y = 0;
+  tile_out[1][0].x = imagelet_io_1_1;
+  tile_out[1][0].y = 0;
+
+  // imagelet erosion for the computation
+  mcu_instr.borderTop    = 1;
+  mcu_instr.borderBottom = 1;
+  mcu_instr.borderLeft   = 1;
+  mcu_instr.borderRight  = 1;
+  mcu_instr.imagelet_height = imagelet_size;
+  mcu_instr.imagelet_width  = TERAPIX_PE_NUMBER;
+
+  // outputs
+  mcu_instr.nbout = 1;
+  mcu_instr.out0 = tile_out[0];
+  mcu_instr.out1 = tile_out[1];
+
+  // inputs
+  mcu_instr.nbin = 1;
+  mcu_instr.in0 = tile_in[0];
+  mcu_instr.in1 = tile_in[1];
+
+  // actual instructions
+  mcu_instr.nbinstr = 2;
+  mcu_instr.instr0   = mcu_macro[0];
+  mcu_instr.instr1   = mcu_macro[1];
+
+  // call terapix runtime
+  param.size = -1; // not used
+  param.raw = (void*) &mcu_instr;
+  ret |= freia_cg_template_process(&param, o0, i0);
+
+  // extract measures
+
+  return ret;
+}
+
+
+! updated function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return my_dilate_6c_terapix_helper_0_0_0(o, i0, p0);                 /*0005*/
+}
+
+! cleaned up function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return my_dilate_6c_terapix_helper_0_0_0(o, i0, p0);                 /*0005*/
+}
+#
+# OPENCL
+#
+
+! initial function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_dilate_6c" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "dag_cleaned_0" of module "my_dilate_6c" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "my_dilate_6c_opencl_helper_0_0" of module "my_dilate_6c" in dot format
+// DAG "my_dilate_6c_opencl_helper_0_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "my_dilate_6c_opencl_helper_0_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+
+! acceleration function
+
+// FREIA OpenCL includes
+#include <CL/opencl.h>
+#include "freia.h"
+#include "private/freia_opencl_runtime.h"
+
+
+// dag 0: 1 ops and 0 copies, optimized to 1 ops and 0+0+0 copies
+#include <freia_opencl_runtime.hcl>
+// generated OpenCL kernels for function my_dilate_6c
+
+// opencl for dag 0
+
+! updated function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+
+! cleaned up function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+#
+# SIGMAC
+#
+#
+# compile generated my_dilate_6c
+#
+
+! initial function
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_aipo_dilate_6c(o, i0, p0);                              /*0005*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_dilate_6c" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+// graph for dag "dag_cleaned_0" of module "my_dilate_6c" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "5 D6" [shape=box];
+  "5 D6" -> "o";
+  "i0" -> "5 D6";
+}
+
+! updated function for OPENCL
+
+freia_status my_dilate_6c(freia_data2d *o, freia_data2d *i0, int32_t *p0)
+{
+   return freia_mppa_launch(0, 1, 1, 0, 0, i0, o);                      /*0005*/
+}
+
+! Sigma-C subgraphs for OPENCL
+
+/* C INCLUDES */
+#include <stdio.h>
+
+/* SIGMA-C INCLUDES */
+#include "sigmacAgents.h"
+
+
+// code module=my_dilate_6c fname=my_dilate_6c_sigmac_helper_0 split=0
+
+
+/*#####################################################################*/
+/*############## my_dilate_6c_sigmac_helper_0_0 Subgraph ##############*/
+/*#####################################################################*/
+
+
+#define pi0_0(OPR)				\
+ret = PIXEL_ ## OPR(ret, buffer[olid][i+0]);	\
+ret = PIXEL_ ## OPR(ret, buffer[olid][i+1]);	\
+ret = PIXEL_ ## OPR(ret, buffer[olid][i+2]);	\
+ret = PIXEL_ ## OPR(ret, buffer[clid][i+0]);	\
+ret = PIXEL_ ## OPR(ret, buffer[clid][i+1]);	\
+ret = PIXEL_ ## OPR(ret, buffer[clid][i+2]);	\
+ret = PIXEL_ ## OPR(ret, buffer[ilid][i+0]);	\
+ret = PIXEL_ ## OPR(ret, buffer[ilid][i+1]);	\
+ret = PIXEL_ ## OPR(ret, buffer[ilid][i+2]);	\
+
+CUSTOM_MORPHO_AGENT(pi0_0, int16_t)
+
+subgraph
+my_dilate_6c_sigmac_helper_0_0
+(char pipein[255],
+ char pipeout[255],
+ int width,
+ int height,
+ size_t sizeMax,
+ char pipeparin[255],
+ char pipeparout[255])
+{
+
+  map {
+    agent lhin = new Launcher_In(pipein, 1, width, height);
+    agent strin = new Streamer_In(width, height, 1);
+    connect (lhin.param, strin.input);
+    SigmaC_agent_setUnitType(strin,"k1-I/O");
+    agent lhout = new Launcher_Out(pipeout, 1, width, height);
+    agent strout = new Streamer_Out(width, height, 1);
+    connect (strout.output, lhout.result);
+    SigmaC_agent_setUnitType(strout,"k1-I/O");
+
+    // parameters declaration...
+    int16_t pi0[9] = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
+    // instantiations...
+    agent dil6c0 = new pi0_0(width, height);
+
+    // connections...
+    connect (strin.output[0] /* i0 */, dil6c0.input);
+    connect (dil6c0.output, strout.input[0] /* o */);
+  }
+}
+
+
+
+/*#####################################################################*/
+/*########################### Subgraph Root ###########################*/
+/*#####################################################################*/
+
+subgraph root () {
+  map {
+    int width = 256, height = 256;
+    size_t sizeMax = width * height * sizeof(int16_t);
+
+    char cmd[255] = "cd .. && ./main";
+    int i, n_pipes = 14;
+    char pipes[n_pipes][255];
+    for (i=0; i<n_pipes; i++)
+      tmpnam(pipes[i]);
+
+    agent pp = new Pipes(cmd, n_pipes, pipes);
+    agent sk = new Sink<char>(1);
+    SigmaC_agent_setUnitType(sk, "native");
+    connect(pp.output, sk.input);
+
+    new Malloc(pipes[0], pipes[1]);
+    new Free(pipes[2], pipes[3]);
+    new MCopy(pipes[4], pipes[5]);
+    new SendDataToMPPA(pipes[6], pipes[7], sizeMax);
+    new SendDataToHost(pipes[8], pipes[9], sizeMax);
+
+    new my_dilate_6c_sigmac_helper_0_0
+    (pipes[10], pipes[11],
+     width, height, sizeMax,
+     pipes[12], pipes[13]);
+
+  }
+}
+#
+# FREIA COMPILATION DONE
+#
+

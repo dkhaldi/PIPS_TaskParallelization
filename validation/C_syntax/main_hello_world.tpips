@@ -1,0 +1,27 @@
+delete main_hello_world
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create main_hello_world main_hello_world.c
+
+#setproperty PRETTYPRINT_LANGUAGE "C"
+#setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+
+#setenv C_SYNTAX_DEBUG_LEVEL 7
+
+#activate C_PARSER
+
+display PARSED_PRINTED_FILE[main_hello_world!]
+
+display PARSED_PRINTED_FILE[main]
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g main_hello_world
+
+close
+
+#delete main_hello_world
+
+quit

@@ -1,0 +1,33 @@
+(tp_parse) save03: No such workspace
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+Registering file save03.f
+Splitting file    ./save03.f
+  Module         FOO
+  Module         SAVE03
+Workspace save03 created and opened.
+Main module PROGRAM "SAVE03" selected.
+Module SAVE03 selected
+Module SAVE03 already active.
+Request: build resource PRINTED_FILE for module SAVE03.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(SAVE03)
+  PARSER                         building   PARSED_CODE(SAVE03)
+                                 building   CALLEES(SAVE03)
+PARSER[SAVE03] (parser) Variable FOO cannot be declared static be cause of its storage class (tag=3)
+PARSER[SAVE03] (parser) [user error] Parser error between lines 9 and 9
+SAVE statement incompatible with previous declaration (e.g. EXTERNAL).
+PARSER[SAVE03] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[SAVE03] (catch_user_error) pass has failed
+PARSER[SAVE03] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module SAVE03.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module FOO.
+  Closing module SAVE03.
+Closing program.
+Closing workspace.
+Workspace save03 closed.
+Workspace save03 deleted.
+Pips is done: tpips quit

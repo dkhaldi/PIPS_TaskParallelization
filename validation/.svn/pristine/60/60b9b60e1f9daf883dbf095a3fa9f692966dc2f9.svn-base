@@ -1,0 +1,56 @@
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   int i;
+
+//  T() {0<=i+2, i<=3}
+
+
+   -2<=i&&i<=3?(void) 0:__assert_fail("-2<=i && i<= 3", "./bounded02.c", 9, __func__);
+
+//  T(i) {i==i#init+1}
+
+
+   i++;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+
+   -2<=i&&i<=3?(void) 0:__assert_fail("-2<=i && i<= 3", "./bounded02.c", 9, __func__);
+
+//  P() {0<=i+2, i<=3}
+
+
+   i++;
+
+//  P(i) {0<=i+1, i<=4}
+
+
+   return 0;
+}

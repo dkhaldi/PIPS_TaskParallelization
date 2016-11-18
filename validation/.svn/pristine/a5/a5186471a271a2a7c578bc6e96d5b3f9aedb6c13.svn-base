@@ -1,0 +1,11 @@
+The declaration order is different.
+
+it should not be the case.
+
+I leave it as it ease because it is legal for gcc. There are not type dependencies preventing the early definition of the structure.
+
+This specific case might be easy to handle with the prettyprint control list built by the parser and used by the prettyprinter (dummy_p).
+
+But I do not have a general solution for the time being.
+
+FI, 20 August 2015

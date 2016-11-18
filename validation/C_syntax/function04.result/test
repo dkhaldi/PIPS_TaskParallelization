@@ -1,0 +1,7 @@
+void function04(int size, int a[static size])
+{
+   int i;
+   for(i = 0; i <= size-1; i += 1)
+      a[i] = 0;
+}
+

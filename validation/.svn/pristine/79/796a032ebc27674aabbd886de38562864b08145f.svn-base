@@ -1,0 +1,84 @@
+
+int main()
+{
+   int a[10];
+   int *p;
+//             <    is written>: b c
+   int b = 0, c = 1;
+//             <    is read   >: b c
+   if (b==c)
+//             <    is written>: p
+      p = &a[0];
+   else
+//             <    is written>: p
+      p = &a[1];
+//             <    is read   >: p
+//             <    is written>: p
+   p = p+1;
+//             <    is read   >: p
+//             <    is written>: p
+   p = p+3;
+//             <    is read   >: p
+//             <    is written>: p
+   p = p-1;
+//             <    is read   >: p
+//             <    is written>: p
+   p = p-2;
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	06 --> 07 with conflicts
+		from <c-W-EXACT> to <c-R-EXACT>
+		from <b-W-EXACT> to <b-R-EXACT>
+	08 --> 11 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	08 --> 12 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	08 --> 13 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	08 --> 14 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	10 --> 11 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	10 --> 12 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	10 --> 13 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	10 --> 14 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	11 --> 12 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+		from <p-R-EXACT> to <p-W-EXACT>
+	11 --> 13 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+		from <p-R-EXACT> to <p-W-EXACT>
+	11 --> 14 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+		from <p-R-EXACT> to <p-W-EXACT>
+	12 --> 13 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+		from <p-R-EXACT> to <p-W-EXACT>
+	12 --> 14 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+		from <p-R-EXACT> to <p-W-EXACT>
+	13 --> 14 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+		from <p-R-EXACT> to <p-W-EXACT>
+
+****************** End of Dependence Graph ******************

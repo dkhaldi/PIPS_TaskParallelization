@@ -1,0 +1,16 @@
+#!/bin/sh
+
+PIPS_CHECK_FORTRAN="Y"
+export PIPS_CHECK_FORTRAN
+
+# test ! -d unknownrule.database || Delete unknownrule
+
+{
+  Init -d -f unknownrule.f unknownrule
+  Display -v -m unknownrule code
+  Perform -v -m unknownrule FOO
+  Build -v -m unknownrule BAR
+  Delete unknownrule
+} 2>&1 | grep 'safe_do_something'
+
+exit 0

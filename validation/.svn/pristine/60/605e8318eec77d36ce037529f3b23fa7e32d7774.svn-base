@@ -1,0 +1,223 @@
+
+PROPER  EFFECTS 
+
+int * foo()
+{
+//             <    is written>: cond i j
+   int cond = 0, i = 1, j = 2;
+   int *p, *q;
+   //PIPS generated variable
+   int *foo;
+//             <    is written>: p
+
+   p = &i;
+//             <    is written>: q
+   q = &j;
+//:   BEGIN UNSTRUCTURED
+//             <    is read   >: cond
+
+   if (cond) goto l99999;
+//             <    is read   >: q
+//             <    is written>: foo
+   foo = q;
+   return foo;
+l99999:   ;
+//             <    is read   >: p
+//             <    is written>: foo
+   foo = p;
+//             <    is read   >: foo
+   return foo;
+//:   END UNSTRUCTURED
+}
+int main()
+{
+   int *r;
+//             <    is written>: r
+   r = foo();
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+   
+   /* r's value is indeterminate and the dereferencement is forbidden
+      * by the standard.
+      */
+   return *r;
+}
+int *foo();
+
+int main();
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// foo -> undefined , EXACT
+
+int * foo()
+{
+
+// Points To: none
+
+   int cond = 0, i = 1, j = 2;
+
+// Points To: none
+
+   int *p, *q;
+   //PIPS generated variable
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   int *foo;
+
+// Points To:
+// foo -> undefined , EXACT
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+
+   p = &i;
+
+// Points To:
+// foo -> undefined , EXACT
+// p -> i , EXACT
+// q -> undefined , EXACT
+
+   q = &j;
+
+// Points To:
+// foo -> undefined , EXACT
+// p -> i , EXACT
+// q -> j , EXACT
+
+//:   BEGIN UNSTRUCTURED
+
+// Points To:
+// foo -> undefined , EXACT
+// p -> i , EXACT
+// q -> j , EXACT
+
+
+   if (cond) goto l99999;
+
+// Points To:
+// foo -> undefined , EXACT
+// p -> i , EXACT
+// q -> j , EXACT
+
+   foo = q;
+   return foo;
+l99999:   ;
+
+// Points To:
+// foo -> undefined , EXACT
+// p -> i , EXACT
+// q -> j , EXACT
+
+   foo = p;
+
+// Points To:
+// foo -> undefined , EXACT
+// p -> i , EXACT
+// q -> j , EXACT
+
+   return foo;
+//:   END UNSTRUCTURED
+}
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main()
+{
+
+// Points To: none
+
+   int *r;
+
+// Points To:
+// r -> undefined , EXACT
+
+   r = foo();
+
+// Points To:
+// r -> undefined , EXACT
+
+   
+   /* r's value is indeterminate and the dereferencement is forbidden
+      * by the standard.
+      */
+   return *r;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+
+// Points To: none
+
+int *foo();
+
+
+// Points To: none
+
+int main();
+
+PROPER  EFFECTS WITH POINTS TO
+
+int * foo()
+{
+//             <    is written>: cond i j
+   int cond = 0, i = 1, j = 2;
+   int *p, *q;
+   //PIPS generated variable
+   int *foo;
+//             <    is written>: p
+
+   p = &i;
+//             <    is written>: q
+   q = &j;
+//:   BEGIN UNSTRUCTURED
+//             <    is read   >: cond
+
+   if (cond) goto l99999;
+//             <    is read   >: q
+//             <    is written>: foo
+   foo = q;
+   return foo;
+l99999:   ;
+//             <    is read   >: p
+//             <    is written>: foo
+   foo = p;
+//             <    is read   >: foo
+   return foo;
+//:   END UNSTRUCTURED
+}
+int main()
+{
+   int *r;
+//             <    is written>: r
+   r = foo();
+//             <    is read   >: r
+   
+   /* r's value is indeterminate and the dereferencement is forbidden
+      * by the standard.
+      */
+   return *r;
+}
+int *foo();
+
+int main();
+
+ *********************** Use-Def Chains *********************
+
+	21 --> -1 with conflicts
+		from <r-W-EXACT> to <r-R-EXACT>
+
+****************** End of Dependence Graph ******************

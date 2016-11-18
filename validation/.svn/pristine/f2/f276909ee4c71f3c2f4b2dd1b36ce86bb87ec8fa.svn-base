@@ -1,0 +1,2 @@
+The error in the souce code is not recognized by the C parser.
+No big deal as the source code should be processed by an industrial compiler first (gcc, clang...).

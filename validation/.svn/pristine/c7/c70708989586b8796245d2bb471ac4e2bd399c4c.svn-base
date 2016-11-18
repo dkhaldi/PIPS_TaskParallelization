@@ -1,0 +1,17 @@
+setenv WS=qualifiers05
+
+setproperty CLOSE_WORKSPACE_ON_USER_ERROR TRUE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+delete $WS
+
+create $WS $WS.c
+
+display PRINTED_FILE[$WS!]
+display PRINTED_FILE[main]
+
+close
+
+delete $WS 
+
+quit

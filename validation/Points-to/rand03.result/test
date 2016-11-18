@@ -1,0 +1,59 @@
+
+Proper effects
+
+int main()
+{
+//             <    is written>: nx ny
+   int ny = 10, nx = 10;
+//             <    is read   >: nx ny
+   Cplfloat pt_in[ny][nx];
+//             <    is written>: Sigma2
+   float Sigma2 = 0.;
+//             <    is read   >: nx ny
+   Cplfloat pt_out[ny][nx];
+//             <may be read   >: pt_in[*][*].im pt_in[*][*].re 
+//                               _RANDOM_EFFECTS:GEN_SEED
+//             <may be written>: pt_out[*][*].im pt_out[*][*].re 
+//                               _RANDOM_EFFECTS:GEN_SEED
+//             <    is read   >: Sigma2 nx ny
+
+   AddNoise(ny, nx, pt_in, Sigma2, pt_out);
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int ny = 10, nx = 10;
+
+// Points To: none
+
+   Cplfloat pt_in[ny][nx];
+
+// Points To: none
+
+   float Sigma2 = 0.;
+
+// Points To: none
+
+   Cplfloat pt_out[ny][nx];
+
+// Points To: none
+
+
+   AddNoise(ny, nx, pt_in, Sigma2, pt_out);
+
+// Points To: none
+
+   return 0;
+}

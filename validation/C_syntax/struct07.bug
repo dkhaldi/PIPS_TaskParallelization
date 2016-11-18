@@ -1,0 +1,3 @@
+The double declaration of struct s is not detected anymore.
+
+No big deal. The code is not C compliant and should be filtered out by gcc or another C compiler.

@@ -1,0 +1,11 @@
+      SUBROUTINE ALTRET11(*, N)
+      INTEGER N
+      LOGICAL B
+90000 FORMAT(' @(#) altret11.f #_cp1s_# 4.1 01/18/99 ')                 0004
+
+      PRINT *, B                                                        0007
+
+      END
+#
+# compile both altret11
+#

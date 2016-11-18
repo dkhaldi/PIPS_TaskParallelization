@@ -1,0 +1,14 @@
+delete global_extern03
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create global_extern03 global_extern03.c
+
+display PARSED_PRINTED_FILE[global_extern03!]
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g global_extern03
+
+close
+# delete global_extern03
+quit

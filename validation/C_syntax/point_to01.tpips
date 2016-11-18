@@ -1,0 +1,24 @@
+delete point_to01
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create point_to01 point_to01.c
+
+activate C_PARSER
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty ABORT_ON_USER_ERROR TRUE
+
+echo
+echo parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[point_to01]
+quit
+echo
+echo printed file
+echo
+
+display PRINTED_FILE[point_to01]
+
+close
+#delete point_to01
+quit

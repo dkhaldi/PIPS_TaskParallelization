@@ -1,0 +1,12 @@
+
+Initial code
+
+int dereferencing09(int riri[10])
+{
+   return *((int *) riri+2);
+}
+int dereferencing09(int riri[10])
+{
+//             <    is read   >: riri[2]
+   return *((int *) riri+2);
+}

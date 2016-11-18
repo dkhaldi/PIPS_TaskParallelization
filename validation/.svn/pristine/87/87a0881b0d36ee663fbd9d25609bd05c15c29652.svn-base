@@ -1,0 +1,139 @@
+
+POINTS TO for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int ***p;                                                            /*0005*/
+
+// Points To:
+// p -> undefined , EXACT
+
+   int a, b, *aa, *bb, **aaa, **bbb;                                    /*0006*/
+
+// Points To:
+// aa -> undefined , EXACT
+// aaa -> undefined , EXACT
+// bb -> undefined , EXACT
+// bbb -> undefined , EXACT
+// p -> undefined , EXACT
+
+
+   a = 1;                                                               /*0008*/
+
+// Points To:
+// aa -> undefined , EXACT
+// aaa -> undefined , EXACT
+// bb -> undefined , EXACT
+// bbb -> undefined , EXACT
+// p -> undefined , EXACT
+
+   b = 2;                                                               /*0009*/
+
+// Points To:
+// aa -> undefined , EXACT
+// aaa -> undefined , EXACT
+// bb -> undefined , EXACT
+// bbb -> undefined , EXACT
+// p -> undefined , EXACT
+
+
+   aa = &a;                                                             /*0011*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> undefined , EXACT
+// bb -> undefined , EXACT
+// bbb -> undefined , EXACT
+// p -> undefined , EXACT
+
+   bb = &b;                                                             /*0012*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> undefined , EXACT
+// bb -> b , EXACT
+// bbb -> undefined , EXACT
+// p -> undefined , EXACT
+
+
+   aaa = &aa;                                                           /*0014*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> aa , EXACT
+// bb -> b , EXACT
+// bbb -> undefined , EXACT
+// p -> undefined , EXACT
+
+   bbb = &bb;                                                           /*0015*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> aa , EXACT
+// bb -> b , EXACT
+// bbb -> bb , EXACT
+// p -> undefined , EXACT
+
+
+   p = &bbb;                                                            /*0017*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> aa , EXACT
+// bb -> b , EXACT
+// bbb -> bb , EXACT
+// p -> bbb , EXACT
+
+
+   if (0==0)                                                            /*0019*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> aa , EXACT
+// bb -> b , EXACT
+// bbb -> bb , EXACT
+// p -> bbb , EXACT
+
+      p = &aaa;                                                         /*0020*/
+   else
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> aa , EXACT
+// bb -> b , EXACT
+// bbb -> bb , EXACT
+// p -> bbb , EXACT
+
+      **p = bb;                                                         /*0022*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> aa , EXACT
+// bb -> b , EXACT
+// bbb -> bb , EXACT
+// p -> aaa , MAY
+// p -> bbb , MAY
+
+
+   printf("%d\n", ***p);                                                /*0024*/
+
+// Points To:
+// aa -> a , EXACT
+// aaa -> aa , EXACT
+// bb -> b , EXACT
+// bbb -> bb , EXACT
+// p -> aaa , MAY
+// p -> bbb , MAY
+
+
+   return 0;                                                            /*0026*/
+}

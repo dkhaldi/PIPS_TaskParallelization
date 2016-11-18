@@ -1,0 +1,55 @@
+
+Points-to for "malloc07"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int malloc07(int argc, char *argv[])
+{
+
+// Points To: none
+
+   int *pi;
+
+// Points To:
+// pi -> undefined , EXACT
+
+   int *qi;
+
+// Points To:
+// pi -> undefined , EXACT
+// qi -> undefined , EXACT
+
+
+   pi = (int *) malloc(sizeof(int));
+
+// Points To:
+// pi -> *HEAP*_l_10 , MAY
+// qi -> undefined , EXACT
+
+   qi = pi;
+
+// Points To:
+// pi -> *HEAP*_l_10 , MAY
+// qi -> *HEAP*_l_10 , MAY
+
+   free(pi);
+
+// Points To:
+// pi -> undefined , EXACT
+// qi -> *HEAP*_l_10 , MAY
+// qi -> undefined , MAY
+
+
+   return 0;
+}
+
+Warnings and errors: Check that the dangling pointer is detected?
+
+In fact, this information cannot be known unless alias analysis
+is also performed
+
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[malloc07] (points_to_set_block_projection) Memory leak for bucket "malloc07:*HEAP*_l_10".

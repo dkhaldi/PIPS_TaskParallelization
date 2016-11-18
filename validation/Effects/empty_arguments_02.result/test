@@ -1,0 +1,33 @@
+#
+# compile initial empty_arguments_02
+#
+static int count;
+
+extern void foo();
+
+extern int main(void);
+//             <    is read   >: count
+//             <    is written>: count
+void foo()
+{
+//             <    is read   >: count
+//             <    is written>: count
+   count++;
+}
+//             <    is read   >: count
+//             <    is written>: count
+int main(void)
+{
+//             <    is read   >: count
+//             <    is written>: count
+   foo();
+//             <    is read   >: count
+//             <    is written>: count
+   foo(1);
+//             <    is read   >: count
+//             <    is written>: count
+   foo(1, 2);
+//             <    is read   >: count
+   return count;
+}
+

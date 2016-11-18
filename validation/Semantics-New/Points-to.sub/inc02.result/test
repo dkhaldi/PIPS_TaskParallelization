@@ -1,0 +1,208 @@
+
+Points-to inc02
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_1 , MAY
+
+
+// Points To OUT:
+// p -> _p_1 , EXACT
+
+void inc02(int *p)
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1 , MAY
+
+   *p = *p+1;
+
+// Points To:
+// p -> _p_1 , EXACT
+
+   return;
+}
+
+Proper effects with points-to for inc02
+
+void inc02(int *p)
+{
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+   *p = *p+1;
+   return;
+}
+
+Cumulated effects for inc02
+
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+void inc02(int *p)
+{
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+   *p = *p+1;
+   return;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 0;
+
+// Points To: none
+
+   inc02(&i);
+
+// Points To: none
+
+   inc02(&i);
+
+// Points To: none
+
+
+   return i;
+}
+
+Proper effects with points-to for "main"
+
+void inc02(int *p)
+{
+//             <    is read   >: _p_1 p
+//             <    is written>: _p_1
+   *p = *p+1;
+   return;
+}
+
+CUMULATED EFFECTS main
+
+int main()
+{
+//             <    is written>: i
+   int i = 0;
+//             <    is read   >: i
+//             <    is written>: i
+   inc02(&i);
+//             <    is read   >: i
+//             <    is written>: i
+   inc02(&i);
+//             <    is read   >: i
+
+   return i;
+}
+
+Transformers with point-to inc02
+
+
+//  T(_p_1) {_p_1==_p_1#init+1}
+
+void inc02(int *p)
+{
+
+//  T(_p_1) {_p_1==_p_1#init+1}
+
+   *p = *p+1;
+
+//  T() {}
+
+   return;
+}
+
+Transformers with point-to for "main"
+
+
+//  T(main) {main==2}
+
+int main()
+{
+
+//  T(i) {i==0}
+
+   int i = 0;
+
+//  T(i) {i==1, i#init==0}
+
+   inc02(&i);
+
+//  T(i) {i==2, i#init==1}
+
+   inc02(&i);
+
+//  T(main) {i==2, main==2}
+
+
+   return i;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i = 0;
+
+//  P(i) {i==0}
+
+   inc02(&i);
+
+//  P(i) {i==1}
+
+   inc02(&i);
+
+//  P(i) {i==2}
+
+
+   return i;
+}
+
+Preconditions for inc02
+
+
+//  P() {0<=_p_1, _p_1<=1}
+
+void inc02(int *p)
+{
+
+//  P() {0<=_p_1, _p_1<=1}
+
+   *p = *p+1;
+
+//  P(_p_1) {_p_1==_p_1#init+1, 1<=_p_1, _p_1<=2}
+
+   return;
+}
+
+Warnings
+
+TRANSFORMERS_INTER_FULL_WITH_POINTS_TO[inc02] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.
+TRANSFORMERS_INTER_FULL_WITH_POINTS_TO[inc02] (semantics_usable_points_to_reference_p) line 8 
+at statement:
+
+	*p = *p+1;
+
+
+The pointer "p" can point to NULL
+TRANSFORMERS_INTER_FULL_WITH_POINTS_TO[inc02] (semantics_usable_points_to_reference_p) line 8 
+at statement:
+
+	*p = *p+1;
+
+
+The pointer "p" can point to NULL

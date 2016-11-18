@@ -1,0 +1,6 @@
+  INTERPROCEDURAL_SUMMARY_PRECONDITION building   SUMMARY_PRECONDITION(test_intr)
+INTERPROCEDURAL_SUMMARY_PRECONDITION[test_intr] (update_precondition_with_call_site_preconditions) [user error] No summary precondition for module "TOP-LEVEL:main". The callgraph is probably broken because stubs have been generated.Please (re)compute the call graph, e.g. display CALLGRAPH_FILE.
+INTERPROCEDURAL_SUMMARY_PRECONDITION[test_intr] (set_debug_stack_pointer) debug level stack is set to 2
+INTERPROCEDURAL_SUMMARY_PRECONDITION[test_intr] (catch_user_error) pass has failed
+INTERPROCEDURAL_SUMMARY_PRECONDITION[test_intr] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build phase/rule PRECONDITIONS_INTER_FULL for module test_intr.

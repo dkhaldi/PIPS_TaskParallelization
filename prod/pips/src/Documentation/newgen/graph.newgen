@@ -1,0 +1,25 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+
+-- External domains
+-- ----------------
+external vertex_label ;
+external arc_label ;
+
+-- Domains
+-- -------
+graph = vertices:vertex* ;
+successor = arc_label x vertex ;
+vertex = vertex_label x successors:successor* ;

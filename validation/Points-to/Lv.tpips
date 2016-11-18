@@ -1,0 +1,38 @@
+# c99 version of Lv (PetaQCD Project)
+
+# Aliasing thru global variables
+
+delete Lv
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+# setenv PIPS_CPP_FLAGS " -I. -I../../include "
+
+create Lv Lv.c
+
+# For MPI functions:
+# MPI_Bcast
+# MPI_Reduce
+setproperty PREPROCESSOR_MISSING_FILE_HANDLING "generate"
+
+setproperty SEMANTICS_TRUST_ARRAY_DECLARATIONS TRUE
+#setproperty SEMANTICS_TRUST_ARRAY_REFERENCES TRUE
+
+display CALLGRAPH_FILE[Lv]
+
+activate PRINT_CODE_POINTS_TO_LIST
+
+echo
+echo Points-to for "cmat_vec_dble"
+echo
+
+display PRINTED_FILE[cmat_vec_dble]
+
+echo
+echo Points-to for "Lv"
+echo
+
+display PRINTED_FILE[Lv]
+
+close
+quit

@@ -1,0 +1,10 @@
+#/bin/sh
+
+tpips typedef13b.script
+
+echo
+echo Warnings
+echo
+
+cat typedef13b.database/Warnings
+rm -Rf typedef13b.database

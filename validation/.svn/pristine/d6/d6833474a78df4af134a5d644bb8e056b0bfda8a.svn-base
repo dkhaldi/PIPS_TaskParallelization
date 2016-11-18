@@ -1,0 +1,43 @@
+
+POINTS TO for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int a[10];
+
+// Points To: none
+
+   int *p = &a[0];
+
+// Points To:
+// p -> a[0] , EXACT
+
+
+   if (p++)
+
+// Points To:
+// p -> a[1] , EXACT
+
+      *p = 1;
+   else
+
+// Points To: unreachable
+
+      *p = 0;
+
+// Points To:
+// p -> a[1] , EXACT
+
+
+   return 0;
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (reference_condition_to_points_to) Dead code detected.

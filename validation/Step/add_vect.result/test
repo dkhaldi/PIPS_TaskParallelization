@@ -1,0 +1,256 @@
+###################### add_vect-STEP/add_vect.database/Src/add_vect.cpp_processed.c ######################
+#include "add_vect.cpp_processed.h"
+#include "step_api.h"
+void main_PAR_HYBRID(int a[100000], int b[100000], int c[100000], int d[100000], int i_0[1]);
+void main_PAR_HYBRID_FOR_HYBRID_1(int a[100000], int b[100000], int d[100000], int i_0[1]);
+void main_PAR_HYBRID_FOR_HYBRID(int a[100000], int b[100000], int c[100000], int i_0[1]);
+void main_PAR_HYBRID(int a[100000], int b[100000], int c[100000], int d[100000], int i_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int i;
+   //PIPS generated variable
+   int STEP_RR_b[1][STEP_INDEX_SLICE_UP], STEP_RR_c[1][STEP_INDEX_SLICE_UP], STEP_SR_a[1][STEP_INDEX_SLICE_UP], STEP_SR_d[1][STEP_INDEX_SLICE_UP];
+#pragma omp master
+   {
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_PARALLEL);
+      STEP_INIT_ARRAYREGIONS(a, STEP_INTEGER4, 1, 0, 100000-1);
+      STEP_INIT_ARRAYREGIONS(b, STEP_INTEGER4, 1, 0, 100000-1);
+      STEP_INIT_ARRAYREGIONS(c, STEP_INTEGER4, 1, 0, 100000-1);
+      STEP_INIT_ARRAYREGIONS(d, STEP_INTEGER4, 1, 0, 100000-1);
+      
+      //RECV REGIONS
+      ;
+      
+      //  <b[PHI1]-R-EXACT-{0<=PHI1, PHI1<=99999}>
+      
+      ;
+      STEP_RR_b[1-1][STEP_INDEX_SLICE_LOW-1] = 0;
+      STEP_RR_b[1-1][STEP_INDEX_SLICE_UP-1] = 99999;
+      
+      //  <c[PHI1]-R-EXACT-{0<=PHI1, PHI1<=99999}>
+      
+      ;
+      STEP_RR_c[1-1][STEP_INDEX_SLICE_LOW-1] = 0;
+      STEP_RR_c[1-1][STEP_INDEX_SLICE_UP-1] = 99999;
+      STEP_SET_RECVREGIONS(b, 1, (STEP_ARG *) STEP_RR_b);
+      STEP_SET_RECVREGIONS(c, 1, (STEP_ARG *) STEP_RR_c);
+      STEP_REGISTER_ALLTOALL_PARTIAL(b, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_REGISTER_ALLTOALL_PARTIAL(c, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      
+      //SEND REGIONS
+      ;
+      
+      //  <a[PHI1]-W-EXACT-{PHI1==1}>
+      
+      ;
+      STEP_SR_a[1-1][STEP_INDEX_SLICE_LOW-1] = 1;
+      STEP_SR_a[1-1][STEP_INDEX_SLICE_UP-1] = 1;
+      
+      //  <d[PHI1]-W-EXACT-{PHI1==5}>
+      
+      ;
+      STEP_SR_d[1-1][STEP_INDEX_SLICE_LOW-1] = 5;
+      STEP_SR_d[1-1][STEP_INDEX_SLICE_UP-1] = 5;
+      STEP_SET_SENDREGIONS(a, 1, (STEP_ARG *) STEP_SR_a);
+      STEP_SET_SENDREGIONS(d, 1, (STEP_ARG *) STEP_SR_d);
+   }
+#pragma omp barrier
+
+   
+   //BEGIN WORK
+   ;
+#pragma omp parallel
+   {
+      main_PAR_HYBRID_FOR_HYBRID(a, b, c, &i);
+      main_PAR_HYBRID_FOR_HYBRID_1(a, b, d, &i);
+   }
+   //END WORK
+   ;
+#pragma omp master
+   {
+      STEP_ALLTOALL_FULL(a, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_ALLTOALL_FULL(d, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      STEP_CONSTRUCT_END(STEP_PARALLEL);
+      *i_0 = i;
+   }
+#pragma omp barrier
+
+   ;
+}
+void main_PAR_HYBRID_FOR_HYBRID_1(int a[100000], int b[100000], int d[100000], int i_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int i;
+   //PIPS generated variable
+   int STEP_COMM_SIZE, STEP_i_LOW, STEP_i_UP, STEP_COMM_RANK, STEP_RR_a[STEP_MAX_NB_LOOPSLICES][1][STEP_INDEX_SLICE_UP], IDX, STEP_RR_b[STEP_MAX_NB_LOOPSLICES][1][STEP_INDEX_SLICE_UP], STEP_SR_d[STEP_MAX_NB_LOOPSLICES][1][STEP_INDEX_SLICE_UP];
+#pragma omp master
+   {
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_DO);
+      STEP_GET_COMMSIZE(&STEP_COMM_SIZE);
+      STEP_COMPUTE_LOOPSLICES(0, 99999, 1, STEP_COMM_SIZE);
+      
+      //RECV REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <a[PHI1]-R-EXACT-{PHI1<=99999, STEP_i_LOW<=PHI1, PHI1<=STEP_i_UP}>
+         
+         ;
+         STEP_RR_a[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_RR_a[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 99999, STEP_i_UP);
+         
+         //  <b[PHI1]-R-EXACT-{PHI1<=99999, STEP_i_LOW<=PHI1, PHI1<=STEP_i_UP}>
+         
+         ;
+         STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 99999, STEP_i_UP);
+      }
+      STEP_SET_RECVREGIONS(a, STEP_COMM_SIZE, (STEP_ARG *) STEP_RR_a);
+      STEP_SET_RECVREGIONS(b, STEP_COMM_SIZE, (STEP_ARG *) STEP_RR_b);
+      STEP_REGISTER_ALLTOALL_PARTIAL(a, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_REGISTER_ALLTOALL_PARTIAL(b, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      
+      //SEND REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <d[PHI1]-W-EXACT-{PHI1==5, STEP_i_LOW<=5, 5<=STEP_i_UP}>
+         
+         ;
+         if (-STEP_i_UP+5<=0&&STEP_i_LOW-5<=0) {
+            STEP_SR_d[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = 5;
+            STEP_SR_d[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = 5;
+         }
+         else {
+            // Inverted bounds correspond to empty regions
+            // Used when work concerns specific data ex: print A[5]
+            // In this case, only concerned process sends non empty regions
+            STEP_SR_d[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = 100000-1;
+            STEP_SR_d[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = 0;
+         }
+      }
+      STEP_SET_SENDREGIONS(d, STEP_COMM_SIZE, (STEP_ARG *) STEP_SR_d);
+   }
+#pragma omp barrier
+
+   
+   //BEGIN WORK
+   ;
+   STEP_GET_RANK(&STEP_COMM_RANK);
+   STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, &STEP_i_LOW, &STEP_i_UP);
+
+#pragma omp for
+   for(i = STEP_i_LOW; i <= STEP_i_UP; i += 1)
+      d[i] = a[i]+b[i];
+   //END WORK
+   ;
+#pragma omp master
+   {
+      STEP_REGISTER_ALLTOALL_PARTIAL(d, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      STEP_CONSTRUCT_END(STEP_DO);
+      *i_0 = i;
+   }
+#pragma omp barrier
+
+   ;
+}
+void main_PAR_HYBRID_FOR_HYBRID(int a[100000], int b[100000], int c[100000], int i_0[1])
+{
+   // Declared as a patch variable by Pass Outlining
+   int i;
+   //PIPS generated variable
+   int STEP_COMM_SIZE, STEP_i_LOW, STEP_i_UP, STEP_COMM_RANK, STEP_RR_b[STEP_MAX_NB_LOOPSLICES][1][STEP_INDEX_SLICE_UP], IDX, STEP_RR_c[STEP_MAX_NB_LOOPSLICES][1][STEP_INDEX_SLICE_UP], STEP_SR_a[STEP_MAX_NB_LOOPSLICES][1][STEP_INDEX_SLICE_UP];
+#pragma omp master
+   {
+      i = *i_0;
+      STEP_CONSTRUCT_BEGIN(STEP_DO);
+      STEP_GET_COMMSIZE(&STEP_COMM_SIZE);
+      STEP_COMPUTE_LOOPSLICES(0, 99999, 1, STEP_COMM_SIZE);
+      
+      //RECV REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <b[PHI1]-R-EXACT-{PHI1<=99999, STEP_i_LOW<=PHI1, PHI1<=STEP_i_UP}>
+         
+         ;
+         STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_RR_b[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 99999, STEP_i_UP);
+         
+         //  <c[PHI1]-R-EXACT-{PHI1<=99999, STEP_i_LOW<=PHI1, PHI1<=STEP_i_UP}>
+         
+         ;
+         STEP_RR_c[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_RR_c[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 99999, STEP_i_UP);
+      }
+      STEP_SET_RECVREGIONS(b, STEP_COMM_SIZE, (STEP_ARG *) STEP_RR_b);
+      STEP_SET_RECVREGIONS(c, STEP_COMM_SIZE, (STEP_ARG *) STEP_RR_c);
+      STEP_REGISTER_ALLTOALL_PARTIAL(b, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_REGISTER_ALLTOALL_PARTIAL(c, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      
+      //SEND REGIONS
+      ;
+      for(IDX = 1; IDX <= STEP_COMM_SIZE; IDX += 1) {
+         STEP_GET_LOOPBOUNDS(IDX-1, &STEP_i_LOW, &STEP_i_UP);
+         
+         //  <a[PHI1]-W-EXACT-{PHI1<=99999, STEP_i_LOW<=PHI1, PHI1<=STEP_i_UP}>
+         
+         ;
+         STEP_SR_a[IDX-1][1-1][STEP_INDEX_SLICE_LOW-1] = STEP_i_LOW;
+         STEP_SR_a[IDX-1][1-1][STEP_INDEX_SLICE_UP-1] = pips_min(2, 99999, STEP_i_UP);
+      }
+      STEP_SET_SENDREGIONS(a, STEP_COMM_SIZE, (STEP_ARG *) STEP_SR_a);
+   }
+#pragma omp barrier
+
+   
+   //BEGIN WORK
+   ;
+   STEP_GET_RANK(&STEP_COMM_RANK);
+   STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, &STEP_i_LOW, &STEP_i_UP);
+#pragma omp for
+   for(i = STEP_i_LOW; i <= STEP_i_UP; i += 1)
+      a[i] = b[i]+c[i];
+   //END WORK
+   ;
+#pragma omp master
+   {
+      STEP_REGISTER_ALLTOALL_PARTIAL(a, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT);
+      STEP_FLUSH();
+      STEP_CONSTRUCT_END(STEP_DO);
+      *i_0 = i;
+   }
+#pragma omp barrier
+
+   ;
+}
+int main(int argc, char **argv)
+{
+   STEP_INIT_C_ORDER();
+   {
+      int i;
+      int a[100000], b[100000], c[100000], d[100000];
+
+      for(i = 0; i <= 99999; i += 1) {
+         b[i] = 2;
+         c[i] = 5;
+      }
+      main_PAR_HYBRID(a, b, c, d, &i);
+
+      printf("a[%d] = %d\n", 1, a[1]);
+      printf("d[%d] = %d\n", 5, d[5]);
+      STEP_FINALIZE();
+
+      return 0;
+   }
+}

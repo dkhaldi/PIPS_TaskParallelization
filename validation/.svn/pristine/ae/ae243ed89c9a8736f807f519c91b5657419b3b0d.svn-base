@@ -1,0 +1,93 @@
+int main()
+{
+   unsigned int sn = 0;
+   unsigned int i = 0;
+   unsigned int n;
+
+   while (i<n) {
+      sn = sn+2;
+      i++;
+   }
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T(sn) {sn==0}
+
+   unsigned int sn = 0;
+
+//  T(i) {i==0}
+
+   unsigned int i = 0;
+
+//  T() {}
+
+   unsigned int n;
+
+//  T(i,sn) {2i+sn#init==2i#init+sn, i#init<=i, i+1<=n, i#init+1<=n}
+
+
+   while (i<n) {
+
+//  T(sn) {sn==sn#init+2}
+
+      sn = sn+2;
+
+//  T(i) {i==i#init+1}
+
+      i++;
+   }
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   unsigned int sn = 0;
+
+//  P(sn) {sn==0}
+
+   unsigned int i = 0;
+
+//  P(i,sn) {i==0, sn==0}
+
+   unsigned int n;
+
+//  P(i,sn) {i==0, sn==0}
+
+
+   while (i<n) {
+
+//  P(i,sn) {2i==sn, 0<=i, i+1<=n}
+
+      sn = sn+2;
+
+//  P(i,sn) {2i==sn-2, 0<=i, i+1<=n}
+
+      i++;
+   }
+
+//  P(i,sn) {2i==sn, 0<=i, n<=i}
+
+
+   return 0;
+}

@@ -1,0 +1,18 @@
+
+int main()
+{
+//             <    is written>: i
+   int i = 5;
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: i stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   printf("i=%d", i);
+}
+
+ *********************** Use-Def Chains *********************
+
+	05 --> 06 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+
+****************** End of Dependence Graph ******************

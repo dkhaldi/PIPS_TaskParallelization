@@ -1,0 +1,22 @@
+LINUX_x86_64_LL/sc_enveloppe.o: sc_enveloppe.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h $(ROOT)/include/sc.h $(ROOT)/include/sommet.h \
+ $(ROOT)/include/ray_dte.h $(ROOT)/include/sg.h polyedre.h \
+ $(ROOT)/include/polynome.h
+LINUX_x86_64_LL/chernikova_fixprec.o: chernikova_fixprec.c \
+ ../arithmetique/arith_fixprec.h ../arithmetique/assert.h \
+ ../arithmetique/arithmetique.h ../arithmetique/boolean.h \
+ ../arithmetique/arithmetic_errors.h chernikova.h $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h \
+ $(ROOT)/include/sc.h $(ROOT)/include/sommet.h $(ROOT)/include/ray_dte.h \
+ $(ROOT)/include/sg.h polyedre.h $(ROOT)/include/polynome.h
+LINUX_x86_64_LL/chernikova_mulprec.o: chernikova_mulprec.c
+LINUX_x86_64_LL/chernikova.o: chernikova.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/contrainte.h $(ROOT)/include/sc.h $(ROOT)/include/sommet.h \
+ $(ROOT)/include/ray_dte.h $(ROOT)/include/sg.h polyedre.h \
+ $(ROOT)/include/polynome.h

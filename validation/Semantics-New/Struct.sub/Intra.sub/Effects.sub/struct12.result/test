@@ -1,0 +1,104 @@
+int struct12()
+{
+//             <    is written>: p.N1
+   p.N1 = 1;
+//             <    is written>: p.N2
+   p.N2 = 2;
+//             <    is read   >: p.N1
+
+   foo(p.N1);
+//             <    is read   >: p.N2
+
+   foo(p.N2);
+
+   return 0;
+}
+//             <    is read   >: p.N1 p.N2
+//             <    is written>: p.N1 p.N2
+int struct12()
+{
+//             <    is written>: p.N1
+   p.N1 = 1;
+//             <    is written>: p.N2
+   p.N2 = 2;
+//             <    is read   >: p.N1
+
+   foo(p.N1);
+//             <    is read   >: p.N2
+
+   foo(p.N2);
+
+   return 0;
+}
+
+//  T(p[N1],p[N2],struct12) {p[N1]==1, p[N2]==2, struct12==0}
+
+int struct12()
+{
+
+//  T(p[N1]) {p[N1]==1}
+
+   p.N1 = 1;
+
+//  T(p[N2]) {p[N2]==2}
+
+   p.N2 = 2;
+
+//  T() {}
+
+
+   foo(p.N1);
+
+//  T() {}
+
+
+   foo(p.N2);
+
+//  T(struct12) {struct12==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int struct12()
+{
+
+//  P() {}
+
+   p.N1 = 1;
+
+//  P(p[N1]) {p[N1]==1}
+
+   p.N2 = 2;
+
+//  P(p[N1],p[N2]) {p[N1]==1, p[N2]==2}
+
+
+   foo(p.N1);
+
+//  P(p[N1],p[N2]) {p[N1]==1, p[N2]==2}
+
+
+   foo(p.N2);
+
+//  P(p[N1],p[N2]) {p[N1]==1, p[N2]==2}
+
+
+   return 0;
+}
+
+//  P() {1<=i, i<=2}
+
+void foo(int i)
+{
+
+//  P() {1<=i, i<=2}
+
+   int j = i;
+
+//  P(j) {i==j, 1<=i, i<=2}
+
+   return;
+}

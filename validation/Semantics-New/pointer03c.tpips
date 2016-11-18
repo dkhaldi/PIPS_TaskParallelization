@@ -1,0 +1,82 @@
+delete pointer03c
+
+create pointer03c pointer03c.c
+
+#
+# Let's try again with points-to information
+#
+activate FAST_INTERPROCEDURAL_POINTS_TO_ANALYSIS
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+
+setproperty ALIASING_ACROSS_TYPES FALSE
+# To avoid creating an array when not necessary
+setproperty POINTS_TO_STRICT_POINTER_TYPES TRUE
+
+echo
+echo Proper effects for "foo" with points-to information
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[foo]
+
+echo
+echo Points-to for "foo" 
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[foo]
+
+echo
+echo Points-to for "main" 
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[main]
+
+echo
+echo Proper effects for "main" with points-to information
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Cumulated effects for "foo" with points-to information
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[foo]
+
+echo
+echo Cumulated effects for "main" with points-to information
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Transformers for "foo" with points-to information
+echo
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[foo]
+
+echo
+echo Transformers for "main" with points-to information
+echo
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[main]
+
+echo
+echo Preconditions for "main" with points-to information
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+close
+delete pointer03c
+quit

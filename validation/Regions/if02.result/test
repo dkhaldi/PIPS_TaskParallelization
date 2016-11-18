@@ -1,0 +1,837 @@
+
+Init Code
+
+int main()
+{
+   int x, y, n, m, a[10];                                               /*0007*/
+
+   a[0] = 0;                                                            /*0009*/
+   a[1] = 1;                                                            /*0010*/
+   x = -1;                                                              /*0011*/
+   n = 3;                                                               /*0012*/
+   m = 2;                                                               /*0013*/
+
+   if (n<m)                                                             /*0015*/
+      x = a[0];                                                         /*0016*/
+   else
+      x = a[1];                                                         /*0019*/
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+
+   if (x==a[0])                                                         /*0024*/
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+      y = 42;                                                           /*0028*/
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+
+   return y;                                                            /*0034*/
+}
+
+PROPER effect for if02
+
+int main()
+{
+//             <    is declared>: a m n x y
+   int x, y, n, m, a[10];                                               /*0007*/
+//             <    is written>: a[0]
+//             <    is referenced>: a
+
+   a[0] = 0;                                                            /*0009*/
+//             <    is written>: a[1]
+//             <    is referenced>: a
+   a[1] = 1;                                                            /*0010*/
+//             <    is written>: x
+//             <    is referenced>: x
+   x = -1;                                                              /*0011*/
+//             <    is written>: n
+//             <    is referenced>: n
+   n = 3;                                                               /*0012*/
+//             <    is written>: m
+//             <    is referenced>: m
+   m = 2;                                                               /*0013*/
+//             <    is read   >: m n
+//             <    is referenced>: m n
+
+   if (n<m)                                                             /*0015*/
+//             <    is read   >: a[0]
+//             <    is written>: x
+//             <    is referenced>: a x
+      x = a[0];                                                         /*0016*/
+   else
+//             <    is read   >: a[1]
+//             <    is written>: x
+//             <    is referenced>: a x
+      x = a[1];                                                         /*0019*/
+//             <    is read   >: x
+//             <    is written>: a[2]
+//             <    is referenced>: a x
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+//             <    is read   >: a[0] x
+//             <    is referenced>: a x
+
+   if (x==a[0])                                                         /*0024*/
+//             <    is written>: y
+//             <    is referenced>: y
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+//             <    is written>: y
+//             <    is referenced>: y
+      y = 42;                                                           /*0028*/
+//             <    is read   >: y
+//             <    is written>: a[2]
+//             <    is referenced>: a y
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+//             <    is read   >: y
+//             <    is referenced>: y
+
+   return y;                                                            /*0034*/
+}
+
+CUMULATED effect for if02
+
+int main()
+{
+//             <    is declared>: a m n x y
+   int x, y, n, m, a[10];                                               /*0007*/
+//             <    is written>: a[0]
+//             <    is referenced>: a
+
+   a[0] = 0;                                                            /*0009*/
+//             <    is written>: a[1]
+//             <    is referenced>: a
+   a[1] = 1;                                                            /*0010*/
+//             <    is written>: x
+//             <    is referenced>: x
+   x = -1;                                                              /*0011*/
+//             <    is written>: n
+//             <    is referenced>: n
+   n = 3;                                                               /*0012*/
+//             <    is written>: m
+//             <    is referenced>: m
+   m = 2;                                                               /*0013*/
+//             <may be read   >: a[*]
+//             <    is read   >: m n
+//             <    is written>: x
+//             <    is referenced>: a m n x
+
+   if (n<m)                                                             /*0015*/
+//             <    is read   >: a[0]
+//             <    is written>: x
+//             <    is referenced>: a x
+      x = a[0];                                                         /*0016*/
+   else
+//             <    is read   >: a[1]
+//             <    is written>: x
+//             <    is referenced>: a x
+      x = a[1];                                                         /*0019*/
+//             <    is read   >: x
+//             <    is written>: a[2]
+//             <    is referenced>: a x
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+//             <may be read   >: a[*]
+//             <may be written>: y
+//             <may be referenced>: y
+//             <    is read   >: x
+//             <    is referenced>: a x
+
+   if (x==a[0])                                                         /*0024*/
+//             <    is written>: y
+//             <    is referenced>: y
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+//             <    is written>: y
+//             <    is referenced>: y
+      y = 42;                                                           /*0028*/
+//             <    is read   >: y
+//             <    is written>: a[2]
+//             <    is referenced>: a y
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+//             <    is read   >: y
+//             <    is referenced>: y
+
+   return y;                                                            /*0034*/
+}
+
+IN effect for if02
+
+int main()
+{
+   int x, y, n, m, a[10];                                               /*0007*/
+
+   a[0] = 0;                                                            /*0009*/
+   a[1] = 1;                                                            /*0010*/
+   x = -1;                                                              /*0011*/
+   n = 3;                                                               /*0012*/
+   m = 2;                                                               /*0013*/
+//             <may be imported>: a[*]
+//             <    is imported>: m n
+
+   if (n<m)                                                             /*0015*/
+//             <    is imported>: a[0]
+      x = a[0];                                                         /*0016*/
+   else
+//             <    is imported>: a[1]
+      x = a[1];                                                         /*0019*/
+//             <    is imported>: x
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+//             <may be imported>: a[*]
+//             <    is imported>: x
+
+   if (x==a[0])                                                         /*0024*/
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+      y = 42;                                                           /*0028*/
+//             <    is imported>: y
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+//             <    is imported>: y
+
+   return y;                                                            /*0034*/
+}
+
+OUT effect for if02
+
+int main()
+{
+   int x, y, n, m, a[10];                                               /*0007*/
+//             <    is exported>: a[0]
+
+   a[0] = 0;                                                            /*0009*/
+//             <    is exported>: a[1]
+   a[1] = 1;                                                            /*0010*/
+   x = -1;                                                              /*0011*/
+//             <    is exported>: n
+   n = 3;                                                               /*0012*/
+//             <    is exported>: m
+   m = 2;                                                               /*0013*/
+//             <    is exported>: x
+
+   if (n<m)                                                             /*0015*/
+//             <    is exported>: x
+      x = a[0];                                                         /*0016*/
+   else
+//             <    is exported>: x
+      x = a[1];                                                         /*0019*/
+//             <    is exported>: a[2]
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+//             <may be exported>: y
+
+   if (x==a[0])                                                         /*0024*/
+//             <may be exported>: y
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+//             <may be exported>: y
+      y = 42;                                                           /*0028*/
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+
+   return y;                                                            /*0034*/
+}
+
+REGIONS for if02
+
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+//  <m-WE-EXACT-{}>
+//  <n-WE-EXACT-{}>
+//  <x-WE-EXACT-{}>
+//  <y-WE-EXACT-{}>
+
+   int x, y, n, m, a[10];                                               /*0007*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==0}>
+
+
+   a[0] = 0;                                                            /*0009*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==1}>
+
+   a[1] = 1;                                                            /*0010*/
+
+//  <x-RE-EXACT-{}>
+//  <x-W-EXACT-{}>
+
+   x = -1;                                                              /*0011*/
+
+//  <n-RE-EXACT-{}>
+//  <n-W-EXACT-{}>
+
+   n = 3;                                                               /*0012*/
+
+//  <m-RE-EXACT-{}>
+//  <m-W-EXACT-{}>
+
+   m = 2;                                                               /*0013*/
+
+//  <m-RE-EXACT-{}>
+//  <m-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+
+   if (n<m)                                                             /*0015*/
+      x = a[0];                                                         /*0016*/
+   else
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==1, m==2, n==3, x==-1}>
+//  <x-RE-EXACT-{}>
+//  <x-W-EXACT-{}>
+
+      x = a[1];                                                         /*0019*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==2, m==2, n==3}>
+//  <x-RE-EXACT-{}>
+//  <x-R-EXACT-{}>
+
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==0, m==2, n==3}>
+//  <x-RE-EXACT-{}>
+//  <x-R-EXACT-{}>
+
+
+   if (x==a[0])                                                         /*0024*/
+
+//  <y-RE-EXACT-{}>
+//  <y-W-EXACT-{}>
+
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+
+//  <y-RE-EXACT-{}>
+//  <y-W-EXACT-{}>
+
+      y = 42;                                                           /*0028*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==2, m==2, n==3}>
+//  <y-RE-EXACT-{}>
+//  <y-R-EXACT-{}>
+
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+
+//  <y-RE-EXACT-{}>
+//  <y-R-EXACT-{}>
+
+
+   return y;                                                            /*0034*/
+}
+
+REGIONS for if02
+
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+//  <m-WE-EXACT-{}>
+//  <n-WE-EXACT-{}>
+//  <x-WE-EXACT-{}>
+//  <y-WE-EXACT-{}>
+
+   int x, y, n, m, a[10];                                               /*0007*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==0}>
+
+
+   a[0] = 0;                                                            /*0009*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==1}>
+
+   a[1] = 1;                                                            /*0010*/
+
+//  <x-RE-EXACT-{}>
+//  <x-W-EXACT-{}>
+
+   x = -1;                                                              /*0011*/
+
+//  <n-RE-EXACT-{}>
+//  <n-W-EXACT-{}>
+
+   n = 3;                                                               /*0012*/
+
+//  <m-RE-EXACT-{}>
+//  <m-W-EXACT-{}>
+
+   m = 2;                                                               /*0013*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==1, m==2, n==3, x==-1}>
+//  <m-R-EXACT-{}>
+//  <m-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <x-RE-EXACT-{}>
+//  <x-W-EXACT-{}>
+
+
+   if (n<m)                                                             /*0015*/
+      x = a[0];                                                         /*0016*/
+   else
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==1, m==2, n==3, x==-1}>
+//  <x-RE-EXACT-{}>
+//  <x-W-EXACT-{}>
+
+      x = a[1];                                                         /*0019*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==2, m==2, n==3}>
+//  <x-R-EXACT-{}>
+//  <x-RE-EXACT-{}>
+
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+
+//  <a-RE-MAY-{}>
+//  <a[PHI1]-R-MAY-{0<=PHI1, PHI1<=1, m==2, n==3}>
+//  <x-R-EXACT-{}>
+//  <x-RE-MAY-{}>
+//  <y-RE-EXACT-{}>
+//  <y-W-MAY-{}>
+
+
+   if (x==a[0])                                                         /*0024*/
+
+//  <y-RE-EXACT-{}>
+//  <y-W-EXACT-{}>
+
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+
+//  <y-RE-EXACT-{}>
+//  <y-W-EXACT-{}>
+
+      y = 42;                                                           /*0028*/
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==2, m==2, n==3}>
+//  <y-R-EXACT-{}>
+//  <y-RE-EXACT-{}>
+
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+
+//  <y-R-EXACT-{}>
+//  <y-RE-EXACT-{}>
+
+
+   return y;                                                            /*0034*/
+}
+
+IN regions for if02
+
+int main()
+{
+   int x, y, n, m, a[10];                                               /*0007*/
+
+   a[0] = 0;                                                            /*0009*/
+   a[1] = 1;                                                            /*0010*/
+   x = -1;                                                              /*0011*/
+   n = 3;                                                               /*0012*/
+   m = 2;                                                               /*0013*/
+
+//  <a[PHI1]-IN-MAY-{PHI1==1, m==2, n==3, x==-1}>
+//  <m-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+
+   if (n<m)                                                             /*0015*/
+      x = a[0];                                                         /*0016*/
+   else
+
+//  <a[PHI1]-IN-EXACT-{PHI1==1, m==2, n==3, x==-1}>
+
+      x = a[1];                                                         /*0019*/
+
+//  <x-IN-EXACT-{}>
+
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+
+//  <a[PHI1]-IN-MAY-{0<=PHI1, PHI1<=1, m==2, n==3}>
+//  <x-IN-EXACT-{}>
+
+
+   if (x==a[0])                                                         /*0024*/
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+      y = 42;                                                           /*0028*/
+
+//  <y-IN-EXACT-{}>
+
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+
+//  <y-IN-EXACT-{}>
+
+
+   return y;                                                            /*0034*/
+}
+
+OUT regions for if02
+
+int main()
+{
+   int x, y, n, m, a[10];                                               /*0007*/
+
+//  <a[PHI1]-OUT-MAY-{PHI1==0}>
+
+
+   a[0] = 0;                                                            /*0009*/
+
+//  <a[PHI1]-OUT-MAY-{PHI1==1}>
+
+   a[1] = 1;                                                            /*0010*/
+   x = -1;                                                              /*0011*/
+
+//  <n-OUT-EXACT-{}>
+
+   n = 3;                                                               /*0012*/
+
+//  <m-OUT-EXACT-{}>
+
+   m = 2;                                                               /*0013*/
+
+//  <x-OUT-EXACT-{}>
+
+
+   if (n<m)                                                             /*0015*/
+      x = a[0];                                                         /*0016*/
+   else
+
+//  <x-OUT-EXACT-{}>
+
+      x = a[1];                                                         /*0019*/
+   // only to know if x is know
+   a[2] = x;                                                            /*0022*/
+
+//  <y-OUT-MAY-{}>
+
+
+   if (x==a[0])                                                         /*0024*/
+
+//  <y-OUT-MAY-{}>
+
+      y = -1;                                                           /*0025*/
+   else if (x==a[1])                                                    /*0024*/
+
+//  <y-OUT-MAY-{}>
+
+      y = 42;                                                           /*0028*/
+   
+   // only to know if y is know
+   a[2] = y;                                                            /*0032*/
+
+   return y;                                                            /*0034*/
+}
+
+Atomic Chains for if02
+
+
+ *********************** Use-Def Chains *********************
+
+	07 --> 09 with conflicts
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 10 with conflicts
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 11 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+	07 --> 12 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	07 --> 13 with conflicts
+		from <m-WE-EXACT> to <m-RE-EXACT>
+	07 --> 15 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+		from <m-WE-EXACT> to <m-RE-EXACT>
+	07 --> 16 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 19 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 22 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 24 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 25 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	07 --> 27 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 28 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	07 --> 32 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 34 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	09 --> 16 with conflicts
+		from <a[0]-W-EXACT> to <a[0]-R-EXACT>
+	09 --> 24 with conflicts
+		from <a[0]-W-EXACT> to <a[0]-R-EXACT>
+	10 --> 19 with conflicts
+		from <a[1]-W-EXACT> to <a[1]-R-EXACT>
+	10 --> 27 with conflicts
+		from <a[1]-W-EXACT> to <a[1]-R-EXACT>
+	11 --> 16 with conflicts
+		from <x-W-EXACT> to <x-W-EXACT>
+	11 --> 19 with conflicts
+		from <x-W-EXACT> to <x-W-EXACT>
+	12 --> 15 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+	13 --> 15 with conflicts
+		from <m-W-EXACT> to <m-R-EXACT>
+	16 --> 22 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	16 --> 24 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	16 --> 27 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	19 --> 22 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	19 --> 24 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	19 --> 27 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	22 --> 32 with conflicts
+		from <a[2]-W-EXACT> to <a[2]-W-EXACT>
+	25 --> 32 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	25 --> 34 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	28 --> 32 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	28 --> 34 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+
+****************** End of Dependence Graph ******************
+
+Region Chains for if02
+
+
+ *********************** Use-Def Chains *********************
+
+	07 --> 09 with conflicts
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 10 with conflicts
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 11 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+	07 --> 12 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	07 --> 13 with conflicts
+		from <m-WE-EXACT> to <m-RE-EXACT>
+	07 --> 15 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+		from <m-WE-EXACT> to <m-RE-EXACT>
+	07 --> 19 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 22 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 24 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 25 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	07 --> 27 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 28 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	07 --> 32 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 34 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	09 --> 10 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	09 --> 19 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	09 --> 22 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	09 --> 24 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	09 --> 27 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	09 --> 32 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	10 --> 19 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	10 --> 22 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	10 --> 24 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	10 --> 27 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	10 --> 32 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	11 --> 19 with conflicts
+		from <x-W-EXACT> to <x-W-EXACT>
+	11 --> 22 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	11 --> 24 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	11 --> 27 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	12 --> 15 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+	13 --> 15 with conflicts
+		from <m-W-EXACT> to <m-R-EXACT>
+	19 --> 22 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+		from <a[PHI1]-R-EXACT> to <a[PHI1]-W-EXACT>
+	19 --> 24 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	19 --> 27 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	19 --> 32 with conflicts
+		from <a[PHI1]-R-EXACT> to <a[PHI1]-W-EXACT>
+	22 --> 24 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	22 --> 27 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	22 --> 32 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	25 --> 32 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	25 --> 34 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	28 --> 32 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	28 --> 34 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+
+****************** End of Dependence Graph ******************
+
+IN/OUT Region Chains for if02
+
+
+ *********************** Use-Def Chains *********************
+
+	07 --> 09 with conflicts
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 10 with conflicts
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 11 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+	07 --> 12 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+	07 --> 13 with conflicts
+		from <m-WE-EXACT> to <m-RE-EXACT>
+	07 --> 15 with conflicts
+		from <n-WE-EXACT> to <n-RE-EXACT>
+		from <m-WE-EXACT> to <m-RE-EXACT>
+	07 --> 19 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 22 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 24 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 25 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	07 --> 27 with conflicts
+		from <x-WE-EXACT> to <x-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 28 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	07 --> 32 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+		from <a-WE-EXACT> to <a-RE-EXACT>
+	07 --> 34 with conflicts
+		from <y-WE-EXACT> to <y-RE-EXACT>
+	09 --> 10 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	09 --> 19 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	09 --> 22 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	09 --> 24 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	09 --> 27 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	09 --> 32 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	10 --> 19 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	10 --> 22 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	10 --> 24 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	10 --> 27 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	10 --> 32 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	11 --> 19 with conflicts
+		from <x-W-EXACT> to <x-W-EXACT>
+	11 --> 22 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	11 --> 24 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	11 --> 27 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	12 --> 15 with conflicts
+		from <n-W-EXACT> to <n-R-EXACT>
+	13 --> 15 with conflicts
+		from <m-W-EXACT> to <m-R-EXACT>
+	19 --> 22 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+		from <a[PHI1]-R-EXACT> to <a[PHI1]-W-EXACT>
+	19 --> 24 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	19 --> 27 with conflicts
+		from <x-W-EXACT> to <x-R-EXACT>
+	19 --> 32 with conflicts
+		from <a[PHI1]-R-EXACT> to <a[PHI1]-W-EXACT>
+	22 --> 24 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	22 --> 27 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-R-EXACT>
+	22 --> 32 with conflicts
+		from <a[PHI1]-W-EXACT> to <a[PHI1]-W-EXACT>
+	25 --> 32 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	25 --> 34 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	28 --> 32 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+	28 --> 34 with conflicts
+		from <y-W-EXACT> to <y-R-EXACT>
+
+****************** End of Dependence Graph ******************
+
+Warnings
+

@@ -1,0 +1,233 @@
+int read_config_file()
+{
+//             <    is written>: file
+   FILE *file = (void *) 0;
+//             <    is read   >: file
+
+   if (file==(void *) 0)
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+      file = fopen("foo.txt", "r");
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is written>: p.N1 r
+   int r = fscanf(file, "%d", &p.N1);
+//             <    is written>: p.N1
+
+   p.N1 = 1;
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N1
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct08.c", 31, __func__);
+//             <    is written>: p.N2
+   p.N2 = 6;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is written>: p.N2 r
+   r = fscanf(file, "%d", &p.N2);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N2
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct08.c", 36, __func__);
+
+   return 0;
+}
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: p.N1 p.N2
+//             <    is written>: p.N1 p.N2
+int read_config_file()
+{
+//             <    is written>: file
+   FILE *file = (void *) 0;
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: file __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+
+   if (file==(void *) 0)
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+      file = fopen("foo.txt", "r");
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is written>: p.N1 r
+   int r = fscanf(file, "%d", &p.N1);
+//             <    is written>: p.N1
+
+   p.N1 = 1;
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N1
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct08.c", 31, __func__);
+//             <    is written>: p.N2
+   p.N2 = 6;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+//             <    is written>: p.N2 r
+   r = fscanf(file, "%d", &p.N2);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N2
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct08.c", 36, __func__);
+
+   return 0;
+}
+
+//  T(p[N1],p[N2],read_config_file) {p[N1]==1, read_config_file==0,
+//    p[N2]<=193}
+
+int read_config_file()
+{
+
+//  T() {}
+
+   FILE *file = (void *) 0;
+
+//  T() {}
+
+
+   if (file==(void *) 0)
+
+//  T() {}
+
+      file = fopen("foo.txt", "r");
+
+
+//  T(p[N1],r) {}
+
+   int r = fscanf(file, "%d", &p.N1);
+
+//  T(p[N1]) {p[N1]==1}
+
+
+   p.N1 = 1;
+
+//  T(read_config_file) {}
+
+   if (r==-1)
+
+//  T(read_config_file) {read_config_file==-1}
+
+      return -1;
+
+//  T() {p[N1]<=256}
+
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct08.c", 31, __func__);
+
+//  T(p[N2]) {p[N2]==6}
+
+   p.N2 = 6;
+
+//  T(p[N2],r) {}
+
+   r = fscanf(file, "%d", &p.N2);
+
+//  T(read_config_file) {}
+
+   if (r==-1)
+
+//  T(read_config_file) {read_config_file==-1}
+
+      return -1;
+
+//  T() {p[N2]<=193}
+
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct08.c", 36, __func__);
+
+//  T(read_config_file) {read_config_file==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int read_config_file()
+{
+
+//  P() {}
+
+   FILE *file = (void *) 0;
+
+//  P() {}
+
+
+   if (file==(void *) 0)
+
+//  P() {}
+
+      file = fopen("foo.txt", "r");
+
+
+//  P() {}
+
+   int r = fscanf(file, "%d", &p.N1);
+
+//  P(p[N1],r) {}
+
+
+   p.N1 = 1;
+
+//  P(p[N1],r) {p[N1]==1}
+
+   if (r==-1)
+
+//  P(p[N1],r) {p[N1]==1, r==-1}
+
+      return -1;
+
+//  P(p[N1],r,read_config_file) {p[N1]==1}
+
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct08.c", 31, __func__);
+
+//  P(p[N1],r,read_config_file) {p[N1]==1}
+
+   p.N2 = 6;
+
+//  P(p[N1],p[N2],r,read_config_file) {p[N1]==1, p[N2]==6}
+
+   r = fscanf(file, "%d", &p.N2);
+
+//  P(p[N1],p[N2],r,read_config_file) {p[N1]==1}
+
+   if (r==-1)
+
+//  P(p[N1],p[N2],r,read_config_file) {p[N1]==1, r==-1}
+
+      return -1;
+
+//  P(p[N1],p[N2],r,read_config_file) {p[N1]==1}
+
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct08.c", 36, __func__);
+
+//  P(p[N1],p[N2],r,read_config_file) {p[N1]==1, p[N2]<=193}
+
+
+   return 0;
+}

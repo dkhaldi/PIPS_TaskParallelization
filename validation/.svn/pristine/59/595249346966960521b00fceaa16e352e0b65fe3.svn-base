@@ -1,0 +1,3 @@
+### stderr
+PARSER[BUGHEXA] (syn_lex) illegal character "" (hexadecimal 0x02)
+PARSER[BUGHEXA] (Lexical Analysis) [user error] Parser error between lines 3 and 3

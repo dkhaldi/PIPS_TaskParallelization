@@ -1,0 +1,6 @@
+void foo()
+{
+  printf("%d\n",i);
+}
+int i = 1;
+extern void foo();

@@ -1,0 +1,105 @@
+
+POINTS TO for inter05
+
+
+// Points To IN:
+// _ppp_1[0] -> *NULL* , MAY
+// _ppp_1[0] -> _ppp_1_1[0][0] , MAY
+// _qqq_2[0] -> *NULL* , MAY
+// _qqq_2[0] -> _qqq_2_2[0][0] , MAY
+// _qqq_2_2[0][0] -> *NULL* , MAY
+// _qqq_2_2[0][0] -> _qqq_2_2_2[0][0][0] , MAY
+// ppp -> *NULL* , MAY
+// ppp -> _ppp_1[0] , MAY
+// qqq -> *NULL* , MAY
+// qqq -> _qqq_2[0] , MAY
+
+
+// Points To OUT:
+// _ppp_1[0] -> _ppp_1_1[0][0] , EXACT
+// _ppp_1_1[0][0] -> *NULL* , MAY
+// _ppp_1_1[0][0] -> _qqq_2_2_2[0][0][0] , MAY
+// _qqq_2[0] -> _qqq_2_2[0][0] , EXACT
+// _qqq_2_2[0][0] -> *NULL* , MAY
+// _qqq_2_2[0][0] -> _qqq_2_2_2[0][0][0] , MAY
+// ppp -> _ppp_1[0] , EXACT
+// qqq -> _qqq_2[0] , EXACT
+
+void bar(int ***ppp, int ***qqq)
+{
+
+// Points To:
+// _ppp_1[0] -> *NULL* , MAY
+// _ppp_1[0] -> _ppp_1_1[0][0] , MAY
+// _qqq_2[0] -> *NULL* , MAY
+// _qqq_2[0] -> _qqq_2_2[0][0] , MAY
+// _qqq_2_2[0][0] -> *NULL* , MAY
+// _qqq_2_2[0][0] -> _qqq_2_2_2[0][0][0] , MAY
+// ppp -> *NULL* , MAY
+// ppp -> _ppp_1[0] , MAY
+// qqq -> *NULL* , MAY
+// qqq -> _qqq_2[0] , MAY
+
+   **ppp = **qqq;
+
+// Points To:
+// _ppp_1[0] -> _ppp_1_1[0][0] , EXACT
+// _ppp_1_1[0][0] -> *NULL* , MAY
+// _ppp_1_1[0][0] -> _qqq_2_2_2[0][0][0] , MAY
+// _qqq_2[0] -> _qqq_2_2[0][0] , EXACT
+// _qqq_2_2[0][0] -> *NULL* , MAY
+// _qqq_2_2[0][0] -> _qqq_2_2_2[0][0][0] , MAY
+// ppp -> _ppp_1[0] , EXACT
+// qqq -> _qqq_2[0] , EXACT
+
+   return;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void inter05()
+{
+
+// Points To: none
+
+   int i = 0, j = 1, *p = &i, *q = &j, **pp = &p, **qq = &q, ***ppp = &pp, ***qqq = &qq;
+
+// Points To:
+// p -> i , EXACT
+// pp -> p , EXACT
+// ppp -> pp , EXACT
+// q -> j , EXACT
+// qq -> q , EXACT
+// qqq -> qq , EXACT
+
+   int k = 2, *r = &k;
+
+// Points To:
+// p -> i , EXACT
+// pp -> p , EXACT
+// ppp -> pp , EXACT
+// q -> j , EXACT
+// qq -> q , EXACT
+// qqq -> qq , EXACT
+// r -> k , EXACT
+
+   bar(ppp, qqq);
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> j , MAY
+// pp -> p , EXACT
+// ppp -> pp , EXACT
+// q -> j , EXACT
+// qq -> q , EXACT
+// qqq -> qq , EXACT
+// r -> k , EXACT
+
+   return;
+}
+C_PARSER[inter05] (simplify_C_expression) Variable "i" is probably used before it is defined
+C_PARSER[inter05] (simplify_C_expression) Variable "j" is probably used before it is defined
+C_PARSER[inter05] (simplify_C_expression) Variable "k" is probably used before it is defined

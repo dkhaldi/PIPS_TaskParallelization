@@ -1,0 +1,71 @@
+setenv WS=array09
+
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setenv PIPS_CPP_FLAGS=" -I src/include "
+
+create $WS $WS.c
+
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT FALSE
+
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+setproperty ABSTRACT_HEAP_LOCATIONS "flow-sensitive"
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+setproperty CONSTANT_PATH_EFFECTS TRUE
+setproperty ALIASING_ACROSS_IO_STREAMS FALSE
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+setproperty POINTS_TO_STRICT_POINTER_TYPES FALSE
+activate PRECONDITIONS_INTER_FULL_WITH_POINTS_TO
+activate INTERPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+activate MUST_REGIONS_WITH_POINTS_TO
+
+activate REGION_CHAINS
+activate RICE_REGIONS_DEPENDENCE_GRAPH
+
+#display PRINTED_FILE[update_array]
+#display PRINTED_FILE[main]
+display PRINTED_FILE[%ALLFUNC]
+
+activate PRINT_CODE_PROPER_EFFECTS
+
+
+display PRINTED_FILE[main]
+
+activate PRINT_CODE_TRANSFORMERS
+
+
+display PRINTED_FILE[%ALLFUNC]
+
+activate PRINT_CODE_PRECONDITIONS
+
+
+display PRINTED_FILE[%ALLFUNC]
+
+activate PRINT_CODE_REGIONS
+
+
+display PRINTED_FILE[update_array]
+
+display PRINTED_FILE[main]
+
+close
+
+# Make sure the type mismatch is detected and documented
+
+shell cat $WS.database/Warnings
+
+quit

@@ -1,0 +1,94 @@
+int main()
+{
+   unsigned char sn = 0;
+   unsigned char i = 0;
+   unsigned char n;
+
+   while (i<n) {
+      sn = sn+2;
+      i++;
+   }
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T(sn) {sn==0}
+
+   unsigned char sn = 0;
+
+//  T(i) {i==0}
+
+   unsigned char i = 0;
+
+//  T() {0<=n, n<=255}
+
+   unsigned char n;
+
+//  T(i,sn) {0<=i, i<=255, 0<=n, n<=255, 0<=sn, sn<=255}
+
+
+   while (i<n) {
+
+//  T(sn) {0<=sn, sn<=255}
+
+      sn = sn+2;
+
+//  T(i) {0<=i, i<=255}
+
+      i++;
+   }
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   unsigned char sn = 0;
+
+//  P(sn) {sn==0}
+
+   unsigned char i = 0;
+
+//  P(i,sn) {i==0, sn==0}
+
+   unsigned char n;
+
+//  P(i,sn) {i==0, sn==0, 0<=n, n<=255}
+
+
+   while (i<n) {
+
+//  P(i,sn) {0<=i, i<=255, i+1<=n, 0<=n, n<=255, 0<=sn, sn<=255}
+
+      sn = sn+2;
+
+//  P(i,sn) {0<=i, i<=255, i+1<=n, 0<=n, n<=255, 0<=sn, sn<=255}
+
+      i++;
+   }
+
+//  P(i,sn) {0<=i, i<=255, n<=i, i<=255n, 0<=n, n<=255, sn<=255n,
+//    0<=sn, sn<=255}
+
+
+   return 0;
+}

@@ -1,0 +1,60 @@
+
+Init Code
+
+int main()
+{
+   int a[1], i;
+   a[0] = 0;
+
+   for(i = 0; i <= 0; i += 1)
+      a[0] = 1;
+
+   return a[0];
+}
+
+Source code for outregionsarray01 after dead-code elimination
+
+int main()
+{
+   int a[1], i;
+   a[0] = 0;
+
+   for(i = 0; i <= 0; i += 1)
+      a[0] = 1;
+
+   return a[0];
+}
+
+OUT regions for outregionsarray01
+
+int main()
+{
+   int a[1], i;
+   a[0] = 0;
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==0}>
+
+
+   for(i = 0; i <= 0; i += 1)
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==0, i==0}>
+
+      a[0] = 1;
+
+   return a[0];
+}
+
+Source code for outregionsarray01 after dead-code elimination with OUT regions
+
+int main()
+{
+   int a[1], i;
+
+   for(i = 0; i <= 0; i += 1)
+      a[0] = 1;
+
+   return a[0];
+}
+
+Warnings
+

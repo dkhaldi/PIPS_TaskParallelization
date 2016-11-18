@@ -1,0 +1,47 @@
+
+TRANSFORMERS
+
+
+//  T(rand01) {rand01==0}
+
+int rand01()
+{
+
+//  T() {}
+
+   // Used to make transformers aborting
+   rand();
+
+//  T(rand01) {rand01==0}
+
+   return 0;
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+int rand01()
+{
+
+//  P() {}
+
+   // Used to make transformers aborting
+   rand();
+
+//  P() {}
+
+   return 0;
+}
+
+WARNINGS
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "rand01" instead.
+TRANSFORMERS_INTER_FULL[rand01] (intrinsic_to_transformer) line 7 
+at statement:
+
+	rand();
+
+
+Value returned by intrinsic "rand" is ignored.

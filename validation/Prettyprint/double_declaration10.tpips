@@ -1,0 +1,25 @@
+setenv WS=double_declaration10
+delete $WS
+
+#setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create $WS $WS.c $WS.src/foo.c
+
+echo
+echo Code for the main file: $WS
+echo
+
+display PRINTED_FILE[$WS!]
+
+echo
+echo Code for the auxiliary file: foo
+echo
+
+display PRINTED_FILE[foo!]
+
+#apply UNSPLIT
+
+#shell gcc -c $WS.database/Src/$WS.c
+
+close
+quit

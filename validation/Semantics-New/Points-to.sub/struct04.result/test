@@ -1,0 +1,119 @@
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   struct Mastruct toto;
+
+// Points To: none
+
+   struct Sastruct riri = {&toto};
+
+// Points To:
+// riri.p -> toto , EXACT
+
+
+   toto.first = 0;
+
+// Points To:
+// riri.p -> toto , EXACT
+
+   riri.p->first = 1;
+
+// Points To:
+// riri.p -> toto , EXACT
+
+
+   return 0;
+}
+
+PROPER  EFFECTS
+
+int main()
+{
+   struct Mastruct toto;
+//             <    is written>: riri.p
+   struct Sastruct riri = {&toto};
+//             <    is written>: toto.first
+
+   toto.first = 0;
+//             <    is read   >: riri.p
+//             <    is written>: toto.first
+   riri.p->first = 1;
+
+   return 0;
+}
+
+Transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   struct Mastruct toto;
+
+//  T() {}
+
+   struct Sastruct riri = {&toto};
+
+//  T(toto[first]) {toto[first]==0}
+
+
+   toto.first = 0;
+
+//  T(toto[first]) {toto[first]==1, toto[first]#init==0}
+
+   riri.p->first = 1;
+
+//  T(main) {main==0, toto[first]==1}
+
+
+   return 0;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   struct Mastruct toto;
+
+//  P() {}
+
+   struct Sastruct riri = {&toto};
+
+//  P() {}
+
+
+   toto.first = 0;
+
+//  P(toto[first]) {toto[first]==0}
+
+   riri.p->first = 1;
+
+//  P(toto[first]) {toto[first]==1}
+
+
+   return 0;
+}
+
+Warnings
+

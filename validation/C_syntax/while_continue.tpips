@@ -1,0 +1,15 @@
+delete while_continue
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create while_continue while_continue.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[main]
+
+close
+delete while_continue
+
+quit

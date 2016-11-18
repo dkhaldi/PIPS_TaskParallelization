@@ -1,0 +1,22 @@
+setenv WS=switch05
+
+delete $WS
+
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create $WS $WS.c
+
+echo
+echo Parsed Printed file for "$WS"
+echo
+
+display PARSED_PRINTED_FILE[$WS]
+
+apply UNSPLIT[%PROGRAM]
+close
+
+#shell (cd $WS.database/Src;gcc -c $WS.c)
+
+delete $WS
+
+quit

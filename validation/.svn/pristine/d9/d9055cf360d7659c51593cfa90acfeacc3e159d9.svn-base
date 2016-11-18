@@ -1,0 +1,13 @@
+
+int main()
+{
+   char *s;
+//             <    is written>: s
+   s = "hello\n";
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

@@ -1,0 +1,18 @@
+COMPILATION_UNIT_PARSER[struct13!] (c_parse) ("./struct13.c":4-5) 
+Dummy parameter "l" is redefined.
+Source code after preprocessing:
+};
+extern void struct13(union {struct s {int l;} d1; struct s {int l;} d2; int i;} u);
+Input source code, before preprocessing:
+};
+extern void struct13(union {struct s {int l;} d1; struct s {int l;} d2; int i;} u);
+
+COMPILATION_UNIT_PARSER[struct13!] (c_parser_error) Recovery from C parser failure not (fully) implemented yet.
+C parser is likely to fail later if re-used.
+COMPILATION_UNIT_PARSER[struct13!] (c_parser_error) [user error] Dummy redefinition accepted by gcc but not compatible with ISO standard. Try to compile with "gcc -ansi -c"
+ at user line 5 in file "./struct13.c"
+COMPILATION_UNIT_PARSER[struct13!] (set_debug_stack_pointer) debug level stack is set to 2
+COMPILATION_UNIT_PARSER[struct13!] (catch_user_error) pass has failed
+COMPILATION_UNIT_PARSER[struct13!] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PARSED_PRINTED_FILE for module struct13!.
+(display_a_resource) [user error] Cannot build view file PARSED_PRINTED_FILE

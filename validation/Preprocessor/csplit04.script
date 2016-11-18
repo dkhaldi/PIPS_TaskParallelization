@@ -1,0 +1,17 @@
+setenv WS=csplit04
+delete $WS
+
+# Duplicate module name into two different Fortran files
+
+# setenv PIPS_CHECK_FORTRAN TRUE
+
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_PIPS TRUE
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create $WS $WS.src/*.f
+
+# The creation is doomed on purpose, see source code.
+
+display PRINTED_FILE[%ALL]
+
+quit

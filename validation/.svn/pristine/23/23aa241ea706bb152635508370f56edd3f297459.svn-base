@@ -1,0 +1,31 @@
+setenv WSPACE=for02
+delete $WSPACE
+create $WSPACE $WSPACE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+activate MUST_REGIONS
+
+echo //
+echo // Init Code
+echo //
+display PRINTED_FILE[main]
+
+echo //
+echo // Source code for "$WSPACE" after LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS
+echo //
+apply LOOP_BOUND_MINIMIZATION_WITH_OUT_REGIONS[main]
+display PRINTED_FILE[main]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

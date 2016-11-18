@@ -1,0 +1,25 @@
+delete ifthenelse07
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create ifthenelse07 ifthenelse07.f
+
+echo
+echo PARSED PRINTED FILE
+echo
+
+display PARSED_PRINTED_FILE
+
+echo
+echo PRINTED FILE
+echo
+
+display PRINTED_FILE
+
+echo
+echo RESTRUCTURED FILE
+echo
+
+apply RESTRUCTURE_CONTROL
+display PRINTED_FILE
+close
+delete ifthenelse07
+quit

@@ -1,0 +1,8 @@
+The analysis of struct fields can be performed intra or interprocedurally, with only effects or with points-to.
+
+The different configurations are implemented with subdirectories:
+
+ * Intra.sub/Effects.sub
+ * Intra.sub/Points-to.sub
+ * Inter.sub/Effects.sub
+ * Inter.sub/Points-to.sub

@@ -1,0 +1,11 @@
+setenv WSPACE=malloc03
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+display SYMBOL_TABLE_FILE[main]
+
+close
+delete $WSPACE
+quit

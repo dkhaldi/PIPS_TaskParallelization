@@ -1,0 +1,9 @@
+/* An implicit struct declaration disappears (used to disappear)
+ *
+ * Same as decl68, but with the static keyword.
+ *
+ * The static keyword is ignored by gcc and PIPS ignores it too
+ */
+
+// The static keyword is ignored for derived entities
+struct c;                                                               /*0009*/

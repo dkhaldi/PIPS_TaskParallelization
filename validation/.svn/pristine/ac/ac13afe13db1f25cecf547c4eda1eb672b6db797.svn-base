@@ -1,0 +1,16 @@
+delete enum_member_name
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create enum_member_name enum_member_name.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[main]
+
+close
+
+delete enum_member_name
+
+quit

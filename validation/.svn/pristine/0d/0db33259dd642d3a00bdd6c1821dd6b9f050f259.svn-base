@@ -1,0 +1,166 @@
+
+PROPER  EFFECTS 
+
+void assign05()
+{
+   int *r;
+   int i;
+//             <    is read   >: i
+//             <    is written>: r
+
+   r = bar(i);
+//             <    is written>: i
+   i = 1;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: r
+   *r = 0;
+}
+/* To be out of Emami's patterns with a user call
+ *
+ * FI: this is not a good example beause "bar" it flawed.  We should
+ * at least use a global variable instead of "return &j".
+ *
+ */
+
+extern int *bar(int j);
+
+extern void assign05();
+
+extern void foo();
+int * bar(int j)
+{
+   return &j;
+}
+void foo()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+   assign05();
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void assign05()
+{
+
+// Points To: none
+
+   int *r;
+
+// Points To:
+// r -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// r -> undefined , EXACT
+
+
+   r = bar(i);
+
+// Points To: unreachable
+
+   i = 1;
+
+// Points To: unreachable
+
+   *r = 0;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+/* To be out of Emami's patterns with a user call
+ *
+ * FI: this is not a good example beause "bar" it flawed.  We should
+ * at least use a global variable instead of "return &j".
+ *
+ */
+
+
+// Points To: none
+
+extern int *bar(int j);
+
+
+// Points To: none
+
+extern void assign05();
+
+
+// Points To: none
+
+extern void foo();
+
+// Points To IN: none
+
+
+// Points To OUT:
+// bar -> j , EXACT
+
+int * bar(int j)
+{
+
+// Points To: none
+
+   return &j;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void foo()
+{
+
+// Points To: none
+
+   assign05();
+}
+
+PROPER  EFFECTS WITH POINTS TO
+
+void assign05()
+{
+   int *r;
+   int i;
+//             <    is read   >: i
+//             <    is written>: r
+
+   r = bar(i);
+   i = 1;
+   *r = 0;
+}
+/* To be out of Emami's patterns with a user call
+ *
+ * FI: this is not a good example beause "bar" it flawed.  We should
+ * at least use a global variable instead of "return &j".
+ *
+ */
+
+extern int *bar(int j);
+
+extern void assign05();
+
+extern void foo();
+int * bar(int j)
+{
+   return &j;
+}
+void foo()
+{
+   assign05();
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

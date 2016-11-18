@@ -1,0 +1,88 @@
+
+Transformers for slope02
+
+
+//  T() {}
+
+void slope02()
+{
+
+//  T() {}
+
+   int x, y, k;
+
+//  T() {0<=x, x<=10}
+
+   
+   /* create a bounding box */
+   //assert(0<=x && x<=10 && 0<=y && 0<=10);
+   if (!(0<=x&&x<=10))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(k) {}
+
+   
+   /* Define a horizontal constraint that is slightly increasing in
+      * rationals.  It links point (-1, 5) to point(11,7), 6y=x+31. It
+      * should be simplified into y<=6 and 5y<x+25.
+      *
+      * Due to division, the left point must be moved to (-2,5) for dx=13
+      */
+   //if(6*y<=x+31)
+   if (13*y<=2*x+69)
+
+//  T(k) {x+y==k}
+
+      k = x+y;
+
+//  T() {}
+
+   return;
+}
+
+Preconditions for slope02
+
+
+//  P() {}
+
+void slope02()
+{
+
+//  P() {}
+
+   int x, y, k;
+
+//  P() {}
+
+   
+   /* create a bounding box */
+   //assert(0<=x && x<=10 && 0<=y && 0<=10);
+   if (!(0<=x&&x<=10))
+
+//  P() {}
+
+      abort();
+
+//  P() {0<=x, x<=10}
+
+   
+   /* Define a horizontal constraint that is slightly increasing in
+      * rationals.  It links point (-1, 5) to point(11,7), 6y=x+31. It
+      * should be simplified into y<=6 and 5y<x+25.
+      *
+      * Due to division, the left point must be moved to (-2,5) for dx=13
+      */
+   //if(6*y<=x+31)
+   if (13*y<=2*x+69)
+
+//  P() {0<=x, x<=10, 5y<=x+25, y<=6}
+
+      k = x+y;
+
+//  P(k) {0<=x, x<=10}
+
+   return;
+}

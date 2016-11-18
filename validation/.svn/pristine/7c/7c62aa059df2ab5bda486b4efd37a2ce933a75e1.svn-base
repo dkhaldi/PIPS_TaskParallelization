@@ -1,0 +1,33 @@
+
+int main()
+{
+   int *p;
+   int a;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   p = (int *) malloc(2*sizeof(int));
+//             <may be written>: *HEAP*_l_7[0]
+//             <    is read   >: p
+   p[0] = 0;
+//             <may be written>: *HEAP*_l_7[1]
+//             <    is read   >: p
+   p[1] = 1;
+//             <    is read   >: p _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   free(p);
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	07 --> 08 with conflicts
+		from <p-W-EXACT> to <p-R-EXACT>
+	07 --> 09 with conflicts
+		from <p-W-EXACT> to <p-R-EXACT>
+	07 --> 10 with conflicts
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-R-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+
+****************** End of Dependence Graph ******************

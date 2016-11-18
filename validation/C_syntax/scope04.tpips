@@ -1,0 +1,44 @@
+setenv WS=scope04
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.src/scope04_a.c  $WS.src/scope04_b.c
+
+setenv PIPS_CPP_FLAGS=" -I$WS "
+
+#setenv C_SYNTAX_DEBUG_LEVEL 6
+
+#activate C_PARSER
+
+#setproperty PRETTYPRINT_LANGUAGE "C"
+#setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+echo
+echo Printed file for scope04_b
+echo
+
+
+display PRINTED_FILE[scope04_b!]
+display PRINTED_FILE[foo]
+
+echo
+echo Printed file for scope04_a: should work in spite of variable i
+echo
+
+display PRINTED_FILE[scope04_a!]
+display PRINTED_FILE[main]
+
+apply UNSPLIT[%PROGRAM]
+
+close
+
+echo
+echo Warnings
+echo
+
+shell cat $WS.database/Warnings
+
+#delete $WS
+quit
+
+
+

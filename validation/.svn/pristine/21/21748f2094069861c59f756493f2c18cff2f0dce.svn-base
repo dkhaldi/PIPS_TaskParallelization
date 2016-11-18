@@ -1,0 +1,62 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *pi, *qi;
+
+// Points To:
+// pi -> undefined , EXACT
+// qi -> undefined , EXACT
+
+
+   pi = (int *) malloc(sizeof(int));
+
+// Points To:
+// pi -> *HEAP*_l_6 , MAY
+// qi -> undefined , EXACT
+
+S:   qi = pi;
+
+// Points To:
+// pi -> *HEAP*_l_6 , MAY
+// qi -> *HEAP*_l_6 , MAY
+
+   free(pi);
+
+// Points To:
+// pi -> undefined , EXACT
+// qi -> *HEAP*_l_6 , MAY
+// qi -> undefined , MAY
+
+
+   return 0;
+}
+
+PROPER EFFECTS WITH POINTS TO
+
+int main()
+{
+   int *pi, *qi;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pi _MALLOC_EFFECTS:_MALLOC_
+
+   pi = (int *) malloc(sizeof(int));
+//             <    is read   >: pi
+//             <    is written>: qi
+S:   qi = pi;
+//             <    is read   >: pi _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   free(pi);
+
+   return 0;
+}

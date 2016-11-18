@@ -1,0 +1,230 @@
+
+TRANSFORMERS for warning01
+
+
+//  T() {0==-1}
+
+int warning01(int n, double a[n])
+{
+
+//  T(i,j) {i==10, j==0}
+
+   int i = 10, j = 0;
+
+//  T() {0==-1}
+
+   
+   /* By default, integer divisions are analyzed without exploiting the
+      * precondition available when the transformers are computer in
+      * context or when they are refined.
+      *
+      * I suppose, this feature was never needed. And now, a still better
+      * analysis is available, up to a property setting. See warning01.tpips.
+      */
+   a[i/j] = a[i/j]+1.;
+
+//  T() {0==-1}
+
+   return i+j;
+}
+
+PRECONDITIONS for warning01
+
+
+//  P() {}
+
+int warning01(int n, double a[n])
+{
+
+//  P() {}
+
+   int i = 10, j = 0;
+
+//  P(i,j) {i==10, j==0}
+
+   
+   /* By default, integer divisions are analyzed without exploiting the
+      * precondition available when the transformers are computer in
+      * context or when they are refined.
+      *
+      * I suppose, this feature was never needed. And now, a still better
+      * analysis is available, up to a property setting. See warning01.tpips.
+      */
+   a[i/j] = a[i/j]+1.;
+
+//  P() {0==-1}
+
+   return i+j;
+}
+
+REGIONS for warning01
+
+int warning01(int n, double a[n])
+{
+
+//  <i-RE-EXACT-{}>
+//  <i-W-EXACT-{}>
+//  <i-WE-EXACT-{}>
+//  <j-RE-EXACT-{}>
+//  <j-W-EXACT-{}>
+//  <j-WE-EXACT-{}>
+
+   int i = 10, j = 0;
+
+//  <a-RE-EXACT-{}>
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-MAY-{0==-1}>
+//  <a[PHI1]-W-MAY-{0==-1}>
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+//  <j-RE-EXACT-{}>
+//  <j-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   
+   /* By default, integer divisions are analyzed without exploiting the
+      * precondition available when the transformers are computer in
+      * context or when they are refined.
+      *
+      * I suppose, this feature was never needed. And now, a still better
+      * analysis is available, up to a property setting. See warning01.tpips.
+      */
+   a[i/j] = a[i/j]+1.;
+   return i+j;
+}
+
+REGIONS for warning01
+
+
+//  <a[PHI1]-R-MAY-{0==-1}>
+//  <a[PHI1]-W-MAY-{0==-1}>
+//  <n-R-EXACT-{}>
+
+int warning01(int n, double a[n])
+{
+
+//  <i-RE-EXACT-{}>
+//  <i-WE-EXACT-{}>
+//  <i-W-EXACT-{}>
+//  <j-RE-EXACT-{}>
+//  <j-WE-EXACT-{}>
+//  <j-W-EXACT-{}>
+
+   int i = 10, j = 0;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-MAY-{0==-1}>
+//  <a[PHI1]-W-MAY-{0==-1}>
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+//  <j-R-EXACT-{}>
+//  <j-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   
+   /* By default, integer divisions are analyzed without exploiting the
+      * precondition available when the transformers are computer in
+      * context or when they are refined.
+      *
+      * I suppose, this feature was never needed. And now, a still better
+      * analysis is available, up to a property setting. See warning01.tpips.
+      */
+   a[i/j] = a[i/j]+1.;
+   return i+j;
+}
+
+IN regions for warning01
+
+
+//  <a[PHI1]-IN-MAY-{0==-1}>
+//  <n-IN-EXACT-{}>
+
+int warning01(int n, double a[n])
+{
+   int i = 10, j = 0;
+
+//  <a[PHI1]-IN-MAY-{0==-1}>
+//  <i-IN-EXACT-{}>
+//  <j-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+   
+   /* By default, integer divisions are analyzed without exploiting the
+      * precondition available when the transformers are computer in
+      * context or when they are refined.
+      *
+      * I suppose, this feature was never needed. And now, a still better
+      * analysis is available, up to a property setting. See warning01.tpips.
+      */
+   a[i/j] = a[i/j]+1.;
+   return i+j;
+}
+
+OUT regions for warning01
+
+int warning01(int n, double a[n])
+{
+
+//  <i-OUT-EXACT-{}>
+//  <j-OUT-EXACT-{}>
+
+   int i = 10, j = 0;
+   
+   /* By default, integer divisions are analyzed without exploiting the
+      * precondition available when the transformers are computer in
+      * context or when they are refined.
+      *
+      * I suppose, this feature was never needed. And now, a still better
+      * analysis is available, up to a property setting. See warning01.tpips.
+      */
+   a[i/j] = a[i/j]+1.;
+   return i+j;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "warning01" instead.
+TRANSFORMERS_INTER_FULL[warning01] (process_bounds_for_divide) line 20 
+at statement:
+
+	a[i/j] = a[i/j]+1.;
+
+
+Zero divide:
+TRANSFORMERS_INTER_FULL[warning01] (process_bounds_for_divide) line 20 
+at statement:
+
+	a[i/j] = a[i/j]+1.;
+
+
+Zero divide:
+MUST_REGIONS[warning01] (process_bounds_for_divide) line 20 
+at statement:
+
+	a[i/j] = a[i/j]+1.;
+
+
+Zero divide:
+MUST_REGIONS[warning01] (sc_add_phi_equation) line 20 
+at statement:
+
+	a[i/j] = a[i/j]+1.;
+
+
+No information derived from subscript expression "i/j":
+MUST_REGIONS[warning01] (process_bounds_for_divide) line 20 
+at statement:
+
+	a[i/j] = a[i/j]+1.;
+
+
+Zero divide:
+MUST_REGIONS[warning01] (sc_add_phi_equation) line 20 
+at statement:
+
+	a[i/j] = a[i/j]+1.;
+
+
+No information derived from subscript expression "i/j":

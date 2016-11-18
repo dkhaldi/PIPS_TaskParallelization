@@ -1,0 +1,27 @@
+delete enum01
+create enum01 enum01.c
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+activate C_PARSER
+
+display PARSED_PRINTED_FILE[main]
+
+#activate PRINT_CODE_PROPER_EFFECTS
+#display PRINTED_FILE[main]
+
+#activate PRINT_CODE_CUMULATED_EFFECTS
+#display PRINTED_FILE[main]
+
+#activate PRINT_CODE_TRANSFORMERS
+#display PRINTED_FILE[main]
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+close
+
+#delete enum01
+
+quit

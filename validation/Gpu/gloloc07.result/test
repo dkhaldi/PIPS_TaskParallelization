@@ -1,0 +1,63 @@
+#
+# initial code
+#
+// global/private with typedefs
+
+typedef float flottant;
+
+extern void typedef00(flottant a[10]);
+
+extern int main(void);
+int main(void)
+{
+   flottant a[10];
+   typedef00(a);
+   return 0;
+}
+void typedef00(flottant a[10])
+{
+   flottant l[10];
+   {
+      int i;
+      for(i = 0; i <= 9; i += 1)
+         l[i] = a[i];
+   }
+   flottant *b = a+3;
+   a++;
+   flottant *c;
+   c = &a[0];
+   flottant *d;
+   d = l+5;
+}
+#
+# global/private declarations
+#
+// global/private with typedefs
+
+typedef float flottant;
+
+extern void typedef00(flottant a[10]);
+
+extern int main(void);
+int main(void)
+{
+   flottant a[10];
+   typedef00(a);
+   return 0;
+}
+void typedef00(global flottant a[10])
+{
+   private flottant l[10];
+   {
+      int i;
+      for(i = 0; i <= 9; i += 1)
+         l[i] = a[i];
+   }
+   global flottant *b = a+3;
+   a++;
+   global flottant *c;
+   c = &a[0];
+   private flottant *d;
+   d = l+5;
+}
+

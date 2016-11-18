@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Presentation}{}% 1
+\BOOKMARK [1][-]{section.2}{The Newgen Grammar}{}% 2
+\BOOKMARK [1][-]{section.3}{An example}{}% 3
+\BOOKMARK [1][-]{section.4}{Newgen-C}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Creation Functions}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Access functions}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Modification functions}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.4}{Destruction function}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.5}{IO functions}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.6}{How to use Newgen-C}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Newgen-Lisp}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Creation Functions}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{Access functions}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.3}{Modification functions}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.4}{Destruction function}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.5}{IO functions}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.6}{How to use Newgen-Lisp}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 18

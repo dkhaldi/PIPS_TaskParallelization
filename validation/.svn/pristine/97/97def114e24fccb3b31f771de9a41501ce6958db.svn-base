@@ -1,0 +1,9 @@
+setenv WS=if06
+delete $WS
+create $WS $WS.c
+setproperty PRETTYPRINT_INDENTATION 2
+#display PARSED_PRINTED_FILE[freia_cipo_dilate]
+display PARSED_PRINTED_FILE[$WS!]
+display PARSED_PRINTED_FILE[$WS]
+close
+quit

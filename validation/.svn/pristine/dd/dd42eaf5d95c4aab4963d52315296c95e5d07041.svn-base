@@ -1,0 +1,404 @@
+#
+# AIPO
+#
+#
+# compile generated my_cast
+#
+
+! initial function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_cast" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+// graph for dag "dag_cleaned_0" of module "my_cast" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+
+! updated function for AIPO
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+#
+# SPOC
+#
+
+! initial function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_cast" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+// graph for dag "dag_cleaned_0" of module "my_cast" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+
+! acceleration function
+
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <spoc.h>
+
+// dag 0: 0 ops and 1 copies, optimized to 0 ops and 1+0+0 copies
+// # SPOC calls: 0
+
+! updated function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! cleaned up function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+#
+# TERAPIX
+#
+
+! initial function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_cast" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+// graph for dag "dag_cleaned_0" of module "my_cast" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+
+! acceleration function
+
+// freia terapix includes
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <terapix.h>
+#include <terapix_ucode.h>
+
+// dag 0: 0 ops and 1 copies, optimized to 0 ops and 1+0+0 copies
+
+! updated function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! cleaned up function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+#
+# OPENCL
+#
+
+! initial function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_cast" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+// graph for dag "dag_cleaned_0" of module "my_cast" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+// graph for dag "my_cast_opencl_helper_0_0" of module "my_cast" in dot format
+// DAG "my_cast_opencl_helper_0_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "my_cast_opencl_helper_0_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+
+! acceleration function
+
+// FREIA OpenCL includes
+#include <CL/opencl.h>
+#include "freia.h"
+#include "private/freia_opencl_runtime.h"
+
+
+// dag 0: 0 ops and 1 copies, optimized to 0 ops and 1+0+0 copies
+#include <freia_opencl_runtime.hcl>
+// generated OpenCL kernels for function my_cast
+
+// opencl for dag 0
+
+! updated function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! cleaned up function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+#
+# SIGMAC
+#
+#
+# compile generated my_cast
+#
+
+! initial function
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_aipo_cast(o, i0);                                       /*0004*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "my_cast" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+// graph for dag "dag_cleaned_0" of module "my_cast" in dot format
+// DAG "dag_cleaned_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+  "i0" [shape=circle];
+
+  // outputs
+  "o" [shape=circle];
+
+  // computation vertices
+  "4 =()" [shape=circle];
+  "4 =()" -> "o";
+  "i0" -> "4 =()";
+}
+
+! updated function for OPENCL
+
+freia_status my_cast(freia_data2d *o, freia_data2d *i0)
+{
+   return freia_mppa_launch(0, 1, 1, 0, 0, i0, o);                      /*0004*/
+}
+
+! Sigma-C subgraphs for OPENCL
+
+/* C INCLUDES */
+#include <stdio.h>
+
+/* SIGMA-C INCLUDES */
+#include "sigmacAgents.h"
+
+
+// code module=my_cast fname=my_cast_sigmac_helper_0 split=0
+
+
+/*#####################################################################*/
+/*################ my_cast_sigmac_helper_0_0 Subgraph #################*/
+/*#####################################################################*/
+
+subgraph
+my_cast_sigmac_helper_0_0
+(char pipein[255],
+ char pipeout[255],
+ int width,
+ int height,
+ size_t sizeMax,
+ char pipeparin[255],
+ char pipeparout[255])
+{
+
+  map {
+    agent lhin = new Launcher_In(pipein, 1, width, height);
+    agent strin = new Streamer_In(width, height, 1);
+    connect (lhin.param, strin.input);
+    SigmaC_agent_setUnitType(strin,"k1-I/O");
+    agent lhout = new Launcher_Out(pipeout, 1, width, height);
+    agent strout = new Streamer_Out(width, height, 1);
+    connect (strout.output, lhout.result);
+    SigmaC_agent_setUnitType(strout,"k1-I/O");
+
+    // parameters declaration...
+
+    // instantiations...
+    agent nop0 = new Id(width, height);
+
+    // connections...
+    connect (strin.output[0] /* i0 */, nop0.input);
+    connect (nop0.output, strout.input[0] /* o */);
+  }
+}
+
+
+
+/*#####################################################################*/
+/*########################### Subgraph Root ###########################*/
+/*#####################################################################*/
+
+subgraph root () {
+  map {
+    int width = 256, height = 256;
+    size_t sizeMax = width * height * sizeof(int16_t);
+
+    char cmd[255] = "cd .. && ./main";
+    int i, n_pipes = 14;
+    char pipes[n_pipes][255];
+    for (i=0; i<n_pipes; i++)
+      tmpnam(pipes[i]);
+
+    agent pp = new Pipes(cmd, n_pipes, pipes);
+    agent sk = new Sink<char>(1);
+    SigmaC_agent_setUnitType(sk, "native");
+    connect(pp.output, sk.input);
+
+    new Malloc(pipes[0], pipes[1]);
+    new Free(pipes[2], pipes[3]);
+    new MCopy(pipes[4], pipes[5]);
+    new SendDataToMPPA(pipes[6], pipes[7], sizeMax);
+    new SendDataToHost(pipes[8], pipes[9], sizeMax);
+
+    new my_cast_sigmac_helper_0_0
+    (pipes[10], pipes[11],
+     width, height, sizeMax,
+     pipes[12], pipes[13]);
+
+  }
+}
+#
+# FREIA COMPILATION DONE
+#
+

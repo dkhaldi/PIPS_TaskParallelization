@@ -1,0 +1,26 @@
+#/bin/sh
+
+WS=csplit19
+
+# Which gcc is used?
+GCC_VERSION=`gcc -v 2>&1|grep 'gcc version'|sed -e 's/gcc version //;s/ .*//'`
+#echo $GCC_VERSION
+if test "$GCC_VERSION" = "4.6.3" ; then
+ PIPS_CPP="cpp -C -P -ffreestanding"
+else
+ PIPS_CPP="cpp -C -ffreestanding"
+fi
+#echo $PIPS_CPP
+export PIPS_CPP
+#exit 0
+tpips $WS.script
+
+echo
+echo Warnings
+echo
+
+cat $WS.database/Warnings
+
+#echo $PIPS_CPP
+
+Delete $WS

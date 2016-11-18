@@ -1,0 +1,107 @@
+LINUX_x86_64_LL/build.o: build.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/genC.o: genC.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/genClib.o: genClib.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h genread.h
+LINUX_x86_64_LL/tabulated.o: tabulated.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/hash.o: hash.c newgen_types.h genC.h newgen_assert.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/set.o: set.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h
+LINUX_x86_64_LL/list.o: list.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/stack.o: stack.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/array.o: array.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h
+LINUX_x86_64_LL/string.o: string.c $(ROOT)/../linear/include/assert.h genC.h \
+ newgen_assert.h newgen_types.h newgen_set.h newgen_hash.h newgen_list.h \
+ newgen_stack.h newgen_string_buffer.h newgen_auto_string.h newgen_map.h \
+ newgen_array.h newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h
+LINUX_x86_64_LL/string_buffer.o: string_buffer.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h
+LINUX_x86_64_LL/genread_yacc.o: genread_yacc.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/genread_lex.o: genread_lex.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h genread.h
+LINUX_x86_64_LL/genspec_yacc.o: genspec_yacc.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/genspec_lex.o: genspec_lex.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h genspec.h
+LINUX_x86_64_LL/new.o: new.c genC.h newgen_assert.h newgen_types.h newgen_set.h \
+ newgen_hash.h newgen_list.h newgen_stack.h newgen_string_buffer.h \
+ newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/genLisp.o: genLisp.c newgen_include.h newgen_types.h newgen_set.h \
+ newgen_hash.h
+LINUX_x86_64_LL/genSML.o: genSML.c newgen_include.h newgen_types.h newgen_set.h \
+ newgen_hash.h genC.h newgen_assert.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h
+LINUX_x86_64_LL/genread_yacc.o: genread_yacc.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/genread_lex.o: genread_lex.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h genread.h
+LINUX_x86_64_LL/genspec_yacc.o: genspec_yacc.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h newgen_include.h
+LINUX_x86_64_LL/genspec_lex.o: genspec_lex.c genC.h newgen_assert.h newgen_types.h \
+ newgen_set.h newgen_hash.h newgen_list.h newgen_stack.h \
+ newgen_string_buffer.h newgen_auto_string.h newgen_map.h newgen_array.h \
+ newgen_generic_mapping.h newgen_generic_stack.h \
+ newgen_generic_function.h genspec.h

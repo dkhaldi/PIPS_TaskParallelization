@@ -1,0 +1,112 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int *p, *q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   int a[10];
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   int b[10];
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+
+   p = &a[0];
+
+// Points To:
+// p -> a[0] , EXACT
+// q -> undefined , EXACT
+
+   q = &b[0];
+
+// Points To:
+// p -> a[0] , EXACT
+// q -> b[0] , EXACT
+
+   for(i = 0; i <= 9; i += 1)
+
+// Points To:
+// p -> a[*] , MAY
+// p -> a[0] , MAY
+// p -> a[1] , MAY
+// p -> a[2] , MAY
+// p -> a[3] , MAY
+// p -> a[4] , MAY
+// p -> a[5] , MAY
+// p -> a[6] , MAY
+// p -> a[7] , MAY
+// p -> a[8] , MAY
+// p -> a[9] , MAY
+// p -> a[10] , MAY
+// p -> a[11] , MAY
+// q -> b[*] , MAY
+// q -> b[0] , MAY
+// q -> b[1] , MAY
+// q -> b[2] , MAY
+// q -> b[3] , MAY
+// q -> b[4] , MAY
+// q -> b[5] , MAY
+// q -> b[6] , MAY
+// q -> b[7] , MAY
+// q -> b[8] , MAY
+// q -> b[9] , MAY
+// q -> b[10] , MAY
+// q -> b[11] , MAY
+
+      *p++ = 2**q++;
+
+// Points To:
+// p -> a[*] , MAY
+// p -> a[0] , MAY
+// p -> a[1] , MAY
+// p -> a[2] , MAY
+// p -> a[3] , MAY
+// p -> a[4] , MAY
+// p -> a[5] , MAY
+// p -> a[6] , MAY
+// p -> a[7] , MAY
+// p -> a[8] , MAY
+// p -> a[9] , MAY
+// p -> a[10] , MAY
+// p -> a[11] , MAY
+// q -> b[*] , MAY
+// q -> b[0] , MAY
+// q -> b[1] , MAY
+// q -> b[2] , MAY
+// q -> b[3] , MAY
+// q -> b[4] , MAY
+// q -> b[5] , MAY
+// q -> b[6] , MAY
+// q -> b[7] , MAY
+// q -> b[8] , MAY
+// q -> b[9] , MAY
+// q -> b[10] , MAY
+// q -> b[11] , MAY
+
+
+   return 0;
+}

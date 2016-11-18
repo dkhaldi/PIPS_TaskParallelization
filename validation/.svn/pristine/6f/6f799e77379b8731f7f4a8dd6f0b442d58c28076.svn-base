@@ -1,0 +1,22 @@
+/*
+ * file for register04.c
+ */
+typedef struct {
+   int x;
+   int y;
+} tuple;
+
+
+extern void set_int(int *a);
+
+extern int main(void);
+void set_int(register int *a)
+{
+   *a = 0;
+}
+int main(void)
+{
+   tuple tpl;
+   set_int(&tpl.x);
+   return tpl.x;
+}

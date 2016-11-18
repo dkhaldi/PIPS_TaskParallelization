@@ -1,0 +1,132 @@
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 0, j = 1;
+
+// Points To: none
+
+   int *p = &i;
+
+// Points To:
+// p -> i , EXACT
+
+
+   j = *p;
+
+// Points To:
+// p -> i , EXACT
+
+   
+   // Here, j==0
+   return j;
+}
+
+Proper effects
+
+int main()
+{
+//             <    is written>: i j
+   int i = 0, j = 1;
+//             <    is written>: p
+   int *p = &i;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+//             <    is written>: j
+
+   j = *p;
+//             <    is read   >: j
+   
+   // Here, j==0
+   return j;
+}
+
+Cumulated effects
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+int main()
+{
+//             <    is written>: i j
+   int i = 0, j = 1;
+//             <    is written>: p
+   int *p = &i;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+//             <    is written>: j
+
+   j = *p;
+//             <    is read   >: j
+   
+   // Here, j==0
+   return j;
+}
+
+Transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T(i,j) {i==0, j==1}
+
+   int i = 0, j = 1;
+
+//  T(p) {&i==p, i==0, j==1}
+
+   int *p = &i;
+
+//  T(j) {&i==p, i==0, j==0, j#init==1}
+
+
+   j = *p;
+
+//  T(main) {&i==p, i==0, j==0, main==0}
+
+   
+   // Here, j==0
+   return j;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i = 0, j = 1;
+
+//  P(i,j) {i==0, j==1}
+
+   int *p = &i;
+
+//  P(i,j,p) {&i==p, i==0, j==1}
+
+
+   j = *p;
+
+//  P(i,j,p) {&i==p, i==0, j==0}
+
+   
+   // Here, j==0
+   return j;
+}
+
+Warnings
+
+PROPER_EFFECTS[main] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.

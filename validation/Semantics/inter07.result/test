@@ -1,0 +1,70 @@
+
+C  T() {}
+
+
+      SUBROUTINE INCR(X)
+
+C  T() {}
+
+      X = X+1.                                                          0003
+      END
+
+C  T() {}
+
+      PROGRAM INTER07
+
+C  T(I) {I==0}
+
+
+C     Check that type mismatches are detected and do not cause core dumps:
+C     this case is not detected but the value of i is lost as it should be.
+C     Floating point scalar variables are not analyzed
+
+      I = 0                                                             0007
+
+C  T(I) {}
+
+
+      CALL INCR(I)                                                      0009
+
+C  T() {}
+
+
+      PRINT *, I                                                        0011
+
+      END
+
+C  P() {}
+
+
+      SUBROUTINE INCR(X)
+
+C  P() {}
+
+      X = X+1.                                                          0003
+      END
+
+C  P() {}
+
+      PROGRAM INTER07
+
+C  P() {}
+
+
+C     Check that type mismatches are detected and do not cause core dumps:
+C     this case is not detected but the value of i is lost as it should be.
+C     Floating point scalar variables are not analyzed
+
+      I = 0                                                             0007
+
+C  P(I) {I==0}
+
+
+      CALL INCR(I)                                                      0009
+
+C  P(I) {}
+
+
+      PRINT *, I                                                        0011
+
+      END

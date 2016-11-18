@@ -1,0 +1,18 @@
+#
+# get the model
+delete matmul3
+shell rm -f model.rc
+# ??? NO.... shoud be a property or something
+shell cp model3.rc model.rc
+#
+# compile
+create fmatmul3 matmul3.f 
+apply PRIVATIZE_MODULE 
+apply WP65
+close matmul3
+#
+# display result
+shell cat matmul3.database/MATMUL.bank matmul3.database/MATMUL.wp65 
+delete matmul3
+shell rm -f model.rc
+quit

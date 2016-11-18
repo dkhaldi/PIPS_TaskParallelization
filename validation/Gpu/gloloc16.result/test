@@ -1,0 +1,63 @@
+#
+# initial code
+#
+extern void setzero(float a[1]);
+
+extern void addone(float *a);
+
+extern void one00(int n, float a[n]);
+
+extern int main(void);
+void addone(float *a)
+{
+   *a += 1.0;
+}
+int main(void)
+{
+   float a[10];
+   one00(10, a);
+}
+void one00(int n, float a[n])
+{
+   int i;
+   for(i = 0; i <= n-1; i += 1) {
+      setzero(&a[i]);
+      addone(a+i);
+   }
+}
+void setzero(float a[1])
+{
+   a[0] = 0.0;
+}
+#
+# global/private declarations
+#
+extern void setzero(float a[1]);
+
+extern void addone(float *a);
+
+extern void one00(int n, float a[n]);
+
+extern int main(void);
+void addone(global float *a)
+{
+   *a += 1.0;
+}
+int main(void)
+{
+   float a[10];
+   one00(10, a);
+}
+void one00(int n, global float a[n])
+{
+   int i;
+   for(i = 0; i <= n-1; i += 1) {
+      setzero(&a[i]);
+      addone(a+i);
+   }
+}
+void setzero(global float a[1])
+{
+   a[0] = 0.0;
+}
+

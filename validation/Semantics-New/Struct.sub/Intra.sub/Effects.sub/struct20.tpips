@@ -1,0 +1,37 @@
+setenv WS=struct20
+delete $WS
+
+# setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+activate PRECONDITIONS_INTRA
+activate TRANSFORMERS_INTRA_FULL
+# activate TRANSFORMERS_INTRA_FULL_WITH_POINTS_TO
+activate INTRAPROCEDURAL_SUMMARY_PRECONDITION
+
+echo
+echo Cumulated Effects
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[%ALLFUNC]
+
+echo
+echo Transformers
+echo
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[%ALLFUNC]
+
+echo
+echo Preconditions
+echo
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[%ALLFUNC]
+
+close
+delete $WS
+quit

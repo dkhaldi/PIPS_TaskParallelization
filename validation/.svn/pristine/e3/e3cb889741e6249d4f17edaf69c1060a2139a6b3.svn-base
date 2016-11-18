@@ -1,0 +1,14 @@
+
+void assert01()
+{
+   int i;
+//             <may be read   >: __func__
+//             <    is read   >: i
+
+   i>0?(void) 0:__assert_fail("i>0", "$VDIR/assert01.c", 15, __func__);
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

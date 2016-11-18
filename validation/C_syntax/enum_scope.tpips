@@ -1,0 +1,16 @@
+delete enum_scope
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create enum_scope enum_scope.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[%ALL]
+
+close
+
+delete enum_scope
+
+quit

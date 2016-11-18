@@ -1,0 +1,44 @@
+
+//  T() {}
+
+void testResult(char *filenameIn, char *fileNameOut)
+{
+
+//  T() {}
+
+   FILE *fichierIn, *fichierOut;
+
+//  T() {}
+
+   char destination[40] = "";
+
+//  T() {}
+
+   strcat(destination, filenameIn);
+
+//  T() {}
+
+   fichierIn = fopen(destination, "r");
+
+//  T() {}
+
+   if (fichierIn)
+
+//  T() {}
+
+      printf("*** Test OK - %s\n", destination);
+}
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   testResult("./ref/module", "test.txt");
+
+//  T(main) {main==0}
+
+   return 0;
+}

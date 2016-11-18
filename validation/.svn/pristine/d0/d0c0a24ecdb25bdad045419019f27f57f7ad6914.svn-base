@@ -1,0 +1,8 @@
+PARSER[SCALARIZATION35] (MakeFormalParameter) Formal parameter "X" may be used several times
+PARSER[SCALARIZATION35] (MakeFormalParameter) [user error] Parser error between lines 3 and 3
+formal parameter should not be already typed
+PARSER[SCALARIZATION35] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[SCALARIZATION35] (catch_user_error) pass has failed
+PARSER[SCALARIZATION35] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PARSED_PRINTED_FILE for module SCALARIZATION35.
+(display_a_resource) [user error] Cannot build view file PARSED_PRINTED_FILE

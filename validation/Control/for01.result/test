@@ -1,0 +1,17 @@
+
+Parsed code
+
+int main()
+{
+   for01();
+   return 0;
+}
+
+Controlized code
+
+int main()
+{
+   for01();
+   return 0;
+}
+c=10, k=0

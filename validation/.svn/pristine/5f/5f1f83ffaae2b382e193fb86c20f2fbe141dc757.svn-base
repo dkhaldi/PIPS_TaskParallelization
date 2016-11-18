@@ -1,0 +1,7 @@
+PROPER_EFFECTS[INTER01] (check_user_call_site) [user error] Call to module FOO: insufficient number of actual arguments.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+PROPER_EFFECTS[INTER01] (check_user_call_site) [user error] Call to module FOO: insufficient number of actual arguments.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+PROPER_EFFECTS[INTER01] (check_user_call_site) [user error] Call to module FOO: insufficient number of actual arguments.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+

@@ -1,0 +1,37 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+delete c_unroll1
+create c_unroll1 c_unroll1.c
+
+echo
+echo Initial code
+echo
+
+display PRINTED_FILE[main]
+
+echo
+echo Code after unrolling
+echo
+
+apply UNROLL[main]
+loop
+4
+display PRINTED_FILE[main]
+
+echo
+echo Code after dead code elimination
+echo
+
+apply SIMPLIFY_CONTROL[main]
+display PRINTED_FILE[main]
+
+echo
+echo Unsplit resulting code
+echo
+apply UNSPLIT
+
+shell pips_validation_exe.sh -c -g c_unroll1
+
+close
+delete c_unroll1
+quit
+

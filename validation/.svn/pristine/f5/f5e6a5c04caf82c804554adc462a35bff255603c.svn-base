@@ -1,0 +1,27 @@
+
+PRINTED FILE for "decl36"
+
+void decl36(int i)
+{
+   i++;
+}
+
+PRINTED FILE for "decl36!"
+
+/* Check that a function can be redeclared with the same arguments,
+ * when a file is included more than once for instance.
+ *
+ * Problem shown in C_syntax/tpips.tpips
+*/
+
+void decl36(int i);
+
+void decl36(int i);
+
+extern int main();
+
+extern void decl36(int i);
+#
+# compile generated decl36
+#
+

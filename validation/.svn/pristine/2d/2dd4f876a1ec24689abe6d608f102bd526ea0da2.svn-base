@@ -1,0 +1,23 @@
+delete complex01
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create complex01 complex01.c
+
+activate C_PARSER
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+echo
+echo parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[complex01]
+quit
+echo
+echo printed file
+echo
+
+display PRINTED_FILE[complex01]
+
+close
+#delete complex01
+quit

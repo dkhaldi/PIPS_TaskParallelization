@@ -1,0 +1,83 @@
+#
+# initial code
+#
+// global/private + kernel
+
+typedef void *kernel;
+
+// also with a static well
+extern void private_zero(float *a);
+
+extern void global_zero(float *a);
+
+extern void stuff(float *a);
+
+extern int main(void);
+void global_zero(float *a)
+{
+   *a = 0.0;
+}
+int main(void)
+{
+   float a[10];
+   stuff(a);
+   return 0;
+}
+void private_zero(float *a)
+{
+   *a = 0.0;
+}
+void stuff(float *a)
+{
+   float l[10];
+   float *p;
+   float *q;
+   p = a;
+   q = l;
+   global_zero(p);
+   private_zero(q);
+}
+#
+# global/private declarations
+#
+// global/private + kernel
+
+typedef void *kernel;
+//PIPS generated variable
+kernel private_zero(private float *a), global_zero(global float *a);
+
+// also with a static well
+;
+
+
+//PIPS generated variable
+kernel stuff(global float *a);
+
+
+
+extern int main(void);
+kernel global_zero(global float *a)
+{
+   *a = 0.0;
+}
+int main(void)
+{
+   float a[10];
+   stuff(a);
+   return 0;
+}
+kernel private_zero(private float *a)
+{
+   *a = 0.0;
+}
+kernel stuff(global float *a)
+{
+   private float l[10];
+   global float *p;
+   private float *q;
+   p = a;
+   q = l;
+   global_zero(p);
+   private_zero(q);
+}
+

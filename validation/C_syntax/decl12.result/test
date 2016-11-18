@@ -1,0 +1,20 @@
+
+Symbol table for "decl12"
+
+
+Warnings for decl12
+
+COMPILATION_UNIT_PARSER[decl12!] (c_parse) ("./decl12.c":1-2) 
+Dummy parameter "a" is redefined.
+Source code after preprocessing:
+void decl12(int a, char a);
+Input source code, before preprocessing:
+/* Not OK with gcc */
+void decl12(int a, char a);
+
+COMPILATION_UNIT_PARSER[decl12!] (c_parser_error) Recovery from C parser failure not (fully) implemented yet.
+C parser is likely to fail later if re-used.
+COMPILATION_UNIT_PARSER[decl12!] (c_parser_error) [user error] Dummy redefinition accepted by gcc but not compatible with ISO standard. Try to compile with "gcc -ansi -c"
+ at user line 2 in file "./decl12.c"
+COMPILATION_UNIT_PARSER[decl12!] (tpips_user_error) Close workspace and quit on user error requested.
+COMPILATION_UNIT_PARSER[decl12!] (pips_log_end) [user error] stopping pips on code 2 (USER_ERROR) for CLOSE_WORKSPACE_AND_QUIT_ON_ERROR

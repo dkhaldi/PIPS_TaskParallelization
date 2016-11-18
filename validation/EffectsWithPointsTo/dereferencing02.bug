@@ -1,0 +1,1 @@
+execution error due to pointer arithmetic beyond array declaration is  not caught anymore

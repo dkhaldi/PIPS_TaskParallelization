@@ -1,0 +1,70 @@
+
+Points-to for dereferencing05
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void dereferencing05()
+{
+
+// Points To: none
+
+   double *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   *p++ = 0.;
+
+// Points To: unreachable
+
+   *p-- = 0.;
+
+// Points To: unreachable
+
+   *++p = 0.;
+
+// Points To: unreachable
+
+   *--p = 0.;
+}
+
+Proper effects with points-to for dereferencing05
+
+void dereferencing05()
+{
+   double *p;
+   int i;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+
+   *p++ = 0.;
+   *p-- = 0.;
+   *++p = 0.;
+   *--p = 0.;
+}
+
+Cumulated effects with points-to for dereferencing05
+
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+void dereferencing05()
+{
+   double *p;
+   int i;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+
+   *p++ = 0.;
+   *p-- = 0.;
+   *++p = 0.;
+   *--p = 0.;
+}

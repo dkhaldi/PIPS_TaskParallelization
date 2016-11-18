@@ -1,0 +1,14 @@
+delete main
+create main main.c
+
+shell echo "Database for main created"
+
+quit
+
+activate C_PARSER
+
+display PRINTED_FILE[main]
+
+close
+delete main
+quit

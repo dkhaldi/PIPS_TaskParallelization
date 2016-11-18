@@ -1,0 +1,111 @@
+
+PROPER EFFECTS
+
+int main()
+{
+//             <may be written>: i[*]
+   int i[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+//             <    is written>: q
+   int *q = &i[0];
+//             <    is written>: p
+   int *p = &i[0];
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: q
+   // Increment i[0]
+   (*q)++;
+   // increment q
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: q
+//             <    is written>: j q
+   int j = *q++;
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: i[0] p q stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   // The loaded value is not used
+   printf("i=%d, p=%p, q=%p\n", i[0], p, q);
+//             <    is read   >: j
+   return j;
+}
+
+PROPER POINTER EFFECTS
+
+int main()
+{
+//             <may be written>: i[*]
+   int i[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+//             <    is written>: q
+   int *q = &i[0];
+//             <    is written>: p
+   int *p = &i[0];
+//             <    is read   >: q q[0]
+//             <    is written>: q[0]
+   // Increment i[0]
+   (*q)++;
+   // increment q
+//             <    is read   >: q q[0]
+//             <    is written>: j q
+   int j = *q++;
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: i[0] p q stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   // The loaded value is not used
+   printf("i=%d, p=%p, q=%p\n", i[0], p, q);
+//             <    is read   >: j
+   return j;
+}
+
+POINTS TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+// Points To: none
+
+   int *q = &i[0];
+
+// Points To:
+// q -> i[0] , EXACT
+
+   int *p = &i[0];
+
+// Points To:
+// p -> i[0] , EXACT
+// q -> i[0] , EXACT
+
+   // Increment i[0]
+   (*q)++;
+   // increment q
+
+// Points To:
+// p -> i[0] , EXACT
+// q -> i[0] , EXACT
+
+   int j = *q++;
+
+// Points To:
+// p -> i[0] , EXACT
+// q -> i[1] , EXACT
+
+   // The loaded value is not used
+   printf("i=%d, p=%p, q=%p\n", i[0], p, q);
+
+// Points To:
+// p -> i[0] , EXACT
+// q -> i[1] , EXACT
+
+   return j;
+}
+PROPER_EFFECTS[main] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.

@@ -1,0 +1,7 @@
+bla: ['blabla']
+blabla: []
+foo: ['foobla', 'foofoo']
+foobla: []
+foofoo: []
+main: ['bla', 'blabla', 'foo', 'foobla', 'foofoo', 'stuff']
+stuff: ['foo', 'foobla', 'foofoo']

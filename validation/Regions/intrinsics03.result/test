@@ -1,0 +1,24 @@
+
+Convex array regions for the input code
+
+
+//  <bar[PHI1][PHI2]-W-MAY-{0<=PHI1, PHI1<=225, 0<=PHI2, PHI2<=225}>
+
+void foo(int bar[256][256])
+{
+   int i, j;
+
+//  <bar[PHI1][PHI2]-W-MAY-{0<=PHI1, PHI1<=225, 0<=PHI2, PHI2<=225}>
+
+   for(i = 0; i <= 15; i += 1)
+
+//  <bar[PHI1][PHI2]-W-MAY-{0<=PHI1, PHI1<=225, PHI1<=15i, 0<=PHI2,
+//    PHI2<=225, PHI2<=15i, i<=15}>
+
+      for(j = 0; j <= 15; j += 1)
+
+//  <bar[PHI1][PHI2]-W-MAY-{0<=PHI1, PHI1<=15i, PHI1<=15j, 0<=PHI2,
+//    PHI2<=15i, PHI2<=15j, 0<=i, i<=15, 0<=j, j<=15}>
+
+         bar[i*j][i*j] = i*j;
+}

@@ -1,0 +1,65 @@
+delete generate06
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create generate06 generate06.c
+
+activate C_PARSER
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty PREPROCESSOR_MISSING_FILE_HANDLING "generate"
+
+echo
+echo Parsed printed file for generate 06
+echo
+
+display PARSED_PRINTED_FILE[generate06]
+
+echo
+echo Parsed printed file for func
+echo
+
+display PARSED_PRINTED_FILE[func]
+
+echo
+echo Printed synthesized file "func!"
+echo
+
+activate PRINT_CODE
+display PRINTED_FILE[func!]
+
+echo
+echo Compile the generated code
+echo
+
+apply UNSPLIT[generate06]
+shell pips_validation_exe.sh -c -g generate06
+
+close
+delete generate06
+quit
+
+echo
+echo Printed file
+echo
+
+display PRINTED_FILE[%ALL]
+
+activate PRINT_CODE_PRECONDITIONS
+
+echo
+echo Printed file generate06 with intraprocedural preconditions
+echo
+
+display PRINTED_FILE[generate06]
+
+echo
+echo Printed file func with intraprocedural preconditions
+echo
+
+display PRINTED_FILE[func]
+
+close
+#delete generate06
+quit

@@ -1,0 +1,27 @@
+--NEWGEN-START 186
+import align from "hpf.newgen";
+import distribute from "hpf.newgen";
+import entity from "ri.newgen";
+import entity_int from "ri.newgen";
+import statement from "ri.newgen";
+import reduction_operator from "reductions_private.newgen";
+alignmap = entity:entity -> align:align;
+data_status = newdeclmap:newdeclmap x alignmap:alignmap x distributemap:distributemap x arrays:entity* x templates:entity* x processors:entity*;
+distributemap = entity:entity -> distribute:distribute;
+dynamic_status = dynamics:entity_entities x primary:entitymap x renamings:statement_renamings x tokeep:statement_entities;
+entities = list:entity*;
+entity_entities = entity:entity -> entities:entities;
+entitymap = entity:entity -> entity:entity;
+entity_status = new_host:entitymap x new_node:entitymap x old_host:entitymap x old_node:entitymap x referenced:entity_int;
+hpfc_reductions = initial:entity x replacement:entity x operator:reduction_operator;
+hpfc_status = overlapsmap:overlapsmap x data_status:data_status x numbers_status:numbers_status x entity_status:entity_status x commons:entity* x dynamic_status:dynamic_status x pures:entity* x ios:entity* x computed:remapping* x reductions:statement_entities;
+hpf_newdecl = none:unit + alpha:unit + beta:unit + gamma:unit + delta:unit;
+hpf_newdecls = dimensions:hpf_newdecl*;
+newdeclmap = entity:entity -> hpf_newdecls:hpf_newdecls;
+numbers_status = numbermap:entity_int x arrays:int x templates:int x processors:int;
+overlap = lower:int x upper:int;
+overlapsmap = entity:entity -> overlap:overlap*;
+remapping = renaming:renaming x referenced:entity*;
+renaming = old:entity x new:entity;
+statement_entities = persistant statement:statement -> entities:entities;
+statement_renamings = persistant statement:statement -> renaming:renaming*;

@@ -1,0 +1,11 @@
+setenv WS=externalloc13
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+display PARSED_PRINTED_FILE[$WS!]
+display PARSED_PRINTED_FILE[main]
+
+close
+delete $WS
+quit

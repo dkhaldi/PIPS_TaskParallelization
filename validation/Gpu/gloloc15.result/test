@@ -1,0 +1,81 @@
+#
+# initial code
+#
+
+static void f(float in[2], float out[2]);
+
+extern void cross00(float a[10], float b[10]);
+
+extern void zero(float a[10]);
+
+extern int main(void);
+void cross00(float a[10], float b[10])
+{
+   float tmp[2];
+   {
+      int i;
+      for(i = 0; i <= 4; i += 1) {
+         tmp[0] = a[i], tmp[1] = a[10-i-1];
+         f(tmp, &b[2*i]);
+      }
+   }
+}
+static void f(float in[2], float out[2])
+{
+   out[0] = in[0]+in[1];
+   out[1] = in[0]-in[1];
+}
+int main(void)
+{
+   float a[10], b[10];
+   zero(a);
+   zero(b);
+   cross00(a, b);
+}
+void zero(float a[10])
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = 0.0;
+}
+#
+# global/private declarations
+#
+
+static void f(float in[2], float out[2]);
+
+extern void cross00(float a[10], float b[10]);
+
+extern void zero(float a[10]);
+
+extern int main(void);
+void cross00(global float a[10], global float b[10])
+{
+   private float tmp[2];
+   {
+      int i;
+      for(i = 0; i <= 4; i += 1) {
+         tmp[0] = a[i], tmp[1] = a[10-i-1];
+         f(tmp, &b[2*i]);
+      }
+   }
+}
+static void f(private float in[2], global float out[2])
+{
+   out[0] = in[0]+in[1];
+   out[1] = in[0]-in[1];
+}
+int main(void)
+{
+   float a[10], b[10];
+   zero(a);
+   zero(b);
+   cross00(a, b);
+}
+void zero(global float a[10])
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] = 0.0;
+}
+

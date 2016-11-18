@@ -1,0 +1,167 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+   mystruct s1, s2;
+   mystruct tab_s[2];
+   int i, j;
+//             <    is written>: s1.a
+   s1.a = &i;
+//             <    is written>: s1.b[0]
+   (s1.b)[0] = &j;
+//             <    is read   >: s1.a
+//             <    is written>: s2.a
+   s2.a = s1.a;
+//             <    is read   >: s1.b[0]
+//             <    is written>: s2.b[0]
+   (s2.b)[0] = (s1.b)[0];
+//             <    is read   >: s1.a
+//             <    is written>: tab_s[0].a
+   tab_s[0].a = s1.a;
+//             <    is read   >: s1.b[0]
+//             <    is written>: tab_s[0].b[0]
+   (tab_s[0].b)[0] = (s1.b)[0];
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   mystruct s1, s2;
+
+// Points To:
+// s1.b[*] -> undefined , EXACT
+// s1.a -> undefined , EXACT
+// s1.c -> undefined , EXACT
+// s2.b[*] -> undefined , EXACT
+// s2.a -> undefined , EXACT
+// s2.c -> undefined , EXACT
+
+   mystruct tab_s[2];
+
+// Points To:
+// s1.b[*] -> undefined , EXACT
+// s1.a -> undefined , EXACT
+// s1.c -> undefined , EXACT
+// s2.b[*] -> undefined , EXACT
+// s2.a -> undefined , EXACT
+// s2.c -> undefined , EXACT
+// tab_s[*].b[*] -> undefined , EXACT
+// tab_s[*].a -> undefined , EXACT
+// tab_s[*].c -> undefined , EXACT
+
+   int i, j;
+
+// Points To:
+// s1.b[*] -> undefined , EXACT
+// s1.a -> undefined , EXACT
+// s1.c -> undefined , EXACT
+// s2.b[*] -> undefined , EXACT
+// s2.a -> undefined , EXACT
+// s2.c -> undefined , EXACT
+// tab_s[*].b[*] -> undefined , EXACT
+// tab_s[*].a -> undefined , EXACT
+// tab_s[*].c -> undefined , EXACT
+
+   s1.a = &i;
+
+// Points To:
+// s1.b[*] -> undefined , EXACT
+// s1.c -> undefined , EXACT
+// s1.a -> i , EXACT
+// s2.b[*] -> undefined , EXACT
+// s2.a -> undefined , EXACT
+// s2.c -> undefined , EXACT
+// tab_s[*].b[*] -> undefined , EXACT
+// tab_s[*].a -> undefined , EXACT
+// tab_s[*].c -> undefined , EXACT
+
+   (s1.b)[0] = &j;
+
+// Points To:
+// s1.b[*] -> undefined , MAY
+// s1.c -> undefined , EXACT
+// s1.a -> i , EXACT
+// s1.b[0] -> j , EXACT
+// s2.b[*] -> undefined , EXACT
+// s2.a -> undefined , EXACT
+// s2.c -> undefined , EXACT
+// tab_s[*].b[*] -> undefined , EXACT
+// tab_s[*].a -> undefined , EXACT
+// tab_s[*].c -> undefined , EXACT
+
+   s2.a = s1.a;
+
+// Points To:
+// s1.b[*] -> undefined , MAY
+// s1.c -> undefined , EXACT
+// s1.a -> i , EXACT
+// s1.b[0] -> j , EXACT
+// s2.b[*] -> undefined , EXACT
+// s2.c -> undefined , EXACT
+// s2.a -> i , EXACT
+// tab_s[*].b[*] -> undefined , EXACT
+// tab_s[*].a -> undefined , EXACT
+// tab_s[*].c -> undefined , EXACT
+
+   (s2.b)[0] = (s1.b)[0];
+
+// Points To:
+// s1.b[*] -> undefined , MAY
+// s1.c -> undefined , EXACT
+// s1.a -> i , EXACT
+// s1.b[0] -> j , EXACT
+// s2.b[*] -> undefined , MAY
+// s2.c -> undefined , EXACT
+// s2.a -> i , EXACT
+// s2.b[0] -> j , EXACT
+// tab_s[*].b[*] -> undefined , EXACT
+// tab_s[*].a -> undefined , EXACT
+// tab_s[*].c -> undefined , EXACT
+
+   tab_s[0].a = s1.a;
+
+// Points To:
+// s1.b[*] -> undefined , MAY
+// s1.c -> undefined , EXACT
+// s1.a -> i , EXACT
+// s1.b[0] -> j , EXACT
+// s2.b[*] -> undefined , MAY
+// s2.c -> undefined , EXACT
+// s2.a -> i , EXACT
+// s2.b[0] -> j , EXACT
+// tab_s[*].b[*] -> undefined , EXACT
+// tab_s[*].a -> undefined , MAY
+// tab_s[*].c -> undefined , EXACT
+// tab_s[0].a -> i , EXACT
+
+   (tab_s[0].b)[0] = (s1.b)[0];
+
+// Points To:
+// s1.b[*] -> undefined , MAY
+// s1.c -> undefined , EXACT
+// s1.a -> i , EXACT
+// s1.b[0] -> j , EXACT
+// s2.b[*] -> undefined , MAY
+// s2.c -> undefined , EXACT
+// s2.a -> i , EXACT
+// s2.b[0] -> j , EXACT
+// tab_s[*].b[*] -> undefined , MAY
+// tab_s[*].a -> undefined , MAY
+// tab_s[*].c -> undefined , EXACT
+// tab_s[0].a -> i , EXACT
+// tab_s[0].b[0] -> j , EXACT
+
+   return 0;
+}

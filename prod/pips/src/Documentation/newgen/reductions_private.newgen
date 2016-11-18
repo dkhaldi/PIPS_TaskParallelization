@@ -1,0 +1,28 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import reference from "ri.newgen" ;
+import preference from "ri.newgen" ;
+import entity from "ri.newgen" ;
+import statement from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+pstatement_reductions = persistent statement->reductions ;
+reduction_operator = { none , min , max , sum , csum , prod , and , or , bitwise_and , bitwise_or , bitwise_xor , eqv, neqv} ;
+reduction = reference x op:reduction_operator x dependences:entity* x trusted:preference* ;
+reductions = list:reduction* ;

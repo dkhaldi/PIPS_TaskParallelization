@@ -1,0 +1,133 @@
+
+Cumulated Effects
+
+void struct29()
+{
+   struct foo {
+      int N1;
+   } s;
+   int i;
+//             <    is written>: s.N1
+   s.N1 = 10;
+//             <    is read   >: s.N1
+   double a[s.N1];
+//             <may be read   >: i
+//             <may be written>: a[*]
+//             <    is read   >: s.N1
+//             <    is written>: i
+   for(i = 0; i <= s.N1-1; i += 1)
+//             <may be written>: a[*]
+//             <    is read   >: i s.N1
+      a[i] = 0.;
+//             <    is read   >: s.N1
+   foo(s.N1);
+   return;
+}
+
+Transformers
+
+
+//  T() {}
+
+void struct29()
+{
+
+//  T() {}
+
+   struct foo {
+      int N1;
+   } s;
+
+//  T() {}
+
+   int i;
+
+//  T(s[N1]) {s[N1]==10}
+
+   s.N1 = 10;
+
+//  T() {}
+
+   double a[s.N1];
+
+//  T(i) {0<=i, i+1<=s[N1]}
+
+   for(i = 0; i <= s.N1-1; i += 1)
+
+//  T() {}
+
+      a[i] = 0.;
+
+//  T() {}
+
+   foo(s.N1);
+
+//  T() {}
+
+   return;
+}
+
+Preconditions
+
+
+//  P() {}
+
+void struct29()
+{
+
+//  P() {}
+
+   struct foo {
+      int N1;
+   } s;
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+   s.N1 = 10;
+
+//  P(s[N1]) {s[N1]==10}
+
+   double a[s.N1];
+
+//  P(s[N1]) {s[N1]==10}
+
+   for(i = 0; i <= s.N1-1; i += 1)
+
+//  P(i,s[N1]) {s[N1]==10, 0<=i, i<=9}
+
+      a[i] = 0.;
+
+//  P(i,s[N1]) {s[N1]==10, 0<=i, i<=10}
+
+   foo(s.N1);
+
+//  P(i,s[N1]) {s[N1]==10, 0<=i, i<=10}
+
+   return;
+}
+
+//  P() {}
+
+void foo()
+{
+}
+
+Constant propagation/partial evaluation
+
+void struct29()
+{
+   struct foo {
+      int N1;
+   } s;
+   int i;
+   s.N1 = 10;
+   double a[s.N1];
+   for(i = 0; i <= s.N1-1; i += 1)
+      a[i] = 0.;
+   foo(s.N1);
+   return;
+}

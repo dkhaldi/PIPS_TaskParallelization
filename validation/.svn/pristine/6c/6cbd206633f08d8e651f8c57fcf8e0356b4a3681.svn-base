@@ -1,0 +1,27 @@
+
+POINTS-TO
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_1[0][0] , MAY
+
+
+// Points To OUT:
+// p -> _p_1[0][0] , EXACT
+
+int ptr_to_array03(int (*p)[10])
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1[0][0] , MAY
+
+   (*p)[3] = 1;
+
+// Points To:
+// p -> _p_1[0][0] , EXACT
+
+
+   return 0;
+}

@@ -1,0 +1,5 @@
+
+PRECONDITIONS with SEMANTICS_ANALYZE_CONSTANT_PATH at TRUE is not enough accurent (and correct) to have good result
+so CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS will make false positive
+
+CHECK_INITIALIZE_VLA_WITH_REGIONS may have good result

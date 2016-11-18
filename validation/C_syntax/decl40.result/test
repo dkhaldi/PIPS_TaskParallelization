@@ -1,0 +1,10 @@
+int foo(void)
+{
+   // external declaration stuttering...
+   extern int bla(void);                                                /*0004*/
+   extern int bla(void);                                                /*0005*/
+   bla();                                                               /*0006*/
+}
+#
+# compile generated decl40
+#

@@ -1,0 +1,73 @@
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+
+// Points To: none
+
+   int *pi;
+
+// Points To:
+// pi -> undefined , EXACT
+
+   int *qi;
+
+// Points To:
+// pi -> undefined , EXACT
+// qi -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// pi -> undefined , EXACT
+// qi -> undefined , EXACT
+
+
+   pi = (int *) malloc(sizeof(int));
+
+// Points To:
+// pi -> *HEAP*_l_11 , MAY
+// qi -> undefined , EXACT
+
+   if (i>0)
+
+// Points To:
+// pi -> *HEAP*_l_11 , MAY
+// qi -> undefined , EXACT
+
+      qi = pi;
+   else
+
+// Points To:
+// pi -> *HEAP*_l_11 , MAY
+// qi -> undefined , EXACT
+
+      qi = &i;
+
+// Points To:
+// pi -> *HEAP*_l_11 , MAY
+// qi -> *HEAP*_l_11 , MAY
+// qi -> i , MAY
+
+   free(pi);
+
+// Points To:
+// pi -> undefined , EXACT
+// qi -> *HEAP*_l_11 , MAY
+// qi -> undefined , MAY
+// qi -> i , MAY
+
+
+   return 0;
+}
+
+Warnings and errors: Check that the potential dangling pointer is detected?
+It cannot be detected with our current heap model and without alias analysis.
+

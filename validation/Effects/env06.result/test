@@ -1,0 +1,119 @@
+
+Init Code
+
+int env06()
+{
+   g = 0;
+   return g;
+}
+int main()
+{
+   return env06();
+}
+
+PROPER_EFFECTS
+
+int env06()
+{
+//             <    is written>: g
+//             <    is referenced>: g
+   g = 0;
+//             <    is read   >: g
+//             <    is referenced>: g
+   return g;
+}
+int main()
+{
+//             <    is read   >: g
+//             <    is written>: g
+//             <    is referenced>: g
+   return env06();
+}
+
+CUMULATED_EFFECTS
+
+//             <    is read   >: g
+//             <    is written>: g
+//             <    is referenced>: g
+int env06()
+{
+//             <    is written>: g
+//             <    is referenced>: g
+   g = 0;
+//             <    is read   >: g
+//             <    is referenced>: g
+   return g;
+}
+//             <    is read   >: g
+//             <    is written>: g
+//             <    is referenced>: g
+int main()
+{
+//             <    is read   >: g
+//             <    is written>: g
+//             <    is referenced>: g
+   return env06();
+}
+
+IN_EFFECTS
+
+int env06()
+{
+   g = 0;
+//             <    is imported>: g
+   return g;
+}
+//             <    is imported>: g
+int main()
+{
+//             <    is imported>: g
+   return env06();
+}
+
+OUT_EFFECTS
+
+int env06()
+{
+//             <    is exported>: g
+   g = 0;
+   return g;
+}
+int main()
+{
+   return env06();
+}
+
+REGIONS
+
+
+//  <g-R-EXACT-{}>
+//  <g-W-EXACT-{}>
+
+int env06()
+{
+
+//  <g-RE-EXACT-{}>
+//  <g-W-EXACT-{}>
+
+   g = 0;
+
+//  <g-R-EXACT-{}>
+//  <g-RE-EXACT-{}>
+
+   return g;
+}
+
+//  <g-R-EXACT-{}>
+//  <g-W-EXACT-{}>
+
+int main()
+{
+
+//  <g-R-EXACT-{}>
+//  <g-W-EXACT-{}>
+
+   return env06();
+}
+
+Warnings
+

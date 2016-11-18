@@ -1,0 +1,2988 @@
+
+bootstrap_stubs > PROGRAM.stubs
+
+flag_as_stub                     > PROGRAM.stubs
+    < PROGRAM.stubs
+
+initializer                     > MODULE.user_file
+    > MODULE.initial_file
+
+filter_file                     > MODULE.source_file
+    < MODULE.initial_file
+    < MODULE.user_file
+
+c_initializer                     > MODULE.c_source_file
+    > COMPILATION_UNIT.c_source_file
+    > MODULE.input_file_name
+
+unsplit                         > PROGRAM.user_file
+    < ALL.user_file
+    < ALL.printed_file
+
+unsplit_parsed                  > PROGRAM.user_file
+    < ALL.user_file
+    < ALL.parsed_printed_file
+
+bootstrap                       > PROGRAM.entities
+
+parser                          > MODULE.parsed_code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.source_file
+
+parsed_symbol_table        > MODULE.parsed_symbol_table_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+
+hpfc_parser                     > MODULE.parsed_code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.hpfc_filtered_file
+
+compilation_unit_parser         > COMPILATION_UNIT.declarations
+    < COMPILATION_UNIT.c_source_file
+
+c_parser                        > MODULE.parsed_code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.c_source_file
+    < MODULE.input_file_name
+    < COMPILATION_UNIT.declarations
+
+controlizer                     > MODULE.code
+    < PROGRAM.entities
+    < MODULE.parsed_code
+
+new_controlizer                     > MODULE.code
+    < PROGRAM.entities
+    < MODULE.parsed_code
+
+symbol_table        > MODULE.symbol_table_file
+    < PROGRAM.entities
+    < MODULE.code
+
+simple_xpath_test > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+prepend_comment > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+prepend_call > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+
+add_pragma > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+clear_pragma > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+pragma_outliner      >     MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.regions
+    < CALLEES.summary_regions
+    < MODULE.summary_regions
+    < MODULE.transformers
+    < MODULE.preconditions
+
+remove_useless_label > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+callgraph                       > ALL.callers
+    > ALL.height
+    > ALL.depth
+    < ALL.callees
+
+graph_of_calls               > MODULE.dvcg_file
+    < ALL.callees
+
+full_graph_of_calls          > PROGRAM.dvcg_file
+    < ALL.callees
+
+proper_pointer_effects                  > MODULE.proper_pointer_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.summary_pointer_effects
+
+proper_effects                  > MODULE.proper_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.summary_effects
+
+proper_effects_with_points_to > MODULE.proper_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.points_to
+    < CALLEES.summary_effects
+
+proper_effects_with_pointer_values > MODULE.proper_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.simple_pointer_values
+    < CALLEES.summary_effects
+
+filter_proper_effects         > MODULE.filtered_proper_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < CALLEES.summary_effects
+
+cumulated_effects            > MODULE.cumulated_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+
+cumulated_effects_with_points_to        > MODULE.cumulated_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+
+cumulated_effects_with_pointer_values   > MODULE.cumulated_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+
+cumulated_pointer_effects   > MODULE.cumulated_pointer_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_pointer_effects
+
+cumulated_pointer_effects_with_points_to > MODULE.cumulated_pointer_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_pointer_effects
+    < MODULE.points_to
+
+cumulated_pointer_effects_with_pointer_values > MODULE.cumulated_pointer_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_pointer_effects
+    < MODULE.simple_pointer_values
+
+summary_pointer_effects                 > MODULE.summary_pointer_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_pointer_effects
+
+summary_effects                 > MODULE.summary_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+in_effects > MODULE.in_effects
+    > MODULE.cumulated_in_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < CALLEES.in_summary_effects
+
+in_summary_effects > MODULE.in_summary_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_effects
+
+out_summary_effects > MODULE.out_summary_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLERS.out_effects
+
+out_effects > MODULE.out_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.out_summary_effects
+    < MODULE.cumulated_in_effects
+
+proper_references       > MODULE.proper_references
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.summary_effects
+
+cumulated_references    > MODULE.cumulated_references
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_references
+
+live_out_summary_paths     > MODULE.live_out_summary_paths
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLERS.live_out_paths
+
+live_paths     > MODULE.live_in_paths
+    > MODULE.live_out_paths
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.in_effects
+    < MODULE.live_out_summary_paths
+
+live_in_summary_paths     > MODULE.live_in_summary_paths
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.live_in_paths
+
+proper_reductions > MODULE.proper_reductions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_references
+    < CALLEES.summary_effects
+    < CALLEES.summary_reductions
+
+cumulated_reductions > MODULE.cumulated_reductions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_references
+    < MODULE.cumulated_effects
+    < MODULE.proper_reductions
+
+summary_reductions > MODULE.summary_reductions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_reductions
+    < MODULE.summary_effects
+
+loop_reductions > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_reductions
+
+reduction_propagation > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_reductions
+    < MODULE.dg
+
+reduction_detection > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+atomic_chains                   > MODULE.chains
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+
+region_chains                   > MODULE.chains
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_regions
+
+in_out_regions_chains           > MODULE.chains
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+
+rice_fast_dependence_graph      > MODULE.dg
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.chains
+    < MODULE.cumulated_effects
+
+rice_full_dependence_graph      > MODULE.dg
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.chains
+    < MODULE.cumulated_effects
+
+rice_semantics_dependence_graph > MODULE.dg
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.chains
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+rice_regions_dependence_graph      > MODULE.dg
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.chains
+    < MODULE.cumulated_effects
+
+flinter                         > MODULE.flinted_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.code
+    < MODULE.proper_effects
+    < MODULE.chains
+
+loop_statistics > MODULE.stats_file
+    < PROGRAM.entities
+    < MODULE.code
+
+transformers_intra_fast         > MODULE.transformers
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.proper_effects
+
+transformers_intra_full         > MODULE.transformers
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.proper_effects
+
+transformers_inter_fast         > MODULE.transformers
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < CALLEES.summary_transformer
+    < MODULE.proper_effects
+    < PROGRAM.program_precondition
+
+transformers_inter_full         > MODULE.transformers
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < CALLEES.summary_transformer
+    < MODULE.proper_effects
+    < PROGRAM.program_precondition
+
+transformers_inter_full_with_points_to         > MODULE.transformers
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.points_to
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < CALLEES.summary_transformer
+    < MODULE.proper_effects
+    < PROGRAM.program_precondition
+
+refine_transformers         > MODULE.transformers
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < CALLEES.summary_transformer
+    < MODULE.proper_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.summary_precondition
+    < PROGRAM.program_precondition
+
+summary_transformer             > MODULE.summary_transformer
+    < PROGRAM.entities
+    < MODULE.transformers
+    < MODULE.summary_effects
+
+initial_precondition     > MODULE.initial_precondition
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+program_precondition     > PROGRAM.program_precondition
+    < PROGRAM.entities
+    < ALL.initial_precondition
+
+intraprocedural_summary_precondition            > MODULE.summary_precondition
+    < PROGRAM.entities
+    < MODULE.initial_precondition
+
+interprocedural_summary_precondition            > MODULE.summary_precondition
+    < PROGRAM.entities
+    < PROGRAM.program_precondition
+    < CALLERS.preconditions
+    < MODULE.callers
+
+summary_precondition            > MODULE.summary_precondition
+    < PROGRAM.entities
+    < CALLERS.preconditions
+    < MODULE.callers
+
+preconditions_intra            > MODULE.preconditions
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.summary_effects
+    < MODULE.summary_transformer
+    < MODULE.summary_precondition
+    < MODULE.code
+
+preconditions_intra_fast            > MODULE.preconditions
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.summary_effects
+    < MODULE.summary_transformer
+    < MODULE.summary_precondition
+    < MODULE.code
+
+preconditions_inter_fast        > MODULE.preconditions
+    < PROGRAM.entities
+    < PROGRAM.program_precondition
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.summary_precondition
+    < MODULE.summary_effects
+    < CALLEES.summary_effects
+    < MODULE.summary_transformer
+
+preconditions_inter_full        > MODULE.preconditions
+    < PROGRAM.entities
+    < PROGRAM.program_precondition
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.summary_precondition
+    < MODULE.summary_effects
+    < CALLEES.summary_transformer
+    < MODULE.summary_transformer
+
+total_preconditions_intra            > MODULE.total_preconditions
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.summary_effects
+    < MODULE.summary_transformer
+    < MODULE.code
+
+total_preconditions_inter        > MODULE.total_preconditions
+    < PROGRAM.entities
+    < PROGRAM.program_postcondition
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.summary_total_postcondition
+    < MODULE.summary_effects
+    < CALLEES.summary_effects
+    < MODULE.summary_transformer
+
+summary_total_precondition            > MODULE.summary_total_precondition
+    < PROGRAM.entities
+    < CALLERS.total_preconditions
+
+summary_total_postcondition            > MODULE.summary_total_postcondition
+    < PROGRAM.entities
+    < CALLERS.total_preconditions
+    < MODULE.callers
+
+program_postcondition     > PROGRAM.program_postcondition
+
+path_transformer                 > MODULE.path_transformer_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+continuation_conditions > MODULE.must_continuation
+    > MODULE.may_continuation
+    > MODULE.must_summary_continuation
+    > MODULE.may_summary_continuation
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < CALLEES.must_summary_continuation
+    < CALLEES.may_summary_continuation
+
+uniform_complexities                    > MODULE.complexities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < CALLEES.summary_complexity
+
+summary_complexity              > MODULE.summary_complexity
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.complexities
+
+fp_complexities                    > MODULE.complexities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < CALLEES.summary_complexity
+
+any_complexities                    > MODULE.complexities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < CALLEES.summary_complexity
+
+may_pointer_regions             > MODULE.proper_pointer_regions
+    > MODULE.pointer_regions
+    > MODULE.inv_pointer_regions
+    > MODULE.useful_variables_pointer_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < CALLEES.summary_pointer_regions
+
+may_regions                     > MODULE.proper_regions
+    > MODULE.regions
+    > MODULE.inv_regions
+    > MODULE.useful_variables_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < CALLEES.summary_regions
+
+must_pointer_regions            > MODULE.proper_pointer_regions
+    > MODULE.pointer_regions
+    > MODULE.inv_pointer_regions
+    > MODULE.useful_variables_pointer_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < CALLEES.summary_pointer_regions
+
+must_pointer_regions_with_points_to > MODULE.proper_pointer_regions
+    > MODULE.pointer_regions
+    > MODULE.inv_pointer_regions
+    > MODULE.useful_variables_pointer_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.points_to
+    < CALLEES.summary_pointer_regions
+
+must_regions                    > MODULE.proper_regions
+    > MODULE.regions
+    > MODULE.inv_regions
+    > MODULE.useful_variables_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < CALLEES.summary_regions
+
+must_regions_with_points_to     > MODULE.proper_regions
+    > MODULE.regions
+    > MODULE.inv_regions
+    > MODULE.useful_variables_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.points_to
+    < MODULE.transformers
+    < MODULE.preconditions
+    < CALLEES.summary_regions
+
+must_regions_with_pointer_values > MODULE.proper_regions
+    > MODULE.regions
+    > MODULE.inv_regions
+    > MODULE.useful_variables_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.simple_pointer_values
+    < MODULE.transformers
+    < MODULE.preconditions
+    < CALLEES.summary_regions
+
+summary_pointer_regions                 > MODULE.summary_pointer_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.pointer_regions
+
+summary_regions                 > MODULE.summary_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+
+in_regions                      > MODULE.in_regions
+    > MODULE.cumulated_in_regions
+    > MODULE.inv_in_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.summary_effects
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.regions
+    < MODULE.inv_regions
+    < CALLEES.in_summary_regions
+
+in_summary_regions              > MODULE.in_summary_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.in_regions
+
+out_summary_regions             > MODULE.out_summary_regions
+    < PROGRAM.entities
+    < CALLERS.out_regions
+
+out_regions                     > MODULE.out_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.regions
+    < MODULE.inv_regions
+    < MODULE.summary_effects
+    < MODULE.cumulated_effects
+    < MODULE.cumulated_in_regions
+    < MODULE.inv_in_regions
+    < MODULE.out_summary_regions
+
+in_alias_pairs > MODULE.in_alias_pairs
+    < PROGRAM.entities
+    < MODULE.callers
+    < MODULE.in_summary_regions
+    < CALLERS.code
+    < CALLERS.cumulated_effects
+    < CALLERS.preconditions
+
+out_alias_pairs > MODULE.out_alias_pairs
+    < PROGRAM.entities
+    < MODULE.callers
+    < MODULE.out_summary_regions
+    < CALLERS.code
+    < CALLERS.cumulated_effects
+    < CALLERS.preconditions
+
+alias_lists > MODULE.alias_lists
+    < PROGRAM.entities
+    < MODULE.in_alias_pairs
+    < MODULE.out_alias_pairs
+    < CALLEES.alias_lists
+
+alias_classes > MODULE.alias_classes
+    < PROGRAM.entities
+    < MODULE.alias_lists
+
+init_points_to_analysis > MODULE.init_points_to_list
+    < PROGRAM.entities
+    < MODULE.code
+
+interprocedural_points_to_analysis > MODULE.points_to
+    > MODULE.points_to_out
+    > MODULE.points_to_in
+    ! SELECT.proper_effects_with_points_to
+    ! SELECT.cumulated_effects_with_points_to
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.summary_effects
+    < CALLEES.points_to_out
+    < CALLEES.points_to_in
+
+fast_interprocedural_points_to_analysis > MODULE.points_to
+    > MODULE.points_to_out
+    > MODULE.points_to_in
+    ! SELECT.proper_effects_with_points_to
+    ! SELECT.cumulated_effects_with_points_to
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.summary_effects
+    < CALLEES.points_to_out
+    < CALLEES.points_to_in
+
+intraprocedural_points_to_analysis > MODULE.points_to
+    > MODULE.points_to_out
+    > MODULE.points_to_in
+    ! SELECT.proper_effects_with_points_to
+    ! SELECT.cumulated_effects_with_points_to
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.summary_effects
+    < CALLEES.points_to_out
+    < CALLEES.points_to_in
+
+initial_points_to     > MODULE.initial_points_to
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.points_to_out
+
+program_points_to     > PROGRAM.program_points_to
+    < PROGRAM.entities
+    < ALL.initial_points_to
+
+initial_simple_pointer_values > MODULE.initial_simple_pointer_values
+    < PROGRAM.entities
+    < MODULE.code
+
+program_simple_pointer_values > PROGRAM.program_simple_pointer_values
+    < PROGRAM.entities
+    < ALL.initial_simple_pointer_values
+
+simple_pointer_values > MODULE.simple_pointer_values
+    > MODULE.in_simple_pointer_values
+    > MODULE.out_simple_pointer_values
+    < PROGRAM.entities
+    < MODULE.code
+    < PROGRAM.program_simple_pointer_values
+    < CALLEES.in_simple_pointer_values
+    < CALLEES.out_simple_pointer_values
+
+print_in_alias_pairs > MODULE.alias_file
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.in_alias_pairs
+
+print_out_alias_pairs > MODULE.alias_file
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.out_alias_pairs
+
+print_alias_lists > MODULE.alias_file
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.alias_lists
+
+print_alias_classes > MODULE.alias_file
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.alias_classes
+
+complementary_sections > MODULE.compsec
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < CALLEES.summary_compsec
+
+summary_complementary_sections > MODULE.summary_compsec
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.compsec
+
+array_bound_check_bottom_up            > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+array_bound_check_top_down   > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+
+array_bound_check_interprocedural             > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+
+array_bound_check_instrumentation > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+alias_propagation           > MODULE.alias_associations
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLERS.alias_associations
+    < CALLERS.code
+
+alias_check   > MODULE.code
+    < PROGRAM.entities
+    < MODULE.alias_associations
+    < MODULE.cumulated_effects
+    < ALL.code
+
+used_before_set   > MODULE.ubs
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_regions
+    < CALLERS.ubs
+
+rice_all_dependence             > MODULE.parallelized_code
+    < PROGRAM.entities
+    < MODULE.code MODULE.dg
+
+rice_data_dependence            > MODULE.parallelized_code
+    < PROGRAM.entities
+    < MODULE.code MODULE.dg
+
+rice_cray                   > MODULE.parallelized_code
+    < PROGRAM.entities
+    < MODULE.code MODULE.dg
+
+coarse_grain_parallelization > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.preconditions
+    < MODULE.inv_regions
+
+coarse_grain_parallelization_with_reduction > MODULE.reduction_parallel_loops
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.cumulated_reductions
+    < MODULE.proper_reductions
+    < MODULE.inv_regions
+
+nest_parallelization                    > MODULE.parallelized_code
+    < PROGRAM.entities
+    < MODULE.code MODULE.dg
+
+internalize_parallel_code             > MODULE.code
+    < MODULE.parallelized_code
+
+computation_intensity > MODULE.code
+    < MODULE.code
+    < MODULE.regions
+    < MODULE.complexities
+
+limit_parallelism_using_complexity > MODULE.code
+    < MODULE.code
+    < MODULE.complexities
+
+limit_nested_parallelism          > MODULE.code
+    < MODULE.code
+
+simd_atomizer                      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+simdizer_auto_unroll        > MODULE.code
+    < PROGRAM.simd_treematch
+    < PROGRAM.simd_operator_mappings
+    < PROGRAM.entities
+    < MODULE.code
+
+loop_auto_unroll        > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+simdizer_auto_tile        > MODULE.code
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.code
+
+simd_remove_reductions      > MODULE.code
+    > MODULE.callees
+    ! MODULE.simdizer_init
+    < PROGRAM.entities
+    < MODULE.cumulated_reductions
+    < MODULE.code
+    < MODULE.dg
+
+redundant_load_store_elimination      > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.out_regions
+    < MODULE.chains
+
+deatomizer                  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.dg
+
+if_conversion_init                  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.summary_complexity
+
+if_conversion                  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+
+if_conversion_compact                  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.dg
+
+loop_nest_unswitching                  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+scalar_renaming           > MODULE.code
+    < PROGRAM.entities
+    < MODULE.dg
+    < MODULE.proper_effects
+
+simd_treematcher > PROGRAM.simd_treematch
+
+simd_operator_mappings > PROGRAM.simd_operator_mappings
+
+simdizer_init  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+simdizer                    > MODULE.code
+    > MODULE.callees
+    > PROGRAM.entities
+    ! MODULE.simdizer_init
+    < PROGRAM.simd_treematch
+    < PROGRAM.simd_operator_mappings
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.dg
+
+simd_memory_packing  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+wp65                            > MODULE.wp65_compute_file
+    > MODULE.wp65_bank_file
+    ! MODULE.privatize_module
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+    < MODULE.cumulated_effects
+    < MODULE.chains
+    < MODULE.proper_effects
+
+hpfc_filter             > MODULE.hpfc_filtered_file
+    < MODULE.source_file
+
+hpfc_init              > PROGRAM.entities
+    > PROGRAM.hpfc_status
+    < PROGRAM.entities
+
+hpfc_static_directives         > MODULE.code
+    > PROGRAM.hpfc_status
+    < PROGRAM.entities
+    < PROGRAM.hpfc_status
+    < MODULE.code
+
+hpfc_dynamic_directives         > MODULE.code
+    > PROGRAM.hpfc_status
+    < PROGRAM.entities
+    < PROGRAM.hpfc_status
+    < MODULE.code
+    < MODULE.proper_effects
+
+hpfc_compile           > MODULE.hpfc_host
+    > MODULE.hpfc_node
+    > MODULE.hpfc_parameters
+    > MODULE.hpfc_rtinit
+    > PROGRAM.hpfc_status
+    < PROGRAM.entities
+    < PROGRAM.hpfc_status
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.code
+    < MODULE.cumulated_references
+    < CALLEES.hpfc_host
+
+hpfc_close             > PROGRAM.hpfc_commons
+    ! SELECT.hpfc_parser
+    ! SELECT.must_regions
+    ! ALL.hpfc_static_directives
+    ! ALL.hpfc_dynamic_directives
+    < PROGRAM.entities
+    < PROGRAM.hpfc_status
+    < MAIN.hpfc_host
+
+hpfc_install            > PROGRAM.hpfc_installation
+    < PROGRAM.hpfc_commons
+
+hpfc_make
+
+hpfc_run
+
+step_parser                 > MODULE.step_directives
+    > MODULE.code
+    < MODULE.code
+
+step_analyse_init            > PROGRAM.step_comm
+
+step_analyse                 > PROGRAM.step_comm
+    > MODULE.step_send_regions
+    > MODULE.step_recv_regions
+    < PROGRAM.entities
+    < PROGRAM.step_comm
+    < MODULE.step_directives
+    < MODULE.code
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.chains
+    < CALLEES.code
+    < CALLEES.step_send_regions
+    < CALLEES.step_recv_regions
+
+step_compile               > MODULE.step_file
+    < PROGRAM.entities
+    < PROGRAM.step_comm
+    < MODULE.step_directives
+    < MODULE.code
+
+step_install
+    < ALL.step_file
+
+phrase_distributor_init                  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+phrase_distributor                       > MODULE.code
+    > MODULE.callees
+    ! MODULE.phrase_distributor_init
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.dg
+
+phrase_distributor_control_code          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.dg
+
+safescale_distributor_init                  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+safescale_distributor                  > MODULE.code
+    > MODULE.callees
+    ! MODULE.safescale_distributor_init
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+
+phrase_remove_dependences                      > MODULE.code
+    > MODULE.callees
+    ! MODULE.phrase_distributor_init
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.dg
+
+phrase_comEngine_distributor                       > MODULE.code
+    > MODULE.callees
+    ! MODULE.phrase_distributor_init
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.dg
+    < MODULE.summary_complexity
+
+isolate_statement > MODULE.code
+    > MODULE.callees
+    < MODULE.code
+    < MODULE.regions
+    < PROGRAM.entities
+
+gpu_xml_dump > MODULE.gpu_xml_file
+    < PROGRAM.entities
+    < MODULE.code
+
+delay_communications_inter                    > MODULE.code
+    > MODULE.callees
+    ! CALLEES.delay_communications_inter
+    ! MODULE.delay_load_communications_inter
+    ! MODULE.delay_store_communications_inter
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+    < MODULE.dg
+
+delay_load_communications_inter                    > MODULE.code
+    > MODULE.callees
+    > CALLERS.code
+    > CALLERS.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLERS.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.dg
+
+delay_store_communications_inter                    > MODULE.code
+    > MODULE.callees
+    > CALLERS.code
+    > CALLERS.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLERS.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.dg
+
+delay_communications_intra                    > MODULE.code
+    > MODULE.callees
+    ! MODULE.delay_load_communications_intra
+    ! MODULE.delay_store_communications_intra
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+    < MODULE.dg
+
+delay_load_communications_intra                    > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.dg
+
+delay_store_communications_intra                    > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.dg
+
+solve_hardware_constraints > MODULE.code
+    < MODULE.code
+    < MODULE.regions
+    < PROGRAM.entities
+
+bootstrap_kernels > PROGRAM.kernels
+
+flag_kernel > PROGRAM.kernels
+    < PROGRAM.kernels
+
+kernel_load_store > CALLERS.code
+    > CALLERS.callees
+    > PROGRAM.kernels
+    < PROGRAM.kernels
+    < CALLERS.code
+    < CALLERS.regions
+    < CALLERS.preconditions
+
+kernelize    > MODULE.code
+    > MODULE.callees
+    > PROGRAM.kernels
+    ! MODULE.privatize_module
+    ! MODULE.coarse_grain_parallelization
+    < PROGRAM.entities
+    < MODULE.code
+    < PROGRAM.kernels
+
+group_constants > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+
+normalize_microcode    > MODULE.code
+    > CALLERS.code
+    > COMPILATION_UNIT.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.callers
+    < MODULE.cumulated_effects
+
+terapix_warmup > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+terapix_remove_divide > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+kernel_data_mapping > MODULE.kernel_copy_in
+    > MODULE.kernel_copy_out
+    < PROGRAM.entities
+    < PROGRAM.kernels
+    < MODULE.code
+    < MODULE.summary_effects
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.callees
+    < MODULE.callers
+    < CALLEES.kernel_copy_out
+    < CALLEES.kernel_copy_in
+
+wrap_kernel_argument > CALLERS.code
+    > CALLERS.callees
+    < PROGRAM.entities
+    < CALLERS.code
+    < CALLERS.callees
+    < MODULE.callers
+
+gpu_ify                    > MODULE.code
+    > MODULE.callees
+    > PROGRAM.entities
+    < MODULE.privatized
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+gpu_loop_nest_annotate         > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+gpu_clear_annotations_on_loop_nest   > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+gpu_parallelize_annotated_loop_nest        > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+one_thread_parallelize > MODULE.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+
+gpu_promote_sequential > MODULE.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+
+gpu_qualify_pointers  > MODULE.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.callees
+
+taskify                        > MODULE.code
+    > MODULE.callees
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.privatized
+    < MODULE.regions
+
+generate_starpu_pragma         > MODULE.code
+    > MODULE.callees
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.privatized
+    < MODULE.regions
+
+scalopragma                    > MODULE.code
+    > MODULE.callees
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+scalopify                    > MODULE.code
+    > MODULE.callees
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+sesamify                    > MODULE.code
+    > MODULE.callees
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+sesam_buffers_processing    > MODULE.sesam_buffers_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+sequence_dependence_graph                       > MODULE.sdg
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.dg
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+hbdsc_parallelization                       > MODULE.sdg
+    < PROGRAM.entities                  > MODULE.schedule
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.sdg
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.complexities
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+bdsc_code_instrumentation                    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.chains
+    < MODULE.sdg
+    < MODULE.regions
+    < MODULE.complexities
+
+dsc_code_parallelization                    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.dg
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.complexities
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+spire_shared_unstructured_to_structured                   > MODULE.shared_spire_code
+    < PROGRAM.entities                                > MODULE.code
+    < MODULE.code
+    < MODULE.sdg
+    < MODULE.schedule
+
+spire_distributed_unstructured_to_structured                   > MODULE.distributed_spire_code
+    < PROGRAM.entities                                     > MODULE.code
+    < MODULE.code
+    < MODULE.schedule
+    < MODULE.sdg
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+
+openmp_task_generation                  > MODULE.parallelized_code
+    < PROGRAM.entities
+    < MODULE.shared_spire_code
+
+mpi_task_generation                  > MODULE.parallelized_code
+    < PROGRAM.entities
+    < MODULE.distributed_spire_code
+
+print_parallelizedMPI_code     > MODULE.parallelprinted_file
+    < PROGRAM.entities
+    < MODULE.parallelized_code
+
+flag_loops                    > MODULE.code
+    > MODULE.loops
+    < PROGRAM.entities
+    < MODULE.code
+
+print_loops > MODULE.loops_file
+    < MODULE.loops
+
+linearize_loop_range > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+distributer                    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+statement_insertion > MODULE.code
+    < PROGRAM.entities
+    < ALL.code
+    > ALL.code
+    < MODULE.regions
+    < MODULE.out_regions
+
+loop_expansion_init  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+loop_expansion  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+array_expansion > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+
+loop_fusion            > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.dg
+
+loop_fusion_with_regions            > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.preconditions
+    < MODULE.inv_regions
+    < MODULE.dg
+
+index_set_splitting      > MODULE.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+
+unroll                          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+full_unroll                          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+full_unroll_pragma                   > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+force_loop_fusion > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+strip_mine                          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+loop_interchange                            > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+loop_hyperplane                            > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+loop_tiling                            > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+symbolic_tiling > MODULE.code
+    ! MODULE.coarse_grain_parallelization
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+loop_normalize          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+guard_elimination       > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+tiling_sequence      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+invariant_code_motion             > MODULE.code
+    < PROGRAM.entities
+    < MODULE.proper_effects
+    < MODULE.code MODULE.dg
+
+partial_redundancy_elimination             > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+
+identity_elimination             > MODULE.code
+    < PROGRAM.entities
+    < MODULE.proper_effects
+    < MODULE.code
+
+identity_elimination_with_points_to > MODULE.code
+    < PROGRAM.entities
+    < MODULE.points_to
+    < MODULE.proper_effects
+    < MODULE.code
+
+simplify_control          > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.preconditions
+
+suppress_dead_code          > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.preconditions
+
+simplify_control_directly    > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+dead_code_elimination          > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.chains
+
+use_def_elimination          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.chains
+
+dead_code_elimination_with_out_regions          > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.preconditions
+    < MODULE.out_regions
+
+loop_bound_minimization_with_out_regions      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < MODULE.out_regions
+
+unspaghettify          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+restructure_control          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+recover_for_loop          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.transformers
+    < MODULE.summary_transformer
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+for_loop_to_do_loop          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+for_loop_to_while_loop          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+dowhile_to_while          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+spaghettify          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+full_spaghettify          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+stf                      > MODULE.source_file
+    < MODULE.source_file
+
+suppress_trivial_test          > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+fsm_generation        > MODULE.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+
+full_fsm_generation   > MODULE.code
+    > PROGRAM.entities
+    ! MODULE.full_spaghettify
+    ! MODULE.fsm_generation
+    < PROGRAM.entities
+    < MODULE.code
+
+fsm_split_state    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+fsm_merge_states    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+add_control_counters    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+atomizer                      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.dg
+
+simplify_subscripts > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+simplify_constant_address_expressions > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+simplify_complex > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+split_structures > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+new_atomizer                      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+generate_two_addresses_code > MODULE.code
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < PROGRAM.entities
+
+partial_eval                    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.preconditions
+
+old_reductions                      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+replace_reduction_with_atomic > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.reduction_parallel_loops
+    < MODULE.cumulated_reductions
+
+flag_parallel_reduced_loops_with_atomic > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.reduction_parallel_loops
+    < MODULE.cumulated_reductions
+
+flag_parallel_reduced_loops_with_openmp_directives > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.reduction_parallel_loops
+    < MODULE.cumulated_reductions
+
+forward_substitute      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.dg
+    < MODULE.cumulated_effects
+
+expression_substitution > MODULE.code
+    > MODULE.callee
+    < PROGRAM.entities
+    < ALL.code
+
+rename_operator > MODULE.code
+    < MODULE.code
+    < PROGRAM.entities
+
+linearize_array > MODULE.code
+    > COMPILATION_UNIT.code
+    > CALLERS.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < COMPILATION_UNIT.code
+    < CALLERS.code
+
+linearize_array_fortran > MODULE.code
+    > CALLERS.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLERS.code
+
+optimize_expressions    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.code
+
+instruction_selection > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+common_subexpression_elimination > MODULE.code
+    < PROGRAM.entities
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.code
+
+icm > MODULE.code
+    < PROGRAM.entities
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.code
+
+freia_aipo_compiler   > MODULE.code
+    > MODULE.callees
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+freia_remove_scalar_ww_deps > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+freia_spoc_compiler   > MODULE.code
+    > MODULE.callees
+    > MODULE.spoc_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+freia_unroll_while > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+freia_terapix_compiler  > MODULE.code
+    > MODULE.callees
+    > MODULE.terapix_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+freia_opencl_compiler  > MODULE.code
+    > MODULE.callees
+    > MODULE.opencl_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+freia_sigmac_compiler > MODULE.code
+    > MODULE.callees
+    > MODULE.sigmac_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+inlining      > CALLERS.c_source_file
+    > PROGRAM.entities
+    > MODULE.callers
+    ! MODULE.split_initializations
+    < PROGRAM.entities
+    < CALLERS.code
+    < CALLERS.printed_file
+    < MODULE.code
+    < MODULE.cumulated_effects
+    * ALL.restructure_control
+    * ALL.remove_useless_label
+
+inlining_simple      > CALLERS.c_source_file
+    > PROGRAM.entities
+    > MODULE.callers
+    ! MODULE.split_initializations
+    < PROGRAM.entities
+    < CALLERS.code
+    < CALLERS.printed_file
+    < MODULE.code
+    < MODULE.callers
+    * ALL.restructure_control
+    * ALL.remove_useless_label
+
+recompile_module > MODULE.c_source_file
+    < MODULE.code
+
+unfolding      > MODULE.c_source_file
+    > MODULE.callees
+    > PROGRAM.entities
+    ! CALLERS.split_initializations
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.printed_file
+    < MODULE.cumulated_effects
+    < CALLEES.code
+    * ALL.restructure_control
+    * ALL.remove_useless_label
+
+unfolding_simple      > MODULE.c_source_file
+    > MODULE.callees
+    > PROGRAM.entities
+    ! CALLERS.split_initializations
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.printed_file
+    < CALLEES.code
+    * ALL.restructure_control
+    * ALL.remove_useless_label
+
+outline      > MODULE.code
+    > PROGRAM.entities
+    < MODULE.privatized
+    < PROGRAM.entities
+    < MODULE.cumulated_effects
+    < MODULE.regions
+    < MODULE.code
+
+clone                   > CALLERS.code
+    > CALLERS.callees
+    < MODULE.code
+    < MODULE.callers
+    < MODULE.user_file
+    < CALLERS.callees
+    < CALLERS.code
+
+clone_substitute        > CALLERS.code
+    > CALLERS.callees
+    < MODULE.code
+    < MODULE.callers
+    < MODULE.user_file
+    < CALLERS.callees
+    < CALLERS.code
+
+clone_on_argument       > CALLERS.code
+    > CALLERS.callees
+    > MODULE.callers
+    < MODULE.code
+    < MODULE.callers
+    < MODULE.user_file
+    < CALLERS.callees
+    < CALLERS.preconditions
+    < CALLERS.code
+
+clone_only
+    < MODULE.code
+    < MODULE.user_file
+
+clean_declarations      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+clean_unused_dynamic_variables > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+force_register_declarations > PROGRAM.entities
+    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+remove_simple_scalar_pointers > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+array_resizing_top_down         > MODULE.new_declarations
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < CALLERS.code
+    < CALLERS.new_declarations
+    < CALLERS.preconditions
+
+array_resizing_bottom_up        > MODULE.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < MODULE.regions
+
+array_resizing_full_bottom_up        > MODULE.code
+    > PROGRAM.entities
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < MODULE.useful_variables_regions
+
+array_resizing_statistic   > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+scalarization  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+    < CALLEES.summary_effects
+
+constant_array_scalarization > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+quick_scalarization  > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.proper_effects
+    < MODULE.dg
+
+induction_substitution > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+strength_reduction > MODULE.code
+    > PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.transformers
+
+flatten_code > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+split_update_operator > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+split_initializations > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+set_return_type_as_typedef > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+cast_at_call_sites > CALLERS.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.callers
+    < CALLERS.code
+
+privatize_module                    > MODULE.code
+    > MODULE.privatized
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.chains
+
+privatize_module_even_globals       > MODULE.code
+    > MODULE.privatized
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+    < MODULE.chains
+    < MODULE.live_out_paths
+    < MODULE.live_in_paths
+    < CALLEES.summary_effects
+
+localize_declaration > MODULE.code
+    < MODULE.privatized
+    < PROGRAM.entities
+    < MODULE.code
+
+array_privatizer             > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+
+array_section_privatizer             > MODULE.code
+    > MODULE.privatized_regions
+    > MODULE.copy_out_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.transformers
+    < MODULE.preconditions
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+
+declarations_privatizer              > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.regions
+    < MODULE.in_regions
+    < MODULE.out_regions
+
+variable_expansion                    > MODULE.code
+    < MODULE.privatized
+    < PROGRAM.entities
+    < MODULE.code
+
+reduction_variable_expansion      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.cumulated_reductions
+    < MODULE.code
+
+reduction_atomization      > MODULE.code
+    < PROGRAM.entities
+    < MODULE.cumulated_reductions
+    < MODULE.code
+
+check_initialize_vla_with_preconditions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+
+check_initialize_vla_with_effects
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+check_initialize_vla_with_regions
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+
+initialize_vla_with_preconditions > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+
+initialize_vla_with_effects > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+
+initialize_vla_with_regions > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+
+freeze_variables                   > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.cumulated_effects
+
+type_checker            > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.code
+
+transformation_test    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+
+ompify_code             > MODULE.code
+    < MODULE.code
+
+omp_loop_parallel_threshold_set             > MODULE.code
+    < MODULE.code
+
+omp_merge_pragma             > MODULE.code
+    < MODULE.code
+
+print_source         > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+
+print_source_transformers         > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.transformers
+    < MODULE.summary_transformer
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_source_preconditions        > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.preconditions
+    < MODULE.summary_precondition
+    < MODULE.summary_effects
+    < MODULE.cumulated_effects
+
+print_source_total_preconditions        > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.total_preconditions
+    < MODULE.summary_precondition
+    < MODULE.summary_effects
+    < MODULE.cumulated_effects
+
+print_source_continuation_conditions   > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.must_continuation
+    < MODULE.may_continuation
+    < MODULE.must_summary_continuation
+    < MODULE.may_summary_continuation
+    < MODULE.cumulated_effects
+
+print_source_regions              > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_source_inv_regions              > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.inv_regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_source_in_regions              > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.in_regions
+    < MODULE.in_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_source_out_regions              > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.out_regions
+    < MODULE.out_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_source_complexities         > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.complexities
+    < MODULE.summary_complexity
+
+print_source_proper_effects       > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    <  MODULE.proper_effects
+
+print_source_cumulated_effects    > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_source_in_effects       > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_effects
+    < MODULE.in_summary_effects
+
+print_source_out_effects       > MODULE.parsed_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.out_effects
+    < MODULE.out_summary_effects
+
+html_prettyprint > MODULE.html_ir_file
+    < PROGRAM.entities
+    < MODULE.code
+
+html_prettyprint_symbol_table > PROGRAM.html_ir_file
+    < PROGRAM.entities
+    < MODULE.code
+
+print_code                      > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+
+print_code_transformers         > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.transformers
+    < MODULE.summary_transformer
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_initial_precondition  > MODULE.printed_file
+    < MODULE.initial_precondition
+    < PROGRAM.entities
+
+print_program_precondition  > PROGRAM.printed_file
+    < PROGRAM.program_precondition
+    < PROGRAM.entities
+
+print_code_complexities         > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.complexities
+    < MODULE.summary_complexity
+
+print_code_preconditions        > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < MODULE.summary_precondition
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_code_total_preconditions        > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.total_preconditions
+    < MODULE.summary_total_precondition
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_code_continuation_conditions   > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.parsed_code
+    < MODULE.must_continuation
+    < MODULE.may_continuation
+    < MODULE.must_summary_continuation
+    < MODULE.may_summary_continuation
+    < MODULE.cumulated_effects
+
+print_code_pointer_regions              > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.pointer_regions
+    < MODULE.summary_pointer_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_proper_pointer_regions          > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_pointer_regions
+    < MODULE.summary_pointer_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_inv_pointer_regions              > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.inv_pointer_regions
+    < MODULE.summary_pointer_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_regions              > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_proper_regions              > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_inv_regions              > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.inv_regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_in_regions              > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_regions
+    < MODULE.in_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_out_regions              > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.out_regions
+    < MODULE.out_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_privatized_regions       > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.privatized_regions
+    < MODULE.copy_out_regions
+
+print_code_complementary_sections > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.compsec
+    < MODULE.summary_compsec
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_proper_pointer_effects       > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_pointer_effects
+
+print_code_proper_effects       > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+
+print_code_proper_references       > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_references
+
+print_code_cumulated_pointer_effects    > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_pointer_effects
+    < MODULE.summary_pointer_effects
+
+print_code_cumulated_effects    > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_code_cumulated_references    > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_references
+
+print_code_in_effects       > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_effects
+    < MODULE.in_summary_effects
+
+print_code_out_effects       > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.out_effects
+    < MODULE.out_summary_effects
+
+print_code_live_in_paths    > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.live_in_paths
+    < MODULE.live_in_summary_paths
+
+print_code_live_out_paths    > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.live_out_paths
+    < MODULE.live_out_summary_paths
+
+print_code_proper_reductions > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_reductions
+
+print_code_cumulated_reductions > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_reductions
+    < MODULE.summary_reductions
+
+print_code_static_control       > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.static_control
+
+print_code_points_to_list      > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.points_to
+
+print_code_simple_pointer_values      > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.simple_pointer_values
+
+print_code_simple_gen_kill_pointer_values      > MODULE.printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.simple_gen_pointer_values
+    < MODULE.simple_kill_pointer_values
+
+print_code_as_a_graph                      > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+
+print_code_as_a_graph_transformers         > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.transformers
+    < MODULE.summary_transformer
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_code_as_a_graph_complexities         > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.complexities
+    < MODULE.summary_complexity
+
+print_code_as_a_graph_preconditions        > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < MODULE.summary_precondition
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_code_as_a_graph_total_preconditions        > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.total_preconditions
+    < MODULE.summary_total_postcondition
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_code_as_a_graph_regions              > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_as_a_graph_in_regions              > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.in_regions
+    < MODULE.in_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_as_a_graph_out_regions              > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.out_regions
+    < MODULE.out_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_code_as_a_graph_proper_effects       > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+
+print_code_as_a_graph_cumulated_effects    > MODULE.graph_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_parallelized77_code       > MODULE.parallelprinted_file
+    < PROGRAM.entities
+    < MODULE.parallelized_code
+
+print_parallelizedHPF_code     > MODULE.parallelprinted_file
+    < PROGRAM.entities
+    < MODULE.parallelized_code
+
+print_parallelizedOMP_code     > MODULE.parallelprinted_file
+    < PROGRAM.entities
+    < MODULE.parallelized_code
+
+print_parallelized90_code       > MODULE.parallelprinted_file
+    < PROGRAM.entities
+    < MODULE.parallelized_code
+
+print_parallelizedcray_code     > MODULE.parallelprinted_file
+    < PROGRAM.entities
+    < MODULE.parallelized_code
+    < MODULE.cumulated_effects
+
+print_call_graph                         > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+
+print_call_graph_with_complexities     > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.summary_complexity
+    < MODULE.complexities
+
+print_call_graph_with_preconditions      > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.summary_precondition
+    < MODULE.summary_effects
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+print_call_graph_with_total_preconditions      > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.summary_total_postcondition
+    < MODULE.summary_effects
+    < MODULE.total_preconditions
+    < MODULE.cumulated_effects
+
+print_call_graph_with_transformers       > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.summary_transformer
+    < MODULE.summary_effects
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_call_graph_with_proper_effects     > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.proper_effects
+
+print_call_graph_with_cumulated_effects  > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_call_graph_with_regions            > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_call_graph_with_in_regions         > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.in_regions
+    < MODULE.in_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_call_graph_with_out_regions        > MODULE.callgraph_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.callgraph_file
+    < MODULE.out_regions
+    < MODULE.out_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_dvicfg_with_filtered_proper_effects           > MODULE.dvicfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.dvicfg_file
+    < MODULE.proper_effects
+    < CALLEES.summary_effects
+
+print_icfg                      > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+
+print_icfg_with_complexities            > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_complexity
+    < MODULE.complexities
+
+print_icfg_with_preconditions            > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_precondition
+    < MODULE.summary_effects
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+print_icfg_with_total_preconditions            > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_total_postcondition
+    < MODULE.summary_effects
+    < MODULE.total_preconditions
+    < MODULE.cumulated_effects
+
+print_icfg_with_transformers             > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.transformers
+    < MODULE.summary_transformer
+    < MODULE.cumulated_effects
+
+print_icfg_with_proper_effects           > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.proper_effects
+
+print_icfg_with_filtered_proper_effects           > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.proper_effects
+    < CALLEES.summary_effects
+
+print_icfg_with_cumulated_effects        > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_icfg_with_regions                  > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_in_regions               > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.in_regions
+    < MODULE.in_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_out_regions              > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.out_regions
+    < MODULE.out_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_loops                    > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+
+print_icfg_with_loops_complexities       > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_complexity
+    < MODULE.complexities
+
+print_icfg_with_loops_preconditions      > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_precondition
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+print_icfg_with_loops_total_preconditions      > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_total_postcondition
+    < MODULE.total_preconditions
+    < MODULE.cumulated_effects
+
+print_icfg_with_loops_transformers       > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.transformers
+    < MODULE.summary_transformer
+    < MODULE.cumulated_effects
+
+print_icfg_with_loops_proper_effects     > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.proper_effects
+
+print_icfg_with_loops_cumulated_effects        > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_icfg_with_loops_regions            > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_loops_in_regions         > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.in_regions
+    < MODULE.in_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_loops_out_regions        > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.out_regions
+    < MODULE.out_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_control         > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+
+print_icfg_with_control_complexities    > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_complexity
+    < MODULE.complexities
+
+print_icfg_with_control_preconditions   > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_precondition
+    < MODULE.preconditions
+    < MODULE.cumulated_effects
+
+print_icfg_with_control_total_preconditions   > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.summary_total_postcondition
+    < MODULE.total_preconditions
+    < MODULE.cumulated_effects
+
+print_icfg_with_control_transformers    > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.transformers
+    < MODULE.summary_transformer
+    < MODULE.cumulated_effects
+
+print_icfg_with_control_proper_effects  > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.proper_effects
+
+print_icfg_with_control_cumulated_effects   > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+
+print_icfg_with_control_regions         > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.regions
+    < MODULE.summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_control_in_regions      > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.in_regions
+    < MODULE.in_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_icfg_with_control_out_regions     > MODULE.icfg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < CALLEES.icfg_file
+    < MODULE.out_regions
+    < MODULE.out_summary_regions
+    < MODULE.preconditions
+    < MODULE.transformers
+    < MODULE.cumulated_effects
+
+print_effective_dependence_graph          > MODULE.dg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+print_loop_carried_dependence_graph          > MODULE.dg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+print_whole_dependence_graph          > MODULE.dg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+print_filtered_dependence_graph          > MODULE.dg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+print_filtered_dependence_daVinci_graph          > MODULE.dvdg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+impact_check    > MODULE.code
+    < PROGRAM.entities
+    < MODULE.alias_associations
+    < MODULE.cumulated_effects
+    < MODULE.summary_effects
+    < MODULE.proper_effects
+    < MODULE.preconditions
+    < MODULE.summary_precondition
+    < MODULE.dg
+    < ALL.code
+
+print_chains_graph      > MODULE.dg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.chains
+
+print_dot_chains_graph  > MODULE.dotdg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.chains
+
+print_dot_dependence_graph          > MODULE.dotdg_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.dg
+
+print_crough  > MODULE.crough
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.summary_effects
+
+print_c_code  > MODULE.c_printed_file
+    < MODULE.crough
+
+print_interface  > MODULE.interface
+    < PROGRAM.entities
+    < MODULE.code
+
+print_code_smalltalk        > MODULE.smalltalk_code_file
+    < PROGRAM.entities
+    < MODULE.code
+
+pocc_prettyprinter      >    MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.static_control
+
+rstream_interface > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.static_control
+
+regions_to_loops > MODULE.code
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.summary_regions
+
+print_xml_code      > MODULE.xml_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.complexities
+    < MODULE.preconditions
+    < MODULE.regions
+
+print_xml_code_with_explicit_motif       > MODULE.xml_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+
+print_claire_code        > MODULE.claire_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.preconditions
+    < MODULE.regions
+
+print_claire_code_with_explicit_motif       > MODULE.claire_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+
+print_xml_application      > MODULE.xml_printed_file
+    < PROGRAM.entities
+    < MODULE.code
+    < MODULE.proper_effects
+    < MODULE.preconditions
+    < MODULE.regions
+    < MODULE.dg
+    < CALLEES.code
+    < CALLEES.summary_effects
+    < CALLEES.xml_printed_file
+
+static_controlize               > MODULE.static_control
+    < PROGRAM.entities
+    < MODULE.code

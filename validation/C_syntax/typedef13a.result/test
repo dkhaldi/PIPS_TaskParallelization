@@ -1,0 +1,12 @@
+
+// Initial code
+
+int main()
+{
+   int toto = 0;
+
+   return toto;
+}
+
+// Warnings
+

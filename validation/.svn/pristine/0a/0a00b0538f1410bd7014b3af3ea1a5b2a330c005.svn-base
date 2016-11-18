@@ -1,0 +1,13 @@
+
+      SUBROUTINE B(X, Y)
+      REAL U(10)
+
+      DOALL I = 1, 10                                                   0005
+         U(I) = 0.                                                      0006
+      ENDDO
+
+      PRINT *, X+Y                                                      0009
+
+      END
+### stderr
+PROPER_EFFECTS[USER_ERROR03] (check_user_call_site) [user error] Call to module B: insufficient number of actual arguments.

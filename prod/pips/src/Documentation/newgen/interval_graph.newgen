@@ -1,0 +1,22 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import control from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+interval_vertex_label = controls:control* ;

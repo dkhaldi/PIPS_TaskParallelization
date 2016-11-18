@@ -1,0 +1,18 @@
+
+int main()
+{
+   int *p, *q;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p
+
+   *p = 1;
+
+   q = p;
+   *q = 2;
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

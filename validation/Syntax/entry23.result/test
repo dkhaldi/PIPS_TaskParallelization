@@ -1,0 +1,56 @@
+(tp_parse) entry23: No such workspace
+setproperty MAXIMUM_USER_ERROR 25
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+Registering file entry23.f
+Splitting file    ./entry23.f
+  Module         ENTRY23
+  Module         INIBND
+Workspace entry23 created and opened.
+setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+echo
+
+echo Module ENTRY23
+Module ENTRY23
+echo
+
+Module ENTRY23 selected
+Request: build resource PRINTED_FILE for module ENTRY23.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(ENTRY23)
+  PARSER                         building   PARSED_CODE(ENTRY23)
+                                 building   CALLEES(ENTRY23)
+PARSER[ENTRY23] (Syntax) [user error] Parser error between lines 11 and 11
+Array sized with a non-integer expression
+PARSER[ENTRY23] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[ENTRY23] (catch_user_error) pass has failed
+PARSER[ENTRY23] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module ENTRY23.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+echo
+
+echo Entry INIBND
+Entry INIBND
+echo
+
+Module INIBND selected
+Request: build resource PRINTED_FILE for module INIBND.
+  FILTER_FILE                    building   SOURCE_FILE(INIBND)
+  PARSER                         building   PARSED_CODE(INIBND)
+                                 building   CALLEES(INIBND)
+PARSER[INIBND] (Syntax) [user error] Parser error between lines 11 and 11
+Array sized with a non-integer expression
+PARSER[INIBND] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[INIBND] (catch_user_error) pass has failed
+PARSER[INIBND] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module INIBND.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module ENTRY23.
+  Closing module INIBND.
+Closing program.
+Closing workspace.
+Workspace entry23 closed.
+Workspace entry23 deleted.
+Pips is done: tpips quit

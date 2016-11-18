@@ -1,0 +1,129 @@
+
+POINTS TO
+
+
+// Points To IN:
+// a -> *NULL_POINTER* , MAY
+// a -> _a_1[0][0] , MAY
+// b -> *NULL_POINTER* , MAY
+// b -> _b_2[0][0] , MAY
+// c -> *NULL_POINTER* , MAY
+// c -> _c_3[0][0] , MAY
+
+
+// Points To OUT: none
+
+void pointer10(double (*a)[10], double (*b)[10], double (*c)[10], int N)
+{
+
+// Points To: none
+
+   double (*w)[N];
+
+// Points To:
+// w -> *ANY_MODULE*:*NOWHERE* , EXACT
+
+   int i;
+
+// Points To:
+// a -> *NULL_POINTER* , MAY
+// a -> _a_1[0][0] , MAY
+// b -> *NULL_POINTER* , MAY
+// b -> _b_2[0][0] , MAY
+// c -> *NULL_POINTER* , MAY
+// c -> _c_3[0][0] , MAY
+// w -> *ANY_MODULE*:*NOWHERE* , EXACT
+
+   a!=(void *) 0&&b!=(void *) 0&&c!=(void *) 0?(void) 0:__assert_fail("a!=((void *)0) && b!=((void *)0) && c!=((void *)0)", "./pointer10.c", 9, (const char *) 0);
+
+// Points To:
+// a -> _a_1[0][0] , EXACT
+// b -> _b_2[0][0] , EXACT
+// c -> _c_3[0][0] , EXACT
+// w -> *ANY_MODULE*:*NOWHERE* , EXACT
+
+
+   w = (double (*)[N]) malloc(N*sizeof(double));
+
+// Points To:
+// a -> _a_1[0][0] , EXACT
+// b -> _b_2[0][0] , EXACT
+// c -> _c_3[0][0] , EXACT
+// w -> *HEAP*_l_11 , MAY
+
+
+   for(i = 0; i <= N-1; i += 1)
+
+// Points To:
+// a -> _a_1[0][0] , EXACT
+// b -> _b_2[0][0] , EXACT
+// c -> _c_3[0][0] , EXACT
+// w -> *HEAP*_l_11 , MAY
+
+      (*w)[i] = (*c)[i]+(*a)[i]*(*b)[i];
+
+// Points To:
+// a -> _a_1[0][0] , EXACT
+// b -> _b_2[0][0] , EXACT
+// c -> _c_3[0][0] , EXACT
+// w -> *HEAP*_l_11 , MAY
+
+
+   return;
+}
+
+Proper effects with points-to
+
+void pointer10(double (*a)[10], double (*b)[10], double (*c)[10], int N)
+{
+//             <    is declared>: w
+   double (*w)[N];
+//             <    is declared>: i
+   int i;
+//             <    is read   >: a b c
+//             <    is referenced>: a b c
+   a!=(void *) 0&&b!=(void *) 0&&c!=(void *) 0?(void) 0:__assert_fail("a!=((void *)0) && b!=((void *)0) && c!=((void *)0)", "./pointer10.c", 9, (const char *) 0);
+//             <    is read   >: N _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: w _MALLOC_EFFECTS:_MALLOC_
+//             <    is referenced>: N w
+
+   w = (double (*)[N]) malloc(N*sizeof(double));
+//             <    is read   >: N
+//             <    is written>: i
+//             <    is referenced>: N i
+
+   for(i = 0; i <= N-1; i += 1)
+//             <may be written>: *HEAP*_l_11[0][i]
+//             <    is read   >: N _a_1[0][i] _b_2[0][i] _c_3[0][i] a 
+//                               b c i w
+//             <    is referenced>: N a b c i w
+      (*w)[i] = (*c)[i]+(*a)[i]*(*b)[i];
+
+   return;
+}
+
+Parallel code
+
+void pointer10(double (*a)[10], double (*b)[10], double (*c)[10], int N)
+{
+   double (*w)[N];
+   int i;
+   a!=(void *) 0&&b!=(void *) 0&&c!=(void *) 0?(void) 0:__assert_fail("a!=((void *)0) && b!=((void *)0) && c!=((void *)0)", "./pointer10.c", 9, (const char *) 0);
+
+   w = (double (*)[N]) malloc(N*sizeof(double));
+
+#pragma omp parallel for 
+   for(i = 0; i <= N-1; i += 1)
+      (*w)[i] = (*c)[i]+(*a)[i]*(*b)[i];
+
+   return;
+}
+
+Warnings and errors
+
+unknown[unknown] (activate_phase) Rule `PROPER_EFFECTS' already active
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[pointer10] (points_to_set_block_projection) Memory leak for bucket "pointer10:*HEAP*_l_11".
+PROGRAM_PRECONDITION[] (get_main_entity) no main found, returning pointer10 instead
+TRANSFORMERS_INTER_FULL[pointer10] (transformer_add_any_relation_information) pointer type not analyzed for operator TOP-LEVEL:__C-non-equal__
+TRANSFORMERS_INTER_FULL[pointer10] (transformer_add_any_relation_information) pointer type not analyzed for operator TOP-LEVEL:__C-non-equal__
+TRANSFORMERS_INTER_FULL[pointer10] (transformer_add_any_relation_information) pointer type not analyzed for operator TOP-LEVEL:__C-non-equal__

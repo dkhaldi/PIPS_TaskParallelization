@@ -1,0 +1,20 @@
+/* Make sure the declaration lists are corrects
+ *
+ * To be checked in PARSED_CODE
+ */
+
+struct s;                                                               /*0006*/
+// -> #s -> phv
+struct s {                                                              /*0007*/
+   int a;
+};
+// -> #s, phv, #s -> #s
+struct s a;                                                             /*0008*/
+// -> #s, a -> a
+struct s1 {                                                             /*0009*/
+   struct s f1;
+};
+// -> #s1, phv, #s -> #s1 
+struct s11 {                                                            /*0010*/
+   struct s f11;
+} a1;

@@ -1,0 +1,226 @@
+
+PROPER  EFFECTS 
+
+list * initialize()
+{
+   int *pi, i;
+//             <    is written>: l
+   list *l = (void *) 0, *nl;
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+   while (!feof(stdin)) {
+//             <may be read   >: stdin[0]
+//             <may be written>: i stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+      scanf("%d", &i);
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pi _MALLOC_EFFECTS:_MALLOC_
+      pi = malloc(sizeof(int));
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: i pi
+      *pi = i;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: nl _MALLOC_EFFECTS:_MALLOC_
+      nl = malloc(sizeof(list));
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: nl pi
+      nl->val = pi;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b1
+//             <    is read   >: l nl
+      nl->next = l;
+//             <    is read   >: nl
+//             <    is written>: l
+      l = nl;
+   }
+//             <    is read   >: l
+   return l;
+}
+
+POINTS-TO
+
+
+// Points To IN:
+// stdin -> *NULL* , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , MAY
+
+
+// Points To OUT:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// initialize -> *HEAP*_l_17 , MAY
+// initialize -> *NULL* , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+list * initialize()
+{
+
+// Points To: none
+
+   int *pi, i;
+
+// Points To:
+// pi -> undefined , EXACT
+
+   list *l = (void *) 0, *nl;
+
+// Points To:
+// l -> *NULL* , EXACT
+// nl -> undefined , EXACT
+// pi -> undefined , EXACT
+// stdin -> *NULL* , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , MAY
+
+   while (!feof(stdin)) {
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// nl -> undefined , MAY
+// pi -> *HEAP*_l_15 , MAY
+// pi -> undefined , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+      scanf("%d", &i);
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// nl -> undefined , MAY
+// pi -> *HEAP*_l_15 , MAY
+// pi -> undefined , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+      pi = malloc(sizeof(int));
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// nl -> undefined , MAY
+// pi -> *HEAP*_l_15 , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+      *pi = i;
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// nl -> undefined , MAY
+// pi -> *HEAP*_l_15 , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+      nl = malloc(sizeof(list));
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.val -> undefined , MAY
+// *HEAP*_l_17.next -> undefined , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// pi -> *HEAP*_l_15 , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+      nl->val = pi;
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> undefined , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// pi -> *HEAP*_l_15 , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+      nl->next = l;
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// pi -> *HEAP*_l_15 , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+      l = nl;
+   }
+
+// Points To:
+// *HEAP*_l_17.val -> *HEAP*_l_15 , MAY
+// *HEAP*_l_17.next -> *HEAP*_l_17 , MAY
+// *HEAP*_l_17.next -> *NULL* , MAY
+// l -> *HEAP*_l_17 , MAY
+// l -> *NULL* , MAY
+// nl -> *HEAP*_l_17 , MAY
+// nl -> undefined , MAY
+// pi -> *HEAP*_l_15 , MAY
+// pi -> undefined , MAY
+// stdin -> __IO_EFFECTS:IO_FILES[0] , EXACT
+
+   return l;
+}
+
+PROPER EFFECTS WITH POINTS TO
+
+list * initialize()
+{
+   int *pi, i;
+//             <    is written>: l
+   list *l = (void *) 0, *nl;
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+   while (!feof(stdin)) {
+//             <may be read   >: stdin[0]
+//             <may be written>: i stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+      scanf("%d", &i);
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: pi _MALLOC_EFFECTS:_MALLOC_
+      pi = malloc(sizeof(int));
+//             <may be written>: *HEAP*_l_15
+//             <    is read   >: i pi
+      *pi = i;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: nl _MALLOC_EFFECTS:_MALLOC_
+      nl = malloc(sizeof(list));
+//             <may be written>: *HEAP*_l_17.val
+//             <    is read   >: nl pi
+      nl->val = pi;
+//             <may be written>: *HEAP*_l_17.next
+//             <    is read   >: l nl
+      nl->next = l;
+//             <    is read   >: nl
+//             <    is written>: l
+      l = nl;
+   }
+//             <    is read   >: l
+   return l;
+}

@@ -1,0 +1,22 @@
+setenv WS=main03
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 9
+
+#setenv PRETTYPRINT_DEBUG_LEVEL 7
+
+#make PARSED_CODE[main]
+
+display PRINTED_FILE[main]
+
+close
+
+# delete $WS
+
+quit
+
+
+
+

@@ -1,0 +1,126 @@
+
+Cumulated Effects
+
+//             <    is written>: p.N1 p.N2 p.N3 p.N4 p.N5
+int init()
+{
+//             <    is written>: p.N1
+   p.N1 = 1;
+//             <    is written>: p.N2
+   p.N2 = 1;
+//             <    is written>: p.N3
+   p.N3 = 1;
+//             <    is written>: p.N4
+   p.N4 = 1;
+//             <    is written>: p.N5
+   p.N5 = 1;
+}
+//             <    is read   >: p
+//             <    is written>: p.N1 p.N2 p.N3 p.N4 p.N5
+void struct20()
+{
+//             <    is written>: p.N1 p.N2 p.N3 p.N4 p.N5
+   while (init()) {
+//             <    is read   >: p.N1 p.N3 p.N4
+      int A[p.N4][p.N3][p.N1];
+   }
+   return;
+}
+
+Transformers
+
+
+//  T(p[N1],p[N2],p[N3],p[N4],p[N5]) {p[N1]==1, p[N2]==1, p[N3]==1,
+//    p[N4]==1, p[N5]==1}
+
+int init()
+{
+
+//  T(p[N1]) {p[N1]==1}
+
+   p.N1 = 1;
+
+//  T(p[N2]) {p[N2]==1}
+
+   p.N2 = 1;
+
+//  T(p[N3]) {p[N3]==1}
+
+   p.N3 = 1;
+
+//  T(p[N4]) {p[N4]==1}
+
+   p.N4 = 1;
+
+//  T(p[N5]) {p[N5]==1}
+
+   p.N5 = 1;
+}
+
+//  T(p[N1],p[N2],p[N3],p[N4],p[N5]) {}
+
+void struct20()
+{
+
+//  T(p[N1],p[N2],p[N3],p[N4],p[N5]) {}
+
+   while (init()) {
+
+//  T() {}
+
+      int A[p.N4][p.N3][p.N1];
+   }
+
+//  T() {}
+
+   return;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int init()
+{
+
+//  P() {}
+
+   p.N1 = 1;
+
+//  P(p[N1]) {p[N1]==1}
+
+   p.N2 = 1;
+
+//  P(p[N1],p[N2]) {p[N1]==1, p[N2]==1}
+
+   p.N3 = 1;
+
+//  P(p[N1],p[N2],p[N3]) {p[N1]==1, p[N2]==1, p[N3]==1}
+
+   p.N4 = 1;
+
+//  P(p[N1],p[N2],p[N3],p[N4]) {p[N1]==1, p[N2]==1, p[N3]==1,
+//    p[N4]==1}
+
+   p.N5 = 1;
+}
+
+//  P() {}
+
+void struct20()
+{
+
+//  P() {}
+
+   while (init()) {
+
+//  P(p[N1],p[N2],p[N3],p[N4],p[N5]) {}
+
+      int A[p.N4][p.N3][p.N1];
+   }
+
+//  P(p[N1],p[N2],p[N3],p[N4],p[N5]) {}
+
+   return;
+}

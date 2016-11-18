@@ -1,0 +1,353 @@
+
+Initial code
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+   int n = 100;
+   int a[n], b[n];
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      // Ensure region IN for guard
+      for(i = 0; i <= n-1; i += 1)
+         a[i] = i;
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      // i goes over n ! (avoid precondition optimization)
+      for(i = 0; i <= n+10-1; i += 1)
+         guard(i, n, a, b);
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      
+      // Ensure region OUT for guard
+      for(i = 0; i <= n-1; i += 1)
+         printf("%d\n", b[i]);
+      // END BLOCK
+   }
+   // END BLOCK
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   // BEGIN BLOCK
+
+// Points To: none
+
+   int n = 100;
+
+// Points To: none
+
+   int a[n], b[n];
+   {
+
+// Points To: none
+
+      // BEGIN BLOCK
+
+// Points To: none
+
+      int i;
+
+// Points To: none
+
+      
+      // Ensure region IN for guard
+      for(i = 0; i <= n-1; i += 1)
+
+// Points To: none
+
+         a[i] = i;
+      // END BLOCK
+   }
+   {
+
+// Points To: none
+
+      // BEGIN BLOCK
+
+// Points To: none
+
+      int i;
+
+// Points To: none
+
+      
+      // i goes over n ! (avoid precondition optimization)
+      for(i = 0; i <= n+10-1; i += 1)
+
+// Points To: none
+
+         guard(i, n, a, b);
+      // END BLOCK
+   }
+   {
+
+// Points To: none
+
+      // BEGIN BLOCK
+
+// Points To: none
+
+      int i;
+
+// Points To: none
+
+      
+      
+      // Ensure region OUT for guard
+      for(i = 0; i <= n-1; i += 1)
+
+// Points To: none
+
+         printf("%d\n", b[i]);
+      // END BLOCK
+   }
+   // END BLOCK
+}
+
+Proper effects
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+//             <    is written>: n
+   int n = 100;
+//             <    is read   >: n
+   int a[n], b[n];
+   {
+      // BEGIN BLOCK
+      int i;
+//             <    is read   >: n
+//             <    is written>: 0`1`i
+      
+      // Ensure region IN for guard
+      for(i = 0; i <= n-1; i += 1)
+//             <    is read   >: 0`1`i n
+//             <    is written>: a[i]
+         a[i] = i;
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+//             <    is read   >: n
+//             <    is written>: 0`3`i
+      
+      // i goes over n ! (avoid precondition optimization)
+      for(i = 0; i <= n+10-1; i += 1)
+//             <may be read   >: a[*]
+//             <may be written>: b[*]
+//             <    is read   >: 0`3`i n
+         guard(i, n, a, b);
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+//             <    is read   >: n
+//             <    is written>: 0`5`i
+      
+      
+      // Ensure region OUT for guard
+      for(i = 0; i <= n-1; i += 1)
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: b[i] 0`5`i n stdout 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+         printf("%d\n", b[i]);
+      // END BLOCK
+   }
+   // END BLOCK
+}
+
+Cumulated effects
+
+//             <may be read   >: stdout stdout[0] __IO_EFFECTS:LUNS[1]
+//             <may be written>: stdout[0] __IO_EFFECTS:LUNS[1]
+int main(int argc, char **argv)
+{
+//             <may be read   >: stdout stdout[0] __IO_EFFECTS:LUNS[1]
+//             <may be written>: stdout[0] __IO_EFFECTS:LUNS[1]
+   // BEGIN BLOCK
+//             <    is written>: n
+   int n = 100;
+//             <    is read   >: n
+   int a[n], b[n];
+   {
+//             <may be written>: a[*]
+//             <    is read   >: n
+      // BEGIN BLOCK
+      int i;
+//             <may be read   >: 0`1`i
+//             <may be written>: a[*]
+//             <    is read   >: n
+//             <    is written>: 0`1`i
+      
+      // Ensure region IN for guard
+      for(i = 0; i <= n-1; i += 1)
+//             <may be written>: a[*]
+//             <    is read   >: 0`1`i n
+         a[i] = i;
+      // END BLOCK
+   }
+   {
+//             <may be read   >: a[*]
+//             <may be written>: b[*]
+//             <    is read   >: n
+      // BEGIN BLOCK
+      int i;
+//             <may be read   >: a[*] 0`3`i
+//             <may be written>: b[*]
+//             <    is read   >: n
+//             <    is written>: 0`3`i
+      
+      // i goes over n ! (avoid precondition optimization)
+      for(i = 0; i <= n+10-1; i += 1)
+//             <may be read   >: a[*]
+//             <may be written>: b[*]
+//             <    is read   >: 0`3`i n
+         guard(i, n, a, b);
+      // END BLOCK
+   }
+   {
+//             <may be read   >: b[*] stdout stdout[0] 
+//                               __IO_EFFECTS:LUNS[1]
+//             <may be written>: stdout[0] __IO_EFFECTS:LUNS[1]
+//             <    is read   >: n
+      // BEGIN BLOCK
+      int i;
+//             <may be read   >: b[*] 0`5`i stdout stdout[0] 
+//                               __IO_EFFECTS:LUNS[1]
+//             <may be written>: stdout[0] __IO_EFFECTS:LUNS[1]
+//             <    is read   >: n
+//             <    is written>: 0`5`i
+      
+      
+      // Ensure region OUT for guard
+      for(i = 0; i <= n-1; i += 1)
+//             <may be read   >: b[*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: 0`5`i n stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+         printf("%d\n", b[i]);
+      // END BLOCK
+   }
+   // END BLOCK
+}
+
+RW regions
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+   int n = 100;
+   int a[n], b[n];
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      // Ensure region IN for guard
+      for(i = 0; i <= n-1; i += 1)
+
+//  <a[PHI1]-W-EXACT-{PHI1==0`1`i, n==100, 0<=0`1`i, 0`1`i<=99}>
+
+         a[i] = i;
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      // i goes over n ! (avoid precondition optimization)
+      for(i = 0; i <= n+10-1; i += 1)
+
+//  <a[PHI1]-R-MAY-{PHI1==0`3`i, 0<=PHI1, PHI1<=99, n==100, n==100,
+//    0<=0`3`i, 0`3`i<=109}>
+//  <b[PHI1]-W-MAY-{PHI1==0`3`i, 0<=PHI1, PHI1<=99, n==100, n==100,
+//    0<=0`3`i, 0`3`i<=109}>
+
+         guard(i, n, a, b);
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      
+      // Ensure region OUT for guard
+      for(i = 0; i <= n-1; i += 1)
+
+//  <b[PHI1]-R-EXACT-{PHI1==0`5`i, n==100, 0<=0`5`i, 0`5`i<=99}>
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1, n==100, 0<=0`5`i,
+//    0`5`i<=99}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1, n==100, 0<=0`5`i,
+//    0`5`i<=99}>
+
+         printf("%d\n", b[i]);
+      // END BLOCK
+   }
+   // END BLOCK
+}
+
+Code after scalarization
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+   int n = 100;
+   int a[n], b[n];
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      // Ensure region IN for guard
+      for(i = 0; i <= n-1; i += 1)
+         a[i] = i;
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      // i goes over n ! (avoid precondition optimization)
+      for(i = 0; i <= n+10-1; i += 1)
+         guard(i, n, a, b);
+      // END BLOCK
+   }
+   {
+      // BEGIN BLOCK
+      int i;
+      
+      
+      // Ensure region OUT for guard
+      for(i = 0; i <= n-1; i += 1)
+         printf("%d\n", b[i]);
+      // END BLOCK
+   }
+   // END BLOCK
+}

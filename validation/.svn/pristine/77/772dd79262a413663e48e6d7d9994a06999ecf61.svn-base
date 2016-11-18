@@ -1,0 +1,13 @@
+#/bin/sh
+
+unset PIPS_CHECK_C
+
+tpips error_management01.script
+
+echo
+echo Warnings for "error_management01"
+echo
+
+grep -o 'C syntax errors in source file' error_management01.database/Warnings
+
+rm -Rf error_management01.database

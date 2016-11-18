@@ -1,0 +1,30 @@
+
+parsed printed file
+
+/* tpips core dumps while handling this declaration in
+ * ngspice_bug/main.tpips, the problem is not replicated here.
+ */
+
+//GRIDTYPE gridtype;        /* defined in FTEconstant.h */
+/* TRUE if circular plot area */
+/* unit labels */
+/* a boolean */
+/* true if hi - lo already hacked up */
+/* unit labels */
+/* unit labels */
+/* added, p.w.h. */
+/* bogus, rework when write polar grids, etc */
+/* if non-zero, user-specified deltas */
+struct {
+   int circular;
+   union {struct {char units[16]; int spacing; int numspace; double distance; double lowlimit; double highlimit; int mult; int onedec; int hacked; double tenpowmag; double tenpowmagx; int digits;} lin; struct {char units[16]; int hmt; int lmt; int decsp; int subs; int pp;} log; struct {char units[16]; int radius; int center; double mrad; int lmt; int hmt; int mag;} circular;} xaxis;
+   union {struct {char units[16]; int spacing; int numspace; double distance; double lowlimit; double highlimit; int mult; int onedec; int hacked; double tenpowmag; double tenpowmagx; int digits;} lin; struct {char units[16]; int hmt; int lmt; int decsp; int subs; int pp;} log; struct {char units[16]; int radius; int center; double mrad; int lmt; int hmt; int mag;} circular;} yaxis;
+   int xdatatype;
+   int ydatatype;
+   int xsized;
+   int ysized;
+   double xdelta;
+   double ydelta;
+   char *xlabel;
+   char *ylabel;
+} grid;

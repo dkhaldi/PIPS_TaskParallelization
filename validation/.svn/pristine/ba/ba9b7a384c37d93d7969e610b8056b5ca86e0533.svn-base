@@ -1,0 +1,19 @@
+setenv WS=omp_include
+delete $WS
+
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create $WS $WS.c
+
+display PARSED_PRINTED_FILE[main]
+
+close
+
+echo
+echo Warnings
+echo
+
+shell cat $WS.database/Warnings
+
+quit
+

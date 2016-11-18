@@ -1,0 +1,49 @@
+setenv WS=scope05
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.src/scope05_a.c  $WS.src/scope05_b.c
+
+setenv PIPS_CPP_FLAGS=" -I$WS "
+
+echo
+echo Printed file for scope05_b
+echo
+
+
+display PRINTED_FILE[scope05_b!]
+display PRINTED_FILE[foo]
+
+echo
+echo Printed file for scope05_a: should work in spite of variable i
+echo
+
+display PRINTED_FILE[scope05_a!]
+display PRINTED_FILE[main]
+
+echo
+echo Symbol table for scope05_b!
+echo
+
+display SYMBOL_TABLE_FILE[scope05_b!]
+
+echo
+echo Symbol table for scope05_a!
+echo
+
+display SYMBOL_TABLE_FILE[scope05_a!]
+
+apply UNSPLIT[%PROGRAM]
+
+close
+
+echo
+echo Warnings
+echo
+
+shell cat $WS.database/Warnings
+
+#delete $WS
+quit
+
+
+

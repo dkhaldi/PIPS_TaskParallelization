@@ -1,0 +1,40 @@
+
+Source code for the compilation unit
+
+/* This code is not standard conformant because struct s is
+ * redeclared in the same scope
+ *
+ * The prettyprinter does not reproduce the second declaration of s
+ * within the declaration of u.
+ */
+
+struct s {
+   int l;
+} d1;
+
+union {
+   struct s d;
+   int i;
+} u;
+
+Warnings for struct07
+
+In pass COMPILATION_UNIT_PARSER, at line(s) 11-17 of file "./struct07.c":
+Symbol "l" is redefined.
+Source code after preprocessing:
+} d1;
+
+union
+{
+  struct s
+  {
+    int l;
+Input source code, before preprocessing:
+} d1;
+
+union
+{
+  struct s
+  {
+    int l;
+

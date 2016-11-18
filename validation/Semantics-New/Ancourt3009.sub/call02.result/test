@@ -1,0 +1,64 @@
+
+Proper effects for "update_sub"
+
+void update_sub(sub *sub1)
+{
+//             <    is read   >: sub1
+//             <    is written>: _sub1_1[0].var2
+//             <    is referenced>: sub1
+   sub1->var2 = 3;
+   return;
+}
+
+Cumulated effects for "update_sub"
+
+//             <    is read   >: sub1
+//             <    is written>: _sub1_1[0].var2
+//             <    is referenced>: sub1
+void update_sub(sub *sub1)
+{
+//             <    is read   >: sub1
+//             <    is written>: _sub1_1[0].var2
+//             <    is referenced>: sub1
+   sub1->var2 = 3;
+   return;
+}
+
+Transformers for "update_sub"
+
+
+//  T(_sub1_1[0][var2]) {_sub1_1[0][var2]==3}
+
+void update_sub(sub *sub1)
+{
+
+//  T(_sub1_1[0][var2]) {_sub1_1[0][var2]==3}
+
+   sub1->var2 = 3;
+
+//  T() {}
+
+   return;
+}
+
+Proper effects for "update_s3"
+
+void update_s3(content *a)
+{
+   {
+//             <    is declared>: i
+      int i;
+//             <    is written>: i
+//             <    is referenced>: i
+      for(i = 0; i <= 3; i += 1)
+//             <    is read   >: a i
+//             <    is written>: _a_1[0].s3[*].var2
+//             <    is referenced>: a i
+         update_sub(&(a->s3)[i]);
+   }
+//             <    is read   >: a
+//             <    is written>: _a_1[0].s3[2].var2
+//             <    is referenced>: a
+   update_sub(&(a->s3)[2]);
+   return;
+}

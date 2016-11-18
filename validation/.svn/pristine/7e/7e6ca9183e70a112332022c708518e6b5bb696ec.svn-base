@@ -1,0 +1,42 @@
+
+PROPER  EFFECTS
+
+void uninitialized01()
+{
+   int **pp;
+   int i;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: pp
+   *pp = &i;
+   return;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void uninitialized01()
+{
+
+// Points To: none
+
+   int **pp;
+
+// Points To:
+// pp -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// pp -> undefined , EXACT
+
+   *pp = &i;
+
+// Points To: unreachable
+
+   return;
+}

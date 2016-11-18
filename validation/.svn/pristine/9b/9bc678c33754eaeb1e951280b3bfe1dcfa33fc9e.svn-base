@@ -1,0 +1,184 @@
+
+PROPER  EFFECTS 
+
+void assign04()
+{
+   int ***p;
+   int **q;
+   int *r;
+   int i;
+//             <    is written>: r
+
+   r = &i;
+//             <    is written>: p
+   //q = &r;
+   p = &q;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b1
+//             <    is read   >: p r
+   **p = r;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               *ANY_MODULE*:*ANYWHERE*_b1
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b1
+//             <    is read   >: p
+   ***p = 0;
+   return;
+}
+/* To be out of Emami's patterns
+ *
+ * assign04 segfaults...
+ */
+
+extern void assign04();
+
+extern void foo();
+void foo()
+{
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               *ANY_MODULE*:*ANYWHERE*_b1
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b1
+   assign04();
+   return;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void assign04()
+{
+
+// Points To: none
+
+   int ***p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int **q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   int *r;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+
+   r = &i;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> i , EXACT
+
+   //q = &r;
+   p = &q;
+
+// Points To:
+// p -> q , EXACT
+// q -> undefined , EXACT
+// r -> i , EXACT
+
+   **p = r;
+
+// Points To: unreachable
+
+   ***p = 0;
+
+// Points To: unreachable
+
+   return;
+}
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+/* To be out of Emami's patterns
+ *
+ * assign04 segfaults...
+ */
+
+
+// Points To: none
+
+extern void assign04();
+
+
+// Points To: none
+
+extern void foo();
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+void foo()
+{
+
+// Points To: none
+
+   assign04();
+
+// Points To: unreachable
+
+   return;
+}
+
+PROPER  EFFECTS WITH POINTS TO
+
+void assign04()
+{
+   int ***p;
+   int **q;
+   int *r;
+   int i;
+//             <    is written>: r
+
+   r = &i;
+//             <    is written>: p
+   //q = &r;
+   p = &q;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: p q r
+   **p = r;
+   ***p = 0;
+   return;
+}
+/* To be out of Emami's patterns
+ *
+ * assign04 segfaults...
+ */
+
+extern void assign04();
+
+extern void foo();
+void foo()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+   assign04();
+   return;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

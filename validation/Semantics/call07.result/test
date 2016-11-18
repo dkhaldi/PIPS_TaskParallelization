@@ -1,0 +1,88 @@
+
+Source code with proper effects
+
+int call07(int i)
+{
+//             <    is read   >: i
+//             <    is written>: i
+   return i++;                                                          /*0005*/
+}
+
+Source code with cumulated effects
+
+//             <    is read   >: i
+int call07(int i)
+{
+//             <    is read   >: i
+//             <    is written>: i
+   return i++;                                                          /*0005*/
+}
+
+Source code with transformers for "call07"
+
+
+//  T(call07) {call07==i}
+
+int call07(int i)
+{
+
+//  T(call07,i) {call07==i-1, call07==i#init}
+
+   return i++;                                                          /*0005*/
+}
+
+Source code with transformers for "main"
+
+
+//  T() {}
+
+int main()
+{
+
+//  T() {}
+
+   int ai;                                                              /*0010*/
+
+//  T(ai) {ai==2}
+
+
+   ai = call07(2);                                                      /*0012*/
+}
+
+Source code with preconditions for "call07"
+
+
+//  P() {i==2}
+
+int call07(int i)
+{
+
+//  P() {i==2}
+
+   return i++;                                                          /*0005*/
+}
+
+Source code with preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int ai;                                                              /*0010*/
+
+//  P() {}
+
+
+   ai = call07(2);                                                      /*0012*/
+}
+
+Warnings
+
+(activate_phase) Rule `C_PARSER' already active
+(activate_phase) Rule `PRINT_CODE_TRANSFORMERS' already active
+(activate_phase) Rule `PRINT_CODE_PRECONDITIONS' already active
+INTERPROCEDURAL_SUMMARY_PRECONDITION[call07!] (ordinary_summary_precondition) empty precondition to call07! because not in call tree from main.

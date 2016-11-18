@@ -1,0 +1,11 @@
+delete struct01
+create struct01 struct01.c
+
+display PRINTED_FILE[main]
+
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[main]
+
+close
+delete struct01
+quit

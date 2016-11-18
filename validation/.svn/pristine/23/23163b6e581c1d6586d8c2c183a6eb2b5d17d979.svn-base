@@ -1,0 +1,92 @@
+static PyObject * smil_maxVal_facade(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds)
+{
+   PyObject *__pyx_v_max_x_y = 0;                                       /*2838*/
+   PyObject *__pyx_v_pt = 0;                                            /*2839*/
+   int __pyx_lineno = 0;                                                /*2840*/
+   const char *__pyx_filename = (void *) 0;                             /*2841*/
+   int __pyx_clineno = 0;                                               /*2842*/
+   PyObject *__pyx_r = 0;                                               /*2843*/
+
+
+   {
+      static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_max_x_y, &__pyx_n_s_pt, 0};   /*2847*/
+      PyObject *values[2] = {0, 0};                                     /*2848*/
+      if (__pyx_kwds) {                                                 /*2849*/
+         Py_ssize_t kw_args;                                            /*2850*/
+         const Py_ssize_t pos_args = ((PyVarObject *) __pyx_args)->ob_size;            /*2851*/
+
+         if (pos_args==2)
+            goto _switch_1_case_2;                                      /*2853*/
+         if (pos_args==1)
+            goto _switch_1_case_1;                                      /*2854*/
+         if (pos_args==0)
+            goto _switch_1_case_0;                                      /*2855*/
+         goto _switch_1_default;                                        /*2856*/
+_switch_1_case_2:         ;
+         values[1] = (((PyTupleObject *) __pyx_args)->ob_item)[1];      /*2853*/
+_switch_1_case_1:         ;
+         values[0] = (((PyTupleObject *) __pyx_args)->ob_item)[0];      /*2854*/
+_switch_1_case_0:         ;
+         goto _break_1;                                                 /*2855*/
+_switch_1_default:         ;
+         goto __pyx_L5_argtuple_error;                                  /*2856*/
+_break_1:         ;
+         kw_args = PyDict_Size(__pyx_kwds);                             /*2858*/
+
+         if (pos_args==0)
+            goto _switch_2_case_0;                                      /*2860*/
+         if (pos_args==1)
+            goto _switch_2_case_1;                                      /*2863*/
+         goto _break_2;                                                 /*2868*/
+_switch_2_case_0:         ;
+         if ((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_max_x_y))!=0)           /*2861*/
+            kw_args--;                                                  /*2861*/
+         else
+            goto __pyx_L5_argtuple_error;                               /*2862*/
+_switch_2_case_1:         ;
+         if ((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_pt))!=0)                /*2864*/
+            kw_args--;                                                  /*2864*/
+         else {
+            __Pyx_RaiseArgtupleInvalid("smil_maxVal_facade", 1, 2, 2, 1);              /*2866*/
+            __pyx_filename = __pyx_f[0];                                /*2866*/
+            __pyx_lineno = 134;                                         /*2866*/
+            __pyx_clineno = 2866;                                       /*2866*/
+            goto __pyx_L3_error;                                        /*2866*/
+         }
+_break_2:         ;
+         if (kw_args>0)                                                 /*2869*/
+            if (__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "smil_maxVal_facade")<0) {           /*2870*/
+               __pyx_filename = __pyx_f[0];                             /*2870*/
+               __pyx_lineno = 134;                                      /*2870*/
+               __pyx_clineno = 2870;                                    /*2870*/
+               goto __pyx_L3_error;                                     /*2870*/
+            }
+      }
+      else if (((PyVarObject *) __pyx_args)->ob_size!=2)                /*2849*/
+         goto __pyx_L5_argtuple_error;                                  /*2873*/
+      else {
+         values[0] = (((PyTupleObject *) __pyx_args)->ob_item)[0];      /*2875*/
+         values[1] = (((PyTupleObject *) __pyx_args)->ob_item)[1];      /*2876*/
+      }
+      __pyx_v_max_x_y = values[0];                                      /*2878*/
+      __pyx_v_pt = values[1];                                           /*2879*/
+   }
+   goto __pyx_L4_argument_unpacking_done;                               /*2881*/
+__pyx_L5_argtuple_error:   ;
+   __Pyx_RaiseArgtupleInvalid("smil_maxVal_facade", 1, 2, 2, ((PyVarObject *) __pyx_args)->ob_size);  /*2883*/
+   __pyx_filename = __pyx_f[0];                                         /*2883*/
+   __pyx_lineno = 134;                                                  /*2883*/
+   __pyx_clineno = 2883;                                                /*2883*/
+   goto __pyx_L3_error;                                                 /*2883*/
+__pyx_L3_error:   ;
+   __Pyx_AddTraceback("smil_anr999.smil_maxVal_facade", __pyx_clineno, __pyx_lineno, __pyx_filename);                /*2885*/
+
+   return (void *) 0;                                                   /*2887*/
+__pyx_L4_argument_unpacking_done:   ;
+   __pyx_r = __pyx_pf_11smil_anr999_4smil_maxVal_facade(__pyx_self, __pyx_v_max_x_y, __pyx_v_pt);     /*2889*/
+   
+   /* function exit code */
+   ;                                                                    /*2892*/
+   return __pyx_r;                                                      /*2893*/
+}
+

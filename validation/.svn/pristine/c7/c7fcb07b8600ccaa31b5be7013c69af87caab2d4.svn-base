@@ -1,0 +1,41 @@
+
+POINTS TO for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main()
+{
+
+// Points To: none
+
+   int *p, *q, *r, i, j;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+
+   if (p==q)
+
+// Points To: unreachable
+
+      r = &i;
+   else
+
+// Points To: unreachable
+
+      r = &j;
+
+// Points To: unreachable
+
+
+   return 0;
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (equal_condition_to_points_to) Unitialized pointer is used to evaluate expression "p" at line 10.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (non_equal_condition_to_points_to) Unitialized pointer is used to evaluate expression "p" at line 10.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (non_equal_condition_to_points_to) Unitialized pointer is used to evaluate expression "q" at line 10.

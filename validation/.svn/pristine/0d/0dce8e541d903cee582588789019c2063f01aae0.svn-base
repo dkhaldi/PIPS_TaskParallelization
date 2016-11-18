@@ -1,0 +1,56 @@
+
+Init Code
+
+int main()
+{
+   int x;
+   x = 0;
+
+   if (rand())
+      x = 1;
+   else
+      x = 2;
+
+   return x;
+}
+
+OUT regions for outregionsscalaire04
+
+int main()
+{
+   int x;
+   x = 0;
+
+//  <x-OUT-EXACT-{}>
+
+
+   if (rand())
+
+//  <x-OUT-EXACT-{}>
+
+      x = 1;
+   else
+
+//  <x-OUT-EXACT-{}>
+
+      x = 2;
+
+   return x;
+}
+
+Source code for outregionsscalaire04 after dead-code elimination with OUT regions
+
+int main()
+{
+   int x;
+
+   if (rand())
+      x = 1;
+   else
+      x = 2;
+
+   return x;
+}
+
+Warnings
+

@@ -1,0 +1,124 @@
+
+POINTS TO for pointer13
+
+
+// Points To IN:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+// b -> *NULL* , MAY
+// b -> _b_2[0] , MAY
+// c -> *NULL* , MAY
+// c -> _c_3[0] , MAY
+// cnt -> *NULL* , MAY
+// cnt -> _cnt_5[0] , MAY
+
+
+// Points To OUT:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+
+void pointer13(double *a, double *b, double *c, double *d, int *cnt)
+{
+
+// Points To: none
+
+   double *w = (void *) 0;
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+// b -> *NULL* , MAY
+// b -> _b_2[0] , MAY
+// c -> *NULL* , MAY
+// c -> _c_3[0] , MAY
+// cnt -> *NULL* , MAY
+// cnt -> _cnt_5[0] , MAY
+// w -> *NULL* , EXACT
+
+   /* w is the workspace */
+   a&&b&&c&&cnt?(void) 0:__assert_fail("a&&b&&c&&cnt", "./pointer13.c", 15, __func__);
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *NULL* , EXACT
+
+   int sz = 0;
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *NULL* , EXACT
+
+   int i;
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *NULL* , EXACT
+
+
+   if (sz<*cnt) {
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *NULL* , EXACT
+
+      if (w)
+
+// Points To: unreachable
+
+         free(w);
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *NULL* , EXACT
+
+      w = (double *) malloc(*cnt*sizeof(double));
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+
+      sz = *cnt;
+   }
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// w -> *NULL* , MAY
+
+   for(i = 0; i <= *cnt-1; i += 1)
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// cnt -> _cnt_5[0] , EXACT
+// w -> *ANY_MODULE*:*HEAP**ANYWHERE* , MAY
+// w -> *NULL* , MAY
+
+      w[i] = c[i]+a[i]*b[i];
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[pointer13] (reference_condition_to_points_to) Dead code detected.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[pointer13] (points_to_set_block_projection) Memory leak for bucket "*ANY_MODULE*:*HEAP**ANYWHERE*".

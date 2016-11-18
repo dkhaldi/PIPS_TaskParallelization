@@ -1,0 +1,20 @@
+
+Parsed printed code for decl62
+
+/* Bug when an entity, array, is freed during parsing of the compilation unit.
+ *
+ * The C parser make decisions too early, especially with pointers to
+ * functions which are assumed functions at first, and fixed later.
+ */
+
+int foo(int, int);                                                      /*0007*/
+int bar(int, int);                                                      /*0008*/
+
+static int (*array[])(int i, int j) = {foo, bar};                       /*0013*/
+
+static int (*pfoo)(int, int) = foo;                                     /*0015*/
+
+extern void decl62();                                                   /*0017*/
+
+Warnings related to decl62.c
+

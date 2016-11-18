@@ -1,0 +1,2 @@
+Comment lines lost for a do while. See also comment09.c and comment10.c.
+The comments are preserved if the loop body a semi-colon, ";", is added after them.

@@ -1,0 +1,189 @@
+#
+# AIPO
+#
+#
+# compile generated freia_dead_02
+#
+
+! initial function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   freia_data2d *tmp = freia_common_create_data(16, 128, 128);          /*0007*/
+   ret |= freia_common_destruct_data(tmp);                              /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! graphs
+
+
+! updated function for AIPO
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   ret |= 0;                                                            /*0008*/
+   return ret;                                                          /*0009*/
+}
+#
+# SPOC
+#
+
+! initial function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   freia_data2d *tmp = freia_common_create_data(16, 128, 128);          /*0007*/
+   ret |= freia_common_destruct_data(tmp);                              /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! graphs
+
+
+! acceleration function
+
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <spoc.h>
+
+! updated function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   ret |= 0;                                                            /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! cleaned up function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = 0;                                                /*0006*/
+
+   return ret;                                                          /*0009*/
+}
+#
+# TERAPIX
+#
+
+! initial function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   freia_data2d *tmp = freia_common_create_data(16, 128, 128);          /*0007*/
+   ret |= freia_common_destruct_data(tmp);                              /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! graphs
+
+
+! acceleration function
+
+// freia terapix includes
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <terapix.h>
+#include <terapix_ucode.h>
+
+! updated function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   ret |= 0;                                                            /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! cleaned up function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = 0;                                                /*0006*/
+
+   return ret;                                                          /*0009*/
+}
+#
+# OPENCL
+#
+
+! initial function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   freia_data2d *tmp = freia_common_create_data(16, 128, 128);          /*0007*/
+   ret |= freia_common_destruct_data(tmp);                              /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! graphs
+
+
+! acceleration function
+
+// FREIA OpenCL includes
+#include <CL/opencl.h>
+#include "freia.h"
+#include "private/freia_opencl_runtime.h"
+
+
+! updated function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   ret |= 0;                                                            /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! cleaned up function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = 0;                                                /*0006*/
+
+   return ret;                                                          /*0009*/
+}
+#
+# SIGMAC
+#
+#
+# compile generated freia_dead_02
+#
+
+! initial function
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   freia_data2d *tmp = freia_common_create_data(16, 128, 128);          /*0007*/
+   ret |= freia_common_destruct_data(tmp);                              /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! graphs
+
+
+! updated function for OPENCL
+
+freia_status freia_dead_02(void)
+{
+   freia_status ret = FREIA_OK;                                         /*0006*/
+   ret |= 0;                                                            /*0008*/
+   return ret;                                                          /*0009*/
+}
+
+! Sigma-C subgraphs for OPENCL
+
+#
+# FREIA COMPILATION DONE
+#
+

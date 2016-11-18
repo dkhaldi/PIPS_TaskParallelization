@@ -1,0 +1,31 @@
+int decode_mcu()
+{
+   int blkn;
+
+   for (blkn = 0;blkn<64;blkn++) {
+      if (!blkn)
+         goto skip_ACs;
+      if (blkn>1)
+
+      else
+skip_ACs:         ;
+   }
+   return 1;
+}
+int decode_mcu()
+{
+   // BEGIN BLOCK
+   int blkn;
+
+   for(blkn = 0; blkn <= 63; blkn += 1) {
+//:      BEGIN UNSTRUCTURED
+      if (!blkn) goto skip_ACs;
+      if (blkn>1) goto l99999;
+skip_ACs:      ;
+l99999:      ;
+
+//:      END UNSTRUCTURED
+   }
+   return 1;
+   // END BLOCK
+}

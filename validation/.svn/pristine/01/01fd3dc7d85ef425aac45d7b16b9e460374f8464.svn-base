@@ -1,0 +1,63 @@
+#
+# initial code
+#
+// global/private propagation with scopes
+
+extern void scope00(float a[10]);
+
+extern int main(void);
+int main(void)
+{
+   float a[10];
+   scope00(a);
+   return 0;
+}
+void scope00(float a[10])
+{
+   float *b = a;
+   if (b) {
+      float *c = b;
+      while (c<a+10)
+         *c++ = 0.0;
+   }
+   else {
+      float *d;
+      d = b;
+      while (d<b+10) {
+         *d = 1.0;
+         d++;
+      }
+   }
+}
+#
+# global/private declarations
+#
+// global/private propagation with scopes
+
+extern void scope00(float a[10]);
+
+extern int main(void);
+int main(void)
+{
+   float a[10];
+   scope00(a);
+   return 0;
+}
+void scope00(global float a[10])
+{
+   global float *b = a;
+   if (b) {
+      global float *c = b;
+      while (c<a+10)
+         *c++ = 0.0;
+   }
+   else {
+      global float *d;
+      d = b;
+      while (d<b+10) {
+         *d = 1.0;
+         d++;
+      }
+   }
+}
+

@@ -1,0 +1,16 @@
+
+void exit01()
+{
+   int i;
+   int *j;
+//             <    is written>: j
+
+   j = &i;
+   exit(0);
+   i = 2;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

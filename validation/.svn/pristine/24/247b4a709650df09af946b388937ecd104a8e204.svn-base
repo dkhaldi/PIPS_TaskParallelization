@@ -1,0 +1,72 @@
+
+POINTS TO for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *p, *q, *r, i, j;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+
+   p = &i;
+
+// Points To:
+// p -> i , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+
+   if (i>0)
+
+// Points To:
+// p -> i , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+
+      q = &i;
+
+// Points To:
+// p -> i , EXACT
+// q -> undefined , MAY
+// q -> i , MAY
+// r -> undefined , EXACT
+
+
+   if (p==q)
+
+// Points To:
+// p -> i , EXACT
+// q -> i , EXACT
+// r -> undefined , EXACT
+
+      r = q;
+   else
+
+// Points To:
+// p -> i , EXACT
+// q -> undefined , MAY
+// r -> undefined , EXACT
+
+      r = &i;
+
+// Points To:
+// p -> i , EXACT
+// q -> undefined , MAY
+// q -> i , MAY
+// r -> i , EXACT
+
+
+   return 0;
+}

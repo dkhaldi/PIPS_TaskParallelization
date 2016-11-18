@@ -1,0 +1,78 @@
+
+Proper effects
+
+int main()
+{
+//             <    is written>: d1
+   int d1 = 4;
+//             <    is written>: d2
+   int d2 = 4;
+//             <    is read   >: d1 d2
+   int y[d1][d2];
+   int i;
+//             <    is read   >: d1
+//             <    is written>: i
+
+   for(i = 0; i <= d1-1; i += 1)
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: d1 d2 i
+      call08(i, d2, &y[i][1]);
+   
+   /*
+     for(i=0;i<d1;i++) {
+       for(j=0;j<d2;j++)
+         printf("y[%d][%d] = %d\t", i, j, y[i][j]);
+       printf("\n");
+     }
+     */
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int d1 = 4;
+
+// Points To: none
+
+   int d2 = 4;
+
+// Points To: none
+
+   int y[d1][d2];
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+
+   for(i = 0; i <= d1-1; i += 1)
+
+// Points To: none
+
+      call08(i, d2, &y[i][1]);
+
+// Points To: none
+
+   
+   /*
+     for(i=0;i<d1;i++) {
+       for(j=0;j<d2;j++)
+         printf("y[%d][%d] = %d\t", i, j, y[i][j]);
+       printf("\n");
+     }
+     */
+   return 0;
+}

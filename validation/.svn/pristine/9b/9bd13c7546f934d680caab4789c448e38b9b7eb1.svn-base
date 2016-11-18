@@ -1,0 +1,15 @@
+      PROGRAM IOERREND
+
+      READ (UNIT=*,FMT=100,ERR=1000,END=2000) I                         0003
+100   FORMAT(I5)                                                        0004
+
+      STOP                                                              0006
+
+1000  CONTINUE                                                          0008
+      PRINT *, 'end of file'                                            0009
+      STOP                                                              0010
+
+2000  CONTINUE                                                          0012
+      PRINT *, 'read error'                                             0013
+
+      END

@@ -1,0 +1,24 @@
+LINUX_x86_64_LL/alloc.o: alloc.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h matrix.h
+LINUX_x86_64_LL/determinant.o: determinant.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h matrix.h
+LINUX_x86_64_LL/hermite.o: hermite.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h matrix.h
+LINUX_x86_64_LL/inversion.o: inversion.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h matrix.h
+LINUX_x86_64_LL/matrix.o: matrix.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h matrix.h
+LINUX_x86_64_LL/matrix_io.o: matrix_io.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h matrix.h
+LINUX_x86_64_LL/smith.o: smith.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h matrix.h
+LINUX_x86_64_LL/sub-matrix.o: sub-matrix.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h matrix.h

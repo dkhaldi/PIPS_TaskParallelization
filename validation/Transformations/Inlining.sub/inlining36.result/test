@@ -1,0 +1,6 @@
+void mehdi(int *b)
+{
+   *b = *b;
+   //inlined by pips from ``idhem''
+   *b = *b;
+}

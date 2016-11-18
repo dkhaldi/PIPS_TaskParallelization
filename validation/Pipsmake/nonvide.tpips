@@ -1,0 +1,7 @@
+delete nonvide
+create nonvide nonvide.f src/vide.f src/tresvide.f
+display PRINTED_FILE[%ALL]
+apply UNSPLIT[%PROGRAM]
+shell ls nonvide.database/Src/*.f ; cat nonvide.database/Src/*.f
+close
+delete nonvide

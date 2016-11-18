@@ -1,0 +1,28 @@
+#/bin/sh
+
+WS=laguer
+
+# Which gcc is used?
+GCC_VERSION=`gcc -v 2>&1|grep 'gcc version'|sed -e 's/gcc version //;s/ .*//'`
+#echo $GCC_VERSION
+if test $GCC_version = 4.6.3
+then
+  PIPS_CPP="cpp -C -P -ffreestanding"
+# PIPS_CPP="cpp -P"
+else
+ PIPS_CPP="cpp -C -ffreestanding"
+fi
+
+export PIPS_CPP
+
+tpips $WS.script
+
+#echo
+#echo Warnings
+#echo
+
+#cat WS.database/Warnings
+
+#echo $PIPS_CPP
+
+#Delete $WS

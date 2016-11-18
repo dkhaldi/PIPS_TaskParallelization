@@ -1,0 +1,108 @@
+setenv WSPACE=if01
+delete $WSPACE
+create $WSPACE $WSPACE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+activate MUST_REGIONS
+
+echo
+echo Init Code
+echo
+display PRINTED_FILE[main]
+
+#echo
+#echo Source code for "$WSPACE" after dead-code elimination
+#echo
+#apply DEAD_CODE_ELIMINATION[main]
+#display PRINTED_FILE[main]
+
+echo
+echo PROPER effect for "$WSPACE"
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo CUMULATED effect for "$WSPACE"
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo IN effect for "$WSPACE"
+echo
+activate PRINT_CODE_IN_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo OUT effect for "$WSPACE"
+echo
+activate PRINT_CODE_OUT_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo REGIONS for "$WSPACE"
+echo
+activate PRINT_CODE_PROPER_REGIONS
+display PRINTED_FILE[main]
+
+echo
+echo REGIONS for "$WSPACE"
+echo
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[main]
+
+echo
+echo IN regions for "$WSPACE"
+echo
+activate PRINT_CODE_IN_REGIONS
+display PRINTED_FILE[main]
+
+echo
+echo OUT regions for "$WSPACE"
+echo
+activate PRINT_CODE_OUT_REGIONS
+display PRINTED_FILE[main]
+
+#echo
+#echo Source code for "$WSPACE" after dead-code elimination with OUT regions
+#echo
+#apply DEAD_CODE_ELIMINATION_WITH_OUT_REGIONS[main]
+#activate PRINT_CODE
+#display PRINTED_FILE[main]
+
+activate PRINT_CHAINS_GRAPH
+
+echo
+echo Atomic Chains for "$WSPACE"
+echo
+#activate ATOMIC_CHAINS
+display DG_FILE[main]
+
+echo
+echo Region Chains for "$WSPACE"
+echo
+activate REGION_CHAINS
+display DG_FILE[main]
+
+echo
+echo IN/OUT Region Chains for "$WSPACE"
+echo
+activate IN_OUT_REGIONS_CHAINS
+display DG_FILE[main]
+
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

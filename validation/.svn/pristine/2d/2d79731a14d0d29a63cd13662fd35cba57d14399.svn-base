@@ -1,0 +1,6 @@
+create with non existing file: MUST FAIL
+create with only one argument: MUST FAIL
+create with two arguments: OK
+void create01()
+{
+}

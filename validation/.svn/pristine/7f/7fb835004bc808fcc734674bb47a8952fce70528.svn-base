@@ -1,0 +1,11 @@
+/* Check line counting with an include file within the function body
+ */
+
+int main()
+{
+  int i = 0;
+#include "line04.h"
+  double a[SIZE];
+  a[i] = 0;
+  return i;
+}

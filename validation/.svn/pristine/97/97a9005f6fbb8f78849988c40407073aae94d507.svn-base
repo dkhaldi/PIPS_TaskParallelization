@@ -1,0 +1,39 @@
+delete modulo01
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create modulo01 modulo01.c
+
+# necessary to handle the modulo operator without a transformer refinment
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+
+echo
+echo Source code with transformers
+echo
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[main]
+
+echo
+echo Source code with preconditions
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+# some issue?
+close
+delete modulo01
+quit
+
+apply UNSPLIT[%PROGRAM]
+
+close
+
+echo
+echo Warnings
+echo
+
+shell cat modulo01.database/Warnings
+
+quit

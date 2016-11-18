@@ -1,0 +1,13 @@
+setenv WS=qualifiers04
+
+delete $WS
+
+create $WS $WS.c
+
+display PRINTED_FILE[$WS!]
+
+close
+
+delete $WS 
+
+quit

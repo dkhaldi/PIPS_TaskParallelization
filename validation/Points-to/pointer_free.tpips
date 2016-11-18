@@ -1,0 +1,35 @@
+setenv WSPACE=pointer_free
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+echo 
+echo Points-to for \"$WSPACE\"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[$WSPACE]
+
+echo 
+echo Points-to for "alloc_pointer"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[alloc_pointer]
+
+echo 
+echo Points-to for "pointer_free"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[pointer_free]
+
+echo 
+echo Points-to for "main"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[main]
+
+close
+delete $WSPACE
+quit

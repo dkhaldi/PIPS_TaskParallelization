@@ -1,0 +1,10 @@
+LINUX_x86_64_LL/abs.o: abs.c arithmetique.h boolean.h arithmetic_errors.h assert.h
+LINUX_x86_64_LL/divide.o: divide.c assert.h arithmetique.h boolean.h arithmetic_errors.h
+LINUX_x86_64_LL/exp.o: exp.c arithmetique.h boolean.h arithmetic_errors.h assert.h
+LINUX_x86_64_LL/modulo.o: modulo.c assert.h arithmetique.h boolean.h arithmetic_errors.h
+LINUX_x86_64_LL/pgcd.o: pgcd.c arithmetique.h boolean.h arithmetic_errors.h assert.h
+LINUX_x86_64_LL/ppcm.o: ppcm.c arithmetique.h boolean.h arithmetic_errors.h assert.h
+LINUX_x86_64_LL/io.o: io.c arithmetique.h boolean.h arithmetic_errors.h
+LINUX_x86_64_LL/errors.o: errors.c boolean.h arithmetique.h arithmetic_errors.h \
+ $(ROOT)/include/assert.h
+LINUX_x86_64_LL/value.o: value.c arithmetique.h boolean.h arithmetic_errors.h assert.h

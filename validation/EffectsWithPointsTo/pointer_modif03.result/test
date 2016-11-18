@@ -1,0 +1,50 @@
+
+int main()
+{
+   s_t s;
+   int j;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: s.entier s.reel 
+//                               _MALLOC_EFFECTS:_MALLOC_
+
+   s = make_s(1, 2.);
+//             <    is written>: s.entier
+   s.entier = 4;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: j _MALLOC_EFFECTS:_MALLOC_
+
+   j = make_s(1, 2.).entier;
+//             <    is read   >: j
+
+   return j;
+}
+s_t make_s(int i, float x)
+{
+   s_t *p;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+
+   p = (s_t *) malloc(sizeof(s_t));
+//             <may be written>: *HEAP*_l_9.entier
+//             <    is read   >: i p
+   p->entier = i;
+//             <may be written>: *HEAP*_l_9.reel
+//             <    is read   >: p x
+   p->reel = x;
+//             <may be read   >: *HEAP*_l_9.entier *HEAP*_l_9.reel
+//             <    is read   >: p
+   return *p;
+}
+
+ *********************** Use-Def Chains *********************
+
+	20 --> 21 with conflicts
+		from <s.entier-W-EXACT> to <s.entier-W-EXACT>
+	20 --> 23 with conflicts
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-W-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-R-EXACT>
+		from <_MALLOC_EFFECTS:_MALLOC_-R-EXACT> to <_MALLOC_EFFECTS:_MALLOC_-W-EXACT>
+	23 --> 25 with conflicts
+		from <j-W-EXACT> to <j-R-EXACT>
+
+****************** End of Dependence Graph ******************

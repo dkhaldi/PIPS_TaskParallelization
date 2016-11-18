@@ -1,0 +1,15 @@
+
+int main()
+{
+   int t[100][10][3];
+   int *pu;
+//             <    is written>: pu
+
+   pu = t[1][2];
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

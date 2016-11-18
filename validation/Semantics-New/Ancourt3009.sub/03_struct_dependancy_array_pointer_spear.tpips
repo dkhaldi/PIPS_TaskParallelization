@@ -1,0 +1,161 @@
+# tpips script
+# 
+setenv WSPACE 03_struct_dependancy_array_pointer_spear
+
+setenv FILE1 "`basename ${WSPACE} _spear`"
+# set cpp flags for pips
+setenv PIPS_CPP_FLAGS "-I$WSPACE.src"
+setproperty ABORT_ON_USER_ERROR TRUE
+
+# skip some properties by pipsmake
+setproperty PIPSMAKE_WARNINGS FALSE
+
+# quiet cleanup
+setproperty NO_USER_WARNING TRUE
+delete ${WSPACE}-Task
+delete ${WSPACE}
+setproperty NO_USER_WARNING FALSE
+
+# first run, intraprocedural
+create ${WSPACE}-Task $FILE1.src/*.c
+
+# ensure that the target function exists before proceeding
+module main
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER TRUE
+# BUGGY with PRIVATIZE_MODULE:
+#   setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT FALSE
+
+#new
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+#new
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+setproperty CONSTANT_PATH_EFFECTS TRUE
+setproperty ALIASING_ACROSS_IO_STREAMS FALSE
+setproperty ALIASING_ACROSS_TYPES TRUE
+
+#new
+setproperty SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+activate PRECONDITIONS_INTER_FULL
+activate TRANSFORMERS_INTER_FULL 
+activate INTRAPROCEDURAL_SUMMARY_PRECONDITION
+
+#echo
+#new
+#activate PROPER_EFFECTS_WITH_POINTS_TO
+#new
+activate PRINT_CODE_PROPER_EFFECTS
+make PRINTED_FILE[main]
+
+#echo
+#echo Transformers with point-to
+#echo
+#activate PROPER_EFFECTS_WITH_POINTS_TO
+#new
+#activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+#new
+activate PRINT_CODE_TRANSFORMERS
+make PRINTED_FILE[main]
+
+#echo
+#echo Preconditions with point-to
+#echo
+#new
+activate PRINT_CODE_PRECONDITIONS
+make PRINTED_FILE[main]
+
+activate MUST_REGIONS
+activate REGION_CHAINS
+activate RICE_REGIONS_DEPENDENCE_GRAPH
+make PRINTED_FILE[%ALLFUNC]
+
+apply PRIVATIZE_MODULE[%ALLFUNC]
+apply COARSE_GRAIN_PARALLELIZATION[%ALLFUNC]
+# why?
+#apply INTERNALIZE_PARALLEL_CODE[%ALLFUNC]
+
+activate PRINT_XML_APPLICATION
+
+make XML_PRINTED_FILE[main]
+close
+
+# second run, interprocedural
+# FIXME: this run implicitely check for the previous
+# database based on its name to recover some informations,
+# such a link should be avoided or at least made explicit.
+create ${WSPACE} $FILE1.src/*.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER TRUE
+# BUGGY with PRIVATIZE_MODULE:
+#   setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT FALSE
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+setproperty CONSTANT_PATH_EFFECTS TRUE
+setproperty ALIASING_ACROSS_IO_STREAMS FALSE
+setproperty ALIASING_ACROSS_TYPES TRUE
+
+
+#new
+setproperty SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+activate PRECONDITIONS_INTER_FULL
+activate TRANSFORMERS_INTER_FULL 
+activate INTRAPROCEDURAL_SUMMARY_PRECONDITION
+
+#echo
+#new
+#activate PROPER_EFFECTS_WITH_POINTS_TO
+#new
+activate PRINT_CODE_PROPER_EFFECTS
+make PRINTED_FILE[main]
+
+#echo
+#echo Transformers with point-to
+#echo
+#activate PROPER_EFFECTS_WITH_POINTS_TO
+#new
+#activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+#new
+activate PRINT_CODE_TRANSFORMERS
+make PRINTED_FILE[main]
+
+#echo
+#echo Preconditions with point-to
+#echo
+#new
+activate PRINT_CODE_PRECONDITIONS
+make PRINTED_FILE[main]
+
+activate MUST_REGIONS
+activate REGION_CHAINS
+activate RICE_REGIONS_DEPENDENCE_GRAPH
+make PRINTED_FILE[%ALLFUNC]
+
+apply PRIVATIZE_MODULE[%ALLFUNC]
+apply COARSE_GRAIN_PARALLELIZATION[%ALLFUNC]
+# why?
+#apply INTERNALIZE_PARALLEL_CODE[%ALLFUNC]
+
+activate PRINT_XML_APPLICATION
+
+apply PARTIAL_EVAL[main]
+apply PARTIAL_EVAL[main]
+display XML_PRINTED_FILE[main]
+close
+
+# no cleanup here
+quit

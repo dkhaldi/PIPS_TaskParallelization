@@ -1,0 +1,112 @@
+setenv PIPS_CPP_FLAGS " -I."
+
+# try a clean stop on user errors
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+# skip some properties by pipsmake
+setproperty PIPSMAKE_WARNINGS FALSE
+
+# include files hack...
+# - should it be outside the script?
+# - should it be a property?
+setenv PIPS_XML_PRETTYPRINT_INCLUDE "/tmp/global_array01.inc"
+
+# quiet cleanup
+setproperty NO_USER_WARNING TRUE
+delete global_array01-Task
+delete global_array01
+setproperty NO_USER_WARNING FALSE
+
+# set properties for both tpips runs
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT FALSE
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+setproperty ALIASING_ACROSS_IO_STREAMS FALSE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+# BUGGY with PRIVATIZE_MODULE:
+#   setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+
+
+# with POINTS-TO
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+setproperty ABSTRACT_HEAP_LOCATIONS "flow-sensitive"
+setproperty POINTS_TO_STRICT_POINTER_TYPES FALSE
+setproperty CONSTANT_PATH_EFFECTS TRUE
+
+
+# first run, intraprocedural
+create global_array01-Task global_array01.c
+
+# ensure that the target function exists before proceeding
+module main
+
+make DECLARATIONS[%ALLCU]
+#setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+# common
+activate REGION_CHAINS
+activate RICE_REGIONS_DEPENDENCE_GRAPH
+
+
+# with POINTS-TO
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+# should be INTRA...
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+activate PRECONDITIONS_INTER_FULL_WITH_POINTS_TO
+activate INTRAPROCEDURAL_SUMMARY_PRECONDITION
+# should be: INTRAPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+#activate INTERPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+activate MUST_REGIONS_WITH_POINTS_TO
+activate PRINT_XML_APPLICATION_WITH_POINTS_TO
+
+apply SIMPLIFY_CONTROL[main]
+# transformations
+capply PRIVATIZE_MODULE[%ALLFUNC]
+capply COARSE_GRAIN_PARALLELIZATION[%ALLFUNC]
+
+# xml generation
+make XML_PRINTED_FILE[main]
+
+close
+
+# second run, interprocedural
+# FIXME: this run implicitely check for the previous
+# database based on its name to recover some informations,
+# such a link should be avoided or at least made explicit.
+create global_array01 global_array01.c
+make DECLARATIONS[%ALLCU]
+# common
+activate REGION_CHAINS
+activate RICE_REGIONS_DEPENDENCE_GRAPH
+
+
+# with POINTS-TO
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+activate PRECONDITIONS_INTER_FULL_WITH_POINTS_TO
+activate INTERPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+activate MUST_REGIONS_WITH_POINTS_TO
+activate PRINT_XML_APPLICATION_WITH_POINTS_TO
+
+apply SIMPLIFY_CONTROL[main]
+capply PRIVATIZE_MODULE[%ALLFUNC]
+capply COARSE_GRAIN_PARALLELIZATION[%ALLFUNC]
+
+# clean twice
+apply PARTIAL_EVAL[main]
+apply PARTIAL_EVAL[main]
+
+# xml generation
+display XML_PRINTED_FILE[main]
+
+close
+
+# no cleanup here
+quit

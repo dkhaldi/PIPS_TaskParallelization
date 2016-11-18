@@ -1,0 +1,21 @@
+# Issue with cpp 5
+
+setenv WS=linkedlist03
+
+delete $WS
+
+setenv ABORT_ON_USER_ERROR TRUE
+
+# Very specific preprocessing
+setenv PIPS_CPP ./cat_last.sh
+
+create $WS $WS.c
+
+display PARSED_PRINTED_FILE[$WS!]
+display PARSED_PRINTED_FILE[main]
+
+close
+
+#delete $WS
+
+quit

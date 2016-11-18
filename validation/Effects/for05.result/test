@@ -1,0 +1,89 @@
+
+Init Code
+
+int main()
+{
+   int x, i;
+   x = 0;
+
+   for(i = 0; i <= 1; i += 1)
+      x = 1;
+
+   return x;
+}
+
+PROPER effect
+
+int main()
+{
+//             <    is declared>: i x
+   int x, i;
+//             <    is written>: x
+//             <    is referenced>: x
+   x = 0;
+//             <    is written>: i
+//             <    is referenced>: i
+
+   for(i = 0; i <= 1; i += 1)
+//             <    is written>: x
+//             <    is referenced>: x
+      x = 1;
+//             <    is read   >: x
+//             <    is referenced>: x
+
+   return x;
+}
+
+CUMULATED effect
+
+int main()
+{
+//             <    is declared>: i x
+   int x, i;
+//             <    is written>: x
+//             <    is referenced>: x
+   x = 0;
+//             <    is written>: i x
+//             <    is referenced>: i x
+
+   for(i = 0; i <= 1; i += 1)
+//             <    is written>: x
+//             <    is referenced>: x
+      x = 1;
+//             <    is read   >: x
+//             <    is referenced>: x
+
+   return x;
+}
+
+IN effect
+
+int main()
+{
+   int x, i;
+   x = 0;
+
+   for(i = 0; i <= 1; i += 1)
+      x = 1;
+//             <    is imported>: x
+
+   return x;
+}
+
+OUT effect
+
+int main()
+{
+   int x, i;
+   x = 0;
+//             <    is exported>: x
+
+   for(i = 0; i <= 1; i += 1)
+//             <    is exported>: x
+      x = 1;
+
+   return x;
+}
+
+Warnings
+

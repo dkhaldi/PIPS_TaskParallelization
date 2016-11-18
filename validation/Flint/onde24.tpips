@@ -1,0 +1,16 @@
+delete onde24
+setproperty ABORT_ON_USER_ERROR TRUE
+# FI: I do not undestand the error message by gfortran
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create onde24 onde24.f
+echo ### initial
+display PRINTED_FILE[%ALL]
+apply TYPE_CHECKER[%ALL]
+echo ### type checked
+display PRINTED_FILE[%ALL]
+# apply UNSPLIT
+close
+! cat onde24.database/Warnings
+
+delete onde24
+quit

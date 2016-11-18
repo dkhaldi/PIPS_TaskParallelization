@@ -1,0 +1,5 @@
+### stderr
+PARSER[DATA08] (store_initial_value) Redefinition of the DATA value for variable M
+PARSER[DATA08] (store_initial_value) Defined with value 1 and redefined by expression
+PARSER[DATA08] (store_initial_value) [user error] Parser error between lines 10 and 10
+Conflicting DATA statements

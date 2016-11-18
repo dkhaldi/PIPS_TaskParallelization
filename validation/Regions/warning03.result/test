@@ -1,0 +1,117 @@
+
+TRANSFORMERS for warning03
+
+
+//  T(warning03) {i==warning03}
+
+int warning03(int n, int i, double a[n*n])
+{
+
+//  T() {}
+
+   a[n*i+i] = 0;
+
+//  T(warning03) {i==warning03}
+
+   return i;
+}
+
+PRECONDITIONS for warning03
+
+
+//  P() {}
+
+int warning03(int n, int i, double a[n*n])
+{
+
+//  P() {}
+
+   a[n*i+i] = 0;
+
+//  P() {}
+
+   return i;
+}
+
+REGIONS for warning03
+
+int warning03(int n, int i, double a[n*n])
+{
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-MAY-{}>
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   a[n*i+i] = 0;
+
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+
+   return i;
+}
+
+REGIONS for warning03
+
+
+//  <a[PHI1]-W-MAY-{}>
+//  <i-R-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+int warning03(int n, int i, double a[n*n])
+{
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-MAY-{}>
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   a[n*i+i] = 0;
+
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+
+   return i;
+}
+
+IN regions for warning03
+
+
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+int warning03(int n, int i, double a[n*n])
+{
+
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+   a[n*i+i] = 0;
+
+//  <i-IN-EXACT-{}>
+
+   return i;
+}
+
+OUT regions for warning03
+
+int warning03(int n, int i, double a[n*n])
+{
+   a[n*i+i] = 0;
+   return i;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "warning03" instead.
+MUST_REGIONS[warning03] (sc_add_phi_equation) line 7 
+at statement:
+
+	a[n*i+i] = 0;
+
+
+No information derived from subscript expression "n*i+i":

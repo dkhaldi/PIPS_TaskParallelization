@@ -1,0 +1,25 @@
+Registering file prefix.f
+  Module         PREFIX
+Workspace prefix created and opened.
+Module PREFIX selected
+Module PREFIX selected
+Request: build resource PRINTED_FILE for module PREFIX.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(PREFIX)
+  PARSER                         building   PARSED_CODE(PREFIX)
+                                 building   CALLEES(PREFIX)
+PARSER[PREFIX] (Syntax) [user error] Parser error between lines 103 and 103
+Declaration appears after executable statement
+PARSER[PREFIX] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[PREFIX] (catch_user_error) pass has failed
+PARSER[PREFIX] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module PREFIX.
+Cannot build PRINTED_FILE for PREFIX.
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module PREFIX.
+Closing program.
+Closing workspace.
+Workspace prefix closed.
+Exit code for pips: 1; exiting Pips

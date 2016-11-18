@@ -1,0 +1,13 @@
+setenv WS=const_int01
+
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+display PRINTED_FILE[$WS!]
+display PRINTED_FILE[$WS]
+
+close
+quit

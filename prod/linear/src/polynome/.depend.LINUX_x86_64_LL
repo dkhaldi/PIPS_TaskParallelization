@@ -1,0 +1,36 @@
+LINUX_x86_64_LL/pnome-alloc.o: pnome-alloc.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-bin.o: pnome-bin.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-error.o: pnome-error.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-io.o: pnome-io.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-private.o: pnome-private.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-reduc.o: pnome-reduc.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-scal.o: pnome-scal.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-root.o: pnome-root.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h
+LINUX_x86_64_LL/pnome-unaires.o: pnome-unaires.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h polynome.h

@@ -1,0 +1,61 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+   int i;
+//             <    is written>: p
+   int *p = 0;
+//             <    is written>: q
+   int **q = 0;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+
+   *p = 1;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: q
+   *q = &i;
+
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main()
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int *p = 0;
+
+// Points To:
+// p -> *NULL* , EXACT
+
+   int **q = 0;
+
+// Points To:
+// p -> *NULL* , EXACT
+// q -> *NULL* , EXACT
+
+
+   *p = 1;
+
+// Points To: unreachable
+
+   *q = &i;
+
+// Points To: unreachable
+
+
+   return 0;
+}

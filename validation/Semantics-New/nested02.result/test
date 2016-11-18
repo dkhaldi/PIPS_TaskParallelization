@@ -1,0 +1,92 @@
+
+TRANSFORMERS
+
+
+//  T() {}
+
+int main()
+{
+
+//  T(i,k) {i==0, k==0}
+
+   int i = 0, j, m, n, k = 0;
+
+//  T() {i==0, k==0, 1<=m, 1<=n}
+
+
+   if (!(m>=1&&n>=1))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(i,j,k) {i#init==0, j==0, k#init==0, 1<=i, i+1<=m, 0<=k, 2<=m,
+//    1<=n}
+
+
+   while (i++, j = 0, i<m)
+
+//  T(j,k) {j+k#init==k+1, j#init==0, i+1<=m, 1<=j, j+1<=n, 2<=m,
+//    2<=n}
+
+      while (j++, j<n)
+
+//  T(k) {k==k#init+1, i+1<=m, j+1<=n, 2<=m, 2<=n}
+
+         k++;
+
+//  T(i) {i==i#init, i==m, j==0, 1<=i, 0<=k, 1<=n}
+
+   // Check the loop nest postcondition
+   i = i;
+
+//  T() {i==m, j==0, 1<=i, 0<=k, 1<=n}
+
+   //i = (1, 2, 3);
+   printf("%d\n", i);
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i = 0, j, m, n, k = 0;
+
+//  P(i,k) {i==0, k==0}
+
+
+   if (!(m>=1&&n>=1))
+
+//  P(i,k) {i==0, k==0}
+
+      abort();
+
+//  P(i,k) {i==0, k==0, 1<=m, 1<=n}
+
+
+   while (i++, j = 0, i<m)
+
+//  P(i,j,k) {j==0, 1<=i, i<=m, 0<=k, 1<=n}
+
+      while (j++, j<n)
+
+//  P(i,j,k) {1<=i, i+j<=k+m+1, i<=m, 1<=j, j<=2k+1, j<=k+2, j<=n}
+
+         k++;
+
+//  P(i,j,k) {j==0, m<=i, i<=m+1, 0<=k, 1<=m, 1<=n}
+
+   // Check the loop nest postcondition
+   i = i;
+
+//  P(i,j,k) {i==m, j==0, 1<=i, 0<=k, 1<=n}
+
+   //i = (1, 2, 3);
+   printf("%d\n", i);
+}

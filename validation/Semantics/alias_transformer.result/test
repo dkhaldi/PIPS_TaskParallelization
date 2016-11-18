@@ -1,0 +1,116 @@
+
+C  T() {0==-1}
+
+C This program is likely not to confomr to the Fortran standard because
+C of aliasing between a formal parameter and a global variable.
+
+C The result found by tpips is wrong.
+
+C The aliasing should be checked before the analysis
+
+      PROGRAM ALIAS_TRANSFORMER
+      COMMON I
+
+C  T() {0==-1}
+
+C     BEGIN BLOCK
+
+C  T(I) {I==0}
+
+      I = 0                                                             0010
+
+C  T() {0==-1}
+
+      CALL FOO(I)                                                       0011
+
+C  T() {}
+
+      PRINT *, I                                                        0012
+
+C  T() {}
+
+      RETURN
+C     END BLOCK
+      END
+
+C  T(I,J) {I==I#init+2, J==J#init+1}
+
+      SUBROUTINE FOO(J)
+      COMMON I
+
+C  T(I,J) {I==I#init+2, J==J#init+1}
+
+C     BEGIN BLOCK
+
+C  T(J) {J==J#init+1}
+
+      J = J+1                                                           0003
+
+C  T(I) {I==I#init+2}
+
+      I = I+2                                                           0004
+
+C  T() {}
+
+      RETURN
+C     END BLOCK
+      END
+
+C  P() {}
+
+C This program is likely not to confomr to the Fortran standard because
+C of aliasing between a formal parameter and a global variable.
+
+C The result found by tpips is wrong.
+
+C The aliasing should be checked before the analysis
+
+      PROGRAM ALIAS_TRANSFORMER
+      COMMON I
+
+C  P() {}
+
+C     BEGIN BLOCK
+
+C  P() {}
+
+      I = 0                                                             0010
+
+C  P(I) {I==0}
+
+      CALL FOO(I)                                                       0011
+
+C  P() {0==-1}
+
+      PRINT *, I                                                        0012
+
+C  P() {0==-1}
+
+      RETURN
+C     END BLOCK
+      END
+
+C  P() {I==0, J==0}
+
+      SUBROUTINE FOO(J)
+      COMMON I
+
+C  P() {I==0, J==0}
+
+C     BEGIN BLOCK
+
+C  P() {I==0, J==0}
+
+      J = J+1                                                           0003
+
+C  P(J) {I==0, J==1, J#init==0}
+
+      I = I+2                                                           0004
+
+C  P(I,J) {I==2, I#init==0, J==1, J#init==0}
+
+      RETURN
+C     END BLOCK
+      END
+### stderr
+TRANSFORMERS_INTER_FULL[ALIAS_TRANSFORMER] (translate_global_value) Variable FOO:I is probably aliased with a formal parameter by the current call to FOO from ALIAS_TRANSFORMER.

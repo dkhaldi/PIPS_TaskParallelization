@@ -1,0 +1,266 @@
+
+Points-To for "update2"
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// s -> *NULL* , MAY
+// s -> _s_0[0] , MAY
+
+
+// Points To OUT:
+// p -> _p_1[0] , EXACT
+// s -> _s_0[0] , EXACT
+
+void update2(char *p, int n)
+{
+
+// Points To: none
+
+   int i = 0;
+
+// Points To: none
+
+   for(i = 0; i <= n-1; i += 1)
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// s -> *NULL* , MAY
+// s -> _s_0[0] , MAY
+
+      s[i] = p[i];
+
+// Points To:
+// p -> _p_1[0] , EXACT
+// s -> _s_0[0] , EXACT
+
+   return;
+}
+
+Points-To for "string03!"
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// s -> "hello" , EXACT
+
+/* To check the handling of constant string by points-to, effects and
+ * convex array region analyses
+ */
+
+
+// Points To: none
+
+char *s = "hello";
+
+
+// Points To:
+// s -> "hello" , EXACT
+
+extern void update2(char *p, int n);
+
+
+// Points To:
+// s -> "hello" , EXACT
+
+extern int main(int argc, char **argv);
+
+Points-To for "main"
+
+
+// Points To IN:
+// s -> *NULL* , MAY
+// s -> _s_0[0] , MAY
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   char *p2;
+
+// Points To:
+// p2 -> undefined , EXACT
+
+   p2 = "morning";
+
+// Points To:
+// p2 -> "morning" , EXACT
+// s -> *NULL* , MAY
+// s -> _s_0[0] , MAY
+
+   update2(p2, argc);
+
+// Points To:
+// p2 -> "morning" , EXACT
+// s -> _s_0[0] , EXACT
+
+   return 0;
+}
+
+Transformers for "update2"
+
+
+//  T() {}
+
+void update2(char *p, int n)
+{
+
+//  T(i) {i==0}
+
+   int i = 0;
+
+//  T(i) {0<=i, i+1<=n}
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  T() {}
+
+      s[i] = p[i];
+
+//  T() {}
+
+   return;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   char *p2;
+
+//  T() {}
+
+   p2 = "morning";
+
+//  T() {}
+
+   update2(p2, argc);
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   char *p2;
+
+//  P() {}
+
+   p2 = "morning";
+
+//  P() {}
+
+   update2(p2, argc);
+
+//  P() {}
+
+   return 0;
+}
+
+Preconditions for "update2"
+
+
+//  P() {}
+
+void update2(char *p, int n)
+{
+
+//  P() {}
+
+   int i = 0;
+
+//  P(i) {i==0}
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  P(i) {0<=i, i+1<=n}
+
+      s[i] = p[i];
+
+//  P(i) {0<=i, n<=i}
+
+   return;
+}
+
+Regions for "update2"
+
+
+//  <_p_1[PHI1]-R-EXACT-{0<=PHI1, PHI1+1<=n}>
+//  <_s_0[PHI1]-W-EXACT-{0<=PHI1, PHI1+1<=n}>
+//  <p-R-EXACT-{}>
+//  <s-R-EXACT-{}>
+
+void update2(char *p, int n)
+{
+   int i = 0;
+
+//  <_p_1[PHI1]-R-EXACT-{0<=PHI1, PHI1+1<=n}>
+//  <_s_0[PHI1]-W-EXACT-{0<=PHI1, PHI1+1<=n}>
+//  <p-R-EXACT-{}>
+//  <p-RE-EXACT-{}>
+//  <s-R-EXACT-{}>
+//  <s-RE-EXACT-{}>
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  <_p_1[PHI1]-R-EXACT-{PHI1==i, 0<=i, i+1<=n}>
+//  <_s_0[PHI1]-W-EXACT-{PHI1==i, 0<=i, i+1<=n}>
+//  <p-R-EXACT-{}>
+//  <p-RE-EXACT-{}>
+//  <s-R-EXACT-{}>
+//  <s-RE-EXACT-{}>
+
+      s[i] = p[i];
+   return;
+}
+
+Regions for "main"
+
+
+//  <_s_0[PHI1]-W-EXACT-{0<=PHI1, PHI1+1<=argc}>
+//  <s-R-EXACT-{}>
+
+int main(int argc, char **argv)
+{
+
+//  <p2-WE-EXACT-{}>
+
+   char *p2;
+
+//  <p2-RE-EXACT-{}>
+//  <p2-W-EXACT-{}>
+
+   p2 = "morning";
+
+//  <"morning"-R-EXACT-{0<=PHI1, PHI1+1<=argc}>
+//  <_s_0[PHI1]-W-EXACT-{0<=PHI1, PHI1+1<=argc}>
+//  <p2-R-EXACT-{}>
+//  <p2-RE-EXACT-{}>
+//  <s-R-EXACT-{}>
+
+   update2(p2, argc);
+   return 0;
+}

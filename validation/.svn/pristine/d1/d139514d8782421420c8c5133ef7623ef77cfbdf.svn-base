@@ -1,0 +1,29 @@
+
+int main()
+{
+   int i;
+   int *p, *q;
+   int a[10];
+   int b[10];
+//             <    is written>: p
+
+   p = &a[0];
+//             <    is written>: q
+   q = &b[0];
+//             <    is read   >: b[0] p q
+//             <    is written>: a[0] p q
+   *p++ = 2**q++;
+
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	10 --> 12 with conflicts
+		from <p-W-EXACT> to <p-W-EXACT>
+		from <p-W-EXACT> to <p-R-EXACT>
+	11 --> 12 with conflicts
+		from <q-W-EXACT> to <q-W-EXACT>
+		from <q-W-EXACT> to <q-R-EXACT>
+
+****************** End of Dependence Graph ******************

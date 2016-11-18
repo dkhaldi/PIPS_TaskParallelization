@@ -1,0 +1,6 @@
+
+Warnings
+
+unknown[unknown] (safe_system_no_abort) Failed (ret: 1, sig: 0) for 'gcc -std=c99 -D__PIPS__ -D__HPFC__ -U__GNUC__   -Wall  -I. \.\/typedef13b\.c  -c -o /dev/null'
+unknown[unknown] (check_input_file_syntax) 
+C syntax errors in source file "./typedef13b.c". Check source file and/or compilation and preprocessing flags.

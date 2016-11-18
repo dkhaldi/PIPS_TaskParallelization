@@ -1,0 +1,17 @@
+
+Code after scalarization
+
+void scalarization25(double A[SIZE], double B[SIZE])
+{
+   int i, j;
+   for(i = 0; i <= SIZE-1; i += 1) {
+      {
+         //PIPS generated variable
+         register double A_0 = A[i];
+
+         A_0 = B[i]+A_0*++A_0;
+         A[i] = A_0;
+      }
+      A[i] = A[i]+get(A, i);
+   }
+}

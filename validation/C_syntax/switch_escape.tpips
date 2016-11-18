@@ -1,0 +1,99 @@
+setenv WSPACE=switch_escape
+setenv FILE=switch_escape.c
+delete $WSPACE
+
+# although gcc warns about unicode constants,
+# clang generates an error, so do not check...
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create $WSPACE $FILE
+
+# activate C_PARSER
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+
+#echo Try more aggressive restructuring:
+setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+
+echo
+echo // Parsed printed file for esc
+echo
+display PARSED_PRINTED_FILE[esc]
+
+echo
+echo // Printed file for esc
+echo
+display PRINTED_FILE[esc]
+
+echo Try more aggressive restructuring:
+#setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+apply RESTRUCTURE_CONTROL[esc]
+
+echo
+echo // printed file after RESTRUCTURE_CONTROL
+echo
+display PRINTED_FILE[esc]
+
+
+capply UNSPLIT[%PROGRAM]
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+# delete $WSPACE
+# create $WSPACE $FILE
+# 
+# # setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+# # activate C_PARSER
+# 
+# setproperty ABORT_ON_USER_ERROR TRUE
+# 
+# setproperty MEMORY_EFFECTS_ONLY FALSE
+# 
+# setproperty PRETTYPRINT_LANGUAGE "C"
+# setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+# 
+# 
+# #echo Try more aggressive restructuring:
+# setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+# 
+# echo
+# echo // With NEW_CONTROLIZER
+# echo
+# activate NEW_CONTROLIZER
+# 
+# echo
+# echo // Parsed printed file for esc
+# echo
+# display PARSED_PRINTED_FILE[esc]
+# 
+# echo
+# echo // Printed file for esc
+# echo
+# display PRINTED_FILE[esc]
+# 
+# echo Try more aggressive restructuring:
+# #setproperty FUSE_CONTROL_NODES_WITH_COMMENTS_OR_LABEL TRUE
+# apply RESTRUCTURE_CONTROL[esc]
+# 
+# echo
+# echo // printed file after RESTRUCTURE_CONTROL
+# echo
+# display PRINTED_FILE[esc]
+# 
+# close
+# echo
+# echo // Warnings
+# echo 
+# shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

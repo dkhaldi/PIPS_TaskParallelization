@@ -1,0 +1,21 @@
+/* Check impact of spacing property */
+
+int space01(int x, int y, double z)
+{
+  if(z>0.)
+    return x+y;
+  else
+    return x-y;
+}
+
+int main()
+{
+  int j = 2 + 3;
+  int * p = &j;
+  int ** pp = &p;
+  int **unused, **unused_bis;
+
+  **pp = 0;
+  *p = space01(1,j,3.);
+  return 0;
+}

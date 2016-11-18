@@ -1,0 +1,14 @@
+delete internal_static
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create internal_static internal_static.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[main]
+
+
+close
+delete internal_static

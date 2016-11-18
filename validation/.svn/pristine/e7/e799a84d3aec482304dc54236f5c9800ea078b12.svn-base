@@ -1,0 +1,7 @@
+# $Id$
+
+include ../validate.mk
+
+clean: local-clean
+local-clean:
+	$(RM) timeout00.xml timeout01.xml

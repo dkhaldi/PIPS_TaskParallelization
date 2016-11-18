@@ -1,0 +1,7 @@
+delete decl04
+create decl04 decl04.f
+setproperty PRETTYPRINT_ALL_DECLARATIONS TRUE
+display PRINTED_FILE
+close
+delete decl04
+quit

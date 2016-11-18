@@ -1,0 +1,62 @@
+setenv WSPACE=call37
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+#setenv POINTER_VALUES_DEBUG_LEVEL 2
+# The source code is not compatible with this property
+# set POINTS_TO_STRICT_POINTER_TYPES TRUE
+setproperty POINTS_TO_STRICT_POINTER_TYPES FALSE
+
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+
+echo
+echo Points-to for "update1" 
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[update1]
+
+echo 
+echo Proper effects with points-to for "update1"
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[update1]
+
+echo 
+echo Cumulated effects with points-to for "update1"
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[update1]
+
+echo 
+echo Points-to for "main"
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE [main]
+
+echo 
+echo Proper effects with points-to for "main"
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE [main]
+
+echo 
+echo Cumulated effects with points-to for "main"
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE [main]
+
+
+
+close
+delete $WSPACE
+quit

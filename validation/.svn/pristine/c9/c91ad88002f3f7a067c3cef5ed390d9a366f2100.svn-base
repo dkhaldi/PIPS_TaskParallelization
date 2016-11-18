@@ -1,0 +1,3 @@
+void vla_declaration02(param *p, double a[p->dim])
+{
+}

@@ -1,0 +1,13 @@
+delete unsigned_long_int01
+
+setproprety ABORT_ON_USER_ERROR TRUE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create unsigned_long_int01 unsigned_long_int01.c
+
+display PARSED_PRINTED_FILE[main]
+display SYMBOL_TABLE_FILE[main]
+
+apply UNSPLIT
+close
+quit

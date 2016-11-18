@@ -1,0 +1,23 @@
+delete allocation09
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create allocation09 allocation09.c
+
+setproperty PRETTYPRINT_INDENTATION 2
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+echo
+echo Symbol table for "allocation09"
+echo
+
+display SYMBOL_TABLE_FILE[allocation09]
+
+echo
+echo Parsed printed file for "allocation09"
+echo
+
+display PARSED_PRINTED_FILE[allocation09!]
+display PARSED_PRINTED_FILE[allocation09]
+
+close
+delete allocation09
+quit

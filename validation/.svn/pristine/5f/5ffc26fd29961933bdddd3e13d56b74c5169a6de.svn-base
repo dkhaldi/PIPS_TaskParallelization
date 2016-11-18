@@ -1,0 +1,7 @@
+# $Id$
+
+# PARALLEL_VALIDATION=1
+# hmmm... quite risky
+include ../validate.mk
+
+one_liner_func02.validate: FLT += -e '/built-in/d'

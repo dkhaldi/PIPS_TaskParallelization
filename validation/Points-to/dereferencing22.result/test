@@ -1,0 +1,63 @@
+
+PROPER  EFFECTS
+
+void dereferencing22()
+{
+   double a[10];
+//             <    is written>: p
+   double *p = &a[5];
+//             <    is read   >: p
+//             <    is written>: p p[0]
+
+   *p++ = 0.;
+//             <    is read   >: p
+//             <    is written>: p p[0]
+   *p-- = 0.;
+//             <    is read   >: p
+//             <    is written>: p p[1]
+   *++p = 0.;
+//             <    is read   >: p
+//             <    is written>: p p[-1]
+   *--p = 0.;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void dereferencing22()
+{
+
+// Points To: none
+
+   double a[10];
+
+// Points To: none
+
+   double *p = &a[5];
+
+// Points To:
+// p -> a[5] , EXACT
+
+
+   *p++ = 0.;
+
+// Points To:
+// p -> a[*] , EXACT
+
+   *p-- = 0.;
+
+// Points To:
+// p -> a[*] , EXACT
+
+   *++p = 0.;
+
+// Points To:
+// p -> a[*] , EXACT
+
+   *--p = 0.;
+}

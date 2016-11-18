@@ -1,0 +1,78 @@
+int struct10()
+{
+//             <    is written>: p.N1
+   p.N1 = 1;
+//             <    is written>: p.N2
+   p.N2 = 2;
+//             <    is read   >: p.N1 p.N2
+//             <    is written>: q.N1 q.N2
+
+   q = p;
+
+   return 0;
+}
+//             <    is read   >: p.N1 p.N2
+//             <    is written>: p.N1 p.N2 q.N1 q.N2
+int struct10()
+{
+//             <    is written>: p.N1
+   p.N1 = 1;
+//             <    is written>: p.N2
+   p.N2 = 2;
+//             <    is read   >: p.N1 p.N2
+//             <    is written>: q.N1 q.N2
+
+   q = p;
+
+   return 0;
+}
+
+//  T(p[N1],p[N2],q[N1],q[N2],struct10) {p[N1]==1, p[N2]==2, q[N1]==1,
+//    q[N2]==2, struct10==0}
+
+int struct10()
+{
+
+//  T(p[N1]) {p[N1]==1}
+
+   p.N1 = 1;
+
+//  T(p[N2]) {p[N2]==2}
+
+   p.N2 = 2;
+
+//  T(q[N1],q[N2]) {p[N1]==q[N1], p[N2]==q[N2]}
+
+
+   q = p;
+
+//  T(struct10) {struct10==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int struct10()
+{
+
+//  P() {}
+
+   p.N1 = 1;
+
+//  P(p[N1]) {p[N1]==1}
+
+   p.N2 = 2;
+
+//  P(p[N1],p[N2]) {p[N1]==1, p[N2]==2}
+
+
+   q = p;
+
+//  P(p[N1],p[N2],q[N1],q[N2]) {p[N1]==1, p[N2]==2, q[N1]==1,
+//    q[N2]==2}
+
+
+   return 0;
+}

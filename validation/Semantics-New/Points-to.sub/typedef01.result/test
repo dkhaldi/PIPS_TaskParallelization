@@ -1,0 +1,115 @@
+
+Points-to
+
+
+Transformers with point-to
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   BYTE a[10];
+
+//  T() {}
+
+   BYTE *p, *q;
+
+//  T(q) {}
+
+
+   q = a;
+
+//  T(p) {q+sizeof(BYTE)==p}
+
+   p = q+1;
+
+//  T() {q+sizeof(BYTE)==p}
+
+
+   *q = 0;
+
+//  T() {q+sizeof(BYTE)==p}
+
+   *p = 0;
+
+//  T(main) {main==0, q+sizeof(BYTE)==p}
+
+
+   return 0;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   BYTE a[10];
+
+//  P() {}
+
+   BYTE *p, *q;
+
+//  P() {}
+
+
+   q = a;
+
+//  P(q) {}
+
+   p = q+1;
+
+//  P(p,q) {q+sizeof(BYTE)==p}
+
+
+   *q = 0;
+
+//  P(p,q) {q+sizeof(BYTE)==p}
+
+   *p = 0;
+
+//  P(p,q) {q+sizeof(BYTE)==p}
+
+
+   return 0;
+}
+
+Warnings
+
+TRANSFORMERS_INTER_FULL[main] (have_null_value_in_pointer_expression_p) line 10 
+at statement:
+
+	p = q+1;
+
+
+TODO : Need to check if q is indirectly NULL
+TRANSFORMERS_INTER_FULL[main] (pointer_binary_operation_to_transformer) line 10 
+at statement:
+
+	p = q+1;
+
+
+Operator TOP-LEVEL:+C not analyzed
+TRANSFORMERS_INTER_FULL[main] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.
+TRANSFORMERS_INTER_FULL[main] (have_null_value_in_pointer_expression_p) line 10 
+at statement:
+
+	p = q+1;
+
+
+TODO : Need to check if q is indirectly NULL
+TRANSFORMERS_INTER_FULL[main] (pointer_binary_operation_to_transformer) line 10 
+at statement:
+
+	p = q+1;
+
+
+Operator TOP-LEVEL:+C not analyzed

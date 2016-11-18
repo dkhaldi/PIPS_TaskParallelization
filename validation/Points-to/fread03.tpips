@@ -1,0 +1,31 @@
+delete fread03
+create fread03 fread03.c
+
+# The source code has been simplified and seems to be wrong.
+# A user error is now detected
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+setproperty PREPROCESSOR_MISSING_FILE_HANDLING "generate"
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+# You must play with the property below whose possible values are
+# flow-sensitive, context-sensitive, insensitive, unique (default
+#  value),...
+
+# setproperty ABSTRACT_HEAP_LOCATIONS "flow-sensitive"
+
+##TODO: explain
+
+echo
+echo POINTS TO
+echo
+
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE[%ALLFUNC]
+#display PRINTED_FILE[bmatrix]
+
+close
+delete fread03
+quit

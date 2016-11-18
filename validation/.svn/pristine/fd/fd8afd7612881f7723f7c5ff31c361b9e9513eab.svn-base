@@ -1,0 +1,91 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   s_with_pointer a, b;
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+
+   s_with_array_of_struct_with_pointer e, f;
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+   int i, j;
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+   
+   /* definition of a */
+   a.p = (int *) malloc(10*sizeof(int));
+
+// Points To:
+// a.p -> *HEAP*_l_20[0] , MAY
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+   
+   /* definition of b */
+   b = a;
+
+// Points To:
+// a.p -> *HEAP*_l_20[0] , MAY
+// b.p -> *HEAP*_l_20[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+   
+   /* definition of e */
+   for(i = 0; i <= 4; i += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_20[0] , MAY
+// b.p -> *HEAP*_l_20[0] , MAY
+// e.champ[*].p -> *HEAP*_l_27[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> undefined , EXACT
+
+      (e.champ)[i].p = malloc(10*sizeof(int));
+
+// Points To:
+// a.p -> *HEAP*_l_20[0] , MAY
+// b.p -> *HEAP*_l_20[0] , MAY
+// e.champ[*].p -> *HEAP*_l_27[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> undefined , EXACT
+
+   
+   /* definition of f, also modifies e */
+   f = e;
+
+// Points To:
+// a.p -> *HEAP*_l_20[0] , MAY
+// b.p -> *HEAP*_l_20[0] , MAY
+// e.champ[*].p -> *HEAP*_l_27[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_27[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+
+   return 0;
+}

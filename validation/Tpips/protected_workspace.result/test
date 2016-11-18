@@ -1,0 +1,11 @@
+
+The message should be: workspace protected_workspace: Permission denied
+
+	PROGRAM PROTECTED_WORKSPACE
+
+C       Check that tpips reacts properly when a non-accessible
+C       workspace is open
+
+      END
+### stderr
+(open_workspace) [user error] Workspace protected_workspace not readable!

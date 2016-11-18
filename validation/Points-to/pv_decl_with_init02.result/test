@@ -1,0 +1,46 @@
+
+Proper effects
+
+int main()
+{
+   mystruct s1;
+//             <may be read   >: s1.b[*]
+//             <may be written>: s2.b[*]
+//             <    is read   >: s1.a s1.c
+//             <    is written>: s2.a s2.c
+   mystruct s2 = s1;
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   mystruct s1;
+
+// Points To:
+// s1.b[*] -> undefined , EXACT
+// s1.a -> undefined , EXACT
+// s1.c -> undefined , EXACT
+
+   mystruct s2 = s1;
+
+// Points To:
+// s1.b[*] -> undefined , EXACT
+// s1.a -> undefined , EXACT
+// s1.c -> undefined , EXACT
+// s2.b[*] -> undefined , MAY
+// s2.a -> undefined , EXACT
+// s2.c -> undefined , EXACT
+
+   return 0;
+}

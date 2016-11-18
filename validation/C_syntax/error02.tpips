@@ -1,0 +1,19 @@
+delete error02
+setproperty MAXIMUM_USER_ERROR 25
+create error02 error02.c
+
+echo
+echo parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[error02]
+
+echo
+echo printed file
+echo
+
+display PRINTED_FILE[error02]
+
+close
+delete error02
+quit

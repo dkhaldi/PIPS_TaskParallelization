@@ -1,0 +1,176 @@
+
+Points-to for "update1" 
+
+
+// Points To IN:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+
+// Points To OUT:
+// _a_1[0].s1 -> *HEAP*_l_31 , MAY
+// a -> _a_1[0] , EXACT
+
+void update1(content *a)
+{
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+   //a->s1 = (sub*) malloc(4);
+   //a->s1 = (sub*) malloc(sizeof(int));
+   a->s1 = (sub *) malloc(sizeof(sub));
+
+// Points To:
+// _a_1[0].s1 -> *HEAP*_l_31 , MAY
+// a -> _a_1[0] , EXACT
+
+   a->s1->var2 = 8;
+}
+
+Proper effects with points-to for "update1"
+
+void update1(content *a)
+{
+//             <    is read   >: a _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _a_1[0].s1 _MALLOC_EFFECTS:_MALLOC_
+   //a->s1 = (sub*) malloc(4);
+   //a->s1 = (sub*) malloc(sizeof(int));
+   a->s1 = (sub *) malloc(sizeof(sub));
+//             <may be written>: *HEAP*_l_31.var2
+//             <    is read   >: _a_1[0].s1 a
+   a->s1->var2 = 8;
+}
+
+Cumulated effects with points-to for "update1"
+
+//             <    is read   >: _a_1[0].s1 a _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _a_1[0].s1 _MALLOC_EFFECTS:_MALLOC_
+void update1(content *a)
+{
+//             <    is read   >: a _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _a_1[0].s1 _MALLOC_EFFECTS:_MALLOC_
+   //a->s1 = (sub*) malloc(4);
+   //a->s1 = (sub*) malloc(sizeof(int));
+   a->s1 = (sub *) malloc(sizeof(sub));
+//             <may be written>: *HEAP*_l_31.var2
+//             <    is read   >: _a_1[0].s1 a
+   a->s1->var2 = 8;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+
+// Points To: none
+
+   content a;
+
+// Points To:
+// a.s1 -> undefined , EXACT
+// a.s2 -> undefined , EXACT
+
+   int b[100];
+
+// Points To:
+// a.s1 -> undefined , EXACT
+// a.s2 -> undefined , EXACT
+
+   int c[100];
+
+// Points To:
+// a.s1 -> undefined , EXACT
+// a.s2 -> undefined , EXACT
+
+
+   update1(&a);
+
+// Points To:
+// a.s1 -> update1:*HEAP*_l_31 , MAY
+// a.s2 -> undefined , EXACT
+
+   compute1(*a.s1, b);
+
+// Points To:
+// a.s1 -> update1:*HEAP*_l_31 , MAY
+// a.s2 -> undefined , EXACT
+
+   update2(&a);
+
+// Points To:
+// a.s1 -> update1:*HEAP*_l_31 , MAY
+// a.s2 -> update2:*HEAP*_l_42 , MAY
+
+   compute2(a.s2, b, c);
+
+// Points To:
+// a.s1 -> update1:*HEAP*_l_31 , MAY
+// a.s2 -> update2:*HEAP*_l_42 , MAY
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char *argv[])
+{
+   content a;
+   int b[100];
+   int c[100];
+//             <    is read   >: a.s1 _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a.s1 _MALLOC_EFFECTS:_MALLOC_
+
+   update1(&a);
+//             <may be read   >: update1:*HEAP*_l_31.var2
+//             <may be written>: b[*]
+//             <    is read   >: a.s1
+   compute1(*a.s1, b);
+//             <    is read   >: a.s2 _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a.s2 _MALLOC_EFFECTS:_MALLOC_
+   update2(&a);
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: a.s2 update2:*HEAP*_l_42.var2
+   compute2(a.s2, b, c);
+
+   return 0;
+}
+
+Cumulated effects with points-to for "main"
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+int main(int argc, char *argv[])
+{
+   content a;
+   int b[100];
+   int c[100];
+//             <    is read   >: a.s1 _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a.s1 _MALLOC_EFFECTS:_MALLOC_
+
+   update1(&a);
+//             <may be read   >: update1:*HEAP*_l_31.var2
+//             <may be written>: b[*]
+//             <    is read   >: a.s1
+   compute1(*a.s1, b);
+//             <    is read   >: a.s2 _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a.s2 _MALLOC_EFFECTS:_MALLOC_
+   update2(&a);
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: a.s2 update2:*HEAP*_l_42.var2
+   compute2(a.s2, b, c);
+
+   return 0;
+}

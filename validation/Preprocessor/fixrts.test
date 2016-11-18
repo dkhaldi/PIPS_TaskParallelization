@@ -1,0 +1,36 @@
+#/bin/sh
+
+WS=fixrts
+
+# Which gcc is used?
+GCC_VERSION=`gcc -v 2>&1|grep 'gcc version'|sed -e 's/gcc version //;s/ .*//'`
+#echo $GCC_VERSION
+if test $GCC_version = 4.6.3
+then
+ PIPS_CPP="cpp -C -P -ffreestanding"
+else
+ PIPS_CPP="cpp -C -ffreestanding"
+fi
+
+export PIPS_CPP
+
+#echo $PIPS_CPP
+
+tpips $WS.script
+
+# No warnings during processing
+
+#wc $WS.database/Warnings
+if [ -s $WS.database/Warnings ]
+then 
+   echo
+   echo No warnings
+   echo
+else 
+   echo
+   echo Warning
+   echo
+   cat $WS.database/Warnings
+fi
+
+#Delete $WS

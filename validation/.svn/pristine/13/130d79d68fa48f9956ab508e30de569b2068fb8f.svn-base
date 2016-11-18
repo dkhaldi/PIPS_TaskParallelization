@@ -1,0 +1,21 @@
+
+### stderr
+setproperty ABORT_ON_USER_ERROR FALSE
+setproperty MAXIMUM_USER_ERROR 25
+setpropertycoelho
+           ^
+at line 5 in "./property03.tpips2"
+(tp_error) [user error] Space expected after initial keyword.
+setpropfabien
+       ^
+at line 6 in "./property03.tpips2"
+(tp_error) [user error] Space expected after initial keyword.
+echofoo
+    ^
+at line 7 in "./property03.tpips2"
+(tp_error) [user error] Space expected after initial keyword.
+shellecho foo
+     ^
+at line 8 in "./property03.tpips2"
+(tp_error) [user error] Space expected after initial keyword.
+Pips is done: tpips end of main

@@ -1,0 +1,91 @@
+C
+      FUNCTION OVL(BETA,Z0)
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z)
+      OVL = MIN(XL, -0.003D0)                                           0004
+      END
+C     Bug: if OVL is parsed first, its explicit declaration does not fit 
+C     its implicit declaration in BLM
+
+C     Extract from apsi (Spec CFP95)
+
+      SUBROUTINE BLM(U,POTT,ZET,NZ,Z0,USTAR,DL,DZ,DKZ,KLAS,ZMH,F)
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z)
+      REAL*8 POTT(*),ZET(*),DKZ(*)
+      DL = 1.D0/OVL(BETA, Z0)                                           0009
+      END
+C     Bug: if OVL is parsed first, its explicit declaration does not fit 
+C     its implicit declaration in BLM
+
+C     Extract from apsi (Spec CFP95)
+
+      SUBROUTINE BLM(U,POTT,ZET,NZ,Z0,USTAR,DL,DZ,DKZ,KLAS,ZMH,F)
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z)
+      REAL*8 POTT(*),ZET(*),DKZ(*)
+      DL = 1.D0/OVL(BETA, Z0)                                           0009
+      END
+C
+      FUNCTION OVL(BETA,Z0)
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z)
+      OVL = MIN(XL, -0.003D0)                                           0004
+      END
+### stderr
+Declared entity BLM:*DYNAMIC*	with type area with size 8
+Declared entity BLM:*HEAP*	with type area with size 0
+Declared entity BLM:*STACK*	with type area with size 0
+Declared entity BLM:*STATIC*	with type area with size 0
+Declared entity BLM:BETA	with type variable REAL*8
+Declared entity BLM:DKZ	with type variable REAL*8
+Declared entity BLM:DL	with type variable REAL*8
+Declared entity BLM:DZ	with type variable REAL*8
+Declared entity BLM:F	with type variable REAL*8
+Declared entity BLM:KLAS	with type variable INTEGER*4
+Declared entity BLM:NZ	with type variable INTEGER*4
+Declared entity BLM:POTT	with type variable REAL*8
+Declared entity BLM:U	with type variable REAL*8
+Declared entity BLM:USTAR	with type variable REAL*8
+Declared entity BLM:Z0	with type variable REAL*8
+Declared entity BLM:ZET	with type variable REAL*8
+Declared entity BLM:ZMH	with type variable REAL*8
+	Variable BLM:DKZ,	offset = 9
+	Variable BLM:DL,	offset = 7
+	Variable BLM:DZ,	offset = 8
+	Variable BLM:F,	offset = 12
+	Variable BLM:KLAS,	offset = 10
+	Variable BLM:NZ,	offset = 4
+	Variable BLM:POTT,	offset = 2
+	Variable BLM:U,	offset = 1
+	Variable BLM:USTAR,	offset = 6
+	Variable BLM:Z0,	offset = 5
+	Variable BLM:ZET,	offset = 3
+	Variable BLM:ZMH,	offset = 11
+	Variable BLM:BETA,	offset = 0,	size = 8
+Declared entity BLM:*DYNAMIC*	with type area with size 8
+Declared entity BLM:*HEAP*	with type area with size 0
+Declared entity BLM:*STACK*	with type area with size 0
+Declared entity BLM:*STATIC*	with type area with size 0
+Declared entity BLM:BETA	with type variable REAL*8
+Declared entity BLM:DKZ	with type variable REAL*8
+Declared entity BLM:DL	with type variable REAL*8
+Declared entity BLM:DZ	with type variable REAL*8
+Declared entity BLM:F	with type variable REAL*8
+Declared entity BLM:KLAS	with type variable INTEGER*4
+Declared entity BLM:NZ	with type variable INTEGER*4
+Declared entity BLM:POTT	with type variable REAL*8
+Declared entity BLM:U	with type variable REAL*8
+Declared entity BLM:USTAR	with type variable REAL*8
+Declared entity BLM:Z0	with type variable REAL*8
+Declared entity BLM:ZET	with type variable REAL*8
+Declared entity BLM:ZMH	with type variable REAL*8
+	Variable BLM:DKZ,	offset = 9
+	Variable BLM:DL,	offset = 7
+	Variable BLM:DZ,	offset = 8
+	Variable BLM:F,	offset = 12
+	Variable BLM:KLAS,	offset = 10
+	Variable BLM:NZ,	offset = 4
+	Variable BLM:POTT,	offset = 2
+	Variable BLM:U,	offset = 1
+	Variable BLM:USTAR,	offset = 6
+	Variable BLM:Z0,	offset = 5
+	Variable BLM:ZET,	offset = 3
+	Variable BLM:ZMH,	offset = 11
+	Variable BLM:BETA,	offset = 0,	size = 8

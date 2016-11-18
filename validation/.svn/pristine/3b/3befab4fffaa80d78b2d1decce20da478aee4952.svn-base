@@ -1,0 +1,392 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   s_with_pointer a, b;
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+
+   s_with_array c, d;
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+
+   s_with_array_of_struct_with_pointer e, f;
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+   s_with_array_of_struct_with_array g, h;
+
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+   int i, j;
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+   
+   // just to create a block for prettyprinting
+   if (1) {
+
+// Points To:
+// a.p -> undefined , EXACT
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      // definition of a
+      a.p = (int *) malloc(10*sizeof(int));
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      for(i = 0; i <= 9; i += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+         (a.p)[i] = i;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> undefined , EXACT
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      
+      // definition of b, also modifies a
+      b = a;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      printf("\nstruct with pointer copy : \n");
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      for(i = 0; i <= 9; i += 1) {
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+         (b.p)[i] = i*10;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+         printf("a.p[%d] = %d; b.p[%d] = %d \n", i, (a.p)[i], i, (b.p)[i]);
+      }
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      
+      // definition of c
+      for(i = 0; i <= 9; i += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+         (c.array)[i] = i;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      
+      // definition of d, does not modify c
+      d = c;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      printf("\nstruct with array copy : \n");
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      for(i = 0; i <= 9; i += 1) {
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+         (d.array)[i] = i*10;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+         printf("c.array[%d] = %d; d.array[%d] = %d \n", i, (c.array)[i], i, (d.array)[i]);
+      }
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> undefined , EXACT
+// f.champ[*].p -> undefined , EXACT
+
+      
+      // definition of e
+      for(i = 0; i <= 4; i += 1) {
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> undefined , EXACT
+
+         (e.champ)[i].p = malloc(10*sizeof(int));
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> undefined , EXACT
+
+         for(j = 0; j <= 9; j += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> undefined , EXACT
+
+            ((e.champ)[i].p)[j] = i+j;
+      }
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> undefined , EXACT
+
+      
+      // definition of f, also modifies e
+      f = e;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+      printf("\nstruct with array of structs with pointer copy : \n");
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+      for(i = 0; i <= 4; i += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+         for(j = 0; j <= 9; j += 1) {
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+            ((f.champ)[i].p)[j] = i*j;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+            printf("e.champ[%d].p[%d] = %d ; f.champ[%d].p[%d] = %d \n", i, j, ((e.champ)[i].p)[j], i, j, ((f.champ)[i].p)[j]);
+         }
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+      
+      // definition of g
+      for(i = 0; i <= 4; i += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+         for(j = 0; j <= 9; j += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+            ((g.champ)[i].array)[j] = i+j;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+      
+      // definition of h, does not modify g
+      h = g;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+      printf("\nstruct with array of structs with array copy : \n");
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+      for(i = 0; i <= 4; i += 1)
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+         for(j = 0; j <= 9; j += 1) {
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+            ((h.champ)[i].array)[j] = i*j;
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+            printf("g.champ[%d].array[%d] = %d ; h.champ[%d].array[%d] = %d \n", i, j, ((g.champ)[i].array)[j], i, j, ((h.champ)[i].array)[j]);
+         }
+   }
+
+// Points To:
+// a.p -> *HEAP*_l_36[0] , MAY
+// a.p -> undefined , MAY
+// b.p -> *HEAP*_l_36[0] , MAY
+// b.p -> undefined , MAY
+// e.champ[*].p -> *HEAP*_l_66[0] , MAY
+// e.champ[*].p -> undefined , MAY
+// f.champ[*].p -> *HEAP*_l_66[0] , MAY
+// f.champ[*].p -> undefined , MAY
+
+   return 0;
+}

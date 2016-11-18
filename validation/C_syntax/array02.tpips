@@ -1,0 +1,38 @@
+setenv WS=array02
+delete $WS
+
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty EVAL_SIZEOF TRUE
+
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5
+
+# mandatory for A&K (Rice) parallization on C files
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+
+#setproperty PRETTYPRINT_LANGUAGE "C"
+#setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+#activate C_PARSER
+#activate C_SYMBOL_TABLE
+
+display SYMBOL_TABLE_FILE[$WS]
+
+display PARSED_PRINTED_FILE[$WS!]
+display PARSED_PRINTED_FILE[$WS]
+
+apply UNSPLIT
+
+shell pips_validation_exe.sh -c -g $WS
+
+display PARALLELPRINTED_FILE
+
+close
+
+#delete $WS
+
+quit

@@ -1,0 +1,1 @@
+constant_path_analyzed_p() seems to have no impact unless pointers are analyzed too.

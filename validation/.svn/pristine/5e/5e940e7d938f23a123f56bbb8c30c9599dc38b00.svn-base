@@ -1,0 +1,6 @@
+# WSPACE=foo FILE=foo.c tpips default_tpips
+#
+# apply compiler on main function
+#
+setenv NAME=main
+source ../default_tpips

@@ -1,0 +1,30 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+delete dotprod_c2
+create dotprod_c2 kernels/DOTPROD/DOTPROD2.c include/SIMD.c
+
+echo
+echo Initial code
+echo
+module dotprod
+
+display PRINTED_FILE
+
+apply UNFOLDING
+
+echo
+echo After Unfolding
+echo
+
+display PRINTED_FILE
+
+source include/benchmark.tpips.h
+
+echo
+echo simdized code
+echo
+
+display PRINTED_FILE
+
+close
+delete dotprod_c2
+quit

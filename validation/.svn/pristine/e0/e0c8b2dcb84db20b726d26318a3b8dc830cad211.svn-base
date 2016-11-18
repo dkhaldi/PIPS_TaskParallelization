@@ -1,0 +1,40 @@
+
+Cumulated Effects
+
+//             <may be read   >: out[*].x out[*].y
+//             <may be written>: out[*].x out[*].y
+//             <    is read   >: np
+void FM(int np, complexfloat in[np], complexfloat out[np])
+{
+   int p;
+//             <may be read   >: out[*].x out[*].y p
+//             <may be written>: out[*].x out[*].y
+//             <    is read   >: np
+//             <    is written>: p
+   for(p = 0; p <= np-1; p += 1)
+//             <may be read   >: out[*].x out[*].y
+//             <may be written>: out[*].x out[*].y
+//             <    is read   >: np p
+      out[p] = F2(out[p]);
+}
+
+Transformers
+
+
+//  T() {}
+
+void FM(int np, complexfloat in[np], complexfloat out[np])
+{
+
+//  T() {}
+
+   int p;
+
+//  T(p) {p+1<=np, 0<=p}
+
+   for(p = 0; p <= np-1; p += 1)
+
+//  T() {}
+
+      out[p] = F2(out[p]);
+}

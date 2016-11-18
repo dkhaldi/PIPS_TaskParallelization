@@ -1,0 +1,13 @@
+setenv PIPS_CHECK_C No
+setproperty ABORT_ON_USER_ERROR TRUE
+delete cleandec03
+create cleandec03 cleandec03.c
+
+display PRINTED_FILE[c_clean_declarations03]
+apply CLEAN_DECLARATIONS[c_clean_declarations03]
+display PRINTED_FILE[c_clean_declarations03]
+
+close
+delete cleandec03
+quit
+

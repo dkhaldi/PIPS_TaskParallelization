@@ -1,0 +1,6 @@
+A derived entity must be declared in the formal scope. This formal
+scope is described in the document C_ri.tex, but its implementation is a bit shaky.
+
+The code synthesis algorithm is not good as it declares a useless derived entity.
+
+Derived entities required by a function signature should be declared outside of that function, not directly as a formal parameter type.

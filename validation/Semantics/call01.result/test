@@ -1,0 +1,48 @@
+
+Source code with proper effects
+
+void call01(int i)
+{
+//             <    is read   >: i
+//             <    is written>: i
+   i++;                                                                 /*0007*/
+//             <    is read   >: j
+//             <    is written>: j
+   j++;                                                                 /*0008*/
+}
+
+Source code with cumulated effects
+
+//             <    is read   >: i j
+//             <    is written>: j
+void call01(int i)
+{
+//             <    is read   >: i
+//             <    is written>: i
+   i++;                                                                 /*0007*/
+//             <    is read   >: j
+//             <    is written>: j
+   j++;                                                                 /*0008*/
+}
+
+Source code with transformers
+
+
+//  T(j) {j==j#init+1}
+
+void call01(int i)
+{
+
+//  T(i) {i==i#init+1}
+
+   i++;                                                                 /*0007*/
+
+//  T(j) {j==j#init+1}
+
+   j++;                                                                 /*0008*/
+}
+
+Warnings
+
+(activate_phase) Rule `C_PARSER' already active
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "call01" instead.

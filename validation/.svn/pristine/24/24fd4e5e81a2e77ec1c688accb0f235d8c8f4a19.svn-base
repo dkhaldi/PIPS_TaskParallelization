@@ -1,0 +1,48 @@
+
+Source code with transformers
+
+
+//  T(modulo08) {}
+
+int modulo08(int argc, char **argv)
+{
+
+//  T(n) {}
+
+   int n = atoi(argv[1]);
+
+//  T(j) {0<=j}
+
+   unsigned int j = n%4;
+
+//  T(modulo08) {0<=j}
+
+   
+   // j is unsigned and thus cannot be < 0
+   // This is only found if property SEMANTICS_USE_TYPE_INFORMATION is set
+   return j;
+}
+
+Source code with preconditions
+
+
+//  P() {}
+
+int modulo08(int argc, char **argv)
+{
+
+//  P() {}
+
+   int n = atoi(argv[1]);
+
+//  P(n) {}
+
+   unsigned int j = n%4;
+
+//  P(j,n) {0<=j}
+
+   
+   // j is unsigned and thus cannot be < 0
+   // This is only found if property SEMANTICS_USE_TYPE_INFORMATION is set
+   return j;
+}

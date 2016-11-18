@@ -1,0 +1,199 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   char buffer_in2[10][10];
+
+// Points To: none
+
+   char buffer_out2[10][10];
+
+// Points To: none
+
+   int n = argc, m = argc, l = argc;
+
+// Points To: none
+
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+// Points To: none
+
+   mymemcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+// Points To: none
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in2
+   char buffer_in2[10][10];
+//             <    is declared>: buffer_out2
+   char buffer_out2[10][10];
+//             <    is read   >: argc
+//             <    is written>: l m n
+//             <    is referenced>: argc argc argc l m n
+//             <    is declared>: l m n
+   int n = argc, m = argc, l = argc;
+//             <    is read   >: buffer_in2[m][0:l-1] l m n
+//             <    is written>: buffer_out2[n][0:l-1]
+//             <    is referenced>: buffer_in2 buffer_out2 l m n
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+//             <may be read   >: buffer_in2[m][*]
+//             <may be written>: buffer_out2[n][*]
+//             <    is read   >: l m n
+//             <    is referenced>: buffer_in2 buffer_out2 l m n
+   mymemcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+   return 0;
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <    is read   >: argc
+//             <    is referenced>: argc
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in2
+   char buffer_in2[10][10];
+//             <    is declared>: buffer_out2
+   char buffer_out2[10][10];
+//             <    is read   >: argc
+//             <    is written>: l m n
+//             <    is referenced>: argc l m n
+//             <    is declared>: l m n
+   int n = argc, m = argc, l = argc;
+//             <may be read   >: buffer_in2[*][*]
+//             <may be written>: buffer_out2[*][*]
+//             <    is read   >: l m n
+//             <    is referenced>: buffer_in2 buffer_out2 l m n
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+//             <may be read   >: buffer_in2[*][*]
+//             <may be written>: buffer_out2[*][*]
+//             <    is read   >: l m n
+//             <    is referenced>: buffer_in2 buffer_out2 l m n
+   mymemcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   char buffer_in2[10][10];
+
+//  T() {}
+
+   char buffer_out2[10][10];
+
+//  T(l,m,n) {argc==l, argc==m, argc==n}
+
+   int n = argc, m = argc, l = argc;
+
+//  T() {}
+
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  T() {}
+
+   mymemcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   char buffer_in2[10][10];
+
+//  P() {}
+
+   char buffer_out2[10][10];
+
+//  P() {}
+
+   int n = argc, m = argc, l = argc;
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   mymemcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+
+   return 0;
+}
+
+Convex array regions with points-to for "main"
+
+int main(int argc, char **argv)
+{
+
+//  <buffer_in2-WE-EXACT-{}>
+
+   char buffer_in2[10][10];
+
+//  <buffer_out2-WE-EXACT-{}>
+
+   char buffer_out2[10][10];
+   int n = argc, m = argc, l = argc;
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <buffer_in2[PHI1][PHI2]-R-EXACT-{PHI1==m, 0<=PHI2, PHI2+1<=l,
+//    l==argc, m==argc, n==argc}>
+//  <buffer_out2-RE-EXACT-{}>
+//  <buffer_out2[PHI1][PHI2]-W-EXACT-{PHI1==n, 0<=PHI2, PHI2+1<=l,
+//    l==argc, m==argc, n==argc}>
+
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <buffer_in2[PHI1][PHI2]-R-EXACT-{PHI1==m, 0<=PHI2, PHI2+1<=l}>
+//  <buffer_out2-RE-EXACT-{}>
+//  <buffer_out2[PHI1][PHI2]-W-EXACT-{PHI1==n, 0<=PHI2, PHI2+1<=l}>
+
+   mymemcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+   return 0;
+}

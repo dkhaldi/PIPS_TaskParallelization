@@ -1,0 +1,5 @@
+# 5 "complex_constant.c"
+void complex_constant()
+{
+  _Complex z = 0. + ( 1.0iF);
+}

@@ -1,0 +1,86 @@
+
+Source code with proper effects
+
+int pointer03()
+{
+//             <    is written>: i
+   int i = 3;                                                           /*0005*/
+//             <    is written>: ip
+   int *ip = &i;                                                        /*0006*/
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: ip
+   *ip = 4;                                                             /*0007*/
+//             <    is read   >: i
+   return i;                                                            /*0008*/
+}
+
+Source code with cumulated effects
+
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+int pointer03()
+{
+//             <    is written>: i
+   int i = 3;                                                           /*0005*/
+//             <    is written>: ip
+   int *ip = &i;                                                        /*0006*/
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: ip
+   *ip = 4;                                                             /*0007*/
+//             <    is read   >: i
+   return i;                                                            /*0008*/
+}
+
+Source code with transformers
+
+
+//  T(pointer03) {}
+
+int pointer03()
+{
+
+//  T(i) {i==3}
+
+   int i = 3;                                                           /*0005*/
+
+//  T() {}
+
+   int *ip = &i;                                                        /*0006*/
+
+//  T(i) {}
+
+   *ip = 4;                                                             /*0007*/
+
+//  T(pointer03) {i==pointer03}
+
+   return i;                                                            /*0008*/
+}
+
+Source code with preconditions
+
+
+//  P() {}
+
+int pointer03()
+{
+
+//  P() {}
+
+   int i = 3;                                                           /*0005*/
+
+//  P(i) {i==3}
+
+   int *ip = &i;                                                        /*0006*/
+
+//  P(i) {i==3}
+
+   *ip = 4;                                                             /*0007*/
+
+//  P(i) {}
+
+   return i;                                                            /*0008*/
+}
+
+Warnings
+
+(activate_phase) Rule `C_PARSER' already active
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "pointer03" instead.

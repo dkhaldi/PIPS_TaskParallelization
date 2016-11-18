@@ -1,0 +1,12 @@
+      BLOCKDATA DATA06
+
+C     Detect data bug (or ANSI extension...)
+
+      DATA M /1/
+
+      COMMON M
+
+      END
+### stderr
+Declared entity DATA06:M	with type variable INTEGER*4
+	Variable DATA06:M,	offset = 0,	size = 4

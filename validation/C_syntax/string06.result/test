@@ -1,0 +1,5 @@
+int main()
+{
+   puts("h""e""l""l""o""\n");
+   return 0;
+}

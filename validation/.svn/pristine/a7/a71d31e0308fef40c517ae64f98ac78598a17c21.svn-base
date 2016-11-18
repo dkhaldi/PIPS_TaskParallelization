@@ -1,0 +1,46 @@
+setenv WSPACE=dynamic01a
+setenv FILE=dynamic01
+delete $WSPACE
+create $WSPACE $FILE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty REGIONS_WITH_ARRAY_BOUNDS TRUE
+
+setproperty ARRAY_RESIZING_ASSUMED_SIZE_ONLY FALSE
+
+activate MUST_REGIONS
+
+echo
+echo Init Code
+echo
+display PRINTED_FILE[foo]
+
+# echo
+# echo PRINT_CODE_REGIONS
+# echo
+# activate PRINT_CODE_REGIONS
+# display PRINTED_FILE[foo]
+# 
+# echo
+# echo PRINT_CODE_PRECONDITIONS
+# echo
+# activate PRINT_CODE_PRECONDITIONS
+# display PRINTED_FILE[foo]
+
+echo
+echo ARRAY_RESIZING_FULL_BOTTOM_UP
+echo
+# activate PRINT_CODE
+apply ARRAY_RESIZING_FULL_BOTTOM_UP[foo]
+display PRINTED_FILE[foo]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit
+

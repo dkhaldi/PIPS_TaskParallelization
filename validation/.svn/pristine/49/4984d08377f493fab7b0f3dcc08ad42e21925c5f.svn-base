@@ -1,0 +1,3 @@
+cast in actual parameters are not handled correctly in generic_c_effects_backward_translation(), effects-generic/interprocedural.c.
+
+I have no clear ideas for a correct solution.

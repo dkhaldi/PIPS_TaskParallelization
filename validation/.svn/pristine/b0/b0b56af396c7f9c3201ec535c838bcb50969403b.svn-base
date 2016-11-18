@@ -1,0 +1,270 @@
+
+TRANSFORMERS for warning02
+
+
+//  T(warning02) {i==warning02-2}
+
+int warning02(int n, int i, double a[n])
+{
+
+//  T(k) {k==2}
+
+   int k = 2;
+
+//  T(i) {i==i#init+1, k==2}
+
+   /* k is added because sc_add_phi_equation() handles as special cases
+      * a[i++] and a[i--], although a more generic approach based on
+      * any_expression_to_transformer() is also used for more complex
+      * subscript expressions.
+      *
+      * However, must_p is not computed when
+      * any_expression_to_transformer() is used. It would be necessary to
+      * check that the phi variable belongs to an equation to preserve
+      * must_p.
+      */
+   a[i++ +k] = 0;
+
+//  T(i) {i==i#init+1, k==2}
+
+   a[i++ +k] = 0;
+
+//  T(warning02) {i==warning02, k==2}
+
+   return i;
+}
+
+PRECONDITIONS for warning02
+
+
+//  P() {}
+
+int warning02(int n, int i, double a[n])
+{
+
+//  P() {}
+
+   int k = 2;
+
+//  P(k) {k==2}
+
+   /* k is added because sc_add_phi_equation() handles as special cases
+      * a[i++] and a[i--], although a more generic approach based on
+      * any_expression_to_transformer() is also used for more complex
+      * subscript expressions.
+      *
+      * However, must_p is not computed when
+      * any_expression_to_transformer() is used. It would be necessary to
+      * check that the phi variable belongs to an equation to preserve
+      * must_p.
+      */
+   a[i++ +k] = 0;
+
+//  P(i,k) {k==2}
+
+   a[i++ +k] = 0;
+
+//  P(i,k) {k==2}
+
+   return i;
+}
+
+REGIONS for warning02
+
+int warning02(int n, int i, double a[n])
+{
+
+//  <k-RE-EXACT-{}>
+//  <k-W-EXACT-{}>
+//  <k-WE-EXACT-{}>
+
+   int k = 2;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==i+1, k==2}>
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+//  <i-W-EXACT-{}>
+//  <k-RE-EXACT-{}>
+//  <k-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   /* k is added because sc_add_phi_equation() handles as special cases
+      * a[i++] and a[i--], although a more generic approach based on
+      * any_expression_to_transformer() is also used for more complex
+      * subscript expressions.
+      *
+      * However, must_p is not computed when
+      * any_expression_to_transformer() is used. It would be necessary to
+      * check that the phi variable belongs to an equation to preserve
+      * must_p.
+      */
+   a[i++ +k] = 0;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==i+1, k==2}>
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+//  <i-W-EXACT-{}>
+//  <k-RE-EXACT-{}>
+//  <k-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   a[i++ +k] = 0;
+
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+
+   return i;
+}
+
+REGIONS for warning02
+
+
+//  <a[PHI1]-W-EXACT-{i+1<=PHI1, PHI1<=i+2}>
+//  <i-R-EXACT-{}>
+//  <i-W-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+int warning02(int n, int i, double a[n])
+{
+
+//  <k-RE-EXACT-{}>
+//  <k-WE-EXACT-{}>
+//  <k-W-EXACT-{}>
+
+   int k = 2;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==i+1, k==2}>
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+//  <i-W-EXACT-{}>
+//  <k-R-EXACT-{}>
+//  <k-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   /* k is added because sc_add_phi_equation() handles as special cases
+      * a[i++] and a[i--], although a more generic approach based on
+      * any_expression_to_transformer() is also used for more complex
+      * subscript expressions.
+      *
+      * However, must_p is not computed when
+      * any_expression_to_transformer() is used. It would be necessary to
+      * check that the phi variable belongs to an equation to preserve
+      * must_p.
+      */
+   a[i++ +k] = 0;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-EXACT-{PHI1==i+1, k==2}>
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+//  <i-W-EXACT-{}>
+//  <k-R-EXACT-{}>
+//  <k-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   a[i++ +k] = 0;
+
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+
+   return i;
+}
+
+IN regions for warning02
+
+
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+int warning02(int n, int i, double a[n])
+{
+   int k = 2;
+
+//  <i-IN-EXACT-{}>
+//  <k-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+   /* k is added because sc_add_phi_equation() handles as special cases
+      * a[i++] and a[i--], although a more generic approach based on
+      * any_expression_to_transformer() is also used for more complex
+      * subscript expressions.
+      *
+      * However, must_p is not computed when
+      * any_expression_to_transformer() is used. It would be necessary to
+      * check that the phi variable belongs to an equation to preserve
+      * must_p.
+      */
+   a[i++ +k] = 0;
+
+//  <i-IN-EXACT-{}>
+//  <k-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+   a[i++ +k] = 0;
+
+//  <i-IN-EXACT-{}>
+
+   return i;
+}
+
+OUT regions for warning02
+
+int warning02(int n, int i, double a[n])
+{
+
+//  <k-OUT-EXACT-{}>
+
+   int k = 2;
+
+//  <i-OUT-EXACT-{}>
+
+   /* k is added because sc_add_phi_equation() handles as special cases
+      * a[i++] and a[i--], although a more generic approach based on
+      * any_expression_to_transformer() is also used for more complex
+      * subscript expressions.
+      *
+      * However, must_p is not computed when
+      * any_expression_to_transformer() is used. It would be necessary to
+      * check that the phi variable belongs to an equation to preserve
+      * must_p.
+      */
+   a[i++ +k] = 0;
+
+//  <i-OUT-EXACT-{}>
+
+   a[i++ +k] = 0;
+   return i;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "warning02" instead.
+TRANSFORMERS_INTER_FULL[warning02] (transformer_safe_combine_with_warnings) Non standard compliant code: side effect in part
+of an expression affects variable(s) used in a later part
+TRANSFORMERS_INTER_FULL[warning02] (transformer_safe_combine_with_warnings) Non standard compliant code: side effect in part
+of an expression affects variable(s) used in a later part
+MUST_REGIONS[warning02] (transformer_safe_combine_with_warnings) Non standard compliant code: side effect in part
+of an expression affects variable(s) used in a later part
+MUST_REGIONS[warning02] (sc_add_phi_equation) line 18 
+at statement:
+
+	a[i++ +k] = 0;
+
+
+Side-effects in subscript expression "i++ +k" should be avoided:
+MUST_REGIONS[warning02] (transformer_safe_combine_with_warnings) Non standard compliant code: side effect in part
+of an expression affects variable(s) used in a later part
+MUST_REGIONS[warning02] (sc_add_phi_equation) line 19 
+at statement:
+
+	a[i++ +k] = 0;
+
+
+Side-effects in subscript expression "i++ +k" should be avoided:

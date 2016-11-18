@@ -1,0 +1,40 @@
+setenv WSPACE=array11
+delete $WSPACE
+create $WSPACE $WSPACE.c
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+#setenv POINTER_VALUES_DEBUG_LEVEL 2
+set POINTS_TO_STRICT_POINTER_TYPES TRUE
+
+echo 
+echo Points-to for "titi"
+echo
+activate PRINT_CODE_POINTS_TO_LIST
+display PRINTED_FILE [titi]
+
+echo
+echo Proper effects with points-to for "titi"
+echo
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE [titi]
+
+echo
+echo Dependence graph for "titi"
+echo
+
+activate PRINT_CHAINS_GRAPH
+display DG_FILE 
+
+close
+
+echo
+echo Warnings and errors
+echo
+
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

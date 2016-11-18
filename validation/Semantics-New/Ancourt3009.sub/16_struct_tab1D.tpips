@@ -1,0 +1,82 @@
+setenv WSPACE 16_struct_tab1D
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty NO_USER_WARNING TRUE
+delete $WSPACE
+setproperty NO_USER_WARNING FALSE
+
+# set properties for both tpips runs
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER TRUE
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT FALSE
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+setproperty ALIASING_ACROSS_IO_STREAMS FALSE
+setproperty ALIASING_ACROSS_TYPES FALSE
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+# BUGGY with PRIVATIZE_MODULE:
+#   setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+
+
+# with POINTS-TO
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+setproperty ABSTRACT_HEAP_LOCATIONS "flow-sensitive"
+setproperty POINTS_TO_STRICT_POINTER_TYPES FALSE
+setproperty CONSTANT_PATH_EFFECTS TRUE
+
+
+# first run, intraprocedural
+create $WSPACE $WSPACE.c
+
+# ensure that the target function exists before proceeding
+module main
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+
+# common
+activate REGION_CHAINS
+activate RICE_REGIONS_DEPENDENCE_GRAPH
+
+# with POINTS-TO
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+# should be INTRA...
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+activate PRECONDITIONS_INTER_FULL_WITH_POINTS_TO
+# should be: INTRAPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+activate INTERPROCEDURAL_SUMMARY_PRECONDITION_WITH_POINTS_TO
+activate MUST_REGIONS_WITH_POINTS_TO
+
+echo
+echo Transformers for "update_sub"
+echo
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[update_sub]
+
+echo
+echo Transformers for "update_s3"
+echo
+
+display PRINTED_FILE[update_s3]
+
+echo
+echo Preconditions for main
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+# transformations
+capply PRIVATIZE_MODULE[%ALLFUNC]
+capply COARSE_GRAIN_PARALLELIZATION[%ALLFUNC]
+
+# xml generation
+activate PRINT_XML_APPLICATION
+make XML_PRINTED_FILE[main]
+
+close
+
+quit

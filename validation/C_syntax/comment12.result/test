@@ -1,0 +1,9 @@
+void comment12(int a, int b)
+{
+   //Shouldn't be lost
+   // but use to be because of the ?: syntax in the test
+   a<(b<0?1:2);
+   while (1)
+      ;
+}
+

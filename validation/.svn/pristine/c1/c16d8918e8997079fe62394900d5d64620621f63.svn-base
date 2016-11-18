@@ -1,0 +1,31 @@
+
+Parsed printed file for "lhs04"
+
+void lhs04()
+{
+   float x;
+
+   *((int *) &x) &= 0x7fffffff;
+}
+
+Proper effects for "lhs04"
+
+void lhs04()
+{
+   float x;
+//             <    is read   >: x
+//             <    is written>: x
+
+   *((int *) &x) &= 0x7fffffff;
+}
+
+Cumulated effects for "lhs04"
+
+void lhs04()
+{
+   float x;
+//             <    is read   >: x
+//             <    is written>: x
+
+   *((int *) &x) &= 0x7fffffff;
+}

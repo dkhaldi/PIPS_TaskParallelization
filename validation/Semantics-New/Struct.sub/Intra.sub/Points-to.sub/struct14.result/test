@@ -1,0 +1,150 @@
+int struct14()
+{
+   static FILE *file = (void *) 0;
+//             <    is read   >: file
+   if (file==(void *) 0)
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+      file = fopen("vals_init.txt", "r");
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+   int r = fscanf(file, "%d", &p.N1);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N1
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct14.c", 26, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N2);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N2
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct14.c", 31, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N3);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N3
+   p.N3<=32?(void) 0:__assert_fail("p.N3 <= 32", "./struct14.c", 36, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N4);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N4
+   p.N4<=8?(void) 0:__assert_fail("p.N4 <= 8", "./struct14.c", 41, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N5);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N5
+   p.N5<=64?(void) 0:__assert_fail("p.N5 <= 64", "./struct14.c", 46, __func__);
+
+   return 0;
+}
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+int struct14()
+{
+   static FILE *file = (void *) 0;
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: file __IO_EFFECTS:LUNS[*]
+//             <    is read   >: file
+   if (file==(void *) 0)
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: file
+      file = fopen("vals_init.txt", "r");
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+   int r = fscanf(file, "%d", &p.N1);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N1
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct14.c", 26, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N2);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N2
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct14.c", 31, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N3);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N3
+   p.N3<=32?(void) 0:__assert_fail("p.N3 <= 32", "./struct14.c", 36, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N4);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N4
+   p.N4<=8?(void) 0:__assert_fail("p.N4 <= 8", "./struct14.c", 41, __func__);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE* 
+//                               __IO_EFFECTS:LUNS[*]
+
+   r = fscanf(file, "%d", &p.N5);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N5
+   p.N5<=64?(void) 0:__assert_fail("p.N5 <= 64", "./struct14.c", 46, __func__);
+
+   return 0;
+}

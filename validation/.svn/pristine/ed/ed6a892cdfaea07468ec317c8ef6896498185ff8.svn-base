@@ -1,0 +1,64 @@
+
+Parser output
+
+void test()
+{
+   int x = 6;
+ici:   if (x>4) {
+      x = 2;
+      goto ici;
+   }
+   else
+      x = 3;
+}
+
+Controlizer output
+
+void test()
+{
+// (0,2)
+   int x = 6;
+// (0,3)
+//:   BEGIN UNSTRUCTURED
+// (1,1)
+ici:   if (x>4) {
+   }
+   else {
+      goto l99999;
+   }
+// (2,1)
+   x = 2;
+   goto ici;
+l99999:   ;
+// (3,1)
+
+//:   END UNSTRUCTURED
+// (0,4)
+   x = 3;
+}
+
+Output after restructuration
+
+void test()
+{
+// (0,2)
+   int x = 6;
+// (0,3)
+//:   BEGIN UNSTRUCTURED
+// (1,1)
+ici:   if (x>4) {
+   }
+   else {
+      goto l99999;
+   }
+// (2,1)
+   x = 2;
+   goto ici;
+l99999:   ;
+// (3,1)
+
+//:   END UNSTRUCTURED
+// (0,4)
+   x = 3;
+}
+

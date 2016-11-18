@@ -1,0 +1,187 @@
+
+PROPER  EFFECTS 
+
+int main()
+{
+   int i[10], j[20], k[30], l[40];
+   _Bool b;
+   int *p, *q, *r, *s, *t;
+//             <    is written>: p
+   p = &k[0];
+//             <    is written>: r
+   r = &i[0];
+//             <    is written>: q
+   q = &j[0];
+//             <    is written>: s
+   s = &l[0];
+//             <    is read   >: q s
+//             <    is written>: b p r
+   /* printf("address of p=%p\n ",p); */
+   /*   printf("address of r=%p\n",r); */
+   /*   printf("address of q=%p\n",q); */
+   /*   printf("address of s=%p\n",s); */
+   
+   b = (p = q)&&(r = s);
+//             <    is read   >: q s
+//             <    is written>: p r
+   /*  printf("address of p=%p\n",p); */
+   /*   printf("address of r=%p\n",r); */
+   if ((p = q)&&(r = s))
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+//             <    is written>: p
+      *p++;
+   else if ((p = q)||(r = s))
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: r
+//             <    is written>: r
+      *r++;
+
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i[10], j[20], k[30], l[40];
+
+// Points To: none
+
+   _Bool b;
+
+// Points To: none
+
+   int *p, *q, *r, *s, *t;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+// s -> undefined , EXACT
+// t -> undefined , EXACT
+
+   p = &k[0];
+
+// Points To:
+// p -> k[0] , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+// s -> undefined , EXACT
+// t -> undefined , EXACT
+
+   r = &i[0];
+
+// Points To:
+// p -> k[0] , EXACT
+// q -> undefined , EXACT
+// r -> i[0] , EXACT
+// s -> undefined , EXACT
+// t -> undefined , EXACT
+
+   q = &j[0];
+
+// Points To:
+// p -> k[0] , EXACT
+// q -> j[0] , EXACT
+// r -> i[0] , EXACT
+// s -> undefined , EXACT
+// t -> undefined , EXACT
+
+   s = &l[0];
+
+// Points To:
+// p -> k[0] , EXACT
+// q -> j[0] , EXACT
+// r -> i[0] , EXACT
+// s -> l[0] , EXACT
+// t -> undefined , EXACT
+
+   /* printf("address of p=%p\n ",p); */
+   /*   printf("address of r=%p\n",r); */
+   /*   printf("address of q=%p\n",q); */
+   /*   printf("address of s=%p\n",s); */
+   
+   b = (p = q)&&(r = s);
+
+// Points To:
+// p -> j[0] , EXACT
+// q -> j[0] , EXACT
+// r -> l[0] , EXACT
+// s -> l[0] , EXACT
+// t -> undefined , EXACT
+
+   /*  printf("address of p=%p\n",p); */
+   /*   printf("address of r=%p\n",r); */
+   if ((p = q)&&(r = s))
+
+// Points To:
+// p -> j[0] , EXACT
+// q -> j[0] , EXACT
+// r -> l[0] , EXACT
+// s -> l[0] , EXACT
+// t -> undefined , EXACT
+
+      *p++;
+   else if ((p = q)||(r = s))
+
+// Points To: unreachable
+
+      *r++;
+
+// Points To:
+// p -> j[1] , EXACT
+// q -> j[0] , EXACT
+// r -> l[0] , EXACT
+// s -> l[0] , EXACT
+// t -> undefined , EXACT
+
+
+   return 0;
+}
+
+PROPER  EFFECTS WITH POINTS TO
+
+int main()
+{
+   int i[10], j[20], k[30], l[40];
+   _Bool b;
+   int *p, *q, *r, *s, *t;
+//             <    is written>: p
+   p = &k[0];
+//             <    is written>: r
+   r = &i[0];
+//             <    is written>: q
+   q = &j[0];
+//             <    is written>: s
+   s = &l[0];
+//             <    is read   >: q s
+//             <    is written>: b p r
+   /* printf("address of p=%p\n ",p); */
+   /*   printf("address of r=%p\n",r); */
+   /*   printf("address of q=%p\n",q); */
+   /*   printf("address of s=%p\n",s); */
+   
+   b = (p = q)&&(r = s);
+//             <    is read   >: q s
+//             <    is written>: p r
+   /*  printf("address of p=%p\n",p); */
+   /*   printf("address of r=%p\n",r); */
+   if ((p = q)&&(r = s))
+//             <    is read   >: j[0] p
+//             <    is written>: p
+      *p++;
+   else if ((p = q)||(r = s))
+      *r++;
+
+   return 0;
+}

@@ -1,0 +1,60 @@
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(void)
+{
+
+//  T(x,x_new) {x==0}
+
+   int x = 0, x_new = unknown();
+
+//  T(x,x_new) {x==2x_new-2, x#init==0, x_new#init==1}
+
+   while (2*x_new==x+2) {
+
+//  T(x) {x==x_new, x#init==2x_new-2}
+
+      x = (x+2)/2;
+
+//  T(x_new) {x==x_new#init}
+
+      x_new = unknown();
+   }
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(void)
+{
+
+//  P() {}
+
+   int x = 0, x_new = unknown();
+
+//  P(x,x_new) {x==0}
+
+   while (2*x_new==x+2) {
+
+//  P(x,x_new) {x==2x_new-2}
+
+      x = (x+2)/2;
+
+//  P(x,x_new) {x==x_new}
+
+      x_new = unknown();
+   }
+
+//  P(x,x_new) {}
+
+   return 0;
+}

@@ -1,0 +1,44 @@
+
+Transformers for "main"
+
+
+//  T(main,temperature) {main==23, static01!:temperature#init==0,
+//    temperature==23}
+
+int main()
+{
+
+//  T(temperature) {static01!:temperature#init==0, temperature==23}
+
+   set_temperature(23);
+
+//  T(t) {t==23, temperature==23}
+
+   int t = get_temperature();
+
+//  T(main) {main==23, t==23, temperature==23}
+
+   return t;
+}
+
+Preconditions for "main"
+
+
+//  P() {temperature==0}
+
+int main()
+{
+
+//  P() {temperature==0}
+
+   set_temperature(23);
+
+//  P(temperature) {static01!:temperature#init==0, temperature==23}
+
+   int t = get_temperature();
+
+//  P(t,temperature) {static01!:temperature#init==0, t==23,
+//    temperature==23}
+
+   return t;
+}

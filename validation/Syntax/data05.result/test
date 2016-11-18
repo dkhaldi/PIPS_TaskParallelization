@@ -1,0 +1,4 @@
+### stderr
+PARSER[DATA05] (fix_storage) DATA for variable M declared in COMMON *BLANK*: not standard compliant, use a BLOCKDATA
+PARSER[DATA05] (fix_storage) [user error] Parser error between lines 11 and 11
+Improper DATA declaration, use a BLOCKDATA or set property PARSER_ACCEPT_ANSI_EXTENSIONS

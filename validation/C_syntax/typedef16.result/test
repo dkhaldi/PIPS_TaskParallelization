@@ -1,0 +1,11 @@
+/* Multiple declarations of a typedef */
+
+typedef double double_t;
+typedef double double_t;
+
+extern void typedef16(void);
+void typedef16(void)
+{
+   typedef int int_t;
+   typedef int int_t;
+}

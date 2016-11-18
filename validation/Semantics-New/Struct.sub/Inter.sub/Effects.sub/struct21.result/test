@@ -1,0 +1,105 @@
+
+Cumulated Effects
+
+//             <    is written>: p.N1
+int init()
+{
+//             <    is written>: p.N1
+   p.N1 = 1;
+   return 0;
+}
+//             <    is read   >: p
+//             <    is written>: p.N1
+int main(int argc, char *argv[])
+{
+//             <    is written>: p.N1
+   // Ici fonction de recuperation des dimensions des tableaux
+   init();
+   while (1) {
+//             <    is read   >: p.N1 p.N3 p.N4
+      float array[p.N4][p.N3][p.N1];
+   }
+   return 0;
+}
+
+Transformers
+
+
+//  T(init,p[N1]) {init==0, p[N1]==1}
+
+int init()
+{
+
+//  T(p[N1]) {p[N1]==1}
+
+   p.N1 = 1;
+
+//  T(init) {init==0}
+
+   return 0;
+}
+
+//  T() {0==-1}
+
+int main(int argc, char *argv[])
+{
+
+//  T(p[N1]) {p[N1]==1}
+
+   // Ici fonction de recuperation des dimensions des tableaux
+   init();
+
+//  T() {}
+
+   while (1) {
+
+//  T() {}
+
+      float array[p.N4][p.N3][p.N1];
+   }
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int init()
+{
+
+//  P() {}
+
+   p.N1 = 1;
+
+//  P(p[N1]) {p[N1]==1}
+
+   return 0;
+}
+
+//  P() {}
+
+int main(int argc, char *argv[])
+{
+
+//  P() {}
+
+   // Ici fonction de recuperation des dimensions des tableaux
+   init();
+
+//  P(p[N1]) {p[N1]==1}
+
+   while (1) {
+
+//  P(p[N1]) {p[N1]==1}
+
+      float array[p.N4][p.N3][p.N1];
+   }
+
+//  P() {0==-1}
+
+   return 0;
+}

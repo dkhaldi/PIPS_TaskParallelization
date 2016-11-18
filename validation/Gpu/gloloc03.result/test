@@ -1,0 +1,75 @@
+#
+# initial code
+#
+// private/(global) propagation on callgraph
+
+extern void compute(float *f);
+
+extern void setzero(float *f);
+
+extern void stuff00(float *f);
+
+extern int main(void);
+void compute(float *f)
+{
+   *f = 0.0;
+}
+int main(void)
+{
+   float data[10];
+   stuff00(data);
+}
+void setzero(float *f)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      compute(&f[i]);
+}
+void stuff00(float *f)
+{
+   // private array
+   float a[10];
+   setzero(a);
+
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] += f[i];
+}
+#
+# global/private declarations
+#
+// private/(global) propagation on callgraph
+
+extern void compute(float *f);
+
+extern void setzero(float *f);
+
+extern void stuff00(float *f);
+
+extern int main(void);
+void compute(private float *f)
+{
+   *f = 0.0;
+}
+int main(void)
+{
+   float data[10];
+   stuff00(data);
+}
+void setzero(private float *f)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      compute(&f[i]);
+}
+void stuff00(global float *f)
+{
+   // private array
+   private float a[10];
+   setzero(a);
+
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      a[i] += f[i];
+}
+

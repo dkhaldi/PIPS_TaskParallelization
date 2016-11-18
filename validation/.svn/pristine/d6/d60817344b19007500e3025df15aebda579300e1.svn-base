@@ -1,0 +1,17 @@
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   int a[10];
+
+// Pointer values: none
+
+   return 0;
+}

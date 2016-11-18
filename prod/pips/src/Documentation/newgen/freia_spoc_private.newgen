@@ -1,0 +1,26 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import entity from "ri.newgen" ;
+import statement from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+dag = inputs:dagvtx* x outputs:dagvtx* x vertices:dagvtx* ;
+dagvtx = content:vtxcontent x succs:dagvtx* ;
+pstatement = persistant statement + empty:unit ;
+vtxcontent = optype:int x opid:int x source:pstatement x inputs:entity* x out:entity ;

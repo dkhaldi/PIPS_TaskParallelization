@@ -1,0 +1,83 @@
+
+Code for "main"
+
+int main()
+{
+   short a[3][3][6/2];
+
+   a[1][1][4/2] = 0;
+   a[1][1][2] = 1;
+
+   return 0;
+}
+
+Proper effects for "main"
+
+int main()
+{
+//             <    is declared>: a
+   short a[3][3][6/2];
+//             <    is written>: a[1][1][4/2]
+//             <    is referenced>: a
+
+   a[1][1][4/2] = 0;
+//             <    is written>: a[1][1][2]
+//             <    is referenced>: a
+   a[1][1][2] = 1;
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   short a[3][3][6/2];
+
+//  T(a[1][1][2]) {a[1][1][2]==0}
+
+
+   a[1][1][4/2] = 0;
+
+//  T(a[1][1][2]) {a[1][1][2]==1}
+
+   a[1][1][2] = 1;
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   short a[3][3][6/2];
+
+//  P() {}
+
+
+   a[1][1][4/2] = 0;
+
+//  P(a[1][1][2]) {a[1][1][2]==0}
+
+   a[1][1][2] = 1;
+
+//  P(a[1][1][2]) {a[1][1][2]==1}
+
+
+   return 0;
+}

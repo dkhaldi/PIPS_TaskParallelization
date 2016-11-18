@@ -1,0 +1,31 @@
+
+Cumulated Effects
+
+//             <    is read   >: p.N1 p.N2
+//             <    is written>: q.N1 q.N2
+int struct33()
+{
+//             <    is read   >: p.N1 p.N2
+//             <    is written>: q.N1 q.N2
+   q = p;
+
+   return 0;
+}
+
+Transformers
+
+
+//  T(q[N1],q[N2],struct33) {p[N1]==q[N1], p[N2]==q[N2], struct33==0}
+
+int struct33()
+{
+
+//  T(q[N1],q[N2]) {p[N1]==q[N1], p[N2]==q[N2]}
+
+   q = p;
+
+//  T(struct33) {struct33==0}
+
+
+   return 0;
+}

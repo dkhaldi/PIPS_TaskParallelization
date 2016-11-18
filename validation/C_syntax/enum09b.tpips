@@ -1,0 +1,18 @@
+setenv WS=enum09b
+delete $WS
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5
+
+display PARSED_PRINTED_FILE[$WS]
+
+apply UNSPLIT
+
+shell pips_validation_exe.sh  -c -g $WS
+
+close
+
+#delete $WS
+
+quit

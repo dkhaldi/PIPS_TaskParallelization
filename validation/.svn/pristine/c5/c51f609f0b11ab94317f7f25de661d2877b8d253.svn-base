@@ -1,0 +1,14 @@
+// OMP style
+int main(int argc, char *argv[])
+{
+   //PIPS generated variable
+   unsigned int N;
+#pragma omp parallel default(shared) 
+   {
+#pragma omp single
+      {
+         N = 10;
+      }
+   }
+   return 0;
+}

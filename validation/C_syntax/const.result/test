@@ -1,0 +1,4 @@
+int main()
+{
+   const volatile int i;
+}

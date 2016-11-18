@@ -1,0 +1,90 @@
+setenv WSPACE=interprocedural_inout01
+setenv FILE=$WSPACE.c
+
+delete $WSPACE
+create $WSPACE $FILE
+
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty MEMORY_EFFECTS_ONLY FALSE
+# setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+# activate MUST_REGIONS
+activate NEW_CONTROLIZER
+
+echo
+echo // Initial code
+echo
+display PRINTED_FILE[main]
+
+
+activate PRINT_CODE_PROPER_EFFECTS
+# activate PRINT_CODE_CUMULATED_EFFECTS
+echo
+echo // PROPER_EFFECTS
+echo
+display PRINTED_FILE[main]
+
+# activate PRINT_CODE_PROPER_EFFECTS
+activate PRINT_CODE_CUMULATED_EFFECTS
+echo
+echo // CUMULATED_EFFECTS
+echo
+display PRINTED_FILE[main]
+
+activate PRINT_CODE_IN_EFFECTS
+echo
+echo // IN_EFFECTS
+echo
+display PRINTED_FILE[init]
+display PRINTED_FILE[update]
+display PRINTED_FILE[read]
+display PRINTED_FILE[main]
+activate PRINT_CODE_OUT_EFFECTS
+echo
+echo // OUT_EFFECTS
+echo
+display PRINTED_FILE[init]
+display PRINTED_FILE[update]
+display PRINTED_FILE[read]
+display PRINTED_FILE[main]
+
+
+# activate PRINT_CODE_PROPER_REGIONS
+# # activate PRINT_CODE_REGIONS
+# echo
+# echo // PROPER_REGIONS
+# echo
+# display PRINTED_FILE[main]
+# 
+# # activate PRINT_CODE_PROPER_REGIONS
+# activate PRINT_CODE_REGIONS
+# echo
+# echo // REGIONS
+# echo
+# display PRINTED_FILE[main]
+# 
+# activate PRINT_CODE_IN_REGIONS
+# echo
+# echo // IN_REGIONS
+# echo
+# display PRINTED_FILE[init]
+# display PRINTED_FILE[update]
+# display PRINTED_FILE[read]
+# display PRINTED_FILE[main]
+# activate PRINT_CODE_OUT_REGIONS
+# echo
+# echo // OUT_REGIONS
+# echo
+# display PRINTED_FILE[init]
+# display PRINTED_FILE[update]
+# display PRINTED_FILE[read]
+# display PRINTED_FILE[main]
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

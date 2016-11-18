@@ -1,0 +1,65 @@
+
+POINTS TO for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *p = (void *) 0, *q = (void *) 0, i, j;
+
+// Points To:
+// p -> *NULL* , EXACT
+// q -> *NULL* , EXACT
+
+
+   if (!p&&!q) {
+
+// Points To:
+// p -> *NULL* , EXACT
+// q -> *NULL* , EXACT
+
+      p = &i;
+
+// Points To:
+// p -> i , EXACT
+// q -> *NULL* , EXACT
+
+      q = &j;
+   }
+   else if (!p)
+
+// Points To: unreachable
+
+      *q = 2;
+   else if (!q)
+
+// Points To: unreachable
+
+      *p = 1;
+   else {
+
+// Points To: unreachable
+
+      *p = 1;
+
+// Points To: unreachable
+
+      *q = 2;
+   }
+
+// Points To:
+// p -> i , EXACT
+// q -> j , EXACT
+
+
+   return 0;
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (reference_condition_to_points_to) Dead code detected.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (reference_condition_to_points_to) Dead code detected.

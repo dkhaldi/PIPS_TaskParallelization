@@ -1,0 +1,1 @@
+script cannot work because generated malloc signature is not ok for C99

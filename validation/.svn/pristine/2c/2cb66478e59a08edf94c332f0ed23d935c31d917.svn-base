@@ -1,0 +1,325 @@
+
+Initial code
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+   int i, n = 100;
+   int *x, *y, *t;
+
+   x = (int *) malloc(sizeof(int));
+   y = (int *) malloc(sizeof(int));
+   t = (int *) malloc(sizeof(int));
+
+   for(i = 0; i <= n-1; i += 1)
+      scanf("%d %d", &x[i], &y[i]);
+
+   for(i = 0; i <= n-1; i += 1) {
+      // BEGIN BLOCK
+      t[i] = x[i];
+      x[i] = y[i];
+      y[i] = t[i];
+      // END BLOCK
+   }
+   printf("%d %d", x[n], y[n]);
+   // END BLOCK
+}
+
+Proper effects
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+//             <    is written>: n
+   int i, n = 100;
+   int *x, *y, *t;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: x _MALLOC_EFFECTS:_MALLOC_
+
+   x = (int *) malloc(sizeof(int));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: y _MALLOC_EFFECTS:_MALLOC_
+   y = (int *) malloc(sizeof(int));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: t _MALLOC_EFFECTS:_MALLOC_
+   t = (int *) malloc(sizeof(int));
+//             <    is read   >: n
+//             <    is written>: i
+
+   for(i = 0; i <= n-1; i += 1)
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0] x[*] y[*]
+//             <    is read   >: i n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+      scanf("%d %d", &x[i], &y[i]);
+//             <    is read   >: n
+//             <    is written>: i
+
+   for(i = 0; i <= n-1; i += 1) {
+      // BEGIN BLOCK
+//             <    is read   >: i n t x x[i]
+//             <    is written>: t[i]
+      t[i] = x[i];
+//             <    is read   >: i n x y y[i]
+//             <    is written>: x[i]
+      x[i] = y[i];
+//             <    is read   >: i n t t[i] y
+//             <    is written>: y[i]
+      y[i] = t[i];
+      // END BLOCK
+   }
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: n stdout x x[n] y y[n] 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   printf("%d %d", x[n], y[n]);
+   // END BLOCK
+}
+
+Transformers
+
+
+//  T() {}
+
+int main(int argc, char **argv)
+{
+
+//  T(argc) {}
+
+   // BEGIN BLOCK
+
+//  T(n) {n==100}
+
+   int i, n = 100;
+
+//  T() {}
+
+   int *x, *y, *t;
+
+//  T() {}
+
+
+   x = (int *) malloc(sizeof(int));
+
+//  T() {}
+
+   y = (int *) malloc(sizeof(int));
+
+//  T() {}
+
+   t = (int *) malloc(sizeof(int));
+
+//  T(argc,i,n) {0<=i}
+
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  T(argc,i,n) {}
+
+      scanf("%d %d", &x[i], &y[i]);
+
+//  T(i) {0<=i, i+1<=n}
+
+
+   for(i = 0; i <= n-1; i += 1) {
+
+//  T() {}
+
+      // BEGIN BLOCK
+
+//  T() {}
+
+      t[i] = x[i];
+
+//  T() {}
+
+      x[i] = y[i];
+
+//  T() {}
+
+      y[i] = t[i];
+      // END BLOCK
+   }
+
+//  T() {}
+
+   printf("%d %d", x[n], y[n]);
+   // END BLOCK
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   // BEGIN BLOCK
+
+//  P() {}
+
+   int i, n = 100;
+
+//  P(n) {n==100}
+
+   int *x, *y, *t;
+
+//  P(n) {n==100}
+
+
+   x = (int *) malloc(sizeof(int));
+
+//  P(n) {n==100}
+
+   y = (int *) malloc(sizeof(int));
+
+//  P(n) {n==100}
+
+   t = (int *) malloc(sizeof(int));
+
+//  P(n) {n==100}
+
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  P(argc,i,n) {0<=i}
+
+      scanf("%d %d", &x[i], &y[i]);
+
+//  P(argc,i,n) {}
+
+
+   for(i = 0; i <= n-1; i += 1) {
+
+//  P(argc,i,n) {0<=i, i+1<=n}
+
+      // BEGIN BLOCK
+
+//  P(argc,i,n) {0<=i, i+1<=n}
+
+      t[i] = x[i];
+
+//  P(argc,i,n) {0<=i, i+1<=n}
+
+      x[i] = y[i];
+
+//  P(argc,i,n) {0<=i, i+1<=n}
+
+      y[i] = t[i];
+      // END BLOCK
+   }
+
+//  P(argc,i,n) {0<=i, n<=i}
+
+   printf("%d %d", x[n], y[n]);
+   // END BLOCK
+}
+
+RW regions
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+   int i, n = 100;
+   int *x, *y, *t;
+
+//  <x-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+
+   x = (int *) malloc(sizeof(int));
+
+//  <y-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   y = (int *) malloc(sizeof(int));
+
+//  <t-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   t = (int *) malloc(sizeof(int));
+
+   for(i = 0; i <= n-1; i += 1)
+
+//  <stdin-R-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <x[PHI1]-W-MAY-{n==100, 0<=i, i<=99}>
+//  <y[PHI1]-W-MAY-{n==100, 0<=i, i<=99}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, n==100, 0<=i, i<=99}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, n==100, 0<=i, i<=99}>
+
+      scanf("%d %d", &x[i], &y[i]);
+
+   for(i = 0; i <= n-1; i += 1) {
+      // BEGIN BLOCK
+
+//  <t-R-EXACT-{}>
+//  <t[PHI1]-W-EXACT-{PHI1==i, n==100, 0<=i, i<=99}>
+//  <x-R-EXACT-{}>
+//  <x[PHI1]-R-EXACT-{PHI1==i, n==100, 0<=i, i<=99}>
+
+      t[i] = x[i];
+
+//  <x-R-EXACT-{}>
+//  <x[PHI1]-W-EXACT-{PHI1==i, n==100, 0<=i, i<=99}>
+//  <y-R-EXACT-{}>
+//  <y[PHI1]-R-EXACT-{PHI1==i, n==100, 0<=i, i<=99}>
+
+      x[i] = y[i];
+
+//  <t-R-EXACT-{}>
+//  <t[PHI1]-R-EXACT-{PHI1==i, n==100, 0<=i, i<=99}>
+//  <y-R-EXACT-{}>
+//  <y[PHI1]-W-EXACT-{PHI1==i, n==100, 0<=i, i<=99}>
+
+      y[i] = t[i];
+      // END BLOCK
+   }
+
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <x-R-EXACT-{}>
+//  <x[PHI1]-R-EXACT-{PHI1==n, i==100, n==100}>
+//  <y-R-EXACT-{}>
+//  <y[PHI1]-R-EXACT-{PHI1==n, i==100, n==100}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1, i==100, n==100}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1, i==100, n==100}>
+
+   printf("%d %d", x[n], y[n]);
+   // END BLOCK
+}
+
+Code after scalarization
+
+int main(int argc, char **argv)
+{
+   // BEGIN BLOCK
+   int i, n = 100;
+   int *x, *y, *t;
+
+   x = (int *) malloc(sizeof(int));
+   y = (int *) malloc(sizeof(int));
+   t = (int *) malloc(sizeof(int));
+
+   for(i = 0; i <= n-1; i += 1)
+      scanf("%d %d", &x[i], &y[i]);
+
+   for(i = 0; i <= n-1; i += 1) {
+      // BEGIN BLOCK
+      t[i] = x[i];
+      x[i] = y[i];
+      y[i] = t[i];
+      // END BLOCK
+   }
+   printf("%d %d", x[n], y[n]);
+   // END BLOCK
+}

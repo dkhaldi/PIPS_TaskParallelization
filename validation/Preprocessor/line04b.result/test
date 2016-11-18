@@ -1,0 +1,19 @@
+
+Parsed code for "main"
+
+int main()
+{
+   int i = 0;                                                           /*0006*/
+   /* To define an array size */
+   double a[1024];                                                      /*0007*/
+   a[i] = 0;                                                            /*0007*/
+   return i;                                                            /*0007*/
+}
+
+Parsed code for the compilation unit line04b!
+
+/* Check line counting with an include file within the function body
+ */
+
+extern int main();                                                      /*0004*/
+

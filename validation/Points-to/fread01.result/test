@@ -1,0 +1,91 @@
+
+Proper effects
+
+int main()
+{
+   FILE *fp;
+   size_t n;
+   char buf[200];
+//             <may be read   >: __IO_EFFECTS:LUNS[*]
+//             <may be written>: __IO_EFFECTS:LUNS[*]
+//             <    is written>: fp
+   fp = fopen("file.txt", "rb");
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: buf[*] *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fp
+//             <    is written>: n
+   n = fread(buf, 8, 50, fp);
+//             <    is read   >: n
+   if (n==-1)
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+      printf("fread failed");
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0 
+//                               __IO_EFFECTS:LUNS[*]
+//             <    is read   >: fp
+   fclose(fp);
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   FILE *fp;
+
+// Points To:
+// fp -> undefined , EXACT
+
+   size_t n;
+
+// Points To:
+// fp -> undefined , EXACT
+
+   char buf[200];
+
+// Points To:
+// fp -> undefined , EXACT
+
+   fp = fopen("file.txt", "rb");
+
+// Points To:
+// fp -> *NULL* , MAY
+// fp -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+   n = fread(buf, 8, 50, fp);
+
+// Points To:
+// fp -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+   if (n==-1)
+
+// Points To:
+// fp -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+      printf("fread failed");
+
+// Points To:
+// fp -> __IO_EFFECTS:IO_FILES[*] , MAY
+
+   fclose(fp);
+
+// Points To:
+// fp -> undefined , EXACT
+
+   return 0;
+}

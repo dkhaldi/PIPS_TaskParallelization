@@ -1,0 +1,143 @@
+//             <    is read   >: fa pb
+//             <    is referenced>: fa pb
+void update(int fa, unsigned int *pb)
+{
+//             <    is written>: k
+//             <    is referenced>: k
+//             <    is declared>: k
+   unsigned int k = 128;
+//             <    is read   >: fa k pb
+//             <    is referenced>: fa k pb
+   // "fa" value stays 0 because it is not impacted by the
+   // dereferencing "*pb"
+   if (fa<0)
+//             <    is read   >: k pb
+//             <    is referenced>: k pb
+      *pb = k;
+   else
+//             <    is read   >: k pb
+//             <    is referenced>: k pb
+      *pb = 2*k;
+   return;
+}
+
+//  T() {}
+
+void update(int fa, unsigned int *pb)
+{
+
+//  T(k) {k==128}
+
+   unsigned int k = 128;
+
+//  T() {}
+
+   // "fa" value stays 0 because it is not impacted by the
+   // dereferencing "*pb"
+   if (fa<0)
+
+//  T() {}
+
+      *pb = k;
+   else
+
+//  T() {}
+
+      *pb = 2*k;
+
+//  T() {}
+
+   return;
+}
+//             <    is read   >: a
+//             <    is referenced>: a b
+int main()
+{
+//             <    is written>: i
+//             <    is referenced>: i
+//             <    is declared>: i
+   int i = 1;
+//             <    is written>: j
+//             <    is referenced>: j
+//             <    is declared>: j
+   unsigned int j = 2;
+//             <    is read   >: a
+//             <    is referenced>: a b
+   update(a, &b);
+//             <    is read   >: i j
+//             <    is referenced>: i j
+   return 0*(i+(int) j);
+}
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T(i) {i==1}
+
+   int i = 1;
+
+//  T(j) {j==2}
+
+   unsigned int j = 2;
+
+//  T() {}
+
+   update(a, &b);
+
+//  T(main) {main==0}
+
+   return 0*(i+(int) j);
+}
+
+//  P() {a==0}
+
+int main()
+{
+
+//  P() {a==0}
+
+   int i = 1;
+
+//  P(i) {a==0, i==1}
+
+   unsigned int j = 2;
+
+//  P(i,j) {a==0, i==1, j==2}
+
+   update(a, &b);
+
+//  P(i,j) {a==0, i==1, j==2}
+
+   return 0*(i+(int) j);
+}
+
+//  P() {fa==0}
+
+void update(int fa, unsigned int *pb)
+{
+
+//  P() {fa==0}
+
+   unsigned int k = 128;
+
+//  P(k) {fa==0, k==128}
+
+   // "fa" value stays 0 because it is not impacted by the
+   // dereferencing "*pb"
+   if (fa<0)
+
+//  P() {0==-1}
+
+      *pb = k;
+   else
+
+//  P(k) {fa==0, k==128}
+
+      *pb = 2*k;
+
+//  P(k) {fa==0, k==128}
+
+   return;
+}

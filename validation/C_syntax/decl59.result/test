@@ -1,0 +1,21 @@
+
+Parsed printed code for "main"
+
+int main()
+{
+   int foo2();
+   int foo2();
+   return 0;
+}
+
+Warnings related to decl59.c
+
+C_PARSER[main] (c_parse) ("./decl59.c":2-3) 
+Symbol "foo2" is redefined.
+Source code after preprocessing:
+  int foo2 ();
+  int foo2 ();
+Input source code, before preprocessing:
+  int foo2 ();
+  int foo2 ();
+

@@ -1,0 +1,9 @@
+int main()
+{
+
+   source2();
+}
+void source2()
+{
+   int i, j;
+}

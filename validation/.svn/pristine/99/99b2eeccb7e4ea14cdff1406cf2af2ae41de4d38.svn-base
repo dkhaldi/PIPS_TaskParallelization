@@ -1,0 +1,83 @@
+
+Transformers
+
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   points high_score;
+
+//  T() {}
+
+   points your_score;
+
+//  T(high_score) {high_score==100}
+
+
+   high_score = 100;
+
+//  T(your_score) {high_score==100, your_score==110}
+
+   your_score = 110;
+
+//  T(high_score) {high_score==110, high_score#init==100,
+//    your_score==110}
+
+
+   if (your_score>high_score)
+
+//  T(high_score) {high_score==110, high_score#init==100,
+//    your_score==110}
+
+      high_score = your_score;
+
+//  T(main) {high_score==110, main==0, your_score==110}
+
+   return 0;
+}
+
+Preconditions
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   points high_score;
+
+//  P() {}
+
+   points your_score;
+
+//  P() {}
+
+
+   high_score = 100;
+
+//  P(high_score) {high_score==100}
+
+   your_score = 110;
+
+//  P(high_score,your_score) {high_score==100, your_score==110}
+
+
+   if (your_score>high_score)
+
+//  P(high_score,your_score) {high_score==100, your_score==110}
+
+      high_score = your_score;
+
+//  P(high_score,your_score) {high_score==110, your_score==110}
+
+   return 0;
+}
+
+Warnings
+

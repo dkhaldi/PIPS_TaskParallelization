@@ -1,0 +1,15 @@
+
+setenv WS=jpeg-6a_fill_input_buffer
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+# stdio.h and stdlib.h are included...
+# display PARSED_PRINTED_FILE[%ALL]
+display PARSED_PRINTED_FILE[%ALLFUNC]
+
+close
+delete $WS
+quit

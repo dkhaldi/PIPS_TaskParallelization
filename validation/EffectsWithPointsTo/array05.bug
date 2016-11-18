@@ -1,0 +1,1 @@
+Excessive subscript due to C semantics is not removed when the target's type allow it.

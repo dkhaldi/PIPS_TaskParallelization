@@ -1,0 +1,136 @@
+LINUX_x86_64_LL/sc_alloc.o: sc_alloc.c $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/assert.h $(ROOT)/include/boolean.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_projection.o: sc_projection.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_read.o: sc_read.c $(ROOT)/include/assert.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc.o: sc.c $(ROOT)/include/assert.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_integer_analyze.o: sc_integer_analyze.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_feasibility.o: sc_feasibility.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h sc-private.h
+LINUX_x86_64_LL/sc_intersection.o: sc_intersection.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_integer_projection.o: sc_integer_projection.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_normalize.o: sc_normalize.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_build_sc_nredund.o: sc_build_sc_nredund.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_oppose.o: sc_oppose.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_triang_elim_redond.o: sc_triang_elim_redond.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h sc-private.h
+LINUX_x86_64_LL/sc_elim_redund.o: sc_elim_redund.c $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_elim_simple_redund.o: sc_elim_simple_redund.c \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_insert_eq.o: sc_insert_eq.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_transformation.o: sc_transformation.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_var.o: sc_var.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_eval.o: sc_eval.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_unaires.o: sc_unaires.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_error.o: sc_error.c
+LINUX_x86_64_LL/sc_io.o: sc_io.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_new_loop_bound.o: sc_new_loop_bound.c $(ROOT)/include/assert.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_simplex_feasibility_fixprec.o: sc_simplex_feasibility_fixprec.c \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/assert.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_simplex_feasibility_mulprec.o: sc_simplex_feasibility_mulprec.c
+LINUX_x86_64_LL/sc_simplex_feasibility.o: sc_simplex_feasibility.c \
+ $(ROOT)/include/boolean.h $(ROOT)/include/assert.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/contrainte.h sc.h \
+ $(ROOT)/include/arithmetique.h
+LINUX_x86_64_LL/sc_debug.o: sc_debug.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h \
+ sc-private.h
+LINUX_x86_64_LL/sc_janus_feasibility.o: sc_janus_feasibility.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h \
+ sc-private.h
+LINUX_x86_64_LL/sc_belong.o: sc_belong.c $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_misc.o: sc_misc.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_gram.o: sc_gram.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_lex.o: sc_lex.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h sc_gram.h
+LINUX_x86_64_LL/sc_gram.o: sc_gram.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h sc.h
+LINUX_x86_64_LL/sc_lex.o: sc_lex.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h sc_gram.h

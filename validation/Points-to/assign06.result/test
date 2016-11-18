@@ -1,0 +1,102 @@
+
+PROPER EFFECTS
+
+void assign06()
+{
+   int **ppi, *pi, *qi, i, j, k, l, m;
+//             <    is read   >: i
+//             <    is written>: ppi
+   ppi = i==0?&pi:&qi;
+//             <    is read   >: i
+//             <    is written>: pi
+   pi = i==0?&i:&j;
+//             <    is read   >: i
+//             <    is written>: qi
+   qi = i==0?&k:&l;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: ppi
+   *ppi = &m;
+   return;
+}
+
+PROPER POINTER EFFECTS
+
+void assign06()
+{
+   int **ppi, *pi, *qi, i, j, k, l, m;
+//             <    is read   >: i
+//             <    is written>: ppi
+   ppi = i==0?&pi:&qi;
+//             <    is read   >: i
+//             <    is written>: pi
+   pi = i==0?&i:&j;
+//             <    is read   >: i
+//             <    is written>: qi
+   qi = i==0?&k:&l;
+//             <    is read   >: ppi
+//             <    is written>: ppi[0]
+   *ppi = &m;
+   return;
+}
+
+POINTS TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void assign06()
+{
+
+// Points To: none
+
+   int **ppi, *pi, *qi, i, j, k, l, m;
+
+// Points To:
+// pi -> undefined , EXACT
+// ppi -> undefined , EXACT
+// qi -> undefined , EXACT
+
+   ppi = i==0?&pi:&qi;
+
+// Points To:
+// pi -> undefined , EXACT
+// ppi -> pi , MAY
+// ppi -> qi , MAY
+// qi -> undefined , EXACT
+
+   pi = i==0?&i:&j;
+
+// Points To:
+// pi -> i , MAY
+// pi -> j , MAY
+// ppi -> pi , MAY
+// ppi -> qi , MAY
+// qi -> undefined , EXACT
+
+   qi = i==0?&k:&l;
+
+// Points To:
+// pi -> i , MAY
+// pi -> j , MAY
+// ppi -> pi , MAY
+// ppi -> qi , MAY
+// qi -> k , MAY
+// qi -> l , MAY
+
+   *ppi = &m;
+
+// Points To:
+// pi -> i , MAY
+// pi -> j , MAY
+// pi -> m , MAY
+// ppi -> pi , MAY
+// ppi -> qi , MAY
+// qi -> k , MAY
+// qi -> l , MAY
+// qi -> m , MAY
+
+   return;
+}

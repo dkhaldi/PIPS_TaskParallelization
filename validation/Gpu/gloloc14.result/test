@@ -1,0 +1,79 @@
+#
+# initial code
+#
+// global/private with casts
+
+extern void global_one(float *a);
+
+extern void private_one(float *a);
+
+extern void casts01(float *a);
+
+extern int main(void);
+void casts01(float *a)
+{
+   float l[10];
+   {
+      int i;
+      for(i = 0; i <= 9; i += 1) {
+         float *p = (float *) (a+i);
+         global_one(p);
+         float *q = (float *) &l[i];
+         private_one(q);
+      }
+   }
+}
+void global_one(float *a)
+{
+   *((float *) a) = 1.0;
+}
+int main(void)
+{
+   float a[10];
+   casts01(a);
+   return 0;
+}
+void private_one(float *a)
+{
+   *((float *) a) = 1.0;
+}
+#
+# global/private declarations
+#
+// global/private with casts
+
+extern void global_one(float *a);
+
+extern void private_one(float *a);
+
+extern void casts01(float *a);
+
+extern int main(void);
+void casts01(global float *a)
+{
+   private float l[10];
+   {
+      int i;
+      for(i = 0; i <= 9; i += 1) {
+         global float *p = (global float *) (a+i);
+         global_one(p);
+         private float *q = (private float *) &l[i];
+         private_one(q);
+      }
+   }
+}
+void global_one(global float *a)
+{
+   *((global float *) a) = 1.0;
+}
+int main(void)
+{
+   float a[10];
+   casts01(a);
+   return 0;
+}
+void private_one(private float *a)
+{
+   *((private float *) a) = 1.0;
+}
+

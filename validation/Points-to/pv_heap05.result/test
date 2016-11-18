@@ -1,0 +1,70 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int ***p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int **q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   int a = 0;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   q = (int **) malloc(sizeof(int *));
+
+// Points To:
+// *HEAP*_l_9 -> undefined , EXACT
+// p -> undefined , EXACT
+// q -> *HEAP*_l_9 , MAY
+
+   q[0] = &a;
+
+// Points To:
+// *HEAP*_l_9 -> a , MAY
+// p -> undefined , EXACT
+// q -> *HEAP*_l_9 , MAY
+
+   p = (int ***) malloc(sizeof(int * *));
+
+// Points To:
+// *HEAP*_l_11 -> undefined , EXACT
+// *HEAP*_l_9 -> a , MAY
+// p -> *HEAP*_l_11 , MAY
+// q -> *HEAP*_l_9 , MAY
+
+   p[0] = q;
+
+// Points To:
+// *HEAP*_l_11 -> *HEAP*_l_9 , MAY
+// *HEAP*_l_9 -> a , MAY
+// p -> *HEAP*_l_11 , MAY
+// q -> *HEAP*_l_9 , MAY
+
+   free(p);
+
+// Points To:
+// *HEAP*_l_9 -> a , MAY
+// p -> undefined , EXACT
+// q -> *HEAP*_l_9 , MAY
+
+   return 0;
+}

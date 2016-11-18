@@ -1,0 +1,32 @@
+
+Source code for dead_code_elimination01 with effects
+
+int dead_code_elimination01()
+{
+   int r;
+//             <    is written>: r
+   r = 1;
+//             <    is written>: r
+   r = 2;
+//             <    is read   >: r
+   return r;
+}
+
+Source code for dead_code_elimination01 after dead-code elimination
+int dead_code_elimination01()
+{
+   int r;
+   r = 1;
+   r = 2;
+   return r;
+}
+
+Warnings
+
+(tp_parse) [user error] Properties should not be updated during tpips processing. Move the setproperty statement at the beginning of your tpips script.
+DEAD_CODE_ELIMINATION[dead_code_elimination01] (dead_code_elimination_on_module) [user error] For C code, Dead code elimination should be run with property MEMORY_EFFECTS_ONLY set to FALSE.
+For C code, this pass requires that effects are calculated with property MEMORY_EFFECTS_ONLY set to false because we need that the chains include arcs for declarations as these latter are separate statements now.
+DEAD_CODE_ELIMINATION[dead_code_elimination01] (set_debug_stack_pointer) debug level stack is set to 2
+DEAD_CODE_ELIMINATION[dead_code_elimination01] (catch_user_error) pass has failed
+DEAD_CODE_ELIMINATION[dead_code_elimination01] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build phase/rule DEAD_CODE_ELIMINATION for module dead_code_elimination01.

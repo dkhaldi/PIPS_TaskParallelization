@@ -1,0 +1,119 @@
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a b
+//             <    is referenced>: a b
+void update(int a, unsigned int *b)
+{
+//             <    is written>: a
+//             <    is referenced>: a
+   a = 3;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a b
+//             <    is referenced>: a b
+   // This information should be deleted by the dereferencing of b
+   if (a<0)
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: b
+//             <    is referenced>: b
+      *b = 128;
+   else
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: b
+//             <    is referenced>: b
+      *b = 256;
+   return;
+}
+
+//  T() {}
+
+void update(int a, unsigned int *b)
+{
+
+//  T(a) {a==3}
+
+   a = 3;
+
+//  T(a) {}
+
+   // This information should be deleted by the dereferencing of b
+   if (a<0)
+
+//  T(a) {}
+
+      *b = 128;
+   else
+
+//  T(a) {}
+
+      *b = 256;
+
+//  T() {}
+
+   return;
+}
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a
+//             <    is referenced>: a b
+int main()
+{
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a
+//             <    is referenced>: a b
+   update(a, &b);
+   return 0;
+}
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T(b) {}
+
+   update(a, &b);
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+//  P() {a==0}
+
+int main()
+{
+
+//  P() {a==0}
+
+   update(a, &b);
+
+//  P(b) {a==0}
+
+   return 0;
+}
+
+//  P() {a==0}
+
+void update(int a, unsigned int *b)
+{
+
+//  P() {a==0}
+
+   a = 3;
+
+//  P(a) {a==3}
+
+   // This information should be deleted by the dereferencing of b
+   if (a<0)
+
+//  P() {0==-1}
+
+      *b = 128;
+   else
+
+//  P(a) {a==3}
+
+      *b = 256;
+
+//  P(a) {}
+
+   return;
+}

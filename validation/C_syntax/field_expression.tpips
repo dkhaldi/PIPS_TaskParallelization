@@ -1,0 +1,18 @@
+delete field_expression
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create field_expression field_expression.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+activate C_PARSER
+
+display PRINTED_FILE[main]
+
+close
+
+delete field_expression
+
+quit

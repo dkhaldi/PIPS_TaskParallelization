@@ -1,0 +1,203 @@
+int main()
+{
+   short a[3][3][6/2];
+   int k;
+   update_array(a, k);
+   return 0;
+}
+void update_array(int fa[3][3][3], int fk)
+{
+   int i;
+   int j;
+   for(i = 0; i <= 2; i += 1)
+      for(j = 0; j <= 2; j += 1)
+         fa[i][j][fk] = 0;
+}
+int main()
+{
+//             <    is declared>: a
+   short a[3][3][6/2];
+//             <    is declared>: k
+   int k;
+//             <may be written>: a[*][*][*]
+//             <    is read   >: k
+//             <    is referenced>: a k
+   update_array(a, k);
+   return 0;
+}
+
+//  T(main) {main==0}
+
+int main()
+{
+
+//  T() {}
+
+   short a[3][3][6/2];
+
+//  T() {}
+
+   int k;
+
+//  T() {}
+
+   update_array(a, k);
+
+//  T(main) {main==0}
+
+   return 0;
+}
+
+//  T() {}
+
+void update_array(int fa[3][3][3], int fk)
+{
+
+//  T() {}
+
+   int i;
+
+//  T() {}
+
+   int j;
+
+//  T(i,j) {0<=i, i<=2}
+
+   for(i = 0; i <= 2; i += 1)
+
+//  T(j) {0<=j, j<=2}
+
+      for(j = 0; j <= 2; j += 1)
+
+//  T() {}
+
+         fa[i][j][fk] = 0;
+}
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   short a[3][3][6/2];
+
+//  P() {}
+
+   int k;
+
+//  P() {}
+
+   update_array(a, k);
+
+//  P() {}
+
+   return 0;
+}
+
+//  P() {}
+
+void update_array(int fa[3][3][3], int fk)
+{
+
+//  P() {}
+
+   int i;
+
+//  P() {}
+
+   int j;
+
+//  P() {}
+
+   for(i = 0; i <= 2; i += 1)
+
+//  P(i,j) {0<=i, i<=2}
+
+      for(j = 0; j <= 2; j += 1)
+
+//  P(i,j) {0<=i, i<=2, 0<=j, j<=2}
+
+         fa[i][j][fk] = 0;
+}
+
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI3==fk, 0<=PHI1, PHI1<=2,
+//    0<=PHI2, PHI2<=2}>
+
+void update_array(int fa[3][3][3], int fk)
+{
+   int i;
+   int j;
+
+//  <fa-RE-EXACT-{}>
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI3==fk, 0<=PHI1, PHI1<=2,
+//    0<=PHI2, PHI2<=2}>
+
+   for(i = 0; i <= 2; i += 1)
+
+//  <fa-RE-EXACT-{}>
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI1==i, PHI3==fk, 0<=PHI2,
+//    PHI2<=2, 0<=i, i<=2}>
+
+      for(j = 0; j <= 2; j += 1)
+
+//  <fa-RE-EXACT-{}>
+//  <fa[PHI1][PHI2][PHI3]-W-EXACT-{PHI1==i, PHI2==j, PHI3==fk, 0<=i,
+//    i<=2, 0<=j, j<=2}>
+
+         fa[i][j][fk] = 0;
+}
+int main()
+{
+
+//  <a-WE-EXACT-{}>
+
+   short a[3][3][6/2];
+   int k;
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1][PHI2][PHI3]-W-MAY-{}>
+
+   update_array(a, k);
+   return 0;
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "update_array" has no side effect on its formal context via pointer variables.
+PROPER_EFFECTS_WITH_POINTS_TO[main] (generic_c_effects_backward_translation) line 25 
+at statement:
+
+	update_array(a, k);
+
+
+Type of actual parameter, "short[3][3][3]", incompatible with type of formal parameter, "int[3][3][3]", for precise interprocedural effect translation.
+MUST_REGIONS_WITH_POINTS_TO[main] (generic_c_effects_backward_translation) line 25 
+at statement:
+
+	update_array(a, k);
+
+
+Type of actual parameter, "short[3][3][3]", incompatible with type of formal parameter, "int[3][3][3]", for precise interprocedural effect translation.
+MUST_REGIONS_WITH_POINTS_TO[main] (any_expression_to_transformer) line 25 
+at statement:
+
+	update_array(a, k);
+
+
+Implicit type coercion between int variable and overloaded expression may reduce semantic analysis accuracy.
+Apply 'type_checker' to explicit all type coercions.
+MUST_REGIONS_WITH_POINTS_TO[main] (any_expression_to_transformer) line 25 
+at statement:
+
+	update_array(a, k);
+
+
+Implicit type coercion between int variable and overloaded expression may reduce semantic analysis accuracy.
+Apply 'type_checker' to explicit all type coercions.
+MUST_REGIONS_WITH_POINTS_TO[main] (any_expression_to_transformer) line 25 
+at statement:
+
+	update_array(a, k);
+
+
+Implicit type coercion between int variable and overloaded expression may reduce semantic analysis accuracy.
+Apply 'type_checker' to explicit all type coercions.

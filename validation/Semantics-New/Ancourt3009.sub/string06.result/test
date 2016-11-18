@@ -1,0 +1,55 @@
+
+Points-To for "string06!"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+/* Handling of constrant strings by the points-to analysis
+ *
+ * How do we represent the area containing the constant string?
+ *
+ * How do we represent pointer arithmetic with constant strings ?
+ */
+
+
+// Points To: none
+
+extern int main(int argc, char **argv);
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   char *p = "hello ";
+
+// Points To:
+// p -> "hello " , EXACT
+
+   char *q = "world";
+
+// Points To:
+// p -> "hello " , EXACT
+// q -> "world" , EXACT
+
+
+   p++;
+
+// Points To:
+// p -> "hello "[1] , EXACT
+// q -> "world" , EXACT
+
+
+   return (int) *p+*q;
+}

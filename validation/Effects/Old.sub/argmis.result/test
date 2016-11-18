@@ -1,0 +1,9 @@
+Selecting rule: PRINT_CODE_PROPER_EFFECTS
+  PROPER_EFFECTS                 building   PROPER_EFFECTS(TWOARG)
+  CUMULATED_EFFECTS              building   CUMULATED_EFFECTS(TWOARG)
+  SUMMARY_EFFECTS                building   SUMMARY_EFFECTS(TWOARG)
+  PROPER_EFFECTS                 building   PROPER_EFFECTS(ARGMIS)
+PROPER_EFFECTS[ARGMIS] (check_user_call_site) [user error] Call to module TWOARG: insufficient number of actual arguments.
+PROPER_EFFECTS[ARGMIS] (set_debug_stack_pointer) debug level stack is set to 2
+PROPER_EFFECTS[ARGMIS] (catch_user_error) pass has failed
+PROPER_EFFECTS[ARGMIS] (catch_user_error) misc exceptions: 1

@@ -1,0 +1,27 @@
+# check how user errors are managed when property
+# CLOSE_WORKSPACE_AND_QUIT_ON_ERROR is set.
+
+setenv WS=error_management02
+
+delete $WS
+
+# This first property must be set to FALSE for the second to be effective
+#setproperty ABORT_ON_USER_ERROR TRUE
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create $WS $WS.c
+
+# This should be a first user_error
+#setproperty FOO
+
+# This should be a second user error
+setproperty ABORT_ON_USER_ERROR true
+
+# This should be a third user error
+disply PRINTED_FILE[main]
+
+display PRINTED_FILE[main]
+
+close
+delete $WS
+quit

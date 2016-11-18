@@ -1,0 +1,732 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   char buffer_in[100];
+
+// Points To: none
+
+   char buffer_out[100];
+
+// Points To: none
+
+   char buffer_in2[10][10];
+
+// Points To: none
+
+   char buffer_out2[10][10];
+
+// Points To: none
+
+   int n = argc, m = argc, l = argc;
+
+// Points To: none
+
+   
+   /* 1D buffers */
+   
+   memcpy(buffer_out, buffer_in, 4);
+
+// Points To: none
+
+   memcpy(&buffer_out[0], &buffer_in[0], 4);
+
+// Points To: none
+
+   memcpy(&buffer_out[n], &buffer_in[m], l);
+
+
+// Points To: none
+
+   char *ip = &buffer_in[0];
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+
+   char *op = &buffer_out[0];
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+
+   memcpy(op, ip, l);
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+   memcpy(&op[n], &ip[m], l);
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+   memcpy(op+n, ip+m, l);
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+   
+   /* 2D buffers */
+   
+   memcpy(buffer_out2, buffer_in2, 4);
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+   memcpy(buffer_out2[0], buffer_in2[0], 4);
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+   memcpy(&buffer_out2[0][0], &buffer_in2[0][0], 4);
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+// Points To:
+// ip -> buffer_in[0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+
+   ip = &buffer_in2[0][0];
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out[0] , EXACT
+
+   op = &buffer_out2[0][0];
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out2[0][0] , EXACT
+
+
+   memcpy(op, ip, l);
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out2[0][0] , EXACT
+
+   memcpy(&op[n], &ip[m], l);
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out2[0][0] , EXACT
+
+   memcpy(op+n, ip+m, l);
+
+// Points To:
+// ip -> buffer_in2[0][0] , EXACT
+// op -> buffer_out2[0][0] , EXACT
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in
+   char buffer_in[100];
+//             <    is declared>: buffer_out
+   char buffer_out[100];
+//             <    is declared>: buffer_in2
+   char buffer_in2[10][10];
+//             <    is declared>: buffer_out2
+   char buffer_out2[10][10];
+//             <    is read   >: argc
+//             <    is written>: l m n
+//             <    is referenced>: argc argc argc l m n
+//             <    is declared>: l m n
+   int n = argc, m = argc, l = argc;
+//             <    is read   >: buffer_in[0:4-1]
+//             <    is written>: buffer_out[0:4-1]
+//             <    is referenced>: buffer_in buffer_out
+   
+   /* 1D buffers */
+   
+   memcpy(buffer_out, buffer_in, 4);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is referenced>: buffer_in buffer_out
+   memcpy(&buffer_out[0], &buffer_in[0], 4);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is read   >: l m n
+//             <    is referenced>: buffer_in buffer_out l m n
+   memcpy(&buffer_out[n], &buffer_in[m], l);
+
+//             <    is written>: ip
+//             <    is referenced>: buffer_in ip
+//             <    is declared>: ip
+   char *ip = &buffer_in[0];
+//             <    is written>: op
+//             <    is referenced>: buffer_out op
+//             <    is declared>: op
+   char *op = &buffer_out[0];
+//             <    is read   >: buffer_in[0:l-1] ip l op
+//             <    is written>: buffer_out[0:l-1]
+//             <    is referenced>: ip l op
+
+   memcpy(op, ip, l);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is read   >: l m n
+//             <    is referenced>: ip l m n op
+   memcpy(&op[n], &ip[m], l);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is referenced>: ip l m n op
+   memcpy(op+n, ip+m, l);
+//             <may be read   >: buffer_in2[*][*]
+//             <may be written>: buffer_out2[*][*]
+//             <    is referenced>: buffer_in2 buffer_out2
+   
+   /* 2D buffers */
+   
+   memcpy(buffer_out2, buffer_in2, 4);
+//             <    is read   >: buffer_in2[0][0:4-1]
+//             <    is written>: buffer_out2[0][0:4-1]
+//             <    is referenced>: buffer_in2 buffer_out2
+   memcpy(buffer_out2[0], buffer_in2[0], 4);
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is referenced>: buffer_in2 buffer_out2
+   memcpy(&buffer_out2[0][0], &buffer_in2[0][0], 4);
+//             <may be read   >: buffer_in2[m][*]
+//             <may be written>: buffer_out2[n][*]
+//             <    is read   >: l m n
+//             <    is referenced>: buffer_in2 buffer_out2 l m n
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+//             <    is written>: ip
+//             <    is referenced>: buffer_in2 ip
+
+   ip = &buffer_in2[0][0];
+//             <    is written>: op
+//             <    is referenced>: buffer_out2 op
+   op = &buffer_out2[0][0];
+//             <    is read   >: buffer_in2[0][0:l-1] ip l op
+//             <    is written>: buffer_out2[0][0:l-1]
+//             <    is referenced>: ip l op
+
+   memcpy(op, ip, l);
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is read   >: l m n
+//             <    is referenced>: ip l m n op
+   memcpy(&op[n], &ip[m], l);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is referenced>: ip l m n op
+   memcpy(op+n, ip+m, l);
+
+   return 0;
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+int main(int argc, char **argv)
+{
+//             <    is declared>: buffer_in
+   char buffer_in[100];
+//             <    is declared>: buffer_out
+   char buffer_out[100];
+//             <    is declared>: buffer_in2
+   char buffer_in2[10][10];
+//             <    is declared>: buffer_out2
+   char buffer_out2[10][10];
+//             <    is read   >: argc
+//             <    is written>: l m n
+//             <    is referenced>: argc l m n
+//             <    is declared>: l m n
+   int n = argc, m = argc, l = argc;
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is referenced>: buffer_in buffer_out
+   
+   /* 1D buffers */
+   
+   memcpy(buffer_out, buffer_in, 4);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is referenced>: buffer_in buffer_out
+   memcpy(&buffer_out[0], &buffer_in[0], 4);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is read   >: l m n
+//             <    is referenced>: buffer_in buffer_out l m n
+   memcpy(&buffer_out[n], &buffer_in[m], l);
+
+//             <    is written>: ip
+//             <    is referenced>: buffer_in ip
+//             <    is declared>: ip
+   char *ip = &buffer_in[0];
+//             <    is written>: op
+//             <    is referenced>: buffer_out op
+//             <    is declared>: op
+   char *op = &buffer_out[0];
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is read   >: ip l op
+//             <    is referenced>: ip l op
+
+   memcpy(op, ip, l);
+//             <may be read   >: buffer_in[*]
+//             <may be written>: buffer_out[*]
+//             <    is read   >: l m n
+//             <    is referenced>: ip l m n op
+   memcpy(&op[n], &ip[m], l);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is referenced>: ip l m n op
+   memcpy(op+n, ip+m, l);
+//             <may be read   >: buffer_in2[*][*]
+//             <may be written>: buffer_out2[*][*]
+//             <    is referenced>: buffer_in2 buffer_out2
+   
+   /* 2D buffers */
+   
+   memcpy(buffer_out2, buffer_in2, 4);
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is referenced>: buffer_in2 buffer_out2
+   memcpy(buffer_out2[0], buffer_in2[0], 4);
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is referenced>: buffer_in2 buffer_out2
+   memcpy(&buffer_out2[0][0], &buffer_in2[0][0], 4);
+//             <may be read   >: buffer_in2[*][*]
+//             <may be written>: buffer_out2[*][*]
+//             <    is read   >: l m n
+//             <    is referenced>: buffer_in2 buffer_out2 l m n
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+//             <    is written>: ip
+//             <    is referenced>: buffer_in2 ip
+
+   ip = &buffer_in2[0][0];
+//             <    is written>: op
+//             <    is referenced>: buffer_out2 op
+   op = &buffer_out2[0][0];
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is read   >: ip l op
+//             <    is referenced>: ip l op
+
+   memcpy(op, ip, l);
+//             <may be read   >: buffer_in2[0][*]
+//             <may be written>: buffer_out2[0][*]
+//             <    is read   >: l m n
+//             <    is referenced>: ip l m n op
+   memcpy(&op[n], &ip[m], l);
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is referenced>: ip l m n op
+   memcpy(op+n, ip+m, l);
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   char buffer_in[100];
+
+//  T() {}
+
+   char buffer_out[100];
+
+//  T() {}
+
+   char buffer_in2[10][10];
+
+//  T() {}
+
+   char buffer_out2[10][10];
+
+//  T(l,m,n) {argc==l, argc==m, argc==n}
+
+   int n = argc, m = argc, l = argc;
+
+//  T() {}
+
+   
+   /* 1D buffers */
+   
+   memcpy(buffer_out, buffer_in, 4);
+
+//  T() {}
+
+   memcpy(&buffer_out[0], &buffer_in[0], 4);
+
+//  T() {}
+
+   memcpy(&buffer_out[n], &buffer_in[m], l);
+
+
+//  T() {}
+
+   char *ip = &buffer_in[0];
+
+//  T() {}
+
+   char *op = &buffer_out[0];
+
+//  T() {}
+
+
+   memcpy(op, ip, l);
+
+//  T() {}
+
+   memcpy(&op[n], &ip[m], l);
+
+//  T(argc,l,m,n) {}
+
+   memcpy(op+n, ip+m, l);
+
+//  T() {}
+
+   
+   /* 2D buffers */
+   
+   memcpy(buffer_out2, buffer_in2, 4);
+
+//  T() {}
+
+   memcpy(buffer_out2[0], buffer_in2[0], 4);
+
+//  T() {}
+
+   memcpy(&buffer_out2[0][0], &buffer_in2[0][0], 4);
+
+//  T() {}
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  T() {}
+
+
+   ip = &buffer_in2[0][0];
+
+//  T() {}
+
+   op = &buffer_out2[0][0];
+
+//  T() {}
+
+
+   memcpy(op, ip, l);
+
+//  T() {}
+
+   memcpy(&op[n], &ip[m], l);
+
+//  T(argc,l,m,n) {}
+
+   memcpy(op+n, ip+m, l);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   char buffer_in[100];
+
+//  P() {}
+
+   char buffer_out[100];
+
+//  P() {}
+
+   char buffer_in2[10][10];
+
+//  P() {}
+
+   char buffer_out2[10][10];
+
+//  P() {}
+
+   int n = argc, m = argc, l = argc;
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   
+   /* 1D buffers */
+   
+   memcpy(buffer_out, buffer_in, 4);
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   memcpy(&buffer_out[0], &buffer_in[0], 4);
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   memcpy(&buffer_out[n], &buffer_in[m], l);
+
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   char *ip = &buffer_in[0];
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   char *op = &buffer_out[0];
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+
+   memcpy(op, ip, l);
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   memcpy(&op[n], &ip[m], l);
+
+//  P(l,m,n) {argc==l, argc==m, argc==n}
+
+   memcpy(op+n, ip+m, l);
+
+//  P(argc,l,m,n) {}
+
+   
+   /* 2D buffers */
+   
+   memcpy(buffer_out2, buffer_in2, 4);
+
+//  P(argc,l,m,n) {}
+
+   memcpy(buffer_out2[0], buffer_in2[0], 4);
+
+//  P(argc,l,m,n) {}
+
+   memcpy(&buffer_out2[0][0], &buffer_in2[0][0], 4);
+
+//  P(argc,l,m,n) {}
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  P(argc,l,m,n) {}
+
+
+   ip = &buffer_in2[0][0];
+
+//  P(argc,l,m,n) {}
+
+   op = &buffer_out2[0][0];
+
+//  P(argc,l,m,n) {}
+
+
+   memcpy(op, ip, l);
+
+//  P(argc,l,m,n) {}
+
+   memcpy(&op[n], &ip[m], l);
+
+//  P(argc,l,m,n) {}
+
+   memcpy(op+n, ip+m, l);
+
+//  P(argc,l,m,n) {}
+
+
+   return 0;
+}
+
+Convex array regions with points-to for "main"
+
+
+//  <*ANY_MODULE*:*ANYWHERE*-R-MAY-{}>
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+int main(int argc, char **argv)
+{
+
+//  <buffer_in-WE-EXACT-{}>
+
+   char buffer_in[100];
+
+//  <buffer_out-WE-EXACT-{}>
+
+   char buffer_out[100];
+
+//  <buffer_in2-WE-EXACT-{}>
+
+   char buffer_in2[10][10];
+
+//  <buffer_out2-WE-EXACT-{}>
+
+   char buffer_out2[10][10];
+   int n = argc, m = argc, l = argc;
+
+//  <buffer_in-RE-EXACT-{}>
+//  <buffer_in[PHI1]-R-EXACT-{0<=PHI1, PHI1<=3}>
+//  <buffer_out-RE-EXACT-{}>
+//  <buffer_out[PHI1]-W-EXACT-{0<=PHI1, PHI1<=3}>
+
+   
+   /* 1D buffers */
+   
+   memcpy(buffer_out, buffer_in, 4);
+
+//  <buffer_in-RE-EXACT-{}>
+//  <buffer_in[PHI1]-R-MAY-{l==argc, m==argc, n==argc}>
+//  <buffer_out-RE-EXACT-{}>
+//  <buffer_out[PHI1]-W-MAY-{l==argc, m==argc, n==argc}>
+
+   memcpy(&buffer_out[0], &buffer_in[0], 4);
+
+//  <buffer_in-RE-EXACT-{}>
+//  <buffer_in[PHI1]-R-MAY-{l==argc, m==argc, n==argc}>
+//  <buffer_out-RE-EXACT-{}>
+//  <buffer_out[PHI1]-W-MAY-{l==argc, m==argc, n==argc}>
+
+   memcpy(&buffer_out[n], &buffer_in[m], l);
+
+
+//  <buffer_in-RE-EXACT-{}>
+//  <ip-RE-EXACT-{}>
+//  <ip-WE-EXACT-{}>
+//  <ip-W-EXACT-{}>
+
+   char *ip = &buffer_in[0];
+
+//  <buffer_out-RE-EXACT-{}>
+//  <op-RE-EXACT-{}>
+//  <op-WE-EXACT-{}>
+//  <op-W-EXACT-{}>
+
+   char *op = &buffer_out[0];
+
+//  <buffer_in[PHI1]-R-MAY-{0<=PHI1, PHI1+1<=l}>
+//  <buffer_out[PHI1]-W-MAY-{0<=PHI1, PHI1+1<=l}>
+//  <ip-R-EXACT-{}>
+//  <ip-RE-EXACT-{}>
+//  <op-R-EXACT-{}>
+//  <op-RE-EXACT-{}>
+
+
+   memcpy(op, ip, l);
+
+//  <buffer_in[PHI1]-R-EXACT-{l==argc, m==argc, n==argc}>
+//  <buffer_out[PHI1]-W-EXACT-{l==argc, m==argc, n==argc}>
+//  <ip-RE-EXACT-{}>
+//  <op-RE-EXACT-{}>
+
+   memcpy(&op[n], &ip[m], l);
+
+//  <ip-RE-EXACT-{}>
+//  <op-RE-EXACT-{}>
+//  <*ANY_MODULE*:*ANYWHERE*-R-MAY-{}>
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+   memcpy(op+n, ip+m, l);
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <buffer_in2[PHI1][PHI2]-R-MAY-{}>
+//  <buffer_out2-RE-EXACT-{}>
+//  <buffer_out2[PHI1][PHI2]-W-MAY-{}>
+
+   
+   /* 2D buffers */
+   
+   memcpy(buffer_out2, buffer_in2, 4);
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <buffer_in2[PHI1][PHI2]-R-EXACT-{PHI1==0, 0<=PHI2, PHI2<=3}>
+//  <buffer_out2-RE-EXACT-{}>
+//  <buffer_out2[PHI1][PHI2]-W-EXACT-{PHI1==0, 0<=PHI2, PHI2<=3}>
+
+   memcpy(buffer_out2[0], buffer_in2[0], 4);
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <buffer_in2[PHI1][PHI2]-R-MAY-{PHI1==0}>
+//  <buffer_out2-RE-EXACT-{}>
+//  <buffer_out2[PHI1][PHI2]-W-MAY-{PHI1==0}>
+
+   memcpy(&buffer_out2[0][0], &buffer_in2[0][0], 4);
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <buffer_in2[PHI1][PHI2]-R-MAY-{PHI1==m}>
+//  <buffer_out2-RE-EXACT-{}>
+//  <buffer_out2[PHI1][PHI2]-W-MAY-{PHI1==n}>
+
+   memcpy(&buffer_out2[n][0], &buffer_in2[m][0], l);
+
+//  <buffer_in2-RE-EXACT-{}>
+//  <ip-RE-EXACT-{}>
+//  <ip-W-EXACT-{}>
+
+
+   ip = &buffer_in2[0][0];
+
+//  <buffer_out2-RE-EXACT-{}>
+//  <op-RE-EXACT-{}>
+//  <op-W-EXACT-{}>
+
+   op = &buffer_out2[0][0];
+
+//  <buffer_in2[PHI1][PHI2]-R-MAY-{PHI1==0, 0<=PHI2, PHI2+1<=l}>
+//  <buffer_out2[PHI1][PHI2]-W-MAY-{PHI1==0, 0<=PHI2, PHI2+1<=l}>
+//  <ip-R-EXACT-{}>
+//  <ip-RE-EXACT-{}>
+//  <op-R-EXACT-{}>
+//  <op-RE-EXACT-{}>
+
+
+   memcpy(op, ip, l);
+
+//  <buffer_in2[PHI1][PHI2]-R-EXACT-{PHI1==0}>
+//  <buffer_out2[PHI1][PHI2]-W-EXACT-{PHI1==0}>
+//  <ip-RE-EXACT-{}>
+//  <op-RE-EXACT-{}>
+
+   memcpy(&op[n], &ip[m], l);
+
+//  <ip-RE-EXACT-{}>
+//  <op-RE-EXACT-{}>
+//  <*ANY_MODULE*:*ANYWHERE*-R-MAY-{}>
+//  <*ANY_MODULE*:*ANYWHERE*-W-MAY-{}>
+
+   memcpy(op+n, ip+m, l);
+
+   return 0;
+}

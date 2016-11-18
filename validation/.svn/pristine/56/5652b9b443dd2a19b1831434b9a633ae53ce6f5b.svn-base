@@ -1,0 +1,18 @@
+delete typedef_name
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create typedef_name typedef_name.c
+
+#setenv C_SYNTAX_DEBUG_LEVEL 5
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+#setenv  PRETTYPRINT_DEBUG_LEVEL 9
+display PRINTED_FILE[main]
+
+close
+delete typedef_name
+
+quit

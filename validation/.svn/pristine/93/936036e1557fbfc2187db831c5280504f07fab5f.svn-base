@@ -1,0 +1,37 @@
+
+POINTS TO
+
+
+// Points To IN:
+// pi -> *NULL* , MAY
+// pi -> _pi_1[0] , MAY
+// q -> *NULL* , MAY
+// q -> _q_2[0] , MAY
+
+
+// Points To OUT:
+// pi -> _pi_1[0] , EXACT
+// q -> _q_2[0] , EXACT
+
+void call15(int *pi, tf_t *q)
+{
+
+// Points To:
+// pi -> *NULL* , MAY
+// pi -> _pi_1[0] , MAY
+
+   *pi = 1;
+
+// Points To:
+// pi -> _pi_1[0] , EXACT
+// q -> *NULL* , MAY
+// q -> _q_2[0] , MAY
+
+   q->one = 1;
+
+// Points To:
+// pi -> _pi_1[0] , EXACT
+// q -> _q_2[0] , EXACT
+
+   return;
+}

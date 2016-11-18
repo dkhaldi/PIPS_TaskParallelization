@@ -1,0 +1,31 @@
+setenv WS=struct08
+
+delete $WS
+setproperty ABORT_ON_USER_ERROR TRUE
+#setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+create $WS $WS.c
+
+setproperty CONSTANT_PATH_EFFECTS TRUE
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+
+activate PRECONDITIONS_INTER_FULL
+#activate TRANSFORMERS_INTER_FULL
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[read_config_file]
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[read_config_file]
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[read_config_file]
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[read_config_file]
+
+close
+delete $WS
+quit

@@ -1,0 +1,67 @@
+
+int main(void)
+{
+   int i;
+   int **pp;
+//             <    is read   >: __TIME_EFFECTS:KALI
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED 
+//                               __TIME_EFFECTS:KALI
+   srand(time((void *) 0));
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout _RANDOM_EFFECTS:GEN_SEED 
+//                               __IO_EFFECTS:LUNS[1]
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED 
+//                               __IO_EFFECTS:LUNS[1]
+
+   if (alea()) {
+//             <    is written>: pi
+      int *pi = &i;
+//             <    is written>: pp
+      pp = &pi;
+//             <    is read   >: pi pp
+//             <    is written>: i
+
+      **pp = 1;
+   }
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: pp stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   
+   // pp points to a dead value in the stack
+   printf("%p\n", pp);
+   
+   // possible segfault.
+   // should generate an error while analyzing?
+   **pp = 0;
+   return 0;
+}
+static int alea(void)
+{
+//             <    is read   >: _RANDOM_EFFECTS:GEN_SEED
+//             <    is written>: r _RANDOM_EFFECTS:GEN_SEED
+   int r = rand();
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: r stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+   printf("%d\n", r);
+//             <    is read   >: _RANDOM_EFFECTS:GEN_SEED
+//             <    is written>: _RANDOM_EFFECTS:GEN_SEED
+   return rand()%2==1;
+}
+
+ *********************** Use-Def Chains *********************
+
+	16 --> 18 with conflicts
+		from <_RANDOM_EFFECTS:GEN_SEED-W-EXACT> to <_RANDOM_EFFECTS:GEN_SEED-W-EXACT>
+		from <_RANDOM_EFFECTS:GEN_SEED-W-EXACT> to <_RANDOM_EFFECTS:GEN_SEED-R-EXACT>
+	20 --> 23 with conflicts
+		from <pi-W-EXACT> to <pi-R-EXACT>
+	21 --> 23 with conflicts
+		from <pp-W-EXACT> to <pp-R-EXACT>
+	21 --> 27 with conflicts
+		from <pp-W-EXACT> to <pp-R-EXACT>
+
+****************** End of Dependence Graph ******************

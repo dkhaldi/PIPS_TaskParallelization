@@ -1,0 +1,6 @@
+extern foo()
+{
+}
+static foo();
+
+extern foo();

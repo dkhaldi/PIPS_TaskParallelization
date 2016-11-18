@@ -1,0 +1,14 @@
+delete loop00
+setproperty ABORT_ON_USER_ERROR TRUE
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create loop00 loop00.f
+echo ### initial file
+display PRINTED_FILE[%ALL]
+apply TYPE_CHECKER[%ALL]
+echo ### type checked file
+display PRINTED_FILE[%ALL]
+close
+
+delete loop00
+quit
+

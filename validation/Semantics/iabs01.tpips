@@ -1,0 +1,9 @@
+delete iabs01
+# Improper typing of x as argument of iabs
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create iabs01 iabs01.f
+module IABS01
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[IABS01]
+close
+delete iabs01

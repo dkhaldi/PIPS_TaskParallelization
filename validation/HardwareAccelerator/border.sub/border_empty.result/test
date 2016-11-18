@@ -1,0 +1,356 @@
+#
+# AIPO
+#
+#
+# compile generated border_empty
+#
+
+! initial function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   const int32_t kernel = {0, 0, 0, 0, 1, 0, 0, 0, 0};                  /*0007*/
+   freia_aipo_erode_8c(out, in, kernel);                                /*0008*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "border_empty" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "in" [shape=circle];
+
+  // outputs
+  "out" [shape=circle];
+
+  // computation vertices
+  "8 E8" [shape=box];
+  "8 E8" -> "out";
+  "in" -> "8 E8";
+}
+// graph for dag "dag_cleaned_0" of module "border_empty" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "out" [shape=circle];
+  "out =" [shape=circle,label="=",style="dashed"]
+  "in" -> "out =";
+  "out =" -> "out";
+}
+
+! updated function for AIPO
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+#
+# SPOC
+#
+
+! initial function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   const int32_t kernel = {0, 0, 0, 0, 1, 0, 0, 0, 0};                  /*0007*/
+   freia_aipo_erode_8c(out, in, kernel);                                /*0008*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "border_empty" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "in" [shape=circle];
+
+  // outputs
+  "out" [shape=circle];
+
+  // computation vertices
+  "8 E8" [shape=box];
+  "8 E8" -> "out";
+  "in" -> "8 E8";
+}
+// graph for dag "dag_cleaned_0" of module "border_empty" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "out" [shape=circle];
+  "out =" [shape=circle,label="=",style="dashed"]
+  "in" -> "out =";
+  "out =" -> "out";
+}
+
+! acceleration function
+
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <spoc.h>
+
+// dag 0: 1 ops and 0 copies, optimized to 0 ops and 0+1+0 copies
+// # SPOC calls: 0
+
+! updated function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+
+! cleaned up function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+#
+# TERAPIX
+#
+
+! initial function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   const int32_t kernel = {0, 0, 0, 0, 1, 0, 0, 0, 0};                  /*0007*/
+   freia_aipo_erode_8c(out, in, kernel);                                /*0008*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "border_empty" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "in" [shape=circle];
+
+  // outputs
+  "out" [shape=circle];
+
+  // computation vertices
+  "8 E8" [shape=box];
+  "8 E8" -> "out";
+  "in" -> "8 E8";
+}
+// graph for dag "dag_cleaned_0" of module "border_empty" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "out" [shape=circle];
+  "out =" [shape=circle,label="=",style="dashed"]
+  "in" -> "out =";
+  "out =" -> "out";
+}
+
+! acceleration function
+
+// freia terapix includes
+#include <freiaCommon.h>
+#include <freiaMediumGrain.h>
+#include <freiaCoarseGrain.h>
+#include <terapix.h>
+#include <terapix_ucode.h>
+
+// dag 0: 1 ops and 0 copies, optimized to 0 ops and 0+1+0 copies
+
+! updated function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+
+! cleaned up function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+#
+# OPENCL
+#
+
+! initial function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   const int32_t kernel = {0, 0, 0, 0, 1, 0, 0, 0, 0};                  /*0007*/
+   freia_aipo_erode_8c(out, in, kernel);                                /*0008*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "border_empty" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "in" [shape=circle];
+
+  // outputs
+  "out" [shape=circle];
+
+  // computation vertices
+  "8 E8" [shape=box];
+  "8 E8" -> "out";
+  "in" -> "8 E8";
+}
+// graph for dag "dag_cleaned_0" of module "border_empty" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "out" [shape=circle];
+  "out =" [shape=circle,label="=",style="dashed"]
+  "in" -> "out =";
+  "out =" -> "out";
+}
+
+! acceleration function
+
+// FREIA OpenCL includes
+#include <CL/opencl.h>
+#include "freia.h"
+#include "private/freia_opencl_runtime.h"
+
+
+// dag 0: 1 ops and 0 copies, optimized to 0 ops and 0+1+0 copies
+#include <freia_opencl_runtime.hcl>
+// generated OpenCL kernels for function border_empty
+
+// opencl for dag 0
+
+! updated function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+
+! cleaned up function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+#
+# SIGMAC
+#
+#
+# compile generated border_empty
+#
+
+! initial function
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   const int32_t kernel = {0, 0, 0, 0, 1, 0, 0, 0, 0};                  /*0007*/
+   freia_aipo_erode_8c(out, in, kernel);                                /*0008*/
+}
+
+! graphs
+
+// graph for dag "dag_0" of module "border_empty" in dot format
+// DAG "dag_0": #i=1 #o=1 #c=1 #s=0 #I=0 #B=0 #A=0
+digraph "dag_0" {
+  // inputs
+  "in" [shape=circle];
+
+  // outputs
+  "out" [shape=circle];
+
+  // computation vertices
+  "8 E8" [shape=box];
+  "8 E8" -> "out";
+  "in" -> "8 E8";
+}
+// graph for dag "dag_cleaned_0" of module "border_empty" in dot format
+// DAG "dag_cleaned_0": #i=0 #o=0 #c=0 #s=0 #I=0 #B=1 #A=0
+digraph "dag_cleaned_0" {
+  // inputs
+
+  // outputs
+
+  // computation vertices
+
+  // external before copies: 1
+  "out" [shape=circle];
+  "out =" [shape=circle,label="=",style="dashed"]
+  "in" -> "out =";
+  "out =" -> "out";
+}
+
+! updated function for OPENCL
+
+void border_empty(freia_data2d *out, freia_data2d *in)
+{
+   freia_aipo_copy(out, in);
+}
+
+! Sigma-C subgraphs for OPENCL
+
+/* C INCLUDES */
+#include <stdio.h>
+
+/* SIGMA-C INCLUDES */
+#include "sigmacAgents.h"
+
+
+
+
+/*#####################################################################*/
+/*########################### Subgraph Root ###########################*/
+/*#####################################################################*/
+
+subgraph root () {
+  map {
+    int width = 256, height = 256;
+    size_t sizeMax = width * height * sizeof(int16_t);
+
+    char cmd[255] = "cd .. && ./main";
+    int i, n_pipes = 10;
+    char pipes[n_pipes][255];
+    for (i=0; i<n_pipes; i++)
+      tmpnam(pipes[i]);
+
+    agent pp = new Pipes(cmd, n_pipes, pipes);
+    agent sk = new Sink<char>(1);
+    SigmaC_agent_setUnitType(sk, "native");
+    connect(pp.output, sk.input);
+
+    new Malloc(pipes[0], pipes[1]);
+    new Free(pipes[2], pipes[3]);
+    new MCopy(pipes[4], pipes[5]);
+    new SendDataToMPPA(pipes[6], pipes[7], sizeMax);
+    new SendDataToHost(pipes[8], pipes[9], sizeMax);
+
+  }
+}
+#
+# FREIA COMPILATION DONE
+#
+

@@ -1,0 +1,37 @@
+delete four1
+create four1 four1.f
+
+shell echo "--- Preconditions for module FOUR1"
+
+# New processing of unstructured
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+
+# FI: used to improve the analysis of M=NN/2 because the context
+# proves that NN is positive and a multiple of 2, but it changes the
+# results too much
+# setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+
+# setproperty PRETTYPRINT_STATEMENT_ORDERING TRUE
+
+# setproperty PRETTYPRINT_BLOCKS TRUE
+
+# setproperty PRETTYPRINT_UNSTRUCTURED TRUE
+
+# setproperty PRETTYPRINT_BLOCK_IF_ONLY TRUE
+
+activate TRANSFORMERS_INTRA_FULL
+activate PRECONDITIONS_INTER_FULL
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[FOUR1]
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[FOUR1]
+
+apply REFINE_TRANSFORMERS[FOUR1]
+
+display PRINTED_FILE[FOUR1]
+
+close
+delete four1
+quit

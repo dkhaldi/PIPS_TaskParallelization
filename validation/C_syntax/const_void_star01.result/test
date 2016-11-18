@@ -1,0 +1,12 @@
+/* Derived from SPEC2006, 482.sphinx3 */
+
+
+
+const void *const_void_star01(char *name);
+extern const void *const_void_star01(char *name);
+
+extern const void *const_void_star01(char *name);
+const void * const_void_star01(char *name)
+{
+   return (void *) 0;
+}

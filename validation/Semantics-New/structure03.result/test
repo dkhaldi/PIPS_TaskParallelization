@@ -1,0 +1,49 @@
+
+Codes with EFFECTS for functions
+
+void structure03()
+{
+//             <    is written>: p
+   Cplfloat c, *p = &c;
+//             <    is written>: i
+   int i = 0;
+//             <    is read   >: i
+//             <    is written>: c.re[i++] i
+
+   (c.re)[i++] = 0.;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: i p
+//             <    is written>: i
+   (p->re)[i++] = 0.;
+   return;
+}
+
+Codes with TRANSFORMERS for functions
+
+
+//  T() {}
+
+void structure03()
+{
+
+//  T() {}
+
+   Cplfloat c, *p = &c;
+
+//  T(i) {i==0}
+
+   int i = 0;
+
+//  T(i) {i==1, i#init==0}
+
+
+   (c.re)[i++] = 0.;
+
+//  T(i) {i==2, i#init==1}
+
+   (p->re)[i++] = 0.;
+
+//  T() {i==2}
+
+   return;
+}

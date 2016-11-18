@@ -1,0 +1,160 @@
+
+Init Code
+
+int return01()
+{
+   return global++;
+}
+int main()
+{
+   printf("global=%d\n", global);
+   printf("return01=%d\n", return01());
+   printf("global=%d\n", global);
+   return 0;
+}
+
+PROPER_EFFECTS
+
+int return01()
+{
+//             <    is read   >: global
+//             <    is written>: global
+//             <    is referenced>: global
+   return global++;
+}
+int main()
+{
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: global stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: global stdout __IO_EFFECTS:LUNS
+   printf("global=%d\n", global);
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: global stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: global __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: global stdout __IO_EFFECTS:LUNS
+   printf("return01=%d\n", return01());
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: global stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: global stdout __IO_EFFECTS:LUNS
+   printf("global=%d\n", global);
+   return 0;
+}
+
+CUMULATED_EFFECTS
+
+//             <    is read   >: global
+//             <    is written>: global
+//             <    is referenced>: global
+int return01()
+{
+//             <    is read   >: global
+//             <    is written>: global
+//             <    is referenced>: global
+   return global++;
+}
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: global stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: global __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: global stdout __IO_EFFECTS:LUNS
+int main()
+{
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: global stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: global stdout __IO_EFFECTS:LUNS
+   printf("global=%d\n", global);
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: global stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: global __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: global stdout __IO_EFFECTS:LUNS
+   printf("return01=%d\n", return01());
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: global stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: global stdout __IO_EFFECTS:LUNS
+   printf("global=%d\n", global);
+//             <    is read   >: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: __IO_EFFECTS:LUNS
+   return 0;
+}
+
+REGIONS
+
+
+//  <global-R-EXACT-{}>
+//  <global-W-EXACT-{}>
+
+int return01()
+{
+
+//  <global-RE-EXACT-{}>
+//  <global-R-EXACT-{}>
+//  <global-W-EXACT-{}>
+
+   return global++;
+}
+
+//  <global-R-EXACT-{}>
+//  <global-W-EXACT-{}>
+//  <stdout-R-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1}>
+
+int main()
+{
+
+//  <global-R-EXACT-{}>
+//  <global-RE-EXACT-{}>
+//  <stdout-R-EXACT-{}>
+//  <stdout-RE-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1, global==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1, global==0}>
+
+   printf("global=%d\n", global);
+
+//  <global-R-EXACT-{}>
+//  <global-W-EXACT-{}>
+//  <stdout-R-EXACT-{}>
+//  <stdout-RE-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1, global==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1, global==0}>
+
+   printf("return01=%d\n", return01());
+
+//  <global-R-EXACT-{}>
+//  <global-RE-EXACT-{}>
+//  <stdout-R-EXACT-{}>
+//  <stdout-RE-EXACT-{}>
+//  <stdout[PHI1]-R-MAY-{PHI1==0}>
+//  <stdout[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==1}>
+
+   printf("global=%d\n", global);
+
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==1}>
+
+   return 0;
+}
+
+Warnings
+

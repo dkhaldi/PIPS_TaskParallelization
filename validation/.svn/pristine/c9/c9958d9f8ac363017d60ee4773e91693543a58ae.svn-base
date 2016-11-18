@@ -1,0 +1,79 @@
+main
+
+Declarations for module "main" with type "int x char *[] -> int"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 88
+	Declared entity "main:*DYNAMIC*" with type "area" with size 34
+	Declared entity "main:*HEAP*" with type "area" with size 0
+	Declared entity "main:*STACK*" with type "area" with size 0
+	Declared entity "main:*STATIC*" with type "area" with size 0
+	Declared entity "main:0`__FUNCTION__" with type "variable" "char *"
+	Declared entity "main:0`__func__" with type "variable" "char *"
+	Declared entity "main:0`pc" with type "variable" "char *"
+	Declared entity "main:0`pi" with type "variable" "int *"
+	Declared entity "main:0`px" with type "variable" "float *"
+	Declared entity "main:argc" with type "variable" "int"
+	Declared entity "main:argv" with type "variable" "char *[]"
+	Declared entity "main:main" with type "variable" "int"
+	Declared entity "malloc03!:*STATIC*" with type "area" with size 0
+
+* empty extern declaration list *
+
+
+Layout for formal parameters:
+
+	Variable main:argc	offset = 1
+	Variable main:argv	offset = 2
+
+Layout for return variable:
+
+	Variable "main:main"	size = 4
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 88:
+	External Variable "TOP-LEVEL:_IO_2_1_stdin_"	offset = UNKNOWN,	size = unknown
+	External Variable "TOP-LEVEL:_IO_2_1_stdout_"	offset = UNKNOWN,	size = unknown
+	External Variable "TOP-LEVEL:_IO_2_1_stderr_"	offset = UNKNOWN,	size = unknown
+	External Variable "TOP-LEVEL:stdin"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:stdout"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:stderr"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:__morecore"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:__malloc_initialize_hook"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:__free_hook"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:__malloc_hook"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:__realloc_hook"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:__memalign_hook"	offset = UNKNOWN,	size = 8
+	External Variable "TOP-LEVEL:__after_morecore_hook"	offset = UNKNOWN,	size = 8
+	Variable "TOP-LEVEL:i"	offset = 0	size = 4
+	Variable "TOP-LEVEL:a"	offset = 4	size = 80
+	Variable "TOP-LEVEL:k"	offset = 84	size = 4
+
+
+Layout for memory area "main:*DYNAMIC*" of size 34:
+	Variable "main:0`pi"	offset = 10	size = 8
+	Variable "main:0`px"	offset = 18	size = 8
+	Variable "main:0`pc"	offset = 26	size = 8
+	Variable "main:0`__func__"	offset = 0	size = 5
+	Variable "main:0`__FUNCTION__"	offset = 5	size = 5
+
+
+Layout for memory area "main:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "main:*STATIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "malloc03!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module main
+

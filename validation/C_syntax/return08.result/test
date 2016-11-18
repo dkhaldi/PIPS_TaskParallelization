@@ -1,0 +1,7 @@
+
+Parsed printed file
+
+void * return08(int i, int j, int k)
+{
+   return i = j, k;
+}

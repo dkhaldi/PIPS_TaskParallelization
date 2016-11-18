@@ -1,0 +1,114 @@
+
+Proper effects
+
+void bar(int i, int x[10], int j, int y[10])
+{
+   int k, l;
+//             <    is read   >: i
+//             <    is written>: k
+
+   for(k = 0; k <= i-1; k += 1)
+//             <    is read   >: i
+//             <    is written>: x[i]
+      x[i] = 0;
+//             <    is read   >: j
+//             <    is written>: l
+   for(l = 0; l <= j-1; l += 1)
+//             <    is read   >: i j
+//             <    is written>: y[i]
+      y[i] = 0;
+}
+void call10(int i, int x[10], int j, int y[10])
+{
+   int k, l;
+//             <    is read   >: i
+//             <    is written>: k
+
+   for(k = 0; k <= i-1; k += 1)
+//             <    is read   >: i
+//             <    is written>: x[i]
+      x[i] = 0;
+//             <    is read   >: j
+//             <    is written>: l
+   for(l = 0; l <= j-1; l += 1)
+//             <    is read   >: i j
+//             <    is written>: y[i]
+      y[i] = 0;
+}
+int main()
+{
+   tf_t s;
+//             <    is written>: sp
+   tf_t *sp = &s;
+   int a[10];
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+
+   call10(s.one, s.two, sp->one, sp->two);
+//             <may be written>: a[*]
+   bar(10, a, 10, a);
+
+   return 0;
+}
+
+Proper effects with points-to
+
+void bar(int i, int x[10], int j, int y[10])
+{
+   int k, l;
+//             <    is read   >: i
+//             <    is written>: k
+
+   for(k = 0; k <= i-1; k += 1)
+//             <    is read   >: i
+//             <    is written>: x[i]
+      x[i] = 0;
+//             <    is read   >: j
+//             <    is written>: l
+   for(l = 0; l <= j-1; l += 1)
+//             <    is read   >: i j
+//             <    is written>: y[i]
+      y[i] = 0;
+}
+void call10(int i, int x[10], int j, int y[10])
+{
+   int k, l;
+//             <    is read   >: i
+//             <    is written>: k
+
+   for(k = 0; k <= i-1; k += 1)
+//             <    is read   >: i
+//             <    is written>: x[i]
+      x[i] = 0;
+//             <    is read   >: j
+//             <    is written>: l
+   for(l = 0; l <= j-1; l += 1)
+//             <    is read   >: i j
+//             <    is written>: y[i]
+      y[i] = 0;
+}
+int main()
+{
+   tf_t s;
+//             <    is written>: sp
+   tf_t *sp = &s;
+   int a[10];
+//             <may be written>: s.two[*]
+//             <    is read   >: s.one sp
+
+   call10(s.one, s.two, sp->one, sp->two);
+//             <may be written>: a[*]
+   bar(10, a, 10, a);
+
+   return 0;
+}
+
+Use-def chains
+
+
+ *********************** Use-Def Chains *********************
+
+	30 --> 33 with conflicts
+		from <sp-W-EXACT> to <sp-R-EXACT>
+
+****************** End of Dependence Graph ******************

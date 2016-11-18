@@ -1,0 +1,12 @@
+
+# test behavior fo pipsmake when resources are touched by user
+
+delete recursion03
+create recursion03 recursion03.f
+
+display PRINTED_FILE[%ALL]
+make CALLERS[%ALL]
+
+close
+delete recursion03
+quit

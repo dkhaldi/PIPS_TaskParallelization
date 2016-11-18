@@ -1,0 +1,50 @@
+
+Proper effects
+
+int main()
+{
+//             <    is written>: d1
+   int d1 = 10;
+//             <    is written>: d2
+   int d2 = 10;
+//             <    is read   >: d1 d2
+   int y[d1][d2];
+//             <may be written>: y[*][*]
+//             <    is read   >: d1 d2
+
+   call04(d1, d2, y);
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int d1 = 10;
+
+// Points To: none
+
+   int d2 = 10;
+
+// Points To: none
+
+   int y[d1][d2];
+
+// Points To: none
+
+
+   call04(d1, d2, y);
+
+// Points To: none
+
+   return 0;
+}

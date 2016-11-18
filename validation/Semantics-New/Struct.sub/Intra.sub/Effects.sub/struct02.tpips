@@ -1,0 +1,52 @@
+setenv WS=struct02
+delete $WS
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create $WS $WS.c
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+
+#setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty USER_EFFECTS_ON_STD_FILES FALSE
+setproperty CONSTANT_PATH_EFFECTS TRUE
+setproperty SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+setproperty SEMANTICS_FIX_POINT_OPERATOR "derivative"
+
+setproperty ALIASING_ACROSS_TYPES FALSE
+
+# Atention : just to analyse *p as scalar
+#setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+#setproperty POINTS_TO_STRICT_POINTRA_TYPES TRUE
+#activate PROPER_EFFECTS_WITH_POINTS_TO
+
+activate PRECONDITIONS_INTRA
+activate TRANSFORMERS_INTRA_FULL
+activate INTRAPROCEDURAL_SUMMARY_PRECONDITION
+#activate TRANSFORMERS_INTRA_FULL_WITH_POINTS_TO
+
+# prettyprint
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+echo
+echo Cumulated Effects
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[%ALLFUNC]
+
+echo
+echo Transformers
+echo
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[%ALLFUNC]
+
+echo
+echo Preconditions
+echo
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[%ALLFUNC]
+close
+delete $WS
+quit

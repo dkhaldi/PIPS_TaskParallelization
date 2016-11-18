@@ -1,0 +1,2777 @@
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_array.h,237
+typedef struct _gen_array_chunk_t * gen_array_t;gen_array_t24,760
+#define gen_array_undefined gen_array_undefined26,810
+#define gen_array_undefined_p(gen_array_undefined_p27,858
+#define GEN_ARRAY_FOREACH(GEN_ARRAY_FOREACH50,1706
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_hash.h,1199
+#define newgen_hash_includednewgen_hash_included24,761
+#define HASH_DEFAULT_SIZE HASH_DEFAULT_SIZE26,791
+typedef enum hash_key_type {hash_key_type31,990
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_string32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_int32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_pointer32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_chunk32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_private32,1019
+} hash_key_type;hash_key_type33,1083
+typedef struct __hash_table *hash_table;hash_table43,1474
+typedef _uint (* hash_rank_t)(const void *, size_t);hash_rank_t44,1515
+typedef int (* hash_equals_t)(const void *, const void *);hash_equals_t45,1568
+#define hash_table_undefined hash_table_undefined49,1668
+#define hash_table_undefined_p(hash_table_undefined_p50,1731
+#define HASH_UNDEFINED_VALUE HASH_UNDEFINED_VALUE56,2006
+#define hash_table_empty_p(hash_table_empty_p58,2067
+#define HASH_MAP(HASH_MAP60,2135
+#define HASH_FOREACH(HASH_FOREACH71,2752
+#define hash_put_or_update(hash_put_or_update80,3324
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_version.h,81
+#define NEWGEN_REV NEWGEN_REV1,0
+#define NEWGEN_MAKE_REV NEWGEN_MAKE_REV2,77
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_list.h,1549
+#define newgen_list_includednewgen_list_included27,829
+typedef struct cons {cons41,1105
+  gen_chunk car; /**< The data payload of a list element */car42,1127
+  struct cons *cdr ; /**< The pointer to the next element. It is NIL if none */cdr43,1187
+} cons;cons44,1267
+#define NIL NIL47,1312
+#define POP(POP59,1676
+#define ENDP(ENDP66,1828
+#define list_undefined list_undefined69,1893
+#define list_undefined_p(list_undefined_p75,2026
+#define CAR(CAR92,2624
+#define CDR(CDR111,3239
+#define REFCAR(REFCAR119,3426
+#define CONS(CONS150,4412
+#define FOREACH(FOREACH179,5318
+#define VOLATILE_FOREACH(VOLATILE_FOREACH186,5651
+#define MAPL(MAPL203,6341
+#define MAP(MAP226,7208
+#define gen_BOOL_cons gen_BOOL_cons239,7840
+#define gen_INT_cons gen_INT_cons243,7968
+#define gen_LIST_cons gen_LIST_cons250,8124
+#define gen_CONSP_cons gen_CONSP_cons257,8282
+#define gen_STRING_cons gen_STRING_cons261,8409
+typedef list (*gen_closure_func_t)(gen_chunk *, list);gen_closure_func_t334,11042
+typedef enum { gen_sweep_forward, gen_sweep_backward } gen_sweep_direction ;gen_sweep_forward364,12144
+typedef enum { gen_sweep_forward, gen_sweep_backward } gen_sweep_direction ;gen_sweep_backward364,12144
+typedef enum { gen_sweep_forward, gen_sweep_backward } gen_sweep_direction ;gen_sweep_direction364,12144
+typedef struct __gen_sweep_state * gen_sweep_state;gen_sweep_state365,12221
+#define gen_sweep_forward_init(gen_sweep_forward_init370,12427
+#define gen_sweep_backward_init(gen_sweep_backward_init371,12514
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_set.h,506
+#define SET_INCLUDEDSET_INCLUDED24,752
+typedef struct _set_chunk * set;set38,1007
+  set_string = hash_string ,set_string42,1107
+  set_int = hash_int,set_int43,1136
+  set_pointer = hash_pointer,set_pointer44,1158
+  set_private = hash_privateset_private45,1188
+} set_type ;set_type46,1217
+#define set_undefined set_undefined48,1231
+#define set_undefined_p(set_undefined_p49,1266
+#define set_equal(set_equal52,1348
+#define SET_MAP(SET_MAP54,1393
+#define SET_FOREACH(SET_FOREACH78,2241
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_assert.h,310
+#define _newgen_assert_message	_newgen_assert_message29,888
+#define _newgen_assert_message	_newgen_assert_message32,1002
+#undef assertassert36,1097
+#define assert(assert38,1125
+#define message_assert(message_assert39,1144
+#define assert(assert41,1182
+#define message_assert(message_assert47,1340
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_generic_function.h,381
+#define NEWGEN_GENERIC_FUNCTION_INCLUDEDNEWGEN_GENERIC_FUNCTION_INCLUDED24,785
+#define GENERIC_STATIC_OBJECT(GENERIC_STATIC_OBJECT28,925
+#define GENERIC_STATIC_STATUS(GENERIC_STATIC_STATUS49,1818
+#define GENERIC_FUNCTION(GENERIC_FUNCTION72,2917
+#define GENERIC_LOCAL_FUNCTION(GENERIC_LOCAL_FUNCTION96,4035
+#define GENERIC_GLOBAL_FUNCTION(GENERIC_GLOBAL_FUNCTION99,4125
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_auto_string.h,0
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_string_buffer.h,135
+#define STRING_BUFFER_INCLUDEDSTRING_BUFFER_INCLUDED25,812
+typedef struct __string_buffer_head * string_buffer;string_buffer27,844
+
+/home/dounia/MYPIPS/prod/newgen/include/genC.h,5374
+#define GENC_INCLUDEDGENC_INCLUDED24,747
+#define NEWGENNEWGEN25,769
+#define GEN_HEADER GEN_HEADER45,1145
+#define GEN_HEADER_SIZE GEN_HEADER_SIZE46,1168
+typedef union gen_chunk {gen_chunk58,1762
+  unit u;u59,1788
+  bool b;b60,1798
+  char c;c61,1808
+  _int i;i62,1818
+  float f;f63,1828
+  string s;s64,1839
+  void * e; /**< For externals (foreign objects) */e65,1851
+  struct cons * l; /**< A pointer to a list element */l66,1903
+  set t;t67,1958
+  hash_table h;h68,1967
+  union gen_chunk * p;p69,1983
+} gen_chunk, *gen_chunkp;gen_chunk70,2006
+} gen_chunk, *gen_chunkp;gen_chunkp70,2006
+typedef void *(gen_extract_func_t)(const gen_chunk);gen_extract_func_t72,2033
+#define gen_chunk_undefined gen_chunk_undefined74,2087
+#define gen_chunk_undefined_p(gen_chunk_undefined_p75,2136
+#define chunk_undefined chunk_undefined79,2213
+#define chunk_undefined_p(chunk_undefined_p80,2257
+#define UNIT(UNIT82,2312
+#define BOOL(BOOL83,2387
+#define CHAR(CHAR84,2411
+#define INT(INT85,2435
+#define FLOAT(FLOAT86,2458
+#define STRING(STRING87,2483
+#define CONSP(CONSP88,2509
+#define SETP(SETP89,2534
+#define CHUNK(CHUNK90,2558
+#define HASH(HASH91,2583
+#define CHUNKP(CHUNKP92,2607
+#define LIST(LIST93,2633
+#define SET(SET94,2657
+#define VOID_STAR(VOID_STAR95,2680
+#define UNIT_TYPE UNIT_TYPE99,2773
+#define BOOL_TYPE BOOL_TYPE100,2829
+#define CHAR_TYPE CHAR_TYPE101,2852
+#define INT_TYPE INT_TYPE102,2875
+#define FLOAT_TYPE FLOAT_TYPE103,2896
+#define STRING_TYPE STRING_TYPE104,2921
+#define VOID_STAR_TYPE VOID_STAR_TYPE105,2948
+#define bool_TYPE bool_TYPE107,2979
+#define char_TYPE char_TYPE108,3002
+#define int_TYPE int_TYPE109,3025
+#define float_TYPE float_TYPE110,3046
+#define string_TYPE string_TYPE111,3071
+#define BOOL_CAST(BOOL_CAST113,3099
+#define CHAR_CAST(CHAR_CAST114,3128
+#define INT_CAST(INT_CAST115,3157
+#define FLOAT_CAST(FLOAT_CAST116,3184
+#define STRING_CAST(STRING_CAST117,3215
+#define VOID_STAR_CAST(VOID_STAR_CAST118,3248
+#define bool_CAST(bool_CAST120,3288
+#define char_CAST(char_CAST121,3317
+#define int_CAST(int_CAST122,3346
+#define float_CAST(float_CAST123,3373
+#define string_CAST(string_CAST124,3404
+#define CONSP_TYPE CONSP_TYPE126,3438
+#define LIST_TYPE LIST_TYPE127,3462
+#define SETP_TYPE SETP_TYPE128,3485
+#define SET_TYPE SET_TYPE129,3507
+#define CHUNK_TYPE CHUNK_TYPE130,3528
+#define CHUNKP_TYPE CHUNKP_TYPE131,3558
+#define HASH_TYPE HASH_TYPE132,3589
+#define consp_TYPE consp_TYPE134,3619
+#define list_TYPE list_TYPE135,3643
+#define setp_TYPE setp_TYPE136,3666
+#define set_TYPE set_TYPE137,3688
+#define chunk_TYPE chunk_TYPE138,3709
+#define chunkp_TYPE chunkp_TYPE139,3739
+#define hash_TYPE hash_TYPE140,3770
+#define CONSP_CAST(CONSP_CAST142,3800
+#define LIST_CAST(LIST_CAST143,3830
+#define SETP_CAST(SETP_CAST144,3859
+#define SET_CAST(SET_CAST145,3887
+#define CHUNK_CAST(CHUNK_CAST146,3914
+#define CHUNKP_CAST(CHUNKP_CAST147,3945
+#define HASH_CAST(HASH_CAST148,3978
+#define consp_CAST(consp_CAST150,4014
+#define list_CAST(list_CAST151,4044
+#define setp_CAST(setp_CAST152,4073
+#define set_CAST(set_CAST153,4101
+#define chunk_CAST(chunk_CAST154,4128
+#define chunkp_CAST(chunkp_CAST155,4159
+#define hash_CAST(hash_CAST156,4192
+enum internal_type {internal_type161,4353
+  unit_domain = 0, /**< Should start at 1 to be able to iterate on them withunit_domain162,4374
+  bool_domain,bool_domain164,4486
+  char_domain,char_domain165,4501
+  int_domain,int_domain166,4516
+  intptr_t_domain = int_domain,intptr_t_domain167,4530
+  _int_domain = int_domain,_int_domain168,4562
+  float_domain,float_domain169,4590
+  string_domainstring_domain170,4606
+#define BOOL_NEWGEN_DOMAIN BOOL_NEWGEN_DOMAIN174,4653
+#define CHAR_NEWGEN_DOMAIN CHAR_NEWGEN_DOMAIN175,4694
+#define INT_NEWGEN_DOMAIN INT_NEWGEN_DOMAIN176,4735
+#define FLOAT_NEWGEN_DOMAIN FLOAT_NEWGEN_DOMAIN177,4774
+#define STRING_NEWGEN_DOMAIN STRING_NEWGEN_DOMAIN178,4817
+#define bool_NEWGEN_DOMAIN bool_NEWGEN_DOMAIN180,4863
+#define char_NEWGEN_DOMAIN char_NEWGEN_DOMAIN181,4904
+#define int_NEWGEN_DOMAIN int_NEWGEN_DOMAIN182,4945
+#define float_NEWGEN_DOMAIN float_NEWGEN_DOMAIN183,4984
+#define string_NEWGEN_DOMAIN string_NEWGEN_DOMAIN184,5027
+#define LIST_NEWGEN_DOMAIN LIST_NEWGEN_DOMAIN186,5073
+#define GEN_DBG_TRAV_LEAF GEN_DBG_TRAV_LEAF197,5325
+#define GEN_DBG_TRAV_SIMPLE GEN_DBG_TRAV_SIMPLE198,5353
+#define GEN_DBG_TRAV_OBJECT GEN_DBG_TRAV_OBJECT199,5383
+#define GEN_DBG_CHECK GEN_DBG_CHECK200,5413
+#define GEN_DBG_RECURSE GEN_DBG_RECURSE201,5437
+#define GEN_DBG_TRAV GEN_DBG_TRAV203,5465
+#define gen_get_ancestor_type(gen_get_ancestor_type270,8557
+#define gen_start_recurse_ancestor_tracking(gen_start_recurse_ancestor_tracking273,8671
+#define gen_stop_recurse_ancestor_tracking(gen_stop_recurse_ancestor_tracking274,8728
+#define gen_recurse(gen_recurse277,8851
+#define gen_context_recurse(gen_context_recurse279,8992
+#define MEMORY_INCLUDEDMEMORY_INCLUDED288,9309
+#define gen_equal(gen_equal291,9341
+#undef GEN_CHECKGEN_CHECK296,9485
+#define GEN_CHECK(GEN_CHECK297,9502
+#define GEN_CHECK_ALLOC GEN_CHECK_ALLOC298,9548
+#define GEN_CHECK(GEN_CHECK300,9580
+#define GEN_CHECK_ALLOC GEN_CHECK_ALLOC301,9607
+#define NEWGEN_CHECK_TYPE(NEWGEN_CHECK_TYPE307,9771
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_types.h,1787
+#define newgen_types_includednewgen_types_included24,763
+#undef stringstring37,952
+typedef char *string ;string39,973
+#define string_undefined string_undefined40,996
+#define string_undefined_p(string_undefined_p41,1035
+#define copy_string(copy_string42,1089
+typedef intptr_t _int;_int53,1465
+typedef uintptr_t _uint;_uint54,1488
+#define _intFMT _intFMT57,1575
+#define _uintFMT _uintFMT58,1599
+#define _int_undefined _int_undefined59,1628
+#define _int_undefined_p(_int_undefined_p60,1740
+#define BOOLEAN_INCLUDEDBOOLEAN_INCLUDED70,2045
+typedef int bool;bool78,2301
+#define false false80,2320
+#define true true81,2336
+#define bool_undefined bool_undefined84,2359
+#define bool_undefined_p(bool_undefined_p85,2471
+typedef int tag;tag92,2536
+#define tag_undefined tag_undefined93,2553
+typedef int unit ;unit97,2593
+#define UU UU98,2612
+#define UUINT(UUINT99,2634
+#define array_undefined array_undefined103,2678
+#define array_undefined_p(array_undefined_p104,2707
+typedef struct cons * list;list106,2749
+typedef bool (*gen_filter_func_t)(const void *);gen_filter_func_t109,2798
+typedef bool (*gen_filter2_func_t)(const void *, const void *);gen_filter2_func_t110,2847
+typedef string (*gen_string_func_t)(const void *);gen_string_func_t111,2911
+typedef int (*gen_cmp_func_t)(const void *, const void *);gen_cmp_func_t114,3087
+typedef bool (*gen_eq_func_t)(const void *, const void *);gen_eq_func_t115,3146
+typedef void (*gen_iter_func_t)(void *);gen_iter_func_t116,3205
+#define NEWGEN_MACRO_NAME_1(NEWGEN_MACRO_NAME_1123,3524
+#define NEWGEN_MACRO_NAME_2(NEWGEN_MACRO_NAME_2124,3575
+#define NGMID(NGMID126,3693
+#define GEN_PROTO(GEN_PROTO130,3790
+#define GEN_PROTO(GEN_PROTO133,3835
+#define GEN_PROTO(GEN_PROTO135,3864
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_generic_stack.h,154
+#define DEFINE_STACK(DEFINE_STACK27,817
+#define DEFINE_LOCAL_STACK(DEFINE_LOCAL_STACK98,3288
+#define DEFINE_GLOBAL_STACK(DEFINE_GLOBAL_STACK99,3360
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_stack.h,473
+#define STACK_INCLUDEDSTACK_INCLUDED43,1571
+typedef struct __stack_head *stack;stack47,1622
+typedef struct __stack_iterator *stack_iterator;stack_iterator48,1658
+#define STACK_NULL STACK_NULL52,1741
+#define STACK_NULL_P(STACK_NULL_P53,1775
+#define stack_undefined stack_undefined55,1818
+#define stack_undefined_p(stack_undefined_p56,1856
+#define STACK_CHECK(STACK_CHECK58,1909
+#define STACK_MAP_X(STACK_MAP_X104,3386
+#define STACK_MAP(STACK_MAP116,3767
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_generic_mapping.h,243
+#define GENERIC_MAPPING_INCLUDEDGENERIC_MAPPING_INCLUDED53,1850
+#define GENERIC_MAPPING(GENERIC_MAPPING72,2375
+#define GENERIC_CURRENT_MAPPING(GENERIC_CURRENT_MAPPING119,4602
+#define GENERIC_LOCAL_MAPPING(GENERIC_LOCAL_MAPPING126,4826
+
+/home/dounia/MYPIPS/prod/newgen/include/newgen_map.h,348
+#define newgen_map_includednewgen_map_included24,759
+#define HASH_GET(HASH_GET30,858
+#define HASH_BOUND_P(HASH_BOUND_P32,975
+#define HASH_UPDATE(HASH_UPDATE34,1104
+#define HASH_EXTEND(HASH_EXTEND36,1229
+#define HASH_DELETE(HASH_DELETE38,1347
+#define FUNCTION_MAP(FUNCTION_MAP42,1474
+#define FUNCTION_FOREACH(FUNCTION_FOREACH60,2614
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/stddef.in.h,99
+#   undef _GL_STDDEF_H_GL_STDDEF_H42,1645
+#   define _GL_STDDEF_WINT_T_GL_STDDEF_WINT_T43,1668
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/unistd.in.h,63
+# define _GL_WINSOCK2_H_WITNESS_GL_WINSOCK2_H_WITNESS35,1472
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/wchar.in.h,0
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/stdint.in.h,10925
+#define _GL_JUST_INCLUDE_SYSTEM_INTTYPES_H_GL_JUST_INCLUDE_SYSTEM_INTTYPES_H34,1281
+#  define __STDINT_H____STDINT_H__49,2023
+#define _GL_STDINT_H_GL_STDINT_H60,2468
+#undef _GL_JUST_INCLUDE_SYSTEM_INTTYPES_H_GL_JUST_INCLUDE_SYSTEM_INTTYPES_H93,3732
+#define _STDINT_MIN(_STDINT_MIN99,3947
+#define _STDINT_MAX(_STDINT_MAX102,4060
+#undef int8_tint8_t115,4593
+#undef uint8_tuint8_t116,4607
+typedef signed char gl_int8_t;gl_int8_t117,4622
+typedef unsigned char gl_uint8_t;gl_uint8_t118,4653
+#define int8_t int8_t119,4687
+#define uint8_t uint8_t120,4712
+#undef int16_tint16_t122,4740
+#undef uint16_tuint16_t123,4755
+typedef short int gl_int16_t;gl_int16_t124,4771
+typedef unsigned short int gl_uint16_t;gl_uint16_t125,4801
+#define int16_t int16_t126,4841
+#define uint16_t uint16_t127,4868
+#undef int32_tint32_t129,4898
+#undef uint32_tuint32_t130,4913
+typedef int gl_int32_t;gl_int32_t131,4929
+typedef unsigned int gl_uint32_t;gl_uint32_t132,4953
+#define int32_t int32_t133,4987
+#define uint32_t uint32_t134,5014
+# undef int64_tint64_t139,5208
+typedef long int gl_int64_t;gl_int64_t140,5224
+# define int64_t int64_t141,5253
+# define GL_INT64_TGL_INT64_T142,5281
+# undef int64_tint64_t144,5324
+typedef __int64 gl_int64_t;gl_int64_t145,5340
+# define int64_t int64_t146,5368
+# define GL_INT64_TGL_INT64_T147,5396
+# undef int64_tint64_t149,5443
+typedef long long int gl_int64_t;gl_int64_t150,5459
+# define int64_t int64_t151,5493
+# define GL_INT64_TGL_INT64_T152,5521
+# undef uint64_tuint64_t156,5585
+typedef unsigned long int gl_uint64_t;gl_uint64_t157,5602
+# define uint64_t uint64_t158,5641
+# define GL_UINT64_TGL_UINT64_T159,5671
+# undef uint64_tuint64_t161,5715
+typedef unsigned __int64 gl_uint64_t;gl_uint64_t162,5732
+# define uint64_t uint64_t163,5770
+# define GL_UINT64_TGL_UINT64_T164,5800
+# undef uint64_tuint64_t166,5857
+typedef unsigned long long int gl_uint64_t;gl_uint64_t167,5874
+# define uint64_t uint64_t168,5918
+# define GL_UINT64_TGL_UINT64_T169,5948
+#define _UINT8_T_UINT8_T173,6036
+#define _UINT32_T_UINT32_T174,6053
+#define _UINT64_T_UINT64_T175,6071
+#undef int_least8_tint_least8_t184,6332
+#undef uint_least8_tuint_least8_t185,6352
+#undef int_least16_tint_least16_t186,6373
+#undef uint_least16_tuint_least16_t187,6394
+#undef int_least32_tint_least32_t188,6416
+#undef uint_least32_tuint_least32_t189,6437
+#undef int_least64_tint_least64_t190,6459
+#undef uint_least64_tuint_least64_t191,6480
+#define int_least8_t int_least8_t192,6502
+#define uint_least8_t uint_least8_t193,6530
+#define int_least16_t int_least16_t194,6560
+#define uint_least16_t uint_least16_t195,6590
+#define int_least32_t int_least32_t196,6622
+#define uint_least32_t uint_least32_t197,6652
+# define int_least64_t int_least64_t199,6702
+# define uint_least64_t uint_least64_t202,6759
+#undef int_fast8_tint_fast8_t215,7257
+#undef uint_fast8_tuint_fast8_t216,7276
+#undef int_fast16_tint_fast16_t217,7296
+#undef uint_fast16_tuint_fast16_t218,7316
+#undef int_fast32_tint_fast32_t219,7337
+#undef uint_fast32_tuint_fast32_t220,7357
+#undef int_fast64_tint_fast64_t221,7378
+#undef uint_fast64_tuint_fast64_t222,7398
+typedef long int gl_int_fast8_t;gl_int_fast8_t223,7419
+typedef unsigned long int gl_uint_fast8_t;gl_uint_fast8_t224,7452
+typedef long int gl_int_fast16_t;gl_int_fast16_t225,7495
+typedef unsigned long int gl_uint_fast16_t;gl_uint_fast16_t226,7529
+typedef long int gl_int_fast32_t;gl_int_fast32_t227,7573
+typedef unsigned long int gl_uint_fast32_t;gl_uint_fast32_t228,7607
+#define int_fast8_t int_fast8_t229,7651
+#define uint_fast8_t uint_fast8_t230,7686
+#define int_fast16_t int_fast16_t231,7723
+#define uint_fast16_t uint_fast16_t232,7760
+#define int_fast32_t int_fast32_t233,7799
+#define uint_fast32_t uint_fast32_t234,7836
+# define int_fast64_t int_fast64_t236,7893
+# define uint_fast64_t uint_fast64_t239,7949
+#undef intptr_tintptr_t244,8055
+#undef uintptr_tuintptr_t245,8071
+typedef long int gl_intptr_t;gl_intptr_t246,8088
+typedef unsigned long int gl_uintptr_t;gl_uintptr_t247,8118
+#define intptr_t intptr_t248,8158
+#define uintptr_t uintptr_t249,8187
+#undef intmax_tintmax_t256,8370
+typedef long long int gl_intmax_t;gl_intmax_t258,8434
+# define intmax_t intmax_t259,8469
+# define intmax_t intmax_t261,8524
+typedef long int gl_intmax_t;gl_intmax_t263,8556
+# define intmax_t intmax_t264,8586
+#undef uintmax_tuintmax_t267,8624
+typedef unsigned long long int gl_uintmax_t;gl_uintmax_t269,8699
+# define uintmax_t uintmax_t270,8744
+# define uintmax_t uintmax_t272,8802
+typedef unsigned long int gl_uintmax_t;gl_uintmax_t274,8836
+# define uintmax_t uintmax_t275,8876
+typedef int _verify_intmax_size[2 * (sizeof (intmax_t) == sizeof (uintmax_t)) - 1];_verify_intmax_size281,9110
+#undef INT8_MININT8_MIN292,9480
+#undef INT8_MAXINT8_MAX293,9496
+#undef UINT8_MAXUINT8_MAX294,9512
+#define INT8_MIN INT8_MIN295,9529
+#define INT8_MAX INT8_MAX296,9560
+#define UINT8_MAX UINT8_MAX297,9582
+#undef INT16_MININT16_MIN299,9606
+#undef INT16_MAXINT16_MAX300,9623
+#undef UINT16_MAXUINT16_MAX301,9640
+#define INT16_MIN INT16_MIN302,9658
+#define INT16_MAX INT16_MAX303,9691
+#define UINT16_MAX UINT16_MAX304,9716
+#undef INT32_MININT32_MIN306,9743
+#undef INT32_MAXINT32_MAX307,9760
+#undef UINT32_MAXUINT32_MAX308,9777
+#define INT32_MIN INT32_MIN309,9795
+#define INT32_MAX INT32_MAX310,9828
+#define UINT32_MAX UINT32_MAX311,9858
+#undef INT64_MININT64_MIN313,9891
+#undef INT64_MAXINT64_MAX314,9908
+# define INT64_MIN INT64_MIN318,10085
+# define INT64_MAX INT64_MAX319,10128
+#undef UINT64_MAXUINT64_MAX322,10187
+# define UINT64_MAX UINT64_MAX324,10224
+#undef INT_LEAST8_MININT_LEAST8_MIN333,10537
+#undef INT_LEAST8_MAXINT_LEAST8_MAX334,10559
+#undef UINT_LEAST8_MAXUINT_LEAST8_MAX335,10581
+#define INT_LEAST8_MIN INT_LEAST8_MIN336,10604
+#define INT_LEAST8_MAX INT_LEAST8_MAX337,10637
+#define UINT_LEAST8_MAX UINT_LEAST8_MAX338,10670
+#undef INT_LEAST16_MININT_LEAST16_MIN340,10706
+#undef INT_LEAST16_MAXINT_LEAST16_MAX341,10729
+#undef UINT_LEAST16_MAXUINT_LEAST16_MAX342,10752
+#define INT_LEAST16_MIN INT_LEAST16_MIN343,10776
+#define INT_LEAST16_MAX INT_LEAST16_MAX344,10811
+#define UINT_LEAST16_MAX UINT_LEAST16_MAX345,10846
+#undef INT_LEAST32_MININT_LEAST32_MIN347,10884
+#undef INT_LEAST32_MAXINT_LEAST32_MAX348,10907
+#undef UINT_LEAST32_MAXUINT_LEAST32_MAX349,10930
+#define INT_LEAST32_MIN INT_LEAST32_MIN350,10954
+#define INT_LEAST32_MAX INT_LEAST32_MAX351,10989
+#define UINT_LEAST32_MAX UINT_LEAST32_MAX352,11024
+#undef INT_LEAST64_MININT_LEAST64_MIN354,11062
+#undef INT_LEAST64_MAXINT_LEAST64_MAX355,11085
+# define INT_LEAST64_MIN INT_LEAST64_MIN357,11126
+# define INT_LEAST64_MAX INT_LEAST64_MAX358,11162
+#undef UINT_LEAST64_MAXUINT_LEAST64_MAX361,11206
+# define UINT_LEAST64_MAX UINT_LEAST64_MAX363,11249
+#undef INT_FAST8_MININT_FAST8_MIN372,11547
+#undef INT_FAST8_MAXINT_FAST8_MAX373,11568
+#undef UINT_FAST8_MAXUINT_FAST8_MAX374,11589
+#define INT_FAST8_MIN INT_FAST8_MIN375,11611
+#define INT_FAST8_MAX INT_FAST8_MAX376,11643
+#define UINT_FAST8_MAX UINT_FAST8_MAX377,11675
+#undef INT_FAST16_MININT_FAST16_MIN379,11710
+#undef INT_FAST16_MAXINT_FAST16_MAX380,11732
+#undef UINT_FAST16_MAXUINT_FAST16_MAX381,11754
+#define INT_FAST16_MIN INT_FAST16_MIN382,11777
+#define INT_FAST16_MAX INT_FAST16_MAX383,11810
+#define UINT_FAST16_MAX UINT_FAST16_MAX384,11843
+#undef INT_FAST32_MININT_FAST32_MIN386,11879
+#undef INT_FAST32_MAXINT_FAST32_MAX387,11901
+#undef UINT_FAST32_MAXUINT_FAST32_MAX388,11923
+#define INT_FAST32_MIN INT_FAST32_MIN389,11946
+#define INT_FAST32_MAX INT_FAST32_MAX390,11979
+#define UINT_FAST32_MAX UINT_FAST32_MAX391,12012
+#undef INT_FAST64_MININT_FAST64_MIN393,12048
+#undef INT_FAST64_MAXINT_FAST64_MAX394,12070
+# define INT_FAST64_MIN INT_FAST64_MIN396,12110
+# define INT_FAST64_MAX INT_FAST64_MAX397,12145
+#undef UINT_FAST64_MAXUINT_FAST64_MAX400,12188
+# define UINT_FAST64_MAX UINT_FAST64_MAX402,12230
+#undef INTPTR_MININTPTR_MIN407,12351
+#undef INTPTR_MAXINTPTR_MAX408,12369
+#undef UINTPTR_MAXUINTPTR_MAX409,12387
+#define INTPTR_MIN INTPTR_MIN410,12406
+#define INTPTR_MAX INTPTR_MAX411,12435
+#define UINTPTR_MAX UINTPTR_MAX412,12464
+#undef INTMAX_MININTMAX_MIN416,12552
+#undef INTMAX_MAXINTMAX_MAX417,12570
+# define INTMAX_MIN INTMAX_MIN419,12605
+# define INTMAX_MAX INTMAX_MAX420,12636
+# define INTMAX_MIN INTMAX_MIN422,12673
+# define INTMAX_MAX INTMAX_MAX423,12704
+#undef UINTMAX_MAXUINTMAX_MAX426,12743
+# define UINTMAX_MAX UINTMAX_MAX428,12780
+# define UINTMAX_MAX UINTMAX_MAX430,12819
+#undef PTRDIFF_MINPTRDIFF_MIN436,12928
+#undef PTRDIFF_MAXPTRDIFF_MAX437,12947
+#  define PTRDIFF_MIN PTRDIFF_MIN440,13008
+#  define PTRDIFF_MAX PTRDIFF_MAX441,13055
+#  define PTRDIFF_MIN PTRDIFF_MIN443,13109
+#  define PTRDIFF_MAX PTRDIFF_MAX444,13155
+# define PTRDIFF_MIN PTRDIFF_MIN447,13215
+# define PTRDIFF_MAX PTRDIFF_MAX449,13303
+#undef SIG_ATOMIC_MINSIG_ATOMIC_MIN454,13425
+#undef SIG_ATOMIC_MAXSIG_ATOMIC_MAX455,13447
+#define SIG_ATOMIC_MIN SIG_ATOMIC_MIN456,13469
+#define SIG_ATOMIC_MAX SIG_ATOMIC_MAX459,13607
+#undef SIZE_MAXSIZE_MAX465,13766
+#  define SIZE_MAX SIZE_MAX468,13824
+#  define SIZE_MAX SIZE_MAX470,13876
+# define SIZE_MAX SIZE_MAX473,13935
+# define _GL_JUST_INCLUDE_SYSTEM_WCHAR_H_GL_JUST_INCLUDE_SYSTEM_WCHAR_H482,14354
+# undef _GL_JUST_INCLUDE_SYSTEM_WCHAR_H_GL_JUST_INCLUDE_SYSTEM_WCHAR_H484,14415
+#undef WCHAR_MINWCHAR_MIN486,14462
+#undef WCHAR_MAXWCHAR_MAX487,14479
+#define WCHAR_MIN WCHAR_MIN488,14496
+#define WCHAR_MAX WCHAR_MAX490,14596
+#undef WINT_MINWINT_MIN494,14717
+#undef WINT_MAXWINT_MAX495,14733
+#define WINT_MIN WINT_MIN496,14749
+#define WINT_MAX WINT_MAX498,14845
+#undef INT8_CINT8_C513,15364
+#undef UINT8_CUINT8_C514,15378
+#define INT8_C(INT8_C515,15393
+#define UINT8_C(UINT8_C516,15413
+#undef INT16_CINT16_C518,15435
+#undef UINT16_CUINT16_C519,15450
+#define INT16_C(INT16_C520,15466
+#define UINT16_C(UINT16_C521,15487
+#undef INT32_CINT32_C523,15510
+#undef UINT32_CUINT32_C524,15525
+#define INT32_C(INT32_C525,15541
+#define UINT32_C(UINT32_C526,15562
+#undef INT64_CINT64_C528,15590
+#undef UINT64_CUINT64_C529,15605
+# define INT64_C(INT64_C531,15651
+# define INT64_C(INT64_C533,15699
+# define INT64_C(INT64_C535,15753
+# define UINT64_C(UINT64_C538,15822
+# define UINT64_C(UINT64_C540,15872
+# define UINT64_C(UINT64_C542,15937
+#undef INTMAX_CINTMAX_C547,16034
+# define INTMAX_C(INTMAX_C549,16098
+# define INTMAX_C(INTMAX_C551,16152
+# define INTMAX_C(INTMAX_C553,16192
+#undef UINTMAX_CUINTMAX_C556,16228
+# define UINTMAX_C(UINTMAX_C558,16303
+# define UINTMAX_C(UINTMAX_C560,16359
+# define UINTMAX_C(UINTMAX_C562,16400
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/stdlib.in.h,0
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/aux/arg-nonnull.h,102
+#  define _GL_ARG_NONNULL(_GL_ARG_NONNULL22,1097
+#  define _GL_ARG_NONNULL(_GL_ARG_NONNULL24,1175
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/aux/warn-on-use.h,331
+#  define _GL_WARN_ON_USE(_GL_WARN_ON_USE68,3470
+#  define _GL_WARN_ON_USE(_GL_WARN_ON_USE72,3623
+#  define _GL_WARN_ON_USE_CXX(_GL_WARN_ON_USE_CXX85,4175
+#  define _GL_WARN_ON_USE_CXX(_GL_WARN_ON_USE_CXX89,4375
+#  define _GL_WARN_EXTERN_C _GL_WARN_EXTERN_C98,4642
+#  define _GL_WARN_EXTERN_C _GL_WARN_EXTERN_C100,4688
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/aux/cPPdefs.h,1403
+#define _GL_CXXDEFS_H_GL_CXXDEFS_H18,777
+# define _GL_EXTERN_C _GL_EXTERN_C82,2673
+# define _GL_EXTERN_C _GL_EXTERN_C84,2712
+#define _GL_FUNCDECL_RPL(_GL_FUNCDECL_RPL94,3096
+#define _GL_FUNCDECL_RPL_1(_GL_FUNCDECL_RPL_196,3233
+#define _GL_FUNCDECL_SYS(_GL_FUNCDECL_SYS106,3705
+#define _GL_CXXALIAS_RPL(_GL_CXXALIAS_RPL115,4084
+# define _GL_CXXALIAS_RPL_1(_GL_CXXALIAS_RPL_1118,4249
+# define _GL_CXXALIAS_RPL_1(_GL_CXXALIAS_RPL_1125,4615
+# define _GL_CXXALIAS_RPL_CAST_1(_GL_CXXALIAS_RPL_CAST_1135,5093
+# define _GL_CXXALIAS_RPL_CAST_1(_GL_CXXALIAS_RPL_CAST_1143,5553
+# define _GL_CXXALIAS_SYS(_GL_CXXALIAS_SYS161,6379
+# define _GL_CXXALIAS_SYS(_GL_CXXALIAS_SYS168,6690
+# define _GL_CXXALIAS_SYS_CAST(_GL_CXXALIAS_SYS_CAST178,7128
+# define _GL_CXXALIAS_SYS_CAST(_GL_CXXALIAS_SYS_CAST186,7522
+# define _GL_CXXALIAS_SYS_CAST2(_GL_CXXALIAS_SYS_CAST2202,8425
+# define _GL_CXXALIAS_SYS_CAST2(_GL_CXXALIAS_SYS_CAST2211,9031
+# define _GL_CXXALIASWARN(_GL_CXXALIASWARN220,9399
+# define _GL_CXXALIASWARN_1(_GL_CXXALIASWARN_1222,9480
+# define _GL_CXXALIASWARN_2(_GL_CXXALIASWARN_2224,9566
+# define _GL_CXXALIASWARN(_GL_CXXALIASWARN229,9787
+# define _GL_CXXALIASWARN1(_GL_CXXALIASWARN1237,10124
+# define _GL_CXXALIASWARN1_1(_GL_CXXALIASWARN1_1240,10303
+# define _GL_CXXALIASWARN1_2(_GL_CXXALIASWARN1_2242,10461
+# define _GL_CXXALIASWARN1(_GL_CXXALIASWARN1247,10765
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/strdup.c,140
+#undef __strdup__strdup29,976
+# undef strdupstrdup31,1005
+# define __strdup __strdup35,1047
+__strdup (const char *s)__strdup40,1147
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/string.in.h,2911
+#define _GL_STRING_H_GL_STRING_H29,991
+#  define __attribute__(__attribute__42,1326
+#  define __pure__ __pure__46,1489
+#   define memchr memchr62,1887
+_GL_CXXALIASWARN (memchr);memchr87,3123
+#   define memmem memmem100,3538
+_GL_CXXALIASWARN (memmem);memmem120,4423
+# undef memmemmemmem122,4482
+_GL_CXXALIASWARN (mempcpy);mempcpy142,5191
+# undef mempcpymempcpy144,5251
+_GL_CXXALIASWARN (memrchr);memrchr169,6377
+# undef memrchrmemrchr172,6445
+_GL_CXXALIASWARN (rawmemchr);rawmemchr199,7665
+# undef rawmemchrrawmemchr202,7735
+_GL_CXXALIASWARN (stpcpy);stpcpy218,8300
+# undef stpcpystpcpy220,8359
+#   define stpncpy stpncpy232,8746
+_GL_CXXALIASWARN (stpncpy);stpncpy252,9467
+# undef stpncpystpncpy254,9527
+# undef strchrstrchr264,9867
+_GL_CXXALIASWARN (strchrnul);strchrnul289,11080
+# undef strchrnulstrchrnul292,11150
+#   undef strdupstrdup303,11494
+#   define strdup strdup304,11511
+_GL_CXXALIASWARN (strdup);strdup314,11879
+# undef strdupstrdup316,11938
+#   undef strncatstrncat327,12269
+#   define strncat strncat328,12287
+_GL_CXXALIASWARN (strncat);strncat336,12633
+# undef strncatstrncat338,12693
+#   undef strndupstrndup349,13036
+#   define strndup strndup350,13054
+_GL_CXXALIASWARN (strndup);strndup362,13548
+# undef strndupstrndup364,13608
+_GL_CXXALIASWARN (strnlen);strnlen381,14268
+# undef strnlenstrnlen383,14328
+# undef strcspnstrcspn395,14777
+_GL_CXXALIASWARN (strpbrk);strpbrk421,16048
+#  undef strpbrkstrpbrk428,16359
+# undef strpbrkstrpbrk434,16611
+# undef strspnstrspn444,16965
+# undef strrchrstrrchr454,17387
+_GL_CXXALIASWARN (strsep);strsep485,18685
+#  undef strsepstrsep487,18743
+# undef strsepstrsep493,18991
+#   define strstr strstr503,19260
+_GL_CXXALIASWARN (strstr);strstr523,20294
+# undef strstrstrstr530,20589
+#   define strcasestr strcasestr544,21164
+_GL_CXXALIASWARN (strcasestr);strcasestr570,22426
+# undef strcasestrstrcasestr576,22636
+#   undef strtok_rstrtok_r611,24027
+#   define strtok_r strtok_r612,24046
+#   undef strtok_rstrtok_r623,24489
+_GL_CXXALIASWARN (strtok_r);strtok_r635,24902
+# undef strtok_rstrtok_r642,25200
+#  undef mbslenmbslen657,25724
+#   define mbslen mbslen661,25882
+_GL_CXXALIASWARN (mbslen);mbslen669,26207
+#   define mbschr mbschr686,26839
+_GL_CXXALIASWARN (mbschr);mbschr696,27302
+#   define mbsrchr mbsrchr706,27694
+_GL_CXXALIASWARN (mbsrchr);mbsrchr716,28165
+#   define mbspbrk mbspbrk794,31724
+_GL_CXXALIASWARN (mbspbrk);mbspbrk804,32253
+#   undef strerrorstrerror861,34486
+#   define strerror strerror862,34505
+_GL_CXXALIASWARN (strerror);strerror869,34694
+# undef strerrorstrerror871,34755
+#   define strsignal strsignal880,35060
+_GL_CXXALIASWARN (strsignal);strsignal892,35459
+# undef strsignalstrsignal894,35521
+_GL_CXXALIASWARN (strverscmp);strverscmp907,35954
+# undef strverscmpstrverscmp909,36017
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/malloc.c,148
+# define NEED_MALLOC_GNUNEED_MALLOC_GNU24,990
+# undef mallocmalloc25,1015
+#undef mallocmalloc34,1140
+rpl_malloc (size_t n)rpl_malloc40,1262
+
+/home/dounia/MYPIPS/prod/newgen/src/gnulib/dummy.c,78
+int gl_dummy_symbol;gl_dummy_symbol37,1558
+typedef int dummy;dummy41,1683
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_array.h,237
+typedef struct _gen_array_chunk_t * gen_array_t;gen_array_t24,760
+#define gen_array_undefined gen_array_undefined26,810
+#define gen_array_undefined_p(gen_array_undefined_p27,858
+#define GEN_ARRAY_FOREACH(GEN_ARRAY_FOREACH50,1706
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_hash.h,1199
+#define newgen_hash_includednewgen_hash_included24,761
+#define HASH_DEFAULT_SIZE HASH_DEFAULT_SIZE26,791
+typedef enum hash_key_type {hash_key_type31,990
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_string32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_int32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_pointer32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_chunk32,1019
+  hash_string, hash_int, hash_pointer, hash_chunk, hash_privatehash_private32,1019
+} hash_key_type;hash_key_type33,1083
+typedef struct __hash_table *hash_table;hash_table43,1474
+typedef _uint (* hash_rank_t)(const void *, size_t);hash_rank_t44,1515
+typedef int (* hash_equals_t)(const void *, const void *);hash_equals_t45,1568
+#define hash_table_undefined hash_table_undefined49,1668
+#define hash_table_undefined_p(hash_table_undefined_p50,1731
+#define HASH_UNDEFINED_VALUE HASH_UNDEFINED_VALUE56,2006
+#define hash_table_empty_p(hash_table_empty_p58,2067
+#define HASH_MAP(HASH_MAP60,2135
+#define HASH_FOREACH(HASH_FOREACH71,2752
+#define hash_put_or_update(hash_put_or_update80,3324
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genread.h,2423
+# define GENREAD_Y_TAB_HGENREAD_Y_TAB_H34,1556
+# define YYDEBUG YYDEBUG37,1621
+# define YYTOKENTYPEYYTOKENTYPE45,1728
+   enum yytokentype {yytokentype48,1852
+     CHUNK_BEGIN = 258,CHUNK_BEGIN49,1874
+     VECTOR_BEGIN = 259,VECTOR_BEGIN50,1898
+     ARROW_BEGIN = 260,ARROW_BEGIN51,1923
+     READ_BOOL = 261,READ_BOOL52,1947
+     TABULATED_BEGIN = 262,TABULATED_BEGIN53,1969
+     LP = 263,LP54,1997
+     RP = 264,RP55,2012
+     LC = 265,LC56,2027
+     RC = 266,RC57,2042
+     LB = 267,LB58,2057
+     SHARED_POINTER = 268,SHARED_POINTER59,2072
+     READ_EXTERNAL = 269,READ_EXTERNAL60,2099
+     READ_DEF = 270,READ_DEF61,2125
+     READ_REF = 271,READ_REF62,2146
+     READ_NULL = 272,READ_NULL63,2167
+     READ_LIST_UNDEFINED = 273,READ_LIST_UNDEFINED64,2189
+     READ_SET_UNDEFINED = 274,READ_SET_UNDEFINED65,2221
+     READ_ARRAY_UNDEFINED = 275,READ_ARRAY_UNDEFINED66,2252
+     READ_STRING = 276,READ_STRING67,2285
+     READ_UNIT = 277,READ_UNIT68,2309
+     READ_CHAR = 278,READ_CHAR69,2331
+     READ_INT = 279,READ_INT70,2353
+     READ_FLOAT = 280READ_FLOAT71,2374
+#define CHUNK_BEGIN CHUNK_BEGIN75,2424
+#define VECTOR_BEGIN VECTOR_BEGIN76,2448
+#define ARROW_BEGIN ARROW_BEGIN77,2473
+#define READ_BOOL READ_BOOL78,2497
+#define TABULATED_BEGIN TABULATED_BEGIN79,2519
+#define LP LP80,2547
+#define RP RP81,2562
+#define LC LC82,2577
+#define RC RC83,2592
+#define LB LB84,2607
+#define SHARED_POINTER SHARED_POINTER85,2622
+#define READ_EXTERNAL READ_EXTERNAL86,2649
+#define READ_DEF READ_DEF87,2675
+#define READ_REF READ_REF88,2696
+#define READ_NULL READ_NULL89,2717
+#define READ_LIST_UNDEFINED READ_LIST_UNDEFINED90,2739
+#define READ_SET_UNDEFINED READ_SET_UNDEFINED91,2771
+#define READ_ARRAY_UNDEFINED READ_ARRAY_UNDEFINED92,2802
+#define READ_STRING READ_STRING93,2835
+#define READ_UNIT READ_UNIT94,2859
+#define READ_CHAR READ_CHAR95,2881
+#define READ_INT READ_INT96,2903
+#define READ_FLOAT READ_FLOAT97,2924
+typedef union YYSTYPEYYSTYPE102,3005
+  gen_chunk chunk ;chunk107,3076
+  gen_chunk *chunkp ;chunkp108,3096
+  cons *consp ;consp109,3118
+  intptr_t val ;val110,3134
+  char * s;s111,3151
+  double d;d112,3163
+  char c;c113,3175
+} YYSTYPE;YYSTYPE118,3234
+# define YYSTYPE_IS_TRIVIAL YYSTYPE_IS_TRIVIAL119,3245
+# define yystype yystype120,3275
+# define YYSTYPE_IS_DECLARED YYSTYPE_IS_DECLARED121,3337
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_include.h,3323
+enum type_of_domain {type_of_domain28,809
+  UNDEF_DT = 0,UNDEF_DT29,831
+  EXTERNAL_DT = 1,EXTERNAL_DT30,847
+  BASIS_DT = 2,BASIS_DT31,866
+  LIST_DT = 3,LIST_DT32,882
+  ARRAY_DT = 4,ARRAY_DT33,897
+  CONSTRUCTED_DT = 5,CONSTRUCTED_DT34,913
+  IMPORT_DT = 6,IMPORT_DT35,935
+  SET_DT = 7SET_DT36,952
+enum domain_operator {domain_operator41,1010
+  UNDEF_OP = 0,UNDEF_OP42,1033
+  AND_OP = 1,AND_OP43,1049
+  OR_OP = 2,OR_OP44,1063
+  ARROW_OP = 3ARROW_OP45,1076
+#define UNIT_TYPE_NAME UNIT_TYPE_NAME51,1223
+#define DEFLIST(DEFLIST55,1285
+typedef struct _gtp * gen_tabulated_p;gen_tabulated_p66,1535
+struct gen_binding {gen_binding70,1609
+  char * name;name71,1630
+  int compiled;compiled72,1645
+  size_t size; /* number of chunks to hold this data. */size73,1661
+  gen_tabulated_p tabulated;tabulated74,1718
+  union domain *domain ;domain75,1747
+  struct inlinable *inlined ;inlined76,1772
+union domain {domain99,2459
+    int type ;type101,2500
+    void* (*read)(FILE*, int(*)(void)) ;read102,2515
+    void (*write)(FILE*, void*) ;write103,2556
+    void (*free)(void*) ;free104,2590
+    void* (*copy)(void*) ;copy105,2616
+    int (*allocated_memory)(void*);allocated_memory106,2643
+  } ex ;ex107,2679
+    enum type_of_domain type;type109,2711
+    char *constructor ;constructor110,2741
+    int persistant ;persistant111,2765
+    struct gen_binding *constructand ;constructand112,2786
+  } ba ;ba113,2825
+    int type ;type115,2856
+    char *constructor ;constructor116,2871
+    int persistant ;persistant117,2895
+    struct gen_binding *element ;element118,2916
+  } li ;li119,2950
+    int type ;type121,2980
+    char *constructor ;constructor122,2995
+    int persistant ;persistant123,3019
+    struct gen_binding *element ;element124,3040
+    set_type what ;what125,3074
+  } se ;se126,3094
+    int type;type128,3126
+    char *constructor;constructor129,3140
+    int persistant;persistant130,3163
+    struct gen_binding * element;element131,3183
+    struct intlist * dimensions;dimensions132,3217
+  } ar ;ar133,3250
+    int type ;type135,3288
+    enum domain_operator op ;op136,3303
+    int first ;first137,3333
+    struct domainlist *components ;components138,3349
+  } co ;co139,3385
+    int type ;type141,3457
+    char *filename ;filename142,3472
+  } im ;im143,3493
+#define MAX_DOMAIN MAX_DOMAIN147,3578
+#define IS_INLINABLE(IS_INLINABLE154,3736
+#define IS_EXTERNAL(IS_EXTERNAL155,3785
+#define IS_TABULATED(IS_TABULATED156,3848
+#define IS_IMPORT(IS_IMPORT157,3897
+#define IS_NORMAL(IS_NORMAL158,3956
+#define NEW_BINDING NEW_BINDING170,4416
+#define OLD_BINDING OLD_BINDING171,4438
+#define HASH_OFFSET HASH_OFFSET196,5227
+#define same_string_p(same_string_p198,5250
+#define IS_UNIT_TYPE(IS_UNIT_TYPE200,5307
+#define IS_BOOL_TYPE(IS_BOOL_TYPE201,5351
+#define IS_CHAR_TYPE(IS_CHAR_TYPE202,5395
+#define IS_INT_TYPE(IS_INT_TYPE203,5439
+#define IS_FLOAT_TYPE(IS_FLOAT_TYPE204,5481
+#define IS_STRING_TYPE(IS_STRING_TYPE205,5526
+#define check_domain(check_domain212,5644
+#define check_read_spec_performed(check_read_spec_performed216,5752
+#define NEWGEN_FREED NEWGEN_FREED220,5875
+#define newgen_free(newgen_free222,5911
+#define quick_domain_index(quick_domain_index226,6066
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_version.h,81
+#define NEWGEN_REV NEWGEN_REV1,0
+#define NEWGEN_MAKE_REV NEWGEN_MAKE_REV2,77
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genspec/genspec_lex.l,0
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genspec/genspec.y,305
+Imports : Imports GRAM_IMPORT Name FROM File SEMI_COLUMN {Imports121,2669
+File	: GRAM_FILE {File134,2932
+Domain	: Simple Constructed {Domain156,3263
+Simple	: Persistant Basis {Simple214,4854
+Basis   : Name {Basis251,5843
+Int     : GRAM_INT   {$$ = $1;}Int325,7518
+Name	: IDENT	{Name328,7561
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_list.h,1549
+#define newgen_list_includednewgen_list_included27,829
+typedef struct cons {cons41,1105
+  gen_chunk car; /**< The data payload of a list element */car42,1127
+  struct cons *cdr ; /**< The pointer to the next element. It is NIL if none */cdr43,1187
+} cons;cons44,1267
+#define NIL NIL47,1312
+#define POP(POP59,1676
+#define ENDP(ENDP66,1828
+#define list_undefined list_undefined69,1893
+#define list_undefined_p(list_undefined_p75,2026
+#define CAR(CAR92,2624
+#define CDR(CDR111,3239
+#define REFCAR(REFCAR119,3426
+#define CONS(CONS150,4412
+#define FOREACH(FOREACH179,5318
+#define VOLATILE_FOREACH(VOLATILE_FOREACH186,5651
+#define MAPL(MAPL203,6341
+#define MAP(MAP226,7208
+#define gen_BOOL_cons gen_BOOL_cons239,7840
+#define gen_INT_cons gen_INT_cons243,7968
+#define gen_LIST_cons gen_LIST_cons250,8124
+#define gen_CONSP_cons gen_CONSP_cons257,8282
+#define gen_STRING_cons gen_STRING_cons261,8409
+typedef list (*gen_closure_func_t)(gen_chunk *, list);gen_closure_func_t334,11042
+typedef enum { gen_sweep_forward, gen_sweep_backward } gen_sweep_direction ;gen_sweep_forward364,12144
+typedef enum { gen_sweep_forward, gen_sweep_backward } gen_sweep_direction ;gen_sweep_backward364,12144
+typedef enum { gen_sweep_forward, gen_sweep_backward } gen_sweep_direction ;gen_sweep_direction364,12144
+typedef struct __gen_sweep_state * gen_sweep_state;gen_sweep_state365,12221
+#define gen_sweep_forward_init(gen_sweep_forward_init370,12427
+#define gen_sweep_backward_init(gen_sweep_backward_init371,12514
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/read.l,0
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genspec.h,1916
+# define GENSPEC_Y_TAB_HGENSPEC_Y_TAB_H34,1556
+# define YYDEBUG YYDEBUG37,1621
+# define YYTOKENTYPEYYTOKENTYPE45,1728
+   enum yytokentype {yytokentype48,1852
+     COMMA = 258,COMMA49,1874
+     COLUMN = 259,COLUMN50,1892
+     SEMI_COLUMN = 260,SEMI_COLUMN51,1911
+     AND = 261,AND52,1935
+     OR = 262,OR53,1951
+     ARROW = 263,ARROW54,1966
+     STAR = 264,STAR55,1984
+     LB = 265,LB56,2001
+     RB = 266,RB57,2016
+     LR = 267,LR58,2031
+     RR = 268,RR59,2046
+     EQUAL = 269,EQUAL60,2061
+     FROM = 270,FROM61,2079
+     GRAM_EXTERNAL = 271,GRAM_EXTERNAL62,2096
+     GRAM_IMPORT = 272,GRAM_IMPORT63,2122
+     TABULATED = 273,TABULATED64,2146
+     PERSISTANT = 274,PERSISTANT65,2168
+     IDENT = 275,IDENT66,2191
+     GRAM_FILE = 276,GRAM_FILE67,2209
+     GRAM_INT = 277GRAM_INT68,2231
+#define COMMA COMMA72,2279
+#define COLUMN COLUMN73,2297
+#define SEMI_COLUMN SEMI_COLUMN74,2316
+#define AND AND75,2340
+#define OR OR76,2356
+#define ARROW ARROW77,2371
+#define STAR STAR78,2389
+#define LB LB79,2406
+#define RB RB80,2421
+#define LR LR81,2436
+#define RR RR82,2451
+#define EQUAL EQUAL83,2466
+#define FROM FROM84,2484
+#define GRAM_EXTERNAL GRAM_EXTERNAL85,2501
+#define GRAM_IMPORT GRAM_IMPORT86,2527
+#define TABULATED TABULATED87,2551
+#define PERSISTANT PERSISTANT88,2573
+#define IDENT IDENT89,2596
+#define GRAM_FILE GRAM_FILE90,2614
+#define GRAM_INT GRAM_INT91,2636
+typedef union YYSTYPEYYSTYPE96,2715
+  union domain *domain ;domain101,2785
+  struct domainlist *domainlist ;domainlist102,2810
+  struct namelist *namelist ;namelist103,2844
+  struct intlist *intlist ;intlist104,2874
+  char *name ;name105,2902
+  int val ;val106,2917
+} YYSTYPE;YYSTYPE111,2978
+# define YYSTYPE_IS_TRIVIAL YYSTYPE_IS_TRIVIAL112,2989
+# define yystype yystype113,3019
+# define YYSTYPE_IS_DECLARED YYSTYPE_IS_DECLARED114,3081
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_set.h,506
+#define SET_INCLUDEDSET_INCLUDED24,752
+typedef struct _set_chunk * set;set38,1007
+  set_string = hash_string ,set_string42,1107
+  set_int = hash_int,set_int43,1136
+  set_pointer = hash_pointer,set_pointer44,1158
+  set_private = hash_privateset_private45,1188
+} set_type ;set_type46,1217
+#define set_undefined set_undefined48,1231
+#define set_undefined_p(set_undefined_p49,1266
+#define set_equal(set_equal52,1348
+#define SET_MAP(SET_MAP54,1393
+#define SET_FOREACH(SET_FOREACH78,2241
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_assert.h,310
+#define _newgen_assert_message	_newgen_assert_message29,888
+#define _newgen_assert_message	_newgen_assert_message32,1002
+#undef assertassert36,1097
+#define assert(assert38,1125
+#define message_assert(message_assert39,1144
+#define assert(assert41,1182
+#define message_assert(message_assert47,1340
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genSML.c,1015
+#undef GEN_HEADERGEN_HEADER32,884
+#define GEN_HEADER GEN_HEADER34,959
+#define IS_NON_INLINABLE_BASIS(IS_NON_INLINABLE_BASIS36,981
+#define UPPER(UPPER37,1038
+#define TYPE(TYPE38,1092
+#define OR_TAG_OFFSET OR_TAG_OFFSET40,1152
+static char start[ 1024 ] ;start42,1177
+int Read_spec_mode ;Read_spec_mode44,1206
+struct gen_binding *Tabulated_bp ;Tabulated_bp46,1228
+gen_size( bp )gen_size52,1365
+primitive_field( dp )primitive_field84,2105
+gen_member( name, dp, offset)gen_member122,2934
+gen_arg( dp )gen_arg141,3405
+gen_args( dlp )gen_args156,3866
+gen_update_arg( dp, index  )gen_update_arg170,4176
+gen_update_args( dlp )gen_update_args185,4503
+gen_make( bp, size, args, updated_args, option_name )gen_make202,4967
+gen_and( bp )gen_and230,5789
+gen_or( bp )gen_or252,6370
+gen_list( bp )gen_list289,7430
+gen_set( bp )gen_set305,7861
+gen_array( bp )gen_array314,8037
+gen_external( bp )gen_external332,8570
+gen_domain( bp )gen_domain342,8794
+gencode( file )gencode392,9938
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/hash.c,5604
+#define HASH_ENTRY_FREE HASH_ENTRY_FREE52,1418
+#define HASH_ENTRY_FREE_FOR_PUT HASH_ENTRY_FREE_FOR_PUT53,1455
+  void * key;key56,1519
+  void * val;val57,1533
+} hash_entry;hash_entry58,1547
+typedef void * (*hash_key_func_t)(const void *);hash_key_func_t60,1562
+typedef void (*hash_free_func_t)(void *);hash_free_func_t61,1611
+struct __hash_table__hash_table63,1654
+  hash_key_type type;		// the type of keys...type65,1676
+  size_t size;			// size of actual arraysize66,1722
+  size_t n_entry;		// number of associations storedn_entry67,1763
+  hash_rank_t rank;		// how to compute rank for keyrank68,1815
+  hash_equals_t equals;		// how to compare keysequals69,1867
+  hash_key_func_t store_key;	// possibly duplicate the key when storingstore_key70,1915
+  hash_free_func_t delete_key;	// possibly free the memory for the key...delete_key71,1987
+  hash_entry *array;		// actual arrayarray72,2061
+  size_t limit;			// max entries before reallocationlimit73,2099
+  size_t n_free_for_puts,n_free_for_puts76,2229
+    n_put, n_get, n_del, n_upd,n_put77,2255
+    n_put, n_get, n_del, n_upd,n_get77,2255
+    n_put, n_get, n_del, n_upd,n_del77,2255
+    n_put, n_get, n_del, n_upd,n_upd77,2255
+    n_put_iter, n_get_iter, n_del_iter, n_upd_iter;n_put_iter78,2287
+    n_put_iter, n_get_iter, n_del_iter, n_upd_iter;n_get_iter78,2287
+    n_put_iter, n_get_iter, n_del_iter, n_upd_iter;n_del_iter78,2287
+    n_put_iter, n_get_iter, n_del_iter, n_upd_iter;n_upd_iter78,2287
+#define END_OF_SIZE_TABLE END_OF_SIZE_TABLE83,2402
+#define RANK(RANK91,2603
+#define RANK(RANK94,2724
+static size_t prime_list[] = {prime_list118,3576
+static size_t hash_size_limit(size_t current_size)hash_size_limit152,4018
+static size_t get_next_hash_table_size(size_t size)get_next_hash_table_size166,4428
+static bool should_i_warn_on_redefinition = true;should_i_warn_on_redefinition178,4708
+void hash_warn_on_redefinition(void)hash_warn_on_redefinition183,4858
+void hash_dont_warn_on_redefinition(void)hash_dont_warn_on_redefinition188,4940
+bool hash_warn_on_redefinition_p(void)hash_warn_on_redefinition_p193,5028
+static void * hash_store_string(const void * s)hash_store_string198,5112
+static void hash_free_string(void * s)hash_free_string203,5193
+hash_table_generic_make(hash_key_type key_type,hash_table_generic_make223,5793
+hash_table hash_table_make(hash_key_type key_type, size_t size)hash_table_make294,7544
+static size_t max_size_seen = 0;max_size_seen302,7842
+void hash_table_clear(hash_table htp)hash_table_clear305,7927
+void hash_table_free(hash_table htp)hash_table_free327,8396
+void hash_overwrite(hash_table htp, const void * key, const void * val)hash_overwrite344,8866
+void hash_put(hash_table htp, const void * key, const void * val)hash_put364,9763
+hash_delget(hash_delget398,10739
+void * hash_del(hash_table htp, const void * key)hash_del439,11870
+void * hash_get(const hash_table htp, const void * key)hash_get449,12212
+list hash_get_default_empty_list(const hash_table h, const void * k) {hash_get_default_empty_list475,12980
+bool hash_defined_p(const hash_table htp, const void * key)hash_defined_p484,13184
+void hash_update(hash_table htp, const void * key, const void * val)hash_update491,13358
+void hash_table_print_header(hash_table htp, FILE *fout)hash_table_print_header510,13837
+void hash_table_print(hash_table htp)hash_table_print525,14383
+void hash_table_fprintf(FILE * f, gen_string_func_t key_to_string,hash_table_fprintf548,14960
+void hash_table_dump(const hash_table htp)hash_table_dump567,15386
+hash_enlarge_table(hash_table htp)hash_enlarge_table591,16050
+_uint hash_string_rank(const void * key, size_t size)hash_string_rank642,17352
+static _uint hash_int_rank(const void * key, size_t size)hash_int_rank652,17571
+static _uint hash_pointer_rank(const void * key, size_t size)hash_pointer_rank657,17660
+static _uint hash_chunk_rank(const gen_chunk * key, size_t size)hash_chunk_rank662,17753
+static int hash_string_equal(const char * key1, const char * key2)hash_string_equal667,17852
+static int hash_int_equal(const int key1, const int key2)hash_int_equal678,18092
+static int hash_pointer_equal(const void * key1, const void * key2)hash_pointer_equal683,18178
+static int hash_chunk_equal(const gen_chunk * key1, const gen_chunk * key2)hash_chunk_equal688,18274
+static char * hash_print_key(hash_key_type t, const void * key)hash_print_key693,18384
+static int inc_prime_list[] = {inc_prime_list717,19097
+#define HASH_INC_SIZE HASH_INC_SIZE724,19295
+hash_find_entry(hash_table htp,hash_find_entry730,19458
+int hash_table_entry_count(hash_table htp)hash_table_entry_count818,21935
+int hash_table_size(hash_table htp)hash_table_size825,22055
+hash_key_type hash_table_type(hash_table htp)hash_table_type832,22161
+hash_table_scan(hash_table htp,hash_table_scan844,22431
+int hash_table_own_allocated_memory(hash_table htp)hash_table_own_allocated_memory869,22926
+void * hash_map_get(const hash_table h, const void * k)hash_map_get878,23193
+bool hash_map_defined_p(const hash_table h, const void * k)hash_map_defined_p888,23437
+void hash_map_put(hash_table h, const void * k, const void * v)hash_map_put895,23575
+void * hash_map_del(hash_table h, const void * k)hash_map_del905,23829
+void hash_map_update(hash_table h,  const void * k, const void * v)hash_map_update925,24247
+hash_equals_t hash_table_equals_function(hash_table h)hash_table_equals_function934,24565
+hash_rank_t hash_table_rank_function(hash_table h)hash_table_rank_function939,24645
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/list.c,5479
+bool gen_eq(const void * obj1, const void * obj2)gen_eq111,4527
+bool gen_list_cyclic_p (const list ml)gen_list_cyclic_p120,4777
+size_t gen_length(const list l)gen_length150,5552
+size_t list_own_allocated_memory(const list l)list_own_allocated_memory158,5677
+void gen_mapl(gen_iter_func_t fp, const list l)gen_mapl165,5781
+void gen_map(gen_iter_func_t fp, const list l)gen_map172,5906
+void * gen_reduce(void * r, void *(*fp)(void *, const list), const list l)gen_reduce180,6061
+bool gen_equals(const list l0, const list l1,gen_eq_func_t equals)gen_equals192,6417
+list gen_some(gen_filter_func_t fp, const list l)gen_some206,6728
+static gen_chunk *gen_chunk_of_cons_of_gen_chunk = gen_chunk_undefined;gen_chunk_of_cons_of_gen_chunk217,6916
+static bool cons_of_gen_chunk(const list cp)cons_of_gen_chunk218,6988
+void gen_insert_after(const void * no, const void * o, list l)gen_insert_after223,7095
+list gen_insert_before(const void * no, const void * o, list l)gen_insert_before238,7527
+list gen_insert_list(list nl, const void * item, list l, bool before)gen_insert_list269,8219
+#define NEXT(NEXT298,8840
+list gen_nreverse(list cp)gen_nreverse304,8997
+void gen_free_list(list l)gen_free_list327,9395
+list gen_nconc(list cp1, list cp2)gen_nconc344,9820
+void gen_copy(void * a, void * b)gen_copy359,10113
+void * gen_car(list l)gen_car364,10192
+gen_find_if(gen_filter_func_t test, const list l, gen_extract_func_t extract)gen_find_if370,10253
+gen_find_if_from_end(gen_filter_func_t test, const list l,gen_find_if_from_end382,10532
+void * gen_find(const void * item, const list seq,gen_find398,11069
+void * gen_find_from_end(const void * item, const list seq,gen_find_from_end408,11341
+void * gen_find_eq(const void * item, const list seq)gen_find_eq422,11650
+list gen_concatenate(const list l1x, const list l2x)gen_concatenate436,12079
+list gen_append(list l1, const list l2)gen_append471,12675
+list gen_copy_seq(list l) {gen_copy_seq501,13136
+list gen_full_copy_list(list l) {gen_full_copy_list535,13930
+gen_copy_string_list(list /* of string */ ls)gen_copy_string_list556,14294
+gen_free_string_list(list /* of string */ ls)gen_free_string_list564,14452
+list gen_last(list l)gen_last578,14724
+void gen_substitute_chunk_by_list(list * pl, const void * o, list sl)gen_substitute_chunk_by_list591,15185
+bool gen_replace_in_list(list l, const void * s, const void * t)gen_replace_in_list634,16069
+void gen_exchange_in_list(list l, const void * i1, const void * i2)gen_exchange_in_list651,16346
+static void gen_remove_from_list(list * pl, const void * o, bool once)gen_remove_from_list664,16720
+void gen_remove(list * cpp, const void * o)gen_remove685,17150
+void gen_remove_once(list * pl, const void * o)gen_remove_once691,17288
+list gen_nthcdr(int n, const list lx)gen_nthcdr700,17518
+gen_chunk gen_nth(int n, const list l)gen_nth710,17719
+list gen_once(const void * vo, list l)gen_once722,17941
+bool gen_in_list_p(const void * vo, const list lx)gen_in_list_p734,18170
+int gen_occurences(const void * vo, const list l)gen_occurences746,18440
+bool gen_once_p(list l)gen_once_p758,18665
+void gen_free_area(void ** p, int size)gen_free_area775,19006
+void gen_sort_list(list l, gen_cmp_func_t compare)gen_sort_list796,19567
+void gen_closure(iterate, initial)gen_closure839,20873
+list gen_make_list(int domain, ...)gen_make_list851,21184
+void gen_fprint(FILE * out, string name, const list l,gen_fprint873,21684
+list gen_cons(const void * item, const list next)gen_cons888,22003
+list gen_typed_cons(_int type, const void * item, const list next)gen_typed_cons900,22335
+list gen_bool_cons(bool b, const list l)gen_bool_cons909,22613
+list gen_int_cons(_int i, const list l)gen_int_cons914,22709
+list gen_string_cons(string s, const list l)gen_string_cons919,22794
+list gen_list_cons(const list i, const list l)gen_list_cons924,22884
+list gen_CHUNK_cons(const gen_chunk * c, const list l)gen_CHUNK_cons929,22976
+list gen_VOID_STAR_cons(const void * e, const list l)gen_VOID_STAR_cons934,23076
+gen_list_and(list * a, const list b)gen_list_and941,23229
+gen_list_and_not(list * a, const list b)gen_list_and_not963,23620
+gen_list_patch(list l, const void * x, const void * y)gen_list_patch985,24053
+int gen_position(const void * item, const list l)gen_position995,24325
+list gen_list_head(list * lp, int n)gen_list_head1015,24804
+list gen_common_prefix(const list l1, const list l2)gen_common_prefix1033,25140
+struct __gen_sweep_state {__gen_sweep_state1050,25578
+  bool done;                       // no more updates are possibledone1051,25605
+  gen_sweep_direction dir;         // forward or backwarddir1052,25672
+  list initial, * phead,  * ptail; // sweep parametersinitial1053,25730
+  list initial, * phead,  * ptail; // sweep parametersphead1053,25730
+  list initial, * phead,  * ptail; // sweep parametersptail1053,25730
+  list last, head, tail, reversed; // internal helperslast1054,25785
+  list last, head, tail, reversed; // internal helpershead1054,25785
+  list last, head, tail, reversed; // internal helperstail1054,25785
+  list last, head, tail, reversed; // internal helpersreversed1054,25785
+gen_sweep_init(list l, gen_sweep_direction dir, list * phead, list * ptail)gen_sweep_init1060,25939
+bool gen_sweep_update(gen_sweep_state state)gen_sweep_update1108,26916
+void gen_sweep_done(gen_sweep_state state)gen_sweep_done1166,28207
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_generic_function.h,381
+#define NEWGEN_GENERIC_FUNCTION_INCLUDEDNEWGEN_GENERIC_FUNCTION_INCLUDED24,785
+#define GENERIC_STATIC_OBJECT(GENERIC_STATIC_OBJECT28,925
+#define GENERIC_STATIC_STATUS(GENERIC_STATIC_STATUS49,1818
+#define GENERIC_FUNCTION(GENERIC_FUNCTION72,2917
+#define GENERIC_LOCAL_FUNCTION(GENERIC_LOCAL_FUNCTION96,4035
+#define GENERIC_GLOBAL_FUNCTION(GENERIC_GLOBAL_FUNCTION99,4125
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/string.c,1354
+string gen_strndup(gen_strndup59,1973
+string gen_strndup0(gen_strndup083,2423
+#define BUFFER_SIZE_INCREMENT BUFFER_SIZE_INCREMENT108,2877
+#define MAX(MAX110,2923
+static string buffer = (string) NULL;buffer113,2968
+static size_t buffer_size = 0;buffer_size114,3006
+static size_t current = 0;current115,3037
+char * i2a(int i) {i2a121,3214
+void init_the_buffer(void)init_the_buffer127,3309
+string append_to_the_buffer(const char* s /* what to append to the buffer */)append_to_the_buffer145,3821
+string get_the_buffer(void)get_the_buffer169,4338
+string concatenate(const char* next, ...)concatenate183,4646
+string strupper(string s1, const char* s2)strupper213,5373
+string strlower(string s1, const char* s2)strlower228,5558
+string bool_to_string(bool b)bool_to_string243,5743
+string nth_suffix(int i)nth_suffix250,5848
+string find_suffix(const string s, const string suffix)find_suffix273,6284
+string chop_newline (string s, bool flg)chop_newline294,6812
+string remove_newline_of_string (string s)remove_newline_of_string309,7163
+list strsplit(const char *s, const char *d)strsplit318,7327
+int gen_qsort_string_cmp(const void * s1, const void *s2) {gen_qsort_string_cmp332,7662
+void str_prepend (string* dst, string prefix) {str_prepend342,7949
+void str_append (string* dst, string suffix) {str_append356,8351
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_auto_string.h,0
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genread/genread.y,364
+Read	: Nb_of_shared_pointers ContentsRead130,3067
+Contents: Chunk Contents164,3850
+Type: IntType215,4799
+Sparse_Datas: Sparse_Datas Int Data { /* index, value */Sparse_Datas252,5598
+Data	: Basis	{ $$ = $1; }Data258,5756
+Basis	: READ_UNIT { $$.u = 1; }Basis325,7437
+Int     : READ_INT   { $$ = $1; }Int337,7811
+String  : READ_STRING {String340,7849
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genread/genread_lex.l,0
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_string_buffer.h,135
+#define STRING_BUFFER_INCLUDEDSTRING_BUFFER_INCLUDED25,812
+typedef struct __string_buffer_head * string_buffer;string_buffer27,844
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genC.c,2024
+#undef gen_recursegen_recurse38,947
+#undef gen_context_recursegen_context_recurse39,966
+#define FIELD FIELD41,994
+#define STRUCT STRUCT42,1032
+#define OPTIMIZE_NEWGEN OPTIMIZE_NEWGEN44,1088
+#define IS_TAB(IS_TAB46,1131
+#define TYPE(TYPE50,1261
+#define DomainNumberError DomainNumberError52,1321
+static int sharp_ifopt(FILE * out)sharp_ifopt59,1541
+static int sharp_else(FILE * out)sharp_else62,1640
+static int sharp_endif(FILE * out)sharp_endif65,1711
+int gen_size(int domain)gen_size71,1907
+static string strup(string s)strup110,2861
+#define same_size(same_size117,2971
+static bool inline_directly(union domain * dp)inline_directly119,3024
+static string int_type(void)int_type135,3452
+static string int_type_access_complement(void)int_type_access_complement140,3542
+static string newgen_type_name(union domain * dp)newgen_type_name148,3708
+static string newgen_argument_type_name(union domain * dp)newgen_argument_type_name178,4481
+static string newgen_type_name_close(union domain * dp)newgen_type_name_close195,4997
+static char newgen_access_name(union domain * dp)newgen_access_name205,5290
+static string newgen_kind_label(union domain * dp)newgen_kind_label215,5524
+static void generate_make(generate_make227,5778
+static void generate_struct_members(generate_struct_members369,9083
+static void generate_union_type_descriptor(generate_union_type_descriptor427,10568
+static void generate_union_as_string(generate_union_as_string453,11228
+static void generate_access_members(generate_access_members489,12285
+static void generate_constructed(generate_constructed554,14364
+static void generate_not_constructed(generate_not_constructed570,14874
+static void generate_arrow(generate_arrow584,15245
+generate_safe_definition(generate_safe_definition660,17548
+generate_domain(generate_domain710,18934
+static FILE * fopen_suffix(string prefix, string suffix)fopen_suffix904,25120
+#define DONT_TOUCH DONT_TOUCH917,25458
+void gencode(string file)gencode927,25909
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/stack.c,3642
+typedef struct __stack_bucket__stack_bucket49,1340
+  size_t n_item;                 /* next available item in the bucket */n_item51,1372
+  size_t max_items;              /* the max number of items of this bucket */max_items52,1445
+  void ** items;                 /* the items (only pointers at the moment) */items53,1523
+  struct __stack_bucket *succ;/* the next bucket */succ54,1602
+  _stack_bucket, *_stack_ptr;_stack_bucket57,1699
+  _stack_bucket, *_stack_ptr;_stack_ptr57,1699
+typedef struct __stack_head__stack_head61,1753
+  size_t size;        /* current number of elements in stack */size63,1783
+  size_t max_extent;  /* maximum extension of the stack */max_extent64,1847
+  _stack_ptr stack;/* buckets in use by the stack */stack65,1906
+  _stack_ptr avail;/* allocated buckets not in use anymore */avail66,1959
+  size_t bucket_size; /* reference bucket size for allocation */bucket_size67,2021
+  size_t n_buckets;   /* number of allocated buckets */n_buckets68,2086
+  int type;        /* as BASIC, LIST, EXTERNAL, CHUNK, domain? */type69,2142
+  int policy;      /* may be used to indicate an allocation policy */policy70,2208
+    _stack_head; /* and also *stack (in headers) */_stack_head72,2280
+#define STACK_PTR_NULL STACK_PTR_NULL76,2357
+#define STACK_PTR_NULL_P(STACK_PTR_NULL_P77,2400
+#define STACK_DEFAULT_SIZE STACK_DEFAULT_SIZE78,2450
+typedef struct __stack_iterator__stack_iterator82,2505
+  _stack_ptr bucket; /* current bucket */bucket84,2539
+  bool downward;      /* true if downward iterations */downward85,2581
+  size_t index;      /* current index in bucket */index86,2637
+  _stack_ptr list;   /* all buckets */list87,2688
+    _stack_iterator; /* and also *stack_iterator (in headers) */_stack_iterator89,2729
+static void update_iterator_upward(stack_iterator i)update_iterator_upward91,2795
+#define STACK_ITERATOR_END_P(STACK_ITERATOR_END_P104,3039
+#define DEFINE_ITERATOR(DEFINE_ITERATOR106,3100
+#define UPDATE_ITERATOR_DOWNWARD(UPDATE_ITERATOR_DOWNWARD114,3278
+#define UPDATE_ITERATOR_UPWARD(UPDATE_ITERATOR_UPWARD121,3492
+#define NEXT_ITERATION(NEXT_ITERATION125,3603
+static void stack_iterator_internal_initstack_iterator_internal_init135,3801
+stack_iterator stack_iterator_init(const stack s, bool down)stack_iterator_init157,4284
+bool stack_iterator_next_and_go(stack_iterator i, void ** pitem)stack_iterator_next_and_go164,4477
+bool stack_iterator_end_p(stack_iterator i)stack_iterator_end_p179,4729
+void stack_iterator_end(stack_iterator * pi)stack_iterator_end184,4812
+static _stack_ptr allocate_bucket(int size)allocate_bucket201,5083
+static _stack_ptr find_or_allocate(stack s)find_or_allocate218,5539
+stack stack_make(int type, int bucket_size, int policy)stack_make246,6249
+stack stack_copy(const stack s)stack_copy267,6753
+static void free_bucket(_stack_ptr x)free_bucket276,6934
+static void free_buckets(_stack_ptr x)free_buckets282,7084
+void stack_free(stack * ps)stack_free292,7254
+#define STACK_OBSERVER(STACK_OBSERVER302,7506
+bool stack_empty_p(const stack s)stack_empty_p313,7918
+#undef STACK_OBSERVERSTACK_OBSERVER319,7996
+void stack_map(const stack s, gen_iter_func_t f)stack_map323,8061
+static int number_of_buckets(_stack_ptr x)number_of_buckets335,8259
+void stack_info(FILE * f, const stack s)stack_info342,8377
+void stack_push(void * item, stack s)stack_push373,9059
+void *stack_pop(stack s)stack_pop399,9525
+void *stack_head(const stack s)stack_head420,9868
+void *stack_nth(const stack s, int nskip)stack_nth436,10242
+void *stack_replace(void * item, stack s)stack_replace450,10647
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/spec.y,305
+Imports : Imports GRAM_IMPORT Name FROM File SEMI_COLUMN {Imports121,2669
+File	: GRAM_FILE {File134,2932
+Domain	: Simple Constructed {Domain156,3263
+Simple	: Persistant Basis {Simple214,4854
+Basis   : Name {Basis251,5843
+Int     : GRAM_INT   {$$ = $1;}Int325,7518
+Name	: IDENT	{Name328,7561
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genC.h,5374
+#define GENC_INCLUDEDGENC_INCLUDED24,747
+#define NEWGENNEWGEN25,769
+#define GEN_HEADER GEN_HEADER45,1145
+#define GEN_HEADER_SIZE GEN_HEADER_SIZE46,1168
+typedef union gen_chunk {gen_chunk58,1762
+  unit u;u59,1788
+  bool b;b60,1798
+  char c;c61,1808
+  _int i;i62,1818
+  float f;f63,1828
+  string s;s64,1839
+  void * e; /**< For externals (foreign objects) */e65,1851
+  struct cons * l; /**< A pointer to a list element */l66,1903
+  set t;t67,1958
+  hash_table h;h68,1967
+  union gen_chunk * p;p69,1983
+} gen_chunk, *gen_chunkp;gen_chunk70,2006
+} gen_chunk, *gen_chunkp;gen_chunkp70,2006
+typedef void *(gen_extract_func_t)(const gen_chunk);gen_extract_func_t72,2033
+#define gen_chunk_undefined gen_chunk_undefined74,2087
+#define gen_chunk_undefined_p(gen_chunk_undefined_p75,2136
+#define chunk_undefined chunk_undefined79,2213
+#define chunk_undefined_p(chunk_undefined_p80,2257
+#define UNIT(UNIT82,2312
+#define BOOL(BOOL83,2387
+#define CHAR(CHAR84,2411
+#define INT(INT85,2435
+#define FLOAT(FLOAT86,2458
+#define STRING(STRING87,2483
+#define CONSP(CONSP88,2509
+#define SETP(SETP89,2534
+#define CHUNK(CHUNK90,2558
+#define HASH(HASH91,2583
+#define CHUNKP(CHUNKP92,2607
+#define LIST(LIST93,2633
+#define SET(SET94,2657
+#define VOID_STAR(VOID_STAR95,2680
+#define UNIT_TYPE UNIT_TYPE99,2773
+#define BOOL_TYPE BOOL_TYPE100,2829
+#define CHAR_TYPE CHAR_TYPE101,2852
+#define INT_TYPE INT_TYPE102,2875
+#define FLOAT_TYPE FLOAT_TYPE103,2896
+#define STRING_TYPE STRING_TYPE104,2921
+#define VOID_STAR_TYPE VOID_STAR_TYPE105,2948
+#define bool_TYPE bool_TYPE107,2979
+#define char_TYPE char_TYPE108,3002
+#define int_TYPE int_TYPE109,3025
+#define float_TYPE float_TYPE110,3046
+#define string_TYPE string_TYPE111,3071
+#define BOOL_CAST(BOOL_CAST113,3099
+#define CHAR_CAST(CHAR_CAST114,3128
+#define INT_CAST(INT_CAST115,3157
+#define FLOAT_CAST(FLOAT_CAST116,3184
+#define STRING_CAST(STRING_CAST117,3215
+#define VOID_STAR_CAST(VOID_STAR_CAST118,3248
+#define bool_CAST(bool_CAST120,3288
+#define char_CAST(char_CAST121,3317
+#define int_CAST(int_CAST122,3346
+#define float_CAST(float_CAST123,3373
+#define string_CAST(string_CAST124,3404
+#define CONSP_TYPE CONSP_TYPE126,3438
+#define LIST_TYPE LIST_TYPE127,3462
+#define SETP_TYPE SETP_TYPE128,3485
+#define SET_TYPE SET_TYPE129,3507
+#define CHUNK_TYPE CHUNK_TYPE130,3528
+#define CHUNKP_TYPE CHUNKP_TYPE131,3558
+#define HASH_TYPE HASH_TYPE132,3589
+#define consp_TYPE consp_TYPE134,3619
+#define list_TYPE list_TYPE135,3643
+#define setp_TYPE setp_TYPE136,3666
+#define set_TYPE set_TYPE137,3688
+#define chunk_TYPE chunk_TYPE138,3709
+#define chunkp_TYPE chunkp_TYPE139,3739
+#define hash_TYPE hash_TYPE140,3770
+#define CONSP_CAST(CONSP_CAST142,3800
+#define LIST_CAST(LIST_CAST143,3830
+#define SETP_CAST(SETP_CAST144,3859
+#define SET_CAST(SET_CAST145,3887
+#define CHUNK_CAST(CHUNK_CAST146,3914
+#define CHUNKP_CAST(CHUNKP_CAST147,3945
+#define HASH_CAST(HASH_CAST148,3978
+#define consp_CAST(consp_CAST150,4014
+#define list_CAST(list_CAST151,4044
+#define setp_CAST(setp_CAST152,4073
+#define set_CAST(set_CAST153,4101
+#define chunk_CAST(chunk_CAST154,4128
+#define chunkp_CAST(chunkp_CAST155,4159
+#define hash_CAST(hash_CAST156,4192
+enum internal_type {internal_type161,4353
+  unit_domain = 0, /**< Should start at 1 to be able to iterate on them withunit_domain162,4374
+  bool_domain,bool_domain164,4486
+  char_domain,char_domain165,4501
+  int_domain,int_domain166,4516
+  intptr_t_domain = int_domain,intptr_t_domain167,4530
+  _int_domain = int_domain,_int_domain168,4562
+  float_domain,float_domain169,4590
+  string_domainstring_domain170,4606
+#define BOOL_NEWGEN_DOMAIN BOOL_NEWGEN_DOMAIN174,4653
+#define CHAR_NEWGEN_DOMAIN CHAR_NEWGEN_DOMAIN175,4694
+#define INT_NEWGEN_DOMAIN INT_NEWGEN_DOMAIN176,4735
+#define FLOAT_NEWGEN_DOMAIN FLOAT_NEWGEN_DOMAIN177,4774
+#define STRING_NEWGEN_DOMAIN STRING_NEWGEN_DOMAIN178,4817
+#define bool_NEWGEN_DOMAIN bool_NEWGEN_DOMAIN180,4863
+#define char_NEWGEN_DOMAIN char_NEWGEN_DOMAIN181,4904
+#define int_NEWGEN_DOMAIN int_NEWGEN_DOMAIN182,4945
+#define float_NEWGEN_DOMAIN float_NEWGEN_DOMAIN183,4984
+#define string_NEWGEN_DOMAIN string_NEWGEN_DOMAIN184,5027
+#define LIST_NEWGEN_DOMAIN LIST_NEWGEN_DOMAIN186,5073
+#define GEN_DBG_TRAV_LEAF GEN_DBG_TRAV_LEAF197,5325
+#define GEN_DBG_TRAV_SIMPLE GEN_DBG_TRAV_SIMPLE198,5353
+#define GEN_DBG_TRAV_OBJECT GEN_DBG_TRAV_OBJECT199,5383
+#define GEN_DBG_CHECK GEN_DBG_CHECK200,5413
+#define GEN_DBG_RECURSE GEN_DBG_RECURSE201,5437
+#define GEN_DBG_TRAV GEN_DBG_TRAV203,5465
+#define gen_get_ancestor_type(gen_get_ancestor_type270,8557
+#define gen_start_recurse_ancestor_tracking(gen_start_recurse_ancestor_tracking273,8671
+#define gen_stop_recurse_ancestor_tracking(gen_stop_recurse_ancestor_tracking274,8728
+#define gen_recurse(gen_recurse277,8851
+#define gen_context_recurse(gen_context_recurse279,8992
+#define MEMORY_INCLUDEDMEMORY_INCLUDED288,9309
+#define gen_equal(gen_equal291,9341
+#undef GEN_CHECKGEN_CHECK296,9485
+#define GEN_CHECK(GEN_CHECK297,9502
+#define GEN_CHECK_ALLOC GEN_CHECK_ALLOC298,9548
+#define GEN_CHECK(GEN_CHECK300,9580
+#define GEN_CHECK_ALLOC GEN_CHECK_ALLOC301,9607
+#define NEWGEN_CHECK_TYPE(NEWGEN_CHECK_TYPE307,9771
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_types.h,1787
+#define newgen_types_includednewgen_types_included24,763
+#undef stringstring37,952
+typedef char *string ;string39,973
+#define string_undefined string_undefined40,996
+#define string_undefined_p(string_undefined_p41,1035
+#define copy_string(copy_string42,1089
+typedef intptr_t _int;_int53,1465
+typedef uintptr_t _uint;_uint54,1488
+#define _intFMT _intFMT57,1575
+#define _uintFMT _uintFMT58,1599
+#define _int_undefined _int_undefined59,1628
+#define _int_undefined_p(_int_undefined_p60,1740
+#define BOOLEAN_INCLUDEDBOOLEAN_INCLUDED70,2045
+typedef int bool;bool78,2301
+#define false false80,2320
+#define true true81,2336
+#define bool_undefined bool_undefined84,2359
+#define bool_undefined_p(bool_undefined_p85,2471
+typedef int tag;tag92,2536
+#define tag_undefined tag_undefined93,2553
+typedef int unit ;unit97,2593
+#define UU UU98,2612
+#define UUINT(UUINT99,2634
+#define array_undefined array_undefined103,2678
+#define array_undefined_p(array_undefined_p104,2707
+typedef struct cons * list;list106,2749
+typedef bool (*gen_filter_func_t)(const void *);gen_filter_func_t109,2798
+typedef bool (*gen_filter2_func_t)(const void *, const void *);gen_filter2_func_t110,2847
+typedef string (*gen_string_func_t)(const void *);gen_string_func_t111,2911
+typedef int (*gen_cmp_func_t)(const void *, const void *);gen_cmp_func_t114,3087
+typedef bool (*gen_eq_func_t)(const void *, const void *);gen_eq_func_t115,3146
+typedef void (*gen_iter_func_t)(void *);gen_iter_func_t116,3205
+#define NEWGEN_MACRO_NAME_1(NEWGEN_MACRO_NAME_1123,3524
+#define NEWGEN_MACRO_NAME_2(NEWGEN_MACRO_NAME_2124,3575
+#define NGMID(NGMID126,3693
+#define GEN_PROTO(GEN_PROTO130,3790
+#define GEN_PROTO(GEN_PROTO133,3835
+#define GEN_PROTO(GEN_PROTO135,3864
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/array.c,1546
+#define GEN_ARRAY_SIZE_INCREMENT GEN_ARRAY_SIZE_INCREMENT29,817
+struct _gen_array_chunk_t {_gen_array_chunk_t31,856
+    size_t size;size32,884
+    int nitems;nitems33,901
+    void ** array;array34,917
+gen_array_make(size_t size)gen_array_make38,952
+gen_array_resize(gen_array_t a, int min)gen_array_resize54,1430
+gen_array_free(gen_array_t a)gen_array_free68,1828
+gen_array_full_free(gen_array_t a)gen_array_full_free75,1981
+gen_array_addto(gen_array_t a, size_t i, void * what)gen_array_addto85,2151
+gen_array_remove(gen_array_t a, size_t i) gen_array_remove95,2444
+gen_array_append(gen_array_t a, void * what)gen_array_append103,2634
+gen_array_dupaddto(gen_array_t a, size_t i, void * what)gen_array_dupaddto109,2730
+gen_array_dupappend(gen_array_t a, void * what)gen_array_dupappend115,2838
+gen_array_pointer(const gen_array_t a)gen_array_pointer123,2958
+gen_array_nitems(const gen_array_t a)gen_array_nitems129,3030
+gen_array_size(const gen_array_t a)gen_array_size135,3102
+gen_array_item(const gen_array_t a, size_t i)gen_array_item141,3170
+gen_array_cmp(const void * a1, const void * a2)gen_array_cmp150,3370
+gen_array_sort_with_cmp(gen_array_t a, int (*cmp)(const void *, const void *))gen_array_sort_with_cmp156,3477
+gen_array_sort(gen_array_t a)gen_array_sort162,3617
+gen_array_from_list(list /* of string */ ls)gen_array_from_list168,3709
+list_from_gen_array(gen_array_t a)list_from_gen_array176,3881
+string string_array_join(gen_array_t array, string separator)string_array_join196,4459
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/set.c,2500
+struct _set_chunk {_set_chunk58,1713
+  hash_table table;table59,1733
+  set_type type;type60,1753
+#define INITIAL_SET_SIZE INITIAL_SET_SIZE63,1774
+hash_table set_private_get_hash_table(const set s)set_private_get_hash_table67,1850
+set_type set_get_type(const set s)set_get_type74,1957
+set set_generic_make(set_type typ,set_generic_make82,2175
+set set_make(set_type typ)set_make101,2615
+set set_singleton(set_type type, const void * p)set_singleton112,2936
+set set_assign(set s1, const set s2)set_assign128,3260
+set set_dup(const set s)set_dup142,3476
+set set_add_element(set s1, const set s2, const void * e)set_add_element151,3634
+set set_add_elements(set s1, const set s2, const void * e, ...)set_add_elements170,4029
+bool set_belong_p(const set s, const void * e)set_belong_p193,4682
+bool list_in_set_p(const list l, const set s)list_in_set_p200,4837
+set set_union(set s1, const set s2, const set s3)set_union210,5004
+set set_intersection(set s1, const set s2, const set s3)set_intersection228,5486
+set set_difference(set s1, const set s2, const set s3)set_difference255,6161
+set set_del_element(set s1, const set s2, const void * e)set_del_element264,6346
+set set_delfree_element(set s1, const set s2, const void * e)set_delfree_element275,6595
+bool set_intersection_p(const set s1, const set s2)set_intersection_p287,6833
+bool set_inclusion_p(const set s1, const set s2)set_inclusion_p304,7232
+bool set_equal_p(const set s1, const set s2)set_equal_p315,7439
+set set_clear(set s)set_clear325,7655
+void set_free(set s)set_free331,7723
+void sets_free(set s,...)sets_free339,7921
+int set_size(const set s)set_size358,8389
+bool set_empty_p(const set s)set_empty_p366,8516
+void gen_set_closure_iterate(void (*iterate)(void *, set),gen_set_closure_iterate371,8576
+void gen_set_closure(void (*iterate)(void *, set), set initial)gen_set_closure417,9607
+int set_own_allocated_memory(const set s)set_own_allocated_memory422,9727
+list set_to_list(const set s)set_to_list435,10069
+list set_to_sorted_list(const set s, gen_cmp_func_t cmp)set_to_sorted_list446,10293
+set set_append_list(set s, const list l)set_append_list459,10530
+set set_assign_list(set s, const list l)set_assign_list473,10795
+set_to_string_buffer(string name, const set s, gen_string_func_t item_name)set_to_string_buffer487,11116
+string set_to_string(string name, const set s, gen_string_func_t item_name)set_to_string512,11780
+void set_fprintset_fprint522,12048
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_generic_stack.h,154
+#define DEFINE_STACK(DEFINE_STACK27,817
+#define DEFINE_LOCAL_STACK(DEFINE_LOCAL_STACK98,3288
+#define DEFINE_GLOBAL_STACK(DEFINE_GLOBAL_STACK99,3360
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genread_yacc.c,9721
+#define YYBISON YYBISON44,2055
+#define YYBISON_VERSION YYBISON_VERSION47,2096
+#define YYSKELETON_NAME YYSKELETON_NAME50,2151
+#define YYPURE YYPURE53,2206
+#define YYPUSH YYPUSH56,2245
+#define YYPULL YYPULL59,2284
+#define yyparse yyparse63,2354
+#define yylex yylex64,2392
+#define yyerror yyerror65,2428
+#define yylval yylval66,2466
+#define yychar yychar67,2503
+#define yydebug yydebug68,2540
+#define yynerrs yynerrs69,2578
+#define YYERROR_VERBOSE YYERROR_VERBOSE109,3657
+#define YYMAXDEPTH YYMAXDEPTH122,4078
+int warn_on_ref_without_def_in_read_tabulated = false;warn_on_ref_without_def_in_read_tabulated126,4137
+gen_chunk *Read_chunk ;Read_chunk130,4224
+static size_t shared_number;shared_number136,4360
+static size_t shared_size;shared_size137,4389
+static gen_chunk ** shared_table ;shared_table138,4416
+int newgen_allow_forward_ref = false;newgen_allow_forward_ref147,4745
+static stack current_chunk;current_chunk154,4950
+static stack current_chunk_index;current_chunk_index155,4978
+static stack current_chunk_size;current_chunk_size156,5012
+#   define YY_NULL YY_NULL164,5163
+#   define YY_NULL YY_NULL166,5198
+# undef YYERROR_VERBOSEYYERROR_VERBOSE172,5300
+# define YYERROR_VERBOSE YYERROR_VERBOSE173,5324
+# define YYERROR_VERBOSE YYERROR_VERBOSE175,5357
+# define GENREAD_Y_TAB_HGENREAD_Y_TAB_H181,5509
+# define YYDEBUG YYDEBUG184,5574
+# define YYTOKENTYPEYYTOKENTYPE192,5681
+   enum yytokentype {yytokentype195,5805
+     CHUNK_BEGIN = 258,CHUNK_BEGIN196,5827
+     VECTOR_BEGIN = 259,VECTOR_BEGIN197,5851
+     ARROW_BEGIN = 260,ARROW_BEGIN198,5876
+     READ_BOOL = 261,READ_BOOL199,5900
+     TABULATED_BEGIN = 262,TABULATED_BEGIN200,5922
+     LP = 263,LP201,5950
+     RP = 264,RP202,5965
+     LC = 265,LC203,5980
+     RC = 266,RC204,5995
+     LB = 267,LB205,6010
+     SHARED_POINTER = 268,SHARED_POINTER206,6025
+     READ_EXTERNAL = 269,READ_EXTERNAL207,6052
+     READ_DEF = 270,READ_DEF208,6078
+     READ_REF = 271,READ_REF209,6099
+     READ_NULL = 272,READ_NULL210,6120
+     READ_LIST_UNDEFINED = 273,READ_LIST_UNDEFINED211,6142
+     READ_SET_UNDEFINED = 274,READ_SET_UNDEFINED212,6174
+     READ_ARRAY_UNDEFINED = 275,READ_ARRAY_UNDEFINED213,6205
+     READ_STRING = 276,READ_STRING214,6238
+     READ_UNIT = 277,READ_UNIT215,6262
+     READ_CHAR = 278,READ_CHAR216,6284
+     READ_INT = 279,READ_INT217,6306
+     READ_FLOAT = 280READ_FLOAT218,6327
+#define CHUNK_BEGIN CHUNK_BEGIN222,6377
+#define VECTOR_BEGIN VECTOR_BEGIN223,6401
+#define ARROW_BEGIN ARROW_BEGIN224,6426
+#define READ_BOOL READ_BOOL225,6450
+#define TABULATED_BEGIN TABULATED_BEGIN226,6472
+#define LP LP227,6500
+#define RP RP228,6515
+#define LC LC229,6530
+#define RC RC230,6545
+#define LB LB231,6560
+#define SHARED_POINTER SHARED_POINTER232,6575
+#define READ_EXTERNAL READ_EXTERNAL233,6602
+#define READ_DEF READ_DEF234,6628
+#define READ_REF READ_REF235,6649
+#define READ_NULL READ_NULL236,6670
+#define READ_LIST_UNDEFINED READ_LIST_UNDEFINED237,6692
+#define READ_SET_UNDEFINED READ_SET_UNDEFINED238,6724
+#define READ_ARRAY_UNDEFINED READ_ARRAY_UNDEFINED239,6755
+#define READ_STRING READ_STRING240,6788
+#define READ_UNIT READ_UNIT241,6812
+#define READ_CHAR READ_CHAR242,6834
+#define READ_INT READ_INT243,6856
+#define READ_FLOAT READ_FLOAT244,6877
+typedef union YYSTYPEYYSTYPE249,6958
+  gen_chunk chunk ;chunk254,7028
+  gen_chunk *chunkp ;chunkp255,7048
+  cons *consp ;consp256,7070
+  intptr_t val ;val257,7086
+  char * s;s258,7103
+  double d;d259,7115
+  char c;c260,7127
+} YYSTYPE;YYSTYPE265,7185
+# define YYSTYPE_IS_TRIVIAL YYSTYPE_IS_TRIVIAL266,7196
+# define yystype yystype267,7226
+# define YYSTYPE_IS_DECLARED YYSTYPE_IS_DECLARED268,7288
+# undef shortshort295,7804
+typedef YYTYPE_UINT8 yytype_uint8;yytype_uint8299,7846
+typedef unsigned char yytype_uint8;yytype_uint8301,7887
+typedef YYTYPE_INT8 yytype_int8;yytype_int8305,7950
+typedef signed char yytype_int8;yytype_int8308,8083
+typedef short int yytype_int8;yytype_int8310,8122
+typedef YYTYPE_UINT16 yytype_uint16;yytype_uint16314,8182
+typedef unsigned short int yytype_uint16;yytype_uint16316,8225
+typedef YYTYPE_INT16 yytype_int16;yytype_int16320,8295
+typedef short int yytype_int16;yytype_int16322,8336
+#  define YYSIZE_T YYSIZE_T327,8415
+#  define YYSIZE_T YYSIZE_T329,8470
+#  define YYSIZE_T YYSIZE_T333,8676
+#  define YYSIZE_T YYSIZE_T335,8709
+#define YYSIZE_MAXIMUM YYSIZE_MAXIMUM339,8757
+#   define YY_(YY_345,8927
+#  define YY_(YY_349,9013
+# define YYUSE(YYUSE355,9150
+# define YYUSE(YYUSE357,9187
+# define YYID(YYID362,9317
+YYID (int yyi)YYID367,9453
+#    define YYSTACK_ALLOC YYSTACK_ALLOC385,9733
+#    define YYSTACK_ALLOC YYSTACK_ALLOC389,9896
+#    define alloca alloca392,10016
+#    define YYSTACK_ALLOC YYSTACK_ALLOC394,10052
+#      define EXIT_SUCCESS EXIT_SUCCESS400,10379
+#  define YYSTACK_FREE(YYSTACK_FREE409,10529
+#   define YYSTACK_ALLOC_MAXIMUM YYSTACK_ALLOC_MAXIMUM415,10926
+#  define YYSTACK_ALLOC YYSTACK_ALLOC418,11008
+#  define YYSTACK_FREE YYSTACK_FREE419,11041
+#   define YYSTACK_ALLOC_MAXIMUM YYSTACK_ALLOC_MAXIMUM421,11103
+#    define EXIT_SUCCESS EXIT_SUCCESS428,11393
+#   define YYMALLOC YYMALLOC432,11458
+#   define YYFREE YYFREE439,11728
+union yyallocyyalloc454,12214
+  yytype_int16 yyss_alloc;yyss_alloc456,12230
+  YYSTYPE yyvs_alloc;yyvs_alloc457,12257
+# define YYSTACK_GAP_MAXIMUM YYSTACK_GAP_MAXIMUM461,12358
+# define YYSTACK_BYTES(YYSTACK_BYTES465,12506
+# define YYCOPY_NEEDED YYCOPY_NEEDED469,12621
+# define YYSTACK_RELOCATE(YYSTACK_RELOCATE476,12930
+#   define YYCOPY(YYCOPY494,13481
+#   define YYCOPY(YYCOPY497,13587
+#define YYFINAL YYFINAL510,14063
+#define YYLAST YYLAST512,14122
+#define YYNTOKENS YYNTOKENS515,14185
+#define YYNNTS YYNNTS517,14248
+#define YYNRULES YYNRULES519,14303
+#define YYNSTATES YYNSTATES521,14361
+#define YYUNDEFTOK YYUNDEFTOK524,14457
+#define YYMAXUTOK YYMAXUTOK525,14479
+#define YYTRANSLATE(YYTRANSLATE527,14504
+static const yytype_uint8 yytranslate[] =yytranslate531,14680
+static const yytype_uint8 yyprhs[] =yyprhs567,16877
+static const yytype_int8 yyrhs[] =yyrhs577,17278
+static const yytype_uint16 yyrline[] =yyrline593,18163
+static const char *const yytname[] =yytname606,18688
+static const yytype_uint16 yytoknum[] =yytoknum622,19389
+static const yytype_uint8 yyr1[] =yyr1631,19700
+static const yytype_uint8 yyr2[] =yyr2641,20119
+static const yytype_uint8 yydefact[] =yydefact653,20641
+static const yytype_int8 yydefgoto[] =yydefgoto665,21176
+#define YYPACT_NINF YYPACT_NINF673,21423
+static const yytype_int16 yypact[] =yypact674,21447
+static const yytype_int8 yypgoto[] =yypgoto686,21978
+#define YYTABLE_NINF YYTABLE_NINF695,22335
+static const yytype_uint8 yytable[] =yytable696,22359
+#define yypact_value_is_default(yypact_value_is_default718,23716
+#define yytable_value_is_error(yytable_value_is_error721,23783
+static const yytype_int8 yycheck[] =yycheck724,23843
+static const yytype_uint8 yystos[] =yystos748,25296
+#define yyerrok	yyerrok759,25800
+#define yyclearin	yyclearin760,25835
+#define YYEMPTY	YYEMPTY761,25872
+#define YYEOF	YYEOF762,25894
+#define YYACCEPT	YYACCEPT764,25912
+#define YYABORT	YYABORT765,25946
+#define YYERROR	YYERROR766,25979
+#define YYFAIL	YYFAIL776,26378
+#define YYRECOVERING(YYRECOVERING784,26698
+#define YYBACKUP(YYBACKUP786,26739
+#define YYTERROR	YYTERROR804,27643
+#define YYERRCODE	YYERRCODE805,27662
+# define YYLLOC_DEFAULT(YYLLOC_DEFAULT812,27890
+#define YYRHSLOC(YYRHSLOC831,29103
+# define YY_LOCATION_PRINT(YY_LOCATION_PRINT838,29226
+# define YYLEX YYLEX845,29362
+# define YYLEX YYLEX847,29403
+#  define YYFPRINTF YYFPRINTF855,29561
+# define YYDPRINTF(YYDPRINTF858,29598
+# define YY_SYMBOL_PRINT(YY_SYMBOL_PRINT864,29705
+yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)yy_symbol_value_print884,30247
+yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)yy_symbol_print918,30954
+yy_stack_print (yytype_int16 *yybottom, yytype_int16 *yytop)yy_stack_print944,31800
+# define YY_STACK_PRINT(YY_STACK_PRINT961,32161
+yy_reduce_print (YYSTYPE *yyvsp, int yyrule)yy_reduce_print975,32571
+# define YY_REDUCE_PRINT(YY_REDUCE_PRINT999,33175
+int yydebug;yydebug1007,33404
+# define YYDPRINTF(YYDPRINTF1009,33438
+# define YY_SYMBOL_PRINT(YY_SYMBOL_PRINT1010,33463
+# define YY_STACK_PRINT(YY_STACK_PRINT1011,33518
+# define YY_REDUCE_PRINT(YY_REDUCE_PRINT1012,33555
+# define YYINITDEPTH YYINITDEPTH1018,33689
+# define YYMAXDEPTH YYMAXDEPTH1029,34045
+#   define yystrlen yystrlen1037,34164
+yystrlen (const char *yystr)yystrlen1043,34348
+#   define yystpcpy yystpcpy1060,34643
+yystpcpy (char *yydest, const char *yysrc)yystpcpy1067,34879
+yytnamerr (char *yyres, const char *yystr)yytnamerr1095,35620
+yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,yysyntax_error1143,36649
+# define YYCASE_(YYCASE_1222,40220
+# undef YYCASE_YYCASE_1232,40771
+yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)yydestruct1279,41981
+int yychar;yychar1306,42376
+YYSTYPE yylval;yylval1309,42440
+int yynerrs;yynerrs1312,42496
+yyparse (void *YYPARSE_PARAM)yyparse1323,42677
+#define YYPOPSTACK(YYPOPSTACK1379,43945
+static gen_chunk * chunk_for_domain(int domain)chunk_for_domain2179,63601
+void yyerror(const char * s)yyerror2190,63857
+static void * read_external(int which)read_external2206,64193
+static gen_chunk * make_def(gen_chunk * gc)make_def2254,65830
+static gen_chunk * make_ref(int domain, gen_chunk * st)make_ref2264,66128
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/build.c,1404
+struct inlinable {inlinable45,1210
+  string name;name46,1229
+  string C_value;C_value47,1244
+  string C_format;C_format48,1262
+  string Lisp_value;Lisp_value49,1281
+  string Lisp_format;Lisp_format50,1302
+static char *keywords[] = {keywords53,1328
+int Current_op, Current_start ;Current_op62,1447
+int Current_op, Current_start ;Current_start62,1447
+static char *Op_names[] = {Op_names67,1568
+int error_seen ;error_seen76,1697
+void fatal(char * fmt, ...)fatal82,1874
+void user(char * fmt, ...)user96,2174
+void check_not_keyword(char *s)check_not_keyword115,2592
+void init(void)init128,2839
+static int max_domain = -1 ;max_domain177,4174
+int max_domain_index()max_domain_index179,4204
+struct gen_binding * lookup(char * name, int action)lookup189,4498
+struct gen_binding * new_binding(char * name, union domain * val)new_binding228,5611
+print_domainlist( out, l, op )print_domainlist263,6371
+print_persistant( out, dp )print_persistant279,6708
+void print_domain(FILE * out, union domain * dp)print_domain292,7019
+print_domains(FILE * out)print_domains350,8445
+static int current_first ;current_first380,9350
+void reconnect(int op, union domain * dp)reconnect382,9378
+void compile(void)compile420,10385
+void gen_write_spec(char * filename)gen_write_spec462,11451
+int build(int argc, char * argv[])build481,11898
+char * alloc(int size)alloc499,12226
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genClib.c,13151
+#undef gen_recursegen_recurse38,1031
+#undef gen_context_recursegen_context_recurse39,1050
+#define GO GO48,1221
+struct gen_binding *Tabulated_bp ;Tabulated_bp58,1415
+int Read_spec_mode ;Read_spec_mode60,1451
+static bool Read_spec_performed = false ;Read_spec_performed61,1472
+int gen_debug = 0 ;gen_debug69,1802
+static int gen_debug_indent = 0 ;gen_debug_indent70,1822
+static int disallow_undefined_tabulated = true ;disallow_undefined_tabulated74,1893
+int gen_type(gen_chunk *obj)gen_type82,2111
+string gen_domain_name(int t)gen_domain_name97,2513
+int newgen_domain_index(gen_chunk * obj)newgen_domain_index105,2671
+fprintf_spaces( fd, number )fprintf_spaces118,3055
+write_gen_chunk( file, obj, l )write_gen_chunk133,3427
+array_size( dim )array_size155,3880
+static gen_chunk * init_array(union domain * dp)init_array169,4139
+static int array_own_allocated_memory(union domain *dp)array_own_allocated_memory181,4425
+#define gen_alloc_component(gen_alloc_component198,4917
+static void gen_alloc_constructed(va_list ap,gen_alloc_constructed249,6832
+gen_chunk * gen_alloc(int size, int gen_check_p, int dom, ...)gen_alloc298,7945
+struct driver {driver365,9630
+  void (*null)() ;null366,9646
+  int (*leaf_in)() ;leaf_in367,9665
+  void (*leaf_out)() ;leaf_out368,9686
+  int (*simple_in)() ;simple_in369,9709
+  void (*array_leaf)() ;array_leaf370,9732
+  void (*simple_out)() ;simple_out371,9757
+  int (*obj_in)() ;obj_in372,9782
+  void (*obj_out)() ;obj_out373,9802
+#define CHECK_NULL(CHECK_NULL380,9895
+static bool gen_trav_stop_recursion = false; /* set to true to stop... */gen_trav_stop_recursion384,10021
+gen_trav_leaf(struct gen_binding * bp, gen_chunk * obj, struct driver * dr)gen_trav_leaf390,10238
+gen_trav_simple(gen_trav_simple431,11415
+gen_array_leaf(gen_array_leaf494,12784
+gen_trav_obj_constructed(gen_trav_obj_constructed510,13119
+gen_trav_obj(gen_trav_obj570,14579
+tabulated_leaf_in(gen_chunk * obj, struct gen_binding * bp)tabulated_leaf_in620,15767
+#define MAX_SHARED_OBJECTS MAX_SHARED_OBJECTS632,16118
+static char *first_seen = (char *)NULL ;first_seen634,16152
+static char *seen_once = (char *)NULL ;seen_once635,16193
+#define FIRST_SEEN(FIRST_SEEN637,16234
+static hash_table obj_table = (hash_table)NULL ;obj_table648,16781
+int current_shared_obj_table_size(void)current_shared_obj_table_size654,16932
+static int shared_number = 0 ;shared_number662,17086
+shared_obj_in(gen_chunk * obj, struct driver * dr)shared_obj_in670,17331
+shared_simple_in( obj, dp )shared_simple_in693,17818
+shared_pointers( obj, keep )shared_pointers734,18886
+shared_obj( obj, first, others )shared_obj764,19687
+#define MAX_GEN_TRAV_ENV MAX_GEN_TRAV_ENV797,20449
+static int gen_trav_env_top = 0 ;gen_trav_env_top799,20479
+struct gen_trav_env {gen_trav_env801,20514
+    char *first_seen ;first_seen802,20536
+    char *seen_once ;seen_once803,20559
+    hash_table obj_table ;obj_table804,20581
+    int shared_number ;shared_number805,20608
+} gen_trav_envs[ MAX_GEN_TRAV_ENV ] ;gen_trav_envs806,20632
+static void push_gen_trav_env()push_gen_trav_env808,20671
+static void pop_gen_trav_env()pop_gen_trav_env827,21210
+static __thread hash_table free_already_seen = (hash_table) NULL;free_already_seen848,21818
+free_already_seen_p(free_already_seen_p851,21897
+free_leaf_in(gen_chunk * obj, struct gen_binding * bp)free_leaf_in867,22285
+free_leaf_out( obj, bp )free_leaf_out876,22523
+static void free_simple_out(gen_chunk *obj, union domain *dp)free_simple_out901,23208
+static void free_obj_out(free_obj_out922,23636
+persistant_simple_in( obj, dp )persistant_simple_in950,24328
+static int free_obj_in(gen_chunk * obj, struct driver * dr)free_obj_in971,24922
+void gen_free(gen_chunk *obj)gen_free992,25320
+gen_full_free_list(list l)gen_full_free_list1023,26058
+static hash_table copy_table = NULL;/* maps an object on its copy */copy_table1050,26664
+copy_hsearch(gen_chunk *key)copy_hsearch1053,26753
+copy_hput(copy_hput1070,27127
+copy_obj_in(gen_chunk * obj, __attribute__((unused)) struct driver * dr)copy_obj_in1086,27508
+copy_simple_in(copy_simple_in1117,28330
+copy_leaf_out(obj,bp)copy_leaf_out1149,29135
+gen_copy_list(gen_copy_list1179,29958
+gen_copy_array(old_a, dp)gen_copy_array1222,31007
+gen_copy_set( old_s, dp )gen_copy_set1247,31539
+copy_simple_out(obj,dp)copy_simple_out1271,32079
+#define COPYABLE_DOMAIN(COPYABLE_DOMAIN1299,32802
+copy_obj_out_constructed( obj, bp, dp, data, new_obj, dr )copy_obj_out_constructed1305,32993
+copy_obj_out(obj,bp,dr)copy_obj_out1361,34438
+gen_local_copy_tree(gen_local_copy_tree1387,35042
+gen_copy_tree(gen_copy_tree1429,35937
+gen_copy_tree_with_sharing(gen_copy_tree_with_sharing1442,36195
+int gen_free_tabulated(int domain)gen_free_tabulated1461,36532
+static FILE *user_file ;user_file1485,37232
+static void fputi(int i, FILE * f)fputi1487,37258
+static void fputci(char c, int i, FILE * f)fputci1492,37322
+static void write_define_shared_node(int n)write_define_shared_node1500,37468
+static void write_shared_node(int n)write_shared_node1507,37599
+static void write_null(struct gen_binding * bp)write_null1512,37670
+static int write_obj_in(gen_chunk *obj, struct driver *dr)write_obj_in1522,37972
+static void write_obj_out(gen_chunk * obj,write_obj_out1560,38960
+static void write_string(string init,write_string1580,39341
+static int write_leaf_in(gen_chunk *obj, struct gen_binding *bp)write_leaf_in1612,39968
+write_simple_in( obj, dp )write_simple_in1668,41640
+write_array_leaf(write_array_leaf1703,42347
+write_simple_out(gen_chunk * obj, union domain * dp)write_simple_out1724,42847
+gen_write(gen_write1745,43263
+gen_write_without_sharing( fd, obj )gen_write_without_sharing1777,43909
+static int write_tabulated_leaf_in(gen_chunk *obj, struct gen_binding *bp)write_tabulated_leaf_in1809,44587
+static struct gen_binding * wtt_bp = NULL;wtt_bp1849,45645
+static struct driver * wtt_dr = NULL;wtt_dr1850,45688
+static void write_this_tabulated(gen_chunk * o)write_this_tabulated1851,45726
+static void change_sign(gen_chunk * o)change_sign1858,45842
+int gen_write_tabulated(FILE * fd, int domain)gen_write_tabulated1866,46021
+static char * strdup(const char * s)strdup1912,47072
+  bool identity; /* whether the translation is nope... */identity1930,47531
+  int old_to_actual[MAX_DOMAIN]; /* forwards translation */old_to_actual1931,47589
+  int actual_to_old[MAX_DOMAIN]; /* backwards translation */actual_to_old1932,47649
+  gtt_t, * gtt_p;gtt_t1934,47712
+  gtt_t, * gtt_p;gtt_p1934,47712
+static gtt_p gtt_current_table = NULL;gtt_current_table1938,47764
+string gen_read_string(FILE * file, char upto)gen_read_string1943,47918
+static gtt_p gtt_make(void)gtt_make1966,48558
+static void gtt_table_init(gtt_p table)gtt_table_init1971,48630
+static void gtt_table_identity(gtt_p table)gtt_table_identity1982,48818
+static int get_domain_number(string name, int i)get_domain_number1997,49121
+static int first_available(int t[MAX_DOMAIN])first_available2007,49305
+static gtt_p gtt_read(string filename)gtt_read2017,49481
+static void gtt_write(string filename, gtt_p table)gtt_write2132,52193
+int gen_type_translation_old_to_actual(int n)gen_type_translation_old_to_actual2147,52544
+int gen_type_translation_actual_to_old(int n)gen_type_translation_actual_to_old2160,52918
+void gen_type_translation_reset(void)gen_type_translation_reset2171,53264
+void gen_type_translation_default(void)gen_type_translation_default2180,53399
+void gen_type_translation_read(string filename)gen_type_translation_read2189,53611
+void gen_type_translation_write(string filename)gen_type_translation_write2195,53738
+    #define genspec_lex_destroy(genspec_lex_destroy2212,54337
+void gen_read_spec(char * spec, ...)gen_read_spec2218,54426
+gen_init_external(int which,gen_init_external2276,55584
+gen_make_array( num )gen_make_array2307,56409
+gen_chunk * gen_read(FILE * file)gen_read2323,56698
+int gen_read_tabulated(FILE * file, int create_p)gen_read_tabulated2334,56947
+gen_check(gen_check2356,57412
+static FILE *black_hole = NULL ;black_hole2386,58152
+static void open_black_hole()open_black_hole2387,58185
+static bool cumulated_error_seen;cumulated_error_seen2394,58357
+int gen_consistent_p(gen_chunk * obj)gen_consistent_p2398,58464
+int gen_tabulated_consistent_p(int domain)gen_tabulated_consistent_p2414,58780
+static void defined_null(struct gen_binding * bp)defined_null2423,59019
+int gen_defined_p(gen_chunk * obj)gen_defined_p2432,59294
+static hash_table pointers = (hash_table)NULL;pointers2466,60052
+static jmp_buf env  ;env2467,60099
+static bool check_sharing(char * p, char * type)check_sharing2469,60122
+static int sharing_obj_in(gen_chunk * obj, struct driver * dr)sharing_obj_in2479,60354
+static int sharing_simple_in(gen_chunk * obj, union domain * dp)sharing_simple_in2493,60657
+gen_sharing_p( obj1, obj2 )gen_sharing_p2512,61015
+static int current_size;current_size2555,62021
+static hash_table already_seen_objects = NULL;already_seen_objects2556,62046
+allocated_memory_already_seen_p(obj)allocated_memory_already_seen_p2561,62181
+allocated_memory_leaf_in( obj, bp )allocated_memory_leaf_in2573,62453
+allocated_memory_obj_in(allocated_memory_obj_in2606,63185
+allocated_memory_simple_in(allocated_memory_simple_in2628,63671
+gen_allocated_memory(gen_allocated_memory2684,64630
+void gen_null(__attribute__((unused)) void * unused)gen_null2746,66185
+bool gen_true( __attribute__((unused)) gen_chunk * unused)gen_true2756,66428
+bool gen_false( __attribute__((unused)) gen_chunk * unused)gen_false2767,66755
+void * gen_identity(const void * x)gen_identity2773,66869
+void gen_core( __attribute__((unused)) void * p)gen_core2783,67052
+#define decision_table_undefined decision_table_undefined2807,67639
+typedef char GenDecisionTableType[MAX_DOMAIN];GenDecisionTableType2808,67683
+typedef GenDecisionTableType gen_tables[MAX_DOMAIN];gen_tables2809,67730
+    number_of_domains = -1;number_of_domains2812,67795
+    DirectDomainsTable,DirectDomainsTable2815,67842
+    DecisionTables;DecisionTables2816,67866
+static void print_decision_table(GenDecisionTableType t)print_decision_table2818,67887
+static void initialize_domain_DecisionTables(int domain)initialize_domain_DecisionTables2834,68457
+initialize_domain_DirectDomainsTable(target, dp)initialize_domain_DirectDomainsTable2906,70184
+initialize_DirectDomainsTable(void)initialize_DirectDomainsTable2945,71146
+initialize_DecisionTables()initialize_DecisionTables2979,71912
+init_gen_quick_recurse_tables()init_gen_quick_recurse_tables2990,72115
+*get_decision_table(domain)get_decision_table3016,72748
+typedef bool (*GenFilterType)();GenFilterType3035,73153
+typedef void (*GenRewriteType)();GenRewriteType3036,73186
+typedef GenFilterType GenFilterTableType[MAX_DOMAIN];GenFilterTableType3038,73221
+typedef GenRewriteType GenRewriteTableType[MAX_DOMAIN];GenRewriteTableType3039,73275
+struct multi_recursemulti_recurse3062,74357
+  hash_table             seen;seen3065,74455
+  bool always_recurse;always_recurse3068,74615
+  GenDecisionTableType * domains;domains3070,74664
+  GenDecisionTableType * decisions;decisions3072,74763
+  GenFilterTableType   * filters;filters3074,74857
+  GenRewriteTableType  * rewrites;rewrites3075,74891
+  void                 * context;context3077,74966
+  stack                upwards;upwards3079,75053
+  gen_chunk            * previous;previous3081,75140
+  gen_chunk            * current;current3083,75221
+static struct multi_recurse * current_mrc = (struct multi_recurse *) NULL;current_mrc3091,75495
+static bool quick_multi_already_seen_p(gen_chunk * obj)quick_multi_already_seen_p3098,75743
+quick_multi_recurse_obj_in(gen_chunk * obj,quick_multi_recurse_obj_in3108,75965
+quick_multi_recurse_obj_out(gen_chunk * obj,quick_multi_recurse_obj_out3153,77435
+quick_multi_recurse_simple_in(gen_chunk * obj, union domain * dp)quick_multi_recurse_simple_in3178,78188
+void gen_recurse_stop(void * obj)gen_recurse_stop3205,79058
+gen_internal_context_multi_recursegen_internal_context_multi_recurse3223,79514
+void gen_context_multi_recurse(void * o, void * context, ...)gen_context_multi_recurse3327,83099
+void gen_full_recurse(void * o, void * context, ...)gen_full_recurse3356,84132
+void gen_multi_recurse(void * o, ...)gen_multi_recurse3382,84979
+void gen_recurse(gen_recurse3406,85856
+void gen_context_recurse(gen_context_recurse3437,87134
+gen_chunk * gen_get_recurse_previous_visited_object(void)gen_get_recurse_previous_visited_object3467,87976
+gen_chunk * gen_get_recurse_current_ancestor(void)gen_get_recurse_current_ancestor3480,88388
+gen_chunk * gen_get_recurse_ancestor(const void * object)gen_get_recurse_ancestor3500,89233
+gen_chunk * gen_get_ancestor(int type, const void * obj)gen_get_ancestor3514,89713
+gen_chunk * gen_get_current_object(void)gen_get_current_object3534,90263
+gen_chunk * gen_get_current_ancestor(int type)gen_get_current_ancestor3541,90426
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genspec_yacc.c,8488
+#define YYBISON YYBISON44,2055
+#define YYBISON_VERSION YYBISON_VERSION47,2096
+#define YYSKELETON_NAME YYSKELETON_NAME50,2151
+#define YYPURE YYPURE53,2206
+#define YYPUSH YYPUSH56,2245
+#define YYPULL YYPULL59,2284
+#define yyparse yyparse63,2354
+#define yylex yylex64,2392
+#define yyerror yyerror65,2428
+#define yylval yylval66,2466
+#define yychar yychar67,2503
+#define yydebug yydebug68,2540
+#define yynerrs yynerrs69,2578
+#define YYERROR_VERBOSE YYERROR_VERBOSE104,3542
+struct gen_binding Domains[MAX_DOMAIN];Domains110,3734
+int Number_imports ;Number_imports111,3774
+void update_op(int op, char * error_msg)update_op116,3924
+#   define YY_NULL YY_NULL136,4303
+#   define YY_NULL YY_NULL138,4338
+# undef YYERROR_VERBOSEYYERROR_VERBOSE144,4440
+# define YYERROR_VERBOSE YYERROR_VERBOSE145,4464
+# define YYERROR_VERBOSE YYERROR_VERBOSE147,4497
+# define GENSPEC_Y_TAB_HGENSPEC_Y_TAB_H153,4649
+# define YYDEBUG YYDEBUG156,4714
+# define YYTOKENTYPEYYTOKENTYPE164,4821
+   enum yytokentype {yytokentype167,4945
+     COMMA = 258,COMMA168,4967
+     COLUMN = 259,COLUMN169,4985
+     SEMI_COLUMN = 260,SEMI_COLUMN170,5004
+     AND = 261,AND171,5028
+     OR = 262,OR172,5044
+     ARROW = 263,ARROW173,5059
+     STAR = 264,STAR174,5077
+     LB = 265,LB175,5094
+     RB = 266,RB176,5109
+     LR = 267,LR177,5124
+     RR = 268,RR178,5139
+     EQUAL = 269,EQUAL179,5154
+     FROM = 270,FROM180,5172
+     GRAM_EXTERNAL = 271,GRAM_EXTERNAL181,5189
+     GRAM_IMPORT = 272,GRAM_IMPORT182,5215
+     TABULATED = 273,TABULATED183,5239
+     PERSISTANT = 274,PERSISTANT184,5261
+     IDENT = 275,IDENT185,5284
+     GRAM_FILE = 276,GRAM_FILE186,5302
+     GRAM_INT = 277GRAM_INT187,5324
+#define COMMA COMMA191,5372
+#define COLUMN COLUMN192,5390
+#define SEMI_COLUMN SEMI_COLUMN193,5409
+#define AND AND194,5433
+#define OR OR195,5449
+#define ARROW ARROW196,5464
+#define STAR STAR197,5482
+#define LB LB198,5499
+#define RB RB199,5514
+#define LR LR200,5529
+#define RR RR201,5544
+#define EQUAL EQUAL202,5559
+#define FROM FROM203,5577
+#define GRAM_EXTERNAL GRAM_EXTERNAL204,5594
+#define GRAM_IMPORT GRAM_IMPORT205,5620
+#define TABULATED TABULATED206,5644
+#define PERSISTANT PERSISTANT207,5666
+#define IDENT IDENT208,5689
+#define GRAM_FILE GRAM_FILE209,5707
+#define GRAM_INT GRAM_INT210,5729
+typedef union YYSTYPEYYSTYPE215,5808
+  union domain *domain ;domain220,5877
+  struct domainlist *domainlist ;domainlist221,5902
+  struct namelist *namelist ;namelist222,5936
+  struct intlist *intlist ;intlist223,5966
+  char *name ;name224,5994
+  int val ;val225,6009
+} YYSTYPE;YYSTYPE230,6069
+# define YYSTYPE_IS_TRIVIAL YYSTYPE_IS_TRIVIAL231,6080
+# define yystype yystype232,6110
+# define YYSTYPE_IS_DECLARED YYSTYPE_IS_DECLARED233,6172
+# undef shortshort260,6688
+typedef YYTYPE_UINT8 yytype_uint8;yytype_uint8264,6730
+typedef unsigned char yytype_uint8;yytype_uint8266,6771
+typedef YYTYPE_INT8 yytype_int8;yytype_int8270,6834
+typedef signed char yytype_int8;yytype_int8273,6967
+typedef short int yytype_int8;yytype_int8275,7006
+typedef YYTYPE_UINT16 yytype_uint16;yytype_uint16279,7066
+typedef unsigned short int yytype_uint16;yytype_uint16281,7109
+typedef YYTYPE_INT16 yytype_int16;yytype_int16285,7179
+typedef short int yytype_int16;yytype_int16287,7220
+#  define YYSIZE_T YYSIZE_T292,7299
+#  define YYSIZE_T YYSIZE_T294,7354
+#  define YYSIZE_T YYSIZE_T298,7560
+#  define YYSIZE_T YYSIZE_T300,7593
+#define YYSIZE_MAXIMUM YYSIZE_MAXIMUM304,7641
+#   define YY_(YY_310,7811
+#  define YY_(YY_314,7897
+# define YYUSE(YYUSE320,8034
+# define YYUSE(YYUSE322,8071
+# define YYID(YYID327,8201
+YYID (int yyi)YYID332,8337
+#    define YYSTACK_ALLOC YYSTACK_ALLOC350,8617
+#    define YYSTACK_ALLOC YYSTACK_ALLOC354,8780
+#    define alloca alloca357,8900
+#    define YYSTACK_ALLOC YYSTACK_ALLOC359,8936
+#      define EXIT_SUCCESS EXIT_SUCCESS365,9263
+#  define YYSTACK_FREE(YYSTACK_FREE374,9413
+#   define YYSTACK_ALLOC_MAXIMUM YYSTACK_ALLOC_MAXIMUM380,9810
+#  define YYSTACK_ALLOC YYSTACK_ALLOC383,9892
+#  define YYSTACK_FREE YYSTACK_FREE384,9925
+#   define YYSTACK_ALLOC_MAXIMUM YYSTACK_ALLOC_MAXIMUM386,9987
+#    define EXIT_SUCCESS EXIT_SUCCESS393,10277
+#   define YYMALLOC YYMALLOC397,10342
+#   define YYFREE YYFREE404,10612
+union yyallocyyalloc419,11098
+  yytype_int16 yyss_alloc;yyss_alloc421,11114
+  YYSTYPE yyvs_alloc;yyvs_alloc422,11141
+# define YYSTACK_GAP_MAXIMUM YYSTACK_GAP_MAXIMUM426,11242
+# define YYSTACK_BYTES(YYSTACK_BYTES430,11390
+# define YYCOPY_NEEDED YYCOPY_NEEDED434,11505
+# define YYSTACK_RELOCATE(YYSTACK_RELOCATE441,11814
+#   define YYCOPY(YYCOPY459,12365
+#   define YYCOPY(YYCOPY462,12471
+#define YYFINAL YYFINAL475,12947
+#define YYLAST YYLAST477,13006
+#define YYNTOKENS YYNTOKENS480,13068
+#define YYNNTS YYNNTS482,13131
+#define YYNRULES YYNRULES484,13186
+#define YYNSTATES YYNSTATES486,13244
+#define YYUNDEFTOK YYUNDEFTOK489,13340
+#define YYMAXUTOK YYMAXUTOK490,13362
+#define YYTRANSLATE(YYTRANSLATE492,13387
+static const yytype_uint8 yytranslate[] =yytranslate496,13563
+static const yytype_uint8 yyprhs[] =yyprhs531,15736
+static const yytype_int8 yyrhs[] =yyrhs540,16085
+static const yytype_uint16 yyrline[] =yyrline556,16935
+static const char *const yytname[] =yytname568,17408
+static const yytype_uint16 yytoknum[] =yytoknum583,18022
+static const yytype_uint8 yyr1[] =yyr1592,18312
+static const yytype_uint8 yyr2[] =yyr2601,18679
+static const yytype_uint8 yydefact[] =yydefact612,19149
+static const yytype_int8 yydefgoto[] =yydefgoto623,19625
+#define YYPACT_NINF YYPACT_NINF631,19886
+static const yytype_int8 yypact[] =yypact632,19910
+static const yytype_int8 yypgoto[] =yypgoto643,20381
+#define YYTABLE_NINF YYTABLE_NINF652,20752
+static const yytype_int8 yytable[] =yytable653,20777
+#define yypact_value_is_default(yypact_value_is_default662,21121
+#define yytable_value_is_error(yytable_value_is_error665,21188
+static const yytype_int8 yycheck[] =yycheck668,21248
+static const yytype_uint8 yystos[] =yystos679,21689
+#define yyerrok	yyerrok689,22134
+#define yyclearin	yyclearin690,22169
+#define YYEMPTY	YYEMPTY691,22206
+#define YYEOF	YYEOF692,22228
+#define YYACCEPT	YYACCEPT694,22246
+#define YYABORT	YYABORT695,22280
+#define YYERROR	YYERROR696,22313
+#define YYFAIL	YYFAIL706,22712
+#define YYRECOVERING(YYRECOVERING714,23032
+#define YYBACKUP(YYBACKUP716,23073
+#define YYTERROR	YYTERROR734,23977
+#define YYERRCODE	YYERRCODE735,23996
+# define YYLLOC_DEFAULT(YYLLOC_DEFAULT742,24224
+#define YYRHSLOC(YYRHSLOC761,25437
+# define YY_LOCATION_PRINT(YY_LOCATION_PRINT768,25560
+# define YYLEX YYLEX775,25696
+# define YYLEX YYLEX777,25737
+#  define YYFPRINTF YYFPRINTF785,25895
+# define YYDPRINTF(YYDPRINTF788,25932
+# define YY_SYMBOL_PRINT(YY_SYMBOL_PRINT794,26039
+yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)yy_symbol_value_print814,26581
+yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)yy_symbol_print848,27288
+yy_stack_print (yytype_int16 *yybottom, yytype_int16 *yytop)yy_stack_print874,28134
+# define YY_STACK_PRINT(YY_STACK_PRINT891,28495
+yy_reduce_print (YYSTYPE *yyvsp, int yyrule)yy_reduce_print905,28905
+# define YY_REDUCE_PRINT(YY_REDUCE_PRINT929,29509
+int yydebug;yydebug937,29738
+# define YYDPRINTF(YYDPRINTF939,29772
+# define YY_SYMBOL_PRINT(YY_SYMBOL_PRINT940,29797
+# define YY_STACK_PRINT(YY_STACK_PRINT941,29852
+# define YY_REDUCE_PRINT(YY_REDUCE_PRINT942,29889
+# define YYINITDEPTH YYINITDEPTH948,30023
+# define YYMAXDEPTH YYMAXDEPTH959,30379
+#   define yystrlen yystrlen967,30498
+yystrlen (const char *yystr)yystrlen973,30682
+#   define yystpcpy yystpcpy990,30977
+yystpcpy (char *yydest, const char *yysrc)yystpcpy997,31213
+yytnamerr (char *yyres, const char *yystr)yytnamerr1025,31954
+yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,yysyntax_error1073,32983
+# define YYCASE_(YYCASE_1152,36554
+# undef YYCASE_YYCASE_1162,37105
+yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)yydestruct1209,38315
+int yychar;yychar1236,38710
+YYSTYPE yylval;yylval1239,38774
+int yynerrs;yynerrs1242,38830
+yyparse (void *YYPARSE_PARAM)yyparse1253,39011
+#define YYPOPSTACK(YYPOPSTACK1309,40279
+void genspec_error(const char * s)genspec_error2078,60591
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/read.y,364
+Read	: Nb_of_shared_pointers ContentsRead130,3067
+Contents: Chunk Contents164,3850
+Type: IntType215,4799
+Sparse_Datas: Sparse_Datas Int Data { /* index, value */Sparse_Datas252,5598
+Data	: Basis	{ $$ = $1; }Data258,5756
+Basis	: READ_UNIT { $$.u = 1; }Basis325,7437
+Int     : READ_INT   { $$ = $1; }Int337,7811
+String  : READ_STRING {String340,7849
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_stack.h,473
+#define STACK_INCLUDEDSTACK_INCLUDED43,1571
+typedef struct __stack_head *stack;stack47,1622
+typedef struct __stack_iterator *stack_iterator;stack_iterator48,1658
+#define STACK_NULL STACK_NULL52,1741
+#define STACK_NULL_P(STACK_NULL_P53,1775
+#define stack_undefined stack_undefined55,1818
+#define stack_undefined_p(stack_undefined_p56,1856
+#define STACK_CHECK(STACK_CHECK58,1909
+#define STACK_MAP_X(STACK_MAP_X104,3386
+#define STACK_MAP(STACK_MAP116,3767
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/string_buffer.c,1849
+struct __string_buffer_head__string_buffer_head46,1437
+  stack ins;ins48,1467
+  bool dup; // whether to duplicate all strings appended to the buffer.dup49,1480
+string_buffer string_buffer_make(bool dup)string_buffer_make58,1781
+void string_buffer_reset(string_buffer sb)string_buffer_reset70,2060
+void string_buffer_free(string_buffer *psb)string_buffer_free82,2356
+void string_buffer_free_all (string_buffer *psb)string_buffer_free_all94,2635
+size_t string_buffer_size(const string_buffer sb)string_buffer_size103,2850
+bool string_buffer_empty_p(const string_buffer sb)string_buffer_empty_p112,3043
+  string_buffer_to_string_internal(const string_buffer sb, bool rev)string_buffer_to_string_internal120,3226
+string string_buffer_to_string(const string_buffer sb)string_buffer_to_string141,3679
+string string_buffer_to_string_reverse (const string_buffer sb)string_buffer_to_string_reverse148,3871
+void string_buffer_to_file(const string_buffer sb, FILE * out)string_buffer_to_file155,4029
+#define BUFFER_SIZE BUFFER_SIZE160,4150
+void string_buffer_append_c_string_buffer(string_buffer_append_c_string_buffer165,4324
+static void string_buffer_append_internal(string_buffer sb, const string s)string_buffer_append_internal251,6410
+void string_buffer_append(string_buffer sb, const string s)string_buffer_append260,6653
+void string_buffer_append_sb(string_buffer sb, const string_buffer sb2)string_buffer_append_sb271,7013
+void string_buffer_append_list(string_buffer sb, const list l)string_buffer_append_list282,7445
+void string_buffer_cat(string_buffer sb, const string first, ...)string_buffer_cat294,7727
+void string_buffer_printf_alist(string_buffer_printf_alist309,8001
+void string_buffer_printf(string_buffer_printf329,8458
+void string_buffer_append_xml_text(string_buffer_append_xml_text342,8687
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/tabulated.c,1907
+#define TABULATED_ELEMENTS_SIZE TABULATED_ELEMENTS_SIZE47,1203
+#define TABULATED_ELEMENTS_INCR TABULATED_ELEMENTS_INCR48,1241
+struct _gtp_gtp50,1282
+  int domain;           /* domain number */domain52,1296
+  int size;		/* current allocated size */size53,1340
+  int used;		/* how many are used */used54,1382
+  gen_chunk * table;	/* actual table */table55,1419
+  hash_table names;     /* names to index for fast search */names56,1459
+static gen_tabulated_p get_tabulated_from_domain(int domain)get_tabulated_from_domain59,1524
+gen_tabulated_p gen_init_tabulated(int domain)gen_init_tabulated66,1721
+static void extends_tabulated(gen_tabulated_p gtp)extends_tabulated88,2188
+gen_chunk * gen_tabulated_fake_object_hack(int domain)gen_tabulated_fake_object_hack107,2583
+void gen_mapc_tabulated(void (*fp)(gen_chunk*), int domain)gen_mapc_tabulated127,3045
+list gen_filter_tabulated(bool (*filter)(gen_chunk*), int domain)gen_filter_tabulated144,3457
+static int gen_put_tabulated(int domain, gen_chunk * gc)gen_put_tabulated162,3863
+static void gen_put_tabulated_name(int domain, char * id, _int number)gen_put_tabulated_name188,4469
+static void gen_delete_tabulated_name(gen_chunk * obj)gen_delete_tabulated_name198,4754
+static _int gen_get_tabulated_name_basic(int domain, const char * id)gen_get_tabulated_name_basic212,5117
+void * gen_find_tabulated(const char * key, int domain)gen_find_tabulated218,5293
+static void positive_number(gen_chunk * o)positive_number234,5685
+int gen_read_and_check_tabulated(FILE *file, int create_p)gen_read_and_check_tabulated239,5792
+void gen_clear_tabulated_element(gen_chunk * obj)gen_clear_tabulated_element251,6181
+gen_do_enter_tabulated(int domain, string id, gen_chunk * cp, bool is_a_ref)gen_do_enter_tabulated265,6555
+gen_enter_tabulated(int domain, string id, gen_chunk * cp, bool allow_ref)gen_enter_tabulated279,7051
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genLisp.c,878
+#define TYPE(TYPE50,1504
+#define NEWGEN_IMPL NEWGEN_IMPL51,1563
+static char start[ 1024 ] ;start55,1710
+static char *package ;package59,1799
+struct gen_binding *Tabulated_bp ;Tabulated_bp61,1823
+int Read_spec_mode ;			/* Unused in Lisp */Read_spec_mode63,1859
+#define OR_VALUE_INDEX OR_VALUE_INDEX65,1904
+static int or_counter ;or_counter67,1930
+init_member( dp )init_member72,2043
+gen_external( bp )gen_external117,3166
+gen_external_member( dp, offset )gen_external_member130,3551
+gen_prelude( bp )gen_prelude155,4253
+gen_postlude( bp )gen_postlude173,4809
+static generate_type_member( bp )generate_type_member197,5715
+gen_and( bp )gen_and211,6053
+gen_or( bp )gen_or240,6835
+gen_list( bp )gen_list292,8712
+gen_array( bp )gen_array305,9057
+gen_set( bp )gen_set321,9471
+gen_domain( bp )gen_domain338,9926
+gencode( file )gencode377,10941
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_generic_mapping.h,243
+#define GENERIC_MAPPING_INCLUDEDGENERIC_MAPPING_INCLUDED53,1850
+#define GENERIC_MAPPING(GENERIC_MAPPING72,2375
+#define GENERIC_CURRENT_MAPPING(GENERIC_CURRENT_MAPPING119,4602
+#define GENERIC_LOCAL_MAPPING(GENERIC_LOCAL_MAPPING126,4826
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/new.c,23
+int main(main39,1029
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/spec.l,0
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genread_lex.c,10808
+#define  YY_INT_ALIGNED YY_INT_ALIGNED4,21
+#define yy_create_buffer yy_create_buffer8,99
+#define yy_delete_buffer yy_delete_buffer9,147
+#define yy_flex_debug yy_flex_debug10,195
+#define yy_init_buffer yy_init_buffer11,237
+#define yy_flush_buffer yy_flush_buffer12,281
+#define yy_load_buffer_state yy_load_buffer_state13,327
+#define yy_switch_to_buffer yy_switch_to_buffer14,383
+#define yyin yyin15,437
+#define yyleng yyleng16,461
+#define yylex yylex17,489
+#define yylineno yylineno18,515
+#define yyout yyout19,547
+#define yyrestart yyrestart20,573
+#define yytext yytext21,607
+#define yywrap yywrap22,635
+#define yyalloc yyalloc23,663
+#define yyrealloc yyrealloc24,693
+#define yyfree yyfree25,727
+#define FLEX_SCANNERFLEX_SCANNER27,756
+#define YY_FLEX_MAJOR_VERSION YY_FLEX_MAJOR_VERSION28,777
+#define YY_FLEX_MINOR_VERSION YY_FLEX_MINOR_VERSION29,809
+#define YY_FLEX_SUBMINOR_VERSION YY_FLEX_SUBMINOR_VERSION30,841
+#define FLEX_BETAFLEX_BETA32,910
+#define FLEXINT_HFLEXINT_H48,1208
+#define __STDC_LIMIT_MACROS __STDC_LIMIT_MACROS58,1519
+typedef int8_t flex_int8_t;flex_int8_t62,1579
+typedef uint8_t flex_uint8_t;flex_uint8_t63,1607
+typedef int16_t flex_int16_t;flex_int16_t64,1637
+typedef uint16_t flex_uint16_t;flex_uint16_t65,1667
+typedef int32_t flex_int32_t;flex_int32_t66,1699
+typedef uint32_t flex_uint32_t;flex_uint32_t67,1729
+typedef signed char flex_int8_t;flex_int8_t69,1767
+typedef short int flex_int16_t;flex_int16_t70,1800
+typedef int flex_int32_t;flex_int32_t71,1832
+typedef unsigned char flex_uint8_t; flex_uint8_t72,1858
+typedef unsigned short int flex_uint16_t;flex_uint16_t73,1895
+typedef unsigned int flex_uint32_t;flex_uint32_t74,1937
+#define INT8_MIN INT8_MIN78,2023
+#define INT16_MIN INT16_MIN81,2086
+#define INT32_MIN INT32_MIN84,2153
+#define INT8_MAX INT8_MAX87,2224
+#define INT16_MAX INT16_MAX90,2286
+#define INT32_MAX INT32_MAX93,2350
+#define UINT8_MAX UINT8_MAX96,2419
+#define UINT16_MAX UINT16_MAX99,2483
+#define UINT32_MAX UINT32_MAX102,2549
+#define YY_USE_CONSTYY_USE_CONST112,2719
+#define YY_USE_CONSTYY_USE_CONST119,2840
+#define yyconst yyconst125,2942
+#define yyconstyyconst127,2970
+#define YY_NULL YY_NULL131,3027
+#define YY_SC_TO_UI(YY_SC_TO_UI138,3274
+#define BEGIN BEGIN144,3505
+#define YY_START YY_START150,3704
+#define YYSTATE YYSTATE151,3744
+#define YY_STATE_EOF(YY_STATE_EOF154,3827
+#define YY_NEW_FILE YY_NEW_FILE157,3947
+#define YY_END_OF_BUFFER_CHAR YY_END_OF_BUFFER_CHAR159,3998
+#define YY_BUF_SIZE YY_BUF_SIZE163,4087
+#define YY_STATE_BUF_SIZE YY_STATE_BUF_SIZE168,4215
+#define YY_TYPEDEF_YY_BUFFER_STATEYY_TYPEDEF_YY_BUFFER_STATE171,4323
+typedef struct yy_buffer_state *YY_BUFFER_STATE;YY_BUFFER_STATE172,4358
+#define YY_TYPEDEF_YY_SIZE_TYY_TYPEDEF_YY_SIZE_T176,4444
+typedef size_t yy_size_t;yy_size_t177,4473
+#define EOB_ACT_CONTINUE_SCAN EOB_ACT_CONTINUE_SCAN184,4579
+#define EOB_ACT_END_OF_FILE EOB_ACT_END_OF_FILE185,4611
+#define EOB_ACT_LAST_MATCH EOB_ACT_LAST_MATCH186,4641
+    #define YY_LESS_LINENO(YY_LESS_LINENO188,4671
+#define yyless(yyless191,4786
+#define unput(unput204,5153
+#define YY_STRUCT_YY_BUFFER_STATEYY_STRUCT_YY_BUFFER_STATE207,5233
+struct yy_buffer_stateyy_buffer_state208,5267
+	FILE *yy_input_file;yy_input_file210,5293
+	char *yy_ch_buf;		/* input buffer */yy_ch_buf212,5316
+	char *yy_buf_pos;		/* current position in input buffer */yy_buf_pos213,5354
+	yy_size_t yy_buf_size;yy_buf_size218,5497
+	yy_size_t yy_n_chars;yy_n_chars223,5607
+	int yy_is_our_buffer;yy_is_our_buffer229,5775
+	int yy_is_interactive;yy_is_interactive236,6013
+	int yy_at_bol;yy_at_bol242,6180
+    int yy_bs_lineno; /**< The line count. */yy_bs_lineno244,6197
+    int yy_bs_column; /**< The column count. */yy_bs_column245,6243
+	int yy_fill_buffer;yy_fill_buffer250,6378
+	int yy_buffer_status;yy_buffer_status252,6400
+#define YY_BUFFER_NEW YY_BUFFER_NEW254,6424
+#define YY_BUFFER_NORMAL YY_BUFFER_NORMAL255,6448
+#define YY_BUFFER_EOF_PENDING YY_BUFFER_EOF_PENDING266,6958
+static size_t yy_buffer_stack_top = 0; /**< index of top of stack. */yy_buffer_stack_top272,7066
+static size_t yy_buffer_stack_max = 0; /**< capacity of stack. */yy_buffer_stack_max273,7136
+static YY_BUFFER_STATE * yy_buffer_stack = 0; /**< Stack as an array. */yy_buffer_stack274,7202
+#define YY_CURRENT_BUFFER YY_CURRENT_BUFFER282,7470
+#define YY_CURRENT_BUFFER_LVALUE YY_CURRENT_BUFFER_LVALUE289,7766
+static char yy_hold_char;yy_hold_char292,7914
+static yy_size_t yy_n_chars;		/* number of characters read into yy_ch_buf */yy_n_chars293,7940
+yy_size_t genread_leng;genread_leng294,8017
+static char *yy_c_buf_p = (char *) 0;yy_c_buf_p297,8087
+static int yy_init = 0;		/* whether we need to initialize */yy_init298,8125
+static int yy_start = 0;	/* start state number */yy_start299,8186
+static int yy_did_buffer_switch_on_eof;yy_did_buffer_switch_on_eof304,8377
+#define YY_FLUSH_BUFFER YY_FLUSH_BUFFER318,8957
+#define yy_new_buffer yy_new_buffer328,9341
+#define yy_set_interactive(yy_set_interactive330,9387
+#define yy_set_bol(yy_set_bol340,9681
+#define YY_AT_BOL(YY_AT_BOL350,9942
+typedef unsigned char YY_CHAR;YY_CHAR354,10025
+FILE *genread_in , *genread_out ;genread_in356,10057
+FILE *genread_in , *genread_out ;genread_out356,10057
+typedef int yy_state_type;yy_state_type358,10092
+int genread_lineno = 1;genread_lineno362,10148
+#define yytext_ptr yytext_ptr365,10200
+#define YY_DO_BEFORE_ACTION YY_DO_BEFORE_ACTION375,10565
+#define YY_NUM_RULES YY_NUM_RULES382,10734
+#define YY_END_OF_BUFFER YY_END_OF_BUFFER383,10758
+struct yy_trans_infoyy_trans_info386,10867
+	flex_int32_t yy_verify;yy_verify388,10891
+	flex_int32_t yy_nxt;yy_nxt389,10916
+static yyconst flex_int16_t yy_accept[80] =yy_accept391,10942
+static yyconst flex_int32_t yy_ec[256] =yy_ec403,11519
+static yyconst flex_int32_t yy_meta[31] =yy_meta435,13241
+static yyconst flex_int16_t yy_base[82] =yy_base442,13497
+static yyconst flex_int16_t yy_def[82] =yy_def455,14089
+static yyconst flex_int16_t yy_nxt[134] =yy_nxt468,14680
+static yyconst flex_int16_t yy_chk[134] =yy_chk487,15610
+static yy_state_type yy_last_accepting_state;yy_last_accepting_state506,16540
+static char *yy_last_accepting_cpos;yy_last_accepting_cpos507,16586
+int genread__flex_debug = 0;genread__flex_debug510,16656
+#define REJECT REJECT515,16788
+#define yymore(yymore516,16832
+#define YY_MORE_ADJ YY_MORE_ADJ517,16878
+#define YY_RESTORE_YY_MORE_OFFSETYY_RESTORE_YY_MORE_OFFSET518,16900
+char *genread_text;genread_text519,16934
+#undef genread_wrapgenread_wrap559,17952
+#define yylval yylval563,17995
+static string literal = (char*) NULL;literal566,18050
+static int literal_size = 0;literal_size567,18088
+static void append_to_literal(string s)append_to_literal568,18117
+  newgen_line_number,newgen_line_number590,18602
+  newgen_char_number,newgen_char_number591,18624
+  newgen_col_number,newgen_col_number592,18646
+  newgen_lex_number;newgen_lex_number593,18667
+void newgen_start_lexer(FILE * in)newgen_start_lexer595,18689
+void newgen_lexer_position(FILE * out)newgen_lexer_position604,18862
+#define INITIAL INITIAL614,19092
+#define a_string a_string615,19110
+#define YY_EXTRA_TYPE YY_EXTRA_TYPE626,19413
+#define YY_READ_BUF_SIZE YY_READ_BUF_SIZE692,20671
+#define ECHO ECHO700,20889
+#define YY_INPUT(YY_INPUT707,21117
+#define yyterminate(yyterminate744,22061
+#define YY_START_STACK_INCR YY_START_STACK_INCR749,22196
+#define YY_FATAL_ERROR(YY_FATAL_ERROR754,22286
+#define YY_DECL_IS_OURS YY_DECL_IS_OURS763,22519
+#define YY_DECL YY_DECL767,22578
+#define YY_USER_ACTIONYY_USER_ACTION774,22772
+#define YY_BREAK YY_BREAK779,22865
+#define YY_RULE_SETUP YY_RULE_SETUP782,22897
+static int yy_get_next_buffer (void)yy_get_next_buffer1218,32742
+    static yy_state_type yy_get_previous_state (void)yy_get_previous_state1352,36376
+    static yy_state_type yy_try_NUL_trans  (yy_state_type yy_current_state )yy_try_NUL_trans1384,37277
+    static int yyinput (void)yyinput1409,37987
+    void genread_restart  (FILE * input_file )genread_restart1486,39778
+    void genread__switch_to_buffer  (YY_BUFFER_STATE  new_buffer )genread__switch_to_buffer1503,40175
+static void genread__load_buffer_state  (void)genread__load_buffer_state1534,41060
+    YY_BUFFER_STATE genread__create_buffer  (FILE * file, int  size )genread__create_buffer1548,41545
+    void genread__delete_buffer (YY_BUFFER_STATE  b )genread__delete_buffer1576,42278
+    static void genread__init_buffer  (YY_BUFFER_STATE  b, FILE * file )genread__init_buffer1595,42751
+    void genread__flush_buffer (YY_BUFFER_STATE  b )genread__flush_buffer1623,43508
+void genread_push_buffer_state (YY_BUFFER_STATE new_buffer )genread_push_buffer_state1652,44206
+void genread_pop_buffer_state (void)genread_pop_buffer_state1682,45001
+static void genread_ensure_buffer_stack (void)genread_ensure_buffer_stack1701,45414
+YY_BUFFER_STATE genread__scan_buffer  (char * base, yy_size_t  size )genread__scan_buffer1750,47066
+YY_BUFFER_STATE genread__scan_string (yyconst char * yystr )genread__scan_string1787,48175
+YY_BUFFER_STATE genread__scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len )genread__scan_bytes1800,48610
+#define YY_EXIT_FAILURE YY_EXIT_FAILURE1831,49369
+static void yy_fatal_error (yyconst char* msg )yy_fatal_error1834,49403
+#undef yylessyyless1842,49582
+#define yyless(yyless1843,49596
+int genread_get_lineno  (void)genread_get_lineno1862,50085
+FILE *genread_get_in  (void)genread_get_in1871,50191
+FILE *genread_get_out  (void)genread_get_out1879,50287
+yy_size_t genread_get_leng  (void)genread_get_leng1887,50399
+char *genread_get_text  (void)genread_get_text1896,50504
+void genread_set_lineno (int  line_number )genread_set_lineno1905,50632
+void genread_set_in (FILE *  in_str )genread_set_in1917,50875
+void genread_set_out (FILE *  out_str )genread_set_out1922,50948
+int genread_get_debug  (void)genread_get_debug1927,51025
+void genread_set_debug (int  bdebug )genread_set_debug1932,51096
+static int yy_init_globals (void)yy_init_globals1937,51178
+int genread_lex_destroy  (void)genread_lex_destroy1966,51902
+static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )yy_flex_strncpy1992,52486
+static int yy_flex_strlen (yyconst char * s )yy_flex_strlen2001,52647
+void *genread_alloc (yy_size_t  size )genread_alloc2011,52764
+void *genread_realloc  (void * ptr, yy_size_t  size )genread_realloc2016,52841
+void genread_free (void * ptr )genread_free2028,53303
+#define YYTABLES_NAME YYTABLES_NAME2033,53409
+int genread_input()genread_input2040,53485
+int genread_wrap(void)genread_wrap2048,53582
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/genspec_lex.c,10843
+#define  YY_INT_ALIGNED YY_INT_ALIGNED4,21
+#define yy_create_buffer yy_create_buffer8,99
+#define yy_delete_buffer yy_delete_buffer9,147
+#define yy_flex_debug yy_flex_debug10,195
+#define yy_init_buffer yy_init_buffer11,237
+#define yy_flush_buffer yy_flush_buffer12,281
+#define yy_load_buffer_state yy_load_buffer_state13,327
+#define yy_switch_to_buffer yy_switch_to_buffer14,383
+#define yyin yyin15,437
+#define yyleng yyleng16,461
+#define yylex yylex17,489
+#define yylineno yylineno18,515
+#define yyout yyout19,547
+#define yyrestart yyrestart20,573
+#define yytext yytext21,607
+#define yywrap yywrap22,635
+#define yyalloc yyalloc23,663
+#define yyrealloc yyrealloc24,693
+#define yyfree yyfree25,727
+#define FLEX_SCANNERFLEX_SCANNER27,756
+#define YY_FLEX_MAJOR_VERSION YY_FLEX_MAJOR_VERSION28,777
+#define YY_FLEX_MINOR_VERSION YY_FLEX_MINOR_VERSION29,809
+#define YY_FLEX_SUBMINOR_VERSION YY_FLEX_SUBMINOR_VERSION30,841
+#define FLEX_BETAFLEX_BETA32,910
+#define FLEXINT_HFLEXINT_H48,1208
+#define __STDC_LIMIT_MACROS __STDC_LIMIT_MACROS58,1519
+typedef int8_t flex_int8_t;flex_int8_t62,1579
+typedef uint8_t flex_uint8_t;flex_uint8_t63,1607
+typedef int16_t flex_int16_t;flex_int16_t64,1637
+typedef uint16_t flex_uint16_t;flex_uint16_t65,1667
+typedef int32_t flex_int32_t;flex_int32_t66,1699
+typedef uint32_t flex_uint32_t;flex_uint32_t67,1729
+typedef signed char flex_int8_t;flex_int8_t69,1767
+typedef short int flex_int16_t;flex_int16_t70,1800
+typedef int flex_int32_t;flex_int32_t71,1832
+typedef unsigned char flex_uint8_t; flex_uint8_t72,1858
+typedef unsigned short int flex_uint16_t;flex_uint16_t73,1895
+typedef unsigned int flex_uint32_t;flex_uint32_t74,1937
+#define INT8_MIN INT8_MIN78,2023
+#define INT16_MIN INT16_MIN81,2086
+#define INT32_MIN INT32_MIN84,2153
+#define INT8_MAX INT8_MAX87,2224
+#define INT16_MAX INT16_MAX90,2286
+#define INT32_MAX INT32_MAX93,2350
+#define UINT8_MAX UINT8_MAX96,2419
+#define UINT16_MAX UINT16_MAX99,2483
+#define UINT32_MAX UINT32_MAX102,2549
+#define YY_USE_CONSTYY_USE_CONST112,2719
+#define YY_USE_CONSTYY_USE_CONST119,2840
+#define yyconst yyconst125,2942
+#define yyconstyyconst127,2970
+#define YY_NULL YY_NULL131,3027
+#define YY_SC_TO_UI(YY_SC_TO_UI138,3274
+#define BEGIN BEGIN144,3505
+#define YY_START YY_START150,3704
+#define YYSTATE YYSTATE151,3744
+#define YY_STATE_EOF(YY_STATE_EOF154,3827
+#define YY_NEW_FILE YY_NEW_FILE157,3947
+#define YY_END_OF_BUFFER_CHAR YY_END_OF_BUFFER_CHAR159,3998
+#define YY_BUF_SIZE YY_BUF_SIZE163,4087
+#define YY_STATE_BUF_SIZE YY_STATE_BUF_SIZE168,4215
+#define YY_TYPEDEF_YY_BUFFER_STATEYY_TYPEDEF_YY_BUFFER_STATE171,4323
+typedef struct yy_buffer_state *YY_BUFFER_STATE;YY_BUFFER_STATE172,4358
+#define YY_TYPEDEF_YY_SIZE_TYY_TYPEDEF_YY_SIZE_T176,4444
+typedef size_t yy_size_t;yy_size_t177,4473
+#define EOB_ACT_CONTINUE_SCAN EOB_ACT_CONTINUE_SCAN184,4579
+#define EOB_ACT_END_OF_FILE EOB_ACT_END_OF_FILE185,4611
+#define EOB_ACT_LAST_MATCH EOB_ACT_LAST_MATCH186,4641
+    #define YY_LESS_LINENO(YY_LESS_LINENO188,4671
+#define yyless(yyless191,4786
+#define unput(unput204,5153
+#define YY_STRUCT_YY_BUFFER_STATEYY_STRUCT_YY_BUFFER_STATE207,5233
+struct yy_buffer_stateyy_buffer_state208,5267
+	FILE *yy_input_file;yy_input_file210,5293
+	char *yy_ch_buf;		/* input buffer */yy_ch_buf212,5316
+	char *yy_buf_pos;		/* current position in input buffer */yy_buf_pos213,5354
+	yy_size_t yy_buf_size;yy_buf_size218,5497
+	yy_size_t yy_n_chars;yy_n_chars223,5607
+	int yy_is_our_buffer;yy_is_our_buffer229,5775
+	int yy_is_interactive;yy_is_interactive236,6013
+	int yy_at_bol;yy_at_bol242,6180
+    int yy_bs_lineno; /**< The line count. */yy_bs_lineno244,6197
+    int yy_bs_column; /**< The column count. */yy_bs_column245,6243
+	int yy_fill_buffer;yy_fill_buffer250,6378
+	int yy_buffer_status;yy_buffer_status252,6400
+#define YY_BUFFER_NEW YY_BUFFER_NEW254,6424
+#define YY_BUFFER_NORMAL YY_BUFFER_NORMAL255,6448
+#define YY_BUFFER_EOF_PENDING YY_BUFFER_EOF_PENDING266,6958
+static size_t yy_buffer_stack_top = 0; /**< index of top of stack. */yy_buffer_stack_top272,7066
+static size_t yy_buffer_stack_max = 0; /**< capacity of stack. */yy_buffer_stack_max273,7136
+static YY_BUFFER_STATE * yy_buffer_stack = 0; /**< Stack as an array. */yy_buffer_stack274,7202
+#define YY_CURRENT_BUFFER YY_CURRENT_BUFFER282,7470
+#define YY_CURRENT_BUFFER_LVALUE YY_CURRENT_BUFFER_LVALUE289,7766
+static char yy_hold_char;yy_hold_char292,7914
+static yy_size_t yy_n_chars;		/* number of characters read into yy_ch_buf */yy_n_chars293,7940
+yy_size_t genspec_leng;genspec_leng294,8017
+static char *yy_c_buf_p = (char *) 0;yy_c_buf_p297,8087
+static int yy_init = 0;		/* whether we need to initialize */yy_init298,8125
+static int yy_start = 0;	/* start state number */yy_start299,8186
+static int yy_did_buffer_switch_on_eof;yy_did_buffer_switch_on_eof304,8377
+#define YY_FLUSH_BUFFER YY_FLUSH_BUFFER318,8957
+#define yy_new_buffer yy_new_buffer328,9341
+#define yy_set_interactive(yy_set_interactive330,9387
+#define yy_set_bol(yy_set_bol340,9681
+#define YY_AT_BOL(YY_AT_BOL350,9942
+typedef unsigned char YY_CHAR;YY_CHAR354,10025
+FILE *genspec_in , *genspec_out ;genspec_in356,10057
+FILE *genspec_in , *genspec_out ;genspec_out356,10057
+typedef int yy_state_type;yy_state_type358,10092
+int genspec_lineno = 1;genspec_lineno362,10148
+#define yytext_ptr yytext_ptr365,10200
+#define YY_DO_BEFORE_ACTION YY_DO_BEFORE_ACTION375,10565
+#define YY_NUM_RULES YY_NUM_RULES382,10734
+#define YY_END_OF_BUFFER YY_END_OF_BUFFER383,10758
+struct yy_trans_infoyy_trans_info386,10867
+	flex_int32_t yy_verify;yy_verify388,10891
+	flex_int32_t yy_nxt;yy_nxt389,10916
+static yyconst flex_int16_t yy_accept[96] =yy_accept391,10942
+static yyconst flex_int32_t yy_ec[256] =yy_ec406,11626
+static yyconst flex_int32_t yy_meta[48] =yy_meta438,13348
+static yyconst flex_int16_t yy_base[99] =yy_base447,13716
+static yyconst flex_int16_t yy_def[99] =yy_def462,14416
+static yyconst flex_int16_t yy_nxt[199] =yy_nxt477,15115
+static yyconst flex_int16_t yy_chk[199] =yy_chk503,16466
+static yy_state_type yy_last_accepting_state;yy_last_accepting_state529,17817
+static char *yy_last_accepting_cpos;yy_last_accepting_cpos530,17863
+int genspec__flex_debug = 0;genspec__flex_debug533,17933
+#define REJECT REJECT538,18065
+#define yymore(yymore539,18109
+#define YY_MORE_ADJ YY_MORE_ADJ540,18155
+#define YY_RESTORE_YY_MORE_OFFSETYY_RESTORE_YY_MORE_OFFSET541,18177
+char *genspec_text;genspec_text542,18211
+#undef genspec_wrapgenspec_wrap579,19202
+#define yylval yylval583,19245
+static char * string_to_parse = (char*) 0; /* shared pointer! */string_to_parse592,19388
+#define YY_INPUT(YY_INPUT594,19454
+void genspec_set_string_to_parse(char *s) { string_to_parse = s;}genspec_set_string_to_parse611,20303
+void genspec_reset_string_to_parse() { string_to_parse = (char *) 0;}genspec_reset_string_to_parse612,20369
+void genspec_set_string_to_parse(char *s)genspec_set_string_to_parse616,20555
+void genspec_reset_string_to_parse()genspec_reset_string_to_parse625,20764
+    char* strcache(char *s)strcache639,21106
+    #define strcache strcache654,21485
+#define INITIAL INITIAL660,21544
+#define YY_EXTRA_TYPE YY_EXTRA_TYPE671,21846
+#define YY_READ_BUF_SIZE YY_READ_BUF_SIZE737,23104
+#define ECHO ECHO745,23322
+#define YY_INPUT(YY_INPUT752,23550
+#define yyterminate(yyterminate789,24494
+#define YY_START_STACK_INCR YY_START_STACK_INCR794,24629
+#define YY_FATAL_ERROR(YY_FATAL_ERROR799,24719
+#define YY_DECL_IS_OURS YY_DECL_IS_OURS808,24952
+#define YY_DECL YY_DECL812,25011
+#define YY_USER_ACTIONYY_USER_ACTION819,25205
+#define YY_BREAK YY_BREAK824,25298
+#define YY_RULE_SETUP YY_RULE_SETUP827,25330
+static int yy_get_next_buffer (void)yy_get_next_buffer1206,33705
+    static yy_state_type yy_get_previous_state (void)yy_get_previous_state1340,37339
+    static yy_state_type yy_try_NUL_trans  (yy_state_type yy_current_state )yy_try_NUL_trans1373,38274
+    static int yyinput (void)yyinput1398,38984
+    void genspec_restart  (FILE * input_file )genspec_restart1477,40828
+    void genspec__switch_to_buffer  (YY_BUFFER_STATE  new_buffer )genspec__switch_to_buffer1494,41225
+static void genspec__load_buffer_state  (void)genspec__load_buffer_state1525,42110
+    YY_BUFFER_STATE genspec__create_buffer  (FILE * file, int  size )genspec__create_buffer1539,42595
+    void genspec__delete_buffer (YY_BUFFER_STATE  b )genspec__delete_buffer1567,43328
+    static void genspec__init_buffer  (YY_BUFFER_STATE  b, FILE * file )genspec__init_buffer1586,43801
+    void genspec__flush_buffer (YY_BUFFER_STATE  b )genspec__flush_buffer1614,44558
+void genspec_push_buffer_state (YY_BUFFER_STATE new_buffer )genspec_push_buffer_state1643,45256
+void genspec_pop_buffer_state (void)genspec_pop_buffer_state1673,46051
+static void genspec_ensure_buffer_stack (void)genspec_ensure_buffer_stack1692,46464
+YY_BUFFER_STATE genspec__scan_buffer  (char * base, yy_size_t  size )genspec__scan_buffer1741,48116
+YY_BUFFER_STATE genspec__scan_string (yyconst char * yystr )genspec__scan_string1778,49225
+YY_BUFFER_STATE genspec__scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len )genspec__scan_bytes1791,49660
+#define YY_EXIT_FAILURE YY_EXIT_FAILURE1822,50419
+static void yy_fatal_error (yyconst char* msg )yy_fatal_error1825,50453
+#undef yylessyyless1833,50632
+#define yyless(yyless1834,50646
+int genspec_get_lineno  (void)genspec_get_lineno1853,51135
+FILE *genspec_get_in  (void)genspec_get_in1862,51241
+FILE *genspec_get_out  (void)genspec_get_out1870,51337
+yy_size_t genspec_get_leng  (void)genspec_get_leng1878,51449
+char *genspec_get_text  (void)genspec_get_text1887,51554
+void genspec_set_lineno (int  line_number )genspec_set_lineno1896,51682
+void genspec_set_in (FILE *  in_str )genspec_set_in1908,51925
+void genspec_set_out (FILE *  out_str )genspec_set_out1913,51998
+int genspec_get_debug  (void)genspec_get_debug1918,52075
+void genspec_set_debug (int  bdebug )genspec_set_debug1923,52146
+static int yy_init_globals (void)yy_init_globals1928,52228
+int genspec_lex_destroy  (void)genspec_lex_destroy1957,52952
+static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )yy_flex_strncpy1983,53536
+static int yy_flex_strlen (yyconst char * s )yy_flex_strlen1992,53697
+void *genspec_alloc (yy_size_t  size )genspec_alloc2002,53814
+void *genspec_realloc  (void * ptr, yy_size_t  size )genspec_realloc2007,53891
+void genspec_free (void * ptr )genspec_free2019,54353
+#define YYTABLES_NAME YYTABLES_NAME2024,54459
+int genspec_wrap()genspec_wrap2030,54515
+int genspec_input()genspec_input2039,54613
+
+/home/dounia/MYPIPS/prod/newgen/src/genC/newgen_map.h,348
+#define newgen_map_includednewgen_map_included24,759
+#define HASH_GET(HASH_GET30,858
+#define HASH_BOUND_P(HASH_BOUND_P32,975
+#define HASH_UPDATE(HASH_UPDATE34,1104
+#define HASH_EXTEND(HASH_EXTEND36,1229
+#define HASH_DELETE(HASH_DELETE38,1347
+#define FUNCTION_MAP(FUNCTION_MAP42,1474
+#define FUNCTION_FOREACH(FUNCTION_FOREACH60,2614
+
+/home/dounia/MYPIPS/prod/newgen/src/test/reserv.c,842
+int secu_id = 0 ;secu_id22,350
+identification secu ;secu23,368
+struct mylogin {mylogin25,391
+	char name ;name26,408
+	char user_id ;user_id27,421
+typedef char *login ;login30,441
+string mk_string(s)mk_string32,464
+#define LGBUF LGBUF42,619
+string ld_string(fic)ld_string43,637
+FILE * ouvrir(f, m)ouvrir61,986
+int ld_int(fic)ld_int75,1205
+char ld_char(fic)ld_char84,1320
+reservation lire_reservation()lire_reservation93,1432
+personne lire_conducteur()lire_conducteur128,2594
+personne lire_passager()lire_passager143,3051
+date lire_date()lire_date157,3435
+lieu lire_lieu()lire_lieu187,4262
+login_write( fd, l )login_write225,5250
+login_read( f, read )login_read234,5404
+login_free( l )login_free247,5685
+login_copy( l )login_copy255,5788
+print_date( d )print_date262,5842
+int main(void)main269,5967
+
+/home/dounia/MYPIPS/prod/newgen/src/test/hash_test.c,85
+#define GAP_BETWEEN_WORDS GAP_BETWEEN_WORDS11,164
+int main(argc, argv)main13,195

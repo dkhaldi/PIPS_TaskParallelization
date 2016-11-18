@@ -1,0 +1,150 @@
+
+POINTS-TO
+
+
+// Points To IN:
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+
+
+// Points To OUT:
+// *HEAP*_l_30.n -> *HEAP*_l_30 , MAY
+// *HEAP*_l_30.n -> *NULL* , MAY
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// reverse_copy -> *HEAP*_l_30 , MAY
+// reverse_copy -> *NULL* , MAY
+
+rec reverse_copy(rec p)
+{
+
+// Points To: none
+
+   rec r = (void *) 0;
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// r -> *NULL* , EXACT
+
+   rec q = p;
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// q -> *NULL* , MAY
+// q -> _p_1[0] , MAY
+// r -> *NULL* , EXACT
+
+   while (q!=(void *) 0) {
+
+// Points To:
+// *HEAP*_l_30.n -> *HEAP*_l_30 , MAY
+// *HEAP*_l_30.n -> *NULL* , MAY
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// q -> _p_1[0] , MAY
+// q -> _p_1_2__1[0][0] , MAY
+// r -> *HEAP*_l_30 , MAY
+// r -> *NULL* , MAY
+
+      rec t = (rec) malloc(sizeof(struct rec_st ));
+
+// Points To:
+// *HEAP*_l_30.n -> *HEAP*_l_30 , MAY
+// *HEAP*_l_30.n -> undefined , MAY
+// *HEAP*_l_30.n -> *NULL* , MAY
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// q -> _p_1[0] , MAY
+// q -> _p_1_2__1[0][0] , MAY
+// r -> *HEAP*_l_30 , MAY
+// r -> *NULL* , MAY
+// t -> *HEAP*_l_30 , MAY
+
+      t->i = q->i;
+
+// Points To:
+// *HEAP*_l_30.n -> *HEAP*_l_30 , MAY
+// *HEAP*_l_30.n -> undefined , MAY
+// *HEAP*_l_30.n -> *NULL* , MAY
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// q -> _p_1[0] , MAY
+// q -> _p_1_2__1[0][0] , MAY
+// r -> *HEAP*_l_30 , MAY
+// r -> *NULL* , MAY
+// t -> *HEAP*_l_30 , MAY
+
+      t->n = r;
+
+// Points To:
+// *HEAP*_l_30.n -> *HEAP*_l_30 , MAY
+// *HEAP*_l_30.n -> *NULL* , MAY
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// q -> _p_1[0] , MAY
+// q -> _p_1_2__1[0][0] , MAY
+// r -> *HEAP*_l_30 , MAY
+// r -> *NULL* , MAY
+// t -> *HEAP*_l_30 , MAY
+
+      q = q->n;
+
+// Points To:
+// *HEAP*_l_30.n -> *HEAP*_l_30 , MAY
+// *HEAP*_l_30.n -> *NULL* , MAY
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// q -> *NULL* , MAY
+// q -> _p_1_2__1[0][0] , MAY
+// r -> *HEAP*_l_30 , MAY
+// r -> *NULL* , MAY
+// t -> *HEAP*_l_30 , MAY
+
+      r = t;
+   }
+
+// Points To:
+// *HEAP*_l_30.n -> *HEAP*_l_30 , MAY
+// *HEAP*_l_30.n -> *NULL* , MAY
+// _p_1[0].n -> *NULL* , MAY
+// _p_1[0].n -> _p_1_2__1[0][0] , MAY
+// _p_1_2__1[0][0].n -> *NULL* , MAY
+// _p_1_2__1[0][0].n -> _p_1_2__1[0][0] , MAY
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+// q -> *NULL* , EXACT
+// r -> *HEAP*_l_30 , MAY
+// r -> *NULL* , MAY
+
+   return r;
+}

@@ -1,0 +1,136 @@
+
+Proper effects for "dependence05"
+
+int * dependence05()
+{
+   int *a;
+   int *b;
+   int *c;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: b _MALLOC_EFFECTS:_MALLOC_
+
+   b = (int *) malloc(10*sizeof(int));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: c _MALLOC_EFFECTS:_MALLOC_
+   c = (int *) malloc(10*sizeof(int));
+//             <    is read   >: b
+//             <    is written>: a
+
+   a = b;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a
+   // a and b are aliased, a points_to b[0]
+   *a = 0;
+//             <    is read   >: c
+//             <    is written>: a
+   // write effect on *a may be visible from caller, because b escape
+   
+   a = c;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a
+   // a and b are aliased, a points_to b[0]
+   *a = 0;
+//             <    is read   >: c _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   // write effect won't be visible from caller, because c doesn't escape
+   
+   free(c);
+//             <    is read   >: b
+
+   return b;
+}
+
+POINTS TO for "dependence05"
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// dependence05 -> *HEAP*_l_10[0] , MAY
+
+int * dependence05()
+{
+
+// Points To: none
+
+   int *a;
+
+// Points To:
+// a -> undefined , EXACT
+
+   int *b;
+
+// Points To:
+// a -> undefined , EXACT
+// b -> undefined , EXACT
+
+   int *c;
+
+// Points To:
+// a -> undefined , EXACT
+// b -> undefined , EXACT
+// c -> undefined , EXACT
+
+
+   b = (int *) malloc(10*sizeof(int));
+
+// Points To:
+// a -> undefined , EXACT
+// b -> *HEAP*_l_10[0] , MAY
+// c -> undefined , EXACT
+
+   c = (int *) malloc(10*sizeof(int));
+
+// Points To:
+// a -> undefined , EXACT
+// b -> *HEAP*_l_10[0] , MAY
+// c -> *HEAP*_l_11[0] , MAY
+
+
+   a = b;
+
+// Points To:
+// a -> *HEAP*_l_10[0] , MAY
+// b -> *HEAP*_l_10[0] , MAY
+// c -> *HEAP*_l_11[0] , MAY
+
+   // a and b are aliased, a points_to b[0]
+   *a = 0;
+
+// Points To:
+// a -> *HEAP*_l_10[0] , MAY
+// b -> *HEAP*_l_10[0] , MAY
+// c -> *HEAP*_l_11[0] , MAY
+
+   // write effect on *a may be visible from caller, because b escape
+   
+   a = c;
+
+// Points To:
+// a -> *HEAP*_l_11[0] , MAY
+// b -> *HEAP*_l_10[0] , MAY
+// c -> *HEAP*_l_11[0] , MAY
+
+   // a and b are aliased, a points_to b[0]
+   *a = 0;
+
+// Points To:
+// a -> *HEAP*_l_11[0] , MAY
+// b -> *HEAP*_l_10[0] , MAY
+// c -> *HEAP*_l_11[0] , MAY
+
+   // write effect won't be visible from caller, because c doesn't escape
+   
+   free(c);
+
+// Points To:
+// a -> *HEAP*_l_11[0] , MAY
+// a -> undefined , MAY
+// b -> *HEAP*_l_10[0] , MAY
+// c -> undefined , EXACT
+
+
+   return b;
+}
+

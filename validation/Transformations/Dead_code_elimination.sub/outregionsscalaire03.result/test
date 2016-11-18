@@ -1,0 +1,64 @@
+
+Init Code
+
+int main()
+{
+   int x;
+   x = 0;
+
+   if (rand())
+      x = 1;
+
+   return x;
+}
+
+Source code for outregionsscalaire03 after dead-code elimination
+
+int main()
+{
+   int x;
+   x = 0;
+
+   if (rand())
+      x = 1;
+
+   return x;
+}
+
+OUT regions for outregionsscalaire03
+
+int main()
+{
+   int x;
+
+//  <x-OUT-MAY-{}>
+
+   x = 0;
+
+//  <x-OUT-MAY-{}>
+
+
+   if (rand())
+
+//  <x-OUT-MAY-{}>
+
+      x = 1;
+
+   return x;
+}
+
+Source code for outregionsscalaire03 after dead-code elimination with OUT regions
+
+int main()
+{
+   int x;
+   x = 0;
+
+   if (rand())
+      x = 1;
+
+   return x;
+}
+
+Warnings
+

@@ -1,0 +1,36 @@
+setenv WS=suppress01
+delete $WS
+create $WS $WS.f
+
+setproperty SEMANTICS_ANALYZE_SCALAR_FLOAT_VARIABLES TRUE
+setproperty SEMANTICS_ANALYZE_SCALAR_INTEGER_VARIABLES TRUE
+
+activate TRANSFORMERS_INTER_FULL
+activate INTERPROCEDURAL_SUMMARY_PRECONDITION
+activate PRECONDITIONS_INTER_FULL
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[%ALL]
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[%ALL]
+
+close
+
+echo
+echo Warnings:
+echo
+
+shell cat $WS.database/Warnings
+
+echo
+
+open $WS
+
+apply SIMPLIFY_CONTROL
+
+activate PRINT_CODE
+display PRINTED_FILE[%ALL]
+
+close
+delete $WS

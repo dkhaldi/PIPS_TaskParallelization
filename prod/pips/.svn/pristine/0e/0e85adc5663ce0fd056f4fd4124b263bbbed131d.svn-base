@@ -1,0 +1,50 @@
+# $Id$
+#
+# minimum rc file for sh-compatible shells
+#
+
+# # install gcc-6x
+# # apt-get install libmpc-dev texinfo zip
+# svn co svn://gcc.gnu.org/svn/gcc/branches/gcc-6-branch gcc-6-src
+# mkdir gcc-6-build
+# cd gcc-6-build
+#   ../gcc-6-src/configure --prefix=$HOME/gcc-6-bin
+#   make bootstrap
+#   make install
+
+root=/home/fabien/GCC6X
+
+# where is gcc 6.x
+gcc=/home/fabien/gcc-6-bin
+PATH=$gcc/bin:$PATH
+LD_LIBRARY_PATH=$gcc/lib:$LD_LIBRARY_PATH
+
+# default architecture
+export PIPS_ARCH=LINUX_x86_64_LL
+
+# gcc strict compilation in "makes/config.mk":
+#   COPT += -Werror
+#   PIPS_NO_GPIPS = 1
+#   PIPS_ENABLE_FORTRAN95 =
+
+unset PIPS_CC
+# with recent gcc avoid "stdc-predef.h"
+export PIPS_CPP="gcc -std=c99 -E -C -ffreestanding"
+
+# subversion repositories
+# export NEWGEN_SVN=https://svn.cri.ensmp.fr/svn/newgen
+# export LINEAR_SVN=https://svn.cri.ensmp.fr/svn/linear
+# export PIPS_SVN=https://svn.cri.ensmp.fr/svn/pips
+
+# software roots
+# needed for polylib
+export EXTERN_ROOT=$root/prod/extern
+
+export PIPS_F77=gfortran
+export PIPS_F90=gfortran
+
+# fix path
+export PATH=$PATH:/usr/bin:/bin:$root/prod/pips/bin:$root/prod/pips/utils
+
+# ignore these static inlined function
+export PIPS_IGNORE_FUNCTION_RX='!__bswap_'

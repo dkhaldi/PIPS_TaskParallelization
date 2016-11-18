@@ -1,0 +1,36 @@
+
+POINTS-TO
+
+
+// Points To IN:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+
+
+// Points To OUT:
+// p -> _p_1[0] , EXACT
+
+int store01(int *p, int i)
+{
+
+// Points To:
+// p -> *NULL* , MAY
+// p -> _p_1[0] , MAY
+
+   *p = i;
+
+// Points To:
+// p -> _p_1[0] , EXACT
+
+   return 0;
+}
+
+PROPER EFFECTS
+
+int store01(int *p, int i)
+{
+//             <    is read   >: i p
+//             <    is written>: _p_1[0]
+   *p = i;
+   return 0;
+}

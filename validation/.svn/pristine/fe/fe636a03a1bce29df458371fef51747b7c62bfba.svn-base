@@ -1,0 +1,48 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int main()
+{
+
+// Points To: none
+
+   int **x, *y, k, h;
+
+// Points To:
+// x -> undefined , EXACT
+// y -> undefined , EXACT
+
+   k = 1;
+
+// Points To:
+// x -> undefined , EXACT
+// y -> undefined , EXACT
+
+   h = 2;
+
+// Points To:
+// x -> undefined , EXACT
+// y -> undefined , EXACT
+
+   y = &h;
+
+// Points To:
+// x -> undefined , EXACT
+// y -> h , EXACT
+
+   *x = y;
+
+// Points To: unreachable
+
+   printf("x = %p \n", x);
+
+// Points To: unreachable
+
+   return 0;
+}

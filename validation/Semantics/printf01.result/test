@@ -1,0 +1,46 @@
+
+Transformers for printf01
+
+
+//  T() {}
+
+void printf01()
+{
+
+//  T(i) {i==1}
+
+   int i = 1;
+
+//  T() {i==1}
+
+   // Here, the transformer should not impact i
+   printf("i=%d\n", i);
+
+//  T() {i==1}
+
+   // Here, i==1
+   return;
+}
+
+Preconditions for printf01
+
+
+//  P() {}
+
+void printf01()
+{
+
+//  P() {}
+
+   int i = 1;
+
+//  P(i) {i==1}
+
+   // Here, the transformer should not impact i
+   printf("i=%d\n", i);
+
+//  P(i) {i==1}
+
+   // Here, i==1
+   return;
+}

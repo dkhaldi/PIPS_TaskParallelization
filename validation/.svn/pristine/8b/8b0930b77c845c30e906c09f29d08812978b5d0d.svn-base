@@ -1,0 +1,11 @@
+delete register02
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create register02 register02.c
+
+display PARSED_PRINTED_FILE[main]
+
+close
+
+#delete register02 
+
+quit

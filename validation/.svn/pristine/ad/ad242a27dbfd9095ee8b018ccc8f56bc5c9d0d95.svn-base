@@ -1,0 +1,80 @@
+
+TRANSFORMERS
+
+
+//  T(trust01) {n==trust01-1, 0<=n}
+
+int trust01(int n)
+{
+
+//  T() {0<=m, 0<=n}
+
+   float a[n];
+   // Trusting the following declarations makes the function inexecutable...
+   // float b[0]; if array declarations are trusted in C as in Fortran
+   
+   // Not possible: float c[-1];
+   
+
+//  T(i) {i==n, 0<=i, 0<=m}
+
+   int i = n;
+   {
+
+//  T() {i==n, 0<=i, 0<=m}
+
+      int m;
+
+//  T() {i==n, 0<=i, 0<=m}
+
+      float b[m];
+
+//  T(i) {i==i#init+1, i==n+1, 1<=i, 0<=m}
+
+      i = i+1;
+   }
+
+//  T(trust01) {i==n+1, i==trust01, 1<=i, 0<=m}
+
+   return i;
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+int trust01(int n)
+{
+
+//  P() {0<=m, 0<=n}
+
+   float a[n];
+   // Trusting the following declarations makes the function inexecutable...
+   // float b[0]; if array declarations are trusted in C as in Fortran
+   
+   // Not possible: float c[-1];
+   
+
+//  P() {0<=m, 0<=n}
+
+   int i = n;
+   {
+
+//  P(i) {i==n, 0<=i, 0<=m}
+
+      int m;
+
+//  P(i) {i==n, 0<=i, 0<=m}
+
+      float b[m];
+
+//  P(i) {i==n, 0<=i, 0<=m}
+
+      i = i+1;
+   }
+
+//  P(i) {i==n+1, 1<=i}
+
+   return i;
+}

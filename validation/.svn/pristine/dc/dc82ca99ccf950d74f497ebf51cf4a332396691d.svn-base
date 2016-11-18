@@ -1,0 +1,42 @@
+#setenv GPU_QUALIFY_POINTERS_DEBUG_LEVEL 8
+setenv NAME=gloloc10
+delete $NAME
+# we are testing errors
+setproperty ABORT_ON_USER_ERROR FALSE
+setproperty MAXIMUM_USER_ERROR 3
+create $NAME $NAME.c
+echo #
+echo # initial code
+echo #
+display PRINTED_FILE[$NAME!]
+display PRINTED_FILE[%ALLFUNC]
+#
+# qualify pointers
+# BEWARE, implicit top-down propagation...
+#
+# fails
+apply GPU_QUALIFY_POINTERS[error04]
+# ok
+apply GPU_QUALIFY_POINTERS[error05]
+apply GPU_QUALIFY_POINTERS[err56]
+# fails, contradiction with error05
+apply GPU_QUALIFY_POINTERS[error06]
+# ok
+apply GPU_QUALIFY_POINTERS[error07]
+apply GPU_QUALIFY_POINTERS[err78]
+# fails, contradiction with error07
+apply GPU_QUALIFY_POINTERS[error08]
+echo #
+echo # global/local declarations
+echo #
+setproperty PRETTYPRINT_GLOBAL_QUALIFIER "global"
+setproperty PRETTYPRINT_LOCAL_QUALIFIER "local"
+display PRINTED_FILE[error05]
+display PRINTED_FILE[err56]
+display PRINTED_FILE[error07]
+display PRINTED_FILE[err78]
+#
+# cleanup
+#
+close
+delete $NAME

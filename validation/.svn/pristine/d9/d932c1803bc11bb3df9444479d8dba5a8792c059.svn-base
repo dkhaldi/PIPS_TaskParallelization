@@ -1,0 +1,201 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   int a2[10][10];
+
+// Points To: none
+
+   int n = argc;
+
+// Points To: none
+
+
+   a2[0][0] = 1;
+
+// Points To: none
+
+
+   scanf("%d", &a2[n][0]);
+
+// Points To: none
+
+
+   return 0;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is declared>: a2
+   int a2[10][10];
+//             <    is read   >: argc
+//             <    is written>: n
+//             <    is referenced>: argc n
+//             <    is declared>: n
+   int n = argc;
+//             <    is written>: a2[0][0]
+//             <    is referenced>: a2
+
+   a2[0][0] = 1;
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: a2[n][0] __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 n stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &a2[n][0]);
+
+   return 0;
+}
+
+Cumulated effects with poins-to for "main"
+
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: argc stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: argc stdin __IO_EFFECTS:LUNS
+int main(int argc, char **argv)
+{
+//             <    is declared>: a2
+   int a2[10][10];
+//             <    is read   >: argc
+//             <    is written>: n
+//             <    is referenced>: argc n
+//             <    is declared>: n
+   int n = argc;
+//             <    is written>: a2[0][0]
+//             <    is referenced>: a2
+
+   a2[0][0] = 1;
+//             <may be read   >: stdin[0]
+//             <may be written>: a2[*][0] stdin[0]
+//             <    is read   >: n stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: a2 n stdin __IO_EFFECTS:LUNS
+
+   scanf("%d", &a2[n][0]);
+//             <    is read   >: __IO_EFFECTS:LUNS[0]
+//             <    is referenced>: __IO_EFFECTS:LUNS
+
+   return 0;
+}
+
+Transformers for "main"
+
+
+//  T(main) {main==0}
+
+int main(int argc, char **argv)
+{
+
+//  T() {}
+
+   int a2[10][10];
+
+//  T(n) {argc==n}
+
+   int n = argc;
+
+//  T(a2[0][0]) {a2[0][0]==1}
+
+
+   a2[0][0] = 1;
+
+//  T(a2[0][0]) {}
+
+
+   scanf("%d", &a2[n][0]);
+
+//  T(main) {main==0}
+
+
+   return 0;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   int a2[10][10];
+
+//  P() {}
+
+   int n = argc;
+
+//  P(n) {argc==n}
+
+
+   a2[0][0] = 1;
+
+//  P(a2[0][0],n) {a2[0][0]==1, argc==n}
+
+
+   scanf("%d", &a2[n][0]);
+
+//  P(a2[0][0],n) {argc==n}
+
+
+   return 0;
+}
+
+Convex array regions with points-to for "main"
+
+
+//  <stdin-R-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0}>
+
+int main(int argc, char **argv)
+{
+
+//  <a2-WE-EXACT-{}>
+
+   int a2[10][10];
+   int n = argc;
+
+//  <a2-RE-EXACT-{}>
+//  <a2[PHI1][PHI2]-W-EXACT-{PHI1==0, PHI2==0, n==argc}>
+
+
+   a2[0][0] = 1;
+
+//  <a2-RE-EXACT-{}>
+//  <a2[PHI1][PHI2]-W-EXACT-{PHI1==n, PHI2==0, a2[0][0]==1, n==argc}>
+//  <stdin-R-EXACT-{}>
+//  <stdin-RE-EXACT-{}>
+//  <stdin[PHI1]-R-MAY-{PHI1==0}>
+//  <stdin[PHI1]-W-MAY-{PHI1==0}>
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0, a2[0][0]==1, n==argc}>
+//  <__IO_EFFECTS:LUNS[PHI1]-W-EXACT-{PHI1==0, a2[0][0]==1, n==argc}>
+
+
+   scanf("%d", &a2[n][0]);
+
+//  <__IO_EFFECTS:LUNS-RE-EXACT-{}>
+//  <__IO_EFFECTS:LUNS[PHI1]-R-EXACT-{PHI1==0}>
+
+
+   return 0;
+}

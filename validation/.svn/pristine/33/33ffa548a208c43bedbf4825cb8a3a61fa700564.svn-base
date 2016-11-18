@@ -1,0 +1,67 @@
+#
+# initial code
+#
+// global/private 2D array
+
+extern void zero(float *f, float val);
+
+extern void init(float a[10], float val);
+
+extern void dims00(float a[10][10], float val);
+
+extern int main(void);
+void dims00(float a[10][10], float val)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      init(&a[i], val);
+}
+void init(float a[10], float val)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      zero(a+i, val);
+}
+int main(void)
+{
+   float a[10][10];
+   dims00(a, 0.0);
+}
+void zero(float *f, float val)
+{
+   *f = val;
+}
+#
+# global/private declarations
+#
+// global/private 2D array
+
+extern void zero(float *f, float val);
+
+extern void init(float a[10], float val);
+
+extern void dims00(float a[10][10], float val);
+
+extern int main(void);
+void dims00(global float a[10][10], float val)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      init(&a[i], val);
+}
+void init(global float a[10], float val)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      zero(a+i, val);
+}
+int main(void)
+{
+   float a[10][10];
+   dims00(a, 0.0);
+}
+void zero(global float *f, float val)
+{
+   *f = val;
+}
+

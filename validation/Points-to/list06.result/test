@@ -1,0 +1,70 @@
+
+PROPER  EFFECTS
+
+void list06(list l)
+{
+//             <    is read   >: nil
+//             <    is written>: n
+   list n = nil;
+   list p;
+//             <    is read   >: nil
+//             <    is written>: p
+   p = nil;
+//             <    is read   >: n nil
+   if (n!=nil)
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: l
+//             <    is written>: l
+      l = l->next;
+   return;
+}
+
+POINTS-TO
+
+
+// Points To IN:
+// nil -> *NULL* , EXACT
+
+
+// Points To OUT:
+// nil -> *NULL* , EXACT
+
+void list06(list l)
+{
+
+// Points To:
+// nil -> *NULL* , EXACT
+
+   list n = nil;
+
+// Points To:
+// n -> *NULL* , EXACT
+// nil -> *NULL* , EXACT
+
+   list p;
+
+// Points To:
+// n -> *NULL* , EXACT
+// nil -> *NULL* , EXACT
+// p -> undefined , EXACT
+
+   p = nil;
+
+// Points To:
+// n -> *NULL* , EXACT
+// nil -> *NULL* , EXACT
+// p -> *NULL* , EXACT
+
+   if (n!=nil)
+
+// Points To: unreachable
+
+      l = l->next;
+
+// Points To:
+// n -> *NULL* , EXACT
+// nil -> *NULL* , EXACT
+// p -> *NULL* , EXACT
+
+   return;
+}

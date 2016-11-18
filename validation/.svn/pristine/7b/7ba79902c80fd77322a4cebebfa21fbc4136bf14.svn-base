@@ -1,0 +1,92 @@
+
+Proper effects
+
+int main()
+{
+   float t;
+   float *a;
+   int i;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: a _MALLOC_EFFECTS:_MALLOC_
+
+   a = (float *) malloc(10*sizeof(float));
+//             <    is written>: t
+
+   t = 1.0;
+//             <    is read   >: t
+   while (t<2.0) {
+//             <    is written>: i
+      for(i = 0; i <= 9; i += 1)
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: a i
+         a[i] = a[i]+t*0, 5;
+      t+0, 01;
+   }
+
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   float t;
+
+// Points To: none
+
+   float *a;
+
+// Points To:
+// a -> undefined , EXACT
+
+   int i;
+
+// Points To:
+// a -> undefined , EXACT
+
+
+   a = (float *) malloc(10*sizeof(float));
+
+// Points To:
+// a -> *HEAP*_l_9[0] , MAY
+
+
+   t = 1.0;
+
+// Points To:
+// a -> *HEAP*_l_9[0] , MAY
+
+   while (t<2.0) {
+
+// Points To:
+// a -> *HEAP*_l_9[0] , MAY
+
+      for(i = 0; i <= 9; i += 1)
+
+// Points To:
+// a -> *HEAP*_l_9[0] , MAY
+
+         a[i] = a[i]+t*0, 5;
+
+// Points To:
+// a -> *HEAP*_l_9[0] , MAY
+
+      t+0, 01;
+   }
+
+// Points To:
+// a -> *HEAP*_l_9[0] , MAY
+
+
+   return 0;
+}

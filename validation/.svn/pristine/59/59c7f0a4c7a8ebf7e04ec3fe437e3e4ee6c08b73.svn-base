@@ -1,0 +1,15 @@
+#!/bin/sh
+
+tpips=${tpips_version:-tpips}
+
+($tpips 2>&1 | sed '/file *\//d') <<EOF
+delete cmplx01
+setproperty MAXIMUM_USER_ERROR 25
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create cmplx01 cmplx01.f
+display PRINTED_FILE
+display PRINTED_FILE[FOO]
+close
+delete cmplx01
+quit
+EOF

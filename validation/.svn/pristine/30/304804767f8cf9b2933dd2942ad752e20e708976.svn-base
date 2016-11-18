@@ -1,0 +1,2 @@
+      INTEGER SIZE
+      PARAMETER(SIZE=10)

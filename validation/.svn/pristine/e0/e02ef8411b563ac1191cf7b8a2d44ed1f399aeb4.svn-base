@@ -1,0 +1,84 @@
+# initial callgraph
+ main
+     clonee
+# initial codes
+void clonee(int i, int j)
+{
+   int k;                                                               /*0007*/
+
+   if (i==j)                                                            /*0009*/
+      k = MIN(i, j);                                                    /*0010*/
+   else
+      k = MAX(i, j);                                                    /*0012*/
+   printf("%d\n", k);                                                   /*0013*/
+}
+int main()
+{
+   clonee(1, 1);                                                        /*0018*/
+   clonee(2, 3);                                                        /*0019*/
+   clonee(2, 2);                                                        /*0020*/
+   return 0;                                                            /*0021*/
+}
+# applying clone...
+# new callgraph
+ main
+     clonee_0
+     clonee
+# new codes.
+void clonee(int i, int j)
+{
+   int k;                                                               /*0007*/
+
+   if (i==j)                                                            /*0009*/
+      k = MIN(i, j);                                                    /*0010*/
+   else
+      k = MAX(i, j);                                                    /*0012*/
+   printf("%d\n", k);                                                   /*0013*/
+}
+void clonee_0(int i, int j)
+{
+   int k;                                                               /*0014*/
+   /*0007*/
+   
+   if (i==j)                                                            /*0016*/
+      /*0009*/
+      k = MIN(i, j);                                                    /*0017*/
+   else
+      k = MAX(i, j);                                                    /*0019*/
+   /*0012*/
+   printf("%d\n", k);                                                   /*0020*/
+}
+int main()
+{
+   clonee_0(1, 1);                                                      /*0018*/
+   clonee(2, 3);                                                        /*0019*/
+   clonee_0(2, 2);                                                      /*0020*/
+   return 0;                                                            /*0021*/
+}
+# applying dead code elimination...
+void clonee(int i, int j)
+{
+   int k;                                                               /*0007*/
+
+   k = MAX(i, j);                                                       /*0012*/
+   printf("%d\n", k);                                                   /*0013*/
+}
+void clonee_0(int i, int j)
+{
+   int k;                                                               /*0014*/
+   /*0007*/
+   
+   /*0009*/
+   k = MIN(i, j);                                                       /*0017*/
+   /*0012*/
+   printf("%d\n", k);                                                   /*0020*/
+}
+int main()
+{
+   clonee_0(1, 1);                                                      /*0018*/
+   clonee(2, 3);                                                        /*0019*/
+   clonee_0(2, 2);                                                      /*0020*/
+   return 0;                                                            /*0021*/
+}
+# done
+

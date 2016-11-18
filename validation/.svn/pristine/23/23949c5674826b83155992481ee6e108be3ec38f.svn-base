@@ -1,0 +1,6 @@
+int main(void)
+{
+   foo(17);                                                             /*0004*/
+   return 0;                                                            /*0005*/
+}
+

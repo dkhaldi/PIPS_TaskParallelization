@@ -1,0 +1,4 @@
+#/bin/sh
+tpips error_management06.tpips
+Delete error_management06
+exit 0

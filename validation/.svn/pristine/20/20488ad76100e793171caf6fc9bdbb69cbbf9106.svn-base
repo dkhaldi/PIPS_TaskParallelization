@@ -1,0 +1,33 @@
+setenv WSPACE=bzlib01
+setenv FILE=bzlib01
+delete ${WSPACE}
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+create ${WSPACE} ${FILE}.c
+
+echo
+echo Parsed printed file
+echo
+
+display PARSED_PRINTED_FILE
+
+echo
+echo Printed file
+echo
+
+display PRINTED_FILE
+
+echo
+echo Printed file after RESTUCTURE_CONTROL
+echo
+
+apply RESTRUCTURE_CONTROL
+display PRINTED_FILE
+
+close
+delete ${WSPACE}
+quit

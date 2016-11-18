@@ -1,0 +1,11 @@
+setenv WSPACE=empty_arguments_02
+setenv FILE=$WSPACE.c
+delete $WSPACE
+setproperty ABORT_ON_USER_ERROR=TRUE
+create $WSPACE $FILE
+shell pips_validation_exe.sh -c -i $WSPACE
+#setproperty PREPROCESSOR_MISSING_FILE_HANDLING="generate"
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[%ALL]
+close
+delete $WSPACE

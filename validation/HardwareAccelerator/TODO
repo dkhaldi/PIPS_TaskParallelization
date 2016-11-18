@@ -1,0 +1,5 @@
+# issues on terapix
+double_threshold.c
+threshold_repl_const.c
+# bug: bad image substitution
+freia_82.c

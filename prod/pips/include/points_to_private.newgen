@@ -1,0 +1,28 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import descriptor from "ri.newgen" ;
+import approximation from "ri.newgen" ;
+import statement from "ri.newgen" ;
+import cell from "effects.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+points_to_graph =  bottom:bool x set:points_to{} ;
+points_to_list = bottom:bool x list : points_to* ;
+points_to = source:cell x sink:cell x approximation x descriptor ;
+statement_points_to = persistant statement -> points_to_list ;

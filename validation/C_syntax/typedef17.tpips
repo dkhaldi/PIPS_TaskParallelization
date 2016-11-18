@@ -1,0 +1,14 @@
+setenv WS=typedef17
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+display PARSED_PRINTED_FILE[$WS!]
+
+close
+
+#delete $WS	
+
+quit

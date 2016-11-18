@@ -1,0 +1,23 @@
+
+Printed file for scope01_b
+
+int i = 1;
+extern void foo();
+void foo()
+{
+   printf("%d\n", i);
+}
+
+Printed file for scope01_a: should not work because of variable i
+
+int i = 1;
+extern int main();
+int main()
+{
+   printf("%d\n", i);
+   foo();
+}
+
+Warnings
+
+COMPILATION_UNIT_PARSER[scope01_a!] (CCompilationUnitMemoryAllocations) Multiple declarations of variable "i" in different files

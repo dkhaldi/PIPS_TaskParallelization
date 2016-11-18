@@ -1,0 +1,57 @@
+setenv WSPACE=check_vlaok_06
+setenv FILE=vlaok_06.c
+delete $WSPACE
+create $WSPACE $FILE
+
+setproperty ABORT_ON_USER_ERROR TRUE
+#setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+#setproperty SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+setproperty ERROR_ON_UNINITIALIZE_VLA FALSE
+
+echo
+echo // Initial code
+echo
+display PRINTED_FILE[test]
+
+echo
+echo // Code with preconditions
+echo
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[test]
+
+echo
+echo // Code after CHECK_INITIALIZE_VLA
+echo // (nothing modify in the code but generate warning or error)
+echo
+activate PRINT_CODE
+apply CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS[test] 
+display PRINTED_FILE[test]
+
+
+setproperty SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+setproperty SEMANTICS_ANALYZE_CONSTANT_PATH TRUE
+activate TRANSFORMERS_INTER_FULL_WITH_POINTS_TO
+apply TRANSFORMERS_INTER_FULL_WITH_POINTS_TO[test] 
+apply PRECONDITIONS_INTER_FULL[test] 
+echo
+echo // Code with preconditions and SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE
+echo
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[test]
+
+echo
+echo // Code after CHECK_INITIALIZE_VLA (with SEMANTICS_ANALYZE_SCALAR_POINTER_VARIABLES TRUE)
+echo // (nothing modify in the code but generate warning or error)
+echo
+activate PRINT_CODE
+apply CHECK_INITIALIZE_VLA_WITH_PRECONDITIONS[test] 
+display PRINTED_FILE[test]
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

@@ -1,0 +1,76 @@
+
+PROPER  EFFECTS
+
+int main()
+{
+   int *a;
+   int *b[10];
+//             <    is written>: i
+   int i = 5;
+//             <    is read   >: i
+//             <    is written>: b[i]
+   b[i] = &i;
+//             <    is read   >: b[i] i
+//             <    is written>: a
+   a = b[i];
+//             <    is read   >: a i
+//             <    is written>: b[++i] i
+   b[++i] = a;
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *a;
+
+// Points To:
+// a -> undefined , EXACT
+
+   int *b[10];
+
+// Points To:
+// a -> undefined , EXACT
+// b[*] -> undefined , EXACT
+
+   int i = 5;
+
+// Points To:
+// a -> undefined , EXACT
+// b[*] -> undefined , EXACT
+
+   b[i] = &i;
+
+// Points To:
+// a -> undefined , EXACT
+// b[*] -> undefined , MAY
+// b[*] -> i , MAY
+
+   a = b[i];
+
+// Points To:
+// a -> undefined , MAY
+// a -> i , MAY
+// b[*] -> undefined , MAY
+// b[*] -> i , MAY
+
+   b[++i] = a;
+
+// Points To:
+// a -> undefined , MAY
+// a -> i , MAY
+// b[*] -> undefined , MAY
+// b[*] -> i , MAY
+
+   return 0;
+}

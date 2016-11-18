@@ -1,0 +1,8 @@
+setenv WS=struct01
+delete $WS
+
+create $WS $WS.c
+display PRINTED_FILE[$WS!]
+
+close
+quit

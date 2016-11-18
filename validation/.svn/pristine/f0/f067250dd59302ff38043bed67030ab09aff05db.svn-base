@@ -1,0 +1,150 @@
+
+TRANSFORMERS for warning04
+
+
+//  T(warning04) {i==warning04, 0<=i, 0<=n}
+
+int warning04(int n, int i, double a[n*n])
+{
+
+//  T() {0<=i, 0<=n}
+
+   n>=0&&i>=0?(void) 0:__assert_fail("n>=0 && i>=0", "./warning04.c", 9, __func__);
+
+//  T() {0<=i, 0<=n}
+
+   a[n*i+i] = 0;
+
+//  T(warning04) {i==warning04, 0<=i, 0<=n}
+
+   return i;
+}
+
+PRECONDITIONS for warning04
+
+
+//  P() {}
+
+int warning04(int n, int i, double a[n*n])
+{
+
+//  P() {}
+
+   n>=0&&i>=0?(void) 0:__assert_fail("n>=0 && i>=0", "./warning04.c", 9, __func__);
+
+//  P() {0<=i, 0<=n}
+
+   a[n*i+i] = 0;
+
+//  P() {0<=i, 0<=n}
+
+   return i;
+}
+
+REGIONS for warning04
+
+int warning04(int n, int i, double a[n*n])
+{
+
+//  <__func__-RE-MAY-{}>
+//  <__func__-R-MAY-{}>
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   n>=0&&i>=0?(void) 0:__assert_fail("n>=0 && i>=0", "./warning04.c", 9, __func__);
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-MAY-{i<=PHI1, 0<=i, 0<=i, 0<=n, 0<=n}>
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   a[n*i+i] = 0;
+
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+
+   return i;
+}
+
+REGIONS for warning04
+
+
+//  <a[PHI1]-W-MAY-{i<=PHI1, 0<=i, 0<=n}>
+//  <i-R-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+int warning04(int n, int i, double a[n*n])
+{
+
+//  <__func__-R-MAY-{}>
+//  <__func__-RE-MAY-{}>
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   n>=0&&i>=0?(void) 0:__assert_fail("n>=0 && i>=0", "./warning04.c", 9, __func__);
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-W-MAY-{i<=PHI1, 0<=i, 0<=n}>
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   a[n*i+i] = 0;
+
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+
+   return i;
+}
+
+IN regions for warning04
+
+
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+int warning04(int n, int i, double a[n*n])
+{
+
+//  <__func__-IN-MAY-{}>
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+   n>=0&&i>=0?(void) 0:__assert_fail("n>=0 && i>=0", "./warning04.c", 9, __func__);
+
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+   a[n*i+i] = 0;
+
+//  <i-IN-EXACT-{}>
+
+   return i;
+}
+
+OUT regions for warning04
+
+int warning04(int n, int i, double a[n*n])
+{
+   n>=0&&i>=0?(void) 0:__assert_fail("n>=0 && i>=0", "./warning04.c", 9, __func__);
+   a[n*i+i] = 0;
+   return i;
+}
+
+Warnings
+
+PROGRAM_PRECONDITION[] (get_main_entity_name) No main function found, use "warning04" instead.
+MUST_REGIONS[warning04] (sc_add_phi_equation) line 10 
+at statement:
+
+	a[n*i+i] = 0;
+
+
+Imprecise subscript expression "n*i+i" should be avoided:

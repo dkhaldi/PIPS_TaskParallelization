@@ -1,0 +1,30 @@
+void kernel(struct struct_0 a_0[1])
+{
+   // Declared by Pass Outlining
+   int i, j, k;
+   // Declared as a patch variable by Pass Outlining
+   struct struct_0 a;
+   a = *a_0;
+kernel:
+   for(i = 0; i <= 16; i += 1)
+      for(j = 0; j <= 12; j += 1)
+         for(k = 0; k <= 10; k += 1) {
+            (((a.x)[i])[j])[k] = 3*i+100+5*j-7*k;
+            (((a.y)[i])[j])[k] = 3*i-100+5*j-7*k;
+         }
+   *a_0 = a;
+}
+int main()
+{
+   int i, j, k;
+   struct struct_0 a;
+kernel:   kernel(&a);
+
+   for(i = 0; i <= 16; i += 1)
+      for(j = 0; j <= 12; j += 1)
+         for(k = 0; k <= 10; k += 1)
+            printf("%f %f ", (((a.x)[i])[j])[k], (((a.y)[i])[j])[k]);
+   puts("");
+
+   return 0;
+}

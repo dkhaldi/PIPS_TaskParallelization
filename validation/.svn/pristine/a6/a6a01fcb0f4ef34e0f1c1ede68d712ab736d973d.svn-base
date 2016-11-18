@@ -1,0 +1,39 @@
+
+POINTS TO for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int *p = (void *) 0, i;
+
+// Points To:
+// p -> *NULL* , EXACT
+
+
+   if (!p)
+
+// Points To:
+// p -> *NULL* , EXACT
+
+      p = &i;
+   else
+
+// Points To: unreachable
+
+      *p = 1;
+
+// Points To:
+// p -> i , EXACT
+
+
+   return 0;
+}
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (reference_condition_to_points_to) Dead code detected.

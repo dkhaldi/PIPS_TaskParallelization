@@ -1,0 +1,12 @@
+Many issues to check:
+
+ * short int -> short
+ * long int -> long
+ * lignes blanches disparues (et/ou deplacees)
+ * initialisation implicite de l'enum GCONV_IGNORE_ERRORS ->explicite
+ * disparition de declarations de structure (cf. Prettyprint struct03-04.c):
+   __gconv_step
+ * const char * const -> const char *
+ * commentaires dans les declarations: les oublier commpletement plutot que les regrouper?
+ * commentaires en fin de ligne: les rattacher au statement precedent? nouveau champ commentaire?
+ * tester le resultat avec un cpp sans option -C?

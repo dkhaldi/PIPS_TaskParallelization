@@ -1,0 +1,58 @@
+int main()
+{
+   char c;                                                              /*0003*/
+
+   if (c=='a')
+      goto _switch_1_case_a;                                            /*0005*/
+   if (c=='b')
+      goto _switch_1_case_b;                                            /*0008*/
+   if (c=='?')
+      goto _switch_1_case_63;                                           /*0011*/
+   if (c=='\n')
+      goto _switch_1_case_10;                                           /*0014*/
+   if (c=='\001')
+      goto _switch_1_case_o001;                                         /*0017*/
+   if (c=='\002')
+      goto _switch_1_case_o002;                                         /*0020*/
+   if (c=='\177')
+      goto _switch_1_case_o177;                                         /*0023*/
+   if (c=='\277')
+      goto _switch_1_case_o277;                                         /*0026*/
+   if (c=='\377')
+      goto _switch_1_case_o377;                                         /*0029*/
+   goto _switch_1_default;                                              /*0032*/
+_switch_1_case_a:   ;
+   c++;                                                                 /*0006*/
+   goto _break_1;                                                       /*0007*/
+_switch_1_case_b:   ;
+   c--;                                                                 /*0009*/
+   goto _break_1;                                                       /*0010*/
+_switch_1_case_63:   ;
+   c = 0;                                                               /*0012*/
+   goto _break_1;                                                       /*0013*/
+_switch_1_case_10:   ;
+   c = 1;                                                               /*0015*/
+   goto _break_1;                                                       /*0016*/
+_switch_1_case_o001:   ;
+   c = '\001';                                                          /*0018*/
+   goto _break_1;                                                       /*0019*/
+_switch_1_case_o002:   ;
+   c = '\002';                                                          /*0021*/
+   goto _break_1;                                                       /*0022*/
+_switch_1_case_o177:   ;
+   c = '\177';                                                          /*0024*/
+   goto _break_1;                                                       /*0025*/
+_switch_1_case_o277:   ;
+   c = '\277';                                                          /*0027*/
+   goto _break_1;                                                       /*0028*/
+_switch_1_case_o377:   ;
+   c = '\377';                                                          /*0030*/
+   goto _break_1;                                                       /*0031*/
+_switch_1_default:   ;
+   goto _break_1;                                                       /*0033*/
+_break_1:   ;
+   return 0;                                                            /*0035*/
+}
+#
+# compile generated switch_case
+#

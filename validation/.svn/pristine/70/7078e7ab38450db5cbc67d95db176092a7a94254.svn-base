@@ -1,0 +1,34 @@
+setproperty ABORT_ON_USER_ERROR TRUE
+delete remove03
+create remove03 remove03.c
+
+module volume
+
+echo
+echo Initial code
+echo
+
+activate PRINT_CODE_CUMULATED_REDUCTIONS
+display PRINTED_FILE
+
+echo
+echo after removing reductions
+echo
+
+setproperty LOOP_LABEL "volume"
+apply REDUCTION_VARIABLE_EXPANSION
+activate PRINT_CODE
+display PRINTED_FILE
+
+echo
+echo Unsplit resulting code
+echo
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g remove03
+
+close
+delete remove03
+quit
+
+

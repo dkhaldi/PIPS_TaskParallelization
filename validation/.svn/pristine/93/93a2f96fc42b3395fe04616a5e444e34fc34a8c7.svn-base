@@ -1,0 +1,32 @@
+setenv WS=modulo02
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+echo
+echo Source code with transformers
+echo
+
+setproperty SEMANTICS_COMPUTE_TRANSFORMERS_IN_CONTEXT TRUE
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[main]
+
+echo
+echo Source code with preconditions
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+close
+
+echo
+echo Warnings
+echo
+
+shell cat $WS.database/Warnings
+
+#delete $WS
+quit

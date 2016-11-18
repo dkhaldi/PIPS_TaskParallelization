@@ -1,0 +1,138 @@
+Compute the intraprocedural preconditions at the same time as
+transformers and use them to improve the accuracy of expression
+and statement transformers:
+int main()
+{
+   float a[10][10][10][10][10];
+   int i, j, k, l, m;
+   float x;
+   float b[10][10];
+   i = 0;
+   j = 0;
+   k = 0;
+   l = 0;
+   m = 0;
+   x = 2.12;
+
+   for(i = 0; i <= 9; i += 1)
+      for(j = 0; j <= 9; j += 1) {
+         // comments 2
+         float z;
+         z = 0.0;
+         for(k = 0; k <= 9; k += 1) {
+            z = k*2.0;
+            for(l = 0; l <= 9; l += 1)
+               for(m = 0; m <= 9; m += 1) {
+                  float y;
+                  //comments 3
+                  // this used to break the privatization
+                  y = 2.0;
+                  // comments 4
+                  y = 3.5+x+z;
+                  a[i][j][k][l][m] = x*y;
+               }
+         }
+      }
+   // print all elements to avoid high optimization
+   for(i = 0; i <= 9; i += 1)
+      for(j = 0; j <= 9; j += 1)
+         for(k = 0; k <= 9; k += 1)
+            for(l = 0; l <= 9; l += 1)
+               for(m = 0; m <= 9; m += 1)
+                  printf("%f", a[i][j][k][l][m]);
+   return 0;
+}
+// parallel printed file style
+int main()
+{
+   float a[10][10][10][10][10];
+   int i, j, k, l, m;
+   float x;
+   float b[10][10];
+   i = 0;
+   j = 0;
+   k = 0;
+   l = 0;
+   m = 0;
+   x = 2.12;
+
+#pragma omp parallel for private(j)
+   for(i = 0; i <= 9; i += 1)
+#pragma omp parallel for private(k)
+      for(j = 0; j <= 9; j += 1) {
+         // comments 2
+         float z;
+         z = 0.0;
+#pragma omp parallel for private(z,l)
+         for(k = 0; k <= 9; k += 1) {
+            z = k*2.0;
+#pragma omp parallel for private(m)
+            for(l = 0; l <= 9; l += 1)
+#pragma omp parallel for 
+               for(m = 0; m <= 9; m += 1) {
+                  float y;
+                  //comments 3
+                  // this used to break the privatization
+                  y = 2.0;
+                  // comments 4
+                  y = 3.5+x+z;
+                  a[i][j][k][l][m] = x*y;
+               }
+         }
+      }
+   // print all elements to avoid high optimization
+   for(i = 0; i <= 9; i += 1)
+      for(j = 0; j <= 9; j += 1)
+         for(k = 0; k <= 9; k += 1)
+            for(l = 0; l <= 9; l += 1)
+               for(m = 0; m <= 9; m += 1)
+                  printf("%f", a[i][j][k][l][m]);
+   return 0;
+}
+// OMPIFY style
+int main()
+{
+   float a[10][10][10][10][10];
+   int i, j, k, l, m;
+   float x;
+   float b[10][10];
+   i = 0;
+   j = 0;
+   k = 0;
+   l = 0;
+   m = 0;
+   x = 2.12;
+
+#pragma omp parallel for private(j)
+   for(i = 0; i <= 9; i += 1)
+#pragma omp parallel for private(k)
+      for(j = 0; j <= 9; j += 1) {
+         // comments 2
+         float z;
+         z = 0.0;
+#pragma omp parallel for private(z, l)
+         for(k = 0; k <= 9; k += 1) {
+            z = k*2.0;
+#pragma omp parallel for private(m)
+            for(l = 0; l <= 9; l += 1)
+#pragma omp parallel for
+               for(m = 0; m <= 9; m += 1) {
+                  float y;
+                  //comments 3
+                  // this used to break the privatization
+                  y = 2.0;
+                  // comments 4
+                  y = 3.5+x+z;
+                  a[i][j][k][l][m] = x*y;
+               }
+         }
+      }
+   // print all elements to avoid high optimization
+   for(i = 0; i <= 9; i += 1)
+      for(j = 0; j <= 9; j += 1)
+         for(k = 0; k <= 9; k += 1)
+            for(l = 0; l <= 9; l += 1)
+               for(m = 0; m <= 9; m += 1)
+                  printf("%f", a[i][j][k][l][m]);
+   return 0;
+}

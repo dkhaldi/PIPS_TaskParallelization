@@ -1,0 +1,42 @@
+
+Transformers for divide09
+
+
+//  T(divide09) {divide09==n}
+
+int divide09(int n)
+{
+
+//  T(nn) {2n==nn}
+
+   int nn = n+n;
+
+//  T(m) {m==n, 2n==nn}
+
+   int m = nn/2;
+
+//  T(divide09) {divide09==m, divide09==n, 2divide09==nn}
+
+   return m;
+}
+
+Preconditions for divide09
+
+
+//  P() {}
+
+int divide09(int n)
+{
+
+//  P() {}
+
+   int nn = n+n;
+
+//  P(nn) {2n==nn}
+
+   int m = nn/2;
+
+//  P(m,nn) {m==n, 2n==nn}
+
+   return m;
+}

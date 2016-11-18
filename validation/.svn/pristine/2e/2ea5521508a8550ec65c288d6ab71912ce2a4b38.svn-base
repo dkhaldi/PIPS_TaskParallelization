@@ -1,0 +1,159 @@
+
+Proper effects for "make_s"
+
+s_t make_s(int i, float x)
+{
+   s_t *p;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+
+   p = (s_t *) malloc(sizeof(s_t));
+//             <    is read   >: i p
+//             <    is written>: p[0].entier
+   p->entier = i;
+//             <    is read   >: p x
+//             <    is written>: p[0].reel
+   p->reel = x;
+//             <    is read   >: p p[0].entier p[0].reel
+   return *p;
+}
+
+Proper pointer effects for "make_s"
+
+s_t make_s(int i, float x)
+{
+   s_t *p;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+
+   p = (s_t *) malloc(sizeof(s_t));
+//             <    is read   >: i p
+//             <    is written>: p[0].entier
+   p->entier = i;
+//             <    is read   >: p x
+//             <    is written>: p[0].reel
+   p->reel = x;
+//             <    is read   >: p p[0].entier p[0].reel
+   return *p;
+}
+
+Points-to for "make_s"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+s_t make_s(int i, float x)
+{
+
+// Points To: none
+
+   s_t *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   p = (s_t *) malloc(sizeof(s_t));
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP*_b0 , MAY
+
+   p->entier = i;
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP*_b0 , MAY
+
+   p->reel = x;
+
+// Points To:
+// p -> *ANY_MODULE*:*HEAP*_b0 , MAY
+
+   return *p;
+}
+
+Proper effects for assign22
+
+void assign22()
+{
+   s_t s;
+   int j;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: s.entier s.reel 
+//                               _MALLOC_EFFECTS:_MALLOC_
+
+   s = make_s(1, 2.);
+//             <    is written>: s.entier
+   s.entier = 4;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: j _MALLOC_EFFECTS:_MALLOC_
+   
+   /* invalid lvalue in assignment */
+   /* make_s(1, 2.).entier = 4; */
+   
+   /* But this is OK in rhs */
+   j = make_s(1, 2.).entier;
+}
+
+Proper pointer effects for assign22
+
+void assign22()
+{
+   s_t s;
+   int j;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: s.entier s.reel 
+//                               _MALLOC_EFFECTS:_MALLOC_
+
+   s = make_s(1, 2.);
+//             <    is written>: s.entier
+   s.entier = 4;
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: j _MALLOC_EFFECTS:_MALLOC_
+   
+   /* invalid lvalue in assignment */
+   /* make_s(1, 2.).entier = 4; */
+   
+   /* But this is OK in rhs */
+   j = make_s(1, 2.).entier;
+}
+
+Points-to for assign22
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void assign22()
+{
+
+// Points To: none
+
+   s_t s;
+
+// Points To: none
+
+   int j;
+
+// Points To: none
+
+
+   s = make_s(1, 2.);
+
+// Points To: none
+
+   s.entier = 4;
+
+// Points To: none
+
+   
+   /* invalid lvalue in assignment */
+   /* make_s(1, 2.).entier = 4; */
+   
+   /* But this is OK in rhs */
+   j = make_s(1, 2.).entier;
+}

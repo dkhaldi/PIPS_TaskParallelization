@@ -1,0 +1,358 @@
+int struct15()
+{
+   /*
+     static FILE* file = NULL;
+     if (file == NULL)
+       file = fopen("vals_init.txt","r");
+     */
+   
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N1 r __IO_EFFECTS:LUNS[0]
+   int r = fscanf(stdin, "%d", &p.N1);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N1
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct15.c", 31, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N2 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N2);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N2
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct15.c", 36, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N3 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N3);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N3
+   p.N3<=32?(void) 0:__assert_fail("p.N3 <= 32", "./struct15.c", 41, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N4 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N4);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N4
+   p.N4<=8?(void) 0:__assert_fail("p.N4 <= 8", "./struct15.c", 46, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N5 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N5);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N5
+   p.N5<=64?(void) 0:__assert_fail("p.N5 <= 64", "./struct15.c", 51, __func__);
+
+   return 0;
+}
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: p.N1 p.N2 p.N3 p.N4 p.N5 stdin 
+//                               __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N1 p.N2 p.N3 p.N4 p.N5 
+//                               __IO_EFFECTS:LUNS[0]
+int struct15()
+{
+   /*
+     static FILE* file = NULL;
+     if (file == NULL)
+       file = fopen("vals_init.txt","r");
+     */
+   
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N1 r __IO_EFFECTS:LUNS[0]
+   int r = fscanf(stdin, "%d", &p.N1);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N1
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct15.c", 31, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N2 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N2);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N2
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct15.c", 36, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N3 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N3);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N3
+   p.N3<=32?(void) 0:__assert_fail("p.N3 <= 32", "./struct15.c", 41, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N4 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N4);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N4
+   p.N4<=8?(void) 0:__assert_fail("p.N4 <= 8", "./struct15.c", 46, __func__);
+//             <may be read   >: stdin[0]
+//             <may be written>: stdin[0]
+//             <    is read   >: stdin __IO_EFFECTS:LUNS[0]
+//             <    is written>: p.N5 r __IO_EFFECTS:LUNS[0]
+
+   r = fscanf(stdin, "%d", &p.N5);
+//             <    is read   >: r
+   if (r==-1)
+      return -1;
+//             <may be read   >: __func__
+//             <    is read   >: p.N5
+   p.N5<=64?(void) 0:__assert_fail("p.N5 <= 64", "./struct15.c", 51, __func__);
+
+   return 0;
+}
+
+//  T(p[N1],p[N2],p[N3],p[N4],p[N5],struct15) {struct15==0,
+//    p[N1]<=256, p[N2]<=193, p[N3]<=32, p[N4]<=8, p[N5]<=64}
+
+int struct15()
+{
+   /*
+     static FILE* file = NULL;
+     if (file == NULL)
+       file = fopen("vals_init.txt","r");
+     */
+   
+
+//  T(p[N1],r) {}
+
+   int r = fscanf(stdin, "%d", &p.N1);
+
+//  T(struct15) {}
+
+   if (r==-1)
+
+//  T(struct15) {struct15==-1}
+
+      return -1;
+
+//  T() {p[N1]<=256}
+
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct15.c", 31, __func__);
+
+//  T(p[N2],r) {}
+
+
+   r = fscanf(stdin, "%d", &p.N2);
+
+//  T(struct15) {}
+
+   if (r==-1)
+
+//  T(struct15) {struct15==-1}
+
+      return -1;
+
+//  T() {p[N2]<=193}
+
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct15.c", 36, __func__);
+
+//  T(p[N3],r) {}
+
+
+   r = fscanf(stdin, "%d", &p.N3);
+
+//  T(struct15) {}
+
+   if (r==-1)
+
+//  T(struct15) {struct15==-1}
+
+      return -1;
+
+//  T() {p[N3]<=32}
+
+   p.N3<=32?(void) 0:__assert_fail("p.N3 <= 32", "./struct15.c", 41, __func__);
+
+//  T(p[N4],r) {}
+
+
+   r = fscanf(stdin, "%d", &p.N4);
+
+//  T(struct15) {}
+
+   if (r==-1)
+
+//  T(struct15) {struct15==-1}
+
+      return -1;
+
+//  T() {p[N4]<=8}
+
+   p.N4<=8?(void) 0:__assert_fail("p.N4 <= 8", "./struct15.c", 46, __func__);
+
+//  T(p[N5],r) {}
+
+
+   r = fscanf(stdin, "%d", &p.N5);
+
+//  T(struct15) {}
+
+   if (r==-1)
+
+//  T(struct15) {struct15==-1}
+
+      return -1;
+
+//  T() {p[N5]<=64}
+
+   p.N5<=64?(void) 0:__assert_fail("p.N5 <= 64", "./struct15.c", 51, __func__);
+
+//  T(struct15) {struct15==0}
+
+
+   return 0;
+}
+
+//  P() {}
+
+int struct15()
+{
+   /*
+     static FILE* file = NULL;
+     if (file == NULL)
+       file = fopen("vals_init.txt","r");
+     */
+   
+
+//  P() {}
+
+   int r = fscanf(stdin, "%d", &p.N1);
+
+//  P(p[N1],r) {}
+
+   if (r==-1)
+
+//  P(p[N1],r) {r==-1}
+
+      return -1;
+
+//  P(p[N1],r,struct15) {}
+
+   p.N1<=256?(void) 0:__assert_fail("p.N1 <= 256", "./struct15.c", 31, __func__);
+
+//  P(p[N1],r,struct15) {p[N1]<=256}
+
+
+   r = fscanf(stdin, "%d", &p.N2);
+
+//  P(p[N1],p[N2],r,struct15) {p[N1]<=256}
+
+   if (r==-1)
+
+//  P(p[N1],p[N2],r,struct15) {r==-1, p[N1]<=256}
+
+      return -1;
+
+//  P(p[N1],p[N2],r,struct15) {p[N1]<=256}
+
+   p.N2<=193?(void) 0:__assert_fail("p.N2 <= 193", "./struct15.c", 36, __func__);
+
+//  P(p[N1],p[N2],r,struct15) {p[N1]<=256, p[N2]<=193}
+
+
+   r = fscanf(stdin, "%d", &p.N3);
+
+//  P(p[N1],p[N2],p[N3],r,struct15) {p[N1]<=256, p[N2]<=193}
+
+   if (r==-1)
+
+//  P(p[N1],p[N2],p[N3],r,struct15) {r==-1, p[N1]<=256, p[N2]<=193}
+
+      return -1;
+
+//  P(p[N1],p[N2],p[N3],r,struct15) {p[N1]<=256, p[N2]<=193}
+
+   p.N3<=32?(void) 0:__assert_fail("p.N3 <= 32", "./struct15.c", 41, __func__);
+
+//  P(p[N1],p[N2],p[N3],r,struct15) {p[N1]<=256, p[N2]<=193,
+//    p[N3]<=32}
+
+
+   r = fscanf(stdin, "%d", &p.N4);
+
+//  P(p[N1],p[N2],p[N3],p[N4],r,struct15) {p[N1]<=256, p[N2]<=193,
+//    p[N3]<=32}
+
+   if (r==-1)
+
+//  P(p[N1],p[N2],p[N3],p[N4],r,struct15) {r==-1, p[N1]<=256,
+//    p[N2]<=193, p[N3]<=32}
+
+      return -1;
+
+//  P(p[N1],p[N2],p[N3],p[N4],r,struct15) {p[N1]<=256, p[N2]<=193,
+//    p[N3]<=32}
+
+   p.N4<=8?(void) 0:__assert_fail("p.N4 <= 8", "./struct15.c", 46, __func__);
+
+//  P(p[N1],p[N2],p[N3],p[N4],r,struct15) {p[N1]<=256, p[N2]<=193,
+//    p[N3]<=32, p[N4]<=8}
+
+
+   r = fscanf(stdin, "%d", &p.N5);
+
+//  P(p[N1],p[N2],p[N3],p[N4],p[N5],r,struct15) {p[N1]<=256,
+//    p[N2]<=193, p[N3]<=32, p[N4]<=8}
+
+   if (r==-1)
+
+//  P(p[N1],p[N2],p[N3],p[N4],p[N5],r,struct15) {r==-1, p[N1]<=256,
+//    p[N2]<=193, p[N3]<=32, p[N4]<=8}
+
+      return -1;
+
+//  P(p[N1],p[N2],p[N3],p[N4],p[N5],r,struct15) {p[N1]<=256,
+//    p[N2]<=193, p[N3]<=32, p[N4]<=8}
+
+   p.N5<=64?(void) 0:__assert_fail("p.N5 <= 64", "./struct15.c", 51, __func__);
+
+//  P(p[N1],p[N2],p[N3],p[N4],p[N5],r,struct15) {p[N1]<=256,
+//    p[N2]<=193, p[N3]<=32, p[N4]<=8, p[N5]<=64}
+
+
+   return 0;
+}

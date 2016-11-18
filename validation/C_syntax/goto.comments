@@ -1,0 +1,2 @@
+FI: I did not find where two statement comments are fused without checking for a
+intermediary LF. I went thru the control library and clean_up_sequences in ri-util.

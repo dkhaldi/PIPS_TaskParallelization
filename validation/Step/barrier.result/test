@@ -1,0 +1,81 @@
+###################### barrier-STEP/barrier.database/Src/BARRIER_PARDO_HYBRID.f ######################
+      SUBROUTINE BARRIER_PARDO_HYBRID(N, A, I)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_I_UP, STEP_I_LOW, 
+     &STEP_COMM_SIZE, N, I
+      INTEGER STEP_SR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:1
+     &, 1:STEP_MAX_NB_LOOPSLICES), A(1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_PARALLEL_DO)
+      CALL STEP_INIT_ARRAYREGIONS(A, STEP_INTEGER4, 1, 1, N)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, N, 1, STEP_COMM_SIZE)
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_I_LOW, STEP_I_UP)
+
+C  <A(PHI1)-W-EXACT-{1<=PHI1, PHI1<=12, STEP_I_LOW<=PHI1,
+C    PHI1<=STEP_I_UP}>
+
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,1,IDX) = MAX(1, STEP_I_LOW)
+         STEP_SR_A(STEP_INDEX_SLICE_UP,1,IDX) = MIN(12, STEP_I_UP)
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(A, STEP_COMM_SIZE, STEP_SR_A)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_I_LOW, STEP_I_UP)
+!$omp parallel do
+
+      DO 10 I = STEP_I_LOW, STEP_I_UP
+         A(I) = I
+         PRINT *, I
+         CALL BARRIER_PARDO_HYBRID_BARRIER_HYBRID
+10       CONTINUE
+!$omp end parallel do
+C END WORK
+!$omp master
+      CALL STEP_ALLTOALL_FULL(A, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT
+     &)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_PARALLEL_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### barrier-STEP/barrier.database/Src/BARRIER_PARDO_HYBRID_BARRIER_HYBRID.f ######################
+      SUBROUTINE BARRIER_PARDO_HYBRID_BARRIER_HYBRID
+      implicit none
+      include "STEP.h"
+
+C BEGIN WORK
+!$omp barrier
+      CALL STEP_BARRIER
+C END WORK
+      END
+###################### barrier-STEP/barrier.database/Src/barrier.f ######################
+!
+! barrier program
+!
+! Example of a barrier directive
+!
+! 2008
+! Creation: A. Muller, 2008
+!
+! deadlock if N not a multiple of nb processes
+
+      PROGRAM BARRIER
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+      INTEGER N
+      PARAMETER (N=12)
+      INTEGER I,A(N)
+      CALL STEP_INIT_FORTRAN_ORDER
+      CALL BARRIER_PARDO_HYBRID(N, A, I)
+
+      PRINT *, A
+      CALL STEP_FINALIZE
+      END

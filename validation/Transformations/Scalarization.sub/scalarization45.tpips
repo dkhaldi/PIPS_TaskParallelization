@@ -1,0 +1,25 @@
+setenv NAME scalarization45
+delete $NAME
+create $NAME $NAME.c
+activate MUST_REGIONS
+echo #
+echo # initial file
+echo #
+display PRINTED_FILE[FAdd1]
+# should do nothing
+setproperty SCALARIZATION_SKIP_ADDRESS_OF_VARIABLES TRUE
+apply SCALARIZATION[FAdd1]
+echo #
+echo # not scalarized because of &
+echo #
+display PRINTED_FILE[FAdd1]
+# should do it! (default)
+setproperty SCALARIZATION_SKIP_ADDRESS_OF_VARIABLES FALSE
+apply SCALARIZATION[FAdd1]
+echo #
+echo # scalarized anyway
+echo #
+display PRINTED_FILE[FAdd1]
+close
+delete $NAME
+quit

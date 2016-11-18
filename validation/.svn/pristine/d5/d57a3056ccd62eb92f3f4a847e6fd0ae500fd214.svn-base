@@ -1,0 +1,26 @@
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void assert01()
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+
+   i>0?(void) 0:__assert_fail("i>0", "./assert01.c", 15, __func__);
+
+// Points To: none
+
+
+   return;
+}

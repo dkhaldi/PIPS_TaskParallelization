@@ -1,0 +1,22 @@
+
+Printed file for scope04_b
+
+int i = 1;
+extern void foo();
+void foo()
+{
+   printf("%d\n", i);
+}
+
+Printed file for scope04_a: should work in spite of variable i
+
+extern int i;
+extern int main();
+int main()
+{
+   printf("%d\n", i);
+   foo();
+}
+
+Warnings
+

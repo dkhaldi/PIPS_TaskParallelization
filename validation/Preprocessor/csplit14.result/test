@@ -1,0 +1,7 @@
+
+Warnings for csplit14
+
+CREATE_WORKSPACE[Program] (csplit_open_compilation_unit) [user error] Two source files (at least) with same name: "pretty14.c".
+Not supported yet.
+CREATE_WORKSPACE[Program] (tpips_user_error) Close workspace and quit on user error requested.
+CREATE_WORKSPACE[Program] (pips_log_end) [user error] stopping pips on code 2 (USER_ERROR) for CLOSE_WORKSPACE_AND_QUIT_ON_ERROR

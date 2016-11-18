@@ -1,0 +1,16 @@
+setenv WS=io01
+delete $WS
+create $WS $WS.c
+
+echo
+echo parsed printed file
+echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+apply UNSPLIT
+shell pips_validation_exe.sh -c -g $WS
+
+close
+#delete $WS
+quit

@@ -1,0 +1,48 @@
+void function05(int size, int a[const size])
+{
+   int i;
+   for(i = 0; i <= size-1; i += 1)
+      a[i] = 0;
+}
+
+Warning(s)
+
+COMPILATION_UNIT_PARSER[function05!] (insert_qualifier) ("./function05.c":1-9) 
+Dupliquate qualifier "const"
+Source code after preprocessing:
+/* Repeated "const" qualifier used in a type and badly prettyprinted
+ * (see also function03.c).
+ *
+ * "const" repeated accepted by gcc 4.6.3
+ *
+ * The repetition was not detected by PIPS.
+ */
+
+extern void function05(int size, int a [ const const size ]);
+Input source code, before preprocessing:
+/* Repeated "const" qualifier used in a type and badly prettyprinted
+ * (see also function03.c).
+ *
+ * "const" repeated accepted by gcc 4.6.3
+ *
+ * The repetition was not detected by PIPS.
+ */
+
+void function05(int size, int a[const const size])
+
+C_PARSER[function05] (insert_qualifier) ("./function05.c":1-9) 
+Dupliquate qualifier "const"
+Source code after preprocessing:
+void function05(int size, int a[const const size])
+Input source code, before preprocessing:
+/* Repeated "const" qualifier used in a type and badly prettyprinted
+ * (see also function03.c).
+ *
+ * "const" repeated accepted by gcc 4.6.3
+ *
+ * The repetition was not detected by PIPS.
+ */
+
+void function05(int size, int a[const const size])
+
+

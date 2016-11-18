@@ -1,0 +1,27 @@
+#
+# initial test
+#
+int test(freia_data2d *img)
+{
+   int vol, bla;
+   int *p;
+   p = &bla;
+   freia_aipo_global_vol(img, &vol);
+   *p = vol;
+   return vol;
+}
+#
+# processed test
+#
+int test(freia_data2d *img)
+{
+   int vol, bla;
+   int *p;
+   0;
+   freia_aipo_global_vol(img, &vol);
+   bla = vol;
+   return vol;
+}
+#
+# compile generated pointer00
+#

@@ -1,0 +1,5 @@
+/* The definition of the struct must be prettyprinted in the typedef statement */
+
+typedef struct {                                                        /*0006*/
+   int a;
+} foo;

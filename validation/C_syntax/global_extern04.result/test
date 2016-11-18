@@ -1,0 +1,8 @@
+/* Try to preserve the extern declarations for functions */
+
+extern double sqrt(double);
+
+int filter();
+#
+# compile generated global_extern04
+#

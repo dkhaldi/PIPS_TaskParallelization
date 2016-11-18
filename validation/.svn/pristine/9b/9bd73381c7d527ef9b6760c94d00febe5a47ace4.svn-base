@@ -1,0 +1,23 @@
+int subscript01()
+{
+   int i, n, choose;
+   int blk[10], a1[10], a2[10];
+//             <may be read   >: a1[n] a2[n]
+//             <    is read   >: blk[(choose?a1:a2)[n]] choose n
+//             <    is written>: i
+   i = blk[(choose?a1:a2)[n]];
+//             <    is read   >: i
+   return i;
+}
+int subscript01()
+{
+   int i, n, choose;
+   int blk[10], a1[10], a2[10];
+
+//  <a1[PHI1]-R-MAY-{PHI1==n}>
+//  <a2[PHI1]-R-MAY-{PHI1==n}>
+//  <blk[PHI1]-R-MAY-{}>
+
+   i = blk[(choose?a1:a2)[n]];
+   return i;
+}

@@ -1,0 +1,162 @@
+###################### master-STEP/master.database/Src/MASTER_PAR_HYBRID.f ######################
+      SUBROUTINE MASTER_PAR_HYBRID(N, A, I, J)
+      implicit none
+      include "STEP.h"
+      INTEGER N, I, J
+      INTEGER STEP_RR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:1
+     &), A(1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_PARALLEL)
+      CALL STEP_INIT_ARRAYREGIONS(A, STEP_INTEGER4, 1, 1, N)
+
+C RECV REGIONS
+
+C  <A(PHI1)-R-MAY-{1<=PHI1, PHI1<=10}>
+
+      STEP_RR_A(STEP_INDEX_SLICE_LOW,1) = 1
+      STEP_RR_A(STEP_INDEX_SLICE_UP,1) = 10
+      CALL STEP_SET_RECVREGIONS(A, 1, STEP_RR_A)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+!$omp parallel
+      CALL MASTER_PAR_HYBRID_DO_HYBRID(N, A, J)
+      PRINT *, "parallel1", A, I
+      I = -1
+      CALL MASTER_PAR_HYBRID_MASTER_HYBRID(N, A, I)
+      CALL MASTER_PAR_HYBRID_BARRIER_HYBRID
+! no implict barrier for "END MASTER" directive
+      PRINT *, "parallel2", A, I
+!$omp end parallel
+C END WORK
+!$omp master
+      CALL STEP_CONSTRUCT_END(STEP_PARALLEL)
+!$omp end master
+!$omp barrier
+      END
+###################### master-STEP/master.database/Src/MASTER_PAR_HYBRID_BARRIER_HYBRID.f ######################
+      SUBROUTINE MASTER_PAR_HYBRID_BARRIER_HYBRID
+      implicit none
+      include "STEP.h"
+
+C BEGIN WORK
+!$omp barrier
+      CALL STEP_BARRIER
+C END WORK
+      END
+###################### master-STEP/master.database/Src/MASTER_PAR_HYBRID_DO_HYBRID.f ######################
+      SUBROUTINE MASTER_PAR_HYBRID_DO_HYBRID(N, A, J)
+      implicit none
+      include "STEP.h"
+      INTEGER IDX, STEP_COMM_RANK, STEP_J_UP, STEP_J_LOW, 
+     &STEP_COMM_SIZE, N, J
+      INTEGER STEP_SR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:1
+     &, 1:STEP_MAX_NB_LOOPSLICES), A(1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_DO)
+      CALL STEP_GET_COMMSIZE(STEP_COMM_SIZE)
+      CALL STEP_COMPUTE_LOOPSLICES(1, N, 1, STEP_COMM_SIZE)
+
+C SEND REGIONS
+      DO IDX = 1, STEP_COMM_SIZE
+         CALL STEP_GET_LOOPBOUNDS(IDX-1, STEP_J_LOW, STEP_J_UP)
+
+C  <A(PHI1)-W-EXACT-{1<=PHI1, PHI1<=10, STEP_J_LOW<=PHI1,
+C    PHI1<=STEP_J_UP}>
+
+         STEP_SR_A(STEP_INDEX_SLICE_LOW,1,IDX) = MAX(1, STEP_J_LOW)
+         STEP_SR_A(STEP_INDEX_SLICE_UP,1,IDX) = MIN(10, STEP_J_UP)
+      ENDDO
+      CALL STEP_SET_SENDREGIONS(A, STEP_COMM_SIZE, STEP_SR_A)
+!$omp end master
+!$omp barrier
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      CALL STEP_GET_LOOPBOUNDS(STEP_COMM_RANK, STEP_J_LOW, STEP_J_UP)
+!$omp do
+      DO 10 J = STEP_J_LOW, STEP_J_UP
+         A(J) = J
+         PRINT *, "do2", J
+10       CONTINUE
+!$omp end do
+C END WORK
+!$omp master
+      CALL STEP_ALLTOALL_FULL(A, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT
+     &)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_DO)
+!$omp end master
+!$omp barrier
+      END
+###################### master-STEP/master.database/Src/MASTER_PAR_HYBRID_MASTER_HYBRID.f ######################
+      SUBROUTINE MASTER_PAR_HYBRID_MASTER_HYBRID(N, A, I)
+      implicit none
+      include "STEP.h"
+      INTEGER STEP_COMM_RANK, N, I
+      INTEGER STEP_SR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:1
+     &), STEP_RR_A(STEP_INDEX_SLICE_LOW:STEP_INDEX_SLICE_UP, 1:1), A(
+     &1:N)
+!$omp master
+      CALL STEP_CONSTRUCT_BEGIN(STEP_MASTER)
+
+C RECV REGIONS
+
+C  <A(PHI1)-R-EXACT-{1<=PHI1, PHI1<=10}>
+
+      STEP_RR_A(STEP_INDEX_SLICE_LOW,1) = 1
+      STEP_RR_A(STEP_INDEX_SLICE_UP,1) = 10
+      CALL STEP_SET_RECVREGIONS(A, 1, STEP_RR_A)
+      CALL STEP_REGISTER_ALLTOALL_PARTIAL(A, STEP_NBLOCKING_ALG, 
+     &STEP_TAG_DEFAULT)
+      CALL STEP_FLUSH
+
+C SEND REGIONS
+
+C  <A(PHI1)-W-EXACT-{1<=PHI1, PHI1<=10}>
+
+      STEP_SR_A(STEP_INDEX_SLICE_LOW,1) = 1
+      STEP_SR_A(STEP_INDEX_SLICE_UP,1) = 10
+      CALL STEP_SET_SENDREGIONS(A, 1, STEP_SR_A)
+
+C BEGIN WORK
+      CALL STEP_GET_RANK(STEP_COMM_RANK)
+      IF (STEP_COMM_RANK.EQ.0) THEN
+         PRINT *, "master", A, I
+
+         DO 20 I = 1, N
+            A(I) = 2*I
+20          CONTINUE
+      ENDIF
+C END WORK
+      CALL STEP_ALLTOALL_FULL(A, STEP_NBLOCKING_ALG, STEP_TAG_DEFAULT
+     &)
+      CALL STEP_FLUSH
+      CALL STEP_CONSTRUCT_END(STEP_MASTER)
+!$omp end master
+      END
+###################### master-STEP/master.database/Src/master.f ######################
+!
+!
+! Example of a master directive
+!
+! 2008
+! Creation: A. Muller, 2008
+!
+      PROGRAM MASTER
+! MIL-STD-1753 Fortran extension not in PIPS
+      implicit none
+      INTEGER N
+      PARAMETER (N=10)
+      INTEGER I,J,A(N)
+      CALL STEP_INIT_FORTRAN_ORDER
+
+      I = -3
+      CALL MASTER_PAR_HYBRID(N, A, I, J)
+      CALL STEP_FINALIZE
+
+      END

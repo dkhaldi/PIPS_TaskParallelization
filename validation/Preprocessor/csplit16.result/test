@@ -1,0 +1,15 @@
+/* See what happens with specific parsing for compilation units */
+
+# 3 "./csplit16.c"
+extern int csplit16(int i, int *pj, int k, int **pl);
+# 3 "csplit16.c"
+int csplit16(int i, int * pj, int k, int * * pl)
+{
+  *pj = i;
+  **pl = k;
+}
+int csplit16(int i, int *pj, int k, int **pl)
+{
+   *pj = i;
+   **pl = k;
+}

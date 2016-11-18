@@ -1,0 +1,60 @@
+
+Init Code
+
+int main()
+{
+   int x;
+   if (rand()) {
+      x = 0;
+      printf("x=%d", x);
+   }
+   return 0;
+}
+
+Source code for ioif02 after dead-code elimination
+
+int main()
+{
+   int x;
+   if (rand()) {
+      x = 0;
+      printf("x=%d", x);
+   }
+   return 0;
+}
+
+OUT regions for ioif02
+
+int main()
+{
+   int x;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1}>
+
+   if (rand()) {
+
+//  <x-OUT-EXACT-{}>
+
+      x = 0;
+
+//  <__IO_EFFECTS:LUNS[PHI1]-OUT-MAY-{PHI1==1, x==0}>
+
+      printf("x=%d", x);
+   }
+   return 0;
+}
+
+Source code for ioif02 after dead-code elimination with OUT regions
+
+int main()
+{
+   int x;
+   if (rand()) {
+      x = 0;
+      printf("x=%d", x);
+   }
+   return 0;
+}
+
+Warnings
+

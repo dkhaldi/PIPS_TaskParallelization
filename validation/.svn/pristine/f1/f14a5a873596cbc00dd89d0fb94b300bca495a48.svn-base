@@ -1,0 +1,66 @@
+      PROGRAM STRDATA01
+      CHARACTER*12 C
+      DATA C /'hello world'/
+      INTEGER I
+      DATA I /12/
+      PRINT *, C, I                                                     0006
+      C = 'bye world'                                                   0007
+      I = 3                                                             0008
+      PRINT *, C, I                                                     0009
+      END
+
+C  P() {C=='hello world', I==12}
+
+
+C  P() {C=='hello world', I==12}
+
+
+C  T(C,I) {C=='bye world', I==3}
+
+      PROGRAM STRDATA01
+      CHARACTER*12 C
+      DATA C /'hello world'/
+      INTEGER I
+      DATA I /12/
+
+C  T() {}
+
+      PRINT *, C, I                                                     0006
+
+C  T(C) {C=='bye world'}
+
+      C = 'bye world'                                                   0007
+
+C  T(I) {I==3}
+
+      I = 3                                                             0008
+
+C  T() {}
+
+      PRINT *, C, I                                                     0009
+      END
+
+C  P() {C=='hello world', I==12}
+
+      PROGRAM STRDATA01
+      CHARACTER*12 C
+      DATA C /'hello world'/
+      INTEGER I
+      DATA I /12/
+
+C  P() {C=='hello world', I==12}
+
+      PRINT *, C, I                                                     0006
+
+C  P() {C=='hello world', I==12}
+
+      C = 'bye world'                                                   0007
+
+C  P(C) {C=='bye world', C#init=='hello world', I==12}
+
+      I = 3                                                             0008
+
+C  P(C,I) {C=='bye world', C#init=='hello world', I==3, I#init==12}
+
+      PRINT *, C, I                                                     0009
+      END

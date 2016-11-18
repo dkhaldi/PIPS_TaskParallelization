@@ -1,0 +1,41 @@
+
+void call04(int n, int m, int x[n][m])
+{
+   int i, j;
+//             <    is read   >: n
+//             <    is written>: i
+
+   for(i = 0; i <= n-1; i += 1)
+//             <    is read   >: m n
+//             <    is written>: j
+      for(j = 0; j <= m-1; j += 1)
+//             <    is read   >: i j m n
+//             <    is written>: x[i][j]
+         x[i][j] = 0;
+}
+int main()
+{
+//             <    is written>: d1
+   int d1 = 10;
+//             <    is written>: d2
+   int d2 = 10;
+//             <    is read   >: d1 d2
+   int y[d1][d2];
+//             <may be written>: y[*][*]
+//             <    is read   >: d1 d2
+
+   call04(d1, d2, y);
+}
+
+ *********************** Use-Def Chains *********************
+
+	14 --> 16 with conflicts
+		from <d1-W-EXACT> to <d1-R-EXACT>
+	14 --> 18 with conflicts
+		from <d1-W-EXACT> to <d1-R-EXACT>
+	15 --> 16 with conflicts
+		from <d2-W-EXACT> to <d2-R-EXACT>
+	15 --> 18 with conflicts
+		from <d2-W-EXACT> to <d2-R-EXACT>
+
+****************** End of Dependence Graph ******************

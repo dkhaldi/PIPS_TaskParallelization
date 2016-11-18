@@ -1,0 +1,69 @@
+
+Parsed printed file for "ARRAY05"
+
+
+      PROGRAM ARRAY05
+
+      REAL A(10), B(10), C(10)
+
+      A = 1.0                                                           0006
+      B = A+1.0                                                         0007
+      C = A/B                                                           0008
+
+
+      PRINT *, A, B, C                                                  0011
+
+      END
+
+Proper effetcs for "ARRAY05"
+
+
+      PROGRAM ARRAY05
+
+      REAL A(10), B(10), C(10)
+C             <may be written>: A(*)
+
+      A = 1.0                                                           0006
+C             <may be read   >: A(*)
+C             <may be written>: B(*)
+      B = A+1.0                                                         0007
+C             <may be read   >: A(*) B(*)
+C             <may be written>: C(*)
+      C = A/B                                                           0008
+C             <may be read   >: A(*) B(*) C(*)
+C             <    is read   >: __IO_EFFECTS:LUNS(6)
+C             <    is written>: __IO_EFFECTS:LUNS(6)
+
+
+      PRINT *, A, B, C                                                  0011
+
+      END
+
+Cumulated effetcs for "ARRAY05"
+
+C             <    is read   >: __IO_EFFECTS:LUNS(6)
+C             <    is written>: __IO_EFFECTS:LUNS(6)
+
+      PROGRAM ARRAY05
+
+      REAL A(10), B(10), C(10)
+C             <may be written>: A(*)
+
+      A = 1.0                                                           0006
+C             <may be read   >: A(*)
+C             <may be written>: B(*)
+      B = A+1.0                                                         0007
+C             <may be read   >: A(*) B(*)
+C             <may be written>: C(*)
+      C = A/B                                                           0008
+C             <may be read   >: A(*) B(*) C(*)
+C             <    is read   >: __IO_EFFECTS:LUNS(6)
+C             <    is written>: __IO_EFFECTS:LUNS(6)
+
+
+      PRINT *, A, B, C                                                  0011
+
+      END
+
+Printed files with regions
+

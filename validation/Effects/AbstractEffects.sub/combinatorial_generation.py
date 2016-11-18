@@ -1,0 +1,68 @@
+#! /usr/bin/env python
+#
+# $Id: combinatorial_generation.py 6727 2016-07-01 15:22:04Z coelho $
+#
+
+from __future__ import print_function
+
+TYPES = { 'int': ['0', '1', '2'],
+		  'float': [ '0.0', '1.0', '2.0' ] }
+MEMORY = ['formal','stack','heap','static','global']
+
+def generate(vmem, pmem, type_a, val_a, val_b, val_c, type_b=None):
+	if type_b is None: type_b = type_a
+	s = [ "", "// %s %s %s %s" % (vmem, pmem, type_a, type_b) ]
+	if vmem == 'global':
+		s += [ "%s global_a;" % type_a, "%s global_b;" % type_b ]
+	elif vmem == 'static':
+		s += [ "static %s static_a;" % type_a,
+			   "static %s static_b;" % type_b ]
+	if pmem == 'global':
+		s += [ "%s * %s_pa;" % (type_a, pmem) ]
+	elif pmem == 'static':
+		s += [ "static %s * %s_pa" % (type_a, pmem) ]
+	f = "void mixup_%s_%s_%s_%s(" % (vmem, pmem, type_a, type_b)
+	if vmem == 'formal':
+		f += "%s formal_a, %s formal_b" % (type_a, type_b)
+	if pmem == 'formal':
+		if f[-1] == 'b': f += ", "
+		f += "%s * %s_pa" % (type_a, pmem)
+	f += ")"
+	s += [ f, "{" ]
+	if vmem == 'stack':
+		s += [ "  %s stack_a;" % type_a, "  %s stack_b;" % type_b ];
+	if pmem == 'stack':
+		s += [ "  %s * %s_pa" % (type_a, pmem) ]
+	s += [ "  %s_a = %s;" % (vmem, val_a),
+		   "  %s_b = %s;" % (vmem, val_b),
+		   "  %s_pa = & %s_a;" % (pmem, vmem),
+		   "  * %s_pa = %s;" % (pmem, val_c) ]
+	s += [ "  // %s_b == %s" % (vmem, val_b) ]
+	s += [ "  return;",
+		   "}" ]
+	# let us call the function
+	s += [ "", "int main(void)", "{" ]
+	if vmem == 'formal':
+		s += [ "  %s a;" % type_a, "  %s b;" % type_b ]
+	if pmem == 'formal':
+		s += [ "  %s * pa;" % type_a ]
+	c = "  mixup_%s_%s_%s_%s(" % (vmem, pmem, type_a, type_b)
+	if vmem == 'formal':
+		c += "a, b"
+	if pmem == 'formal':
+		if c[-1] == 'b': c += ", "
+		c += "pa"
+	c += ");"
+	s += [ c, "  return 0;", "}" ]
+	return s
+
+import sys
+if len(sys.argv) > 1:
+	v, p, t1, t2 = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+	assert v in MEMORY and p in MEMORY and t1 in TYPES and t2 in TYPES
+	print("\n".join(generate(v, p, t1, TYPES[t1][0],
+							 TYPES[t2][1], TYPES[t1][2], t2)))
+else:
+	for v in MEMORY:
+		for p in MEMORY:
+		  print("\n".join(generate(v, p, 'int', '0', '1', '2', 'int')))

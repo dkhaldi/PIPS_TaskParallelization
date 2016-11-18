@@ -1,0 +1,33 @@
+(tp_parse) equiv11: No such workspace
+setproperty CHECK_FORTRAN_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+Registering file equiv11.f
+Splitting file    ./equiv11.f
+  Module         EQUIV11
+Workspace equiv11 created and opened.
+Module EQUIV11 selected
+Main module PROGRAM "EQUIV11" selected.
+Module EQUIV11 already active.
+setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+Module EQUIV11 already active.
+Request: build resource PRINTED_FILE for module EQUIV11.
+  BOOTSTRAP                      building   ENTITIES()
+  FILTER_FILE                    building   SOURCE_FILE(EQUIV11)
+  PARSER                         building   PARSED_CODE(EQUIV11)
+                                 building   CALLEES(EQUIV11)
+PARSER[EQUIV11] (remove_ghost_variable_entities) Entity "EQUIV11:V" does not really exist but appears in an equivalence chain!
+PARSER[EQUIV11] (remove_ghost_variable_entities) [user error] Parser error between lines 16 and 16
+Cannot remove still accessible ghost variable
+PARSER[EQUIV11] (set_debug_stack_pointer) debug level stack is set to 2
+PARSER[EQUIV11] (catch_user_error) pass has failed
+PARSER[EQUIV11] (catch_user_error) misc exceptions: 1
+(safe_do_something) Request aborted under pipsmake: build resource PRINTED_FILE for module EQUIV11.
+(display_a_resource) [user error] Cannot build view file PRINTED_FILE
+Deletion of obsolete resources:
+none destroyed.
+Closing all modules.
+  Closing module EQUIV11.
+Closing program.
+Closing workspace.
+Workspace equiv11 closed.
+Workspace equiv11 deleted.
+Pips is done: tpips quit

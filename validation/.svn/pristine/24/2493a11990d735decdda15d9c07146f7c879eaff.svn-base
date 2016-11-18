@@ -1,0 +1,33 @@
+#
+# SAME AS line05 but preprocess by clang instead of gcc
+#
+setenv WS=line05b
+delete $WS
+
+# This setting is overridden by create_workspace() calling activate_language()
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+# In this case, we do need preprocessing
+# FC: THIS IS REALLY NEEDED FOR PORTABILITY
+# see comments in line04.tpips
+setenv PIPS_CPP ./cat_last.sh
+create $WS $WS.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+echo
+echo Parsed code for "main"
+echo
+
+display PARSED_PRINTED_FILE[main]
+
+echo
+echo Parsed code for the compilation unit $WS!
+echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+close
+#delete $WS

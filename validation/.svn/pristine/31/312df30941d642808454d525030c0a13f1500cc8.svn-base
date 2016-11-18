@@ -1,0 +1,327 @@
+
+Points-to for "update1"
+
+
+// Points To IN:
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+
+// Points To OUT:
+// a -> _a_1 , EXACT
+
+void update1(content *a)
+{
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+#pragma MOTIF
+   a->var1 = 8;
+
+// Points To:
+// a -> _a_1 , EXACT
+
+   return;
+}
+
+Proper effects with points-to for "update1"
+
+void update1(content *a)
+{
+//             <    is read   >: a
+//             <    is written>: _a_1.var1
+//             <    is referenced>: a
+#pragma MOTIF
+   a->var1 = 8;
+   return;
+}
+
+Cumulated effects with points-to for "update1"
+
+//             <    is read   >: a
+//             <    is written>: _a_1.var1
+//             <    is referenced>: a
+void update1(content *a)
+{
+//             <    is read   >: a
+//             <    is written>: _a_1.var1
+//             <    is referenced>: a
+#pragma MOTIF
+   a->var1 = 8;
+   return;
+}
+
+Points-to for "compute1"
+
+
+// Points To IN:
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+
+// Points To OUT:
+// a -> _a_1 , EXACT
+
+void compute1(content *a, int b[100])
+{
+#pragma MOTIF
+   {
+
+// Points To: none
+
+      int i;
+
+// Points To: none
+
+      for(i = 0; i <= 99; i += 1)
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+         b[i] = a->var1;
+   }
+
+// Points To:
+// a -> _a_1 , EXACT
+
+   return;
+}
+
+Proper effects with points-to for "compute1"
+
+void compute1(content *a, int b[100])
+{
+#pragma MOTIF
+   {
+//             <    is declared>: i
+      int i;
+//             <    is written>: i
+//             <    is referenced>: i
+      for(i = 0; i <= 99; i += 1)
+//             <    is read   >: _a_1.var1 a i
+//             <    is written>: b[i]
+//             <    is referenced>: a b i
+         b[i] = a->var1;
+   }
+   return;
+}
+
+Cumulated effects with points-to for "compute1"
+
+//             <may be written>: b[*]
+//             <    is read   >: _a_1.var1 a
+//             <    is referenced>: a b
+void compute1(content *a, int b[100])
+{
+#pragma MOTIF
+   {
+//             <    is declared>: i
+      int i;
+//             <may be written>: b[*]
+//             <    is read   >: _a_1.var1 a i
+//             <    is written>: i
+//             <    is referenced>: a b i
+      for(i = 0; i <= 99; i += 1)
+//             <may be written>: b[*]
+//             <    is read   >: _a_1.var1 a i
+//             <    is referenced>: a b i
+         b[i] = a->var1;
+   }
+   return;
+}
+
+Points-to for "update2"
+
+
+// Points To IN:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+
+// Points To OUT:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> _a_1 , EXACT
+
+void update2(content *a)
+{
+
+// Points To:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+#pragma MOTIF
+   a->s->var2 = 9;
+
+// Points To:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> _a_1 , EXACT
+
+   return;
+}
+
+Proper effects with points-to for "update2"
+
+void update2(content *a)
+{
+//             <    is read   >: _a_1.s a
+//             <    is written>: _a_1_2__1.var2
+//             <    is referenced>: a
+#pragma MOTIF
+   a->s->var2 = 9;
+   return;
+}
+
+Cumulated effects with points-to for "update2"
+
+//             <    is read   >: _a_1.s a
+//             <    is written>: _a_1_2__1.var2
+//             <    is referenced>: a
+void update2(content *a)
+{
+//             <    is read   >: _a_1.s a
+//             <    is written>: _a_1_2__1.var2
+//             <    is referenced>: a
+#pragma MOTIF
+   a->s->var2 = 9;
+   return;
+}
+
+Points-to for "compute2"
+
+
+// Points To IN:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+
+// Points To OUT:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> _a_1 , EXACT
+
+void compute2(content *a, int b[100], int c[100])
+{
+#pragma MOTIF
+   {
+
+// Points To: none
+
+      int i;
+
+// Points To: none
+
+      for(i = 0; i <= 99; i += 1)
+
+// Points To:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> *NULL* , MAY
+// a -> _a_1 , MAY
+
+         c[i] = b[i]+a->s->var2;
+   }
+
+// Points To:
+// _a_1.s -> *NULL* , MAY
+// _a_1.s -> _a_1_2__1 , MAY
+// a -> _a_1 , EXACT
+
+   return;
+}
+
+Proper effects with points-to for "compute2"
+
+void compute2(content *a, int b[100], int c[100])
+{
+#pragma MOTIF
+   {
+//             <    is declared>: i
+      int i;
+//             <    is written>: i
+//             <    is referenced>: i
+      for(i = 0; i <= 99; i += 1)
+//             <    is read   >: _a_1.s _a_1_2__1.var2 a b[i] i
+//             <    is written>: c[i]
+//             <    is referenced>: a b c i
+         c[i] = b[i]+a->s->var2;
+   }
+   return;
+}
+
+Cumulated effects with points-to for "compute2"
+
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: _a_1.s _a_1_2__1.var2 a
+//             <    is referenced>: a b c
+void compute2(content *a, int b[100], int c[100])
+{
+#pragma MOTIF
+   {
+//             <    is declared>: i
+      int i;
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: _a_1.s _a_1_2__1.var2 a i
+//             <    is written>: i
+//             <    is referenced>: a b c i
+      for(i = 0; i <= 99; i += 1)
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: _a_1.s _a_1_2__1.var2 a i
+//             <    is referenced>: a b c i
+         c[i] = b[i]+a->s->var2;
+   }
+   return;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char *argv[])
+{
+
+//             <    is referenced>: sub
+//             <    is declared>: s
+   sub s;
+//             <    is referenced>: content
+//             <    is declared>: a
+   content a;
+//             <    is written>: a.s
+//             <    is referenced>: a s
+   a.s = &s;
+
+//             <    is declared>: b
+   int b[100];
+//             <    is declared>: c
+   int c[100];
+//             <    is written>: a.var1
+//             <    is referenced>: a
+
+   update1(&a);
+//             <may be written>: b[*]
+//             <    is read   >: a.var1
+//             <    is referenced>: a b
+   compute1(&a, b);
+//             <    is read   >: a.s
+//             <    is written>: s.var2
+//             <    is referenced>: a
+   update2(&a);
+//             <may be read   >: b[*]
+//             <may be written>: c[*]
+//             <    is read   >: a.s s.var2
+//             <    is referenced>: a b c
+   compute2(&a, b, c);
+
+   return 0;
+}

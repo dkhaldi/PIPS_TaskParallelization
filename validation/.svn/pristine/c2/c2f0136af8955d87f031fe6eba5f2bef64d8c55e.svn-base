@@ -1,0 +1,28 @@
+
+Parsed printed file
+
+int main()
+{
+   int i;
+
+   while (1)
+      /* Comment for the test */
+      if (i>0)
+         goto lab;
+      else
+         return i;
+lab:   return 0;
+}
+
+Printed file
+
+int main()
+{
+   int i;
+
+   if (!1) goto lab;
+   /* Comment for the test */
+   if (i>0) goto lab;
+   return i;
+lab:   return 0;
+}

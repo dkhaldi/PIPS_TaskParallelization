@@ -1,0 +1,47 @@
+
+Points-to for "assignment03"
+
+
+// Points To IN: none
+
+
+// Points To OUT: unreachable
+
+int assignment03()
+{
+
+// Points To: none
+
+   int i;
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+   int *q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+
+   p = &i;
+
+// Points To:
+// p -> i , EXACT
+// q -> undefined , EXACT
+
+   // Copy of an undefined/indeterminate pointer allowed by C standard
+   p = q;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+
+   
+   // Not OK with C standard; this shows in points-to OUT
+   return *p;
+}

@@ -1,0 +1,90 @@
+
+TRANSFORMERS
+
+
+//  T() {}
+
+int main()
+{
+
+//  T(i,k) {i==0, k==0}
+
+   int i = 0, j, m, n, k = 0;
+
+//  T(i,j,k) {i==1, i#init==0, j==0, k==0, k#init==0}
+
+   
+   //assert(m>=1 && n>=1);
+   
+   // Try first something simpler than a while loop
+   if (i++, j = 0, i<m)
+
+//  T(k) {i==1, j==0, k==0, k#init==0, 2<=m}
+
+      k = 0;
+
+//  T(i,j,k) {i#init==1, j==0, j#init==0, k#init==0, 2<=i, i+1<=m,
+//    0<=k, 3<=m}
+
+
+   while (i++, j = 0, i<m)
+
+//  T(j,k) {j+k#init==k+1, j#init==0, i+1<=m, 1<=j, j+1<=n, 3<=m,
+//    2<=n}
+
+      while (j++, j<n)
+
+//  T(k) {k==k#init+1, i+1<=m, j+1<=n, 3<=m, 2<=n}
+
+         k++;
+
+//  T(i) {i==i#init, j==0, 2<=i, m<=i, 0<=k}
+
+   
+   // Check the loop nest postcondition
+   i = i;
+}
+
+PRECONDITIONS
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i = 0, j, m, n, k = 0;
+
+//  P(i,k) {i==0, k==0}
+
+   
+   //assert(m>=1 && n>=1);
+   
+   // Try first something simpler than a while loop
+   if (i++, j = 0, i<m)
+
+//  P(i,j,k) {i==1, j==0, k==0, 2<=m}
+
+      k = 0;
+
+//  P(i,j,k) {i==1, j==0, k==0}
+
+
+   while (i++, j = 0, i<m)
+
+//  P(i,j,k) {j==0, 2<=i, 0<=k}
+
+      while (j++, j<n)
+
+//  P(i,j,k) {2<=i, 1<=j, j<=2k+1, j<=k+2}
+
+         k++;
+
+//  P(i,j,k) {j==0, 2<=i, m<=i, 0<=k}
+
+   
+   // Check the loop nest postcondition
+   i = i;
+}

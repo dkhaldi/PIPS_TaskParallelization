@@ -1,0 +1,48 @@
+
+POINTS TO for "main"
+
+
+// Points To IN:
+// filename -> *NULL* , MAY
+// filename -> _filename_1[0] , MAY
+
+
+// Points To OUT:
+// filename -> _filename_1[0] , EXACT
+
+void if12(char *filename)
+{
+
+// Points To: none
+
+   FILE *file;
+
+// Points To:
+// file -> undefined , EXACT
+// filename -> *NULL* , MAY
+// filename -> _filename_1[0] , MAY
+
+
+   file = fopen(filename, "rb");
+
+// Points To:
+// file -> *NULL* , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+
+   if (file==(void *) 0)
+
+// Points To:
+// file -> *NULL* , EXACT
+// filename -> _filename_1[0] , EXACT
+
+      printf("ouverture du fichier impossible\n");
+
+// Points To:
+// file -> *NULL* , MAY
+// file -> __IO_EFFECTS:IO_FILES[*] , MAY
+// filename -> _filename_1[0] , EXACT
+
+
+   return;
+}

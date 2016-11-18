@@ -1,0 +1,111 @@
+
+Transformers for divide01
+
+
+//  T(divide01) {2divide01<=v1, v1+1<=3divide01+v2, 10<=v1, v1<=100,
+//    2<=v2, v2<=3}
+
+int divide01(int v1, int v2)
+{
+
+//  T() {}
+
+   int v;
+
+//  T() {10<=v1, v1<=100, 2<=v2, v2<=3}
+
+   if (!(10<=v1&&v1<=100&&2<=v2&&v2<=3))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(v) {2v<=v1, v1+1<=3v+v2, 10<=v1, v1<=100, 2<=v2, v2<=3}
+
+   v = v1/v2;
+
+//  T(divide01) {divide01==v, 2divide01<=v1, v1+1<=3divide01+v2,
+//    10<=v1, v1<=100, 2<=v2, v2<=3}
+
+   return v;
+}
+
+Transformers for "main"
+
+
+//  T(main) {5<=main, main<=7}
+
+int main()
+{
+
+//  T(k) {5<=k, k<=7}
+
+   int k = divide01(15, 3);
+
+//  T(main) {k==main, 5<=k, k<=7}
+
+   return k;
+}
+
+Preconditions for divide01
+
+
+//  P() {v1==15, v2==3}
+
+int divide01(int v1, int v2)
+{
+
+//  P() {v1==15, v2==3}
+
+   int v;
+
+//  P() {v1==15, v2==3}
+
+   if (!(10<=v1&&v1<=100&&2<=v2&&v2<=3))
+
+//  P() {0==-1}
+
+      abort();
+
+//  P() {v1==15, v2==3}
+
+   v = v1/v2;
+
+//  P(v) {v1==15, v2==3, 5<=v, v<=7}
+
+   return v;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int k = divide01(15, 3);
+
+//  P(k) {5<=k, k<=7}
+
+   return k;
+}
+
+Preconditions for "main" after transformer refinement
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int k = divide01(15, 3);
+
+//  P(k) {k==5}
+
+   return k;
+}

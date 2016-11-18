@@ -1,0 +1,6 @@
+foo()
+{
+  i = 2;
+}
+int i;
+extern foo();

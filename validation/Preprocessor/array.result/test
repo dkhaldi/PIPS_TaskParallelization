@@ -1,0 +1,21 @@
+void main()
+{
+   int a[10];
+   int nga;
+   float b[10][20];
+   nga = 2;
+   a[nga] = 1;
+   b[1][2] = 2;
+}
+
+Warnings:
+
+C_PARSER[main] (c_parse) ("./array.c":10-12) 
+The "main" function should return an int value
+Source code after preprocessing:
+  b[1][2] = 2;
+}
+Input source code, before preprocessing:
+  b[1][2] = 2;
+}
+

@@ -1,0 +1,6 @@
+delete cplx
+setproperty PARSER_SUBSTITUTE_ASSIGNED_GOTO=TRUE
+create cplx cplx.f
+display PRINTED_FILE
+close
+delete cplx

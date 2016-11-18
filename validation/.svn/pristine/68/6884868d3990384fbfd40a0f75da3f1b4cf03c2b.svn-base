@@ -1,0 +1,14 @@
+setenv WS=while01
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+apply SIMPLIFY_CONTROL_DIRECTLY[main]
+activate PRINT_CODE
+display PRINTED_FILE[main]
+
+close
+delete $WS
+quit

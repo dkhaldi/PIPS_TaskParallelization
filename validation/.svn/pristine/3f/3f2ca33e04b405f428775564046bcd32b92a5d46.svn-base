@@ -1,0 +1,51 @@
+#
+# initial code
+#
+// global propagation on callgraph
+
+extern void compute(float *f);
+
+extern void setzero(float *f);
+
+extern int main(void);
+void compute(float *f)
+{
+   *f = 0.0;
+}
+int main(void)
+{
+   float data[10];
+   setzero(data);
+}
+void setzero(float *f)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      compute(&f[i]);
+}
+#
+# global/private declarations
+#
+// global propagation on callgraph
+
+extern void compute(float *f);
+
+extern void setzero(float *f);
+
+extern int main(void);
+void compute(global float *f)
+{
+   *f = 0.0;
+}
+int main(void)
+{
+   float data[10];
+   setzero(data);
+}
+void setzero(global float *f)
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+      compute(&f[i]);
+}
+

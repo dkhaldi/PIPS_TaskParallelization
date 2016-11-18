@@ -1,0 +1,15 @@
+delete initialization02
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create initialization02 initialization02.c
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+activate C_PARSER
+
+display PRINTED_FILE[main]
+
+close
+delete initialization02
+
+quit

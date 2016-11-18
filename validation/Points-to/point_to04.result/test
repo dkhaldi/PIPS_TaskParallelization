@@ -1,0 +1,61 @@
+
+Proper effects
+
+void point_to04()
+{
+   struct s {
+      int a;
+      int b;
+      int c;
+      int d;
+   } c, *p;
+//             <    is written>: p
+
+   p = &c;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+
+   p->d = p->a;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+   p->d = p->a = 4;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void point_to04()
+{
+
+// Points To: none
+
+   struct s {
+      int a;
+      int b;
+      int c;
+      int d;
+   } c, *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   p = &c;
+
+// Points To:
+// p -> c , EXACT
+
+
+   p->d = p->a;
+
+// Points To:
+// p -> c , EXACT
+
+   p->d = p->a = 4;
+}

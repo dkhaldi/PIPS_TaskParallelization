@@ -1,0 +1,9 @@
+c
+	SUBROUTINE BAR(I)
+C             <    is written>: I
+      I = 3                                                             0003
+      END
+	PROGRAM FOO
+C             <    is written>: I
+      CALL BAR(I)                                                       0002
+      END

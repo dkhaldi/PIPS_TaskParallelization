@@ -1,0 +1,44 @@
+setenv WS=fixrts
+delete $WS
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+# Let $WS.test take care of this
+#setenv PIPS_CPP "cpp -C -P -ffreestanding"
+create $WS $WS.c
+
+# This file cannot be preprocessed as such because its specific "complex.h" is not available
+# Fixed with a few declarations
+
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER FALSE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER FALSE
+
+# BUG: the output of CPP is *NOT* stable across compiler versions
+# FC: why reprocessing an already cpp-processed file?
+# shell cpp -C -ffreestanding $WS.database/Tmp/$WS.cpp_processed.c
+# The next output is known to be unstable accross environments
+# shell cat $WS.database/Tmp/$WS.cpp_processed.c 
+
+# This line was used to obtain the results of the PIPS preprocessor
+# echo cat $WS.database/[a-z_]*[a-z_]/*.c
+
+echo
+echo C source file for compilation unit \"$WS!\"
+echo
+
+display C_SOURCE_FILE[$WS!]
+
+echo
+echo C source file for function \"$WS\"
+echo
+
+display C_SOURCE_FILE[$WS]
+
+# close
+# delete $WS
+
+#display PRINTED_FILE[$WS]
+
+close
+# delete $WS
+quit

@@ -1,0 +1,478 @@
+
+Points-to for "update_float"
+
+
+// Points To IN:
+// t -> *NULL* , MAY
+// t -> _t_1[0] , MAY
+
+
+// Points To OUT:
+// t -> _t_1[0] , EXACT
+
+void update_float(float *t)
+{
+
+// Points To:
+// t -> *NULL* , MAY
+// t -> _t_1[0] , MAY
+
+   *t = 0.0;
+
+// Points To:
+// t -> _t_1[0] , EXACT
+
+   return;
+}
+
+Points-to for "update_float2"
+
+
+// Points To IN:
+// t -> *NULL* , MAY
+// t -> _t_1[0] , MAY
+
+
+// Points To OUT:
+// t -> _t_1[0] , EXACT
+
+void update_float2(float2 *t)
+{
+
+// Points To:
+// t -> *NULL* , MAY
+// t -> _t_1[0] , MAY
+
+   t->x = 0.0;
+
+// Points To:
+// t -> _t_1[0] , EXACT
+
+   t->y = 0.0;
+
+// Points To:
+// t -> _t_1[0] , EXACT
+
+   return;
+}
+
+Points-to for "update_sub2"
+
+
+// Points To IN:
+// b -> *NULL* , MAY
+// b -> _b_1[0] , MAY
+
+
+// Points To OUT:
+// b -> _b_1[0] , EXACT
+
+void update_sub2(sub2 *b)
+{
+
+// Points To:
+// b -> *NULL* , MAY
+// b -> _b_1[0] , MAY
+
+   b->k1 = 0;
+
+// Points To:
+// b -> _b_1[0] , EXACT
+
+   b->k2 = 1;
+}
+
+Proper effects for "update_float"
+
+void update_float(float *t)
+{
+//             <    is read   >: t
+//             <    is written>: _t_1[0]
+//             <    is referenced>: t
+   *t = 0.0;
+   return;
+}
+
+Proper effects for "update_float2"
+
+void update_float2(float2 *t)
+{
+//             <    is read   >: t
+//             <    is written>: _t_1[0].x
+//             <    is referenced>: t
+   t->x = 0.0;
+//             <    is read   >: t
+//             <    is written>: _t_1[0].y
+//             <    is referenced>: t
+   t->y = 0.0;
+   return;
+}
+
+Proper effects for "update_sub2"
+
+void update_sub2(sub2 *b)
+{
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1
+//             <    is referenced>: b
+   b->k1 = 0;
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k2
+//             <    is referenced>: b
+   b->k2 = 1;
+}
+
+Cumulated effects for "update_float"
+
+//             <    is read   >: t
+//             <    is written>: _t_1[0]
+//             <    is referenced>: t
+void update_float(float *t)
+{
+//             <    is read   >: t
+//             <    is written>: _t_1[0]
+//             <    is referenced>: t
+   *t = 0.0;
+   return;
+}
+
+Cumulated effects for "update_float2"
+
+//             <    is read   >: t
+//             <    is written>: _t_1[0].x _t_1[0].y
+//             <    is referenced>: t
+void update_float2(float2 *t)
+{
+//             <    is read   >: t
+//             <    is written>: _t_1[0].x
+//             <    is referenced>: t
+   t->x = 0.0;
+//             <    is read   >: t
+//             <    is written>: _t_1[0].y
+//             <    is referenced>: t
+   t->y = 0.0;
+   return;
+}
+
+Cumulated effects for "update_sub2"
+
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1 _b_1[0].k2
+//             <    is referenced>: b
+void update_sub2(sub2 *b)
+{
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k1
+//             <    is referenced>: b
+   b->k1 = 0;
+//             <    is read   >: b
+//             <    is written>: _b_1[0].k2
+//             <    is referenced>: b
+   b->k2 = 1;
+}
+
+Points-to for "update_sub"
+
+
+// Points To IN:
+// _s_1[0].var3 -> *NULL* , MAY
+// _s_1[0].var3 -> _s_1_2__1[0][0] , MAY
+// s -> *NULL* , MAY
+// s -> _s_1[0] , MAY
+
+
+// Points To OUT:
+// _s_1[0].var3 -> _s_1_2__1[0][0] , EXACT
+// s -> _s_1[0] , EXACT
+
+void update_sub(sub *s)
+{
+
+// Points To:
+// s -> *NULL* , MAY
+// s -> _s_1[0] , MAY
+
+   s->var2 = 2;
+
+// Points To:
+// _s_1[0].var3 -> *NULL* , MAY
+// _s_1[0].var3 -> _s_1_2__1[0][0] , MAY
+// s -> _s_1[0] , EXACT
+
+   update_sub2(s->var3);
+
+// Points To:
+// _s_1[0].var3 -> _s_1_2__1[0][0] , EXACT
+// s -> _s_1[0] , EXACT
+
+   return;
+}
+
+Points-to for "update_content"
+
+
+// Points To IN:
+// _a_1[0].s3.var3 -> *NULL* , MAY
+// _a_1[0].s3.var3 -> _a_1_3_2__1[0][0] , MAY
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+
+// Points To OUT:
+// _a_1[0].s3.var3 -> _a_1_3_2__1[0][0] , EXACT
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+void update_content(content *a)
+{
+
+// Points To: none
+
+   int i;
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+
+   update_float2(&a->s1);
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+   //update_float(&a->s1.x);
+   for(i = 0; i <= 2; i += 1)
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+      update_float2(&(a->s2)[i]);
+
+// Points To:
+// _a_1[0].s3.var3 -> *NULL* , MAY
+// _a_1[0].s3.var3 -> _a_1_3_2__1[0][0] , MAY
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+   update_sub(&a->s3);
+
+// Points To:
+// _a_1[0].s3.var3 -> _a_1_3_2__1[0][0] , EXACT
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+
+   return;
+}
+
+Proper effects for "update_sub"
+
+void update_sub(sub *s)
+{
+//             <    is read   >: s
+//             <    is written>: _s_1[0].var2
+//             <    is referenced>: s
+   s->var2 = 2;
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1_2__1[0][0].k1 _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+   update_sub2(s->var3);
+   return;
+}
+
+Cumulated effects for "update_sub"
+
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1[0].var2 _s_1_2__1[0][0].k1 
+//                               _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+void update_sub(sub *s)
+{
+//             <    is read   >: s
+//             <    is written>: _s_1[0].var2
+//             <    is referenced>: s
+   s->var2 = 2;
+//             <    is read   >: _s_1[0].var3 s
+//             <    is written>: _s_1_2__1[0][0].k1 _s_1_2__1[0][0].k2
+//             <    is referenced>: s
+   update_sub2(s->var3);
+   return;
+}
+
+Proper effects for "update_content"
+
+void update_content(content *a)
+{
+//             <    is declared>: i
+   int i;
+//             <    is read   >: a
+//             <    is written>: _a_1[0].s1.x _a_1[0].s1.y
+//             <    is referenced>: a
+
+   update_float2(&a->s1);
+//             <    is written>: i
+//             <    is referenced>: i
+   //update_float(&a->s1.x);
+   for(i = 0; i <= 2; i += 1)
+//             <    is read   >: a i
+//             <    is written>: _a_1[0].s2[*].x _a_1[0].s2[*].y
+//             <    is referenced>: a i
+      update_float2(&(a->s2)[i]);
+//             <    is read   >: _a_1[0].s3.var3 a
+//             <    is written>: _a_1[0].s3.var2 _a_1_3_2__1[0][0].k1 
+//                               _a_1_3_2__1[0][0].k2
+//             <    is referenced>: a
+   update_sub(&a->s3);
+   return;
+}
+
+Cumulated effects for "update_content"
+
+//             <    is read   >: _a_1[0].s3.var3 a
+//             <    is written>: _a_1[0].s1.x _a_1[0].s1.y 
+//                               _a_1[0].s2[*].x _a_1[0].s2[*].y 
+//                               _a_1[0].s3.var2 _a_1_3_2__1[0][0].k1 
+//                               _a_1_3_2__1[0][0].k2
+//             <    is referenced>: a
+void update_content(content *a)
+{
+//             <    is declared>: i
+   int i;
+//             <    is read   >: a
+//             <    is written>: _a_1[0].s1.x _a_1[0].s1.y
+//             <    is referenced>: a
+
+   update_float2(&a->s1);
+//             <    is read   >: a i
+//             <    is written>: _a_1[0].s2[*].x _a_1[0].s2[*].y i
+//             <    is referenced>: a i
+   //update_float(&a->s1.x);
+   for(i = 0; i <= 2; i += 1)
+//             <    is read   >: a i
+//             <    is written>: _a_1[0].s2[*].x _a_1[0].s2[*].y
+//             <    is referenced>: a i
+      update_float2(&(a->s2)[i]);
+//             <    is read   >: _a_1[0].s3.var3 a
+//             <    is written>: _a_1[0].s3.var2 _a_1_3_2__1[0][0].k1 
+//                               _a_1_3_2__1[0][0].k2
+//             <    is referenced>: a
+   update_sub(&a->s3);
+   return;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   content ct;
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+   sub2 s2;
+
+// Points To:
+// ct.s3.var3 -> undefined , EXACT
+
+   ct.s3.var3 = &s2;
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   update_float2(&ct.s1);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   update_float(&ct.s1.x);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   update_float2(&(ct.s2)[1]);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   int i;
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   for(i = 0; i <= 2; i += 1)
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+      update_float2(&(ct.s2)[i]);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   update_sub(&ct.s3);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+   update_content(&ct);
+
+// Points To:
+// ct.s3.var3 -> s2 , EXACT
+
+
+   return 0;
+}
+
+Proper effects for "main"
+
+int main()
+{
+//             <    is referenced>: content
+//             <    is declared>: ct
+   content ct;
+//             <    is referenced>: sub2
+//             <    is declared>: s2
+   sub2 s2;
+//             <    is written>: ct.s3.var3
+//             <    is referenced>: ct s2
+   ct.s3.var3 = &s2;
+//             <    is written>: ct.s1.x ct.s1.y
+//             <    is referenced>: ct
+   update_float2(&ct.s1);
+//             <    is written>: ct.s1.x
+//             <    is referenced>: ct
+   update_float(&ct.s1.x);
+//             <    is written>: ct.s2[1].x ct.s2[1].y
+//             <    is referenced>: ct
+   update_float2(&(ct.s2)[1]);
+//             <    is declared>: i
+   int i;
+//             <    is written>: i
+//             <    is referenced>: i
+   for(i = 0; i <= 2; i += 1)
+//             <    is read   >: i
+//             <    is written>: ct.s2[*].x ct.s2[*].y
+//             <    is referenced>: ct i
+      update_float2(&(ct.s2)[i]);
+//             <    is read   >: ct.s3.var3
+//             <    is written>: ct.s3.var2 s2.k1 s2.k2
+//             <    is referenced>: ct
+   update_sub(&ct.s3);
+//             <    is read   >: ct.s3.var3
+//             <    is written>: ct.s1.x ct.s1.y ct.s2[*].x ct.s2[*].y
+//                               ct.s3.var2 s2.k1 s2.k2
+//             <    is referenced>: ct
+   update_content(&ct);
+
+   return 0;
+}

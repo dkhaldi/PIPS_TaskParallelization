@@ -1,0 +1,68 @@
+
+Cumulated Effects
+
+//             <    is read   >: s.N1 s.N2
+param copy(param s)
+{
+//             <    is read   >: s.N1 s.N2
+   return s;
+}
+int main(int argc, char *argv[])
+{
+//             <    is written>: i j
+   int i = 1, j = 2;
+   param pi, po;
+//             <    is read   >: i
+//             <    is written>: pi.N1
+   pi.N1 = i;
+//             <    is read   >: j
+//             <    is written>: pi.N2
+   pi.N2 = j;
+//             <    is read   >: pi.N1 pi.N2
+//             <    is written>: po.N1 po.N2
+   po = copy(pi);
+   return 0;
+}
+
+Transformers
+
+
+//  T(copy[N1],copy[N2]) {copy[N1]==s[N1], copy[N2]==s[N2]}
+
+param copy(param s)
+{
+
+//  T(copy[N1],copy[N2]) {copy[N1]==s[N1], copy[N2]==s[N2]}
+
+   return s;
+}
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T(i,j) {i==1, j==2}
+
+   int i = 1, j = 2;
+
+//  T() {}
+
+   param pi, po;
+
+//  T(pi[N1]) {i==pi[N1]}
+
+   pi.N1 = i;
+
+//  T(pi[N2]) {j==pi[N2]}
+
+   pi.N2 = j;
+
+//  T(po[N1],po[N2]) {pi[N1]==po[N1], pi[N2]==po[N2]}
+
+   po = copy(pi);
+
+//  T(main) {main==0}
+
+   return 0;
+}

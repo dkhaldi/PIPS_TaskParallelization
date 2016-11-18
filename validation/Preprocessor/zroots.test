@@ -1,0 +1,14 @@
+#/bin/sh
+
+WS=zroots
+
+# this will fail...
+tpips $WS.script
+
+echo
+echo Warnings for "$WS"
+echo
+
+cat $WS.database/Warnings
+
+#rm -Rf $WS.database

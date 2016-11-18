@@ -1,0 +1,69 @@
+
+int main()
+{
+   int i;
+   mystruct s1, s2;
+//             <    is written>: i
+
+   i = 0;
+//             <    is read   >: i
+   do {
+      mystruct tab_s[2];
+//             <may be read   >: s1.b[*]
+//             <may be written>: tab_s[0].b[*]
+//             <    is read   >: s1.a s1.c
+//             <    is written>: tab_s[0].a tab_s[0].c
+      tab_s[0] = s1;
+//             <may be read   >: s1.b[*]
+//             <may be written>: tab_s[1].b[*]
+//             <    is read   >: s1.a s1.c
+//             <    is written>: tab_s[1].a tab_s[1].c
+      tab_s[1] = s1;
+//             <may be read   >: s2.b[*]
+//             <may be written>: tab_s[1].b[*]
+//             <    is read   >: s2.a s2.c
+//             <    is written>: tab_s[1].a tab_s[1].c
+      tab_s[1] = s2;
+//             <    is read   >: i
+//             <    is written>: i
+      i++;
+   }
+   while (i<10);
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	08 --> 15 with conflicts
+		from <i-W-EXACT> to <i-W-EXACT>
+		from <i-W-EXACT> to <i-R-EXACT>
+	08 --> 16 with conflicts
+		from <i-W-EXACT> to <i-R-EXACT>
+	12 --> 12 with conflicts
+		from <tab_s[0].c-W-EXACT> to <tab_s[0].c-W-EXACT>
+		from <tab_s[0].b[*]-W-MAY> to <tab_s[0].b[*]-W-MAY>
+		from <tab_s[0].a-W-EXACT> to <tab_s[0].a-W-EXACT>
+	13 --> 13 with conflicts
+		from <tab_s[1].c-W-EXACT> to <tab_s[1].c-W-EXACT>
+		from <tab_s[1].b[*]-W-MAY> to <tab_s[1].b[*]-W-MAY>
+		from <tab_s[1].a-W-EXACT> to <tab_s[1].a-W-EXACT>
+	13 --> 14 with conflicts
+		from <tab_s[1].c-W-EXACT> to <tab_s[1].c-W-EXACT>
+		from <tab_s[1].b[*]-W-MAY> to <tab_s[1].b[*]-W-MAY>
+		from <tab_s[1].a-W-EXACT> to <tab_s[1].a-W-EXACT>
+	14 --> 13 with conflicts
+		from <tab_s[1].c-W-EXACT> to <tab_s[1].c-W-EXACT>
+		from <tab_s[1].b[*]-W-MAY> to <tab_s[1].b[*]-W-MAY>
+		from <tab_s[1].a-W-EXACT> to <tab_s[1].a-W-EXACT>
+	14 --> 14 with conflicts
+		from <tab_s[1].c-W-EXACT> to <tab_s[1].c-W-EXACT>
+		from <tab_s[1].b[*]-W-MAY> to <tab_s[1].b[*]-W-MAY>
+		from <tab_s[1].a-W-EXACT> to <tab_s[1].a-W-EXACT>
+	15 --> 15 with conflicts
+		from <i-W-EXACT> to <i-W-EXACT>
+		from <i-W-EXACT> to <i-R-EXACT>
+		from <i-R-EXACT> to <i-W-EXACT>
+	16 --> 15 with conflicts
+		from <i-R-EXACT> to <i-W-EXACT>
+
+****************** End of Dependence Graph ******************

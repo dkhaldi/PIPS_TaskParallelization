@@ -1,0 +1,342 @@
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int t[100][10][3];
+
+
+// Points To: none
+
+   int (*p)[3];
+
+// Points To:
+// p -> undefined , EXACT
+
+   int *pu;
+
+
+// Points To:
+// p -> undefined , EXACT
+// pu -> undefined , EXACT
+
+   int (*q)[10][3];
+
+// Points To:
+// p -> undefined , EXACT
+// pu -> undefined , EXACT
+// q -> undefined , EXACT
+
+   int (*qu)[3];
+
+
+// Points To:
+// p -> undefined , EXACT
+// pu -> undefined , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+
+   int (*r)[100][10][3];
+
+// Points To:
+// p -> undefined , EXACT
+// pu -> undefined , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+
+   int (*ru)[10][3];
+
+// Points To:
+// p -> undefined , EXACT
+// pu -> undefined , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   
+   
+   p = &t[1][2];
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> undefined , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   (*p)[1] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> undefined , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   p[1][1] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> undefined , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+
+   pu = &t[1][2][0];
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   *pu = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   pu[2] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> undefined , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+
+   q = &t[1];
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   ((*q)[2])[3] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   q[1][2][3] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> undefined , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+
+   qu = &t[1][0];
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   (*qu)[1] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+   qu[1][1] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> undefined , EXACT
+// ru -> undefined , EXACT
+
+
+   r = &t;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> t , EXACT
+// ru -> undefined , EXACT
+
+   (((*r)[0])[0])[0] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> t , EXACT
+// ru -> undefined , EXACT
+
+   (((*r)[1])[2])[3] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> t , EXACT
+// ru -> undefined , EXACT
+
+
+   ru = &t[0];
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> t , EXACT
+// ru -> t[0] , EXACT
+
+   ((*ru)[0])[0] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> t , EXACT
+// ru -> t[0] , EXACT
+
+   ru[0][0][0] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> t , EXACT
+// ru -> t[0] , EXACT
+
+   ru[1][2][1] = 0;
+
+// Points To:
+// p -> t[1][2] , EXACT
+// pu -> t[1][2][0] , EXACT
+// q -> t[1] , EXACT
+// qu -> t[1][0] , EXACT
+// r -> t , EXACT
+// ru -> t[0] , EXACT
+
+
+   return 0;
+}
+
+Proper effects for "main"
+
+int main()
+{
+   int t[100][10][3];
+
+   int (*p)[3];
+   int *pu;
+
+   int (*q)[10][3];
+   int (*qu)[3];
+
+   int (*r)[100][10][3];
+   int (*ru)[10][3];
+//             <    is written>: p
+   
+   
+   p = &t[1][2];
+//             <    is read   >: p
+//             <    is written>: t[1][2][1]
+   (*p)[1] = 0;
+//             <    is read   >: p
+//             <    is written>: t[1][3][1]
+   p[1][1] = 0;
+//             <    is written>: pu
+
+   pu = &t[1][2][0];
+//             <    is read   >: pu
+//             <    is written>: t[1][2][0]
+   *pu = 0;
+//             <    is read   >: pu
+//             <    is written>: t[1][2][2]
+   pu[2] = 0;
+//             <    is written>: q
+
+   q = &t[1];
+//             <    is read   >: q
+//             <    is written>: t[1][2][3]
+   ((*q)[2])[3] = 0;
+//             <    is read   >: q
+//             <    is written>: t[2][2][3]
+   q[1][2][3] = 0;
+//             <    is written>: qu
+
+   qu = &t[1][0];
+//             <    is read   >: qu
+//             <    is written>: t[1][0][1]
+   (*qu)[1] = 0;
+//             <    is read   >: qu
+//             <    is written>: t[1][1][1]
+   qu[1][1] = 0;
+//             <    is written>: r
+
+   r = &t;
+//             <    is read   >: r
+//             <    is written>: t[0][0][0]
+   (((*r)[0])[0])[0] = 0;
+//             <    is read   >: r
+//             <    is written>: t[1][2][3]
+   (((*r)[1])[2])[3] = 0;
+//             <    is written>: ru
+
+   ru = &t[0];
+//             <    is read   >: ru
+//             <    is written>: t[0][0][0]
+   ((*ru)[0])[0] = 0;
+//             <    is read   >: ru
+//             <    is written>: t[0][0][0]
+   ru[0][0][0] = 0;
+//             <    is read   >: ru
+//             <    is written>: t[1][2][1]
+   ru[1][2][1] = 0;
+
+   return 0;
+}

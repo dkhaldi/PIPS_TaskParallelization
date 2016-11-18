@@ -1,0 +1,66 @@
+
+PROPER  EFFECTS
+
+int main(int argc, char *argv[])
+{
+   int *p, i, j;
+//             <    is written>: i
+   i = 0;
+//             <    is written>: j
+   j = 1;
+//             <    is written>: i
+
+   for(i = 1; i <= 4; i += 1)
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+      p = (int *) malloc(sizeof(int));
+   
+   
+   return 0;
+}
+
+POINTS-TO
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char *argv[])
+{
+
+// Points To: none
+
+   int *p, i, j;
+
+// Points To:
+// p -> undefined , EXACT
+
+   i = 0;
+
+// Points To:
+// p -> undefined , EXACT
+
+   j = 1;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   for(i = 1; i <= 4; i += 1)
+
+// Points To:
+// p -> *HEAP*_l_13 , MAY
+// p -> undefined , MAY
+
+      p = (int *) malloc(sizeof(int));
+
+// Points To:
+// p -> *HEAP*_l_13 , MAY
+// p -> undefined , MAY
+
+   
+   
+   return 0;
+}

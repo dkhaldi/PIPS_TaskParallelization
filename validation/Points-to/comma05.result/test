@@ -1,0 +1,94 @@
+
+Proper effects
+
+int main()
+{
+//             <    is written>: i j k l
+   int i = 0, j = 1, k = 2, l = 3;
+   int *p, *q, *r, *s, *t;
+//             <    is written>: r
+
+   r = &i;
+//             <    is written>: q
+   q = &j;
+//             <    is written>: s
+   s = &k;
+//             <    is read   >: r s
+//             <    is written>: p r
+   /* we treat this instruction as :
+        p = r;
+        r = s;
+     */
+   p = r, r = s;
+   return 0;
+}
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 0, j = 1, k = 2, l = 3;
+
+// Points To: none
+
+   int *p, *q, *r, *s, *t;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> undefined , EXACT
+// s -> undefined , EXACT
+// t -> undefined , EXACT
+
+
+   r = &i;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> undefined , EXACT
+// r -> i , EXACT
+// s -> undefined , EXACT
+// t -> undefined , EXACT
+
+   q = &j;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> j , EXACT
+// r -> i , EXACT
+// s -> undefined , EXACT
+// t -> undefined , EXACT
+
+   s = &k;
+
+// Points To:
+// p -> undefined , EXACT
+// q -> j , EXACT
+// r -> i , EXACT
+// s -> k , EXACT
+// t -> undefined , EXACT
+
+   /* we treat this instruction as :
+        p = r;
+        r = s;
+     */
+   p = r, r = s;
+
+// Points To:
+// p -> i , EXACT
+// q -> j , EXACT
+// r -> k , EXACT
+// s -> k , EXACT
+// t -> undefined , EXACT
+
+   return 0;
+}

@@ -1,0 +1,47 @@
+setenv WSPACE=for04
+delete $WSPACE
+create $WSPACE $WSPACE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+
+
+echo
+echo Init Code
+echo
+display PRINTED_FILE[main]
+
+echo
+echo PROPER effect
+echo
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo CUMULATED effect
+echo
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo IN effect
+echo
+activate PRINT_CODE_IN_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo OUT effect
+echo
+activate PRINT_CODE_OUT_EFFECTS
+display PRINTED_FILE[main]
+
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit

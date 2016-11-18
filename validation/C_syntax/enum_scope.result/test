@@ -1,0 +1,27 @@
+int bar()
+{
+   int a;
+}
+extern int main();
+enum hue {node, nide};
+extern int foo();
+
+enum test {a, b};
+// int a;
+extern int bar();
+int foo()
+{
+   enum hue {node, nide};
+   enum hue1 {node1, nide1};
+   //  int node; 
+   enum hue x;
+   int hue;
+}
+int main()
+{
+   enum hue {node, nide};
+   enum hue1 {node1, nide1};
+   //  int node; 
+   enum hue x;
+   int hue;
+}

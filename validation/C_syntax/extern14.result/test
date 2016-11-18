@@ -1,0 +1,43 @@
+/* Buggy code... that should not be prettyprinted by PIPS */
+
+extern int i3 = 3;
+extern14!
+
+Declarations for module "extern14!" with type "() -> unknown"
+
+Variable list:
+
+	Declared entity "TOP-LEVEL:*STATIC*" with type "area" with size 0
+	Declared entity "TOP-LEVEL:i3" with type "variable" "int"
+	Declared entity "extern14!:*DYNAMIC*" with type "area" with size 0
+	Declared entity "extern14!:*HEAP*" with type "area" with size 0
+	Declared entity "extern14!:*STACK*" with type "area" with size 0
+	Declared entity "extern14!:*STATIC*" with type "area" with size 0
+
+External variable list:
+
+	Declared external entity "TOP-LEVEL:i3"	with type "variable" "int"
+
+Layouts for memory areas:
+
+Layout for memory area "TOP-LEVEL:*STATIC*" of size 0:
+	External Variable "TOP-LEVEL:i3"	offset = UNKNOWN,	size = 4
+
+
+Layout for memory area "extern14!:*DYNAMIC*" of size 0:
+	* empty area *
+
+
+Layout for memory area "extern14!:*HEAP*" of size 0:
+	* empty area *
+
+
+Layout for memory area "extern14!:*STACK*" of size 0:
+	* empty area *
+
+
+Layout for memory area "extern14!:*STATIC*" of size 0:
+	* empty area *
+
+End of declarations for module extern14!
+

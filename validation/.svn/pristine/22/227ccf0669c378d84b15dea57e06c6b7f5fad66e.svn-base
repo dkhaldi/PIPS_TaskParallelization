@@ -1,0 +1,5 @@
+
+The message should be: workspace protected_workspace2: Permission denied
+
+FILTER_FILE[PROTECTED_WORKSPACE2] (create_directory) cannot create directory: ./protected_workspace2.database/PROTECTED_WORKSPACE2 (Permission denied)
+cannot create directory ./protected_workspace2.database/PROTECTED_WORKSPACE2

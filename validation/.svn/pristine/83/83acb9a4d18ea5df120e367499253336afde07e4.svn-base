@@ -1,0 +1,112 @@
+#
+# initial code
+#
+// global/private errors
+
+extern void err4(float *a);
+
+extern void error04(float a[10]);
+
+// global -> private
+extern void err56(float *a);
+
+extern void error05(float a[10]);
+
+extern void error06(float a[10]);
+
+// private -> global
+extern void err78(float *a);
+
+extern void error07(float a[10]);
+
+extern void error08(float a[10]);
+
+extern int main(void);
+void err4(float *a)
+{
+   *a = 1.0;
+}
+void err56(float *a)
+{
+   *a = 0.0;
+}
+void err78(float *a)
+{
+   *a = 0.0;
+}
+void error04(float a[10])
+{
+   err4(a);
+   float l[10];
+   err4(l);
+}
+void error05(float a[10])
+{
+   err56(a);
+}
+void error06(float a[10])
+{
+   float l[10];
+   {
+      int i;
+      for(i = 0; i <= 9; i += 1)
+         l[i] = a[i];
+   }
+   err56(l);
+}
+void error07(float a[10])
+{
+   float l[10];
+   {
+      int i;
+      for(i = 0; i <= 9; i += 1)
+         l[i] = a[i];
+   }
+   err78(l);
+}
+void error08(float a[10])
+{
+   err78(a);
+}
+int main(void)
+{
+   float a[10];
+   error04(a);
+   error05(a);
+   error06(a);
+   error07(a);
+   error08(a);
+   // err4(a);
+   // err56(a);
+   return 0;
+}
+#
+# global/local declarations
+#
+void error05(global float a[10])
+{
+   err56(a);
+}
+void err56(global float *a)
+{
+   *a = 0.0;
+}
+void error07(global float a[10])
+{
+   float l[10];
+   {
+      int i;
+      for(i = 0; i <= 9; i += 1)
+         l[i] = a[i];
+   }
+   err78(l);
+}
+void err78(float *a)
+{
+   *a = 0.0;
+}
+
+### stderr
+GPU_QUALIFY_POINTERS[error04] (do_gpu_qualify_pointers) [user error] formal parameter TOP-LEVEL:err4:1 (a) is already private
+GPU_QUALIFY_POINTERS[error06] (do_gpu_qualify_pointers) [user error] formal parameter TOP-LEVEL:err56:1 (a) is already global
+GPU_QUALIFY_POINTERS[error08] (do_gpu_qualify_pointers) [user error] formal parameter TOP-LEVEL:err78:1 (a) is already private

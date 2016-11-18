@@ -1,0 +1,34 @@
+
+Transformers for divide07
+
+
+//  T(divide07) {divide07==nk}
+
+int divide07(int nk)
+{
+
+//  T(lu_nub0) {lu_nub0==nk}
+
+   int lu_nub0 = (nk-1-0+1)/1;
+
+//  T(divide07) {divide07==lu_nub0, divide07==nk}
+
+   return lu_nub0;
+}
+
+Preconditions for divide07
+
+
+//  P() {}
+
+int divide07(int nk)
+{
+
+//  P() {}
+
+   int lu_nub0 = (nk-1-0+1)/1;
+
+//  P(lu_nub0) {lu_nub0==nk}
+
+   return lu_nub0;
+}

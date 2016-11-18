@@ -1,0 +1,104 @@
+setenv WS=call22
+delete $WS
+
+setenv PIPS_CPP="cpp -C"
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+setproperty FOR_TO_DO_LOOP_IN_CONTROLIZER   TRUE
+setproperty FOR_TO_WHILE_LOOP_IN_CONTROLIZER   TRUE
+activate MUST_REGIONS
+
+setproperty CONSTANT_PATH_EFFECTS FALSE
+
+# setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+echo
+echo Parsed code for "$WS"
+echo
+
+display PARSED_PRINTED_FILE[$WS]
+
+echo
+echo Code for "$WS"
+echo
+
+display PRINTED_FILE[$WS]
+
+#echo
+#echo Code for "main"
+#echo
+#
+#display PRINTED_FILE[main]
+
+echo
+echo Proper effects for "$WS"
+echo
+
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE[$WS]
+
+echo
+echo Cumulated pointer effects for "$WS"
+echo
+
+activate PRINT_CODE_CUMULATED_POINTER_EFFECTS
+display PRINTED_FILE[$WS]
+
+echo
+echo Cumulated effects for "main"
+echo
+
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE[main]
+
+echo
+echo Transformers for "$WS"
+echo
+
+activate PRINT_CODE_TRANSFORMERS
+display PRINTED_FILE[$WS]
+
+echo
+echo Transformers for "main"
+echo
+
+display PRINTED_FILE[main]
+
+echo
+echo Preconditions for "main"
+echo
+
+activate PRINT_CODE_PRECONDITIONS
+display PRINTED_FILE[main]
+
+echo
+echo Preconditions for "$WS"
+echo
+
+display PRINTED_FILE[$WS]
+
+setproperty PRETTYPRINT_SCALAR_REGIONS TRUE
+
+echo
+echo Pointer Regions for "$WS"
+echo
+
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[$WS]
+
+echo
+echo Pointer Regions for "main"
+echo
+
+activate PRINT_CODE_REGIONS
+display PRINTED_FILE[main]
+
+close
+delete $WS
+quit

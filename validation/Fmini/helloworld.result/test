@@ -1,0 +1,5 @@
+c     a spendid version of a world-famous program!
+! next line added by fsplit() in pips
+      PROGRAM MAIN000
+      PRINT *, 'hello world'                                            0004
+      END

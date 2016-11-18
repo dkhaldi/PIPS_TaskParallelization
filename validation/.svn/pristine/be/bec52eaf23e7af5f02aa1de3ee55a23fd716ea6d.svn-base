@@ -1,0 +1,32 @@
+setenv WSPACE=if08
+delete $WSPACE
+create $WSPACE $WSPACE.c 
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty PRETTYPRINT_ALL_LABELS TRUE
+
+echo
+echo Init Code
+echo
+# activate NEW_CONTROLIZER
+display PRINTED_FILE[main]
+
+echo
+echo DEAD_CODE_ELIMINATION
+echo
+apply DEAD_CODE_ELIMINATION[main]
+#activate PRINT_CODE
+display PRINTED_FILE[main]
+
+close
+echo
+echo Warnings
+echo
+shell cat $WSPACE.database/Warnings
+
+delete $WSPACE
+quit
+
+

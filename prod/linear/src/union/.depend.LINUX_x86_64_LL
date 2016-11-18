@@ -1,0 +1,42 @@
+LINUX_x86_64_LL/disjunct.o: disjunct.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h \
+ $(ROOT)/include/sc.h $(ROOT)/include/sommet.h $(ROOT)/include/polyedre.h \
+ $(ROOT)/include/ray_dte.h $(ROOT)/include/sg.h $(ROOT)/include/polynome.h \
+ union.h
+LINUX_x86_64_LL/path.o: path.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h \
+ $(ROOT)/include/sc.h $(ROOT)/include/sommet.h $(ROOT)/include/polyedre.h \
+ $(ROOT)/include/ray_dte.h $(ROOT)/include/sg.h $(ROOT)/include/polynome.h \
+ union.h
+LINUX_x86_64_LL/reduc.o: reduc.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h \
+ $(ROOT)/include/sc.h $(ROOT)/include/sommet.h $(ROOT)/include/polyedre.h \
+ $(ROOT)/include/ray_dte.h $(ROOT)/include/sg.h $(ROOT)/include/polynome.h \
+ union.h
+LINUX_x86_64_LL/sc_list.o: sc_list.c $(ROOT)/include/assert.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/boolean.h \
+ $(ROOT)/include/arithmetic_errors.h $(ROOT)/include/vecteur.h \
+ $(ROOT)/include/arithmetique.h $(ROOT)/include/contrainte.h \
+ $(ROOT)/include/sc.h $(ROOT)/include/sommet.h $(ROOT)/include/polyedre.h \
+ $(ROOT)/include/ray_dte.h $(ROOT)/include/sg.h $(ROOT)/include/polynome.h \
+ union.h
+LINUX_x86_64_LL/sl_gram.o: sl_gram.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h $(ROOT)/include/sc.h union.h
+LINUX_x86_64_LL/sl_lex.o: sl_lex.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h sl_gram.h
+LINUX_x86_64_LL/sl_gram.o: sl_gram.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/contrainte.h $(ROOT)/include/sc.h union.h
+LINUX_x86_64_LL/sl_lex.o: sl_lex.c $(ROOT)/include/boolean.h $(ROOT)/include/arithmetique.h \
+ $(ROOT)/include/boolean.h $(ROOT)/include/arithmetic_errors.h \
+ $(ROOT)/include/vecteur.h $(ROOT)/include/arithmetique.h sl_gram.h

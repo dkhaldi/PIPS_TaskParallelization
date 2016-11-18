@@ -1,0 +1,58 @@
+delete somemodules
+setproperty MAXIMUM_USER_ERROR 25
+create somemodules somemodules.f
+setproperty PREPROCESSOR_MISSING_FILE_HANDLING "generate"
+
+echo
+echo Source code for default MAIN, although TOTO is selected
+echo but inexistant in the workspace somemodules
+echo
+
+# this fails, because there is no module TOTO (yet)
+# FC: why is not generated? if generated, why not set?
+module TOTO
+
+# on "display PRINTED_FILE", implicitely on MAIN
+display PRINTED_FILE
+
+echo
+echo Source code for FOO, although FOO does not exist yet in the workspace
+echo
+
+# now it should work
+display PRINTED_FILE[FOO]
+
+echo
+echo No source code for BOOM, which does not exist,
+echo although BLA is selected just before
+echo
+
+module BLA
+display PRINTED_FILE[BOOM]
+
+echo
+echo Printed file for BLA
+echo
+
+display PRINTED_FILE
+
+echo
+echo Source code for MAIN
+echo
+
+display PRINTED_FILE[MAIN]
+
+echo
+echo Source code for FOO
+echo
+
+module FOO
+display PRINTED_FILE
+
+echo
+echo Source code for the main program
+echo
+
+display PRINTED_FILE[%MAIN]
+close
+delete somemodules

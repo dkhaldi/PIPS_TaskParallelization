@@ -1,0 +1,201 @@
+
+Points-to
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 0, j = 1, k = 2;
+
+// Points To: none
+
+   int *p;
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   if (foo())
+
+// Points To:
+// p -> undefined , EXACT
+
+      p = &i;
+   else
+
+// Points To:
+// p -> undefined , EXACT
+
+      p = &k;
+
+// Points To:
+// p -> i , MAY
+// p -> k , MAY
+
+
+   j = *p;
+
+// Points To:
+// p -> i , MAY
+// p -> k , MAY
+
+   
+   // Here, 0<=j<=2
+   return j;
+}
+
+Proper effects
+
+int main()
+{
+//             <    is written>: i j k
+   int i = 0, j = 1, k = 2;
+   int *p;
+
+   if (foo())
+//             <    is written>: p
+      p = &i;
+   else
+//             <    is written>: p
+      p = &k;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+//             <    is written>: j
+
+   j = *p;
+//             <    is read   >: j
+   
+   // Here, 0<=j<=2
+   return j;
+}
+
+Cumulated effects
+
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+int main()
+{
+//             <    is written>: i j k
+   int i = 0, j = 1, k = 2;
+   int *p;
+//             <    is written>: p
+
+   if (foo())
+//             <    is written>: p
+      p = &i;
+   else
+//             <    is written>: p
+      p = &k;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+//             <    is written>: j
+
+   j = *p;
+//             <    is read   >: j
+   
+   // Here, 0<=j<=2
+   return j;
+}
+
+Transformers with point-to
+
+
+//  T(main) {0<=main, main<=2}
+
+int main()
+{
+
+//  T(i,j,k) {i==0, j==1, k==2}
+
+   int i = 0, j = 1, k = 2;
+
+//  T() {i==0, j==1, k==2}
+
+   int *p;
+
+//  T(p) {i==0, j==1, k==2}
+
+
+   if (foo())
+
+//  T(p) {&i==p, i==0, j==1, k==2}
+
+      p = &i;
+   else
+
+//  T(p) {&k==p, i==0, j==1, k==2}
+
+      p = &k;
+
+//  T(j) {i==0, j#init==1, k==2, 0<=j, j<=2}
+
+
+   j = *p;
+
+//  T(main) {i==0, j==main, k==2, 0<=j, j<=2}
+
+   
+   // Here, 0<=j<=2
+   return j;
+}
+
+Preconditions with point-to
+
+
+//  P() {}
+
+int main()
+{
+
+//  P() {}
+
+   int i = 0, j = 1, k = 2;
+
+//  P(i,j,k) {i==0, j==1, k==2}
+
+   int *p;
+
+//  P(i,j,k) {i==0, j==1, k==2}
+
+
+   if (foo())
+
+//  P(i,j,k) {i==0, j==1, k==2}
+
+      p = &i;
+   else
+
+//  P(i,j,k) {i==0, j==1, k==2}
+
+      p = &k;
+
+//  P(i,j,k,p) {i==0, j==1, k==2}
+
+
+   j = *p;
+
+//  P(i,j,k,p) {i==0, k==2, 0<=j, j<=2}
+
+   
+   // Here, 0<=j<=2
+   return j;
+}
+
+Warnings
+
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+PROPER_EFFECTS[main] (abstract_locations_max) property "ALIASING_ACROSS_TYPES" is assumed true for abstract locations.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.
+INTERPROCEDURAL_POINTS_TO_ANALYSIS[main] (user_call_to_points_to_interprocedural) Function "foo" has no side effect on its formal context via pointer variables.

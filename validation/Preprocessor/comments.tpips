@@ -1,0 +1,9 @@
+delete comments
+create comments comments.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+shell ls comments.database/*/*.c | xargs cat | sed -e '/^# [1-9][0-9]*/d;/built-in/d'
+
+display PARSED_PRINTED_FILE[%ALL]
+quit

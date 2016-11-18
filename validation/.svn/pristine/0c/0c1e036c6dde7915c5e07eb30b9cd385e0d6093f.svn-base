@@ -1,0 +1,20 @@
+delete multideclsinfile
+create multideclsinfile multideclsinfile.c
+
+
+#setproperty PRETTYPRINT_LANGUAGE "C"
+#setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+
+#setproperty PARSER_DUMP_SYMBOL_TABLE TRUE
+
+echo
+echo Error duplicate variable declaration for variable "a" 
+echo
+
+display PARSED_PRINTED_FILE[multideclsinfile!]
+
+close
+# The database is used by multideclsinfile.test
+#delete multideclsinfile
+quit

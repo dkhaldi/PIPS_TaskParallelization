@@ -1,0 +1,23 @@
+* parallel validation
+- check casses of default (parallelization) validation
+- investigate validate/new-validate differences
+- remove old validate?
+- update private repos
+
+2015/08/21: Effects/Old.sub/fulguro01 -> synthese de code a modifier
+pour declarer les typedefs et les entites necessaires dans la
+compilation unit? En fait, la compilation unit est correcte mais pas
+le code de la fonction qui ne prend pas en compte les entites
+declarees au niveau compilation unit
+
+2015/08/21: Effects/Old.sub/struct03.c et struct06.c; les fields sont
+maintenant visibles dans les declarations; on pourrait les filtrer
+dans le parser?
+
+2015/08/21: HardwareAccelerator/freia_74.c, freia_ret_00, 01, initialisation perdue
+
+2015/08/21: LoopRecovering/recover_while3: weird comments
+
+2015/08/21: Pointers/Mensi.sub/pointer06.c: what do we want to declare or not? What is written in the CPC paper of January 2015?
+
+2015/08/21: Transformations/Linearize_array.sub/array_to_pointer07-08, linearize_array03: initialisations perdues

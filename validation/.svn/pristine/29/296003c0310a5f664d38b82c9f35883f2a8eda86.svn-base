@@ -1,0 +1,146 @@
+
+// Initial code
+
+int main()
+{
+   int a[10];
+   init(a);
+   update(a);
+   read(a);
+   return 0;
+}
+
+// PROPER_EFFECTS
+
+int main()
+{
+//             <    is declared>: a
+   int a[10];
+//             <may be written>: a[*]
+//             <    is referenced>: a
+   init(a);
+//             <may be written>: a[*]
+//             <    is referenced>: a
+   update(a);
+//             <may be read   >: a[*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: a stdout __IO_EFFECTS:LUNS
+   read(a);
+   return 0;
+}
+
+// CUMULATED_EFFECTS
+
+//             <may be read   >: stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: stdout __IO_EFFECTS:LUNS
+int main()
+{
+//             <    is declared>: a
+   int a[10];
+//             <may be written>: a[*]
+//             <    is referenced>: a
+   init(a);
+//             <may be written>: a[*]
+//             <    is referenced>: a
+   update(a);
+//             <may be read   >: a[*] stdout[0]
+//             <may be written>: stdout[0]
+//             <    is read   >: stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: a stdout __IO_EFFECTS:LUNS
+   read(a);
+//             <    is read   >: __IO_EFFECTS:LUNS[1]
+//             <    is referenced>: __IO_EFFECTS:LUNS
+   return 0;
+}
+
+// IN_EFFECTS
+
+void init(int a[10])
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+//             <    is imported>: i
+      a[i] = i;
+}
+void update(int a[10])
+{
+   int i;
+   for(i = 0; i <= 9; i += 1)
+//             <    is imported>: i
+      a[i] = i+10;
+}
+//             <may be imported>: a[*] stdout[0]
+//             <    is imported>: stdout __IO_EFFECTS:LUNS[1]
+void read(int a[10])
+{
+   int i;
+//             <may be imported>: a[*] stdout[0]
+//             <    is imported>: stdout __IO_EFFECTS:LUNS[1]
+   for(i = 0; i <= 9; i += 1)
+//             <may be imported>: a[*] stdout[0]
+//             <    is imported>: i stdout __IO_EFFECTS:LUNS[1]
+      printf("%i", a[i]);
+}
+//             <may be imported>: stdout[0]
+//             <    is imported>: stdout __IO_EFFECTS:LUNS[1]
+int main()
+{
+   int a[10];
+   init(a);
+   update(a);
+//             <may be imported>: a[*] stdout[0]
+//             <    is imported>: stdout __IO_EFFECTS:LUNS[1]
+   read(a);
+//             <    is imported>: __IO_EFFECTS:LUNS[1]
+   return 0;
+}
+
+// OUT_EFFECTS
+
+//             <may be exported>: a[*]
+void init(int a[10])
+{
+   int i;
+//             <may be exported>: a[*]
+   for(i = 0; i <= 9; i += 1)
+//             <may be exported>: a[*]
+      a[i] = i;
+}
+//             <may be exported>: a[*]
+void update(int a[10])
+{
+   int i;
+//             <may be exported>: a[*]
+   for(i = 0; i <= 9; i += 1)
+//             <may be exported>: a[*]
+      a[i] = i+10;
+}
+//             <    is exported>: __IO_EFFECTS:LUNS[1]
+void read(int a[10])
+{
+   int i;
+//             <    is exported>: __IO_EFFECTS:LUNS[1]
+   for(i = 0; i <= 9; i += 1)
+//             <may be exported>: __IO_EFFECTS:LUNS[1]
+      printf("%i", a[i]);
+}
+int main()
+{
+   int a[10];
+//             <may be exported>: a[*]
+   init(a);
+//             <may be exported>: a[*]
+   update(a);
+//             <    is exported>: __IO_EFFECTS:LUNS[1]
+   read(a);
+   return 0;
+}
+
+// Warnings
+

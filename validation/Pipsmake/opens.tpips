@@ -1,0 +1,19 @@
+delete opens
+create opens opens.f
+close
+# no pipsmake just generates a warning...
+#rm o.database/Metadata/pipsmake
+#open opens
+shell rm opens.database/Metadata/properties
+open opens
+shell rm opens.database/Metadata/database.STATUS
+open opens
+shell rm opens.database/Metadata/database.SYMBOLS
+open opens
+shell rm opens.database/Metadata/database.MISC
+open opens
+# if we reached this point it means tpips can stand some db incoherencies...
+close
+echo done!
+delete opens
+quit

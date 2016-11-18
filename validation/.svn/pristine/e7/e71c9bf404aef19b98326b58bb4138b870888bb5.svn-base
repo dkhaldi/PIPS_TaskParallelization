@@ -1,0 +1,24 @@
+int main(int argc, char *argv[])
+{
+   int i = 0;
+   int j;
+   return 0;
+}
+
+//  T(main) {main==0}
+
+int main(int argc, char *argv[])
+{
+
+//  T(i) {i==0}
+
+   int i = 0;
+
+//  T() {i==0}
+
+   int j;
+
+//  T(main) {i==0, main==0}
+
+   return 0;
+}

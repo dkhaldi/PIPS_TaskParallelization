@@ -1,0 +1,6 @@
+Bug in 
+
+INITIAL_PRECONDITION[main] (add_or_kill_equivalenced_variables) [internal error] (/home/francois/NEWPIPS/prod/pips/src/Libs/semantics/mappings.c:316) 
+unproper storage = 3 (rom), for entity *ANY_MODULE*:*HEAP*_b0
+INITIAL_PRECONDITION[main] (pips_log_end) [internal error] stopping pips on code -1 (ABORT) at ("/home/francois/NEWPIPS/prod/pips/src/Libs/misc/message.c":1134) for internal error raised
+Aborted (core dumped)

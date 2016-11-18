@@ -1,0 +1,9 @@
+#/bin/sh
+
+tpips error_management02.tpips
+
+echo
+echo Warnings
+echo
+
+cat error_management02.database/Warnings

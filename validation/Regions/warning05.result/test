@@ -1,0 +1,156 @@
+
+TRANSFORMERS for warning05
+
+
+//  T(warning05) {i==warning05, n==4}
+
+int warning05(int n, int i, double a[n*n])
+{
+
+//  T() {n==4}
+
+   if (!(n==4))
+
+//  T() {0==-1}
+
+      exit(1);
+
+//  T() {n==4}
+
+   a[n*i+i] = a[n*i+i]+1.;
+
+//  T(warning05) {i==warning05, n==4}
+
+   return i;
+}
+
+PRECONDITIONS for warning05
+
+
+//  P() {}
+
+int warning05(int n, int i, double a[n*n])
+{
+
+//  P() {}
+
+   if (!(n==4))
+
+//  P() {}
+
+      exit(1);
+
+//  P() {n==4}
+
+   a[n*i+i] = a[n*i+i]+1.;
+
+//  P() {n==4}
+
+   return i;
+}
+
+REGIONS for warning05
+
+int warning05(int n, int i, double a[n*n])
+{
+
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   if (!(n==4))
+      exit(1);
+
+//  <a-RE-EXACT-{}>
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==5i, n==4, n==4}>
+//  <a[PHI1]-W-EXACT-{PHI1==5i, n==4, n==4}>
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+   a[n*i+i] = a[n*i+i]+1.;
+
+//  <i-RE-EXACT-{}>
+//  <i-R-EXACT-{}>
+
+   return i;
+}
+
+REGIONS for warning05
+
+
+//  <a[PHI1]-R-EXACT-{PHI1==5i, n==4}>
+//  <a[PHI1]-W-EXACT-{PHI1==5i, n==4}>
+//  <i-R-EXACT-{}>
+//  <n-R-EXACT-{}>
+
+int warning05(int n, int i, double a[n*n])
+{
+
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   if (!(n==4))
+      exit(1);
+
+//  <a-RE-EXACT-{}>
+//  <a[PHI1]-R-EXACT-{PHI1==5i, n==4}>
+//  <a[PHI1]-W-EXACT-{PHI1==5i, n==4}>
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+//  <n-R-EXACT-{}>
+//  <n-RE-EXACT-{}>
+
+   a[n*i+i] = a[n*i+i]+1.;
+
+//  <i-R-EXACT-{}>
+//  <i-RE-EXACT-{}>
+
+   return i;
+}
+
+IN regions for warning05
+
+
+//  <a[PHI1]-IN-EXACT-{PHI1==5i, n==4}>
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+int warning05(int n, int i, double a[n*n])
+{
+
+//  <n-IN-EXACT-{}>
+
+   if (!(n==4))
+      exit(1);
+
+//  <a[PHI1]-IN-EXACT-{PHI1==5i, n==4}>
+//  <i-IN-EXACT-{}>
+//  <n-IN-EXACT-{}>
+
+   a[n*i+i] = a[n*i+i]+1.;
+
+//  <i-IN-EXACT-{}>
+
+   return i;
+}
+
+OUT regions for warning05
+
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==5i, PHI1==i, n==4}>
+
+int warning05(int n, int i, double a[n*n])
+{
+   if (!(n==4))
+      exit(1);
+
+//  <a[PHI1]-OUT-EXACT-{PHI1==5i, PHI1==i, n==4}>
+
+   a[n*i+i] = a[n*i+i]+1.;
+   return i;
+}
+
+Warnings: none expected
+

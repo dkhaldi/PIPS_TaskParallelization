@@ -1,0 +1,28 @@
+
+# The source code is not correct, but the C parser does not recognize the error
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+
+setenv WSPACE=typedef13b
+setenv FILE = typedef13b.c
+delete $WSPACE
+
+setproperty CLOSE_WORKSPACE_AND_QUIT_ON_ERROR TRUE
+
+create $WSPACE $FILE
+
+#setproperty ABORT_ON_USER_ERROR TRUE
+
+echo
+echo // Initial code
+echo
+display PRINTED_FILE [main]
+
+
+close
+echo
+echo // Warnings
+echo 
+shell cat $WSPACE.database/Warnings
+
+#delete $WSPACE
+quit

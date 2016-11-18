@@ -1,0 +1,168 @@
+
+PRINT_CODE_SIMPLE_POINTER_VALUES
+
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+void dereferencing04()
+{
+
+// Pointer values: none
+
+   double *p = (double *) malloc(10*sizeof(double));
+
+// Pointer values:
+// p == &*HEAP*_l_7[0] (exact);
+
+   double *q = (double *) malloc(10*sizeof(double));
+
+// Pointer values:
+// p == &*HEAP*_l_7[0] (exact);
+// q == &*HEAP*_l_8[0] (exact);
+
+   double *r = (double *) malloc(10*sizeof(double));
+
+// Pointer values:
+// p == &*HEAP*_l_7[0] (exact);
+// q == &*HEAP*_l_8[0] (exact);
+// r == &*HEAP*_l_9[0] (exact);
+
+
+   *(p+(q-r)) = 0.;
+}
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   dereferencing04();
+
+// Pointer values: none
+
+   return 1;
+}
+
+PROPER_EFFECTS_WITH_POINTER_VALUES
+
+void dereferencing04()
+{
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: p _MALLOC_EFFECTS:_MALLOC_
+   double *p = (double *) malloc(10*sizeof(double));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: q _MALLOC_EFFECTS:_MALLOC_
+   double *q = (double *) malloc(10*sizeof(double));
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: r _MALLOC_EFFECTS:_MALLOC_
+   double *r = (double *) malloc(10*sizeof(double));
+//             <    is read   >: p q r
+//             <    is written>: *HEAP*_l_7[q-r]
+
+   *(p+(q-r)) = 0.;
+}
+int main()
+{
+//             <    is read   >: _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: _MALLOC_EFFECTS:_MALLOC_
+   dereferencing04();
+   return 1;
+}
+
+MUST_REGIONS_WITH_POINTER_VALUES
+
+void dereferencing04()
+{
+
+//  <p-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   double *p = (double *) malloc(10*sizeof(double));
+
+//  <q-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   double *q = (double *) malloc(10*sizeof(double));
+
+//  <r-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   double *r = (double *) malloc(10*sizeof(double));
+
+//  <*HEAP*_l_7[PHI1]-W-MAY-{}>
+//  <p-R-EXACT-{}>
+//  <q-R-EXACT-{}>
+//  <r-R-EXACT-{}>
+
+
+   *(p+(q-r)) = 0.;
+}
+int main()
+{
+
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   dereferencing04();
+   return 1;
+}
+
+PRINT_CODE_REGIONS
+
+
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+void dereferencing04()
+{
+
+//  <p-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   double *p = (double *) malloc(10*sizeof(double));
+
+//  <q-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   double *q = (double *) malloc(10*sizeof(double));
+
+//  <r-W-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   double *r = (double *) malloc(10*sizeof(double));
+
+//  <*HEAP*_l_7[PHI1]-W-MAY-{}>
+//  <p-R-EXACT-{}>
+//  <q-R-EXACT-{}>
+//  <r-R-EXACT-{}>
+
+
+   *(p+(q-r)) = 0.;
+}
+
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+int main()
+{
+
+//  <_MALLOC_EFFECTS:_MALLOC_-R-EXACT-{}>
+//  <_MALLOC_EFFECTS:_MALLOC_-W-EXACT-{}>
+
+   dereferencing04();
+   return 1;
+}

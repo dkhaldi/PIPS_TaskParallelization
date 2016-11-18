@@ -1,0 +1,22 @@
+
+Warnings for cominc01
+
+CREATE_WORKSPACE[Program] (splitc_lex) ("./cominc01.c":*) 
+at statement:
+
+	/*helloworld*/ #include<stdio.h>
+
+Unrecognized character '#'
+see stderr for exact file and line number
+CREATE_WORKSPACE[Program] (splitc_lex) Preprocessor directives must have disappeared thanks to the C preprocessor.
+Check the input code and/or modify the preprocessor options using environment variables PIPS_CPP.
+CREATE_WORKSPACE[Program] (splitc_error) C syntax error near "<" at line 1 in file "./cominc01.c":
+/*helloworld*/ #include<stdio.h>
+CREATE_WORKSPACE[Program] (splitc_error) [user error] Syntax error detected by PIPS C preprocessor.
+Suggestions:
+ 1. check the legality of the source code with a production C compiler
+ 2. see if the issue is linked to a non-standard C feature
+ 3. see if the issue is a C feature unsupported by PIPS C parser
+ 4. see if the source code can be rewritten differently.
+CREATE_WORKSPACE[Program] (tpips_user_error) Close workspace and quit on user error requested.
+CREATE_WORKSPACE[Program] (pips_log_end) [user error] stopping pips on code 2 (USER_ERROR) for CLOSE_WORKSPACE_AND_QUIT_ON_ERROR

@@ -1,0 +1,20 @@
+
+Parsed printed file
+
+void return05()
+{
+   int i = 1;
+   i++;
+   return;
+   i++;
+   ;
+}
+
+Printed file
+
+void return05()
+{
+   int i = 1;
+   i++;
+   ;
+}

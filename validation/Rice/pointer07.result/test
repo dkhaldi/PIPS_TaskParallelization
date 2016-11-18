@@ -1,0 +1,112 @@
+
+POINTS TO
+
+
+// Points To IN:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+// b -> *NULL* , MAY
+// b -> _b_2[0] , MAY
+// c -> *NULL* , MAY
+// c -> _c_3[0] , MAY
+
+
+// Points To OUT:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+
+void pointer07(double *a, double *b, double *c, int cnt)
+{
+
+// Points To: none
+
+   double *w = (void *) 0;
+
+// Points To:
+// w -> *NULL* , EXACT
+
+   int i;
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_1[0] , MAY
+// b -> *NULL* , MAY
+// b -> _b_2[0] , MAY
+// c -> *NULL* , MAY
+// c -> _c_3[0] , MAY
+// w -> *NULL* , EXACT
+
+
+   a!=(void *) 0&&b!=(void *) 0&&c!=(void *) 0?(void) 0:__assert_fail("a!=NULL && b!=NULL && c!=NULL", "./pointer07.c", 11, __func__);
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// w -> *NULL* , EXACT
+
+
+   w = (double *) malloc(cnt*sizeof(double));
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// w -> *HEAP*_l_13[0] , MAY
+
+   for(i = 0; i <= cnt-1; i += 1)
+
+// Points To:
+// a -> _a_1[0] , EXACT
+// b -> _b_2[0] , EXACT
+// c -> _c_3[0] , EXACT
+// w -> *HEAP*_l_13[0] , MAY
+
+      w[i] = c[i]+a[i]*b[i];
+}
+
+Proper effects with points-to
+
+void pointer07(double *a, double *b, double *c, int cnt)
+{
+//             <    is written>: w
+//             <    is referenced>: w
+//             <    is declared>: w
+   double *w = (void *) 0;
+//             <    is declared>: i
+   int i;
+//             <may be read   >: __func__
+//             <may be referenced>: __func__
+//             <    is read   >: a b c
+//             <    is referenced>: a b c
+
+   a!=(void *) 0&&b!=(void *) 0&&c!=(void *) 0?(void) 0:__assert_fail("a!=NULL && b!=NULL && c!=NULL", "./pointer07.c", 11, __func__);
+//             <    is read   >: cnt _MALLOC_EFFECTS:_MALLOC_
+//             <    is written>: w _MALLOC_EFFECTS:_MALLOC_
+//             <    is referenced>: cnt w
+
+   w = (double *) malloc(cnt*sizeof(double));
+//             <    is read   >: cnt
+//             <    is written>: i
+//             <    is referenced>: cnt i
+   for(i = 0; i <= cnt-1; i += 1)
+//             <may be written>: *HEAP*_l_13[i]
+//             <    is read   >: _a_1[i] _b_2[i] _c_3[i] a b c cnt i w
+//             <    is referenced>: a b c cnt i w
+      w[i] = c[i]+a[i]*b[i];
+}
+
+Parallel code
+
+void pointer07(double *a, double *b, double *c, int cnt)
+{
+   double *w = (void *) 0;
+   int i;
+
+   a!=(void *) 0&&b!=(void *) 0&&c!=(void *) 0?(void) 0:__assert_fail("a!=NULL && b!=NULL && c!=NULL", "./pointer07.c", 11, __func__);
+
+   w = (double *) malloc(cnt*sizeof(double));
+   forall(i = 0; i <= cnt-1; i += 1)
+      w[i] = c[i]+a[i]*b[i];
+}

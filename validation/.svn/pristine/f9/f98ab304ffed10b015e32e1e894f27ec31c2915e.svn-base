@@ -1,0 +1,36 @@
+
+TRANSFORMERS
+
+
+C  T() {1<=N}
+
+!     Check constraint induced by an array declaration
+
+      SUBROUTINE TRUST02(N, A)
+
+      REAL A(N)
+
+C  T(J) {J==N, 1<=J}
+
+
+      J = N                                                             0007
+
+      END
+
+PRECONDITIONS
+
+
+C  P() {}
+
+!     Check constraint induced by an array declaration
+
+      SUBROUTINE TRUST02(N, A)
+
+      REAL A(N)
+
+C  P() {1<=N}
+
+
+      J = N                                                             0007
+
+      END

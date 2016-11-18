@@ -1,0 +1,23 @@
+setenv WS=comment14
+delete $WS
+#setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create $WS $WS.c
+
+setproperty PRETTYPRINT_STATEMENT_NUMBER TRUE
+
+# To reproduce the input file
+#echo
+#echo Parsed printed code for "$WS"
+#echo
+
+display PARSED_PRINTED_FILE[$WS!]
+
+close
+
+#echo
+#echo Warnings related to "$WS.c"
+#echo
+
+#shell cat $WS.database/Warnings
+#delete $WS
+quit

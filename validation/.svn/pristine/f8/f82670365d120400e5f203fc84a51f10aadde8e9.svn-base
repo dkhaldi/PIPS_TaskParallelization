@@ -1,0 +1,7 @@
+delete error_management06
+setproperty ABORT_ON_USER_ERROR TRUE
+create error_management06 hello_world.c
+echo apply should fail
+apply PHASE_INEXISTANTE[main]
+echo message must not be shown
+quit

@@ -1,0 +1,6 @@
+int main(void)
+{
+   fprintf(stdout, "hello, world!\n");                                  /*0005*/
+   return 0;                                                            /*0006*/
+}
+

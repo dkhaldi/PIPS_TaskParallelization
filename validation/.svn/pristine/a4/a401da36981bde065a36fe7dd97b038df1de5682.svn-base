@@ -1,0 +1,82 @@
+
+Transformers for slope10
+
+
+//  T() {}
+
+void slope10()
+{
+
+//  T() {}
+
+   int x, y, k;
+
+//  T() {0<=x, x<=50}
+
+
+   if (!(0<=x&&x<=50))
+
+//  T() {0==-1}
+
+      abort();
+
+//  T(k) {x+y==k}
+
+
+   if (2*x-99*y<=0)
+
+//  T(k) {x+y==k}
+
+      k = x+y;
+   else
+
+//  T(k) {x+y==k}
+
+      k = x+y;
+
+//  T() {}
+
+
+   return;
+}
+
+Preconditions for slope10
+
+
+//  P() {}
+
+void slope10()
+{
+
+//  P() {}
+
+   int x, y, k;
+
+//  P() {}
+
+
+   if (!(0<=x&&x<=50))
+
+//  P() {}
+
+      abort();
+
+//  P() {0<=x, x<=50}
+
+
+   if (2*x-99*y<=0)
+
+//  P() {0<=x, x<=50, x<=49y, x<=y+48}
+
+      k = x+y;
+   else
+
+//  P() {0<=x, x<=50, y+1<=x, 49y+1<=x}
+
+      k = x+y;
+
+//  P(k) {x+y==k, 0<=x, x<=50}
+
+
+   return;
+}

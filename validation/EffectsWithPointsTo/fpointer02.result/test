@@ -1,0 +1,42 @@
+
+Points-to for fpointer02
+
+
+// Points To IN:
+// col -> *NULL* , MAY
+// col -> _col_1[0] , MAY
+
+
+// Points To OUT:
+// col -> _col_1[0] , EXACT
+
+void fpointer02(int *col, int indent)
+{
+
+// Points To:
+// col -> *NULL* , MAY
+// col -> _col_1[0] , MAY
+
+   // *col = 0;
+   if (*col<indent)
+      ;
+
+// Points To:
+// col -> _col_1[0] , EXACT
+
+   while (*col<indent)
+      ;
+}
+
+Proper effects with points-to for fpointer02
+
+void fpointer02(int *col, int indent)
+{
+//             <    is read   >: _col_1[0] col indent
+   // *col = 0;
+   if (*col<indent)
+      ;
+//             <    is read   >: _col_1[0] col indent
+   while (*col<indent)
+      ;
+}

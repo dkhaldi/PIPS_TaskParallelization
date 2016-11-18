@@ -1,0 +1,12 @@
+
+Parsed printed code for decl65
+
+/* Preserve the extern keyword... and the initial LFs */
+
+
+struct foo {                                                            /*0004*/
+   int mem;
+} x = {1};
+
+Warnings related to decl65.c
+

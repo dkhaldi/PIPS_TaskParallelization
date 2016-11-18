@@ -1,0 +1,102 @@
+
+PROPER EFFECTS
+
+int global03()
+{
+//             <    is written>: p
+   int *p = i;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: pi
+   *pi = 1;
+//             <    is read   >: pi
+//             <    is written>: pi
+   pi++;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: q
+   q->one = 1;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: q
+   (q->two)[4] = 2;
+//             <may be read   >: *ANY_MODULE*:*ANYWHERE*_b0
+//             <    is read   >: p
+   return *p;
+}
+
+PROPER POINTER EFFECTS
+
+int global03()
+{
+//             <    is written>: p
+   int *p = i;
+//             <    is read   >: pi
+//             <    is written>: pi[0]
+   *pi = 1;
+//             <    is read   >: pi
+//             <    is written>: pi
+   pi++;
+//             <    is read   >: q
+//             <    is written>: q[0].one
+   q->one = 1;
+//             <    is read   >: q
+//             <    is written>: q[0].two[4]
+   (q->two)[4] = 2;
+//             <    is read   >: p p[0]
+   return *p;
+}
+
+POINTS TO
+
+
+// Points To IN:
+// pi -> *NULL* , MAY
+// pi -> _pi_84[0] , MAY
+// q -> *NULL* , MAY
+// q -> _q_92[0] , MAY
+
+
+// Points To OUT:
+// pi -> _pi_84[1] , EXACT
+// q -> _q_92[0] , EXACT
+
+int global03()
+{
+
+// Points To: none
+
+   int *p = i;
+
+// Points To:
+// p -> i[0] , EXACT
+// pi -> *NULL* , MAY
+// pi -> _pi_84[0] , MAY
+
+   *pi = 1;
+
+// Points To:
+// p -> i[0] , EXACT
+// pi -> _pi_84[0] , EXACT
+
+   pi++;
+
+// Points To:
+// p -> i[0] , EXACT
+// pi -> _pi_84[1] , EXACT
+// q -> *NULL* , MAY
+// q -> _q_92[0] , MAY
+
+   q->one = 1;
+
+// Points To:
+// p -> i[0] , EXACT
+// pi -> _pi_84[1] , EXACT
+// q -> _q_92[0] , EXACT
+
+   (q->two)[4] = 2;
+
+// Points To:
+// p -> i[0] , EXACT
+// pi -> _pi_84[1] , EXACT
+// q -> _q_92[0] , EXACT
+
+   return *p;
+}

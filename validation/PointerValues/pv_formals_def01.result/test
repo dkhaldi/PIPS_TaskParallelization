@@ -1,0 +1,42 @@
+
+// IN Pointer values:
+// a == &_a_1[0] (exact);
+
+
+// OUT Pointer values:
+// a == &_a_1[0] (exact);
+
+int foo(int *a)
+{
+
+// Pointer values:
+// a == &_a_1[0] (exact);
+
+   *a = 1;
+
+// Pointer values:
+// a == &_a_1[0] (exact);
+
+   return *a;
+}
+
+// IN Pointer values: none
+
+
+// OUT Pointer values: none
+
+int main()
+{
+
+// Pointer values: none
+
+   int i;
+
+// Pointer values: none
+
+   foo(&i);
+
+// Pointer values: none
+
+   return i;
+}

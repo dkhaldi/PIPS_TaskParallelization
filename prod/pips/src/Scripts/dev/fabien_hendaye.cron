@@ -1,0 +1,21 @@
+# $Id: fabien_hendaye.cron 23134 2016-07-07 05:49:54Z coelho $
+#
+# Ubuntu 14.04 Trusty on Hendaye
+#
+# account crontab at CRI on hendaye
+#   bootstrap with: login@host> setup_pips.sh <version>
+#   fix <version>/pipsrc.sh
+#   copy scripts in ~/NIGHT/
+#   must fix PIPS_F77 and PIPS_FLINT, gfortran package is needed
+#   BEWARE: this updates the online documentation
+#
+03 22 * * * $HOME/NIGHT/pips_check_compile --force --report --nlpmake=htdoc --source=$HOME/NIGHT/pipsrc.sh --exec=$HOME/NIGHT/pips_publish_www.sh pips-validation@cri.ensmp.fr $HOME/NIGHT/prod $HOME/NIGHT/validation
+#
+# compile pips from scratch, static & dynamic
+#
+33 21 * * * /home/fabien/pips_compile_from_scratch.sh --light --static STATIC $HOME/STATIC.log coelho@cri.ensmp.fr
+33 23 * * * /home/fabien/pips_compile_from_scratch.sh --light --dynamic DYNAMIC $HOME/DYNAMIC.log coelho@cri.ensmp.fr
+#
+# gcc48 once a day
+#
+7 3 * * * /home/fabien/GCC48/pips_check_compile --wait --force --report --keepfail --source=/home/fabien/GCC48/pipsrc.sh pips-validation@cri.ensmp.fr /home/fabien/GCC48/prod /home/fabien/GCC48/validation

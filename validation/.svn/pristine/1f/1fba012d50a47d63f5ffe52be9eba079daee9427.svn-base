@@ -1,0 +1,249 @@
+
+Points-To for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To: none
+
+   int n = 4, m = 3;
+
+// Points To: none
+
+   int a[n][m];
+
+// Points To: none
+
+   int (*p)[m] = a;
+
+// Points To:
+// p -> a[0] , EXACT
+
+   // p == &a[0]
+   p += 1;
+
+// Points To:
+// p -> a[1] , EXACT
+
+   // p == &a[1]
+   (*p)[2] = 99;
+
+// Points To:
+// p -> a[1] , EXACT
+
+   // a[1][2] == 99
+   n = p-a;
+
+// Points To:
+// p -> a[1] , EXACT
+
+   // n == 1
+   return n;
+}
+
+Proper effects with points-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is written>: m n
+//             <    is referenced>: m n
+//             <    is declared>: m n
+   int n = 4, m = 3;
+//             <    is read   >: m n
+//             <    is referenced>: m n
+//             <    is declared>: a
+   int a[n][m];
+//             <    is read   >: m n
+//             <    is written>: p
+//             <    is referenced>: a m n p
+//             <    is declared>: p
+   int (*p)[m] = a;
+//             <    is read   >: m p
+//             <    is written>: p
+//             <    is referenced>: m p
+   // p == &a[0]
+   p += 1;
+//             <    is read   >: p
+//             <    is written>: a[1][2]
+//             <    is referenced>: p
+   // p == &a[1]
+   (*p)[2] = 99;
+//             <    is read   >: m n p
+//             <    is written>: n
+//             <    is referenced>: a m n p
+   // a[1][2] == 99
+   n = p-a;
+//             <    is read   >: n
+//             <    is referenced>: n
+   // n == 1
+   return n;
+}
+
+Cumulated effects with poins-to for "main"
+
+int main(int argc, char **argv)
+{
+//             <    is written>: m n
+//             <    is referenced>: m n
+//             <    is declared>: m n
+   int n = 4, m = 3;
+//             <    is read   >: m n
+//             <    is referenced>: m n
+//             <    is declared>: a
+   int a[n][m];
+//             <    is read   >: m n
+//             <    is written>: p
+//             <    is referenced>: a m n p
+//             <    is declared>: p
+   int (*p)[m] = a;
+//             <    is read   >: m p
+//             <    is written>: p
+//             <    is referenced>: m p
+   // p == &a[0]
+   p += 1;
+//             <    is read   >: p
+//             <    is written>: a[1][2]
+//             <    is referenced>: p
+   // p == &a[1]
+   (*p)[2] = 99;
+//             <    is read   >: m n p
+//             <    is written>: n
+//             <    is referenced>: a m n p
+   // a[1][2] == 99
+   n = p-a;
+//             <    is read   >: n
+//             <    is referenced>: n
+   // n == 1
+   return n;
+}
+
+Transformers for "main"
+
+
+//  T(main) {}
+
+int main(int argc, char **argv)
+{
+
+//  T(m,n) {m==3, n==4}
+
+   int n = 4, m = 3;
+
+//  T() {}
+
+   int a[n][m];
+
+//  T(p) {&a[0]==p}
+
+   int (*p)[m] = a;
+
+//  T(p) {p#init+sizeof(int[m])==p}
+
+   // p == &a[0]
+   p += 1;
+
+//  T(a[1][2]) {a[1][2]==99}
+
+   // p == &a[1]
+   (*p)[2] = 99;
+
+//  T(n) {}
+
+   // a[1][2] == 99
+   n = p-a;
+
+//  T(main) {main==n}
+
+   // n == 1
+   return n;
+}
+
+Preconditions for "main"
+
+
+//  P() {}
+
+int main(int argc, char **argv)
+{
+
+//  P() {}
+
+   int n = 4, m = 3;
+
+//  P(m,n) {m==3, n==4}
+
+   int a[n][m];
+
+//  P(m,n) {m==3, n==4}
+
+   int (*p)[m] = a;
+
+//  P(m,n,p) {&a[0]==p, m==3, n==4}
+
+   // p == &a[0]
+   p += 1;
+
+//  P(m,n,p) {&a[0]+sizeof(int[m])==p, m==3, n==4}
+
+   // p == &a[1]
+   (*p)[2] = 99;
+
+//  P(a[1][2],m,n,p) {&a[0]+sizeof(int[m])==p, a[1][2]==99, m==3,
+//    n==4}
+
+   // a[1][2] == 99
+   n = p-a;
+
+//  P(a[1][2],m,n,p) {&a[0]+sizeof(int[m])==p, a[1][2]==99, m==3}
+
+   // n == 1
+   return n;
+}
+
+Convex array regions with points-to for "main"
+
+int main(int argc, char **argv)
+{
+   int n = 4, m = 3;
+
+//  <a-WE-EXACT-{}>
+
+   int a[n][m];
+
+//  <a-RE-EXACT-{}>
+//  <p-RE-EXACT-{}>
+//  <p-WE-EXACT-{}>
+//  <p-W-EXACT-{}>
+
+   int (*p)[m] = a;
+
+//  <p-RE-EXACT-{}>
+//  <p-R-EXACT-{}>
+//  <p-W-EXACT-{}>
+
+   // p == &a[0]
+   p += 1;
+
+//  <a[PHI1][PHI2]-W-EXACT-{PHI1==1, PHI2==2, int[m]#sizeof+a[0]==p,
+//    m==3, n==4}>
+//  <p-R-EXACT-{}>
+//  <p-RE-EXACT-{}>
+
+   // p == &a[1]
+   (*p)[2] = 99;
+
+//  <a-RE-EXACT-{}>
+//  <p-R-EXACT-{}>
+//  <p-RE-EXACT-{}>
+
+   // a[1][2] == 99
+   n = p-a;
+   // n == 1
+   return n;
+}

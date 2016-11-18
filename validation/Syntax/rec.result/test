@@ -1,0 +1,4 @@
+### stderr
+PARSER[REC] (update_called_modules) Recursive call from REC to REC
+PARSER[REC] (update_called_modules) [user error] Parser error between lines 6 and 6
+Recursive call are not supported

@@ -1,0 +1,12 @@
+
+Warnings
+
+(tp_parse) [user error] Unknown command "isply PRINTED_FILE[main]" at line 21 in file "./error_management03.tpips".
+	Maybe you intended to execute a direct shell command.
+	This convenient feature is desactivated by default.
+	To enable it, you can run tpips with the -s option,
+	or do "setproperty TPIPS_IS_A_SHELL=TRUE",
+	or do "setenv TPIPS_IS_A_SHELL=TRUE".
+	Otherwise use ! or "shell" as a command prefix.
+(tpips_user_error) Close workspace and quit on user error requested.
+(pips_log_end) [user error] stopping pips on code 2 (USER_ERROR) for CLOSE_WORKSPACE_AND_QUIT_ON_ERROR

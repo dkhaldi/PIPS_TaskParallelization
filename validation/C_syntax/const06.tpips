@@ -1,0 +1,16 @@
+setenv WS=const06
+delete $WS
+
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create $WS $WS.c
+
+display PARSED_PRINTED_FILE[$WS!]
+display PARSED_PRINTED_FILE[main]
+
+close
+
+#delete $WS
+
+quit

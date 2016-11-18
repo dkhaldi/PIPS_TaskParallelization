@@ -1,0 +1,64 @@
+
+Points-to for string10
+
+
+// Points To IN:
+// a -> *NULL* , MAY
+// a -> _a_5[0] , MAY
+// b -> *NULL* , MAY
+// b -> _b_6[0] , MAY
+// filenameIn -> *NULL* , MAY
+// filenameIn -> _filenameIn_3[0] , MAY
+
+
+// Points To OUT:
+// a -> _a_5[0] , EXACT
+// b -> _b_6[0] , EXACT
+// filenameIn -> _filenameIn_3[0] , EXACT
+
+int string10(int x, float2 tab[x], char *filenameIn, char *fileNameOut, int *a, int *b, int c)
+{
+
+// Points To: none
+
+   char abc[30];
+
+// Points To: none
+
+   char destination[40] = "";
+
+// Points To:
+// a -> *NULL* , MAY
+// a -> _a_5[0] , MAY
+// b -> *NULL* , MAY
+// b -> _b_6[0] , MAY
+
+   sprintf(abc, "%d%d%d.txt", *a, *b, c);
+
+// Points To:
+// a -> _a_5[0] , EXACT
+// b -> _b_6[0] , EXACT
+// filenameIn -> *NULL* , MAY
+// filenameIn -> _filenameIn_3[0] , MAY
+
+   return strcmp(destination, filenameIn);
+}
+
+Proper effects for string10
+
+int string10(int x, float2 tab[x], char *filenameIn, char *fileNameOut, int *a, int *b, int c)
+{
+//             <    is declared>: abc
+   char abc[30];
+//             <may be written>: destination[*]
+//             <    is declared>: destination
+   char destination[40] = "";
+//             <may be written>: abc[*]
+//             <    is read   >: _a_5[0] _b_6[0] a b c
+//             <    is referenced>: a abc b c
+   sprintf(abc, "%d%d%d.txt", *a, *b, c);
+//             <may be read   >: _filenameIn_3[*] destination[*]
+//             <    is read   >: filenameIn
+//             <    is referenced>: destination filenameIn
+   return strcmp(destination, filenameIn);
+}

@@ -1,0 +1,6 @@
+delete error_management04
+setproperty ABORT_ON_USER_ERROR TRUE
+echo create should fail
+create error_management04 ce_fichier_n_existe_pas_ici.c
+echo message must NOT be shown
+quit

@@ -1,0 +1,8 @@
+delete matmul
+create matmul matmul.f
+apply PRIVATIZE_MODULE
+activate PRINT_PARALLELIZEDHPF_CODE
+display PARALLELPRINTED_FILE
+close
+delete matmul
+quit

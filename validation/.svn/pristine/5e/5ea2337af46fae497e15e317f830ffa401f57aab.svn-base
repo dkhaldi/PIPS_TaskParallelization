@@ -1,0 +1,35 @@
+void scalarization29(double B[SIZE][SIZE])
+{
+   int i, j;
+   for(i = 0; i <= SIZE-1; i += 1)
+      for(j = 0; j <= SIZE-1; j += 1) {
+         B[i][j] = 0.;
+         B[i][j] = B[i][j]+B[i][j];
+         B[i][j] = B[i][j]*B[i][j];
+      }
+}
+void scalarization29(double B[SIZE][SIZE])
+{
+   int i, j;
+   for(i = 0; i <= SIZE-1; i += 1)
+      for(j = 0; j <= SIZE-1; j += 1) {
+         //PIPS generated variable
+         register double B_0;
+         B_0 = 0.;
+         B_0 = B_0+B_0;
+         B_0 = B_0*B_0;
+      }
+}
+void scalarization29(double B[SIZE][SIZE])
+{
+   int i, j;
+   for(i = 0; i <= SIZE-1; i += 1)
+      for(j = 0; j <= SIZE-1; j += 1) {
+         //PIPS generated variable
+         register double B_0;
+         B_0 = 0.;
+         B_0 = B_0+B_0;
+         B_0 = B_0*B_0;
+         B[i][j] = B_0;
+      }
+}

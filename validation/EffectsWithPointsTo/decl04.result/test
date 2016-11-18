@@ -1,0 +1,32 @@
+
+void decl04(mystruct s)
+{
+//             <    is read   >: s.champ1 s.champ2
+//             <    is written>: s_loc.champ1 s_loc.champ2
+   mystruct s_loc = s;
+//             <    is read   >: s_loc.champ1
+//             <    is written>: s_loc.champ1
+
+   s_loc.champ1 = s_loc.champ1-1;
+}
+int main()
+{
+   mystruct s;
+//             <    is written>: s.champ1
+
+   s.champ1 = 3;
+//             <    is written>: s.champ2
+   s.champ2 = 4;
+//             <    is read   >: s.champ1 s.champ2
+   decl04(s);
+   return 0;
+}
+
+ *********************** Use-Def Chains *********************
+
+	15 --> 17 with conflicts
+		from <s.champ1-W-EXACT> to <s.champ1-R-EXACT>
+	16 --> 17 with conflicts
+		from <s.champ2-W-EXACT> to <s.champ2-R-EXACT>
+
+****************** End of Dependence Graph ******************

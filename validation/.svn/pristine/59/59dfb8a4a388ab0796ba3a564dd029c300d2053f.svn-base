@@ -1,0 +1,16 @@
+delete characters
+setproperty CHECK_C_SYNTAX_BEFORE_RUNNING_PIPS FALSE
+create characters characters.c
+
+activate C_PARSER
+
+setproperty PRETTYPRINT_LANGUAGE "C"
+setproperty PRETTYPRINT_STATEMENT_NUMBER FALSE
+
+display PRINTED_FILE[main]
+
+
+close
+delete characters
+
+quit

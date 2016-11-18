@@ -1,0 +1,13 @@
+# shows bad prettyprint of ++ prefix operator after a binary +
+setproperty ABORT_ON_USER_ERROR TRUE
+setenv WS "increment"
+delete $WS
+create $WS $WS.c
+
+display PRINTED_FILE[main]
+apply UNSPLIT
+close
+
+shell pips_validation_exe.sh -c $WS
+
+delete $WS

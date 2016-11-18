@@ -1,0 +1,15 @@
+
+void dereferencing03()
+{
+   double *p;
+   int i;
+//             <    is read   >: p
+   *(p+1) = 0.;
+//             <    is read   >: i p
+   *(p+i) = 0.;
+}
+
+ *********************** Use-Def Chains *********************
+
+
+****************** End of Dependence Graph ******************

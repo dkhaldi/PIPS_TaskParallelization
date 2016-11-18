@@ -1,0 +1,48 @@
+delete pointer12
+
+
+setproperty ABORT_ON_USER_ERROR TRUE
+
+create pointer12 pointer12.c
+
+setproperty MEMORY_EFFECTS_ONLY FALSE
+setproperty ABSTRACT_HEAP_LOCATIONS "context-sensitive"
+activate PROPER_EFFECTS
+
+activate PRINT_CODE_POINTS_TO_LIST
+
+echo
+echo POINTS TO
+echo
+
+display PRINTED_FILE
+
+echo
+echo Proper effects with points-to
+echo
+
+activate PROPER_EFFECTS_WITH_POINTS_TO
+activate PRINT_CODE_PROPER_EFFECTS
+display PRINTED_FILE
+
+echo
+echo Cumulated effects with points-to
+echo
+
+activate CUMULATED_EFFECTS_WITH_POINTS_TO
+activate PRINT_CODE_CUMULATED_EFFECTS
+display PRINTED_FILE
+
+echo
+echo Parallel code
+echo
+
+#activate PRINT_CODE_PROPER_EFFECTS
+activate PRINT_PARALLELIZEDOMP_CODE
+display PARALLELPRINTED_FILE
+
+
+
+close
+delete pointer12
+quit

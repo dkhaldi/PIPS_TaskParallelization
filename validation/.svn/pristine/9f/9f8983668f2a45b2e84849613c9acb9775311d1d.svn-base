@@ -1,0 +1,51 @@
+
+Points-to for "foo"
+
+
+// Points To IN: none
+
+
+// Points To OUT:
+// foo -> *HEAP*_l_10 , MAY
+
+int * foo(void)
+{
+
+// Points To: none
+
+   int *p = (int *) malloc(sizeof(int));
+
+// Points To:
+// p -> *HEAP*_l_10 , MAY
+
+   return p;
+}
+
+Points-to for "main"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+int main()
+{
+
+// Points To: none
+
+   int i = 1, *p = foo();
+
+// Points To:
+// p -> foo:*HEAP*_l_10 , MAY
+
+
+   free(p);
+
+// Points To:
+// p -> undefined , EXACT
+
+
+   return i;
+}
+(activate_phase) Rule `PRINT_CODE_POINTS_TO_LIST' already active

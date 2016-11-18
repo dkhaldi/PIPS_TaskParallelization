@@ -1,0 +1,27 @@
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+--
+--				    WARNING
+--
+--		  THIS FILE HAS BEEN AUTOMATICALLY GENERATED
+--
+--			       DO NOT MODIFY IT
+--
+--	   --------------------------------------------------------
+--	   --------------------------------------------------------
+
+-- Imported domains
+-- ----------------
+import expression from "ri.newgen" ;
+import entity from "ri.newgen" ;
+
+-- External domains
+-- ----------------
+
+-- Domains
+-- -------
+assignment = lhs:function x rhs:function x dependences:entity*  ;
+expressionwithlevel = level:entity* x expression ;
+function = op:entity x args:entity* ;
+lexpressionwithlevel = list:expressionwithlevel* ;
+persistant_expression_to_entity = persistant expression -> entity ;

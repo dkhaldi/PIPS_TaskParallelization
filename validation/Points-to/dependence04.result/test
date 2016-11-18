@@ -1,0 +1,43 @@
+
+Proper effects for "dependence04"
+
+void dependence04()
+{
+   int *b;
+//             <    is written>: b
+   b = &global_a;
+//             <may be written>: *ANY_MODULE*:*ANYWHERE*
+//             <    is read   >: b
+   // b points_to global_a
+   
+   *b = 0;
+}
+
+POINTS TO for "dependence04"
+
+
+// Points To IN: none
+
+
+// Points To OUT: none
+
+void dependence04()
+{
+
+// Points To: none
+
+   int *b;
+
+// Points To:
+// b -> undefined , EXACT
+
+   b = &global_a;
+
+// Points To:
+// b -> global_a , EXACT
+
+   // b points_to global_a
+   
+   *b = 0;
+}
+

@@ -1,0 +1,28 @@
+setenv WS=constants04
+delete $WS
+
+create $WS $WS.c
+
+echo
+echo Initial code for $WS
+echo
+
+display PRINTED_FILE[$WS]
+
+echo
+echo Code for $WS after partial evaluation/constant propagation
+echo
+
+apply PARTIAL_EVAL[$WS]
+
+display PRINTED_FILE[$WS]
+
+close
+
+echo #
+echo # Warnings
+echo #
+
+shell cat $WS.database/Warnings
+
+delete $WS

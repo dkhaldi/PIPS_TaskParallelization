@@ -1,0 +1,38 @@
+
+Proper effects
+
+int main(int argc, char **argv)
+{
+//             <may be read   >: stdout[0] *ANY_MODULE*:*ANYWHERE*_b0
+//             <may be written>: stdout[0]
+//             <    is read   >: argc argv stdout __IO_EFFECTS:LUNS[1]
+//             <    is written>: size __IO_EFFECTS:LUNS[1]
+   long long int size = get_result(argc, argv);
+//             <    is read   >: size
+   return size;
+}
+
+Points-to
+
+
+// Points To IN:
+// argv -> *NULL* , MAY
+// argv -> _argv_2[0] , MAY
+
+
+// Points To OUT: none
+
+int main(int argc, char **argv)
+{
+
+// Points To:
+// argv -> *NULL* , MAY
+// argv -> _argv_2[0] , MAY
+
+   long long int size = get_result(argc, argv);
+
+// Points To:
+// argv -> _argv_2[0] , EXACT
+
+   return size;
+}

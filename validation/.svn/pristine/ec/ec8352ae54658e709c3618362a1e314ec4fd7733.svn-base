@@ -1,0 +1,5 @@
+extern main();
+main()
+{
+  const volatile int i;
+}

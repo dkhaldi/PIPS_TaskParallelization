@@ -1,0 +1,8 @@
+echo
+
+echo The message should be: workspace noworkspace: No such file or directory
+The message should be: workspace noworkspace: No such file or directory
+echo
+
+(tp_parse) [user error] No workspace noworkspace to open!
+Pips is done: tpips quit

@@ -1,0 +1,5 @@
+Assignment of a constant struct to a struct.
+
+I thought it ypt be legal, but it is not OK with gcc 4.8.4.
+
+FI
